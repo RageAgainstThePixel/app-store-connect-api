@@ -15,6 +15,13 @@ jobs:
       - run: |
           npm ci
           npm run build
+          # check if the last release is the same as the current version
+          lastVersion=$(npm show @rage-against-the-pixel/app-store-connect-api version)
+          version=$(node -p "require('./package.json').version")
+          if [ "$version" = "$lastVersion" ]; then
+            echo "No changes detected"
+            exit 0
+          fi
           npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
