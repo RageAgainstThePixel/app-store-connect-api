@@ -48,6 +48,7 @@ jobs:
           git commit -m "chore: release v$version"
           git push origin "v$version"
       - uses: actions/github-script@v7
+        if: env.VERSION != ''
         with:
           script: |
             const version = process.env.VERSION;
