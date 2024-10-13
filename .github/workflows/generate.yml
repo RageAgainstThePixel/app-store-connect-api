@@ -22,14 +22,22 @@ jobs:
           curl -L https://developer.apple.com/sample-code/app-store-connect/app-store-connect-openapi-specification.zip -o app-store-connect-openapi-specification.zip
           unzip app-store-connect-openapi-specification.zip -d /tmp
           cp /tmp/app_store_connect_api_openapi.json app_store_connect_api_openapi.json
-          rm -rf /tmp
+          rm -rf /tmp/app_store_connect_api_openapi.zip
+          rm -rf /tmp/app_store_connect_api_openapi.json
           npm run generate
           if [ $? -ne 0 ]; then
             echo "Error: npm run generate failed"
             exit 1
           fi
+          # get the last version of the package from the npm registry
+          lastVersion=$(npm show @rage-against-the-pixel/app-store-connect-api version)
           # set the package version to be the same as the schema version
           version=$(node -p "require('./app_store_connect_api_openapi.json').info.version")
+          # if the schema version is the same as the last version of the package, exit
+          if [ "$version" = "$lastVersion" ]; then
+            echo "No changes detected"
+            exit 0
+          fi
           npm version $version
           # commit the changes as build bot on a new branch named after the new version
           echo "VERSION=$version" >> $GITHUB_ENV
