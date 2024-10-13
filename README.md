@@ -9,7 +9,7 @@ A TypeScript package for communicating with Apple [App Store Connect API](https:
 ## Installation
 
 ```sh
-npm install app-store-connect-api
+npm install @rage-against-the-pixel/app-store-connect-api
 ```
 
 ## Authentication
