@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "declaration": true,
+    "esModuleInterop": true,
+    "noUnusedLocals": true,
+    "strict": true,
+    "useUnknownInCatchVariables": false,
+    "rootDir": "src",
+    "outDir": "dist",
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "examples",
+    "dist"
+  ]
+}
