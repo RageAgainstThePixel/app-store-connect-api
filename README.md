@@ -23,7 +23,7 @@ The `privateKeyId` and `issuerId` are both listed on the same page where you cre
 ## Example
 
 ```ts
-import { AppStoreConnectClient, AppStoreConnectOptions } from 'app-store-connect-api';
+import { AppStoreConnectClient, AppStoreConnectOptions } from '@rage-against-the-pixel/app-store-connect-api';
 
 async function main() {
     const options: AppStoreConnectOptions = {
