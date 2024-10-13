@@ -1,8 +1,6 @@
-import AppStoreConnectClient from '../src/client';
+import { AppStoreConnectClient } from '../src';
 import * as services from '../src/app_store_connect_api/services.gen';
-import { generateAuthToken } from '../src/auth';
 
-jest.mock('../src/auth');
 jest.mock('../src/app_store_connect_api/services.gen');
 
 describe('AppStoreConnectClient', () => {
@@ -34,15 +32,11 @@ describe('AppStoreConnectClient', () => {
   });
 
   it('should generate a new bearer token if not provided', async () => {
-    (generateAuthToken as jest.Mock).mockResolvedValue('generatedBearerToken');
     const client = new AppStoreConnectClient(mockOptions);
+    const generateAuthToken = client['generateAuthToken'] = jest.fn();
+    generateAuthToken.mockResolvedValue('generatedBearerToken');
     const token = await client['getToken']();
-    expect(generateAuthToken).toHaveBeenCalledWith({
-      issuerId: mockOptions.issuerId,
-      privateKeyId: mockOptions.privateKeyId,
-      privateKey: mockOptions.privateKey,
-      expirationTime: mockOptions.expirationTime,
-    });
+    expect(generateAuthToken).toHaveBeenCalledWith('testIssuerId', 'testPrivateKeyId', 'testPrivateKey', 600);
     expect(token).toBe('generatedBearerToken');
   });
 
@@ -54,6 +48,8 @@ describe('AppStoreConnectClient', () => {
 
   it('should reuse the existing token if it is not expired', async () => {
     const client = new AppStoreConnectClient(mockOptions);
+    const generateAuthToken = client['generateAuthToken'] = jest.fn();
+    generateAuthToken.mockResolvedValue('generatedBearerToken');
     client['bearerToken'] = 'existingToken';
     client['bearerTokenGeneratedAt'] = Date.now();
     const token = await client['getToken']();
@@ -62,8 +58,9 @@ describe('AppStoreConnectClient', () => {
   });
 
   it('should generate a new token if the existing token is expired', async () => {
-    (generateAuthToken as jest.Mock).mockResolvedValue('newGeneratedToken');
     const client = new AppStoreConnectClient(mockOptions);
+    const generateAuthToken = client['generateAuthToken'] = jest.fn();
+    generateAuthToken.mockResolvedValue('newGeneratedToken');
     client['bearerToken'] = 'expiredToken';
     client['bearerTokenGeneratedAt'] = Date.now() - 700000; // Token expired
     const token = await client['getToken']();
