@@ -1,0 +1,19 @@
+{
+    "name": "app-store-connect-api-examples",
+    "version": "1.0.0",
+    "description": "Examples of using the app-store-connect-api package",
+    "main": "app.ts",
+    "type": "module",
+    "dependencies": {
+        "app-store-connect-api": "file:..",
+        "dotenv": "^16.4.5"
+    },
+    "scripts": {
+        "example": "node --import ./loader.mjs app.ts"
+    },
+    "devDependencies": {
+        "@types/node": "^22.7.5",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.6.3"
+    }
+}
