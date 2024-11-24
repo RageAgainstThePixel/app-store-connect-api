@@ -21,7 +21,7 @@ jobs:
           npm audit fix --save --force
           # download the latest version of the apple app store connect api schema
           # https://developer.apple.com/sample-code/app-store-connect/app-store-connect-openapi-specification.zip
-          curl -L https://developer.apple.com/sample-code/app-store-connect/app-store-connect-openapi-specification.zip -o app-store-connect-openapi-specification.zip
+          curl -L https://developer.apple.com/sample-code/app-store-connect/app-store-connect-openapi-specification.zip -o /tmp/app_store_connect_api_openapi.zip
           unzip app-store-connect-openapi-specification.zip -d /tmp
           cp /tmp/app_store_connect_api_openapi.json app_store_connect_api_openapi.json
           rm -rf /tmp/app_store_connect_api_openapi.zip
