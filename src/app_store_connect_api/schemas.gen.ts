@@ -1475,186 +1475,6 @@ export const AppAvailabilityV2CreateRequestSchema = {
     required: ['data']
 } as const;
 
-export const AppAvailabilitySchema = {
-    type: 'object',
-    title: 'AppAvailability',
-    properties: {
-        type: {
-            type: 'string',
-            enum: ['appAvailabilities']
-        },
-        id: {
-            type: 'string'
-        },
-        attributes: {
-            type: 'object',
-            properties: {
-                availableInNewTerritories: {
-                    type: 'boolean'
-                }
-            }
-        },
-        relationships: {
-            type: 'object',
-            properties: {
-                app: {
-                    type: 'object',
-                    properties: {
-                        data: {
-                            type: 'object',
-                            properties: {
-                                type: {
-                                    type: 'string',
-                                    enum: ['apps']
-                                },
-                                id: {
-                                    type: 'string'
-                                }
-                            },
-                            required: ['id', 'type']
-                        }
-                    }
-                },
-                availableTerritories: {
-                    type: 'object',
-                    properties: {
-                        links: {
-                            '$ref': '#/components/schemas/RelationshipLinks'
-                        },
-                        meta: {
-                            '$ref': '#/components/schemas/PagingInformation'
-                        },
-                        data: {
-                            type: 'array',
-                            items: {
-                                type: 'object',
-                                properties: {
-                                    type: {
-                                        type: 'string',
-                                        enum: ['territories']
-                                    },
-                                    id: {
-                                        type: 'string'
-                                    }
-                                },
-                                required: ['id', 'type']
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        links: {
-            '$ref': '#/components/schemas/ResourceLinks'
-        }
-    },
-    required: ['id', 'type'],
-    deprecated: true
-} as const;
-
-export const AppAvailabilityResponseSchema = {
-    type: 'object',
-    title: 'AppAvailabilityResponse',
-    properties: {
-        data: {
-            '$ref': '#/components/schemas/AppAvailability'
-        },
-        included: {
-            type: 'array',
-            items: {
-                oneOf: [
-                    {
-                        '$ref': '#/components/schemas/App'
-                    },
-                    {
-                        '$ref': '#/components/schemas/Territory'
-                    }
-                ]
-            }
-        },
-        links: {
-            '$ref': '#/components/schemas/DocumentLinks'
-        }
-    },
-    required: ['data', 'links'],
-    deprecated: true
-} as const;
-
-export const AppAvailabilityCreateRequestSchema = {
-    type: 'object',
-    title: 'AppAvailabilityCreateRequest',
-    properties: {
-        data: {
-            type: 'object',
-            properties: {
-                type: {
-                    type: 'string',
-                    enum: ['appAvailabilities']
-                },
-                attributes: {
-                    type: 'object',
-                    properties: {
-                        availableInNewTerritories: {
-                            type: 'boolean'
-                        }
-                    },
-                    required: ['availableInNewTerritories']
-                },
-                relationships: {
-                    type: 'object',
-                    properties: {
-                        app: {
-                            type: 'object',
-                            properties: {
-                                data: {
-                                    type: 'object',
-                                    properties: {
-                                        type: {
-                                            type: 'string',
-                                            enum: ['apps']
-                                        },
-                                        id: {
-                                            type: 'string'
-                                        }
-                                    },
-                                    required: ['id', 'type']
-                                }
-                            },
-                            required: ['data']
-                        },
-                        availableTerritories: {
-                            type: 'object',
-                            properties: {
-                                data: {
-                                    type: 'array',
-                                    items: {
-                                        type: 'object',
-                                        properties: {
-                                            type: {
-                                                type: 'string',
-                                                enum: ['territories']
-                                            },
-                                            id: {
-                                                type: 'string'
-                                            }
-                                        },
-                                        required: ['id', 'type']
-                                    }
-                                }
-                            },
-                            required: ['data']
-                        }
-                    },
-                    required: ['app', 'availableTerritories']
-                }
-            },
-            required: ['relationships', 'attributes', 'type']
-        }
-    },
-    required: ['data'],
-    deprecated: true
-} as const;
-
 export const AppCategorySchema = {
     type: 'object',
     title: 'AppCategory',
@@ -5610,7 +5430,11 @@ export const AppEventVideoClipSchema = {
                 videoUrl: {
                     type: 'string'
                 },
+                previewFrameImage: {
+                    '$ref': '#/components/schemas/PreviewFrameImage'
+                },
                 previewImage: {
+                    deprecated: true,
                     '$ref': '#/components/schemas/ImageAsset'
                 },
                 uploadOperations: {
@@ -5620,7 +5444,11 @@ export const AppEventVideoClipSchema = {
                     }
                 },
                 assetDeliveryState: {
+                    deprecated: true,
                     '$ref': '#/components/schemas/AppMediaAssetState'
+                },
+                videoDeliveryState: {
+                    '$ref': '#/components/schemas/AppMediaVideoState'
                 },
                 appEventAssetType: {
                     '$ref': '#/components/schemas/AppEventAssetType'
@@ -6298,7 +6126,7 @@ export const AppInfoLocalizationCreateRequestSchema = {
                             type: 'string'
                         }
                     },
-                    required: ['locale']
+                    required: ['name', 'locale']
                 },
                 relationships: {
                     type: 'object',
@@ -6409,6 +6237,10 @@ export const AppInfoSchema = {
                 brazilAgeRatingV2: {
                     type: 'string',
                     enum: ['SELF_RATED_L', 'SELF_RATED_TEN', 'SELF_RATED_TWELVE', 'SELF_RATED_FOURTEEN', 'SELF_RATED_SIXTEEN', 'SELF_RATED_EIGHTEEN', 'OFFICIAL_L', 'OFFICIAL_TEN', 'OFFICIAL_TWELVE', 'OFFICIAL_FOURTEEN', 'OFFICIAL_SIXTEEN', 'OFFICIAL_EIGHTEEN']
+                },
+                franceAgeRating: {
+                    type: 'string',
+                    enum: ['EIGHTEEN']
                 },
                 koreaAgeRating: {
                     type: 'string',
@@ -6829,166 +6661,6 @@ export const AppInfoUpdateRequestSchema = {
     required: ['data']
 } as const;
 
-export const AppPreOrderSchema = {
-    type: 'object',
-    title: 'AppPreOrder',
-    properties: {
-        type: {
-            type: 'string',
-            enum: ['appPreOrders']
-        },
-        id: {
-            type: 'string'
-        },
-        attributes: {
-            type: 'object',
-            properties: {
-                preOrderAvailableDate: {
-                    type: 'string',
-                    format: 'date'
-                },
-                appReleaseDate: {
-                    type: 'string',
-                    format: 'date'
-                }
-            }
-        },
-        relationships: {
-            type: 'object',
-            properties: {
-                app: {
-                    type: 'object',
-                    properties: {
-                        data: {
-                            type: 'object',
-                            properties: {
-                                type: {
-                                    type: 'string',
-                                    enum: ['apps']
-                                },
-                                id: {
-                                    type: 'string'
-                                }
-                            },
-                            required: ['id', 'type']
-                        }
-                    }
-                }
-            }
-        },
-        links: {
-            '$ref': '#/components/schemas/ResourceLinks'
-        }
-    },
-    required: ['id', 'type'],
-    deprecated: true
-} as const;
-
-export const AppPreOrderResponseSchema = {
-    type: 'object',
-    title: 'AppPreOrderResponse',
-    properties: {
-        data: {
-            '$ref': '#/components/schemas/AppPreOrder'
-        },
-        included: {
-            type: 'array',
-            items: {
-                '$ref': '#/components/schemas/App'
-            }
-        },
-        links: {
-            '$ref': '#/components/schemas/DocumentLinks'
-        }
-    },
-    required: ['data', 'links'],
-    deprecated: true
-} as const;
-
-export const AppPreOrderCreateRequestSchema = {
-    type: 'object',
-    title: 'AppPreOrderCreateRequest',
-    properties: {
-        data: {
-            type: 'object',
-            properties: {
-                type: {
-                    type: 'string',
-                    enum: ['appPreOrders']
-                },
-                attributes: {
-                    type: 'object',
-                    properties: {
-                        appReleaseDate: {
-                            type: 'string',
-                            format: 'date'
-                        }
-                    }
-                },
-                relationships: {
-                    type: 'object',
-                    properties: {
-                        app: {
-                            type: 'object',
-                            properties: {
-                                data: {
-                                    type: 'object',
-                                    properties: {
-                                        type: {
-                                            type: 'string',
-                                            enum: ['apps']
-                                        },
-                                        id: {
-                                            type: 'string'
-                                        }
-                                    },
-                                    required: ['id', 'type']
-                                }
-                            },
-                            required: ['data']
-                        }
-                    },
-                    required: ['app']
-                }
-            },
-            required: ['relationships', 'type']
-        }
-    },
-    required: ['data'],
-    deprecated: true
-} as const;
-
-export const AppPreOrderUpdateRequestSchema = {
-    type: 'object',
-    title: 'AppPreOrderUpdateRequest',
-    properties: {
-        data: {
-            type: 'object',
-            properties: {
-                type: {
-                    type: 'string',
-                    enum: ['appPreOrders']
-                },
-                id: {
-                    type: 'string'
-                },
-                attributes: {
-                    type: 'object',
-                    properties: {
-                        appReleaseDate: {
-                            type: 'string',
-                            format: 'date'
-                        }
-                    }
-                }
-            },
-            required: ['id', 'type']
-        }
-    },
-    required: ['data'],
-    deprecated: true
-} as const;
-
 export const AppPreviewSetSchema = {
     type: 'object',
     title: 'AppPreviewSet',
@@ -7291,7 +6963,11 @@ export const AppPreviewSchema = {
                 videoUrl: {
                     type: 'string'
                 },
+                previewFrameImage: {
+                    '$ref': '#/components/schemas/PreviewFrameImage'
+                },
                 previewImage: {
+                    deprecated: true,
                     '$ref': '#/components/schemas/ImageAsset'
                 },
                 uploadOperations: {
@@ -7301,7 +6977,11 @@ export const AppPreviewSchema = {
                     }
                 },
                 assetDeliveryState: {
+                    deprecated: true,
                     '$ref': '#/components/schemas/AppMediaAssetState'
+                },
+                videoDeliveryState: {
+                    '$ref': '#/components/schemas/AppMediaVideoState'
                 }
             }
         },
@@ -11707,36 +11387,7 @@ export const AppSchema = {
                         }
                     }
                 },
-                preOrder: {
-                    type: 'object',
-                    properties: {
-                        links: {
-                            '$ref': '#/components/schemas/RelationshipLinks'
-                        },
-                        data: {
-                            type: 'object',
-                            properties: {
-                                type: {
-                                    type: 'string',
-                                    enum: ['appPreOrders']
-                                },
-                                id: {
-                                    type: 'string'
-                                }
-                            },
-                            required: ['id', 'type']
-                        }
-                    }
-                },
                 appPriceSchedule: {
-                    type: 'object',
-                    properties: {
-                        links: {
-                            '$ref': '#/components/schemas/RelationshipLinks'
-                        }
-                    }
-                },
-                appAvailability: {
                     type: 'object',
                     properties: {
                         links: {
@@ -12138,9 +11789,6 @@ export const AppsResponseSchema = {
                         '$ref': '#/components/schemas/EndUserLicenseAgreement'
                     },
                     {
-                        '$ref': '#/components/schemas/AppPreOrder'
-                    },
-                    {
                         '$ref': '#/components/schemas/InAppPurchase'
                     },
                     {
@@ -12232,9 +11880,6 @@ export const AppResponseSchema = {
                     },
                     {
                         '$ref': '#/components/schemas/EndUserLicenseAgreement'
-                    },
-                    {
-                        '$ref': '#/components/schemas/AppPreOrder'
                     },
                     {
                         '$ref': '#/components/schemas/InAppPurchase'
@@ -19027,7 +18672,8 @@ export const GameCenterAchievementSchema = {
                             },
                             required: ['id', 'type']
                         }
-                    }
+                    },
+                    deprecated: true
                 },
                 localizations: {
                     type: 'object',
@@ -22032,7 +21678,8 @@ export const GameCenterLeaderboardSetSchema = {
                             },
                             required: ['id', 'type']
                         }
-                    }
+                    },
+                    deprecated: true
                 },
                 localizations: {
                     type: 'object',
@@ -22442,7 +22089,8 @@ export const GameCenterLeaderboardSchema = {
                             },
                             required: ['id', 'type']
                         }
-                    }
+                    },
+                    deprecated: true
                 },
                 gameCenterLeaderboardSets: {
                     type: 'object',
@@ -24850,6 +24498,14 @@ export const InAppPurchasePricePointSchema = {
                             required: ['id', 'type']
                         }
                     }
+                },
+                equalizations: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            '$ref': '#/components/schemas/RelationshipLinks'
+                        }
+                    }
                 }
             }
         },
@@ -24900,24 +24556,6 @@ export const InAppPurchasePriceScheduleSchema = {
         relationships: {
             type: 'object',
             properties: {
-                inAppPurchase: {
-                    type: 'object',
-                    properties: {
-                        data: {
-                            type: 'object',
-                            properties: {
-                                type: {
-                                    type: 'string',
-                                    enum: ['inAppPurchases']
-                                },
-                                id: {
-                                    type: 'string'
-                                }
-                            },
-                            required: ['id', 'type']
-                        }
-                    }
-                },
                 baseTerritory: {
                     type: 'object',
                     properties: {
@@ -25013,9 +24651,6 @@ export const InAppPurchasePriceScheduleResponseSchema = {
             type: 'array',
             items: {
                 oneOf: [
-                    {
-                        '$ref': '#/components/schemas/InAppPurchaseV2'
-                    },
                     {
                         '$ref': '#/components/schemas/Territory'
                     },
@@ -28969,24 +28604,6 @@ export const SubscriptionAvailabilitySchema = {
         relationships: {
             type: 'object',
             properties: {
-                subscription: {
-                    type: 'object',
-                    properties: {
-                        data: {
-                            type: 'object',
-                            properties: {
-                                type: {
-                                    type: 'string',
-                                    enum: ['subscriptions']
-                                },
-                                id: {
-                                    type: 'string'
-                                }
-                            },
-                            required: ['id', 'type']
-                        }
-                    }
-                },
                 availableTerritories: {
                     type: 'object',
                     properties: {
@@ -29033,14 +28650,7 @@ export const SubscriptionAvailabilityResponseSchema = {
         included: {
             type: 'array',
             items: {
-                oneOf: [
-                    {
-                        '$ref': '#/components/schemas/Subscription'
-                    },
-                    {
-                        '$ref': '#/components/schemas/Territory'
-                    }
-                ]
+                '$ref': '#/components/schemas/Territory'
             }
         },
         links: {
@@ -34635,20 +34245,6 @@ export const EndUserLicenseAgreementWithoutIncludesResponseSchema = {
     required: ['data', 'links']
 } as const;
 
-export const AppPreOrderWithoutIncludesResponseSchema = {
-    type: 'object',
-    title: 'AppPreOrderWithoutIncludesResponse',
-    properties: {
-        data: {
-            '$ref': '#/components/schemas/AppPreOrder'
-        },
-        links: {
-            '$ref': '#/components/schemas/DocumentLinks'
-        }
-    },
-    required: ['data', 'links']
-} as const;
-
 export const PreReleaseVersionsWithoutIncludesResponseSchema = {
     type: 'object',
     title: 'PreReleaseVersionsWithoutIncludesResponse',
@@ -35301,7 +34897,8 @@ export const GameCenterAchievementGroupAchievementLinkageResponseSchema = {
             '$ref': '#/components/schemas/DocumentLinks'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterAchievementGroupAchievementLinkageRequestSchema = {
@@ -35321,7 +34918,8 @@ export const GameCenterAchievementGroupAchievementLinkageRequestSchema = {
             required: ['id', 'type']
         }
     },
-    required: ['data']
+    required: ['data'],
+    deprecated: true
 } as const;
 
 export const GameCenterAppVersionCompatibilityVersionsLinkagesResponseSchema = {
@@ -35814,7 +35412,8 @@ export const GameCenterLeaderboardSetGroupLeaderboardSetLinkageResponseSchema = 
             '$ref': '#/components/schemas/DocumentLinks'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardSetGroupLeaderboardSetLinkageRequestSchema = {
@@ -35834,7 +35433,8 @@ export const GameCenterLeaderboardSetGroupLeaderboardSetLinkageRequestSchema = {
             required: ['id', 'type']
         }
     },
-    required: ['data']
+    required: ['data'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardGroupLeaderboardLinkageResponseSchema = {
@@ -35857,7 +35457,8 @@ export const GameCenterLeaderboardGroupLeaderboardLinkageResponseSchema = {
             '$ref': '#/components/schemas/DocumentLinks'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardGroupLeaderboardLinkageRequestSchema = {
@@ -35877,7 +35478,8 @@ export const GameCenterLeaderboardGroupLeaderboardLinkageRequestSchema = {
             required: ['id', 'type']
         }
     },
-    required: ['data']
+    required: ['data'],
+    deprecated: true
 } as const;
 
 export const BundleIdWithoutIncludesResponseSchema = {
@@ -37046,6 +36648,28 @@ export const AppMediaAssetStateSchema = {
     }
 } as const;
 
+export const AppMediaPreviewFrameImageStateSchema = {
+    type: 'object',
+    properties: {
+        errors: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/AppMediaStateError'
+            }
+        },
+        warnings: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/AppMediaStateError'
+            }
+        },
+        state: {
+            type: 'string',
+            enum: ['PROCESSING', 'COMPLETE', 'FAILED']
+        }
+    }
+} as const;
+
 export const AppMediaStateErrorSchema = {
     type: 'object',
     properties: {
@@ -37054,6 +36678,28 @@ export const AppMediaStateErrorSchema = {
         },
         description: {
             type: 'string'
+        }
+    }
+} as const;
+
+export const AppMediaVideoStateSchema = {
+    type: 'object',
+    properties: {
+        errors: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/AppMediaStateError'
+            }
+        },
+        warnings: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/AppMediaStateError'
+            }
+        },
+        state: {
+            type: 'string',
+            enum: ['AWAITING_UPLOAD', 'UPLOAD_COMPLETE', 'PROCESSING', 'COMPLETE', 'FAILED']
         }
     }
 } as const;
@@ -37100,7 +36746,7 @@ export const BuildAudienceTypeSchema = {
 
 export const BundleIdPlatformSchema = {
     type: 'string',
-    enum: ['IOS', 'MAC_OS']
+    enum: ['IOS', 'MAC_OS', 'UNIVERSAL']
 } as const;
 
 export const CapabilityOptionSchema = {
@@ -37170,7 +36816,7 @@ export const CapabilityTypeSchema = {
 
 export const CertificateTypeSchema = {
     type: 'string',
-    enum: ['IOS_DEVELOPMENT', 'IOS_DISTRIBUTION', 'MAC_APP_DISTRIBUTION', 'MAC_INSTALLER_DISTRIBUTION', 'MAC_APP_DEVELOPMENT', 'DEVELOPER_ID_KEXT', 'DEVELOPER_ID_APPLICATION', 'DEVELOPMENT', 'DISTRIBUTION', 'PASS_TYPE_ID', 'PASS_TYPE_ID_WITH_NFC']
+    enum: ['IOS_DEVELOPMENT', 'IOS_DISTRIBUTION', 'MAC_APP_DISTRIBUTION', 'MAC_INSTALLER_DISTRIBUTION', 'MAC_APP_DEVELOPMENT', 'DEVELOPER_ID_KEXT', 'DEVELOPER_ID_KEXT_G2', 'DEVELOPER_ID_APPLICATION', 'DEVELOPER_ID_APPLICATION_G2', 'DEVELOPMENT', 'DISTRIBUTION', 'PASS_TYPE_ID', 'PASS_TYPE_ID_WITH_NFC']
 } as const;
 
 export const CiActionSchema = {
@@ -37754,6 +37400,18 @@ export const PhasedReleaseStateSchema = {
 export const PlatformSchema = {
     type: 'string',
     enum: ['IOS', 'MAC_OS', 'TV_OS', 'VISION_OS']
+} as const;
+
+export const PreviewFrameImageSchema = {
+    type: 'object',
+    properties: {
+        image: {
+            '$ref': '#/components/schemas/ImageAsset'
+        },
+        state: {
+            '$ref': '#/components/schemas/AppMediaPreviewFrameImageState'
+        }
+    }
 } as const;
 
 export const PreviewTypeSchema = {
