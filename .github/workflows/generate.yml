@@ -40,6 +40,8 @@ jobs:
           else
             echo "New version detected: $lastVersion -> $version"
           fi
+          git config --global user.email github-actions[bot]@users.noreply.github.com
+          git config --global user.name "build bot"
           git status
           # set the package version to be the same as the schema version
           git stash
@@ -47,8 +49,6 @@ jobs:
           git stash pop
           # commit the changes as build bot on a new branch named after the new version
           echo "VERSION=$version" >> $GITHUB_ENV
-          git config --global user.email github-actions[bot]@users.noreply.github.com
-          git config --global user.name "build bot"
           git checkout -b "v$version"
           git add .
           git commit -m "chore: release v$version"
