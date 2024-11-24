@@ -37,7 +37,10 @@ jobs:
           if [ "$version" = "$lastVersion" ]; then
             echo "No changes detected"
             exit 0
+          else
+            echo "New version detected: $lastVersion -> $version"
           fi
+          git status
           npm version $version
           # commit the changes as build bot on a new branch named after the new version
           echo "VERSION=$version" >> $GITHUB_ENV
