@@ -52,10 +52,10 @@ jobs:
           npm run generate
           # commit the changes as build bot on a new branch named after the new version
           echo "VERSION=$version" >> $GITHUB_ENV
-          git checkout -b "v$version"
+          git checkout -b "release/v$version"
           git add .
           git commit -m "chore: release v$version"
-          git push origin "v$version"
+          git push origin "release/v$version"
       - uses: actions/github-script@v7
         if: env.VERSION != ''
         with:
