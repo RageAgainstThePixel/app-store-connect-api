@@ -41,7 +41,10 @@ jobs:
             echo "New version detected: $lastVersion -> $version"
           fi
           git status
+          # set the package version to be the same as the schema version
+          git stash
           npm version $version
+          git stash pop
           # commit the changes as build bot on a new branch named after the new version
           echo "VERSION=$version" >> $GITHUB_ENV
           git config --global user.email github-actions[bot]@users.noreply.github.com
