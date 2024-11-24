@@ -26,7 +26,6 @@ jobs:
           cp /tmp/app_store_connect_api_openapi.json app_store_connect_api_openapi.json
           rm -rf /tmp/app_store_connect_api_openapi.zip
           rm -rf /tmp/app_store_connect_api_openapi.json
-          npm run generate
           if [ $? -ne 0 ]; then
             echo "Error: npm run generate failed"
             exit 1
@@ -36,11 +35,12 @@ jobs:
           # set the package version to be the same as the schema version
           version=$(node -p "require('./app_store_connect_api_openapi.json').info.version")
           # if the schema version is the same as the last version of the package, exit
+          echo "$lastVersion -> $version"
           if [ "$version" = "$lastVersion" ]; then
             echo "No changes detected"
             exit 0
           else
-            echo "New version detected: $lastVersion -> $version"
+            echo "New version detected"
           fi
           git config --global user.email github-actions[bot]@users.noreply.github.com
           git config --global user.name "build bot"
@@ -49,6 +49,7 @@ jobs:
           git stash
           npm version $version
           git stash pop
+          npm run generate
           # commit the changes as build bot on a new branch named after the new version
           echo "VERSION=$version" >> $GITHUB_ENV
           git checkout -b "v$version"
