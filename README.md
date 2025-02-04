@@ -1,5 +1,7 @@
 # app-store-connect-api
 
+[![Discord](https://img.shields.io/discord/855294214065487932.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/xQgMW9ufN4) [![NPM Version](https://img.shields.io/npm/v/%40rage-against-the-pixel%2Fapp-store-connect-api)](https://www.npmjs.com/package/@rage-against-the-pixel/app-store-connect-api) ![NPM Downloads](https://img.shields.io/npm/dw/%40rage-against-the-pixel%2Fapp-store-connect-api)
+
 A TypeScript package for communicating with Apple [App Store Connect API](https://developer.apple.com/documentation/appstoreconnectapi)
 
 - Automatically generated API client using the latest [OpenAPI specification](https://developer.apple.com/sample-code/app-store-connect/app-store-connect-openapi-specification.zip) from Apple.
