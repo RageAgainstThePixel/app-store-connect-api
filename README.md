@@ -20,6 +20,9 @@ Download and save the private key `.p8` file to a save, secure location.
 The contents of this file is your `privateKey`.
 The `privateKeyId` and `issuerId` are both listed on the same page where you create your private key.
 
+> [!NOTE]
+> Individual keys do not require issuerId.
+
 ## Example
 
 ```ts
