@@ -4,10 +4,15 @@ import * as services from '../src/app_store_connect_api/services.gen';
 jest.mock('../src/app_store_connect_api/services.gen');
 
 describe('AppStoreConnectClient', () => {
-  const mockOptions = {
+  const mockTeamKeys = {
     issuerId: 'testIssuerId',
-    privateKeyId: 'testPrivateKeyId',
-    privateKey: 'testPrivateKey',
+    privateKeyId: 'testTeamPrivateKeyId',
+    privateKey: 'testTeamPrivateKey',
+    expirationTime: 600,
+  };
+  const mockUserKeys = {
+    privateKeyId: 'testUserPrivateKeyId',
+    privateKey: 'testUserPrivateKey',
     expirationTime: 600,
   };
 
@@ -20,7 +25,7 @@ describe('AppStoreConnectClient', () => {
   });
 
   it('should set the config for services client', () => {
-    new AppStoreConnectClient(mockOptions);
+    new AppStoreConnectClient(mockTeamKeys);
     expect(services.client.setConfig).toHaveBeenCalledWith({ baseUrl: 'https://api.appstoreconnect.apple.com' });
   });
 
@@ -31,12 +36,21 @@ describe('AppStoreConnectClient', () => {
     expect(token).toBe('testBearerToken');
   });
 
-  it('should generate a new bearer token if not provided', async () => {
-    const client = new AppStoreConnectClient(mockOptions);
+  it('should generate a new bearer token if not provided (team)', async () => {
+    const client = new AppStoreConnectClient(mockTeamKeys);
     const generateAuthToken = client['generateAuthToken'] = jest.fn();
     generateAuthToken.mockResolvedValue('generatedBearerToken');
     const token = await client['getToken']();
-    expect(generateAuthToken).toHaveBeenCalledWith('testIssuerId', 'testPrivateKeyId', 'testPrivateKey', 600);
+    expect(generateAuthToken).toHaveBeenCalledWith('testIssuerId', 'testTeamPrivateKeyId', 'testTeamPrivateKey', 600);
+    expect(token).toBe('generatedBearerToken');
+  });
+
+  it('should generate a new bearer token if not provided (user)', async () => {
+    const client = new AppStoreConnectClient(mockUserKeys);
+    const generateAuthToken = client['generateUserAuthToken'] = jest.fn();
+    generateAuthToken.mockResolvedValue('generatedBearerToken');
+    const token = await client['getToken']();
+    expect(generateAuthToken).toHaveBeenCalledWith('testUserPrivateKeyId', 'testUserPrivateKey', 600);
     expect(token).toBe('generatedBearerToken');
   });
 
@@ -47,7 +61,7 @@ describe('AppStoreConnectClient', () => {
   });
 
   it('should reuse the existing token if it is not expired', async () => {
-    const client = new AppStoreConnectClient(mockOptions);
+    const client = new AppStoreConnectClient(mockTeamKeys);
     const generateAuthToken = client['generateAuthToken'] = jest.fn();
     generateAuthToken.mockResolvedValue('generatedBearerToken');
     client['bearerToken'] = 'existingToken';
@@ -58,7 +72,7 @@ describe('AppStoreConnectClient', () => {
   });
 
   it('should generate a new token if the existing token is expired', async () => {
-    const client = new AppStoreConnectClient(mockOptions);
+    const client = new AppStoreConnectClient(mockTeamKeys);
     const generateAuthToken = client['generateAuthToken'] = jest.fn();
     generateAuthToken.mockResolvedValue('newGeneratedToken');
     client['bearerToken'] = 'expiredToken';
@@ -69,7 +83,7 @@ describe('AppStoreConnectClient', () => {
   });
 
   it('should expose all api methods', () => {
-    const client = new AppStoreConnectClient(mockOptions);
+    const client = new AppStoreConnectClient(mockTeamKeys);
     expect(client.api).toEqual(services);
   });
 });
