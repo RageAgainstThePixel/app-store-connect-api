@@ -39,7 +39,7 @@ jobs:
           version=$(node -p "require('./app_store_connect_api_openapi.json').info.version")
           # if the schema version is the same as the last version of the package, exit
           echo "$lastVersion -> $version"
-          if [ "$version" = "$lastVersion" ]; then
+          if [ "$(npx semver $version -r $lastVersion)" = "$version" ]; then
             echo "No changes detected"
             exit 0
           else
