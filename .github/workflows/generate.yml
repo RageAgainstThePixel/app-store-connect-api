@@ -21,7 +21,8 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - run: |
           npm install
-          npm audit fix --save --force
+          npm update --save
+          npm audit fix --save
           # download the latest version of the apple app store connect api schema
           # https://developer.apple.com/sample-code/app-store-connect/app-store-connect-openapi-specification.zip
           curl -L https://developer.apple.com/sample-code/app-store-connect/app-store-connect-openapi-specification.zip -o $RUNNER_TEMP/app-store-connect-openapi-specification.zip
