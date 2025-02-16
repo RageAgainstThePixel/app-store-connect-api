@@ -4261,6 +4261,7 @@ export type BetaGroup = {
         publicLink?: string;
         feedbackEnabled?: boolean;
         iosBuildsAvailableForAppleSiliconMac?: boolean;
+        iosBuildsAvailableForAppleVision?: boolean;
     };
     relationships?: {
         app?: {
@@ -4286,6 +4287,16 @@ export type BetaGroup = {
                 id: string;
             }>;
         };
+        betaRecruitmentCriteria?: {
+            links?: RelationshipLinks;
+            data?: {
+                type: 'betaRecruitmentCriteria';
+                id: string;
+            };
+        };
+        betaRecruitmentCriterionCompatibleBuildCheck?: {
+            links?: RelationshipLinks;
+        };
     };
     links?: ResourceLinks;
 };
@@ -4294,14 +4305,14 @@ export type type60 = 'betaGroups';
 
 export type BetaGroupsResponse = {
     data: Array<BetaGroup>;
-    included?: Array<(App | Build | BetaTester)>;
+    included?: Array<(App | Build | BetaTester | BetaRecruitmentCriterion)>;
     links: PagedDocumentLinks;
     meta?: PagingInformation;
 };
 
 export type BetaGroupResponse = {
     data: BetaGroup;
-    included?: Array<(App | Build | BetaTester)>;
+    included?: Array<(App | Build | BetaTester | BetaRecruitmentCriterion)>;
     links: DocumentLinks;
 };
 
@@ -4351,6 +4362,7 @@ export type BetaGroupUpdateRequest = {
             publicLinkLimit?: number;
             feedbackEnabled?: boolean;
             iosBuildsAvailableForAppleSiliconMac?: boolean;
+            iosBuildsAvailableForAppleVision?: boolean;
         };
     };
 };
@@ -4398,13 +4410,93 @@ export type BetaLicenseAgreementUpdateRequest = {
     };
 };
 
+export type BetaRecruitmentCriterion = {
+    type: 'betaRecruitmentCriteria';
+    id: string;
+    attributes?: {
+        lastModifiedDate?: string;
+        deviceFamilyOsVersionFilters?: Array<DeviceFamilyOsVersionFilter>;
+    };
+    links?: ResourceLinks;
+};
+
+export type type62 = 'betaRecruitmentCriteria';
+
+export type BetaRecruitmentCriterionResponse = {
+    data: BetaRecruitmentCriterion;
+    links: DocumentLinks;
+};
+
+export type BetaRecruitmentCriterionCreateRequest = {
+    data: {
+        type: 'betaRecruitmentCriteria';
+        attributes: {
+            deviceFamilyOsVersionFilters: Array<DeviceFamilyOsVersionFilter>;
+        };
+        relationships: {
+            betaGroup: {
+                data: {
+                    type: 'betaGroups';
+                    id: string;
+                };
+            };
+        };
+    };
+};
+
+export type BetaRecruitmentCriterionUpdateRequest = {
+    data: {
+        type: 'betaRecruitmentCriteria';
+        id: string;
+        attributes?: {
+            deviceFamilyOsVersionFilters?: Array<DeviceFamilyOsVersionFilter>;
+        };
+    };
+};
+
+export type BetaRecruitmentCriterionCompatibleBuildCheck = {
+    type: 'betaRecruitmentCriterionCompatibleBuildChecks';
+    id: string;
+    attributes?: {
+        hasCompatibleBuild?: boolean;
+    };
+    links?: ResourceLinks;
+};
+
+export type type63 = 'betaRecruitmentCriterionCompatibleBuildChecks';
+
+export type BetaRecruitmentCriterionCompatibleBuildCheckResponse = {
+    data: BetaRecruitmentCriterionCompatibleBuildCheck;
+    links: DocumentLinks;
+};
+
+export type BetaRecruitmentCriterionOption = {
+    type: 'betaRecruitmentCriterionOptions';
+    id: string;
+    attributes?: {
+        deviceFamilyOsVersions?: Array<{
+            deviceFamily?: DeviceFamily;
+            osVersions?: Array<(string)>;
+        }>;
+    };
+    links?: ResourceLinks;
+};
+
+export type type64 = 'betaRecruitmentCriterionOptions';
+
+export type BetaRecruitmentCriterionOptionsResponse = {
+    data: Array<BetaRecruitmentCriterionOption>;
+    links: PagedDocumentLinks;
+    meta?: PagingInformation;
+};
+
 export type BetaTesterInvitation = {
     type: 'betaTesterInvitations';
     id: string;
     links?: ResourceLinks;
 };
 
-export type type62 = 'betaTesterInvitations';
+export type type65 = 'betaTesterInvitations';
 
 export type BetaTesterInvitationResponse = {
     data: BetaTesterInvitation;
@@ -4470,7 +4562,7 @@ export type BetaTester = {
     links?: ResourceLinks;
 };
 
-export type type63 = 'betaTesters';
+export type type66 = 'betaTesters';
 
 export type BetaTestersResponse = {
     data: Array<BetaTester>;
@@ -4530,7 +4622,7 @@ export type BuildBetaDetail = {
     links?: ResourceLinks;
 };
 
-export type type64 = 'buildBetaDetails';
+export type type67 = 'buildBetaDetails';
 
 export type BuildBetaDetailsResponse = {
     data: Array<BuildBetaDetail>;
@@ -4561,7 +4653,7 @@ export type BuildBetaNotification = {
     links?: ResourceLinks;
 };
 
-export type type65 = 'buildBetaNotifications';
+export type type68 = 'buildBetaNotifications';
 
 export type BuildBetaNotificationResponse = {
     data: BuildBetaNotification;
@@ -4594,7 +4686,7 @@ export type BuildBundleFileSize = {
     links?: ResourceLinks;
 };
 
-export type type66 = 'buildBundleFileSizes';
+export type type69 = 'buildBundleFileSizes';
 
 export type BuildBundleFileSizesResponse = {
     data: Array<BuildBundleFileSize>;
@@ -4663,7 +4755,7 @@ export type BuildBundle = {
     links?: ResourceLinks;
 };
 
-export type type67 = 'buildBundles';
+export type type70 = 'buildBundles';
 
 export type bundleType = 'APP' | 'APP_CLIP';
 
@@ -4678,7 +4770,7 @@ export type BuildIcon = {
     links?: ResourceLinks;
 };
 
-export type type68 = 'buildIcons';
+export type type71 = 'buildIcons';
 
 export type BuildIconsResponse = {
     data: Array<BuildIcon>;
@@ -4794,7 +4886,7 @@ export type Build = {
     links?: ResourceLinks;
 };
 
-export type type69 = 'builds';
+export type type72 = 'builds';
 
 export type processingState = 'PROCESSING' | 'FAILED' | 'INVALID' | 'VALID';
 
@@ -4840,7 +4932,7 @@ export type BundleIdCapability = {
     links?: ResourceLinks;
 };
 
-export type type70 = 'bundleIdCapabilities';
+export type type73 = 'bundleIdCapabilities';
 
 export type BundleIdCapabilitiesResponse = {
     data: Array<BundleIdCapability>;
@@ -4919,7 +5011,7 @@ export type BundleId = {
     links?: ResourceLinks;
 };
 
-export type type71 = 'bundleIds';
+export type type74 = 'bundleIds';
 
 export type BundleIdsResponse = {
     data: Array<BundleId>;
@@ -4967,11 +5059,12 @@ export type Certificate = {
         platform?: BundleIdPlatform;
         expirationDate?: string;
         certificateContent?: string;
+        activated?: boolean;
     };
     links?: ResourceLinks;
 };
 
-export type type72 = 'certificates';
+export type type75 = 'certificates';
 
 export type CertificatesResponse = {
     data: Array<Certificate>;
@@ -4991,6 +5084,24 @@ export type CertificateCreateRequest = {
             csrContent: string;
             certificateType: CertificateType;
         };
+        relationships?: {
+            merchantId?: {
+                data?: {
+                    type: 'merchantIds';
+                    id: string;
+                };
+            };
+        };
+    };
+};
+
+export type CertificateUpdateRequest = {
+    data: {
+        type: 'certificates';
+        id: string;
+        attributes?: {
+            activated?: boolean;
+        };
     };
 };
 
@@ -5006,7 +5117,7 @@ export type CiArtifact = {
     links?: ResourceLinks;
 };
 
-export type type73 = 'ciArtifacts';
+export type type76 = 'ciArtifacts';
 
 export type fileType = 'ARCHIVE' | 'ARCHIVE_EXPORT' | 'LOG_BUNDLE' | 'RESULT_BUNDLE' | 'TEST_PRODUCTS' | 'XCODEBUILD_PRODUCTS' | 'STAPLED_NOTARIZED_ARCHIVE';
 
@@ -5055,7 +5166,7 @@ export type CiBuildAction = {
     links?: ResourceLinks;
 };
 
-export type type74 = 'ciBuildActions';
+export type type77 = 'ciBuildActions';
 
 export type CiBuildActionsResponse = {
     data: Array<CiBuildAction>;
@@ -5145,7 +5256,7 @@ export type CiBuildRun = {
     links?: ResourceLinks;
 };
 
-export type type75 = 'ciBuildRuns';
+export type type78 = 'ciBuildRuns';
 
 export type startReason = 'GIT_REF_CHANGE' | 'MANUAL' | 'MANUAL_REBUILD' | 'PULL_REQUEST_OPEN' | 'PULL_REQUEST_UPDATE' | 'SCHEDULE';
 
@@ -5211,7 +5322,7 @@ export type CiIssue = {
     links?: ResourceLinks;
 };
 
-export type type76 = 'ciIssues';
+export type type79 = 'ciIssues';
 
 export type issueType = 'ANALYZER_WARNING' | 'ERROR' | 'TEST_FAILURE' | 'WARNING';
 
@@ -5246,7 +5357,7 @@ export type CiMacOsVersion = {
     links?: ResourceLinks;
 };
 
-export type type77 = 'ciMacOsVersions';
+export type type80 = 'ciMacOsVersions';
 
 export type CiMacOsVersionsResponse = {
     data: Array<CiMacOsVersion>;
@@ -5304,7 +5415,7 @@ export type CiProduct = {
     links?: ResourceLinks;
 };
 
-export type type78 = 'ciProducts';
+export type type81 = 'ciProducts';
 
 export type productType = 'APP' | 'FRAMEWORK';
 
@@ -5341,7 +5452,7 @@ export type CiTestResult = {
     links?: ResourceLinks;
 };
 
-export type type79 = 'ciTestResults';
+export type type82 = 'ciTestResults';
 
 export type CiTestResultsResponse = {
     data: Array<CiTestResult>;
@@ -5407,7 +5518,7 @@ export type CiWorkflow = {
     links?: ResourceLinks;
 };
 
-export type type80 = 'ciWorkflows';
+export type type83 = 'ciWorkflows';
 
 export type CiWorkflowsResponse = {
     data: Array<CiWorkflow>;
@@ -5536,7 +5647,7 @@ export type CiXcodeVersion = {
     links?: ResourceLinks;
 };
 
-export type type81 = 'ciXcodeVersions';
+export type type84 = 'ciXcodeVersions';
 
 export type CiXcodeVersionsResponse = {
     data: Array<CiXcodeVersion>;
@@ -5570,7 +5681,7 @@ export type CustomerReviewResponseV1 = {
     links?: ResourceLinks;
 };
 
-export type type82 = 'customerReviewResponses';
+export type type85 = 'customerReviewResponses';
 
 export type state5 = 'PUBLISHED' | 'PENDING_PUBLISH';
 
@@ -5620,7 +5731,7 @@ export type CustomerReview = {
     links?: ResourceLinks;
 };
 
-export type type83 = 'customerReviews';
+export type type86 = 'customerReviews';
 
 export type CustomerReviewsResponse = {
     data: Array<CustomerReview>;
@@ -5650,7 +5761,7 @@ export type Device = {
     links?: ResourceLinks;
 };
 
-export type type84 = 'devices';
+export type type87 = 'devices';
 
 export type deviceClass = 'APPLE_WATCH' | 'IPAD' | 'IPHONE' | 'IPOD' | 'APPLE_TV' | 'MAC';
 
@@ -5695,7 +5806,7 @@ export type DiagnosticLog = {
     links?: ResourceLinks;
 };
 
-export type type85 = 'diagnosticLogs';
+export type type88 = 'diagnosticLogs';
 
 export type DiagnosticSignature = {
     type: 'diagnosticSignatures';
@@ -5714,7 +5825,7 @@ export type DiagnosticSignature = {
     links?: ResourceLinks;
 };
 
-export type type86 = 'diagnosticSignatures';
+export type type89 = 'diagnosticSignatures';
 
 export type diagnosticType = 'DISK_WRITES' | 'HANGS' | 'LAUNCHES';
 
@@ -5730,7 +5841,7 @@ export type EndAppAvailabilityPreOrder = {
     links?: ResourceLinks;
 };
 
-export type type87 = 'endAppAvailabilityPreOrders';
+export type type90 = 'endAppAvailabilityPreOrders';
 
 export type EndAppAvailabilityPreOrderResponse = {
     data: EndAppAvailabilityPreOrder;
@@ -5776,7 +5887,7 @@ export type EndUserLicenseAgreement = {
     links?: ResourceLinks;
 };
 
-export type type88 = 'endUserLicenseAgreements';
+export type type91 = 'endUserLicenseAgreements';
 
 export type EndUserLicenseAgreementResponse = {
     data: EndUserLicenseAgreement;
@@ -5846,7 +5957,7 @@ export type GameCenterAchievementImage = {
     links?: ResourceLinks;
 };
 
-export type type89 = 'gameCenterAchievementImages';
+export type type92 = 'gameCenterAchievementImages';
 
 export type GameCenterAchievementImageResponse = {
     data: GameCenterAchievementImage;
@@ -5910,7 +6021,7 @@ export type GameCenterAchievementLocalization = {
     links?: ResourceLinks;
 };
 
-export type type90 = 'gameCenterAchievementLocalizations';
+export type type93 = 'gameCenterAchievementLocalizations';
 
 export type GameCenterAchievementLocalizationsResponse = {
     data: Array<GameCenterAchievementLocalization>;
@@ -5980,7 +6091,7 @@ export type GameCenterAchievementRelease = {
     links?: ResourceLinks;
 };
 
-export type type91 = 'gameCenterAchievementReleases';
+export type type94 = 'gameCenterAchievementReleases';
 
 export type GameCenterAchievementReleasesResponse = {
     data: Array<GameCenterAchievementRelease>;
@@ -6069,7 +6180,7 @@ export type GameCenterAchievement = {
     links?: ResourceLinks;
 };
 
-export type type92 = 'gameCenterAchievements';
+export type type95 = 'gameCenterAchievements';
 
 export type GameCenterAchievementsResponse = {
     data: Array<GameCenterAchievement>;
@@ -6151,7 +6262,7 @@ export type GameCenterAppVersion = {
     links?: ResourceLinks;
 };
 
-export type type93 = 'gameCenterAppVersions';
+export type type96 = 'gameCenterAppVersions';
 
 export type GameCenterAppVersionsResponse = {
     data: Array<GameCenterAppVersion>;
@@ -6283,7 +6394,7 @@ export type GameCenterDetail = {
     links?: ResourceLinks;
 };
 
-export type type94 = 'gameCenterDetails';
+export type type97 = 'gameCenterDetails';
 
 export type GameCenterDetailsResponse = {
     data: Array<GameCenterDetail>;
@@ -6375,7 +6486,7 @@ export type GameCenterEnabledVersion = {
     links?: ResourceLinks;
 };
 
-export type type95 = 'gameCenterEnabledVersions';
+export type type98 = 'gameCenterEnabledVersions';
 
 /**
  * @deprecated
@@ -6430,7 +6541,7 @@ export type GameCenterGroup = {
     links?: ResourceLinks;
 };
 
-export type type96 = 'gameCenterGroups';
+export type type99 = 'gameCenterGroups';
 
 export type GameCenterGroupsResponse = {
     data: Array<GameCenterGroup>;
@@ -6479,7 +6590,7 @@ export type GameCenterLeaderboardEntrySubmission = {
     links?: ResourceLinks;
 };
 
-export type type97 = 'gameCenterLeaderboardEntrySubmissions';
+export type type100 = 'gameCenterLeaderboardEntrySubmissions';
 
 export type GameCenterLeaderboardEntrySubmissionResponse = {
     data: GameCenterLeaderboardEntrySubmission;
@@ -6522,7 +6633,7 @@ export type GameCenterLeaderboardImage = {
     links?: ResourceLinks;
 };
 
-export type type98 = 'gameCenterLeaderboardImages';
+export type type101 = 'gameCenterLeaderboardImages';
 
 export type GameCenterLeaderboardImageResponse = {
     data: GameCenterLeaderboardImage;
@@ -6586,7 +6697,7 @@ export type GameCenterLeaderboardLocalization = {
     links?: ResourceLinks;
 };
 
-export type type99 = 'gameCenterLeaderboardLocalizations';
+export type type102 = 'gameCenterLeaderboardLocalizations';
 
 export type GameCenterLeaderboardLocalizationsResponse = {
     data: Array<GameCenterLeaderboardLocalization>;
@@ -6658,7 +6769,7 @@ export type GameCenterLeaderboardRelease = {
     links?: ResourceLinks;
 };
 
-export type type100 = 'gameCenterLeaderboardReleases';
+export type type103 = 'gameCenterLeaderboardReleases';
 
 export type GameCenterLeaderboardReleasesResponse = {
     data: Array<GameCenterLeaderboardRelease>;
@@ -6714,7 +6825,7 @@ export type GameCenterLeaderboardSetImage = {
     links?: ResourceLinks;
 };
 
-export type type101 = 'gameCenterLeaderboardSetImages';
+export type type104 = 'gameCenterLeaderboardSetImages';
 
 export type GameCenterLeaderboardSetImageResponse = {
     data: GameCenterLeaderboardSetImage;
@@ -6775,7 +6886,7 @@ export type GameCenterLeaderboardSetLocalization = {
     links?: ResourceLinks;
 };
 
-export type type102 = 'gameCenterLeaderboardSetLocalizations';
+export type type105 = 'gameCenterLeaderboardSetLocalizations';
 
 export type GameCenterLeaderboardSetLocalizationsResponse = {
     data: Array<GameCenterLeaderboardSetLocalization>;
@@ -6844,7 +6955,7 @@ export type GameCenterLeaderboardSetMemberLocalization = {
     links?: ResourceLinks;
 };
 
-export type type103 = 'gameCenterLeaderboardSetMemberLocalizations';
+export type type106 = 'gameCenterLeaderboardSetMemberLocalizations';
 
 export type GameCenterLeaderboardSetMemberLocalizationsResponse = {
     data: Array<GameCenterLeaderboardSetMemberLocalization>;
@@ -6916,7 +7027,7 @@ export type GameCenterLeaderboardSetRelease = {
     links?: ResourceLinks;
 };
 
-export type type104 = 'gameCenterLeaderboardSetReleases';
+export type type107 = 'gameCenterLeaderboardSetReleases';
 
 export type GameCenterLeaderboardSetReleasesResponse = {
     data: Array<GameCenterLeaderboardSetRelease>;
@@ -7009,7 +7120,7 @@ export type GameCenterLeaderboardSet = {
     links?: ResourceLinks;
 };
 
-export type type105 = 'gameCenterLeaderboardSets';
+export type type108 = 'gameCenterLeaderboardSets';
 
 export type GameCenterLeaderboardSetsResponse = {
     data: Array<GameCenterLeaderboardSet>;
@@ -7130,7 +7241,7 @@ export type GameCenterLeaderboard = {
     links?: ResourceLinks;
 };
 
-export type type106 = 'gameCenterLeaderboards';
+export type type109 = 'gameCenterLeaderboards';
 
 export type submissionType = 'BEST_SCORE' | 'MOST_RECENT_SCORE';
 
@@ -7230,7 +7341,7 @@ export type GameCenterMatchmakingQueue = {
     links?: ResourceLinks;
 };
 
-export type type107 = 'gameCenterMatchmakingQueues';
+export type type110 = 'gameCenterMatchmakingQueues';
 
 export type GameCenterMatchmakingQueuesResponse = {
     data: Array<GameCenterMatchmakingQueue>;
@@ -7305,7 +7416,7 @@ export type GameCenterMatchmakingRuleSetTest = {
     links?: ResourceLinks;
 };
 
-export type type108 = 'gameCenterMatchmakingRuleSetTests';
+export type type111 = 'gameCenterMatchmakingRuleSetTests';
 
 export type GameCenterMatchmakingRuleSetTestResponse = {
     data: GameCenterMatchmakingRuleSetTest;
@@ -7371,7 +7482,7 @@ export type GameCenterMatchmakingRuleSet = {
     links?: ResourceLinks;
 };
 
-export type type109 = 'gameCenterMatchmakingRuleSets';
+export type type112 = 'gameCenterMatchmakingRuleSets';
 
 export type GameCenterMatchmakingRuleSetsResponse = {
     data: Array<GameCenterMatchmakingRuleSet>;
@@ -7422,7 +7533,7 @@ export type GameCenterMatchmakingRule = {
     links?: ResourceLinks;
 };
 
-export type type110 = 'gameCenterMatchmakingRules';
+export type type113 = 'gameCenterMatchmakingRules';
 
 export type GameCenterMatchmakingRulesResponse = {
     data: Array<GameCenterMatchmakingRule>;
@@ -7479,7 +7590,7 @@ export type GameCenterMatchmakingTeam = {
     links?: ResourceLinks;
 };
 
-export type type111 = 'gameCenterMatchmakingTeams';
+export type type114 = 'gameCenterMatchmakingTeams';
 
 export type GameCenterMatchmakingTeamsResponse = {
     data: Array<GameCenterMatchmakingTeam>;
@@ -7531,7 +7642,7 @@ export type GameCenterMatchmakingTestPlayerPropertyInlineCreate = {
     };
 };
 
-export type type112 = 'gameCenterMatchmakingTestPlayerProperties';
+export type type115 = 'gameCenterMatchmakingTestPlayerProperties';
 
 export type GameCenterMatchmakingTestRequestInlineCreate = {
     type: 'gameCenterMatchmakingTestRequests';
@@ -7558,7 +7669,7 @@ export type GameCenterMatchmakingTestRequestInlineCreate = {
     };
 };
 
-export type type113 = 'gameCenterMatchmakingTestRequests';
+export type type116 = 'gameCenterMatchmakingTestRequests';
 
 export type locale = 'AR-SA' | 'CA-ES' | 'CS-CZ' | 'DA-DK' | 'DE-DE' | 'EL-GR' | 'EN-AU' | 'EN-GB' | 'EN-US' | 'EN-KY' | 'ES-ES' | 'ES-MX' | 'FI-FI' | 'FR-CA' | 'FR-FR' | 'HI-IN' | 'HR-HR' | 'HU-HU' | 'ID-ID' | 'IT-IT' | 'IW-IL' | 'JA-JP' | 'KO-KR' | 'MS-MY' | 'NL-NL' | 'NO-NO' | 'PL-PL' | 'PT-BR' | 'PT-PT' | 'RO-RO' | 'RU-RU' | 'SK-SK' | 'SV-SE' | 'TH-TH' | 'TR-TR' | 'UK-UA' | 'ZH-CN' | 'ZH-TW' | 'ZH-HK';
 
@@ -7576,7 +7687,7 @@ export type GameCenterPlayerAchievementSubmission = {
     links?: ResourceLinks;
 };
 
-export type type114 = 'gameCenterPlayerAchievementSubmissions';
+export type type117 = 'gameCenterPlayerAchievementSubmissions';
 
 export type GameCenterPlayerAchievementSubmissionResponse = {
     data: GameCenterPlayerAchievementSubmission;
@@ -7621,7 +7732,7 @@ export type InAppPurchaseAppStoreReviewScreenshot = {
     links?: ResourceLinks;
 };
 
-export type type115 = 'inAppPurchaseAppStoreReviewScreenshots';
+export type type118 = 'inAppPurchaseAppStoreReviewScreenshots';
 
 export type InAppPurchaseAppStoreReviewScreenshotResponse = {
     data: InAppPurchaseAppStoreReviewScreenshot;
@@ -7677,7 +7788,7 @@ export type InAppPurchaseAvailability = {
     links?: ResourceLinks;
 };
 
-export type type116 = 'inAppPurchaseAvailabilities';
+export type type119 = 'inAppPurchaseAvailabilities';
 
 export type InAppPurchaseAvailabilityResponse = {
     data: InAppPurchaseAvailability;
@@ -7728,7 +7839,7 @@ export type InAppPurchaseContent = {
     links?: ResourceLinks;
 };
 
-export type type117 = 'inAppPurchaseContents';
+export type type120 = 'inAppPurchaseContents';
 
 export type InAppPurchaseContentResponse = {
     data: InAppPurchaseContent;
@@ -7759,7 +7870,7 @@ export type InAppPurchaseImage = {
     links?: ResourceLinks;
 };
 
-export type type118 = 'inAppPurchaseImages';
+export type type121 = 'inAppPurchaseImages';
 
 export type state6 = 'AWAITING_UPLOAD' | 'UPLOAD_COMPLETE' | 'FAILED' | 'PREPARE_FOR_SUBMISSION' | 'WAITING_FOR_REVIEW' | 'APPROVED' | 'REJECTED';
 
@@ -7825,7 +7936,7 @@ export type InAppPurchaseLocalization = {
     links?: ResourceLinks;
 };
 
-export type type119 = 'inAppPurchaseLocalizations';
+export type type122 = 'inAppPurchaseLocalizations';
 
 export type state7 = 'PREPARE_FOR_SUBMISSION' | 'WAITING_FOR_REVIEW' | 'APPROVED' | 'REJECTED';
 
@@ -7893,7 +8004,7 @@ export type InAppPurchasePricePoint = {
     links?: ResourceLinks;
 };
 
-export type type120 = 'inAppPurchasePricePoints';
+export type type123 = 'inAppPurchasePricePoints';
 
 export type InAppPurchasePricePointsResponse = {
     data: Array<InAppPurchasePricePoint>;
@@ -7933,7 +8044,7 @@ export type InAppPurchasePriceSchedule = {
     links?: ResourceLinks;
 };
 
-export type type121 = 'inAppPurchasePriceSchedules';
+export type type124 = 'inAppPurchasePriceSchedules';
 
 export type InAppPurchasePriceScheduleResponse = {
     data: InAppPurchasePriceSchedule;
@@ -7993,7 +8104,7 @@ export type InAppPurchasePrice = {
     links?: ResourceLinks;
 };
 
-export type type122 = 'inAppPurchasePrices';
+export type type125 = 'inAppPurchasePrices';
 
 export type InAppPurchasePriceInlineCreate = {
     type: 'inAppPurchasePrices';
@@ -8039,7 +8150,7 @@ export type InAppPurchaseSubmission = {
     links?: ResourceLinks;
 };
 
-export type type123 = 'inAppPurchaseSubmissions';
+export type type126 = 'inAppPurchaseSubmissions';
 
 export type InAppPurchaseSubmissionResponse = {
     data: InAppPurchaseSubmission;
@@ -8085,7 +8196,7 @@ export type InAppPurchase = {
     links?: ResourceLinks;
 };
 
-export type type124 = 'inAppPurchases';
+export type type127 = 'inAppPurchases';
 
 export type inAppPurchaseType = 'AUTOMATICALLY_RENEWABLE_SUBSCRIPTION' | 'NON_CONSUMABLE' | 'CONSUMABLE' | 'NON_RENEWING_SUBSCRIPTION' | 'FREE_SUBSCRIPTION';
 
@@ -8246,7 +8357,7 @@ export type MarketplaceDomain = {
     links?: ResourceLinks;
 };
 
-export type type125 = 'marketplaceDomains';
+export type type128 = 'marketplaceDomains';
 
 /**
  * @deprecated
@@ -8287,7 +8398,7 @@ export type MarketplaceSearchDetail = {
     links?: ResourceLinks;
 };
 
-export type type126 = 'marketplaceSearchDetails';
+export type type129 = 'marketplaceSearchDetails';
 
 export type MarketplaceSearchDetailResponse = {
     data: MarketplaceSearchDetail;
@@ -8330,7 +8441,7 @@ export type MarketplaceWebhook = {
     links?: ResourceLinks;
 };
 
-export type type127 = 'marketplaceWebhooks';
+export type type130 = 'marketplaceWebhooks';
 
 export type MarketplaceWebhooksResponse = {
     data: Array<MarketplaceWebhook>;
@@ -8364,6 +8475,227 @@ export type MarketplaceWebhookUpdateRequest = {
     };
 };
 
+export type MerchantId = {
+    type: 'merchantIds';
+    id: string;
+    attributes?: {
+        name?: string;
+        identifier?: string;
+    };
+    relationships?: {
+        certificates?: {
+            links?: RelationshipLinks;
+            meta?: PagingInformation;
+            data?: Array<{
+                type: 'certificates';
+                id: string;
+            }>;
+        };
+    };
+    links?: ResourceLinks;
+};
+
+export type type131 = 'merchantIds';
+
+export type MerchantIdsResponse = {
+    data: Array<MerchantId>;
+    included?: Array<Certificate>;
+    links: PagedDocumentLinks;
+    meta?: PagingInformation;
+};
+
+export type MerchantIdResponse = {
+    data: MerchantId;
+    included?: Array<Certificate>;
+    links: DocumentLinks;
+};
+
+export type MerchantIdCreateRequest = {
+    data: {
+        type: 'merchantIds';
+        attributes: {
+            name: string;
+            identifier: string;
+        };
+    };
+};
+
+export type MerchantIdUpdateRequest = {
+    data: {
+        type: 'merchantIds';
+        id: string;
+        attributes?: {
+            name?: string;
+        };
+    };
+};
+
+export type Nomination = {
+    type: 'nominations';
+    id: string;
+    attributes?: {
+        name?: string;
+        type?: 'APP_LAUNCH' | 'APP_ENHANCEMENTS' | 'NEW_CONTENT';
+        description?: string;
+        createdDate?: string;
+        lastModifiedDate?: string;
+        submittedDate?: string;
+        state?: 'DRAFT' | 'SUBMITTED' | 'ARCHIVED';
+        publishStartDate?: string;
+        publishEndDate?: string;
+        deviceFamilies?: Array<DeviceFamily>;
+        locales?: Array<(string)>;
+        supplementalMaterialsUris?: Array<(string)>;
+        hasInAppEvents?: boolean;
+        launchInSelectMarketsFirst?: boolean;
+        notes?: string;
+        preOrderEnabled?: boolean;
+    };
+    relationships?: {
+        relatedApps?: {
+            meta?: PagingInformation;
+            data?: Array<{
+                type: 'apps';
+                id: string;
+            }>;
+        };
+        createdByActor?: {
+            data?: {
+                type: 'actors';
+                id: string;
+            };
+        };
+        lastModifiedByActor?: {
+            data?: {
+                type: 'actors';
+                id: string;
+            };
+        };
+        submittedByActor?: {
+            data?: {
+                type: 'actors';
+                id: string;
+            };
+        };
+        inAppEvents?: {
+            meta?: PagingInformation;
+            data?: Array<{
+                type: 'appEvents';
+                id: string;
+            }>;
+        };
+        supportedTerritories?: {
+            meta?: PagingInformation;
+            data?: Array<{
+                type: 'territories';
+                id: string;
+            }>;
+        };
+    };
+    links?: ResourceLinks;
+};
+
+export type type132 = 'nominations';
+
+export type state9 = 'DRAFT' | 'SUBMITTED' | 'ARCHIVED';
+
+export type NominationsResponse = {
+    data: Array<Nomination>;
+    included?: Array<(App | Actor | AppEvent | Territory)>;
+    links: PagedDocumentLinks;
+    meta?: PagingInformation;
+};
+
+export type NominationResponse = {
+    data: Nomination;
+    included?: Array<(App | Actor | AppEvent | Territory)>;
+    links: DocumentLinks;
+};
+
+export type NominationCreateRequest = {
+    data: {
+        type: 'nominations';
+        attributes: {
+            name: string;
+            type: 'APP_LAUNCH' | 'APP_ENHANCEMENTS' | 'NEW_CONTENT';
+            description: string;
+            submitted: boolean;
+            publishStartDate: string;
+            publishEndDate?: string;
+            deviceFamilies?: Array<DeviceFamily>;
+            locales?: Array<(string)>;
+            supplementalMaterialsUris?: Array<(string)>;
+            hasInAppEvents?: boolean;
+            launchInSelectMarketsFirst?: boolean;
+            notes?: string;
+            preOrderEnabled?: boolean;
+        };
+        relationships: {
+            relatedApps: {
+                data: Array<{
+                    type: 'apps';
+                    id: string;
+                }>;
+            };
+            inAppEvents?: {
+                data?: Array<{
+                    type: 'appEvents';
+                    id: string;
+                }>;
+            };
+            supportedTerritories?: {
+                data?: Array<{
+                    type: 'territories';
+                    id: string;
+                }>;
+            };
+        };
+    };
+};
+
+export type NominationUpdateRequest = {
+    data: {
+        type: 'nominations';
+        id: string;
+        attributes?: {
+            name?: string;
+            type?: 'APP_LAUNCH' | 'APP_ENHANCEMENTS' | 'NEW_CONTENT';
+            description?: string;
+            submitted?: boolean;
+            archived?: boolean;
+            publishStartDate?: string;
+            publishEndDate?: string;
+            deviceFamilies?: Array<DeviceFamily>;
+            locales?: Array<(string)>;
+            supplementalMaterialsUris?: Array<(string)>;
+            hasInAppEvents?: boolean;
+            launchInSelectMarketsFirst?: boolean;
+            notes?: string;
+            preOrderEnabled?: boolean;
+        };
+        relationships?: {
+            relatedApps?: {
+                data?: Array<{
+                    type: 'apps';
+                    id: string;
+                }>;
+            };
+            inAppEvents?: {
+                data?: Array<{
+                    type: 'appEvents';
+                    id: string;
+                }>;
+            };
+            supportedTerritories?: {
+                data?: Array<{
+                    type: 'territories';
+                    id: string;
+                }>;
+            };
+        };
+    };
+};
+
 export type PerfPowerMetric = {
     type: 'perfPowerMetrics';
     id: string;
@@ -8375,7 +8707,7 @@ export type PerfPowerMetric = {
     links?: ResourceLinks;
 };
 
-export type type128 = 'perfPowerMetrics';
+export type type133 = 'perfPowerMetrics';
 
 export type platform = 'IOS';
 
@@ -8408,7 +8740,7 @@ export type PrereleaseVersion = {
     links?: ResourceLinks;
 };
 
-export type type129 = 'preReleaseVersions';
+export type type134 = 'preReleaseVersions';
 
 export type PreReleaseVersionsResponse = {
     data: Array<PrereleaseVersion>;
@@ -8464,7 +8796,7 @@ export type Profile = {
     links?: ResourceLinks;
 };
 
-export type type130 = 'profiles';
+export type type135 = 'profiles';
 
 export type profileType = 'IOS_APP_DEVELOPMENT' | 'IOS_APP_STORE' | 'IOS_APP_ADHOC' | 'IOS_APP_INHOUSE' | 'MAC_APP_DEVELOPMENT' | 'MAC_APP_STORE' | 'MAC_APP_DIRECT' | 'TVOS_APP_DEVELOPMENT' | 'TVOS_APP_STORE' | 'TVOS_APP_ADHOC' | 'TVOS_APP_INHOUSE' | 'MAC_CATALYST_APP_DEVELOPMENT' | 'MAC_CATALYST_APP_STORE' | 'MAC_CATALYST_APP_DIRECT';
 
@@ -8513,89 +8845,6 @@ export type ProfileCreateRequest = {
     };
 };
 
-/**
- * @deprecated
- */
-export type PromotedPurchaseImage = {
-    type: 'promotedPurchaseImages';
-    id: string;
-    attributes?: {
-        fileSize?: number;
-        fileName?: string;
-        sourceFileChecksum?: string;
-        assetToken?: string;
-        imageAsset?: ImageAsset;
-        assetType?: string;
-        uploadOperations?: Array<UploadOperation>;
-        state?: 'AWAITING_UPLOAD' | 'UPLOAD_COMPLETE' | 'FAILED' | 'PREPARE_FOR_SUBMISSION' | 'WAITING_FOR_REVIEW' | 'APPROVED' | 'REJECTED';
-    };
-    relationships?: {
-        promotedPurchase?: {
-            data?: {
-                type: 'promotedPurchases';
-                id: string;
-            };
-        };
-    };
-    links?: ResourceLinks;
-};
-
-export type type131 = 'promotedPurchaseImages';
-
-/**
- * @deprecated
- */
-export type PromotedPurchaseImagesResponse = {
-    data: Array<PromotedPurchaseImage>;
-    included?: Array<PromotedPurchase>;
-    links: PagedDocumentLinks;
-    meta?: PagingInformation;
-};
-
-/**
- * @deprecated
- */
-export type PromotedPurchaseImageResponse = {
-    data: PromotedPurchaseImage;
-    included?: Array<PromotedPurchase>;
-    links: DocumentLinks;
-};
-
-/**
- * @deprecated
- */
-export type PromotedPurchaseImageCreateRequest = {
-    data: {
-        type: 'promotedPurchaseImages';
-        attributes: {
-            fileSize: number;
-            fileName: string;
-        };
-        relationships: {
-            promotedPurchase: {
-                data: {
-                    type: 'promotedPurchases';
-                    id: string;
-                };
-            };
-        };
-    };
-};
-
-/**
- * @deprecated
- */
-export type PromotedPurchaseImageUpdateRequest = {
-    data: {
-        type: 'promotedPurchaseImages';
-        id: string;
-        attributes?: {
-            sourceFileChecksum?: string;
-            uploaded?: boolean;
-        };
-    };
-};
-
 export type PromotedPurchase = {
     type: 'promotedPurchases';
     id: string;
@@ -8617,35 +8866,24 @@ export type PromotedPurchase = {
                 id: string;
             };
         };
-        /**
-         * @deprecated
-         */
-        promotionImages?: {
-            links?: RelationshipLinks;
-            meta?: PagingInformation;
-            data?: Array<{
-                type: 'promotedPurchaseImages';
-                id: string;
-            }>;
-        };
     };
     links?: ResourceLinks;
 };
 
-export type type132 = 'promotedPurchases';
+export type type136 = 'promotedPurchases';
 
-export type state9 = 'APPROVED' | 'IN_REVIEW' | 'PREPARE_FOR_SUBMISSION' | 'REJECTED';
+export type state10 = 'APPROVED' | 'IN_REVIEW' | 'PREPARE_FOR_SUBMISSION' | 'REJECTED';
 
 export type PromotedPurchasesResponse = {
     data: Array<PromotedPurchase>;
-    included?: Array<(InAppPurchaseV2 | Subscription | PromotedPurchaseImage)>;
+    included?: Array<(InAppPurchaseV2 | Subscription)>;
     links: PagedDocumentLinks;
     meta?: PagingInformation;
 };
 
 export type PromotedPurchaseResponse = {
     data: PromotedPurchase;
-    included?: Array<(InAppPurchaseV2 | Subscription | PromotedPurchaseImage)>;
+    included?: Array<(InAppPurchaseV2 | Subscription)>;
     links: DocumentLinks;
 };
 
@@ -8731,9 +8969,9 @@ export type ReviewSubmissionItem = {
     links?: ResourceLinks;
 };
 
-export type type133 = 'reviewSubmissionItems';
+export type type137 = 'reviewSubmissionItems';
 
-export type state10 = 'READY_FOR_REVIEW' | 'ACCEPTED' | 'APPROVED' | 'REJECTED' | 'REMOVED';
+export type state11 = 'READY_FOR_REVIEW' | 'ACCEPTED' | 'APPROVED' | 'REJECTED' | 'REMOVED';
 
 export type ReviewSubmissionItemsResponse = {
     data: Array<ReviewSubmissionItem>;
@@ -8848,9 +9086,9 @@ export type ReviewSubmission = {
     links?: ResourceLinks;
 };
 
-export type type134 = 'reviewSubmissions';
+export type type138 = 'reviewSubmissions';
 
-export type state11 = 'READY_FOR_REVIEW' | 'WAITING_FOR_REVIEW' | 'IN_REVIEW' | 'UNRESOLVED_ISSUES' | 'CANCELING' | 'COMPLETING' | 'COMPLETE';
+export type state12 = 'READY_FOR_REVIEW' | 'WAITING_FOR_REVIEW' | 'IN_REVIEW' | 'UNRESOLVED_ISSUES' | 'CANCELING' | 'COMPLETING' | 'COMPLETE';
 
 export type ReviewSubmissionsResponse = {
     data: Array<ReviewSubmission>;
@@ -8914,7 +9152,7 @@ export type RoutingAppCoverage = {
     links?: ResourceLinks;
 };
 
-export type type135 = 'routingAppCoverages';
+export type type139 = 'routingAppCoverages';
 
 export type RoutingAppCoverageResponse = {
     data: RoutingAppCoverage;
@@ -8966,7 +9204,7 @@ export type SandboxTesterV2 = {
     links?: ResourceLinks;
 };
 
-export type type136 = 'sandboxTesters';
+export type type140 = 'sandboxTesters';
 
 export type subscriptionRenewalRate = 'MONTHLY_RENEWAL_EVERY_ONE_HOUR' | 'MONTHLY_RENEWAL_EVERY_THIRTY_MINUTES' | 'MONTHLY_RENEWAL_EVERY_FIFTEEN_MINUTES' | 'MONTHLY_RENEWAL_EVERY_FIVE_MINUTES' | 'MONTHLY_RENEWAL_EVERY_THREE_MINUTES';
 
@@ -8999,7 +9237,7 @@ export type SandboxTestersClearPurchaseHistoryRequestV2 = {
     links?: ResourceLinks;
 };
 
-export type type137 = 'sandboxTestersClearPurchaseHistoryRequest';
+export type type141 = 'sandboxTestersClearPurchaseHistoryRequest';
 
 export type SandboxTestersClearPurchaseHistoryRequestV2Response = {
     data: SandboxTestersClearPurchaseHistoryRequestV2;
@@ -9040,7 +9278,7 @@ export type ScmGitReference = {
     links?: ResourceLinks;
 };
 
-export type type138 = 'scmGitReferences';
+export type type142 = 'scmGitReferences';
 
 export type ScmGitReferencesResponse = {
     data: Array<ScmGitReference>;
@@ -9070,7 +9308,7 @@ export type ScmProvider = {
     links?: ResourceLinks;
 };
 
-export type type139 = 'scmProviders';
+export type type143 = 'scmProviders';
 
 export type ScmProvidersResponse = {
     data: Array<ScmProvider>;
@@ -9110,7 +9348,7 @@ export type ScmPullRequest = {
     links?: ResourceLinks;
 };
 
-export type type140 = 'scmPullRequests';
+export type type144 = 'scmPullRequests';
 
 export type ScmPullRequestsResponse = {
     data: Array<ScmPullRequest>;
@@ -9158,7 +9396,7 @@ export type ScmRepository = {
     links?: ResourceLinks;
 };
 
-export type type141 = 'scmRepositories';
+export type type145 = 'scmRepositories';
 
 export type ScmRepositoriesResponse = {
     data: Array<ScmRepository>;
@@ -9197,7 +9435,7 @@ export type SubscriptionAppStoreReviewScreenshot = {
     links?: ResourceLinks;
 };
 
-export type type142 = 'subscriptionAppStoreReviewScreenshots';
+export type type146 = 'subscriptionAppStoreReviewScreenshots';
 
 export type SubscriptionAppStoreReviewScreenshotResponse = {
     data: SubscriptionAppStoreReviewScreenshot;
@@ -9253,7 +9491,7 @@ export type SubscriptionAvailability = {
     links?: ResourceLinks;
 };
 
-export type type143 = 'subscriptionAvailabilities';
+export type type147 = 'subscriptionAvailabilities';
 
 export type SubscriptionAvailabilityResponse = {
     data: SubscriptionAvailability;
@@ -9296,7 +9534,7 @@ export type SubscriptionGracePeriod = {
     links?: ResourceLinks;
 };
 
-export type type144 = 'subscriptionGracePeriods';
+export type type148 = 'subscriptionGracePeriods';
 
 export type renewalType = 'ALL_RENEWALS' | 'PAID_TO_PAID_ONLY';
 
@@ -9338,7 +9576,7 @@ export type SubscriptionGroupLocalization = {
     links?: ResourceLinks;
 };
 
-export type type145 = 'subscriptionGroupLocalizations';
+export type type149 = 'subscriptionGroupLocalizations';
 
 export type SubscriptionGroupLocalizationsResponse = {
     data: Array<SubscriptionGroupLocalization>;
@@ -9389,7 +9627,7 @@ export type SubscriptionGroupSubmission = {
     links?: ResourceLinks;
 };
 
-export type type146 = 'subscriptionGroupSubmissions';
+export type type150 = 'subscriptionGroupSubmissions';
 
 export type SubscriptionGroupSubmissionResponse = {
     data: SubscriptionGroupSubmission;
@@ -9437,7 +9675,7 @@ export type SubscriptionGroup = {
     links?: ResourceLinks;
 };
 
-export type type147 = 'subscriptionGroups';
+export type type151 = 'subscriptionGroups';
 
 export type SubscriptionGroupsResponse = {
     data: Array<SubscriptionGroup>;
@@ -9502,7 +9740,7 @@ export type SubscriptionImage = {
     links?: ResourceLinks;
 };
 
-export type type148 = 'subscriptionImages';
+export type type152 = 'subscriptionImages';
 
 export type SubscriptionImagesResponse = {
     data: Array<SubscriptionImage>;
@@ -9579,7 +9817,7 @@ export type SubscriptionIntroductoryOffer = {
     links?: ResourceLinks;
 };
 
-export type type149 = 'subscriptionIntroductoryOffers';
+export type type153 = 'subscriptionIntroductoryOffers';
 
 export type SubscriptionIntroductoryOfferInlineCreate = {
     type: 'subscriptionIntroductoryOffers';
@@ -9690,7 +9928,7 @@ export type SubscriptionLocalization = {
     links?: ResourceLinks;
 };
 
-export type type150 = 'subscriptionLocalizations';
+export type type154 = 'subscriptionLocalizations';
 
 export type SubscriptionLocalizationsResponse = {
     data: Array<SubscriptionLocalization>;
@@ -9756,7 +9994,7 @@ export type SubscriptionOfferCodeCustomCode = {
     links?: ResourceLinks;
 };
 
-export type type151 = 'subscriptionOfferCodeCustomCodes';
+export type type155 = 'subscriptionOfferCodeCustomCodes';
 
 export type SubscriptionOfferCodeCustomCodesResponse = {
     data: Array<SubscriptionOfferCodeCustomCode>;
@@ -9806,7 +10044,7 @@ export type SubscriptionOfferCodeOneTimeUseCodeValue = {
     links?: ResourceLinks;
 };
 
-export type type152 = 'subscriptionOfferCodeOneTimeUseCodeValues';
+export type type156 = 'subscriptionOfferCodeOneTimeUseCodeValues';
 
 export type SubscriptionOfferCodeOneTimeUseCode = {
     type: 'subscriptionOfferCodeOneTimeUseCodes';
@@ -9831,7 +10069,7 @@ export type SubscriptionOfferCodeOneTimeUseCode = {
     links?: ResourceLinks;
 };
 
-export type type153 = 'subscriptionOfferCodeOneTimeUseCodes';
+export type type157 = 'subscriptionOfferCodeOneTimeUseCodes';
 
 export type SubscriptionOfferCodeOneTimeUseCodesResponse = {
     data: Array<SubscriptionOfferCodeOneTimeUseCode>;
@@ -9894,7 +10132,7 @@ export type SubscriptionOfferCodePrice = {
     links?: ResourceLinks;
 };
 
-export type type154 = 'subscriptionOfferCodePrices';
+export type type158 = 'subscriptionOfferCodePrices';
 
 export type SubscriptionOfferCodePriceInlineCreate = {
     type: 'subscriptionOfferCodePrices';
@@ -9970,7 +10208,7 @@ export type SubscriptionOfferCode = {
     links?: ResourceLinks;
 };
 
-export type type155 = 'subscriptionOfferCodes';
+export type type159 = 'subscriptionOfferCodes';
 
 export type SubscriptionOfferCodesResponse = {
     data: Array<SubscriptionOfferCode>;
@@ -10046,7 +10284,7 @@ export type SubscriptionPricePoint = {
     links?: ResourceLinks;
 };
 
-export type type156 = 'subscriptionPricePoints';
+export type type160 = 'subscriptionPricePoints';
 
 export type SubscriptionPricePointInlineCreate = {
     type: 'subscriptionPricePoints';
@@ -10090,7 +10328,7 @@ export type SubscriptionPrice = {
     links?: ResourceLinks;
 };
 
-export type type157 = 'subscriptionPrices';
+export type type161 = 'subscriptionPrices';
 
 export type SubscriptionPriceInlineCreate = {
     type: 'subscriptionPrices';
@@ -10184,7 +10422,7 @@ export type SubscriptionPromotionalOfferPrice = {
     links?: ResourceLinks;
 };
 
-export type type158 = 'subscriptionPromotionalOfferPrices';
+export type type162 = 'subscriptionPromotionalOfferPrices';
 
 export type SubscriptionPromotionalOfferPriceInlineCreate = {
     type: 'subscriptionPromotionalOfferPrices';
@@ -10241,7 +10479,7 @@ export type SubscriptionPromotionalOffer = {
     links?: ResourceLinks;
 };
 
-export type type159 = 'subscriptionPromotionalOffers';
+export type type163 = 'subscriptionPromotionalOffers';
 
 export type SubscriptionPromotionalOfferInlineCreate = {
     type: 'subscriptionPromotionalOffers';
@@ -10340,7 +10578,7 @@ export type SubscriptionSubmission = {
     links?: ResourceLinks;
 };
 
-export type type160 = 'subscriptionSubmissions';
+export type type164 = 'subscriptionSubmissions';
 
 export type SubscriptionSubmissionResponse = {
     data: SubscriptionSubmission;
@@ -10465,9 +10703,9 @@ export type Subscription = {
     links?: ResourceLinks;
 };
 
-export type type161 = 'subscriptions';
+export type type165 = 'subscriptions';
 
-export type state12 = 'MISSING_METADATA' | 'READY_TO_SUBMIT' | 'WAITING_FOR_REVIEW' | 'IN_REVIEW' | 'DEVELOPER_ACTION_NEEDED' | 'PENDING_BINARY_APPROVAL' | 'APPROVED' | 'DEVELOPER_REMOVED_FROM_SALE' | 'REMOVED_FROM_SALE' | 'REJECTED';
+export type state13 = 'MISSING_METADATA' | 'READY_TO_SUBMIT' | 'WAITING_FOR_REVIEW' | 'IN_REVIEW' | 'DEVELOPER_ACTION_NEEDED' | 'PENDING_BINARY_APPROVAL' | 'APPROVED' | 'DEVELOPER_REMOVED_FROM_SALE' | 'REMOVED_FROM_SALE' | 'REJECTED';
 
 export type subscriptionPeriod = 'ONE_WEEK' | 'ONE_MONTH' | 'TWO_MONTHS' | 'THREE_MONTHS' | 'SIX_MONTHS' | 'ONE_YEAR';
 
@@ -10550,7 +10788,7 @@ export type Territory = {
     links?: ResourceLinks;
 };
 
-export type type162 = 'territories';
+export type type166 = 'territories';
 
 export type TerritoryInlineCreate = {
     type: 'territories';
@@ -10576,7 +10814,7 @@ export type TerritoryAvailability = {
         releaseDate?: string;
         preOrderEnabled?: boolean;
         preOrderPublishDate?: string;
-        contentStatuses?: Array<('AVAILABLE' | 'AVAILABLE_FOR_PREORDER_ON_DATE' | 'PROCESSING_TO_NOT_AVAILABLE' | 'PROCESSING_TO_AVAILABLE' | 'PROCESSING_TO_PRE_ORDER' | 'AVAILABLE_FOR_SALE_UNRELEASED_APP' | 'PREORDER_ON_UNRELEASED_APP' | 'AVAILABLE_FOR_PREORDER' | 'MISSING_RATING' | 'CANNOT_SELL_RESTRICTED_RATING' | 'BRAZIL_REQUIRED_TAX_ID' | 'MISSING_GRN' | 'UNVERIFIED_GRN' | 'ICP_NUMBER_INVALID' | 'ICP_NUMBER_MISSING' | 'CANNOT_SELL_SEVENTEEN_PLUS_APPS' | 'CANNOT_SELL_SEXUALLY_EXPLICIT' | 'CANNOT_SELL_NON_IOS_GAMES' | 'CANNOT_SELL_SEVENTEEN_PLUS_GAMES' | 'CANNOT_SELL_FREQUENT_INTENSE_GAMBLING' | 'CANNOT_SELL_CASINO' | 'CANNOT_SELL_CASINO_WITHOUT_GRAC' | 'CANNOT_SELL_CASINO_WITHOUT_AGE_VERIFICATION' | 'CANNOT_SELL_FREQUENT_INTENSE_ALCOHOL_TOBACCO_DRUGS' | 'CANNOT_SELL_FREQUENT_INTENSE_VIOLENCE' | 'CANNOT_SELL_FREQUENT_INTENSE_SEXUAL_CONTENT_NUDITY' | 'CANNOT_SELL_INFREQUENT_MILD_ALCOHOL_TOBACCO_DRUGS' | 'CANNOT_SELL_INFREQUENT_MILD_SEXUAL_CONTENT_NUDITY' | 'CANNOT_SELL_ADULT_ONLY' | 'CANNOT_SELL_FREQUENT_INTENSE' | 'CANNOT_SELL_FREQUENT_INTENSE_WITHOUT_GRAC' | 'CANNOT_SELL_GAMBLING_CONTESTS' | 'CANNOT_SELL_GAMBLING' | 'CANNOT_SELL_CONTESTS' | 'CANNOT_SELL')>;
+        contentStatuses?: Array<('AVAILABLE' | 'AVAILABLE_FOR_PREORDER_ON_DATE' | 'PROCESSING_TO_NOT_AVAILABLE' | 'PROCESSING_TO_AVAILABLE' | 'PROCESSING_TO_PRE_ORDER' | 'AVAILABLE_FOR_SALE_UNRELEASED_APP' | 'PREORDER_ON_UNRELEASED_APP' | 'AVAILABLE_FOR_PREORDER' | 'MISSING_RATING' | 'CANNOT_SELL_RESTRICTED_RATING' | 'BRAZIL_REQUIRED_TAX_ID' | 'MISSING_GRN' | 'UNVERIFIED_GRN' | 'ICP_NUMBER_INVALID' | 'ICP_NUMBER_MISSING' | 'TRADER_STATUS_NOT_PROVIDED' | 'TRADER_STATUS_VERIFICATION_FAILED' | 'TRADER_STATUS_VERIFICATION_STATUS_MISSING' | 'CANNOT_SELL_SEVENTEEN_PLUS_APPS' | 'CANNOT_SELL_SEXUALLY_EXPLICIT' | 'CANNOT_SELL_NON_IOS_GAMES' | 'CANNOT_SELL_SEVENTEEN_PLUS_GAMES' | 'CANNOT_SELL_FREQUENT_INTENSE_GAMBLING' | 'CANNOT_SELL_CASINO' | 'CANNOT_SELL_CASINO_WITHOUT_GRAC' | 'CANNOT_SELL_CASINO_WITHOUT_AGE_VERIFICATION' | 'CANNOT_SELL_FREQUENT_INTENSE_ALCOHOL_TOBACCO_DRUGS' | 'CANNOT_SELL_FREQUENT_INTENSE_VIOLENCE' | 'CANNOT_SELL_FREQUENT_INTENSE_SEXUAL_CONTENT_NUDITY' | 'CANNOT_SELL_INFREQUENT_MILD_ALCOHOL_TOBACCO_DRUGS' | 'CANNOT_SELL_INFREQUENT_MILD_SEXUAL_CONTENT_NUDITY' | 'CANNOT_SELL_ADULT_ONLY' | 'CANNOT_SELL_FREQUENT_INTENSE' | 'CANNOT_SELL_FREQUENT_INTENSE_WITHOUT_GRAC' | 'CANNOT_SELL_GAMBLING_CONTESTS' | 'CANNOT_SELL_GAMBLING' | 'CANNOT_SELL_CONTESTS' | 'CANNOT_SELL')>;
     };
     relationships?: {
         territory?: {
@@ -10589,7 +10827,7 @@ export type TerritoryAvailability = {
     links?: ResourceLinks;
 };
 
-export type type163 = 'territoryAvailabilities';
+export type type167 = 'territoryAvailabilities';
 
 export type TerritoryAvailabilityInlineCreate = {
     type: 'territoryAvailabilities';
@@ -10646,7 +10884,7 @@ export type UserInvitation = {
     links?: ResourceLinks;
 };
 
-export type type164 = 'userInvitations';
+export type type168 = 'userInvitations';
 
 export type UserInvitationsResponse = {
     data: Array<UserInvitation>;
@@ -10707,7 +10945,7 @@ export type User = {
     links?: ResourceLinks;
 };
 
-export type type165 = 'users';
+export type type169 = 'users';
 
 export type UsersResponse = {
     data: Array<User>;
@@ -10762,7 +11000,7 @@ export type WinBackOfferPrice = {
     links?: ResourceLinks;
 };
 
-export type type166 = 'winBackOfferPrices';
+export type type170 = 'winBackOfferPrices';
 
 export type WinBackOfferPriceInlineCreate = {
     type: 'winBackOfferPrices';
@@ -10806,7 +11044,7 @@ export type WinBackOffer = {
     links?: ResourceLinks;
 };
 
-export type type167 = 'winBackOffers';
+export type type171 = 'winBackOffers';
 
 export type promotionIntent = 'NOT_PROMOTED' | 'USE_AUTO_GENERATED_ASSETS';
 
@@ -11538,6 +11776,26 @@ export type AppsBetaTesterUsagesV1MetricResponse = {
     included?: Array<BetaTester>;
 };
 
+export type BetaPublicLinkUsagesV1MetricResponse = {
+    data: Array<{
+        dataPoints?: {
+            start?: string;
+            end?: string;
+            values?: {
+                viewCount?: number;
+                acceptedCount?: number;
+                didNotAcceptCount?: number;
+                didNotMeetCriteriaCount?: number;
+                notRelevantRatio?: number;
+                notClearRatio?: number;
+                notInterestingRatio?: number;
+            };
+        };
+    }>;
+    links: PagedDocumentLinks;
+    meta?: PagingInformation;
+};
+
 export type BetaTesterUsagesV1MetricResponse = {
     data: Array<{
         dataPoints?: {
@@ -11830,7 +12088,7 @@ export type AppMediaAssetState = {
     state?: 'AWAITING_UPLOAD' | 'UPLOAD_COMPLETE' | 'COMPLETE' | 'FAILED';
 };
 
-export type state13 = 'AWAITING_UPLOAD' | 'UPLOAD_COMPLETE' | 'COMPLETE' | 'FAILED';
+export type state14 = 'AWAITING_UPLOAD' | 'UPLOAD_COMPLETE' | 'COMPLETE' | 'FAILED';
 
 export type AppMediaPreviewFrameImageState = {
     errors?: Array<AppMediaStateError>;
@@ -11838,7 +12096,7 @@ export type AppMediaPreviewFrameImageState = {
     state?: 'PROCESSING' | 'COMPLETE' | 'FAILED';
 };
 
-export type state14 = 'PROCESSING' | 'COMPLETE' | 'FAILED';
+export type state15 = 'PROCESSING' | 'COMPLETE' | 'FAILED';
 
 export type AppMediaStateError = {
     code?: string;
@@ -11851,7 +12109,7 @@ export type AppMediaVideoState = {
     state?: 'AWAITING_UPLOAD' | 'UPLOAD_COMPLETE' | 'PROCESSING' | 'COMPLETE' | 'FAILED';
 };
 
-export type state15 = 'AWAITING_UPLOAD' | 'UPLOAD_COMPLETE' | 'PROCESSING' | 'COMPLETE' | 'FAILED';
+export type state16 = 'AWAITING_UPLOAD' | 'UPLOAD_COMPLETE' | 'PROCESSING' | 'COMPLETE' | 'FAILED';
 
 export type AppStoreAgeRating = 'FOUR_PLUS' | 'NINE_PLUS' | 'TWELVE_PLUS' | 'SEVENTEEN_PLUS' | 'UNRATED';
 
@@ -11899,7 +12157,7 @@ export type allowedInstances = 'ENTRY' | 'SINGLE' | 'MULTIPLE';
 
 export type CapabilityType = 'ICLOUD' | 'IN_APP_PURCHASE' | 'GAME_CENTER' | 'PUSH_NOTIFICATIONS' | 'WALLET' | 'INTER_APP_AUDIO' | 'MAPS' | 'ASSOCIATED_DOMAINS' | 'PERSONAL_VPN' | 'APP_GROUPS' | 'HEALTHKIT' | 'HOMEKIT' | 'WIRELESS_ACCESSORY_CONFIGURATION' | 'APPLE_PAY' | 'DATA_PROTECTION' | 'SIRIKIT' | 'NETWORK_EXTENSIONS' | 'MULTIPATH' | 'HOT_SPOT' | 'NFC_TAG_READING' | 'CLASSKIT' | 'AUTOFILL_CREDENTIAL_PROVIDER' | 'ACCESS_WIFI_INFORMATION' | 'NETWORK_CUSTOM_PROTOCOL' | 'COREMEDIA_HLS_LOW_LATENCY' | 'SYSTEM_EXTENSION_INSTALL' | 'USER_MANAGEMENT' | 'APPLE_ID_AUTH';
 
-export type CertificateType = 'IOS_DEVELOPMENT' | 'IOS_DISTRIBUTION' | 'MAC_APP_DISTRIBUTION' | 'MAC_INSTALLER_DISTRIBUTION' | 'MAC_APP_DEVELOPMENT' | 'DEVELOPER_ID_KEXT' | 'DEVELOPER_ID_KEXT_G2' | 'DEVELOPER_ID_APPLICATION' | 'DEVELOPER_ID_APPLICATION_G2' | 'DEVELOPMENT' | 'DISTRIBUTION' | 'PASS_TYPE_ID' | 'PASS_TYPE_ID_WITH_NFC';
+export type CertificateType = 'APPLE_PAY' | 'APPLE_PAY_MERCHANT_IDENTITY' | 'APPLE_PAY_PSP_IDENTITY' | 'APPLE_PAY_RSA' | 'DEVELOPER_ID_KEXT' | 'DEVELOPER_ID_KEXT_G2' | 'DEVELOPER_ID_APPLICATION' | 'DEVELOPER_ID_APPLICATION_G2' | 'DEVELOPMENT' | 'DISTRIBUTION' | 'IDENTITY_ACCESS' | 'IOS_DEVELOPMENT' | 'IOS_DISTRIBUTION' | 'MAC_APP_DISTRIBUTION' | 'MAC_INSTALLER_DISTRIBUTION' | 'MAC_APP_DEVELOPMENT' | 'PASS_TYPE_ID' | 'PASS_TYPE_ID_WITH_NFC';
 
 export type CiAction = {
     name?: string;
@@ -12028,6 +12286,14 @@ export type CiTestDestinationKind = 'SIMULATOR' | 'MAC';
 
 export type CiTestStatus = 'SUCCESS' | 'FAILURE' | 'MIXED' | 'SKIPPED' | 'EXPECTED_FAILURE';
 
+export type DeviceFamily = 'IPHONE' | 'IPAD' | 'APPLE_TV' | 'APPLE_WATCH' | 'MAC' | 'VISION';
+
+export type DeviceFamilyOsVersionFilter = {
+    deviceFamily?: DeviceFamily;
+    minimumOsInclusive?: string;
+    maximumOsInclusive?: string;
+};
+
 export type DiagnosticInsight = {
     insightType?: DiagnosticInsightType;
     direction?: DiagnosticInsightDirection;
@@ -12064,7 +12330,7 @@ export type FileLocation = {
     lineNumber?: number;
 };
 
-export type GameCenterLeaderboardFormatter = 'INTEGER' | 'DECIMAL_POINT_1_PLACE' | 'DECIMAL_POINT_2_PLACE' | 'DECIMAL_POINT_3_PLACE' | 'ELAPSED_TIME_MILLISECOND' | 'ELAPSED_TIME_CENTISECOND' | 'ELAPSED_TIME_MINUTE' | 'ELAPSED_TIME_SECOND' | 'MONEY_POUND_DECIMAL' | 'MONEY_POUND' | 'MONEY_DOLLAR_DECIMAL' | 'MONEY_DOLLAR' | 'MONEY_EURO_DECIMAL' | 'MONEY_EURO' | 'MONEY_FRANC_DECIMAL' | 'MONEY_FRANC' | 'MONEY_KRONER_DECIMAL' | 'MONEY_KRONER' | 'MONEY_YEN';
+export type GameCenterLeaderboardFormatter = 'INTEGER' | 'DECIMAL_POINT_1_PLACE' | 'DECIMAL_POINT_2_PLACE' | 'DECIMAL_POINT_3_PLACE' | 'ELAPSED_TIME_CENTISECOND' | 'ELAPSED_TIME_MINUTE' | 'ELAPSED_TIME_SECOND' | 'MONEY_POUND_DECIMAL' | 'MONEY_POUND' | 'MONEY_DOLLAR_DECIMAL' | 'MONEY_DOLLAR' | 'MONEY_EURO_DECIMAL' | 'MONEY_EURO' | 'MONEY_FRANC_DECIMAL' | 'MONEY_FRANC' | 'MONEY_KRONER_DECIMAL' | 'MONEY_KRONER' | 'MONEY_YEN';
 
 export type GameCenterMatchmakingTeamAssignment = {
     playerId?: string;
@@ -14224,6 +14490,7 @@ export type AppEncryptionDeclarationsGetCollectionData = {
         'filter[builds]'?: Array<(string)>;
         /**
          * filter by attribute 'platform'
+         * @deprecated
          */
         'filter[platform]'?: Array<('IOS' | 'MAC_OS' | 'TV_OS' | 'VISION_OS')>;
         /**
@@ -17306,7 +17573,7 @@ export type AppsGetCollectionData = {
         /**
          * the fields to include for returned resources of type betaGroups
          */
-        'fields[betaGroups]'?: Array<('name' | 'createdDate' | 'isInternalGroup' | 'hasAccessToAllBuilds' | 'publicLinkEnabled' | 'publicLinkId' | 'publicLinkLimitEnabled' | 'publicLinkLimit' | 'publicLink' | 'feedbackEnabled' | 'iosBuildsAvailableForAppleSiliconMac' | 'app' | 'builds' | 'betaTesters')>;
+        'fields[betaGroups]'?: Array<('name' | 'createdDate' | 'isInternalGroup' | 'hasAccessToAllBuilds' | 'publicLinkEnabled' | 'publicLinkId' | 'publicLinkLimitEnabled' | 'publicLinkLimit' | 'publicLink' | 'feedbackEnabled' | 'iosBuildsAvailableForAppleSiliconMac' | 'iosBuildsAvailableForAppleVision' | 'app' | 'builds' | 'betaTesters' | 'betaRecruitmentCriteria' | 'betaRecruitmentCriterionCompatibleBuildCheck')>;
         /**
          * the fields to include for returned resources of type betaLicenseAgreements
          */
@@ -17343,7 +17610,7 @@ export type AppsGetCollectionData = {
         /**
          * the fields to include for returned resources of type promotedPurchases
          */
-        'fields[promotedPurchases]'?: Array<('visibleForAllUsers' | 'enabled' | 'state' | 'inAppPurchaseV2' | 'subscription' | 'promotionImages')>;
+        'fields[promotedPurchases]'?: Array<('visibleForAllUsers' | 'enabled' | 'state' | 'inAppPurchaseV2' | 'subscription')>;
         /**
          * the fields to include for returned resources of type reviewSubmissions
          */
@@ -17358,6 +17625,7 @@ export type AppsGetCollectionData = {
         'fields[subscriptionGroups]'?: Array<('referenceName' | 'subscriptions' | 'subscriptionGroupLocalizations')>;
         /**
          * filter by attribute 'appStoreVersions.appStoreState'
+         * @deprecated
          */
         'filter[appStoreVersions.appStoreState]'?: Array<('ACCEPTED' | 'DEVELOPER_REMOVED_FROM_SALE' | 'DEVELOPER_REJECTED' | 'IN_REVIEW' | 'INVALID_BINARY' | 'METADATA_REJECTED' | 'PENDING_APPLE_RELEASE' | 'PENDING_CONTRACT' | 'PENDING_DEVELOPER_RELEASE' | 'PREPARE_FOR_SUBMISSION' | 'PREORDER_READY_FOR_SALE' | 'PROCESSING_FOR_APP_STORE' | 'READY_FOR_REVIEW' | 'READY_FOR_SALE' | 'REJECTED' | 'REMOVED_FROM_SALE' | 'WAITING_FOR_EXPORT_COMPLIANCE' | 'WAITING_FOR_REVIEW' | 'REPLACED_WITH_NEW_VERSION' | 'NOT_APPLICABLE')>;
         /**
@@ -17536,7 +17804,7 @@ export type AppsGetInstanceData = {
         /**
          * the fields to include for returned resources of type betaGroups
          */
-        'fields[betaGroups]'?: Array<('name' | 'createdDate' | 'isInternalGroup' | 'hasAccessToAllBuilds' | 'publicLinkEnabled' | 'publicLinkId' | 'publicLinkLimitEnabled' | 'publicLinkLimit' | 'publicLink' | 'feedbackEnabled' | 'iosBuildsAvailableForAppleSiliconMac' | 'app' | 'builds' | 'betaTesters')>;
+        'fields[betaGroups]'?: Array<('name' | 'createdDate' | 'isInternalGroup' | 'hasAccessToAllBuilds' | 'publicLinkEnabled' | 'publicLinkId' | 'publicLinkLimitEnabled' | 'publicLinkLimit' | 'publicLink' | 'feedbackEnabled' | 'iosBuildsAvailableForAppleSiliconMac' | 'iosBuildsAvailableForAppleVision' | 'app' | 'builds' | 'betaTesters' | 'betaRecruitmentCriteria' | 'betaRecruitmentCriterionCompatibleBuildCheck')>;
         /**
          * the fields to include for returned resources of type betaLicenseAgreements
          */
@@ -17573,7 +17841,7 @@ export type AppsGetInstanceData = {
         /**
          * the fields to include for returned resources of type promotedPurchases
          */
-        'fields[promotedPurchases]'?: Array<('visibleForAllUsers' | 'enabled' | 'state' | 'inAppPurchaseV2' | 'subscription' | 'promotionImages')>;
+        'fields[promotedPurchases]'?: Array<('visibleForAllUsers' | 'enabled' | 'state' | 'inAppPurchaseV2' | 'subscription')>;
         /**
          * the fields to include for returned resources of type reviewSubmissions
          */
@@ -17889,6 +18157,7 @@ export type AppsAppEncryptionDeclarationsGetToManyRelatedData = {
         'filter[builds]'?: Array<(string)>;
         /**
          * filter by attribute 'platform'
+         * @deprecated
          */
         'filter[platform]'?: Array<('IOS' | 'MAC_OS' | 'TV_OS' | 'VISION_OS')>;
         /**
@@ -18195,6 +18464,7 @@ export type AppsAppStoreVersionsGetToManyRelatedData = {
         'fields[routingAppCoverages]'?: Array<('fileSize' | 'fileName' | 'sourceFileChecksum' | 'uploadOperations' | 'assetDeliveryState' | 'appStoreVersion')>;
         /**
          * filter by attribute 'appStoreState'
+         * @deprecated
          */
         'filter[appStoreState]'?: Array<('ACCEPTED' | 'DEVELOPER_REMOVED_FROM_SALE' | 'DEVELOPER_REJECTED' | 'IN_REVIEW' | 'INVALID_BINARY' | 'METADATA_REJECTED' | 'PENDING_APPLE_RELEASE' | 'PENDING_CONTRACT' | 'PENDING_DEVELOPER_RELEASE' | 'PREPARE_FOR_SUBMISSION' | 'PREORDER_READY_FOR_SALE' | 'PROCESSING_FOR_APP_STORE' | 'READY_FOR_REVIEW' | 'READY_FOR_SALE' | 'REJECTED' | 'REMOVED_FROM_SALE' | 'WAITING_FOR_EXPORT_COMPLIANCE' | 'WAITING_FOR_REVIEW' | 'REPLACED_WITH_NEW_VERSION' | 'NOT_APPLICABLE')>;
         /**
@@ -18294,7 +18564,7 @@ export type AppsBetaGroupsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type betaGroups
          */
-        'fields[betaGroups]'?: Array<('name' | 'createdDate' | 'isInternalGroup' | 'hasAccessToAllBuilds' | 'publicLinkEnabled' | 'publicLinkId' | 'publicLinkLimitEnabled' | 'publicLinkLimit' | 'publicLink' | 'feedbackEnabled' | 'iosBuildsAvailableForAppleSiliconMac' | 'app' | 'builds' | 'betaTesters')>;
+        'fields[betaGroups]'?: Array<('name' | 'createdDate' | 'isInternalGroup' | 'hasAccessToAllBuilds' | 'publicLinkEnabled' | 'publicLinkId' | 'publicLinkLimitEnabled' | 'publicLinkLimit' | 'publicLink' | 'feedbackEnabled' | 'iosBuildsAvailableForAppleSiliconMac' | 'iosBuildsAvailableForAppleVision' | 'app' | 'builds' | 'betaTesters' | 'betaRecruitmentCriteria' | 'betaRecruitmentCriterionCompatibleBuildCheck')>;
         /**
          * maximum resources per page
          */
@@ -18695,7 +18965,7 @@ export type AppsInAppPurchasesV2GetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type promotedPurchases
          */
-        'fields[promotedPurchases]'?: Array<('visibleForAllUsers' | 'enabled' | 'state' | 'inAppPurchaseV2' | 'subscription' | 'promotionImages')>;
+        'fields[promotedPurchases]'?: Array<('visibleForAllUsers' | 'enabled' | 'state' | 'inAppPurchaseV2' | 'subscription')>;
         /**
          * filter by attribute 'inAppPurchaseType'
          */
@@ -18857,13 +19127,9 @@ export type AppsPromotedPurchasesGetToManyRelatedData = {
          */
         'fields[inAppPurchases]'?: Array<('name' | 'productId' | 'inAppPurchaseType' | 'state' | 'reviewNote' | 'familySharable' | 'contentHosting' | 'inAppPurchaseLocalizations' | 'pricePoints' | 'content' | 'appStoreReviewScreenshot' | 'promotedPurchase' | 'iapPriceSchedule' | 'inAppPurchaseAvailability' | 'images')>;
         /**
-         * the fields to include for returned resources of type promotedPurchaseImages
-         */
-        'fields[promotedPurchaseImages]'?: Array<('fileSize' | 'fileName' | 'sourceFileChecksum' | 'assetToken' | 'imageAsset' | 'assetType' | 'uploadOperations' | 'state' | 'promotedPurchase')>;
-        /**
          * the fields to include for returned resources of type promotedPurchases
          */
-        'fields[promotedPurchases]'?: Array<('visibleForAllUsers' | 'enabled' | 'state' | 'inAppPurchaseV2' | 'subscription' | 'promotionImages')>;
+        'fields[promotedPurchases]'?: Array<('visibleForAllUsers' | 'enabled' | 'state' | 'inAppPurchaseV2' | 'subscription')>;
         /**
          * the fields to include for returned resources of type subscriptions
          */
@@ -18871,16 +19137,11 @@ export type AppsPromotedPurchasesGetToManyRelatedData = {
         /**
          * comma-separated list of relationships to include
          */
-        include?: Array<('inAppPurchaseV2' | 'subscription' | 'promotionImages')>;
+        include?: Array<('inAppPurchaseV2' | 'subscription')>;
         /**
          * maximum resources per page
          */
         limit?: number;
-        /**
-         * maximum number of related promotionImages returned (when they are included)
-         * @deprecated
-         */
-        'limit[promotionImages]'?: number;
     };
 };
 
@@ -19588,7 +19849,11 @@ export type BetaGroupsGetCollectionData = {
         /**
          * the fields to include for returned resources of type betaGroups
          */
-        'fields[betaGroups]'?: Array<('name' | 'createdDate' | 'isInternalGroup' | 'hasAccessToAllBuilds' | 'publicLinkEnabled' | 'publicLinkId' | 'publicLinkLimitEnabled' | 'publicLinkLimit' | 'publicLink' | 'feedbackEnabled' | 'iosBuildsAvailableForAppleSiliconMac' | 'app' | 'builds' | 'betaTesters')>;
+        'fields[betaGroups]'?: Array<('name' | 'createdDate' | 'isInternalGroup' | 'hasAccessToAllBuilds' | 'publicLinkEnabled' | 'publicLinkId' | 'publicLinkLimitEnabled' | 'publicLinkLimit' | 'publicLink' | 'feedbackEnabled' | 'iosBuildsAvailableForAppleSiliconMac' | 'iosBuildsAvailableForAppleVision' | 'app' | 'builds' | 'betaTesters' | 'betaRecruitmentCriteria' | 'betaRecruitmentCriterionCompatibleBuildCheck')>;
+        /**
+         * the fields to include for returned resources of type betaRecruitmentCriteria
+         */
+        'fields[betaRecruitmentCriteria]'?: Array<('lastModifiedDate' | 'deviceFamilyOsVersionFilters')>;
         /**
          * the fields to include for returned resources of type betaTesters
          */
@@ -19632,7 +19897,7 @@ export type BetaGroupsGetCollectionData = {
         /**
          * comma-separated list of relationships to include
          */
-        include?: Array<('app' | 'builds' | 'betaTesters')>;
+        include?: Array<('app' | 'builds' | 'betaTesters' | 'betaRecruitmentCriteria')>;
         /**
          * maximum resources per page
          */
@@ -19682,7 +19947,11 @@ export type BetaGroupsGetInstanceData = {
         /**
          * the fields to include for returned resources of type betaGroups
          */
-        'fields[betaGroups]'?: Array<('name' | 'createdDate' | 'isInternalGroup' | 'hasAccessToAllBuilds' | 'publicLinkEnabled' | 'publicLinkId' | 'publicLinkLimitEnabled' | 'publicLinkLimit' | 'publicLink' | 'feedbackEnabled' | 'iosBuildsAvailableForAppleSiliconMac' | 'app' | 'builds' | 'betaTesters')>;
+        'fields[betaGroups]'?: Array<('name' | 'createdDate' | 'isInternalGroup' | 'hasAccessToAllBuilds' | 'publicLinkEnabled' | 'publicLinkId' | 'publicLinkLimitEnabled' | 'publicLinkLimit' | 'publicLink' | 'feedbackEnabled' | 'iosBuildsAvailableForAppleSiliconMac' | 'iosBuildsAvailableForAppleVision' | 'app' | 'builds' | 'betaTesters' | 'betaRecruitmentCriteria' | 'betaRecruitmentCriterionCompatibleBuildCheck')>;
+        /**
+         * the fields to include for returned resources of type betaRecruitmentCriteria
+         */
+        'fields[betaRecruitmentCriteria]'?: Array<('lastModifiedDate' | 'deviceFamilyOsVersionFilters')>;
         /**
          * the fields to include for returned resources of type betaTesters
          */
@@ -19694,7 +19963,7 @@ export type BetaGroupsGetInstanceData = {
         /**
          * comma-separated list of relationships to include
          */
-        include?: Array<('app' | 'builds' | 'betaTesters')>;
+        include?: Array<('app' | 'builds' | 'betaTesters' | 'betaRecruitmentCriteria')>;
         /**
          * maximum number of related betaTesters returned (when they are included)
          */
@@ -19758,6 +20027,44 @@ export type BetaGroupsAppGetToOneRelatedData = {
 export type BetaGroupsAppGetToOneRelatedResponse = (AppWithoutIncludesResponse);
 
 export type BetaGroupsAppGetToOneRelatedError = (ErrorResponse);
+
+export type BetaGroupsBetaRecruitmentCriteriaGetToOneRelatedData = {
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * the fields to include for returned resources of type betaRecruitmentCriteria
+         */
+        'fields[betaRecruitmentCriteria]'?: Array<('lastModifiedDate' | 'deviceFamilyOsVersionFilters')>;
+    };
+};
+
+export type BetaGroupsBetaRecruitmentCriteriaGetToOneRelatedResponse = (BetaRecruitmentCriterionResponse);
+
+export type BetaGroupsBetaRecruitmentCriteriaGetToOneRelatedError = (ErrorResponse);
+
+export type BetaGroupsBetaRecruitmentCriterionCompatibleBuildCheckGetToOneRelatedData = {
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * the fields to include for returned resources of type betaRecruitmentCriterionCompatibleBuildChecks
+         */
+        'fields[betaRecruitmentCriterionCompatibleBuildChecks]'?: Array<('hasCompatibleBuild')>;
+    };
+};
+
+export type BetaGroupsBetaRecruitmentCriterionCompatibleBuildCheckGetToOneRelatedResponse = (BetaRecruitmentCriterionCompatibleBuildCheckResponse);
+
+export type BetaGroupsBetaRecruitmentCriterionCompatibleBuildCheckGetToOneRelatedError = (ErrorResponse);
 
 export type BetaGroupsBetaTestersGetToManyRelationshipData = {
     path: {
@@ -19942,6 +20249,25 @@ export type BetaGroupsBetaTesterUsagesGetMetricsResponse = (AppsBetaTesterUsages
 
 export type BetaGroupsBetaTesterUsagesGetMetricsError = (ErrorResponse);
 
+export type BetaGroupsPublicLinkUsagesGetMetricsData = {
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * maximum number of groups to return per page
+         */
+        limit?: number;
+    };
+};
+
+export type BetaGroupsPublicLinkUsagesGetMetricsResponse = (BetaPublicLinkUsagesV1MetricResponse);
+
+export type BetaGroupsPublicLinkUsagesGetMetricsError = (ErrorResponse);
+
 export type BetaLicenseAgreementsGetCollectionData = {
     query?: {
         /**
@@ -20034,6 +20360,64 @@ export type BetaLicenseAgreementsAppGetToOneRelatedResponse = (AppWithoutInclude
 
 export type BetaLicenseAgreementsAppGetToOneRelatedError = (ErrorResponse);
 
+export type BetaRecruitmentCriteriaCreateInstanceData = {
+    /**
+     * BetaRecruitmentCriterion representation
+     */
+    body: BetaRecruitmentCriterionCreateRequest;
+};
+
+export type BetaRecruitmentCriteriaCreateInstanceResponse = (BetaRecruitmentCriterionResponse);
+
+export type BetaRecruitmentCriteriaCreateInstanceError = (ErrorResponse);
+
+export type BetaRecruitmentCriteriaUpdateInstanceData = {
+    /**
+     * BetaRecruitmentCriterion representation
+     */
+    body: BetaRecruitmentCriterionUpdateRequest;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+};
+
+export type BetaRecruitmentCriteriaUpdateInstanceResponse = (BetaRecruitmentCriterionResponse);
+
+export type BetaRecruitmentCriteriaUpdateInstanceError = (ErrorResponse);
+
+export type BetaRecruitmentCriteriaDeleteInstanceData = {
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+};
+
+export type BetaRecruitmentCriteriaDeleteInstanceResponse = (void);
+
+export type BetaRecruitmentCriteriaDeleteInstanceError = (ErrorResponse);
+
+export type BetaRecruitmentCriterionOptionsGetCollectionData = {
+    query?: {
+        /**
+         * the fields to include for returned resources of type betaRecruitmentCriterionOptions
+         */
+        'fields[betaRecruitmentCriterionOptions]'?: Array<('deviceFamilyOsVersions')>;
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+    };
+};
+
+export type BetaRecruitmentCriterionOptionsGetCollectionResponse = (BetaRecruitmentCriterionOptionsResponse);
+
+export type BetaRecruitmentCriterionOptionsGetCollectionError = (ErrorResponse);
+
 export type BetaTesterInvitationsCreateInstanceData = {
     /**
      * BetaTesterInvitation representation
@@ -20054,7 +20438,7 @@ export type BetaTestersGetCollectionData = {
         /**
          * the fields to include for returned resources of type betaGroups
          */
-        'fields[betaGroups]'?: Array<('name' | 'createdDate' | 'isInternalGroup' | 'hasAccessToAllBuilds' | 'publicLinkEnabled' | 'publicLinkId' | 'publicLinkLimitEnabled' | 'publicLinkLimit' | 'publicLink' | 'feedbackEnabled' | 'iosBuildsAvailableForAppleSiliconMac' | 'app' | 'builds' | 'betaTesters')>;
+        'fields[betaGroups]'?: Array<('name' | 'createdDate' | 'isInternalGroup' | 'hasAccessToAllBuilds' | 'publicLinkEnabled' | 'publicLinkId' | 'publicLinkLimitEnabled' | 'publicLinkLimit' | 'publicLink' | 'feedbackEnabled' | 'iosBuildsAvailableForAppleSiliconMac' | 'iosBuildsAvailableForAppleVision' | 'app' | 'builds' | 'betaTesters' | 'betaRecruitmentCriteria' | 'betaRecruitmentCriterionCompatibleBuildCheck')>;
         /**
          * the fields to include for returned resources of type betaTesters
          */
@@ -20152,7 +20536,7 @@ export type BetaTestersGetInstanceData = {
         /**
          * the fields to include for returned resources of type betaGroups
          */
-        'fields[betaGroups]'?: Array<('name' | 'createdDate' | 'isInternalGroup' | 'hasAccessToAllBuilds' | 'publicLinkEnabled' | 'publicLinkId' | 'publicLinkLimitEnabled' | 'publicLinkLimit' | 'publicLink' | 'feedbackEnabled' | 'iosBuildsAvailableForAppleSiliconMac' | 'app' | 'builds' | 'betaTesters')>;
+        'fields[betaGroups]'?: Array<('name' | 'createdDate' | 'isInternalGroup' | 'hasAccessToAllBuilds' | 'publicLinkEnabled' | 'publicLinkId' | 'publicLinkLimitEnabled' | 'publicLinkLimit' | 'publicLink' | 'feedbackEnabled' | 'iosBuildsAvailableForAppleSiliconMac' | 'iosBuildsAvailableForAppleVision' | 'app' | 'builds' | 'betaTesters' | 'betaRecruitmentCriteria' | 'betaRecruitmentCriterionCompatibleBuildCheck')>;
         /**
          * the fields to include for returned resources of type betaTesters
          */
@@ -20320,7 +20704,7 @@ export type BetaTestersBetaGroupsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type betaGroups
          */
-        'fields[betaGroups]'?: Array<('name' | 'createdDate' | 'isInternalGroup' | 'hasAccessToAllBuilds' | 'publicLinkEnabled' | 'publicLinkId' | 'publicLinkLimitEnabled' | 'publicLinkLimit' | 'publicLink' | 'feedbackEnabled' | 'iosBuildsAvailableForAppleSiliconMac' | 'app' | 'builds' | 'betaTesters')>;
+        'fields[betaGroups]'?: Array<('name' | 'createdDate' | 'isInternalGroup' | 'hasAccessToAllBuilds' | 'publicLinkEnabled' | 'publicLinkId' | 'publicLinkLimitEnabled' | 'publicLinkLimit' | 'publicLink' | 'feedbackEnabled' | 'iosBuildsAvailableForAppleSiliconMac' | 'iosBuildsAvailableForAppleVision' | 'app' | 'builds' | 'betaTesters' | 'betaRecruitmentCriteria' | 'betaRecruitmentCriterionCompatibleBuildCheck')>;
         /**
          * maximum resources per page
          */
@@ -20521,13 +20905,81 @@ export type BuildBetaDetailsBuildGetToOneRelatedData = {
     };
     query?: {
         /**
+         * the fields to include for returned resources of type appEncryptionDeclarations
+         */
+        'fields[appEncryptionDeclarations]'?: Array<('appDescription' | 'createdDate' | 'usesEncryption' | 'exempt' | 'containsProprietaryCryptography' | 'containsThirdPartyCryptography' | 'availableOnFrenchStore' | 'platform' | 'uploadedDate' | 'documentUrl' | 'documentName' | 'documentType' | 'appEncryptionDeclarationState' | 'codeValue' | 'app' | 'builds' | 'appEncryptionDeclarationDocument')>;
+        /**
+         * the fields to include for returned resources of type apps
+         */
+        'fields[apps]'?: Array<('name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail')>;
+        /**
+         * the fields to include for returned resources of type appStoreVersions
+         */
+        'fields[appStoreVersions]'?: Array<('platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'downloadable' | 'createdDate' | 'app' | 'ageRatingDeclaration' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage')>;
+        /**
+         * the fields to include for returned resources of type betaAppReviewSubmissions
+         */
+        'fields[betaAppReviewSubmissions]'?: Array<('betaReviewState' | 'submittedDate' | 'build')>;
+        /**
+         * the fields to include for returned resources of type betaBuildLocalizations
+         */
+        'fields[betaBuildLocalizations]'?: Array<('whatsNew' | 'locale' | 'build')>;
+        /**
+         * the fields to include for returned resources of type betaGroups
+         */
+        'fields[betaGroups]'?: Array<('name' | 'createdDate' | 'isInternalGroup' | 'hasAccessToAllBuilds' | 'publicLinkEnabled' | 'publicLinkId' | 'publicLinkLimitEnabled' | 'publicLinkLimit' | 'publicLink' | 'feedbackEnabled' | 'iosBuildsAvailableForAppleSiliconMac' | 'iosBuildsAvailableForAppleVision' | 'app' | 'builds' | 'betaTesters' | 'betaRecruitmentCriteria' | 'betaRecruitmentCriterionCompatibleBuildCheck')>;
+        /**
+         * the fields to include for returned resources of type betaTesters
+         */
+        'fields[betaTesters]'?: Array<('firstName' | 'lastName' | 'email' | 'inviteType' | 'state' | 'apps' | 'betaGroups' | 'builds')>;
+        /**
+         * the fields to include for returned resources of type buildBetaDetails
+         */
+        'fields[buildBetaDetails]'?: Array<('autoNotifyEnabled' | 'internalBuildState' | 'externalBuildState' | 'build')>;
+        /**
+         * the fields to include for returned resources of type buildBundles
+         */
+        'fields[buildBundles]'?: Array<('bundleId' | 'bundleType' | 'sdkBuild' | 'platformBuild' | 'fileName' | 'hasSirikit' | 'hasOnDemandResources' | 'hasPrerenderedIcon' | 'usesLocationServices' | 'isIosBuildMacAppStoreCompatible' | 'includesSymbols' | 'dSYMUrl' | 'supportedArchitectures' | 'requiredCapabilities' | 'deviceProtocols' | 'locales' | 'entitlements' | 'appClipDomainCacheStatus' | 'appClipDomainDebugStatus' | 'betaAppClipInvocations' | 'buildBundleFileSizes')>;
+        /**
+         * the fields to include for returned resources of type buildIcons
+         */
+        'fields[buildIcons]'?: Array<('name' | 'iconAsset' | 'iconType')>;
+        /**
          * the fields to include for returned resources of type builds
          */
         'fields[builds]'?: Array<('version' | 'uploadedDate' | 'expirationDate' | 'expired' | 'minOsVersion' | 'lsMinimumSystemVersion' | 'computedMinMacOsVersion' | 'iconAssetToken' | 'processingState' | 'buildAudienceType' | 'usesNonExemptEncryption' | 'preReleaseVersion' | 'individualTesters' | 'betaGroups' | 'betaBuildLocalizations' | 'appEncryptionDeclaration' | 'betaAppReviewSubmission' | 'app' | 'buildBetaDetail' | 'appStoreVersion' | 'icons' | 'buildBundles' | 'perfPowerMetrics' | 'diagnosticSignatures')>;
+        /**
+         * the fields to include for returned resources of type preReleaseVersions
+         */
+        'fields[preReleaseVersions]'?: Array<('version' | 'platform' | 'builds' | 'app')>;
+        /**
+         * comma-separated list of relationships to include
+         */
+        include?: Array<('preReleaseVersion' | 'individualTesters' | 'betaGroups' | 'betaBuildLocalizations' | 'appEncryptionDeclaration' | 'betaAppReviewSubmission' | 'app' | 'buildBetaDetail' | 'appStoreVersion' | 'icons' | 'buildBundles')>;
+        /**
+         * maximum number of related betaBuildLocalizations returned (when they are included)
+         */
+        'limit[betaBuildLocalizations]'?: number;
+        /**
+         * maximum number of related betaGroups returned (when they are included)
+         */
+        'limit[betaGroups]'?: number;
+        /**
+         * maximum number of related buildBundles returned (when they are included)
+         */
+        'limit[buildBundles]'?: number;
+        /**
+         * maximum number of related icons returned (when they are included)
+         */
+        'limit[icons]'?: number;
+        /**
+         * maximum number of related individualTesters returned (when they are included)
+         */
+        'limit[individualTesters]'?: number;
     };
 };
 
-export type BuildBetaDetailsBuildGetToOneRelatedResponse = (BuildWithoutIncludesResponse);
+export type BuildBetaDetailsBuildGetToOneRelatedResponse = (BuildResponse);
 
 export type BuildBetaDetailsBuildGetToOneRelatedError = (ErrorResponse);
 
@@ -21477,11 +21929,11 @@ export type CertificatesGetCollectionData = {
         /**
          * the fields to include for returned resources of type certificates
          */
-        'fields[certificates]'?: Array<('name' | 'certificateType' | 'displayName' | 'serialNumber' | 'platform' | 'expirationDate' | 'certificateContent')>;
+        'fields[certificates]'?: Array<('name' | 'certificateType' | 'displayName' | 'serialNumber' | 'platform' | 'expirationDate' | 'certificateContent' | 'activated')>;
         /**
          * filter by attribute 'certificateType'
          */
-        'filter[certificateType]'?: Array<('IOS_DEVELOPMENT' | 'IOS_DISTRIBUTION' | 'MAC_APP_DISTRIBUTION' | 'MAC_INSTALLER_DISTRIBUTION' | 'MAC_APP_DEVELOPMENT' | 'DEVELOPER_ID_KEXT' | 'DEVELOPER_ID_KEXT_G2' | 'DEVELOPER_ID_APPLICATION' | 'DEVELOPER_ID_APPLICATION_G2' | 'DEVELOPMENT' | 'DISTRIBUTION' | 'PASS_TYPE_ID' | 'PASS_TYPE_ID_WITH_NFC')>;
+        'filter[certificateType]'?: Array<('APPLE_PAY' | 'APPLE_PAY_MERCHANT_IDENTITY' | 'APPLE_PAY_PSP_IDENTITY' | 'APPLE_PAY_RSA' | 'DEVELOPER_ID_KEXT' | 'DEVELOPER_ID_KEXT_G2' | 'DEVELOPER_ID_APPLICATION' | 'DEVELOPER_ID_APPLICATION_G2' | 'DEVELOPMENT' | 'DISTRIBUTION' | 'IDENTITY_ACCESS' | 'IOS_DEVELOPMENT' | 'IOS_DISTRIBUTION' | 'MAC_APP_DISTRIBUTION' | 'MAC_INSTALLER_DISTRIBUTION' | 'MAC_APP_DEVELOPMENT' | 'PASS_TYPE_ID' | 'PASS_TYPE_ID_WITH_NFC')>;
         /**
          * filter by attribute 'displayName'
          */
@@ -21531,13 +21983,30 @@ export type CertificatesGetInstanceData = {
         /**
          * the fields to include for returned resources of type certificates
          */
-        'fields[certificates]'?: Array<('name' | 'certificateType' | 'displayName' | 'serialNumber' | 'platform' | 'expirationDate' | 'certificateContent')>;
+        'fields[certificates]'?: Array<('name' | 'certificateType' | 'displayName' | 'serialNumber' | 'platform' | 'expirationDate' | 'certificateContent' | 'activated')>;
     };
 };
 
 export type CertificatesGetInstanceResponse = (CertificateResponse);
 
 export type CertificatesGetInstanceError = (ErrorResponse);
+
+export type CertificatesUpdateInstanceData = {
+    /**
+     * Certificate representation
+     */
+    body: CertificateUpdateRequest;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+};
+
+export type CertificatesUpdateInstanceResponse = (CertificateResponse);
+
+export type CertificatesUpdateInstanceError = (ErrorResponse);
 
 export type CertificatesDeleteInstanceData = {
     path: {
@@ -21818,7 +22287,7 @@ export type CiBuildRunsBuildsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type betaGroups
          */
-        'fields[betaGroups]'?: Array<('name' | 'createdDate' | 'isInternalGroup' | 'hasAccessToAllBuilds' | 'publicLinkEnabled' | 'publicLinkId' | 'publicLinkLimitEnabled' | 'publicLinkLimit' | 'publicLink' | 'feedbackEnabled' | 'iosBuildsAvailableForAppleSiliconMac' | 'app' | 'builds' | 'betaTesters')>;
+        'fields[betaGroups]'?: Array<('name' | 'createdDate' | 'isInternalGroup' | 'hasAccessToAllBuilds' | 'publicLinkEnabled' | 'publicLinkId' | 'publicLinkLimitEnabled' | 'publicLinkLimit' | 'publicLink' | 'feedbackEnabled' | 'iosBuildsAvailableForAppleSiliconMac' | 'iosBuildsAvailableForAppleVision' | 'app' | 'builds' | 'betaTesters' | 'betaRecruitmentCriteria' | 'betaRecruitmentCriterionCompatibleBuildCheck')>;
         /**
          * the fields to include for returned resources of type betaTesters
          */
@@ -22227,7 +22696,7 @@ export type CiProductsAppGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type betaGroups
          */
-        'fields[betaGroups]'?: Array<('name' | 'createdDate' | 'isInternalGroup' | 'hasAccessToAllBuilds' | 'publicLinkEnabled' | 'publicLinkId' | 'publicLinkLimitEnabled' | 'publicLinkLimit' | 'publicLink' | 'feedbackEnabled' | 'iosBuildsAvailableForAppleSiliconMac' | 'app' | 'builds' | 'betaTesters')>;
+        'fields[betaGroups]'?: Array<('name' | 'createdDate' | 'isInternalGroup' | 'hasAccessToAllBuilds' | 'publicLinkEnabled' | 'publicLinkId' | 'publicLinkLimitEnabled' | 'publicLinkLimit' | 'publicLink' | 'feedbackEnabled' | 'iosBuildsAvailableForAppleSiliconMac' | 'iosBuildsAvailableForAppleVision' | 'app' | 'builds' | 'betaTesters' | 'betaRecruitmentCriteria' | 'betaRecruitmentCriterionCompatibleBuildCheck')>;
         /**
          * the fields to include for returned resources of type betaLicenseAgreements
          */
@@ -22263,7 +22732,7 @@ export type CiProductsAppGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type promotedPurchases
          */
-        'fields[promotedPurchases]'?: Array<('visibleForAllUsers' | 'enabled' | 'state' | 'inAppPurchaseV2' | 'subscription' | 'promotionImages')>;
+        'fields[promotedPurchases]'?: Array<('visibleForAllUsers' | 'enabled' | 'state' | 'inAppPurchaseV2' | 'subscription')>;
         /**
          * the fields to include for returned resources of type reviewSubmissions
          */
@@ -27523,7 +27992,7 @@ export type InAppPurchasesV2GetInstanceData = {
         /**
          * the fields to include for returned resources of type promotedPurchases
          */
-        'fields[promotedPurchases]'?: Array<('visibleForAllUsers' | 'enabled' | 'state' | 'inAppPurchaseV2' | 'subscription' | 'promotionImages')>;
+        'fields[promotedPurchases]'?: Array<('visibleForAllUsers' | 'enabled' | 'state' | 'inAppPurchaseV2' | 'subscription')>;
         /**
          * comma-separated list of relationships to include
          */
@@ -27811,13 +28280,9 @@ export type InAppPurchasesV2PromotedPurchaseGetToOneRelatedData = {
          */
         'fields[inAppPurchases]'?: Array<('name' | 'productId' | 'inAppPurchaseType' | 'state' | 'reviewNote' | 'familySharable' | 'contentHosting' | 'inAppPurchaseLocalizations' | 'pricePoints' | 'content' | 'appStoreReviewScreenshot' | 'promotedPurchase' | 'iapPriceSchedule' | 'inAppPurchaseAvailability' | 'images')>;
         /**
-         * the fields to include for returned resources of type promotedPurchaseImages
-         */
-        'fields[promotedPurchaseImages]'?: Array<('fileSize' | 'fileName' | 'sourceFileChecksum' | 'assetToken' | 'imageAsset' | 'assetType' | 'uploadOperations' | 'state' | 'promotedPurchase')>;
-        /**
          * the fields to include for returned resources of type promotedPurchases
          */
-        'fields[promotedPurchases]'?: Array<('visibleForAllUsers' | 'enabled' | 'state' | 'inAppPurchaseV2' | 'subscription' | 'promotionImages')>;
+        'fields[promotedPurchases]'?: Array<('visibleForAllUsers' | 'enabled' | 'state' | 'inAppPurchaseV2' | 'subscription')>;
         /**
          * the fields to include for returned resources of type subscriptions
          */
@@ -27825,12 +28290,7 @@ export type InAppPurchasesV2PromotedPurchaseGetToOneRelatedData = {
         /**
          * comma-separated list of relationships to include
          */
-        include?: Array<('inAppPurchaseV2' | 'subscription' | 'promotionImages')>;
-        /**
-         * maximum number of related promotionImages returned (when they are included)
-         * @deprecated
-         */
-        'limit[promotionImages]'?: number;
+        include?: Array<('inAppPurchaseV2' | 'subscription')>;
     };
 };
 
@@ -27997,6 +28457,287 @@ export type MarketplaceWebhooksDeleteInstanceResponse = (void);
 
 export type MarketplaceWebhooksDeleteInstanceError = (ErrorResponse);
 
+export type MerchantIdsGetCollectionData = {
+    query?: {
+        /**
+         * the fields to include for returned resources of type certificates
+         */
+        'fields[certificates]'?: Array<('name' | 'certificateType' | 'displayName' | 'serialNumber' | 'platform' | 'expirationDate' | 'certificateContent' | 'activated')>;
+        /**
+         * the fields to include for returned resources of type merchantIds
+         */
+        'fields[merchantIds]'?: Array<('name' | 'identifier' | 'certificates')>;
+        /**
+         * filter by attribute 'identifier'
+         */
+        'filter[identifier]'?: Array<(string)>;
+        /**
+         * filter by attribute 'name'
+         */
+        'filter[name]'?: Array<(string)>;
+        /**
+         * comma-separated list of relationships to include
+         */
+        include?: Array<('certificates')>;
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+        /**
+         * maximum number of related certificates returned (when they are included)
+         */
+        'limit[certificates]'?: number;
+        /**
+         * comma-separated list of sort expressions; resources will be sorted as specified
+         */
+        sort?: Array<('name' | '-name' | 'identifier' | '-identifier')>;
+    };
+};
+
+export type MerchantIdsGetCollectionResponse = (MerchantIdsResponse);
+
+export type MerchantIdsGetCollectionError = (ErrorResponse);
+
+export type MerchantIdsCreateInstanceData = {
+    /**
+     * MerchantId representation
+     */
+    body: MerchantIdCreateRequest;
+};
+
+export type MerchantIdsCreateInstanceResponse = (MerchantIdResponse);
+
+export type MerchantIdsCreateInstanceError = (ErrorResponse);
+
+export type MerchantIdsGetInstanceData = {
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * the fields to include for returned resources of type certificates
+         */
+        'fields[certificates]'?: Array<('name' | 'certificateType' | 'displayName' | 'serialNumber' | 'platform' | 'expirationDate' | 'certificateContent' | 'activated')>;
+        /**
+         * the fields to include for returned resources of type merchantIds
+         */
+        'fields[merchantIds]'?: Array<('name' | 'identifier' | 'certificates')>;
+        /**
+         * comma-separated list of relationships to include
+         */
+        include?: Array<('certificates')>;
+        /**
+         * maximum number of related certificates returned (when they are included)
+         */
+        'limit[certificates]'?: number;
+    };
+};
+
+export type MerchantIdsGetInstanceResponse = (MerchantIdResponse);
+
+export type MerchantIdsGetInstanceError = (ErrorResponse);
+
+export type MerchantIdsUpdateInstanceData = {
+    /**
+     * MerchantId representation
+     */
+    body: MerchantIdUpdateRequest;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+};
+
+export type MerchantIdsUpdateInstanceResponse = (MerchantIdResponse);
+
+export type MerchantIdsUpdateInstanceError = (ErrorResponse);
+
+export type MerchantIdsDeleteInstanceData = {
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+};
+
+export type MerchantIdsDeleteInstanceResponse = (void);
+
+export type MerchantIdsDeleteInstanceError = (ErrorResponse);
+
+export type MerchantIdsCertificatesGetToManyRelatedData = {
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * the fields to include for returned resources of type certificates
+         */
+        'fields[certificates]'?: Array<('name' | 'certificateType' | 'displayName' | 'serialNumber' | 'platform' | 'expirationDate' | 'certificateContent' | 'activated')>;
+        /**
+         * filter by attribute 'certificateType'
+         */
+        'filter[certificateType]'?: Array<('APPLE_PAY' | 'APPLE_PAY_MERCHANT_IDENTITY' | 'APPLE_PAY_PSP_IDENTITY' | 'APPLE_PAY_RSA' | 'DEVELOPER_ID_KEXT' | 'DEVELOPER_ID_KEXT_G2' | 'DEVELOPER_ID_APPLICATION' | 'DEVELOPER_ID_APPLICATION_G2' | 'DEVELOPMENT' | 'DISTRIBUTION' | 'IDENTITY_ACCESS' | 'IOS_DEVELOPMENT' | 'IOS_DISTRIBUTION' | 'MAC_APP_DISTRIBUTION' | 'MAC_INSTALLER_DISTRIBUTION' | 'MAC_APP_DEVELOPMENT' | 'PASS_TYPE_ID' | 'PASS_TYPE_ID_WITH_NFC')>;
+        /**
+         * filter by attribute 'displayName'
+         */
+        'filter[displayName]'?: Array<(string)>;
+        /**
+         * filter by id(s)
+         */
+        'filter[id]'?: Array<(string)>;
+        /**
+         * filter by attribute 'serialNumber'
+         */
+        'filter[serialNumber]'?: Array<(string)>;
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+        /**
+         * comma-separated list of sort expressions; resources will be sorted as specified
+         */
+        sort?: Array<('displayName' | '-displayName' | 'certificateType' | '-certificateType' | 'serialNumber' | '-serialNumber' | 'id' | '-id')>;
+    };
+};
+
+export type MerchantIdsCertificatesGetToManyRelatedResponse = (CertificatesResponse);
+
+export type MerchantIdsCertificatesGetToManyRelatedError = (ErrorResponse);
+
+export type NominationsGetCollectionData = {
+    query: {
+        /**
+         * the fields to include for returned resources of type nominations
+         */
+        'fields[nominations]'?: Array<('name' | 'type' | 'description' | 'createdDate' | 'lastModifiedDate' | 'submittedDate' | 'state' | 'publishStartDate' | 'publishEndDate' | 'deviceFamilies' | 'locales' | 'supplementalMaterialsUris' | 'hasInAppEvents' | 'launchInSelectMarketsFirst' | 'notes' | 'preOrderEnabled' | 'relatedApps' | 'createdByActor' | 'lastModifiedByActor' | 'submittedByActor' | 'inAppEvents' | 'supportedTerritories')>;
+        /**
+         * filter by id(s) of related 'relatedApps'
+         */
+        'filter[relatedApps]'?: Array<(string)>;
+        /**
+         * filter by attribute 'state'
+         */
+        'filter[state]': Array<('DRAFT' | 'SUBMITTED' | 'ARCHIVED')>;
+        /**
+         * filter by attribute 'type'
+         */
+        'filter[type]'?: Array<('APP_LAUNCH' | 'APP_ENHANCEMENTS' | 'NEW_CONTENT')>;
+        /**
+         * comma-separated list of relationships to include
+         */
+        include?: Array<('relatedApps' | 'createdByActor' | 'lastModifiedByActor' | 'submittedByActor' | 'inAppEvents' | 'supportedTerritories')>;
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+        /**
+         * maximum number of related inAppEvents returned (when they are included)
+         */
+        'limit[inAppEvents]'?: number;
+        /**
+         * maximum number of related relatedApps returned (when they are included)
+         */
+        'limit[relatedApps]'?: number;
+        /**
+         * maximum number of related supportedTerritories returned (when they are included)
+         */
+        'limit[supportedTerritories]'?: number;
+        /**
+         * comma-separated list of sort expressions; resources will be sorted as specified
+         */
+        sort?: Array<('lastModifiedDate' | '-lastModifiedDate' | 'publishStartDate' | '-publishStartDate' | 'publishEndDate' | '-publishEndDate' | 'name' | '-name' | 'type' | '-type')>;
+    };
+};
+
+export type NominationsGetCollectionResponse = (NominationsResponse);
+
+export type NominationsGetCollectionError = (ErrorResponse);
+
+export type NominationsCreateInstanceData = {
+    /**
+     * Nomination representation
+     */
+    body: NominationCreateRequest;
+};
+
+export type NominationsCreateInstanceResponse = (NominationResponse);
+
+export type NominationsCreateInstanceError = (ErrorResponse);
+
+export type NominationsGetInstanceData = {
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * the fields to include for returned resources of type nominations
+         */
+        'fields[nominations]'?: Array<('name' | 'type' | 'description' | 'createdDate' | 'lastModifiedDate' | 'submittedDate' | 'state' | 'publishStartDate' | 'publishEndDate' | 'deviceFamilies' | 'locales' | 'supplementalMaterialsUris' | 'hasInAppEvents' | 'launchInSelectMarketsFirst' | 'notes' | 'preOrderEnabled' | 'relatedApps' | 'createdByActor' | 'lastModifiedByActor' | 'submittedByActor' | 'inAppEvents' | 'supportedTerritories')>;
+        /**
+         * comma-separated list of relationships to include
+         */
+        include?: Array<('relatedApps' | 'createdByActor' | 'lastModifiedByActor' | 'submittedByActor' | 'inAppEvents' | 'supportedTerritories')>;
+        /**
+         * maximum number of related inAppEvents returned (when they are included)
+         */
+        'limit[inAppEvents]'?: number;
+        /**
+         * maximum number of related relatedApps returned (when they are included)
+         */
+        'limit[relatedApps]'?: number;
+        /**
+         * maximum number of related supportedTerritories returned (when they are included)
+         */
+        'limit[supportedTerritories]'?: number;
+    };
+};
+
+export type NominationsGetInstanceResponse = (NominationResponse);
+
+export type NominationsGetInstanceError = (ErrorResponse);
+
+export type NominationsUpdateInstanceData = {
+    /**
+     * Nomination representation
+     */
+    body: NominationUpdateRequest;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+};
+
+export type NominationsUpdateInstanceResponse = (NominationResponse);
+
+export type NominationsUpdateInstanceError = (ErrorResponse);
+
+export type NominationsDeleteInstanceData = {
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+};
+
+export type NominationsDeleteInstanceResponse = (void);
+
+export type NominationsDeleteInstanceError = (ErrorResponse);
+
 export type PreReleaseVersionsGetCollectionData = {
     query?: {
         /**
@@ -28148,7 +28889,7 @@ export type ProfilesGetCollectionData = {
         /**
          * the fields to include for returned resources of type certificates
          */
-        'fields[certificates]'?: Array<('name' | 'certificateType' | 'displayName' | 'serialNumber' | 'platform' | 'expirationDate' | 'certificateContent')>;
+        'fields[certificates]'?: Array<('name' | 'certificateType' | 'displayName' | 'serialNumber' | 'platform' | 'expirationDate' | 'certificateContent' | 'activated')>;
         /**
          * the fields to include for returned resources of type devices
          */
@@ -28226,7 +28967,7 @@ export type ProfilesGetInstanceData = {
         /**
          * the fields to include for returned resources of type certificates
          */
-        'fields[certificates]'?: Array<('name' | 'certificateType' | 'displayName' | 'serialNumber' | 'platform' | 'expirationDate' | 'certificateContent')>;
+        'fields[certificates]'?: Array<('name' | 'certificateType' | 'displayName' | 'serialNumber' | 'platform' | 'expirationDate' | 'certificateContent' | 'activated')>;
         /**
          * the fields to include for returned resources of type devices
          */
@@ -28297,7 +29038,7 @@ export type ProfilesCertificatesGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type certificates
          */
-        'fields[certificates]'?: Array<('name' | 'certificateType' | 'displayName' | 'serialNumber' | 'platform' | 'expirationDate' | 'certificateContent')>;
+        'fields[certificates]'?: Array<('name' | 'certificateType' | 'displayName' | 'serialNumber' | 'platform' | 'expirationDate' | 'certificateContent' | 'activated')>;
         /**
          * maximum resources per page
          */
@@ -28332,70 +29073,6 @@ export type ProfilesDevicesGetToManyRelatedResponse = (DevicesWithoutIncludesRes
 
 export type ProfilesDevicesGetToManyRelatedError = (ErrorResponse);
 
-export type PromotedPurchaseImagesCreateInstanceData = {
-    /**
-     * PromotedPurchaseImage representation
-     */
-    body: PromotedPurchaseImageCreateRequest;
-};
-
-export type PromotedPurchaseImagesCreateInstanceResponse = (PromotedPurchaseImageResponse);
-
-export type PromotedPurchaseImagesCreateInstanceError = (ErrorResponse);
-
-export type PromotedPurchaseImagesGetInstanceData = {
-    path: {
-        /**
-         * the id of the requested resource
-         */
-        id: string;
-    };
-    query?: {
-        /**
-         * the fields to include for returned resources of type promotedPurchaseImages
-         */
-        'fields[promotedPurchaseImages]'?: Array<('fileSize' | 'fileName' | 'sourceFileChecksum' | 'assetToken' | 'imageAsset' | 'assetType' | 'uploadOperations' | 'state' | 'promotedPurchase')>;
-        /**
-         * comma-separated list of relationships to include
-         */
-        include?: Array<('promotedPurchase')>;
-    };
-};
-
-export type PromotedPurchaseImagesGetInstanceResponse = (PromotedPurchaseImageResponse);
-
-export type PromotedPurchaseImagesGetInstanceError = (ErrorResponse);
-
-export type PromotedPurchaseImagesUpdateInstanceData = {
-    /**
-     * PromotedPurchaseImage representation
-     */
-    body: PromotedPurchaseImageUpdateRequest;
-    path: {
-        /**
-         * the id of the requested resource
-         */
-        id: string;
-    };
-};
-
-export type PromotedPurchaseImagesUpdateInstanceResponse = (PromotedPurchaseImageResponse);
-
-export type PromotedPurchaseImagesUpdateInstanceError = (ErrorResponse);
-
-export type PromotedPurchaseImagesDeleteInstanceData = {
-    path: {
-        /**
-         * the id of the requested resource
-         */
-        id: string;
-    };
-};
-
-export type PromotedPurchaseImagesDeleteInstanceResponse = (void);
-
-export type PromotedPurchaseImagesDeleteInstanceError = (ErrorResponse);
-
 export type PromotedPurchasesCreateInstanceData = {
     /**
      * PromotedPurchase representation
@@ -28416,23 +29093,13 @@ export type PromotedPurchasesGetInstanceData = {
     };
     query?: {
         /**
-         * the fields to include for returned resources of type promotedPurchaseImages
-         * @deprecated
-         */
-        'fields[promotedPurchaseImages]'?: Array<('fileSize' | 'fileName' | 'sourceFileChecksum' | 'assetToken' | 'imageAsset' | 'assetType' | 'uploadOperations' | 'state' | 'promotedPurchase')>;
-        /**
          * the fields to include for returned resources of type promotedPurchases
          */
-        'fields[promotedPurchases]'?: Array<('visibleForAllUsers' | 'enabled' | 'state' | 'inAppPurchaseV2' | 'subscription' | 'promotionImages')>;
+        'fields[promotedPurchases]'?: Array<('visibleForAllUsers' | 'enabled' | 'state' | 'inAppPurchaseV2' | 'subscription')>;
         /**
          * comma-separated list of relationships to include
          */
-        include?: Array<('inAppPurchaseV2' | 'subscription' | 'promotionImages')>;
-        /**
-         * maximum number of related promotionImages returned (when they are included)
-         * @deprecated
-         */
-        'limit[promotionImages]'?: number;
+        include?: Array<('inAppPurchaseV2' | 'subscription')>;
     };
 };
 
@@ -28469,37 +29136,6 @@ export type PromotedPurchasesDeleteInstanceData = {
 export type PromotedPurchasesDeleteInstanceResponse = (void);
 
 export type PromotedPurchasesDeleteInstanceError = (ErrorResponse);
-
-export type PromotedPurchasesPromotionImagesGetToManyRelatedData = {
-    path: {
-        /**
-         * the id of the requested resource
-         */
-        id: string;
-    };
-    query?: {
-        /**
-         * the fields to include for returned resources of type promotedPurchaseImages
-         */
-        'fields[promotedPurchaseImages]'?: Array<('fileSize' | 'fileName' | 'sourceFileChecksum' | 'assetToken' | 'imageAsset' | 'assetType' | 'uploadOperations' | 'state' | 'promotedPurchase')>;
-        /**
-         * the fields to include for returned resources of type promotedPurchases
-         */
-        'fields[promotedPurchases]'?: Array<('visibleForAllUsers' | 'enabled' | 'state' | 'inAppPurchaseV2' | 'subscription' | 'promotionImages')>;
-        /**
-         * comma-separated list of relationships to include
-         */
-        include?: Array<('promotedPurchase')>;
-        /**
-         * maximum resources per page
-         */
-        limit?: number;
-    };
-};
-
-export type PromotedPurchasesPromotionImagesGetToManyRelatedResponse = (PromotedPurchaseImagesResponse);
-
-export type PromotedPurchasesPromotionImagesGetToManyRelatedError = (ErrorResponse);
 
 export type ReviewSubmissionItemsCreateInstanceData = {
     /**
@@ -29420,7 +30056,7 @@ export type SubscriptionGroupsSubscriptionsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type promotedPurchases
          */
-        'fields[promotedPurchases]'?: Array<('visibleForAllUsers' | 'enabled' | 'state' | 'inAppPurchaseV2' | 'subscription' | 'promotionImages')>;
+        'fields[promotedPurchases]'?: Array<('visibleForAllUsers' | 'enabled' | 'state' | 'inAppPurchaseV2' | 'subscription')>;
         /**
          * the fields to include for returned resources of type subscriptionAppStoreReviewScreenshots
          */
@@ -30214,7 +30850,7 @@ export type SubscriptionsGetInstanceData = {
         /**
          * the fields to include for returned resources of type promotedPurchases
          */
-        'fields[promotedPurchases]'?: Array<('visibleForAllUsers' | 'enabled' | 'state' | 'inAppPurchaseV2' | 'subscription' | 'promotionImages')>;
+        'fields[promotedPurchases]'?: Array<('visibleForAllUsers' | 'enabled' | 'state' | 'inAppPurchaseV2' | 'subscription')>;
         /**
          * the fields to include for returned resources of type subscriptionAppStoreReviewScreenshots
          */
@@ -30647,13 +31283,9 @@ export type SubscriptionsPromotedPurchaseGetToOneRelatedData = {
          */
         'fields[inAppPurchases]'?: Array<('name' | 'productId' | 'inAppPurchaseType' | 'state' | 'reviewNote' | 'familySharable' | 'contentHosting' | 'inAppPurchaseLocalizations' | 'pricePoints' | 'content' | 'appStoreReviewScreenshot' | 'promotedPurchase' | 'iapPriceSchedule' | 'inAppPurchaseAvailability' | 'images')>;
         /**
-         * the fields to include for returned resources of type promotedPurchaseImages
-         */
-        'fields[promotedPurchaseImages]'?: Array<('fileSize' | 'fileName' | 'sourceFileChecksum' | 'assetToken' | 'imageAsset' | 'assetType' | 'uploadOperations' | 'state' | 'promotedPurchase')>;
-        /**
          * the fields to include for returned resources of type promotedPurchases
          */
-        'fields[promotedPurchases]'?: Array<('visibleForAllUsers' | 'enabled' | 'state' | 'inAppPurchaseV2' | 'subscription' | 'promotionImages')>;
+        'fields[promotedPurchases]'?: Array<('visibleForAllUsers' | 'enabled' | 'state' | 'inAppPurchaseV2' | 'subscription')>;
         /**
          * the fields to include for returned resources of type subscriptions
          */
@@ -30661,12 +31293,7 @@ export type SubscriptionsPromotedPurchaseGetToOneRelatedData = {
         /**
          * comma-separated list of relationships to include
          */
-        include?: Array<('inAppPurchaseV2' | 'subscription' | 'promotionImages')>;
-        /**
-         * maximum number of related promotionImages returned (when they are included)
-         * @deprecated
-         */
-        'limit[promotionImages]'?: number;
+        include?: Array<('inAppPurchaseV2' | 'subscription')>;
     };
 };
 

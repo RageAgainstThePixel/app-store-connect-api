@@ -2,8 +2,8 @@
   "openapi" : "3.0.1",
   "info" : {
     "title" : "App Store Connect API",
-    "version" : "3.7.0",
-    "x-platform" : "app_store_connect_api"
+    "version" : "3.8.0",
+    "x-platforms": {"app_store_connect_api": "App Store Connect"}
   },
   "servers" : [ {
     "url" : "https://api.appstoreconnect.apple.com/"
@@ -5521,7 +5521,8 @@
           },
           "style" : "form",
           "explode" : false,
-          "required" : false
+          "required" : false,
+          "deprecated" : true
         }, {
           "name" : "filter[app]",
           "in" : "query",
@@ -12709,7 +12710,8 @@
           },
           "style" : "form",
           "explode" : false,
-          "required" : false
+          "required" : false,
+          "deprecated" : true
         }, {
           "name" : "filter[appStoreVersions.platform]",
           "in" : "query",
@@ -12867,7 +12869,7 @@
             "type" : "array",
             "items" : {
               "type" : "string",
-              "enum" : [ "name", "createdDate", "isInternalGroup", "hasAccessToAllBuilds", "publicLinkEnabled", "publicLinkId", "publicLinkLimitEnabled", "publicLinkLimit", "publicLink", "feedbackEnabled", "iosBuildsAvailableForAppleSiliconMac", "app", "builds", "betaTesters" ]
+              "enum" : [ "name", "createdDate", "isInternalGroup", "hasAccessToAllBuilds", "publicLinkEnabled", "publicLinkId", "publicLinkLimitEnabled", "publicLinkLimit", "publicLink", "feedbackEnabled", "iosBuildsAvailableForAppleSiliconMac", "iosBuildsAvailableForAppleVision", "app", "builds", "betaTesters", "betaRecruitmentCriteria", "betaRecruitmentCriterionCompatibleBuildCheck" ]
             }
           },
           "style" : "form",
@@ -13064,7 +13066,7 @@
             "type" : "array",
             "items" : {
               "type" : "string",
-              "enum" : [ "visibleForAllUsers", "enabled", "state", "inAppPurchaseV2", "subscription", "promotionImages" ]
+              "enum" : [ "visibleForAllUsers", "enabled", "state", "inAppPurchaseV2", "subscription" ]
             }
           },
           "style" : "form",
@@ -13434,7 +13436,7 @@
             "type" : "array",
             "items" : {
               "type" : "string",
-              "enum" : [ "name", "createdDate", "isInternalGroup", "hasAccessToAllBuilds", "publicLinkEnabled", "publicLinkId", "publicLinkLimitEnabled", "publicLinkLimit", "publicLink", "feedbackEnabled", "iosBuildsAvailableForAppleSiliconMac", "app", "builds", "betaTesters" ]
+              "enum" : [ "name", "createdDate", "isInternalGroup", "hasAccessToAllBuilds", "publicLinkEnabled", "publicLinkId", "publicLinkLimitEnabled", "publicLinkLimit", "publicLink", "feedbackEnabled", "iosBuildsAvailableForAppleSiliconMac", "iosBuildsAvailableForAppleVision", "app", "builds", "betaTesters", "betaRecruitmentCriteria", "betaRecruitmentCriterionCompatibleBuildCheck" ]
             }
           },
           "style" : "form",
@@ -13631,7 +13633,7 @@
             "type" : "array",
             "items" : {
               "type" : "string",
-              "enum" : [ "visibleForAllUsers", "enabled", "state", "inAppPurchaseV2", "subscription", "promotionImages" ]
+              "enum" : [ "visibleForAllUsers", "enabled", "state", "inAppPurchaseV2", "subscription" ]
             }
           },
           "style" : "form",
@@ -16290,7 +16292,7 @@
             "type" : "array",
             "items" : {
               "type" : "string",
-              "enum" : [ "name", "createdDate", "isInternalGroup", "hasAccessToAllBuilds", "publicLinkEnabled", "publicLinkId", "publicLinkLimitEnabled", "publicLinkLimit", "publicLink", "feedbackEnabled", "iosBuildsAvailableForAppleSiliconMac", "app", "builds", "betaTesters" ]
+              "enum" : [ "name", "createdDate", "isInternalGroup", "hasAccessToAllBuilds", "publicLinkEnabled", "publicLinkId", "publicLinkLimitEnabled", "publicLinkLimit", "publicLink", "feedbackEnabled", "iosBuildsAvailableForAppleSiliconMac", "iosBuildsAvailableForAppleVision", "app", "builds", "betaTesters", "betaRecruitmentCriteria", "betaRecruitmentCriterionCompatibleBuildCheck" ]
             }
           },
           "style" : "form",
@@ -16339,6 +16341,20 @@
           "explode" : false,
           "required" : false
         }, {
+          "name" : "fields[betaRecruitmentCriteria]",
+          "in" : "query",
+          "description" : "the fields to include for returned resources of type betaRecruitmentCriteria",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "enum" : [ "lastModifiedDate", "deviceFamilyOsVersionFilters" ]
+            }
+          },
+          "style" : "form",
+          "explode" : false,
+          "required" : false
+        }, {
           "name" : "limit",
           "in" : "query",
           "description" : "maximum resources per page",
@@ -16355,7 +16371,7 @@
             "type" : "array",
             "items" : {
               "type" : "string",
-              "enum" : [ "app", "builds", "betaTesters" ]
+              "enum" : [ "app", "builds", "betaTesters", "betaRecruitmentCriteria" ]
             }
           },
           "style" : "form",
@@ -16515,7 +16531,7 @@
             "type" : "array",
             "items" : {
               "type" : "string",
-              "enum" : [ "name", "createdDate", "isInternalGroup", "hasAccessToAllBuilds", "publicLinkEnabled", "publicLinkId", "publicLinkLimitEnabled", "publicLinkLimit", "publicLink", "feedbackEnabled", "iosBuildsAvailableForAppleSiliconMac", "app", "builds", "betaTesters" ]
+              "enum" : [ "name", "createdDate", "isInternalGroup", "hasAccessToAllBuilds", "publicLinkEnabled", "publicLinkId", "publicLinkLimitEnabled", "publicLinkLimit", "publicLink", "feedbackEnabled", "iosBuildsAvailableForAppleSiliconMac", "iosBuildsAvailableForAppleVision", "app", "builds", "betaTesters", "betaRecruitmentCriteria", "betaRecruitmentCriterionCompatibleBuildCheck" ]
             }
           },
           "style" : "form",
@@ -16564,6 +16580,20 @@
           "explode" : false,
           "required" : false
         }, {
+          "name" : "fields[betaRecruitmentCriteria]",
+          "in" : "query",
+          "description" : "the fields to include for returned resources of type betaRecruitmentCriteria",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "enum" : [ "lastModifiedDate", "deviceFamilyOsVersionFilters" ]
+            }
+          },
+          "style" : "form",
+          "explode" : false,
+          "required" : false
+        }, {
           "name" : "include",
           "in" : "query",
           "description" : "comma-separated list of relationships to include",
@@ -16571,7 +16601,7 @@
             "type" : "array",
             "items" : {
               "type" : "string",
-              "enum" : [ "app", "builds", "betaTesters" ]
+              "enum" : [ "app", "builds", "betaTesters", "betaRecruitmentCriteria" ]
             }
           },
           "style" : "form",
@@ -17119,6 +17149,315 @@
         "required" : true
       } ]
     },
+    "/v1/betaRecruitmentCriteria" : {
+      "post" : {
+        "tags" : [ "BetaRecruitmentCriteria" ],
+        "operationId" : "betaRecruitmentCriteria_createInstance",
+        "requestBody" : {
+          "description" : "BetaRecruitmentCriterion representation",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/BetaRecruitmentCriterionCreateRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "400" : {
+            "description" : "Parameter error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422" : {
+            "description" : "Unprocessable request entity error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "201" : {
+            "description" : "Single BetaRecruitmentCriterion",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BetaRecruitmentCriterionResponse"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Request entity error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/betaRecruitmentCriteria/{id}" : {
+      "patch" : {
+        "tags" : [ "BetaRecruitmentCriteria" ],
+        "operationId" : "betaRecruitmentCriteria_updateInstance",
+        "requestBody" : {
+          "description" : "BetaRecruitmentCriterion representation",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/BetaRecruitmentCriterionUpdateRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "400" : {
+            "description" : "Parameter error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not found error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422" : {
+            "description" : "Unprocessable request entity error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "Single BetaRecruitmentCriterion",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BetaRecruitmentCriterionResponse"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Request entity error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "BetaRecruitmentCriteria" ],
+        "operationId" : "betaRecruitmentCriteria_deleteInstance",
+        "responses" : {
+          "400" : {
+            "description" : "Parameter error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not found error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Request entity error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "204" : {
+            "description" : "Success (no content)"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "id",
+        "in" : "path",
+        "description" : "the id of the requested resource",
+        "schema" : {
+          "type" : "string"
+        },
+        "style" : "simple",
+        "required" : true
+      } ]
+    },
+    "/v1/betaRecruitmentCriterionOptions" : {
+      "get" : {
+        "tags" : [ "BetaRecruitmentCriterionOptions" ],
+        "operationId" : "betaRecruitmentCriterionOptions_getCollection",
+        "parameters" : [ {
+          "name" : "fields[betaRecruitmentCriterionOptions]",
+          "in" : "query",
+          "description" : "the fields to include for returned resources of type betaRecruitmentCriterionOptions",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "enum" : [ "deviceFamilyOsVersions" ]
+            }
+          },
+          "style" : "form",
+          "explode" : false,
+          "required" : false
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "description" : "maximum resources per page",
+          "schema" : {
+            "type" : "integer",
+            "maximum" : 200
+          },
+          "style" : "form"
+        } ],
+        "responses" : {
+          "400" : {
+            "description" : "Parameter error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "List of BetaRecruitmentCriterionOptions",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BetaRecruitmentCriterionOptionsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/v1/betaTesterInvitations" : {
       "post" : {
         "tags" : [ "BetaTesterInvitations" ],
@@ -17357,7 +17696,7 @@
             "type" : "array",
             "items" : {
               "type" : "string",
-              "enum" : [ "name", "createdDate", "isInternalGroup", "hasAccessToAllBuilds", "publicLinkEnabled", "publicLinkId", "publicLinkLimitEnabled", "publicLinkLimit", "publicLink", "feedbackEnabled", "iosBuildsAvailableForAppleSiliconMac", "app", "builds", "betaTesters" ]
+              "enum" : [ "name", "createdDate", "isInternalGroup", "hasAccessToAllBuilds", "publicLinkEnabled", "publicLinkId", "publicLinkLimitEnabled", "publicLinkLimit", "publicLink", "feedbackEnabled", "iosBuildsAvailableForAppleSiliconMac", "iosBuildsAvailableForAppleVision", "app", "builds", "betaTesters", "betaRecruitmentCriteria", "betaRecruitmentCriterionCompatibleBuildCheck" ]
             }
           },
           "style" : "form",
@@ -17592,7 +17931,7 @@
             "type" : "array",
             "items" : {
               "type" : "string",
-              "enum" : [ "name", "createdDate", "isInternalGroup", "hasAccessToAllBuilds", "publicLinkEnabled", "publicLinkId", "publicLinkLimitEnabled", "publicLinkLimit", "publicLink", "feedbackEnabled", "iosBuildsAvailableForAppleSiliconMac", "app", "builds", "betaTesters" ]
+              "enum" : [ "name", "createdDate", "isInternalGroup", "hasAccessToAllBuilds", "publicLinkEnabled", "publicLinkId", "publicLinkLimitEnabled", "publicLinkLimit", "publicLink", "feedbackEnabled", "iosBuildsAvailableForAppleSiliconMac", "iosBuildsAvailableForAppleVision", "app", "builds", "betaTesters", "betaRecruitmentCriteria", "betaRecruitmentCriterionCompatibleBuildCheck" ]
             }
           },
           "style" : "form",
@@ -19867,7 +20206,7 @@
             "type" : "array",
             "items" : {
               "type" : "string",
-              "enum" : [ "IOS_DEVELOPMENT", "IOS_DISTRIBUTION", "MAC_APP_DISTRIBUTION", "MAC_INSTALLER_DISTRIBUTION", "MAC_APP_DEVELOPMENT", "DEVELOPER_ID_KEXT", "DEVELOPER_ID_KEXT_G2", "DEVELOPER_ID_APPLICATION", "DEVELOPER_ID_APPLICATION_G2", "DEVELOPMENT", "DISTRIBUTION", "PASS_TYPE_ID", "PASS_TYPE_ID_WITH_NFC" ]
+              "enum" : [ "APPLE_PAY", "APPLE_PAY_MERCHANT_IDENTITY", "APPLE_PAY_PSP_IDENTITY", "APPLE_PAY_RSA", "DEVELOPER_ID_KEXT", "DEVELOPER_ID_KEXT_G2", "DEVELOPER_ID_APPLICATION", "DEVELOPER_ID_APPLICATION_G2", "DEVELOPMENT", "DISTRIBUTION", "IDENTITY_ACCESS", "IOS_DEVELOPMENT", "IOS_DISTRIBUTION", "MAC_APP_DISTRIBUTION", "MAC_INSTALLER_DISTRIBUTION", "MAC_APP_DEVELOPMENT", "PASS_TYPE_ID", "PASS_TYPE_ID_WITH_NFC" ]
             }
           },
           "style" : "form",
@@ -19921,7 +20260,7 @@
             "type" : "array",
             "items" : {
               "type" : "string",
-              "enum" : [ "name", "certificateType", "displayName", "serialNumber", "platform", "expirationDate", "certificateContent" ]
+              "enum" : [ "name", "certificateType", "displayName", "serialNumber", "platform", "expirationDate", "certificateContent", "activated" ]
             }
           },
           "style" : "form",
@@ -20070,7 +20409,7 @@
             "type" : "array",
             "items" : {
               "type" : "string",
-              "enum" : [ "name", "certificateType", "displayName", "serialNumber", "platform", "expirationDate", "certificateContent" ]
+              "enum" : [ "name", "certificateType", "displayName", "serialNumber", "platform", "expirationDate", "certificateContent", "activated" ]
             }
           },
           "style" : "form",
@@ -20124,6 +20463,93 @@
               "application/json" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/CertificateResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch" : {
+        "tags" : [ "Certificates" ],
+        "operationId" : "certificates_updateInstance",
+        "requestBody" : {
+          "description" : "Certificate representation",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CertificateUpdateRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "400" : {
+            "description" : "Parameter error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not found error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422" : {
+            "description" : "Unprocessable request entity error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "Single Certificate",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CertificateResponse"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Request entity error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -32233,7 +32659,7 @@
             "type" : "array",
             "items" : {
               "type" : "string",
-              "enum" : [ "visibleForAllUsers", "enabled", "state", "inAppPurchaseV2", "subscription", "promotionImages" ]
+              "enum" : [ "visibleForAllUsers", "enabled", "state", "inAppPurchaseV2", "subscription" ]
             }
           },
           "style" : "form",
@@ -33375,6 +33801,1026 @@
         "required" : true
       } ]
     },
+    "/v1/merchantIds" : {
+      "get" : {
+        "tags" : [ "MerchantIds" ],
+        "operationId" : "merchantIds_getCollection",
+        "parameters" : [ {
+          "name" : "filter[name]",
+          "in" : "query",
+          "description" : "filter by attribute 'name'",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "style" : "form",
+          "explode" : false,
+          "required" : false
+        }, {
+          "name" : "filter[identifier]",
+          "in" : "query",
+          "description" : "filter by attribute 'identifier'",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "style" : "form",
+          "explode" : false,
+          "required" : false
+        }, {
+          "name" : "sort",
+          "in" : "query",
+          "description" : "comma-separated list of sort expressions; resources will be sorted as specified",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "enum" : [ "name", "-name", "identifier", "-identifier" ]
+            }
+          },
+          "style" : "form",
+          "explode" : false,
+          "required" : false
+        }, {
+          "name" : "fields[merchantIds]",
+          "in" : "query",
+          "description" : "the fields to include for returned resources of type merchantIds",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "enum" : [ "name", "identifier", "certificates" ]
+            }
+          },
+          "style" : "form",
+          "explode" : false,
+          "required" : false
+        }, {
+          "name" : "fields[certificates]",
+          "in" : "query",
+          "description" : "the fields to include for returned resources of type certificates",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "enum" : [ "name", "certificateType", "displayName", "serialNumber", "platform", "expirationDate", "certificateContent", "activated" ]
+            }
+          },
+          "style" : "form",
+          "explode" : false,
+          "required" : false
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "description" : "maximum resources per page",
+          "schema" : {
+            "type" : "integer",
+            "maximum" : 200
+          },
+          "style" : "form"
+        }, {
+          "name" : "include",
+          "in" : "query",
+          "description" : "comma-separated list of relationships to include",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "enum" : [ "certificates" ]
+            }
+          },
+          "style" : "form",
+          "explode" : false,
+          "required" : false
+        }, {
+          "name" : "limit[certificates]",
+          "in" : "query",
+          "description" : "maximum number of related certificates returned (when they are included)",
+          "schema" : {
+            "type" : "integer",
+            "maximum" : 50
+          },
+          "style" : "form",
+          "required" : false
+        } ],
+        "responses" : {
+          "400" : {
+            "description" : "Parameter error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "List of MerchantIds",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/MerchantIdsResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "MerchantIds" ],
+        "operationId" : "merchantIds_createInstance",
+        "requestBody" : {
+          "description" : "MerchantId representation",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/MerchantIdCreateRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "400" : {
+            "description" : "Parameter error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422" : {
+            "description" : "Unprocessable request entity error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "201" : {
+            "description" : "Single MerchantId",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/MerchantIdResponse"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Request entity error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/merchantIds/{id}" : {
+      "get" : {
+        "tags" : [ "MerchantIds" ],
+        "operationId" : "merchantIds_getInstance",
+        "parameters" : [ {
+          "name" : "fields[merchantIds]",
+          "in" : "query",
+          "description" : "the fields to include for returned resources of type merchantIds",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "enum" : [ "name", "identifier", "certificates" ]
+            }
+          },
+          "style" : "form",
+          "explode" : false,
+          "required" : false
+        }, {
+          "name" : "fields[certificates]",
+          "in" : "query",
+          "description" : "the fields to include for returned resources of type certificates",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "enum" : [ "name", "certificateType", "displayName", "serialNumber", "platform", "expirationDate", "certificateContent", "activated" ]
+            }
+          },
+          "style" : "form",
+          "explode" : false,
+          "required" : false
+        }, {
+          "name" : "include",
+          "in" : "query",
+          "description" : "comma-separated list of relationships to include",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "enum" : [ "certificates" ]
+            }
+          },
+          "style" : "form",
+          "explode" : false,
+          "required" : false
+        }, {
+          "name" : "limit[certificates]",
+          "in" : "query",
+          "description" : "maximum number of related certificates returned (when they are included)",
+          "schema" : {
+            "type" : "integer",
+            "maximum" : 50
+          },
+          "style" : "form",
+          "required" : false
+        } ],
+        "responses" : {
+          "400" : {
+            "description" : "Parameter error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not found error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "Single MerchantId",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/MerchantIdResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch" : {
+        "tags" : [ "MerchantIds" ],
+        "operationId" : "merchantIds_updateInstance",
+        "requestBody" : {
+          "description" : "MerchantId representation",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/MerchantIdUpdateRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "400" : {
+            "description" : "Parameter error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not found error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422" : {
+            "description" : "Unprocessable request entity error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "Single MerchantId",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/MerchantIdResponse"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Request entity error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "MerchantIds" ],
+        "operationId" : "merchantIds_deleteInstance",
+        "responses" : {
+          "400" : {
+            "description" : "Parameter error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not found error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Request entity error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "204" : {
+            "description" : "Success (no content)"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "id",
+        "in" : "path",
+        "description" : "the id of the requested resource",
+        "schema" : {
+          "type" : "string"
+        },
+        "style" : "simple",
+        "required" : true
+      } ]
+    },
+    "/v1/nominations" : {
+      "get" : {
+        "tags" : [ "Nominations" ],
+        "operationId" : "nominations_getCollection",
+        "parameters" : [ {
+          "name" : "filter[type]",
+          "in" : "query",
+          "description" : "filter by attribute 'type'",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "enum" : [ "APP_LAUNCH", "APP_ENHANCEMENTS", "NEW_CONTENT" ]
+            }
+          },
+          "style" : "form",
+          "explode" : false,
+          "required" : false
+        }, {
+          "name" : "filter[state]",
+          "in" : "query",
+          "description" : "filter by attribute 'state'",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "enum" : [ "DRAFT", "SUBMITTED", "ARCHIVED" ]
+            }
+          },
+          "style" : "form",
+          "explode" : false,
+          "required" : true
+        }, {
+          "name" : "filter[relatedApps]",
+          "in" : "query",
+          "description" : "filter by id(s) of related 'relatedApps'",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "style" : "form",
+          "explode" : false,
+          "required" : false
+        }, {
+          "name" : "sort",
+          "in" : "query",
+          "description" : "comma-separated list of sort expressions; resources will be sorted as specified",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "enum" : [ "lastModifiedDate", "-lastModifiedDate", "publishStartDate", "-publishStartDate", "publishEndDate", "-publishEndDate", "name", "-name", "type", "-type" ]
+            }
+          },
+          "style" : "form",
+          "explode" : false,
+          "required" : false
+        }, {
+          "name" : "fields[nominations]",
+          "in" : "query",
+          "description" : "the fields to include for returned resources of type nominations",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "enum" : [ "name", "type", "description", "createdDate", "lastModifiedDate", "submittedDate", "state", "publishStartDate", "publishEndDate", "deviceFamilies", "locales", "supplementalMaterialsUris", "hasInAppEvents", "launchInSelectMarketsFirst", "notes", "preOrderEnabled", "relatedApps", "createdByActor", "lastModifiedByActor", "submittedByActor", "inAppEvents", "supportedTerritories" ]
+            }
+          },
+          "style" : "form",
+          "explode" : false,
+          "required" : false
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "description" : "maximum resources per page",
+          "schema" : {
+            "type" : "integer",
+            "maximum" : 200
+          },
+          "style" : "form"
+        }, {
+          "name" : "include",
+          "in" : "query",
+          "description" : "comma-separated list of relationships to include",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "enum" : [ "relatedApps", "createdByActor", "lastModifiedByActor", "submittedByActor", "inAppEvents", "supportedTerritories" ]
+            }
+          },
+          "style" : "form",
+          "explode" : false,
+          "required" : false
+        }, {
+          "name" : "limit[inAppEvents]",
+          "in" : "query",
+          "description" : "maximum number of related inAppEvents returned (when they are included)",
+          "schema" : {
+            "type" : "integer",
+            "maximum" : 50
+          },
+          "style" : "form",
+          "required" : false
+        }, {
+          "name" : "limit[relatedApps]",
+          "in" : "query",
+          "description" : "maximum number of related relatedApps returned (when they are included)",
+          "schema" : {
+            "type" : "integer",
+            "maximum" : 50
+          },
+          "style" : "form",
+          "required" : false
+        }, {
+          "name" : "limit[supportedTerritories]",
+          "in" : "query",
+          "description" : "maximum number of related supportedTerritories returned (when they are included)",
+          "schema" : {
+            "type" : "integer",
+            "maximum" : 50
+          },
+          "style" : "form",
+          "required" : false
+        } ],
+        "responses" : {
+          "400" : {
+            "description" : "Parameter error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "List of Nominations",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/NominationsResponse"
+                }
+              },
+              "text/csv" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/csv"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Nominations" ],
+        "operationId" : "nominations_createInstance",
+        "requestBody" : {
+          "description" : "Nomination representation",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/NominationCreateRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "400" : {
+            "description" : "Parameter error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422" : {
+            "description" : "Unprocessable request entity error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "201" : {
+            "description" : "Single Nomination",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/NominationResponse"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Request entity error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/nominations/{id}" : {
+      "get" : {
+        "tags" : [ "Nominations" ],
+        "operationId" : "nominations_getInstance",
+        "parameters" : [ {
+          "name" : "fields[nominations]",
+          "in" : "query",
+          "description" : "the fields to include for returned resources of type nominations",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "enum" : [ "name", "type", "description", "createdDate", "lastModifiedDate", "submittedDate", "state", "publishStartDate", "publishEndDate", "deviceFamilies", "locales", "supplementalMaterialsUris", "hasInAppEvents", "launchInSelectMarketsFirst", "notes", "preOrderEnabled", "relatedApps", "createdByActor", "lastModifiedByActor", "submittedByActor", "inAppEvents", "supportedTerritories" ]
+            }
+          },
+          "style" : "form",
+          "explode" : false,
+          "required" : false
+        }, {
+          "name" : "include",
+          "in" : "query",
+          "description" : "comma-separated list of relationships to include",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "enum" : [ "relatedApps", "createdByActor", "lastModifiedByActor", "submittedByActor", "inAppEvents", "supportedTerritories" ]
+            }
+          },
+          "style" : "form",
+          "explode" : false,
+          "required" : false
+        }, {
+          "name" : "limit[inAppEvents]",
+          "in" : "query",
+          "description" : "maximum number of related inAppEvents returned (when they are included)",
+          "schema" : {
+            "type" : "integer",
+            "maximum" : 50
+          },
+          "style" : "form",
+          "required" : false
+        }, {
+          "name" : "limit[relatedApps]",
+          "in" : "query",
+          "description" : "maximum number of related relatedApps returned (when they are included)",
+          "schema" : {
+            "type" : "integer",
+            "maximum" : 50
+          },
+          "style" : "form",
+          "required" : false
+        }, {
+          "name" : "limit[supportedTerritories]",
+          "in" : "query",
+          "description" : "maximum number of related supportedTerritories returned (when they are included)",
+          "schema" : {
+            "type" : "integer",
+            "maximum" : 50
+          },
+          "style" : "form",
+          "required" : false
+        } ],
+        "responses" : {
+          "400" : {
+            "description" : "Parameter error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not found error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "Single Nomination",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/NominationResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch" : {
+        "tags" : [ "Nominations" ],
+        "operationId" : "nominations_updateInstance",
+        "requestBody" : {
+          "description" : "Nomination representation",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/NominationUpdateRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "400" : {
+            "description" : "Parameter error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not found error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422" : {
+            "description" : "Unprocessable request entity error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "Single Nomination",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/NominationResponse"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Request entity error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Nominations" ],
+        "operationId" : "nominations_deleteInstance",
+        "responses" : {
+          "400" : {
+            "description" : "Parameter error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not found error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Request entity error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "204" : {
+            "description" : "Success (no content)"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "id",
+        "in" : "path",
+        "description" : "the id of the requested resource",
+        "schema" : {
+          "type" : "string"
+        },
+        "style" : "simple",
+        "required" : true
+      } ]
+    },
     "/v1/preReleaseVersions" : {
       "get" : {
         "tags" : [ "PreReleaseVersions" ],
@@ -33863,7 +35309,7 @@
             "type" : "array",
             "items" : {
               "type" : "string",
-              "enum" : [ "name", "certificateType", "displayName", "serialNumber", "platform", "expirationDate", "certificateContent" ]
+              "enum" : [ "name", "certificateType", "displayName", "serialNumber", "platform", "expirationDate", "certificateContent", "activated" ]
             }
           },
           "style" : "form",
@@ -34088,7 +35534,7 @@
             "type" : "array",
             "items" : {
               "type" : "string",
-              "enum" : [ "name", "certificateType", "displayName", "serialNumber", "platform", "expirationDate", "certificateContent" ]
+              "enum" : [ "name", "certificateType", "displayName", "serialNumber", "platform", "expirationDate", "certificateContent", "activated" ]
             }
           },
           "style" : "form",
@@ -34252,332 +35698,6 @@
         "required" : true
       } ]
     },
-    "/v1/promotedPurchaseImages" : {
-      "post" : {
-        "tags" : [ "PromotedPurchaseImages" ],
-        "operationId" : "promotedPurchaseImages_createInstance",
-        "deprecated" : true,
-        "requestBody" : {
-          "description" : "PromotedPurchaseImage representation",
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/PromotedPurchaseImageCreateRequest"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "400" : {
-            "description" : "Parameter error(s)",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401" : {
-            "description" : "Unauthorized error(s)",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403" : {
-            "description" : "Forbidden error",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422" : {
-            "description" : "Unprocessable request entity error(s)",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "201" : {
-            "description" : "Single PromotedPurchaseImage",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/PromotedPurchaseImageResponse"
-                }
-              }
-            }
-          },
-          "409" : {
-            "description" : "Request entity error(s)",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/promotedPurchaseImages/{id}" : {
-      "get" : {
-        "tags" : [ "PromotedPurchaseImages" ],
-        "operationId" : "promotedPurchaseImages_getInstance",
-        "deprecated" : true,
-        "parameters" : [ {
-          "name" : "fields[promotedPurchaseImages]",
-          "in" : "query",
-          "description" : "the fields to include for returned resources of type promotedPurchaseImages",
-          "schema" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string",
-              "enum" : [ "fileSize", "fileName", "sourceFileChecksum", "assetToken", "imageAsset", "assetType", "uploadOperations", "state", "promotedPurchase" ]
-            }
-          },
-          "style" : "form",
-          "explode" : false,
-          "required" : false
-        }, {
-          "name" : "include",
-          "in" : "query",
-          "description" : "comma-separated list of relationships to include",
-          "schema" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string",
-              "enum" : [ "promotedPurchase" ]
-            }
-          },
-          "style" : "form",
-          "explode" : false,
-          "required" : false
-        } ],
-        "responses" : {
-          "400" : {
-            "description" : "Parameter error(s)",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401" : {
-            "description" : "Unauthorized error(s)",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403" : {
-            "description" : "Forbidden error",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "404" : {
-            "description" : "Not found error",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "200" : {
-            "description" : "Single PromotedPurchaseImage",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/PromotedPurchaseImageResponse"
-                }
-              }
-            }
-          }
-        }
-      },
-      "patch" : {
-        "tags" : [ "PromotedPurchaseImages" ],
-        "operationId" : "promotedPurchaseImages_updateInstance",
-        "deprecated" : true,
-        "requestBody" : {
-          "description" : "PromotedPurchaseImage representation",
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/PromotedPurchaseImageUpdateRequest"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "400" : {
-            "description" : "Parameter error(s)",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401" : {
-            "description" : "Unauthorized error(s)",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403" : {
-            "description" : "Forbidden error",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "404" : {
-            "description" : "Not found error",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422" : {
-            "description" : "Unprocessable request entity error(s)",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "200" : {
-            "description" : "Single PromotedPurchaseImage",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/PromotedPurchaseImageResponse"
-                }
-              }
-            }
-          },
-          "409" : {
-            "description" : "Request entity error(s)",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete" : {
-        "tags" : [ "PromotedPurchaseImages" ],
-        "operationId" : "promotedPurchaseImages_deleteInstance",
-        "deprecated" : true,
-        "responses" : {
-          "400" : {
-            "description" : "Parameter error(s)",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401" : {
-            "description" : "Unauthorized error(s)",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403" : {
-            "description" : "Forbidden error",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "404" : {
-            "description" : "Not found error",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "409" : {
-            "description" : "Request entity error(s)",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "204" : {
-            "description" : "Success (no content)"
-          }
-        }
-      },
-      "parameters" : [ {
-        "name" : "id",
-        "in" : "path",
-        "description" : "the id of the requested resource",
-        "schema" : {
-          "type" : "string"
-        },
-        "style" : "simple",
-        "required" : true
-      } ]
-    },
     "/v1/promotedPurchases" : {
       "post" : {
         "tags" : [ "PromotedPurchases" ],
@@ -34669,27 +35789,12 @@
             "type" : "array",
             "items" : {
               "type" : "string",
-              "enum" : [ "visibleForAllUsers", "enabled", "state", "inAppPurchaseV2", "subscription", "promotionImages" ]
+              "enum" : [ "visibleForAllUsers", "enabled", "state", "inAppPurchaseV2", "subscription" ]
             }
           },
           "style" : "form",
           "explode" : false,
           "required" : false
-        }, {
-          "name" : "fields[promotedPurchaseImages]",
-          "in" : "query",
-          "description" : "the fields to include for returned resources of type promotedPurchaseImages",
-          "schema" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string",
-              "enum" : [ "fileSize", "fileName", "sourceFileChecksum", "assetToken", "imageAsset", "assetType", "uploadOperations", "state", "promotedPurchase" ]
-            }
-          },
-          "style" : "form",
-          "explode" : false,
-          "required" : false,
-          "deprecated" : true
         }, {
           "name" : "include",
           "in" : "query",
@@ -34698,23 +35803,12 @@
             "type" : "array",
             "items" : {
               "type" : "string",
-              "enum" : [ "inAppPurchaseV2", "subscription", "promotionImages" ]
+              "enum" : [ "inAppPurchaseV2", "subscription" ]
             }
           },
           "style" : "form",
           "explode" : false,
           "required" : false
-        }, {
-          "name" : "limit[promotionImages]",
-          "in" : "query",
-          "description" : "maximum number of related promotionImages returned (when they are included)",
-          "schema" : {
-            "type" : "integer",
-            "maximum" : 50
-          },
-          "style" : "form",
-          "required" : false,
-          "deprecated" : true
         } ],
         "responses" : {
           "400" : {
@@ -40912,7 +42006,7 @@
             "type" : "array",
             "items" : {
               "type" : "string",
-              "enum" : [ "visibleForAllUsers", "enabled", "state", "inAppPurchaseV2", "subscription", "promotionImages" ]
+              "enum" : [ "visibleForAllUsers", "enabled", "state", "inAppPurchaseV2", "subscription" ]
             }
           },
           "style" : "form",
@@ -51965,7 +53059,8 @@
             }
           },
           "style" : "form",
-          "explode" : false
+          "explode" : false,
+          "deprecated" : true
         }, {
           "name" : "filter[builds]",
           "in" : "query",
@@ -52956,7 +54051,8 @@
             }
           },
           "style" : "form",
-          "explode" : false
+          "explode" : false,
+          "deprecated" : true
         }, {
           "name" : "filter[appVersionState]",
           "in" : "query",
@@ -53451,7 +54547,7 @@
             "type" : "array",
             "items" : {
               "type" : "string",
-              "enum" : [ "name", "createdDate", "isInternalGroup", "hasAccessToAllBuilds", "publicLinkEnabled", "publicLinkId", "publicLinkLimitEnabled", "publicLinkLimit", "publicLink", "feedbackEnabled", "iosBuildsAvailableForAppleSiliconMac", "app", "builds", "betaTesters" ]
+              "enum" : [ "name", "createdDate", "isInternalGroup", "hasAccessToAllBuilds", "publicLinkEnabled", "publicLinkId", "publicLinkLimitEnabled", "publicLinkLimit", "publicLink", "feedbackEnabled", "iosBuildsAvailableForAppleSiliconMac", "iosBuildsAvailableForAppleVision", "app", "builds", "betaTesters", "betaRecruitmentCriteria", "betaRecruitmentCriterionCompatibleBuildCheck" ]
             }
           },
           "style" : "form",
@@ -54922,7 +56018,7 @@
             "type" : "array",
             "items" : {
               "type" : "string",
-              "enum" : [ "visibleForAllUsers", "enabled", "state", "inAppPurchaseV2", "subscription", "promotionImages" ]
+              "enum" : [ "visibleForAllUsers", "enabled", "state", "inAppPurchaseV2", "subscription" ]
             }
           },
           "style" : "form",
@@ -55511,7 +56607,7 @@
             "type" : "array",
             "items" : {
               "type" : "string",
-              "enum" : [ "visibleForAllUsers", "enabled", "state", "inAppPurchaseV2", "subscription", "promotionImages" ]
+              "enum" : [ "visibleForAllUsers", "enabled", "state", "inAppPurchaseV2", "subscription" ]
             }
           },
           "style" : "form",
@@ -55543,19 +56639,6 @@
           "style" : "form",
           "explode" : false
         }, {
-          "name" : "fields[promotedPurchaseImages]",
-          "in" : "query",
-          "description" : "the fields to include for returned resources of type promotedPurchaseImages",
-          "schema" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string",
-              "enum" : [ "fileSize", "fileName", "sourceFileChecksum", "assetToken", "imageAsset", "assetType", "uploadOperations", "state", "promotedPurchase" ]
-            }
-          },
-          "style" : "form",
-          "explode" : false
-        }, {
           "name" : "limit",
           "in" : "query",
           "description" : "maximum resources per page",
@@ -55572,21 +56655,11 @@
             "type" : "array",
             "items" : {
               "type" : "string",
-              "enum" : [ "inAppPurchaseV2", "subscription", "promotionImages" ]
+              "enum" : [ "inAppPurchaseV2", "subscription" ]
             }
           },
           "style" : "form",
           "explode" : false
-        }, {
-          "name" : "limit[promotionImages]",
-          "in" : "query",
-          "description" : "maximum number of related promotionImages returned (when they are included)",
-          "schema" : {
-            "type" : "integer",
-            "maximum" : 50
-          },
-          "style" : "form",
-          "deprecated" : true
         } ],
         "responses" : {
           "400" : {
@@ -56504,6 +57577,170 @@
               "application/json" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/AppWithoutIncludesResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "id",
+        "in" : "path",
+        "description" : "the id of the requested resource",
+        "schema" : {
+          "type" : "string"
+        },
+        "style" : "simple",
+        "required" : true
+      } ]
+    },
+    "/v1/betaGroups/{id}/betaRecruitmentCriteria" : {
+      "get" : {
+        "tags" : [ "BetaGroups" ],
+        "operationId" : "betaGroups_betaRecruitmentCriteria_getToOneRelated",
+        "parameters" : [ {
+          "name" : "fields[betaRecruitmentCriteria]",
+          "in" : "query",
+          "description" : "the fields to include for returned resources of type betaRecruitmentCriteria",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "enum" : [ "lastModifiedDate", "deviceFamilyOsVersionFilters" ]
+            }
+          },
+          "style" : "form",
+          "explode" : false
+        } ],
+        "responses" : {
+          "400" : {
+            "description" : "Parameter error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not found error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "Single BetaRecruitmentCriterion",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BetaRecruitmentCriterionResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "id",
+        "in" : "path",
+        "description" : "the id of the requested resource",
+        "schema" : {
+          "type" : "string"
+        },
+        "style" : "simple",
+        "required" : true
+      } ]
+    },
+    "/v1/betaGroups/{id}/betaRecruitmentCriterionCompatibleBuildCheck" : {
+      "get" : {
+        "tags" : [ "BetaGroups" ],
+        "operationId" : "betaGroups_betaRecruitmentCriterionCompatibleBuildCheck_getToOneRelated",
+        "parameters" : [ {
+          "name" : "fields[betaRecruitmentCriterionCompatibleBuildChecks]",
+          "in" : "query",
+          "description" : "the fields to include for returned resources of type betaRecruitmentCriterionCompatibleBuildChecks",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "enum" : [ "hasCompatibleBuild" ]
+            }
+          },
+          "style" : "form",
+          "explode" : false
+        } ],
+        "responses" : {
+          "400" : {
+            "description" : "Parameter error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not found error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "Single BetaRecruitmentCriterionCompatibleBuildCheck",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BetaRecruitmentCriterionCompatibleBuildCheckResponse"
                 }
               }
             }
@@ -57693,7 +58930,7 @@
             "type" : "array",
             "items" : {
               "type" : "string",
-              "enum" : [ "name", "createdDate", "isInternalGroup", "hasAccessToAllBuilds", "publicLinkEnabled", "publicLinkId", "publicLinkLimitEnabled", "publicLinkLimit", "publicLink", "feedbackEnabled", "iosBuildsAvailableForAppleSiliconMac", "app", "builds", "betaTesters" ]
+              "enum" : [ "name", "createdDate", "isInternalGroup", "hasAccessToAllBuilds", "publicLinkEnabled", "publicLinkId", "publicLinkLimitEnabled", "publicLinkLimit", "publicLink", "feedbackEnabled", "iosBuildsAvailableForAppleSiliconMac", "iosBuildsAvailableForAppleVision", "app", "builds", "betaTesters", "betaRecruitmentCriteria", "betaRecruitmentCriterionCompatibleBuildCheck" ]
             }
           },
           "style" : "form",
@@ -58098,6 +59335,207 @@
           },
           "style" : "form",
           "explode" : false
+        }, {
+          "name" : "fields[preReleaseVersions]",
+          "in" : "query",
+          "description" : "the fields to include for returned resources of type preReleaseVersions",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "enum" : [ "version", "platform", "builds", "app" ]
+            }
+          },
+          "style" : "form",
+          "explode" : false
+        }, {
+          "name" : "fields[betaTesters]",
+          "in" : "query",
+          "description" : "the fields to include for returned resources of type betaTesters",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "enum" : [ "firstName", "lastName", "email", "inviteType", "state", "apps", "betaGroups", "builds" ]
+            }
+          },
+          "style" : "form",
+          "explode" : false
+        }, {
+          "name" : "fields[betaGroups]",
+          "in" : "query",
+          "description" : "the fields to include for returned resources of type betaGroups",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "enum" : [ "name", "createdDate", "isInternalGroup", "hasAccessToAllBuilds", "publicLinkEnabled", "publicLinkId", "publicLinkLimitEnabled", "publicLinkLimit", "publicLink", "feedbackEnabled", "iosBuildsAvailableForAppleSiliconMac", "iosBuildsAvailableForAppleVision", "app", "builds", "betaTesters", "betaRecruitmentCriteria", "betaRecruitmentCriterionCompatibleBuildCheck" ]
+            }
+          },
+          "style" : "form",
+          "explode" : false
+        }, {
+          "name" : "fields[betaBuildLocalizations]",
+          "in" : "query",
+          "description" : "the fields to include for returned resources of type betaBuildLocalizations",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "enum" : [ "whatsNew", "locale", "build" ]
+            }
+          },
+          "style" : "form",
+          "explode" : false
+        }, {
+          "name" : "fields[appEncryptionDeclarations]",
+          "in" : "query",
+          "description" : "the fields to include for returned resources of type appEncryptionDeclarations",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "enum" : [ "appDescription", "createdDate", "usesEncryption", "exempt", "containsProprietaryCryptography", "containsThirdPartyCryptography", "availableOnFrenchStore", "platform", "uploadedDate", "documentUrl", "documentName", "documentType", "appEncryptionDeclarationState", "codeValue", "app", "builds", "appEncryptionDeclarationDocument" ]
+            }
+          },
+          "style" : "form",
+          "explode" : false
+        }, {
+          "name" : "fields[betaAppReviewSubmissions]",
+          "in" : "query",
+          "description" : "the fields to include for returned resources of type betaAppReviewSubmissions",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "enum" : [ "betaReviewState", "submittedDate", "build" ]
+            }
+          },
+          "style" : "form",
+          "explode" : false
+        }, {
+          "name" : "fields[apps]",
+          "in" : "query",
+          "description" : "the fields to include for returned resources of type apps",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "enum" : [ "name", "bundleId", "sku", "primaryLocale", "isOrEverWasMadeForKids", "subscriptionStatusUrl", "subscriptionStatusUrlVersion", "subscriptionStatusUrlForSandbox", "subscriptionStatusUrlVersionForSandbox", "contentRightsDeclaration", "streamlinedPurchasingEnabled", "appEncryptionDeclarations", "ciProduct", "betaTesters", "betaGroups", "appStoreVersions", "preReleaseVersions", "betaAppLocalizations", "builds", "betaLicenseAgreement", "betaAppReviewDetail", "appInfos", "appClips", "appPricePoints", "endUserLicenseAgreement", "appPriceSchedule", "appAvailabilityV2", "inAppPurchases", "subscriptionGroups", "gameCenterEnabledVersions", "perfPowerMetrics", "appCustomProductPages", "inAppPurchasesV2", "promotedPurchases", "appEvents", "reviewSubmissions", "subscriptionGracePeriod", "customerReviews", "gameCenterDetail", "appStoreVersionExperimentsV2", "alternativeDistributionKey", "analyticsReportRequests", "marketplaceSearchDetail" ]
+            }
+          },
+          "style" : "form",
+          "explode" : false
+        }, {
+          "name" : "fields[buildBetaDetails]",
+          "in" : "query",
+          "description" : "the fields to include for returned resources of type buildBetaDetails",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "enum" : [ "autoNotifyEnabled", "internalBuildState", "externalBuildState", "build" ]
+            }
+          },
+          "style" : "form",
+          "explode" : false
+        }, {
+          "name" : "fields[appStoreVersions]",
+          "in" : "query",
+          "description" : "the fields to include for returned resources of type appStoreVersions",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "enum" : [ "platform", "versionString", "appStoreState", "appVersionState", "copyright", "reviewType", "releaseType", "earliestReleaseDate", "downloadable", "createdDate", "app", "ageRatingDeclaration", "appStoreVersionLocalizations", "build", "appStoreVersionPhasedRelease", "gameCenterAppVersion", "routingAppCoverage", "appStoreReviewDetail", "appStoreVersionSubmission", "appClipDefaultExperience", "appStoreVersionExperiments", "appStoreVersionExperimentsV2", "customerReviews", "alternativeDistributionPackage" ]
+            }
+          },
+          "style" : "form",
+          "explode" : false
+        }, {
+          "name" : "fields[buildIcons]",
+          "in" : "query",
+          "description" : "the fields to include for returned resources of type buildIcons",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "enum" : [ "name", "iconAsset", "iconType" ]
+            }
+          },
+          "style" : "form",
+          "explode" : false
+        }, {
+          "name" : "fields[buildBundles]",
+          "in" : "query",
+          "description" : "the fields to include for returned resources of type buildBundles",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "enum" : [ "bundleId", "bundleType", "sdkBuild", "platformBuild", "fileName", "hasSirikit", "hasOnDemandResources", "hasPrerenderedIcon", "usesLocationServices", "isIosBuildMacAppStoreCompatible", "includesSymbols", "dSYMUrl", "supportedArchitectures", "requiredCapabilities", "deviceProtocols", "locales", "entitlements", "appClipDomainCacheStatus", "appClipDomainDebugStatus", "betaAppClipInvocations", "buildBundleFileSizes" ]
+            }
+          },
+          "style" : "form",
+          "explode" : false
+        }, {
+          "name" : "include",
+          "in" : "query",
+          "description" : "comma-separated list of relationships to include",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "enum" : [ "preReleaseVersion", "individualTesters", "betaGroups", "betaBuildLocalizations", "appEncryptionDeclaration", "betaAppReviewSubmission", "app", "buildBetaDetail", "appStoreVersion", "icons", "buildBundles" ]
+            }
+          },
+          "style" : "form",
+          "explode" : false
+        }, {
+          "name" : "limit[individualTesters]",
+          "in" : "query",
+          "description" : "maximum number of related individualTesters returned (when they are included)",
+          "schema" : {
+            "type" : "integer",
+            "maximum" : 50
+          },
+          "style" : "form"
+        }, {
+          "name" : "limit[betaGroups]",
+          "in" : "query",
+          "description" : "maximum number of related betaGroups returned (when they are included)",
+          "schema" : {
+            "type" : "integer",
+            "maximum" : 50
+          },
+          "style" : "form"
+        }, {
+          "name" : "limit[betaBuildLocalizations]",
+          "in" : "query",
+          "description" : "maximum number of related betaBuildLocalizations returned (when they are included)",
+          "schema" : {
+            "type" : "integer",
+            "maximum" : 50
+          },
+          "style" : "form"
+        }, {
+          "name" : "limit[icons]",
+          "in" : "query",
+          "description" : "maximum number of related icons returned (when they are included)",
+          "schema" : {
+            "type" : "integer",
+            "maximum" : 50
+          },
+          "style" : "form"
+        }, {
+          "name" : "limit[buildBundles]",
+          "in" : "query",
+          "description" : "maximum number of related buildBundles returned (when they are included)",
+          "schema" : {
+            "type" : "integer",
+            "maximum" : 50
+          },
+          "style" : "form"
         } ],
         "responses" : {
           "400" : {
@@ -58141,11 +59579,11 @@
             }
           },
           "200" : {
-            "description" : "Single Build with get",
+            "description" : "Single Build",
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/BuildWithoutIncludesResponse"
+                  "$ref" : "#/components/schemas/BuildResponse"
                 }
               }
             }
@@ -61299,7 +62737,7 @@
             "type" : "array",
             "items" : {
               "type" : "string",
-              "enum" : [ "name", "createdDate", "isInternalGroup", "hasAccessToAllBuilds", "publicLinkEnabled", "publicLinkId", "publicLinkLimitEnabled", "publicLinkLimit", "publicLink", "feedbackEnabled", "iosBuildsAvailableForAppleSiliconMac", "app", "builds", "betaTesters" ]
+              "enum" : [ "name", "createdDate", "isInternalGroup", "hasAccessToAllBuilds", "publicLinkEnabled", "publicLinkId", "publicLinkLimitEnabled", "publicLinkLimit", "publicLink", "feedbackEnabled", "iosBuildsAvailableForAppleSiliconMac", "iosBuildsAvailableForAppleVision", "app", "builds", "betaTesters", "betaRecruitmentCriteria", "betaRecruitmentCriterionCompatibleBuildCheck" ]
             }
           },
           "style" : "form",
@@ -61859,7 +63297,7 @@
             "type" : "array",
             "items" : {
               "type" : "string",
-              "enum" : [ "name", "createdDate", "isInternalGroup", "hasAccessToAllBuilds", "publicLinkEnabled", "publicLinkId", "publicLinkLimitEnabled", "publicLinkLimit", "publicLink", "feedbackEnabled", "iosBuildsAvailableForAppleSiliconMac", "app", "builds", "betaTesters" ]
+              "enum" : [ "name", "createdDate", "isInternalGroup", "hasAccessToAllBuilds", "publicLinkEnabled", "publicLinkId", "publicLinkLimitEnabled", "publicLinkLimit", "publicLink", "feedbackEnabled", "iosBuildsAvailableForAppleSiliconMac", "iosBuildsAvailableForAppleVision", "app", "builds", "betaTesters", "betaRecruitmentCriteria", "betaRecruitmentCriterionCompatibleBuildCheck" ]
             }
           },
           "style" : "form",
@@ -62041,7 +63479,7 @@
             "type" : "array",
             "items" : {
               "type" : "string",
-              "enum" : [ "visibleForAllUsers", "enabled", "state", "inAppPurchaseV2", "subscription", "promotionImages" ]
+              "enum" : [ "visibleForAllUsers", "enabled", "state", "inAppPurchaseV2", "subscription" ]
             }
           },
           "style" : "form",
@@ -72934,7 +74372,7 @@
             "type" : "array",
             "items" : {
               "type" : "string",
-              "enum" : [ "visibleForAllUsers", "enabled", "state", "inAppPurchaseV2", "subscription", "promotionImages" ]
+              "enum" : [ "visibleForAllUsers", "enabled", "state", "inAppPurchaseV2", "subscription" ]
             }
           },
           "style" : "form",
@@ -72966,19 +74404,6 @@
           "style" : "form",
           "explode" : false
         }, {
-          "name" : "fields[promotedPurchaseImages]",
-          "in" : "query",
-          "description" : "the fields to include for returned resources of type promotedPurchaseImages",
-          "schema" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string",
-              "enum" : [ "fileSize", "fileName", "sourceFileChecksum", "assetToken", "imageAsset", "assetType", "uploadOperations", "state", "promotedPurchase" ]
-            }
-          },
-          "style" : "form",
-          "explode" : false
-        }, {
           "name" : "include",
           "in" : "query",
           "description" : "comma-separated list of relationships to include",
@@ -72986,21 +74411,11 @@
             "type" : "array",
             "items" : {
               "type" : "string",
-              "enum" : [ "inAppPurchaseV2", "subscription", "promotionImages" ]
+              "enum" : [ "inAppPurchaseV2", "subscription" ]
             }
           },
           "style" : "form",
           "explode" : false
-        }, {
-          "name" : "limit[promotionImages]",
-          "in" : "query",
-          "description" : "maximum number of related promotionImages returned (when they are included)",
-          "schema" : {
-            "type" : "integer",
-            "maximum" : 50
-          },
-          "style" : "form",
-          "deprecated" : true
         } ],
         "responses" : {
           "400" : {
@@ -73049,6 +74464,159 @@
               "application/json" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/PromotedPurchaseResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "id",
+        "in" : "path",
+        "description" : "the id of the requested resource",
+        "schema" : {
+          "type" : "string"
+        },
+        "style" : "simple",
+        "required" : true
+      } ]
+    },
+    "/v1/merchantIds/{id}/certificates" : {
+      "get" : {
+        "tags" : [ "MerchantIds" ],
+        "operationId" : "merchantIds_certificates_getToManyRelated",
+        "parameters" : [ {
+          "name" : "filter[displayName]",
+          "in" : "query",
+          "description" : "filter by attribute 'displayName'",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "style" : "form",
+          "explode" : false
+        }, {
+          "name" : "filter[certificateType]",
+          "in" : "query",
+          "description" : "filter by attribute 'certificateType'",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "enum" : [ "APPLE_PAY", "APPLE_PAY_MERCHANT_IDENTITY", "APPLE_PAY_PSP_IDENTITY", "APPLE_PAY_RSA", "DEVELOPER_ID_KEXT", "DEVELOPER_ID_KEXT_G2", "DEVELOPER_ID_APPLICATION", "DEVELOPER_ID_APPLICATION_G2", "DEVELOPMENT", "DISTRIBUTION", "IDENTITY_ACCESS", "IOS_DEVELOPMENT", "IOS_DISTRIBUTION", "MAC_APP_DISTRIBUTION", "MAC_INSTALLER_DISTRIBUTION", "MAC_APP_DEVELOPMENT", "PASS_TYPE_ID", "PASS_TYPE_ID_WITH_NFC" ]
+            }
+          },
+          "style" : "form",
+          "explode" : false
+        }, {
+          "name" : "filter[serialNumber]",
+          "in" : "query",
+          "description" : "filter by attribute 'serialNumber'",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "style" : "form",
+          "explode" : false
+        }, {
+          "name" : "filter[id]",
+          "in" : "query",
+          "description" : "filter by id(s)",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "style" : "form",
+          "explode" : false
+        }, {
+          "name" : "sort",
+          "in" : "query",
+          "description" : "comma-separated list of sort expressions; resources will be sorted as specified",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "enum" : [ "displayName", "-displayName", "certificateType", "-certificateType", "serialNumber", "-serialNumber", "id", "-id" ]
+            }
+          },
+          "style" : "form",
+          "explode" : false
+        }, {
+          "name" : "fields[certificates]",
+          "in" : "query",
+          "description" : "the fields to include for returned resources of type certificates",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "enum" : [ "name", "certificateType", "displayName", "serialNumber", "platform", "expirationDate", "certificateContent", "activated" ]
+            }
+          },
+          "style" : "form",
+          "explode" : false
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "description" : "maximum resources per page",
+          "schema" : {
+            "type" : "integer",
+            "maximum" : 200
+          },
+          "style" : "form"
+        } ],
+        "responses" : {
+          "400" : {
+            "description" : "Parameter error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not found error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "List of Certificates",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CertificatesResponse"
                 }
               }
             }
@@ -73333,7 +74901,7 @@
             "type" : "array",
             "items" : {
               "type" : "string",
-              "enum" : [ "name", "certificateType", "displayName", "serialNumber", "platform", "expirationDate", "certificateContent" ]
+              "enum" : [ "name", "certificateType", "displayName", "serialNumber", "platform", "expirationDate", "certificateContent", "activated" ]
             }
           },
           "style" : "form",
@@ -73486,124 +75054,6 @@
               "application/json" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/DevicesWithoutIncludesResponse"
-                }
-              }
-            }
-          }
-        }
-      },
-      "parameters" : [ {
-        "name" : "id",
-        "in" : "path",
-        "description" : "the id of the requested resource",
-        "schema" : {
-          "type" : "string"
-        },
-        "style" : "simple",
-        "required" : true
-      } ]
-    },
-    "/v1/promotedPurchases/{id}/promotionImages" : {
-      "get" : {
-        "tags" : [ "PromotedPurchases" ],
-        "operationId" : "promotedPurchases_promotionImages_getToManyRelated",
-        "deprecated" : true,
-        "parameters" : [ {
-          "name" : "fields[promotedPurchaseImages]",
-          "in" : "query",
-          "description" : "the fields to include for returned resources of type promotedPurchaseImages",
-          "schema" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string",
-              "enum" : [ "fileSize", "fileName", "sourceFileChecksum", "assetToken", "imageAsset", "assetType", "uploadOperations", "state", "promotedPurchase" ]
-            }
-          },
-          "style" : "form",
-          "explode" : false
-        }, {
-          "name" : "fields[promotedPurchases]",
-          "in" : "query",
-          "description" : "the fields to include for returned resources of type promotedPurchases",
-          "schema" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string",
-              "enum" : [ "visibleForAllUsers", "enabled", "state", "inAppPurchaseV2", "subscription", "promotionImages" ]
-            }
-          },
-          "style" : "form",
-          "explode" : false
-        }, {
-          "name" : "limit",
-          "in" : "query",
-          "description" : "maximum resources per page",
-          "schema" : {
-            "type" : "integer",
-            "maximum" : 200
-          },
-          "style" : "form"
-        }, {
-          "name" : "include",
-          "in" : "query",
-          "description" : "comma-separated list of relationships to include",
-          "schema" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string",
-              "enum" : [ "promotedPurchase" ]
-            }
-          },
-          "style" : "form",
-          "explode" : false
-        } ],
-        "responses" : {
-          "400" : {
-            "description" : "Parameter error(s)",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401" : {
-            "description" : "Unauthorized error(s)",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403" : {
-            "description" : "Forbidden error",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "404" : {
-            "description" : "Not found error",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "200" : {
-            "description" : "List of PromotedPurchaseImages",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/PromotedPurchaseImagesResponse"
                 }
               }
             }
@@ -74527,7 +75977,7 @@
             "type" : "array",
             "items" : {
               "type" : "string",
-              "enum" : [ "visibleForAllUsers", "enabled", "state", "inAppPurchaseV2", "subscription", "promotionImages" ]
+              "enum" : [ "visibleForAllUsers", "enabled", "state", "inAppPurchaseV2", "subscription" ]
             }
           },
           "style" : "form",
@@ -76625,7 +78075,7 @@
             "type" : "array",
             "items" : {
               "type" : "string",
-              "enum" : [ "visibleForAllUsers", "enabled", "state", "inAppPurchaseV2", "subscription", "promotionImages" ]
+              "enum" : [ "visibleForAllUsers", "enabled", "state", "inAppPurchaseV2", "subscription" ]
             }
           },
           "style" : "form",
@@ -76657,19 +78107,6 @@
           "style" : "form",
           "explode" : false
         }, {
-          "name" : "fields[promotedPurchaseImages]",
-          "in" : "query",
-          "description" : "the fields to include for returned resources of type promotedPurchaseImages",
-          "schema" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string",
-              "enum" : [ "fileSize", "fileName", "sourceFileChecksum", "assetToken", "imageAsset", "assetType", "uploadOperations", "state", "promotedPurchase" ]
-            }
-          },
-          "style" : "form",
-          "explode" : false
-        }, {
           "name" : "include",
           "in" : "query",
           "description" : "comma-separated list of relationships to include",
@@ -76677,21 +78114,11 @@
             "type" : "array",
             "items" : {
               "type" : "string",
-              "enum" : [ "inAppPurchaseV2", "subscription", "promotionImages" ]
+              "enum" : [ "inAppPurchaseV2", "subscription" ]
             }
           },
           "style" : "form",
           "explode" : false
-        }, {
-          "name" : "limit[promotionImages]",
-          "in" : "query",
-          "description" : "maximum number of related promotionImages returned (when they are included)",
-          "schema" : {
-            "type" : "integer",
-            "maximum" : 50
-          },
-          "style" : "form",
-          "deprecated" : true
         } ],
         "responses" : {
           "400" : {
@@ -78119,6 +79546,84 @@
               "application/json" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/AppsBetaTesterUsagesV1MetricResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "id",
+        "in" : "path",
+        "description" : "the id of the requested resource",
+        "schema" : {
+          "type" : "string"
+        },
+        "style" : "simple",
+        "required" : true
+      } ]
+    },
+    "/v1/betaGroups/{id}/metrics/publicLinkUsages" : {
+      "get" : {
+        "tags" : [ "BetaGroups", "Metrics" ],
+        "operationId" : "betaGroups_publicLinkUsages_getMetrics",
+        "parameters" : [ {
+          "name" : "limit",
+          "in" : "query",
+          "description" : "maximum number of groups to return per page",
+          "schema" : {
+            "type" : "integer",
+            "maximum" : 200
+          },
+          "style" : "form"
+        } ],
+        "responses" : {
+          "400" : {
+            "description" : "Parameter error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized error(s)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not found error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "Metrics data response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BetaPublicLinkUsagesV1MetricResponse"
                 }
               }
             }
@@ -92367,6 +93872,9 @@
               },
               "iosBuildsAvailableForAppleSiliconMac" : {
                 "type" : "boolean"
+              },
+              "iosBuildsAvailableForAppleVision" : {
+                "type" : "boolean"
               }
             }
           },
@@ -92447,6 +93955,35 @@
                     }
                   }
                 }
+              },
+              "betaRecruitmentCriteria" : {
+                "type" : "object",
+                "properties" : {
+                  "links" : {
+                    "$ref" : "#/components/schemas/RelationshipLinks"
+                  },
+                  "data" : {
+                    "type" : "object",
+                    "properties" : {
+                      "type" : {
+                        "type" : "string",
+                        "enum" : [ "betaRecruitmentCriteria" ]
+                      },
+                      "id" : {
+                        "type" : "string"
+                      }
+                    },
+                    "required" : [ "id", "type" ]
+                  }
+                }
+              },
+              "betaRecruitmentCriterionCompatibleBuildCheck" : {
+                "type" : "object",
+                "properties" : {
+                  "links" : {
+                    "$ref" : "#/components/schemas/RelationshipLinks"
+                  }
+                }
               }
             }
           },
@@ -92475,6 +94012,8 @@
                 "$ref" : "#/components/schemas/Build"
               }, {
                 "$ref" : "#/components/schemas/BetaTester"
+              }, {
+                "$ref" : "#/components/schemas/BetaRecruitmentCriterion"
               } ]
             }
           },
@@ -92503,6 +94042,8 @@
                 "$ref" : "#/components/schemas/Build"
               }, {
                 "$ref" : "#/components/schemas/BetaTester"
+              }, {
+                "$ref" : "#/components/schemas/BetaRecruitmentCriterion"
               } ]
             }
           },
@@ -92657,6 +94198,9 @@
                   },
                   "iosBuildsAvailableForAppleSiliconMac" : {
                     "type" : "boolean"
+                  },
+                  "iosBuildsAvailableForAppleVision" : {
+                    "type" : "boolean"
                   }
                 }
               }
@@ -92788,6 +94332,232 @@
           }
         },
         "required" : [ "data" ]
+      },
+      "BetaRecruitmentCriterion" : {
+        "type" : "object",
+        "title" : "BetaRecruitmentCriterion",
+        "properties" : {
+          "type" : {
+            "type" : "string",
+            "enum" : [ "betaRecruitmentCriteria" ]
+          },
+          "id" : {
+            "type" : "string"
+          },
+          "attributes" : {
+            "type" : "object",
+            "properties" : {
+              "lastModifiedDate" : {
+                "type" : "string",
+                "format" : "date-time"
+              },
+              "deviceFamilyOsVersionFilters" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/DeviceFamilyOsVersionFilter"
+                }
+              }
+            }
+          },
+          "links" : {
+            "$ref" : "#/components/schemas/ResourceLinks"
+          }
+        },
+        "required" : [ "id", "type" ]
+      },
+      "BetaRecruitmentCriterionResponse" : {
+        "type" : "object",
+        "title" : "BetaRecruitmentCriterionResponse",
+        "properties" : {
+          "data" : {
+            "$ref" : "#/components/schemas/BetaRecruitmentCriterion"
+          },
+          "links" : {
+            "$ref" : "#/components/schemas/DocumentLinks"
+          }
+        },
+        "required" : [ "data", "links" ]
+      },
+      "BetaRecruitmentCriterionCreateRequest" : {
+        "type" : "object",
+        "title" : "BetaRecruitmentCriterionCreateRequest",
+        "properties" : {
+          "data" : {
+            "type" : "object",
+            "properties" : {
+              "type" : {
+                "type" : "string",
+                "enum" : [ "betaRecruitmentCriteria" ]
+              },
+              "attributes" : {
+                "type" : "object",
+                "properties" : {
+                  "deviceFamilyOsVersionFilters" : {
+                    "type" : "array",
+                    "items" : {
+                      "$ref" : "#/components/schemas/DeviceFamilyOsVersionFilter"
+                    }
+                  }
+                },
+                "required" : [ "deviceFamilyOsVersionFilters" ]
+              },
+              "relationships" : {
+                "type" : "object",
+                "properties" : {
+                  "betaGroup" : {
+                    "type" : "object",
+                    "properties" : {
+                      "data" : {
+                        "type" : "object",
+                        "properties" : {
+                          "type" : {
+                            "type" : "string",
+                            "enum" : [ "betaGroups" ]
+                          },
+                          "id" : {
+                            "type" : "string"
+                          }
+                        },
+                        "required" : [ "id", "type" ]
+                      }
+                    },
+                    "required" : [ "data" ]
+                  }
+                },
+                "required" : [ "betaGroup" ]
+              }
+            },
+            "required" : [ "relationships", "attributes", "type" ]
+          }
+        },
+        "required" : [ "data" ]
+      },
+      "BetaRecruitmentCriterionUpdateRequest" : {
+        "type" : "object",
+        "title" : "BetaRecruitmentCriterionUpdateRequest",
+        "properties" : {
+          "data" : {
+            "type" : "object",
+            "properties" : {
+              "type" : {
+                "type" : "string",
+                "enum" : [ "betaRecruitmentCriteria" ]
+              },
+              "id" : {
+                "type" : "string"
+              },
+              "attributes" : {
+                "type" : "object",
+                "properties" : {
+                  "deviceFamilyOsVersionFilters" : {
+                    "type" : "array",
+                    "items" : {
+                      "$ref" : "#/components/schemas/DeviceFamilyOsVersionFilter"
+                    }
+                  }
+                }
+              }
+            },
+            "required" : [ "id", "type" ]
+          }
+        },
+        "required" : [ "data" ]
+      },
+      "BetaRecruitmentCriterionCompatibleBuildCheck" : {
+        "type" : "object",
+        "title" : "BetaRecruitmentCriterionCompatibleBuildCheck",
+        "properties" : {
+          "type" : {
+            "type" : "string",
+            "enum" : [ "betaRecruitmentCriterionCompatibleBuildChecks" ]
+          },
+          "id" : {
+            "type" : "string"
+          },
+          "attributes" : {
+            "type" : "object",
+            "properties" : {
+              "hasCompatibleBuild" : {
+                "type" : "boolean"
+              }
+            }
+          },
+          "links" : {
+            "$ref" : "#/components/schemas/ResourceLinks"
+          }
+        },
+        "required" : [ "id", "type" ]
+      },
+      "BetaRecruitmentCriterionCompatibleBuildCheckResponse" : {
+        "type" : "object",
+        "title" : "BetaRecruitmentCriterionCompatibleBuildCheckResponse",
+        "properties" : {
+          "data" : {
+            "$ref" : "#/components/schemas/BetaRecruitmentCriterionCompatibleBuildCheck"
+          },
+          "links" : {
+            "$ref" : "#/components/schemas/DocumentLinks"
+          }
+        },
+        "required" : [ "data", "links" ]
+      },
+      "BetaRecruitmentCriterionOption" : {
+        "type" : "object",
+        "title" : "BetaRecruitmentCriterionOption",
+        "properties" : {
+          "type" : {
+            "type" : "string",
+            "enum" : [ "betaRecruitmentCriterionOptions" ]
+          },
+          "id" : {
+            "type" : "string"
+          },
+          "attributes" : {
+            "type" : "object",
+            "properties" : {
+              "deviceFamilyOsVersions" : {
+                "type" : "array",
+                "items" : {
+                  "type" : "object",
+                  "properties" : {
+                    "deviceFamily" : {
+                      "$ref" : "#/components/schemas/DeviceFamily"
+                    },
+                    "osVersions" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "links" : {
+            "$ref" : "#/components/schemas/ResourceLinks"
+          }
+        },
+        "required" : [ "id", "type" ]
+      },
+      "BetaRecruitmentCriterionOptionsResponse" : {
+        "type" : "object",
+        "title" : "BetaRecruitmentCriterionOptionsResponse",
+        "properties" : {
+          "data" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/BetaRecruitmentCriterionOption"
+            }
+          },
+          "links" : {
+            "$ref" : "#/components/schemas/PagedDocumentLinks"
+          },
+          "meta" : {
+            "$ref" : "#/components/schemas/PagingInformation"
+          }
+        },
+        "required" : [ "data", "links" ]
       },
       "BetaTesterInvitation" : {
         "type" : "object",
@@ -94539,6 +96309,9 @@
               },
               "certificateContent" : {
                 "type" : "string"
+              },
+              "activated" : {
+                "type" : "boolean"
               }
             }
           },
@@ -94602,9 +96375,60 @@
                   }
                 },
                 "required" : [ "csrContent", "certificateType" ]
+              },
+              "relationships" : {
+                "type" : "object",
+                "properties" : {
+                  "merchantId" : {
+                    "type" : "object",
+                    "properties" : {
+                      "data" : {
+                        "type" : "object",
+                        "properties" : {
+                          "type" : {
+                            "type" : "string",
+                            "enum" : [ "merchantIds" ]
+                          },
+                          "id" : {
+                            "type" : "string"
+                          }
+                        },
+                        "required" : [ "id", "type" ]
+                      }
+                    }
+                  }
+                }
               }
             },
             "required" : [ "attributes", "type" ]
+          }
+        },
+        "required" : [ "data" ]
+      },
+      "CertificateUpdateRequest" : {
+        "type" : "object",
+        "title" : "CertificateUpdateRequest",
+        "properties" : {
+          "data" : {
+            "type" : "object",
+            "properties" : {
+              "type" : {
+                "type" : "string",
+                "enum" : [ "certificates" ]
+              },
+              "id" : {
+                "type" : "string"
+              },
+              "attributes" : {
+                "type" : "object",
+                "properties" : {
+                  "activated" : {
+                    "type" : "boolean"
+                  }
+                }
+              }
+            },
+            "required" : [ "id", "type" ]
           }
         },
         "required" : [ "data" ]
@@ -104678,6 +106502,738 @@
         },
         "required" : [ "data" ]
       },
+      "MerchantId" : {
+        "type" : "object",
+        "title" : "MerchantId",
+        "properties" : {
+          "type" : {
+            "type" : "string",
+            "enum" : [ "merchantIds" ]
+          },
+          "id" : {
+            "type" : "string"
+          },
+          "attributes" : {
+            "type" : "object",
+            "properties" : {
+              "name" : {
+                "type" : "string"
+              },
+              "identifier" : {
+                "type" : "string"
+              }
+            }
+          },
+          "relationships" : {
+            "type" : "object",
+            "properties" : {
+              "certificates" : {
+                "type" : "object",
+                "properties" : {
+                  "links" : {
+                    "$ref" : "#/components/schemas/RelationshipLinks"
+                  },
+                  "meta" : {
+                    "$ref" : "#/components/schemas/PagingInformation"
+                  },
+                  "data" : {
+                    "type" : "array",
+                    "items" : {
+                      "type" : "object",
+                      "properties" : {
+                        "type" : {
+                          "type" : "string",
+                          "enum" : [ "certificates" ]
+                        },
+                        "id" : {
+                          "type" : "string"
+                        }
+                      },
+                      "required" : [ "id", "type" ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "links" : {
+            "$ref" : "#/components/schemas/ResourceLinks"
+          }
+        },
+        "required" : [ "id", "type" ]
+      },
+      "MerchantIdsResponse" : {
+        "type" : "object",
+        "title" : "MerchantIdsResponse",
+        "properties" : {
+          "data" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/MerchantId"
+            }
+          },
+          "included" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Certificate"
+            }
+          },
+          "links" : {
+            "$ref" : "#/components/schemas/PagedDocumentLinks"
+          },
+          "meta" : {
+            "$ref" : "#/components/schemas/PagingInformation"
+          }
+        },
+        "required" : [ "data", "links" ]
+      },
+      "MerchantIdResponse" : {
+        "type" : "object",
+        "title" : "MerchantIdResponse",
+        "properties" : {
+          "data" : {
+            "$ref" : "#/components/schemas/MerchantId"
+          },
+          "included" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Certificate"
+            }
+          },
+          "links" : {
+            "$ref" : "#/components/schemas/DocumentLinks"
+          }
+        },
+        "required" : [ "data", "links" ]
+      },
+      "MerchantIdCreateRequest" : {
+        "type" : "object",
+        "title" : "MerchantIdCreateRequest",
+        "properties" : {
+          "data" : {
+            "type" : "object",
+            "properties" : {
+              "type" : {
+                "type" : "string",
+                "enum" : [ "merchantIds" ]
+              },
+              "attributes" : {
+                "type" : "object",
+                "properties" : {
+                  "name" : {
+                    "type" : "string"
+                  },
+                  "identifier" : {
+                    "type" : "string"
+                  }
+                },
+                "required" : [ "identifier", "name" ]
+              }
+            },
+            "required" : [ "attributes", "type" ]
+          }
+        },
+        "required" : [ "data" ]
+      },
+      "MerchantIdUpdateRequest" : {
+        "type" : "object",
+        "title" : "MerchantIdUpdateRequest",
+        "properties" : {
+          "data" : {
+            "type" : "object",
+            "properties" : {
+              "type" : {
+                "type" : "string",
+                "enum" : [ "merchantIds" ]
+              },
+              "id" : {
+                "type" : "string"
+              },
+              "attributes" : {
+                "type" : "object",
+                "properties" : {
+                  "name" : {
+                    "type" : "string"
+                  }
+                }
+              }
+            },
+            "required" : [ "id", "type" ]
+          }
+        },
+        "required" : [ "data" ]
+      },
+      "Nomination" : {
+        "type" : "object",
+        "title" : "Nomination",
+        "properties" : {
+          "type" : {
+            "type" : "string",
+            "enum" : [ "nominations" ]
+          },
+          "id" : {
+            "type" : "string"
+          },
+          "attributes" : {
+            "type" : "object",
+            "properties" : {
+              "name" : {
+                "type" : "string"
+              },
+              "type" : {
+                "type" : "string",
+                "enum" : [ "APP_LAUNCH", "APP_ENHANCEMENTS", "NEW_CONTENT" ]
+              },
+              "description" : {
+                "type" : "string"
+              },
+              "createdDate" : {
+                "type" : "string",
+                "format" : "date-time"
+              },
+              "lastModifiedDate" : {
+                "type" : "string",
+                "format" : "date-time"
+              },
+              "submittedDate" : {
+                "type" : "string",
+                "format" : "date-time"
+              },
+              "state" : {
+                "type" : "string",
+                "enum" : [ "DRAFT", "SUBMITTED", "ARCHIVED" ]
+              },
+              "publishStartDate" : {
+                "type" : "string",
+                "format" : "date-time"
+              },
+              "publishEndDate" : {
+                "type" : "string",
+                "format" : "date-time"
+              },
+              "deviceFamilies" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/DeviceFamily"
+                }
+              },
+              "locales" : {
+                "type" : "array",
+                "items" : {
+                  "type" : "string"
+                }
+              },
+              "supplementalMaterialsUris" : {
+                "type" : "array",
+                "items" : {
+                  "type" : "string",
+                  "format" : "uri"
+                }
+              },
+              "hasInAppEvents" : {
+                "type" : "boolean"
+              },
+              "launchInSelectMarketsFirst" : {
+                "type" : "boolean"
+              },
+              "notes" : {
+                "type" : "string"
+              },
+              "preOrderEnabled" : {
+                "type" : "boolean"
+              }
+            }
+          },
+          "relationships" : {
+            "type" : "object",
+            "properties" : {
+              "relatedApps" : {
+                "type" : "object",
+                "properties" : {
+                  "meta" : {
+                    "$ref" : "#/components/schemas/PagingInformation"
+                  },
+                  "data" : {
+                    "type" : "array",
+                    "items" : {
+                      "type" : "object",
+                      "properties" : {
+                        "type" : {
+                          "type" : "string",
+                          "enum" : [ "apps" ]
+                        },
+                        "id" : {
+                          "type" : "string"
+                        }
+                      },
+                      "required" : [ "id", "type" ]
+                    }
+                  }
+                }
+              },
+              "createdByActor" : {
+                "type" : "object",
+                "properties" : {
+                  "data" : {
+                    "type" : "object",
+                    "properties" : {
+                      "type" : {
+                        "type" : "string",
+                        "enum" : [ "actors" ]
+                      },
+                      "id" : {
+                        "type" : "string"
+                      }
+                    },
+                    "required" : [ "id", "type" ]
+                  }
+                }
+              },
+              "lastModifiedByActor" : {
+                "type" : "object",
+                "properties" : {
+                  "data" : {
+                    "type" : "object",
+                    "properties" : {
+                      "type" : {
+                        "type" : "string",
+                        "enum" : [ "actors" ]
+                      },
+                      "id" : {
+                        "type" : "string"
+                      }
+                    },
+                    "required" : [ "id", "type" ]
+                  }
+                }
+              },
+              "submittedByActor" : {
+                "type" : "object",
+                "properties" : {
+                  "data" : {
+                    "type" : "object",
+                    "properties" : {
+                      "type" : {
+                        "type" : "string",
+                        "enum" : [ "actors" ]
+                      },
+                      "id" : {
+                        "type" : "string"
+                      }
+                    },
+                    "required" : [ "id", "type" ]
+                  }
+                }
+              },
+              "inAppEvents" : {
+                "type" : "object",
+                "properties" : {
+                  "meta" : {
+                    "$ref" : "#/components/schemas/PagingInformation"
+                  },
+                  "data" : {
+                    "type" : "array",
+                    "items" : {
+                      "type" : "object",
+                      "properties" : {
+                        "type" : {
+                          "type" : "string",
+                          "enum" : [ "appEvents" ]
+                        },
+                        "id" : {
+                          "type" : "string"
+                        }
+                      },
+                      "required" : [ "id", "type" ]
+                    }
+                  }
+                }
+              },
+              "supportedTerritories" : {
+                "type" : "object",
+                "properties" : {
+                  "meta" : {
+                    "$ref" : "#/components/schemas/PagingInformation"
+                  },
+                  "data" : {
+                    "type" : "array",
+                    "items" : {
+                      "type" : "object",
+                      "properties" : {
+                        "type" : {
+                          "type" : "string",
+                          "enum" : [ "territories" ]
+                        },
+                        "id" : {
+                          "type" : "string"
+                        }
+                      },
+                      "required" : [ "id", "type" ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "links" : {
+            "$ref" : "#/components/schemas/ResourceLinks"
+          }
+        },
+        "required" : [ "id", "type" ]
+      },
+      "NominationsResponse" : {
+        "type" : "object",
+        "title" : "NominationsResponse",
+        "properties" : {
+          "data" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Nomination"
+            }
+          },
+          "included" : {
+            "type" : "array",
+            "items" : {
+              "oneOf" : [ {
+                "$ref" : "#/components/schemas/App"
+              }, {
+                "$ref" : "#/components/schemas/Actor"
+              }, {
+                "$ref" : "#/components/schemas/AppEvent"
+              }, {
+                "$ref" : "#/components/schemas/Territory"
+              } ]
+            }
+          },
+          "links" : {
+            "$ref" : "#/components/schemas/PagedDocumentLinks"
+          },
+          "meta" : {
+            "$ref" : "#/components/schemas/PagingInformation"
+          }
+        },
+        "required" : [ "data", "links" ]
+      },
+      "NominationResponse" : {
+        "type" : "object",
+        "title" : "NominationResponse",
+        "properties" : {
+          "data" : {
+            "$ref" : "#/components/schemas/Nomination"
+          },
+          "included" : {
+            "type" : "array",
+            "items" : {
+              "oneOf" : [ {
+                "$ref" : "#/components/schemas/App"
+              }, {
+                "$ref" : "#/components/schemas/Actor"
+              }, {
+                "$ref" : "#/components/schemas/AppEvent"
+              }, {
+                "$ref" : "#/components/schemas/Territory"
+              } ]
+            }
+          },
+          "links" : {
+            "$ref" : "#/components/schemas/DocumentLinks"
+          }
+        },
+        "required" : [ "data", "links" ]
+      },
+      "NominationCreateRequest" : {
+        "type" : "object",
+        "title" : "NominationCreateRequest",
+        "properties" : {
+          "data" : {
+            "type" : "object",
+            "properties" : {
+              "type" : {
+                "type" : "string",
+                "enum" : [ "nominations" ]
+              },
+              "attributes" : {
+                "type" : "object",
+                "properties" : {
+                  "name" : {
+                    "type" : "string"
+                  },
+                  "type" : {
+                    "type" : "string",
+                    "enum" : [ "APP_LAUNCH", "APP_ENHANCEMENTS", "NEW_CONTENT" ]
+                  },
+                  "description" : {
+                    "type" : "string"
+                  },
+                  "submitted" : {
+                    "type" : "boolean"
+                  },
+                  "publishStartDate" : {
+                    "type" : "string",
+                    "format" : "date-time"
+                  },
+                  "publishEndDate" : {
+                    "type" : "string",
+                    "format" : "date-time"
+                  },
+                  "deviceFamilies" : {
+                    "type" : "array",
+                    "items" : {
+                      "$ref" : "#/components/schemas/DeviceFamily"
+                    }
+                  },
+                  "locales" : {
+                    "type" : "array",
+                    "items" : {
+                      "type" : "string"
+                    }
+                  },
+                  "supplementalMaterialsUris" : {
+                    "type" : "array",
+                    "items" : {
+                      "type" : "string",
+                      "format" : "uri"
+                    }
+                  },
+                  "hasInAppEvents" : {
+                    "type" : "boolean"
+                  },
+                  "launchInSelectMarketsFirst" : {
+                    "type" : "boolean"
+                  },
+                  "notes" : {
+                    "type" : "string"
+                  },
+                  "preOrderEnabled" : {
+                    "type" : "boolean"
+                  }
+                },
+                "required" : [ "submitted", "publishStartDate", "name", "description", "type" ]
+              },
+              "relationships" : {
+                "type" : "object",
+                "properties" : {
+                  "relatedApps" : {
+                    "type" : "object",
+                    "properties" : {
+                      "data" : {
+                        "type" : "array",
+                        "items" : {
+                          "type" : "object",
+                          "properties" : {
+                            "type" : {
+                              "type" : "string",
+                              "enum" : [ "apps" ]
+                            },
+                            "id" : {
+                              "type" : "string"
+                            }
+                          },
+                          "required" : [ "id", "type" ]
+                        }
+                      }
+                    },
+                    "required" : [ "data" ]
+                  },
+                  "inAppEvents" : {
+                    "type" : "object",
+                    "properties" : {
+                      "data" : {
+                        "type" : "array",
+                        "items" : {
+                          "type" : "object",
+                          "properties" : {
+                            "type" : {
+                              "type" : "string",
+                              "enum" : [ "appEvents" ]
+                            },
+                            "id" : {
+                              "type" : "string"
+                            }
+                          },
+                          "required" : [ "id", "type" ]
+                        }
+                      }
+                    }
+                  },
+                  "supportedTerritories" : {
+                    "type" : "object",
+                    "properties" : {
+                      "data" : {
+                        "type" : "array",
+                        "items" : {
+                          "type" : "object",
+                          "properties" : {
+                            "type" : {
+                              "type" : "string",
+                              "enum" : [ "territories" ]
+                            },
+                            "id" : {
+                              "type" : "string"
+                            }
+                          },
+                          "required" : [ "id", "type" ]
+                        }
+                      }
+                    }
+                  }
+                },
+                "required" : [ "relatedApps" ]
+              }
+            },
+            "required" : [ "relationships", "attributes", "type" ]
+          }
+        },
+        "required" : [ "data" ]
+      },
+      "NominationUpdateRequest" : {
+        "type" : "object",
+        "title" : "NominationUpdateRequest",
+        "properties" : {
+          "data" : {
+            "type" : "object",
+            "properties" : {
+              "type" : {
+                "type" : "string",
+                "enum" : [ "nominations" ]
+              },
+              "id" : {
+                "type" : "string"
+              },
+              "attributes" : {
+                "type" : "object",
+                "properties" : {
+                  "name" : {
+                    "type" : "string"
+                  },
+                  "type" : {
+                    "type" : "string",
+                    "enum" : [ "APP_LAUNCH", "APP_ENHANCEMENTS", "NEW_CONTENT" ]
+                  },
+                  "description" : {
+                    "type" : "string"
+                  },
+                  "submitted" : {
+                    "type" : "boolean"
+                  },
+                  "archived" : {
+                    "type" : "boolean"
+                  },
+                  "publishStartDate" : {
+                    "type" : "string",
+                    "format" : "date-time"
+                  },
+                  "publishEndDate" : {
+                    "type" : "string",
+                    "format" : "date-time"
+                  },
+                  "deviceFamilies" : {
+                    "type" : "array",
+                    "items" : {
+                      "$ref" : "#/components/schemas/DeviceFamily"
+                    }
+                  },
+                  "locales" : {
+                    "type" : "array",
+                    "items" : {
+                      "type" : "string"
+                    }
+                  },
+                  "supplementalMaterialsUris" : {
+                    "type" : "array",
+                    "items" : {
+                      "type" : "string",
+                      "format" : "uri"
+                    }
+                  },
+                  "hasInAppEvents" : {
+                    "type" : "boolean"
+                  },
+                  "launchInSelectMarketsFirst" : {
+                    "type" : "boolean"
+                  },
+                  "notes" : {
+                    "type" : "string"
+                  },
+                  "preOrderEnabled" : {
+                    "type" : "boolean"
+                  }
+                }
+              },
+              "relationships" : {
+                "type" : "object",
+                "properties" : {
+                  "relatedApps" : {
+                    "type" : "object",
+                    "properties" : {
+                      "data" : {
+                        "type" : "array",
+                        "items" : {
+                          "type" : "object",
+                          "properties" : {
+                            "type" : {
+                              "type" : "string",
+                              "enum" : [ "apps" ]
+                            },
+                            "id" : {
+                              "type" : "string"
+                            }
+                          },
+                          "required" : [ "id", "type" ]
+                        }
+                      }
+                    }
+                  },
+                  "inAppEvents" : {
+                    "type" : "object",
+                    "properties" : {
+                      "data" : {
+                        "type" : "array",
+                        "items" : {
+                          "type" : "object",
+                          "properties" : {
+                            "type" : {
+                              "type" : "string",
+                              "enum" : [ "appEvents" ]
+                            },
+                            "id" : {
+                              "type" : "string"
+                            }
+                          },
+                          "required" : [ "id", "type" ]
+                        }
+                      }
+                    }
+                  },
+                  "supportedTerritories" : {
+                    "type" : "object",
+                    "properties" : {
+                      "data" : {
+                        "type" : "array",
+                        "items" : {
+                          "type" : "object",
+                          "properties" : {
+                            "type" : {
+                              "type" : "string",
+                              "enum" : [ "territories" ]
+                            },
+                            "id" : {
+                              "type" : "string"
+                            }
+                          },
+                          "required" : [ "id", "type" ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "required" : [ "id", "type" ]
+          }
+        },
+        "required" : [ "data" ]
+      },
       "PerfPowerMetric" : {
         "type" : "object",
         "title" : "PerfPowerMetric",
@@ -105128,213 +107684,6 @@
         },
         "required" : [ "data" ]
       },
-      "PromotedPurchaseImage" : {
-        "type" : "object",
-        "title" : "PromotedPurchaseImage",
-        "properties" : {
-          "type" : {
-            "type" : "string",
-            "enum" : [ "promotedPurchaseImages" ]
-          },
-          "id" : {
-            "type" : "string"
-          },
-          "attributes" : {
-            "type" : "object",
-            "properties" : {
-              "fileSize" : {
-                "type" : "integer"
-              },
-              "fileName" : {
-                "type" : "string"
-              },
-              "sourceFileChecksum" : {
-                "type" : "string"
-              },
-              "assetToken" : {
-                "type" : "string"
-              },
-              "imageAsset" : {
-                "$ref" : "#/components/schemas/ImageAsset"
-              },
-              "assetType" : {
-                "type" : "string"
-              },
-              "uploadOperations" : {
-                "type" : "array",
-                "items" : {
-                  "$ref" : "#/components/schemas/UploadOperation"
-                }
-              },
-              "state" : {
-                "type" : "string",
-                "enum" : [ "AWAITING_UPLOAD", "UPLOAD_COMPLETE", "FAILED", "PREPARE_FOR_SUBMISSION", "WAITING_FOR_REVIEW", "APPROVED", "REJECTED" ]
-              }
-            }
-          },
-          "relationships" : {
-            "type" : "object",
-            "properties" : {
-              "promotedPurchase" : {
-                "type" : "object",
-                "properties" : {
-                  "data" : {
-                    "type" : "object",
-                    "properties" : {
-                      "type" : {
-                        "type" : "string",
-                        "enum" : [ "promotedPurchases" ]
-                      },
-                      "id" : {
-                        "type" : "string"
-                      }
-                    },
-                    "required" : [ "id", "type" ]
-                  }
-                }
-              }
-            }
-          },
-          "links" : {
-            "$ref" : "#/components/schemas/ResourceLinks"
-          }
-        },
-        "required" : [ "id", "type" ],
-        "deprecated" : true
-      },
-      "PromotedPurchaseImagesResponse" : {
-        "type" : "object",
-        "title" : "PromotedPurchaseImagesResponse",
-        "properties" : {
-          "data" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/PromotedPurchaseImage"
-            }
-          },
-          "included" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/PromotedPurchase"
-            }
-          },
-          "links" : {
-            "$ref" : "#/components/schemas/PagedDocumentLinks"
-          },
-          "meta" : {
-            "$ref" : "#/components/schemas/PagingInformation"
-          }
-        },
-        "required" : [ "data", "links" ],
-        "deprecated" : true
-      },
-      "PromotedPurchaseImageResponse" : {
-        "type" : "object",
-        "title" : "PromotedPurchaseImageResponse",
-        "properties" : {
-          "data" : {
-            "$ref" : "#/components/schemas/PromotedPurchaseImage"
-          },
-          "included" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/PromotedPurchase"
-            }
-          },
-          "links" : {
-            "$ref" : "#/components/schemas/DocumentLinks"
-          }
-        },
-        "required" : [ "data", "links" ],
-        "deprecated" : true
-      },
-      "PromotedPurchaseImageCreateRequest" : {
-        "type" : "object",
-        "title" : "PromotedPurchaseImageCreateRequest",
-        "properties" : {
-          "data" : {
-            "type" : "object",
-            "properties" : {
-              "type" : {
-                "type" : "string",
-                "enum" : [ "promotedPurchaseImages" ]
-              },
-              "attributes" : {
-                "type" : "object",
-                "properties" : {
-                  "fileSize" : {
-                    "type" : "integer"
-                  },
-                  "fileName" : {
-                    "type" : "string"
-                  }
-                },
-                "required" : [ "fileName", "fileSize" ]
-              },
-              "relationships" : {
-                "type" : "object",
-                "properties" : {
-                  "promotedPurchase" : {
-                    "type" : "object",
-                    "properties" : {
-                      "data" : {
-                        "type" : "object",
-                        "properties" : {
-                          "type" : {
-                            "type" : "string",
-                            "enum" : [ "promotedPurchases" ]
-                          },
-                          "id" : {
-                            "type" : "string"
-                          }
-                        },
-                        "required" : [ "id", "type" ]
-                      }
-                    },
-                    "required" : [ "data" ]
-                  }
-                },
-                "required" : [ "promotedPurchase" ]
-              }
-            },
-            "required" : [ "relationships", "attributes", "type" ]
-          }
-        },
-        "required" : [ "data" ],
-        "deprecated" : true
-      },
-      "PromotedPurchaseImageUpdateRequest" : {
-        "type" : "object",
-        "title" : "PromotedPurchaseImageUpdateRequest",
-        "properties" : {
-          "data" : {
-            "type" : "object",
-            "properties" : {
-              "type" : {
-                "type" : "string",
-                "enum" : [ "promotedPurchaseImages" ]
-              },
-              "id" : {
-                "type" : "string"
-              },
-              "attributes" : {
-                "type" : "object",
-                "properties" : {
-                  "sourceFileChecksum" : {
-                    "type" : "string"
-                  },
-                  "uploaded" : {
-                    "type" : "boolean"
-                  }
-                }
-              }
-            },
-            "required" : [ "id", "type" ]
-          }
-        },
-        "required" : [ "data" ],
-        "deprecated" : true
-      },
       "PromotedPurchase" : {
         "type" : "object",
         "title" : "PromotedPurchase",
@@ -105399,34 +107748,6 @@
                     "required" : [ "id", "type" ]
                   }
                 }
-              },
-              "promotionImages" : {
-                "type" : "object",
-                "properties" : {
-                  "links" : {
-                    "$ref" : "#/components/schemas/RelationshipLinks"
-                  },
-                  "meta" : {
-                    "$ref" : "#/components/schemas/PagingInformation"
-                  },
-                  "data" : {
-                    "type" : "array",
-                    "items" : {
-                      "type" : "object",
-                      "properties" : {
-                        "type" : {
-                          "type" : "string",
-                          "enum" : [ "promotedPurchaseImages" ]
-                        },
-                        "id" : {
-                          "type" : "string"
-                        }
-                      },
-                      "required" : [ "id", "type" ]
-                    }
-                  }
-                },
-                "deprecated" : true
               }
             }
           },
@@ -105453,8 +107774,6 @@
                 "$ref" : "#/components/schemas/InAppPurchaseV2"
               }, {
                 "$ref" : "#/components/schemas/Subscription"
-              }, {
-                "$ref" : "#/components/schemas/PromotedPurchaseImage"
               } ]
             }
           },
@@ -105481,8 +107800,6 @@
                 "$ref" : "#/components/schemas/InAppPurchaseV2"
               }, {
                 "$ref" : "#/components/schemas/Subscription"
-              }, {
-                "$ref" : "#/components/schemas/PromotedPurchaseImage"
               } ]
             }
           },
@@ -111308,7 +113625,7 @@
                 "type" : "array",
                 "items" : {
                   "type" : "string",
-                  "enum" : [ "AVAILABLE", "AVAILABLE_FOR_PREORDER_ON_DATE", "PROCESSING_TO_NOT_AVAILABLE", "PROCESSING_TO_AVAILABLE", "PROCESSING_TO_PRE_ORDER", "AVAILABLE_FOR_SALE_UNRELEASED_APP", "PREORDER_ON_UNRELEASED_APP", "AVAILABLE_FOR_PREORDER", "MISSING_RATING", "CANNOT_SELL_RESTRICTED_RATING", "BRAZIL_REQUIRED_TAX_ID", "MISSING_GRN", "UNVERIFIED_GRN", "ICP_NUMBER_INVALID", "ICP_NUMBER_MISSING", "CANNOT_SELL_SEVENTEEN_PLUS_APPS", "CANNOT_SELL_SEXUALLY_EXPLICIT", "CANNOT_SELL_NON_IOS_GAMES", "CANNOT_SELL_SEVENTEEN_PLUS_GAMES", "CANNOT_SELL_FREQUENT_INTENSE_GAMBLING", "CANNOT_SELL_CASINO", "CANNOT_SELL_CASINO_WITHOUT_GRAC", "CANNOT_SELL_CASINO_WITHOUT_AGE_VERIFICATION", "CANNOT_SELL_FREQUENT_INTENSE_ALCOHOL_TOBACCO_DRUGS", "CANNOT_SELL_FREQUENT_INTENSE_VIOLENCE", "CANNOT_SELL_FREQUENT_INTENSE_SEXUAL_CONTENT_NUDITY", "CANNOT_SELL_INFREQUENT_MILD_ALCOHOL_TOBACCO_DRUGS", "CANNOT_SELL_INFREQUENT_MILD_SEXUAL_CONTENT_NUDITY", "CANNOT_SELL_ADULT_ONLY", "CANNOT_SELL_FREQUENT_INTENSE", "CANNOT_SELL_FREQUENT_INTENSE_WITHOUT_GRAC", "CANNOT_SELL_GAMBLING_CONTESTS", "CANNOT_SELL_GAMBLING", "CANNOT_SELL_CONTESTS", "CANNOT_SELL" ]
+                  "enum" : [ "AVAILABLE", "AVAILABLE_FOR_PREORDER_ON_DATE", "PROCESSING_TO_NOT_AVAILABLE", "PROCESSING_TO_AVAILABLE", "PROCESSING_TO_PRE_ORDER", "AVAILABLE_FOR_SALE_UNRELEASED_APP", "PREORDER_ON_UNRELEASED_APP", "AVAILABLE_FOR_PREORDER", "MISSING_RATING", "CANNOT_SELL_RESTRICTED_RATING", "BRAZIL_REQUIRED_TAX_ID", "MISSING_GRN", "UNVERIFIED_GRN", "ICP_NUMBER_INVALID", "ICP_NUMBER_MISSING", "TRADER_STATUS_NOT_PROVIDED", "TRADER_STATUS_VERIFICATION_FAILED", "TRADER_STATUS_VERIFICATION_STATUS_MISSING", "CANNOT_SELL_SEVENTEEN_PLUS_APPS", "CANNOT_SELL_SEXUALLY_EXPLICIT", "CANNOT_SELL_NON_IOS_GAMES", "CANNOT_SELL_SEVENTEEN_PLUS_GAMES", "CANNOT_SELL_FREQUENT_INTENSE_GAMBLING", "CANNOT_SELL_CASINO", "CANNOT_SELL_CASINO_WITHOUT_GRAC", "CANNOT_SELL_CASINO_WITHOUT_AGE_VERIFICATION", "CANNOT_SELL_FREQUENT_INTENSE_ALCOHOL_TOBACCO_DRUGS", "CANNOT_SELL_FREQUENT_INTENSE_VIOLENCE", "CANNOT_SELL_FREQUENT_INTENSE_SEXUAL_CONTENT_NUDITY", "CANNOT_SELL_INFREQUENT_MILD_ALCOHOL_TOBACCO_DRUGS", "CANNOT_SELL_INFREQUENT_MILD_SEXUAL_CONTENT_NUDITY", "CANNOT_SELL_ADULT_ONLY", "CANNOT_SELL_FREQUENT_INTENSE", "CANNOT_SELL_FREQUENT_INTENSE_WITHOUT_GRAC", "CANNOT_SELL_GAMBLING_CONTESTS", "CANNOT_SELL_GAMBLING", "CANNOT_SELL_CONTESTS", "CANNOT_SELL" ]
                 }
               }
             }
@@ -114141,6 +116458,65 @@
         },
         "required" : [ "data", "links" ]
       },
+      "BetaPublicLinkUsagesV1MetricResponse" : {
+        "type" : "object",
+        "properties" : {
+          "data" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "properties" : {
+                "dataPoints" : {
+                  "type" : "object",
+                  "properties" : {
+                    "start" : {
+                      "type" : "string",
+                      "format" : "date-time"
+                    },
+                    "end" : {
+                      "type" : "string",
+                      "format" : "date-time"
+                    },
+                    "values" : {
+                      "type" : "object",
+                      "properties" : {
+                        "viewCount" : {
+                          "type" : "integer"
+                        },
+                        "acceptedCount" : {
+                          "type" : "integer"
+                        },
+                        "didNotAcceptCount" : {
+                          "type" : "integer"
+                        },
+                        "didNotMeetCriteriaCount" : {
+                          "type" : "integer"
+                        },
+                        "notRelevantRatio" : {
+                          "type" : "number"
+                        },
+                        "notClearRatio" : {
+                          "type" : "number"
+                        },
+                        "notInterestingRatio" : {
+                          "type" : "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "links" : {
+            "$ref" : "#/components/schemas/PagedDocumentLinks"
+          },
+          "meta" : {
+            "$ref" : "#/components/schemas/PagingInformation"
+          }
+        },
+        "required" : [ "data", "links" ]
+      },
       "BetaTesterUsagesV1MetricResponse" : {
         "type" : "object",
         "properties" : {
@@ -115141,7 +117517,7 @@
       },
       "CertificateType" : {
         "type" : "string",
-        "enum" : [ "IOS_DEVELOPMENT", "IOS_DISTRIBUTION", "MAC_APP_DISTRIBUTION", "MAC_INSTALLER_DISTRIBUTION", "MAC_APP_DEVELOPMENT", "DEVELOPER_ID_KEXT", "DEVELOPER_ID_KEXT_G2", "DEVELOPER_ID_APPLICATION", "DEVELOPER_ID_APPLICATION_G2", "DEVELOPMENT", "DISTRIBUTION", "PASS_TYPE_ID", "PASS_TYPE_ID_WITH_NFC" ]
+        "enum" : [ "APPLE_PAY", "APPLE_PAY_MERCHANT_IDENTITY", "APPLE_PAY_PSP_IDENTITY", "APPLE_PAY_RSA", "DEVELOPER_ID_KEXT", "DEVELOPER_ID_KEXT_G2", "DEVELOPER_ID_APPLICATION", "DEVELOPER_ID_APPLICATION_G2", "DEVELOPMENT", "DISTRIBUTION", "IDENTITY_ACCESS", "IOS_DEVELOPMENT", "IOS_DISTRIBUTION", "MAC_APP_DISTRIBUTION", "MAC_INSTALLER_DISTRIBUTION", "MAC_APP_DEVELOPMENT", "PASS_TYPE_ID", "PASS_TYPE_ID_WITH_NFC" ]
       },
       "CiAction" : {
         "type" : "object",
@@ -115440,6 +117816,24 @@
         "type" : "string",
         "enum" : [ "SUCCESS", "FAILURE", "MIXED", "SKIPPED", "EXPECTED_FAILURE" ]
       },
+      "DeviceFamily" : {
+        "type" : "string",
+        "enum" : [ "IPHONE", "IPAD", "APPLE_TV", "APPLE_WATCH", "MAC", "VISION" ]
+      },
+      "DeviceFamilyOsVersionFilter" : {
+        "type" : "object",
+        "properties" : {
+          "deviceFamily" : {
+            "$ref" : "#/components/schemas/DeviceFamily"
+          },
+          "minimumOsInclusive" : {
+            "type" : "string"
+          },
+          "maximumOsInclusive" : {
+            "type" : "string"
+          }
+        }
+      },
       "DiagnosticInsight" : {
         "type" : "object",
         "properties" : {
@@ -115537,7 +117931,7 @@
       },
       "GameCenterLeaderboardFormatter" : {
         "type" : "string",
-        "enum" : [ "INTEGER", "DECIMAL_POINT_1_PLACE", "DECIMAL_POINT_2_PLACE", "DECIMAL_POINT_3_PLACE", "ELAPSED_TIME_MILLISECOND", "ELAPSED_TIME_CENTISECOND", "ELAPSED_TIME_MINUTE", "ELAPSED_TIME_SECOND", "MONEY_POUND_DECIMAL", "MONEY_POUND", "MONEY_DOLLAR_DECIMAL", "MONEY_DOLLAR", "MONEY_EURO_DECIMAL", "MONEY_EURO", "MONEY_FRANC_DECIMAL", "MONEY_FRANC", "MONEY_KRONER_DECIMAL", "MONEY_KRONER", "MONEY_YEN" ]
+        "enum" : [ "INTEGER", "DECIMAL_POINT_1_PLACE", "DECIMAL_POINT_2_PLACE", "DECIMAL_POINT_3_PLACE", "ELAPSED_TIME_CENTISECOND", "ELAPSED_TIME_MINUTE", "ELAPSED_TIME_SECOND", "MONEY_POUND_DECIMAL", "MONEY_POUND", "MONEY_DOLLAR_DECIMAL", "MONEY_DOLLAR", "MONEY_EURO_DECIMAL", "MONEY_EURO", "MONEY_FRANC_DECIMAL", "MONEY_FRANC", "MONEY_KRONER_DECIMAL", "MONEY_KRONER", "MONEY_YEN" ]
       },
       "GameCenterMatchmakingTeamAssignment" : {
         "type" : "object",
