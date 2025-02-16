@@ -13133,6 +13133,9 @@ export const BetaGroupSchema = {
                 },
                 iosBuildsAvailableForAppleSiliconMac: {
                     type: 'boolean'
+                },
+                iosBuildsAvailableForAppleVision: {
+                    type: 'boolean'
                 }
             }
         },
@@ -13213,6 +13216,35 @@ export const BetaGroupSchema = {
                             }
                         }
                     }
+                },
+                betaRecruitmentCriteria: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            '$ref': '#/components/schemas/RelationshipLinks'
+                        },
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['betaRecruitmentCriteria']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                },
+                betaRecruitmentCriterionCompatibleBuildCheck: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            '$ref': '#/components/schemas/RelationshipLinks'
+                        }
+                    }
                 }
             }
         },
@@ -13245,6 +13277,9 @@ export const BetaGroupsResponseSchema = {
                     },
                     {
                         '$ref': '#/components/schemas/BetaTester'
+                    },
+                    {
+                        '$ref': '#/components/schemas/BetaRecruitmentCriterion'
                     }
                 ]
             }
@@ -13278,6 +13313,9 @@ export const BetaGroupResponseSchema = {
                     },
                     {
                         '$ref': '#/components/schemas/BetaTester'
+                    },
+                    {
+                        '$ref': '#/components/schemas/BetaRecruitmentCriterion'
                     }
                 ]
             }
@@ -13435,6 +13473,9 @@ export const BetaGroupUpdateRequestSchema = {
                         },
                         iosBuildsAvailableForAppleSiliconMac: {
                             type: 'boolean'
+                        },
+                        iosBuildsAvailableForAppleVision: {
+                            type: 'boolean'
                         }
                     }
                 }
@@ -13570,6 +13611,240 @@ export const BetaLicenseAgreementUpdateRequestSchema = {
         }
     },
     required: ['data']
+} as const;
+
+export const BetaRecruitmentCriterionSchema = {
+    type: 'object',
+    title: 'BetaRecruitmentCriterion',
+    properties: {
+        type: {
+            type: 'string',
+            enum: ['betaRecruitmentCriteria']
+        },
+        id: {
+            type: 'string'
+        },
+        attributes: {
+            type: 'object',
+            properties: {
+                lastModifiedDate: {
+                    type: 'string',
+                    format: 'date-time'
+                },
+                deviceFamilyOsVersionFilters: {
+                    type: 'array',
+                    items: {
+                        '$ref': '#/components/schemas/DeviceFamilyOsVersionFilter'
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: ['id', 'type']
+} as const;
+
+export const BetaRecruitmentCriterionResponseSchema = {
+    type: 'object',
+    title: 'BetaRecruitmentCriterionResponse',
+    properties: {
+        data: {
+            '$ref': '#/components/schemas/BetaRecruitmentCriterion'
+        },
+        links: {
+            '$ref': '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const BetaRecruitmentCriterionCreateRequestSchema = {
+    type: 'object',
+    title: 'BetaRecruitmentCriterionCreateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['betaRecruitmentCriteria']
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        deviceFamilyOsVersionFilters: {
+                            type: 'array',
+                            items: {
+                                '$ref': '#/components/schemas/DeviceFamilyOsVersionFilter'
+                            }
+                        }
+                    },
+                    required: ['deviceFamilyOsVersionFilters']
+                },
+                relationships: {
+                    type: 'object',
+                    properties: {
+                        betaGroup: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: ['betaGroups']
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: ['id', 'type']
+                                }
+                            },
+                            required: ['data']
+                        }
+                    },
+                    required: ['betaGroup']
+                }
+            },
+            required: ['relationships', 'attributes', 'type']
+        }
+    },
+    required: ['data']
+} as const;
+
+export const BetaRecruitmentCriterionUpdateRequestSchema = {
+    type: 'object',
+    title: 'BetaRecruitmentCriterionUpdateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['betaRecruitmentCriteria']
+                },
+                id: {
+                    type: 'string'
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        deviceFamilyOsVersionFilters: {
+                            type: 'array',
+                            items: {
+                                '$ref': '#/components/schemas/DeviceFamilyOsVersionFilter'
+                            }
+                        }
+                    }
+                }
+            },
+            required: ['id', 'type']
+        }
+    },
+    required: ['data']
+} as const;
+
+export const BetaRecruitmentCriterionCompatibleBuildCheckSchema = {
+    type: 'object',
+    title: 'BetaRecruitmentCriterionCompatibleBuildCheck',
+    properties: {
+        type: {
+            type: 'string',
+            enum: ['betaRecruitmentCriterionCompatibleBuildChecks']
+        },
+        id: {
+            type: 'string'
+        },
+        attributes: {
+            type: 'object',
+            properties: {
+                hasCompatibleBuild: {
+                    type: 'boolean'
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: ['id', 'type']
+} as const;
+
+export const BetaRecruitmentCriterionCompatibleBuildCheckResponseSchema = {
+    type: 'object',
+    title: 'BetaRecruitmentCriterionCompatibleBuildCheckResponse',
+    properties: {
+        data: {
+            '$ref': '#/components/schemas/BetaRecruitmentCriterionCompatibleBuildCheck'
+        },
+        links: {
+            '$ref': '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const BetaRecruitmentCriterionOptionSchema = {
+    type: 'object',
+    title: 'BetaRecruitmentCriterionOption',
+    properties: {
+        type: {
+            type: 'string',
+            enum: ['betaRecruitmentCriterionOptions']
+        },
+        id: {
+            type: 'string'
+        },
+        attributes: {
+            type: 'object',
+            properties: {
+                deviceFamilyOsVersions: {
+                    type: 'array',
+                    items: {
+                        type: 'object',
+                        properties: {
+                            deviceFamily: {
+                                '$ref': '#/components/schemas/DeviceFamily'
+                            },
+                            osVersions: {
+                                type: 'array',
+                                items: {
+                                    type: 'string'
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: ['id', 'type']
+} as const;
+
+export const BetaRecruitmentCriterionOptionsResponseSchema = {
+    type: 'object',
+    title: 'BetaRecruitmentCriterionOptionsResponse',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/BetaRecruitmentCriterionOption'
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
+        }
+    },
+    required: ['data', 'links']
 } as const;
 
 export const BetaTesterInvitationSchema = {
@@ -15395,6 +15670,9 @@ export const CertificateSchema = {
                 },
                 certificateContent: {
                     type: 'string'
+                },
+                activated: {
+                    type: 'boolean'
                 }
             }
         },
@@ -15461,9 +15739,61 @@ export const CertificateCreateRequestSchema = {
                         }
                     },
                     required: ['csrContent', 'certificateType']
+                },
+                relationships: {
+                    type: 'object',
+                    properties: {
+                        merchantId: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: ['merchantIds']
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: ['id', 'type']
+                                }
+                            }
+                        }
+                    }
                 }
             },
             required: ['attributes', 'type']
+        }
+    },
+    required: ['data']
+} as const;
+
+export const CertificateUpdateRequestSchema = {
+    type: 'object',
+    title: 'CertificateUpdateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['certificates']
+                },
+                id: {
+                    type: 'string'
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        activated: {
+                            type: 'boolean'
+                        }
+                    }
+                }
+            },
+            required: ['id', 'type']
         }
     },
     required: ['data']
@@ -25939,6 +26269,758 @@ export const MarketplaceWebhookUpdateRequestSchema = {
     required: ['data']
 } as const;
 
+export const MerchantIdSchema = {
+    type: 'object',
+    title: 'MerchantId',
+    properties: {
+        type: {
+            type: 'string',
+            enum: ['merchantIds']
+        },
+        id: {
+            type: 'string'
+        },
+        attributes: {
+            type: 'object',
+            properties: {
+                name: {
+                    type: 'string'
+                },
+                identifier: {
+                    type: 'string'
+                }
+            }
+        },
+        relationships: {
+            type: 'object',
+            properties: {
+                certificates: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            '$ref': '#/components/schemas/RelationshipLinks'
+                        },
+                        meta: {
+                            '$ref': '#/components/schemas/PagingInformation'
+                        },
+                        data: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    type: {
+                                        type: 'string',
+                                        enum: ['certificates']
+                                    },
+                                    id: {
+                                        type: 'string'
+                                    }
+                                },
+                                required: ['id', 'type']
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: ['id', 'type']
+} as const;
+
+export const MerchantIdsResponseSchema = {
+    type: 'object',
+    title: 'MerchantIdsResponse',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/MerchantId'
+            }
+        },
+        included: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/Certificate'
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const MerchantIdResponseSchema = {
+    type: 'object',
+    title: 'MerchantIdResponse',
+    properties: {
+        data: {
+            '$ref': '#/components/schemas/MerchantId'
+        },
+        included: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/Certificate'
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const MerchantIdCreateRequestSchema = {
+    type: 'object',
+    title: 'MerchantIdCreateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['merchantIds']
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        name: {
+                            type: 'string'
+                        },
+                        identifier: {
+                            type: 'string'
+                        }
+                    },
+                    required: ['identifier', 'name']
+                }
+            },
+            required: ['attributes', 'type']
+        }
+    },
+    required: ['data']
+} as const;
+
+export const MerchantIdUpdateRequestSchema = {
+    type: 'object',
+    title: 'MerchantIdUpdateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['merchantIds']
+                },
+                id: {
+                    type: 'string'
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        name: {
+                            type: 'string'
+                        }
+                    }
+                }
+            },
+            required: ['id', 'type']
+        }
+    },
+    required: ['data']
+} as const;
+
+export const NominationSchema = {
+    type: 'object',
+    title: 'Nomination',
+    properties: {
+        type: {
+            type: 'string',
+            enum: ['nominations']
+        },
+        id: {
+            type: 'string'
+        },
+        attributes: {
+            type: 'object',
+            properties: {
+                name: {
+                    type: 'string'
+                },
+                type: {
+                    type: 'string',
+                    enum: ['APP_LAUNCH', 'APP_ENHANCEMENTS', 'NEW_CONTENT']
+                },
+                description: {
+                    type: 'string'
+                },
+                createdDate: {
+                    type: 'string',
+                    format: 'date-time'
+                },
+                lastModifiedDate: {
+                    type: 'string',
+                    format: 'date-time'
+                },
+                submittedDate: {
+                    type: 'string',
+                    format: 'date-time'
+                },
+                state: {
+                    type: 'string',
+                    enum: ['DRAFT', 'SUBMITTED', 'ARCHIVED']
+                },
+                publishStartDate: {
+                    type: 'string',
+                    format: 'date-time'
+                },
+                publishEndDate: {
+                    type: 'string',
+                    format: 'date-time'
+                },
+                deviceFamilies: {
+                    type: 'array',
+                    items: {
+                        '$ref': '#/components/schemas/DeviceFamily'
+                    }
+                },
+                locales: {
+                    type: 'array',
+                    items: {
+                        type: 'string'
+                    }
+                },
+                supplementalMaterialsUris: {
+                    type: 'array',
+                    items: {
+                        type: 'string',
+                        format: 'uri'
+                    }
+                },
+                hasInAppEvents: {
+                    type: 'boolean'
+                },
+                launchInSelectMarketsFirst: {
+                    type: 'boolean'
+                },
+                notes: {
+                    type: 'string'
+                },
+                preOrderEnabled: {
+                    type: 'boolean'
+                }
+            }
+        },
+        relationships: {
+            type: 'object',
+            properties: {
+                relatedApps: {
+                    type: 'object',
+                    properties: {
+                        meta: {
+                            '$ref': '#/components/schemas/PagingInformation'
+                        },
+                        data: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    type: {
+                                        type: 'string',
+                                        enum: ['apps']
+                                    },
+                                    id: {
+                                        type: 'string'
+                                    }
+                                },
+                                required: ['id', 'type']
+                            }
+                        }
+                    }
+                },
+                createdByActor: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['actors']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                },
+                lastModifiedByActor: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['actors']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                },
+                submittedByActor: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['actors']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                },
+                inAppEvents: {
+                    type: 'object',
+                    properties: {
+                        meta: {
+                            '$ref': '#/components/schemas/PagingInformation'
+                        },
+                        data: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    type: {
+                                        type: 'string',
+                                        enum: ['appEvents']
+                                    },
+                                    id: {
+                                        type: 'string'
+                                    }
+                                },
+                                required: ['id', 'type']
+                            }
+                        }
+                    }
+                },
+                supportedTerritories: {
+                    type: 'object',
+                    properties: {
+                        meta: {
+                            '$ref': '#/components/schemas/PagingInformation'
+                        },
+                        data: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    type: {
+                                        type: 'string',
+                                        enum: ['territories']
+                                    },
+                                    id: {
+                                        type: 'string'
+                                    }
+                                },
+                                required: ['id', 'type']
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: ['id', 'type']
+} as const;
+
+export const NominationsResponseSchema = {
+    type: 'object',
+    title: 'NominationsResponse',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/Nomination'
+            }
+        },
+        included: {
+            type: 'array',
+            items: {
+                oneOf: [
+                    {
+                        '$ref': '#/components/schemas/App'
+                    },
+                    {
+                        '$ref': '#/components/schemas/Actor'
+                    },
+                    {
+                        '$ref': '#/components/schemas/AppEvent'
+                    },
+                    {
+                        '$ref': '#/components/schemas/Territory'
+                    }
+                ]
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const NominationResponseSchema = {
+    type: 'object',
+    title: 'NominationResponse',
+    properties: {
+        data: {
+            '$ref': '#/components/schemas/Nomination'
+        },
+        included: {
+            type: 'array',
+            items: {
+                oneOf: [
+                    {
+                        '$ref': '#/components/schemas/App'
+                    },
+                    {
+                        '$ref': '#/components/schemas/Actor'
+                    },
+                    {
+                        '$ref': '#/components/schemas/AppEvent'
+                    },
+                    {
+                        '$ref': '#/components/schemas/Territory'
+                    }
+                ]
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const NominationCreateRequestSchema = {
+    type: 'object',
+    title: 'NominationCreateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['nominations']
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        name: {
+                            type: 'string'
+                        },
+                        type: {
+                            type: 'string',
+                            enum: ['APP_LAUNCH', 'APP_ENHANCEMENTS', 'NEW_CONTENT']
+                        },
+                        description: {
+                            type: 'string'
+                        },
+                        submitted: {
+                            type: 'boolean'
+                        },
+                        publishStartDate: {
+                            type: 'string',
+                            format: 'date-time'
+                        },
+                        publishEndDate: {
+                            type: 'string',
+                            format: 'date-time'
+                        },
+                        deviceFamilies: {
+                            type: 'array',
+                            items: {
+                                '$ref': '#/components/schemas/DeviceFamily'
+                            }
+                        },
+                        locales: {
+                            type: 'array',
+                            items: {
+                                type: 'string'
+                            }
+                        },
+                        supplementalMaterialsUris: {
+                            type: 'array',
+                            items: {
+                                type: 'string',
+                                format: 'uri'
+                            }
+                        },
+                        hasInAppEvents: {
+                            type: 'boolean'
+                        },
+                        launchInSelectMarketsFirst: {
+                            type: 'boolean'
+                        },
+                        notes: {
+                            type: 'string'
+                        },
+                        preOrderEnabled: {
+                            type: 'boolean'
+                        }
+                    },
+                    required: ['submitted', 'publishStartDate', 'name', 'description', 'type']
+                },
+                relationships: {
+                    type: 'object',
+                    properties: {
+                        relatedApps: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'array',
+                                    items: {
+                                        type: 'object',
+                                        properties: {
+                                            type: {
+                                                type: 'string',
+                                                enum: ['apps']
+                                            },
+                                            id: {
+                                                type: 'string'
+                                            }
+                                        },
+                                        required: ['id', 'type']
+                                    }
+                                }
+                            },
+                            required: ['data']
+                        },
+                        inAppEvents: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'array',
+                                    items: {
+                                        type: 'object',
+                                        properties: {
+                                            type: {
+                                                type: 'string',
+                                                enum: ['appEvents']
+                                            },
+                                            id: {
+                                                type: 'string'
+                                            }
+                                        },
+                                        required: ['id', 'type']
+                                    }
+                                }
+                            }
+                        },
+                        supportedTerritories: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'array',
+                                    items: {
+                                        type: 'object',
+                                        properties: {
+                                            type: {
+                                                type: 'string',
+                                                enum: ['territories']
+                                            },
+                                            id: {
+                                                type: 'string'
+                                            }
+                                        },
+                                        required: ['id', 'type']
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    required: ['relatedApps']
+                }
+            },
+            required: ['relationships', 'attributes', 'type']
+        }
+    },
+    required: ['data']
+} as const;
+
+export const NominationUpdateRequestSchema = {
+    type: 'object',
+    title: 'NominationUpdateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['nominations']
+                },
+                id: {
+                    type: 'string'
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        name: {
+                            type: 'string'
+                        },
+                        type: {
+                            type: 'string',
+                            enum: ['APP_LAUNCH', 'APP_ENHANCEMENTS', 'NEW_CONTENT']
+                        },
+                        description: {
+                            type: 'string'
+                        },
+                        submitted: {
+                            type: 'boolean'
+                        },
+                        archived: {
+                            type: 'boolean'
+                        },
+                        publishStartDate: {
+                            type: 'string',
+                            format: 'date-time'
+                        },
+                        publishEndDate: {
+                            type: 'string',
+                            format: 'date-time'
+                        },
+                        deviceFamilies: {
+                            type: 'array',
+                            items: {
+                                '$ref': '#/components/schemas/DeviceFamily'
+                            }
+                        },
+                        locales: {
+                            type: 'array',
+                            items: {
+                                type: 'string'
+                            }
+                        },
+                        supplementalMaterialsUris: {
+                            type: 'array',
+                            items: {
+                                type: 'string',
+                                format: 'uri'
+                            }
+                        },
+                        hasInAppEvents: {
+                            type: 'boolean'
+                        },
+                        launchInSelectMarketsFirst: {
+                            type: 'boolean'
+                        },
+                        notes: {
+                            type: 'string'
+                        },
+                        preOrderEnabled: {
+                            type: 'boolean'
+                        }
+                    }
+                },
+                relationships: {
+                    type: 'object',
+                    properties: {
+                        relatedApps: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'array',
+                                    items: {
+                                        type: 'object',
+                                        properties: {
+                                            type: {
+                                                type: 'string',
+                                                enum: ['apps']
+                                            },
+                                            id: {
+                                                type: 'string'
+                                            }
+                                        },
+                                        required: ['id', 'type']
+                                    }
+                                }
+                            }
+                        },
+                        inAppEvents: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'array',
+                                    items: {
+                                        type: 'object',
+                                        properties: {
+                                            type: {
+                                                type: 'string',
+                                                enum: ['appEvents']
+                                            },
+                                            id: {
+                                                type: 'string'
+                                            }
+                                        },
+                                        required: ['id', 'type']
+                                    }
+                                }
+                            }
+                        },
+                        supportedTerritories: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'array',
+                                    items: {
+                                        type: 'object',
+                                        properties: {
+                                            type: {
+                                                type: 'string',
+                                                enum: ['territories']
+                                            },
+                                            id: {
+                                                type: 'string'
+                                            }
+                                        },
+                                        required: ['id', 'type']
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            required: ['id', 'type']
+        }
+    },
+    required: ['data']
+} as const;
+
 export const PerfPowerMetricSchema = {
     type: 'object',
     title: 'PerfPowerMetric',
@@ -26411,218 +27493,6 @@ export const ProfileCreateRequestSchema = {
     required: ['data']
 } as const;
 
-export const PromotedPurchaseImageSchema = {
-    type: 'object',
-    title: 'PromotedPurchaseImage',
-    properties: {
-        type: {
-            type: 'string',
-            enum: ['promotedPurchaseImages']
-        },
-        id: {
-            type: 'string'
-        },
-        attributes: {
-            type: 'object',
-            properties: {
-                fileSize: {
-                    type: 'integer'
-                },
-                fileName: {
-                    type: 'string'
-                },
-                sourceFileChecksum: {
-                    type: 'string'
-                },
-                assetToken: {
-                    type: 'string'
-                },
-                imageAsset: {
-                    '$ref': '#/components/schemas/ImageAsset'
-                },
-                assetType: {
-                    type: 'string'
-                },
-                uploadOperations: {
-                    type: 'array',
-                    items: {
-                        '$ref': '#/components/schemas/UploadOperation'
-                    }
-                },
-                state: {
-                    type: 'string',
-                    enum: ['AWAITING_UPLOAD', 'UPLOAD_COMPLETE', 'FAILED', 'PREPARE_FOR_SUBMISSION', 'WAITING_FOR_REVIEW', 'APPROVED', 'REJECTED']
-                }
-            }
-        },
-        relationships: {
-            type: 'object',
-            properties: {
-                promotedPurchase: {
-                    type: 'object',
-                    properties: {
-                        data: {
-                            type: 'object',
-                            properties: {
-                                type: {
-                                    type: 'string',
-                                    enum: ['promotedPurchases']
-                                },
-                                id: {
-                                    type: 'string'
-                                }
-                            },
-                            required: ['id', 'type']
-                        }
-                    }
-                }
-            }
-        },
-        links: {
-            '$ref': '#/components/schemas/ResourceLinks'
-        }
-    },
-    required: ['id', 'type'],
-    deprecated: true
-} as const;
-
-export const PromotedPurchaseImagesResponseSchema = {
-    type: 'object',
-    title: 'PromotedPurchaseImagesResponse',
-    properties: {
-        data: {
-            type: 'array',
-            items: {
-                '$ref': '#/components/schemas/PromotedPurchaseImage'
-            }
-        },
-        included: {
-            type: 'array',
-            items: {
-                '$ref': '#/components/schemas/PromotedPurchase'
-            }
-        },
-        links: {
-            '$ref': '#/components/schemas/PagedDocumentLinks'
-        },
-        meta: {
-            '$ref': '#/components/schemas/PagingInformation'
-        }
-    },
-    required: ['data', 'links'],
-    deprecated: true
-} as const;
-
-export const PromotedPurchaseImageResponseSchema = {
-    type: 'object',
-    title: 'PromotedPurchaseImageResponse',
-    properties: {
-        data: {
-            '$ref': '#/components/schemas/PromotedPurchaseImage'
-        },
-        included: {
-            type: 'array',
-            items: {
-                '$ref': '#/components/schemas/PromotedPurchase'
-            }
-        },
-        links: {
-            '$ref': '#/components/schemas/DocumentLinks'
-        }
-    },
-    required: ['data', 'links'],
-    deprecated: true
-} as const;
-
-export const PromotedPurchaseImageCreateRequestSchema = {
-    type: 'object',
-    title: 'PromotedPurchaseImageCreateRequest',
-    properties: {
-        data: {
-            type: 'object',
-            properties: {
-                type: {
-                    type: 'string',
-                    enum: ['promotedPurchaseImages']
-                },
-                attributes: {
-                    type: 'object',
-                    properties: {
-                        fileSize: {
-                            type: 'integer'
-                        },
-                        fileName: {
-                            type: 'string'
-                        }
-                    },
-                    required: ['fileName', 'fileSize']
-                },
-                relationships: {
-                    type: 'object',
-                    properties: {
-                        promotedPurchase: {
-                            type: 'object',
-                            properties: {
-                                data: {
-                                    type: 'object',
-                                    properties: {
-                                        type: {
-                                            type: 'string',
-                                            enum: ['promotedPurchases']
-                                        },
-                                        id: {
-                                            type: 'string'
-                                        }
-                                    },
-                                    required: ['id', 'type']
-                                }
-                            },
-                            required: ['data']
-                        }
-                    },
-                    required: ['promotedPurchase']
-                }
-            },
-            required: ['relationships', 'attributes', 'type']
-        }
-    },
-    required: ['data'],
-    deprecated: true
-} as const;
-
-export const PromotedPurchaseImageUpdateRequestSchema = {
-    type: 'object',
-    title: 'PromotedPurchaseImageUpdateRequest',
-    properties: {
-        data: {
-            type: 'object',
-            properties: {
-                type: {
-                    type: 'string',
-                    enum: ['promotedPurchaseImages']
-                },
-                id: {
-                    type: 'string'
-                },
-                attributes: {
-                    type: 'object',
-                    properties: {
-                        sourceFileChecksum: {
-                            type: 'string'
-                        },
-                        uploaded: {
-                            type: 'boolean'
-                        }
-                    }
-                }
-            },
-            required: ['id', 'type']
-        }
-    },
-    required: ['data'],
-    deprecated: true
-} as const;
-
 export const PromotedPurchaseSchema = {
     type: 'object',
     title: 'PromotedPurchase',
@@ -26687,34 +27557,6 @@ export const PromotedPurchaseSchema = {
                             required: ['id', 'type']
                         }
                     }
-                },
-                promotionImages: {
-                    type: 'object',
-                    properties: {
-                        links: {
-                            '$ref': '#/components/schemas/RelationshipLinks'
-                        },
-                        meta: {
-                            '$ref': '#/components/schemas/PagingInformation'
-                        },
-                        data: {
-                            type: 'array',
-                            items: {
-                                type: 'object',
-                                properties: {
-                                    type: {
-                                        type: 'string',
-                                        enum: ['promotedPurchaseImages']
-                                    },
-                                    id: {
-                                        type: 'string'
-                                    }
-                                },
-                                required: ['id', 'type']
-                            }
-                        }
-                    },
-                    deprecated: true
                 }
             }
         },
@@ -26744,9 +27586,6 @@ export const PromotedPurchasesResponseSchema = {
                     },
                     {
                         '$ref': '#/components/schemas/Subscription'
-                    },
-                    {
-                        '$ref': '#/components/schemas/PromotedPurchaseImage'
                     }
                 ]
             }
@@ -26777,9 +27616,6 @@ export const PromotedPurchaseResponseSchema = {
                     },
                     {
                         '$ref': '#/components/schemas/Subscription'
-                    },
-                    {
-                        '$ref': '#/components/schemas/PromotedPurchaseImage'
                     }
                 ]
             }
@@ -32828,7 +33664,7 @@ export const TerritoryAvailabilitySchema = {
                     type: 'array',
                     items: {
                         type: 'string',
-                        enum: ['AVAILABLE', 'AVAILABLE_FOR_PREORDER_ON_DATE', 'PROCESSING_TO_NOT_AVAILABLE', 'PROCESSING_TO_AVAILABLE', 'PROCESSING_TO_PRE_ORDER', 'AVAILABLE_FOR_SALE_UNRELEASED_APP', 'PREORDER_ON_UNRELEASED_APP', 'AVAILABLE_FOR_PREORDER', 'MISSING_RATING', 'CANNOT_SELL_RESTRICTED_RATING', 'BRAZIL_REQUIRED_TAX_ID', 'MISSING_GRN', 'UNVERIFIED_GRN', 'ICP_NUMBER_INVALID', 'ICP_NUMBER_MISSING', 'CANNOT_SELL_SEVENTEEN_PLUS_APPS', 'CANNOT_SELL_SEXUALLY_EXPLICIT', 'CANNOT_SELL_NON_IOS_GAMES', 'CANNOT_SELL_SEVENTEEN_PLUS_GAMES', 'CANNOT_SELL_FREQUENT_INTENSE_GAMBLING', 'CANNOT_SELL_CASINO', 'CANNOT_SELL_CASINO_WITHOUT_GRAC', 'CANNOT_SELL_CASINO_WITHOUT_AGE_VERIFICATION', 'CANNOT_SELL_FREQUENT_INTENSE_ALCOHOL_TOBACCO_DRUGS', 'CANNOT_SELL_FREQUENT_INTENSE_VIOLENCE', 'CANNOT_SELL_FREQUENT_INTENSE_SEXUAL_CONTENT_NUDITY', 'CANNOT_SELL_INFREQUENT_MILD_ALCOHOL_TOBACCO_DRUGS', 'CANNOT_SELL_INFREQUENT_MILD_SEXUAL_CONTENT_NUDITY', 'CANNOT_SELL_ADULT_ONLY', 'CANNOT_SELL_FREQUENT_INTENSE', 'CANNOT_SELL_FREQUENT_INTENSE_WITHOUT_GRAC', 'CANNOT_SELL_GAMBLING_CONTESTS', 'CANNOT_SELL_GAMBLING', 'CANNOT_SELL_CONTESTS', 'CANNOT_SELL']
+                        enum: ['AVAILABLE', 'AVAILABLE_FOR_PREORDER_ON_DATE', 'PROCESSING_TO_NOT_AVAILABLE', 'PROCESSING_TO_AVAILABLE', 'PROCESSING_TO_PRE_ORDER', 'AVAILABLE_FOR_SALE_UNRELEASED_APP', 'PREORDER_ON_UNRELEASED_APP', 'AVAILABLE_FOR_PREORDER', 'MISSING_RATING', 'CANNOT_SELL_RESTRICTED_RATING', 'BRAZIL_REQUIRED_TAX_ID', 'MISSING_GRN', 'UNVERIFIED_GRN', 'ICP_NUMBER_INVALID', 'ICP_NUMBER_MISSING', 'TRADER_STATUS_NOT_PROVIDED', 'TRADER_STATUS_VERIFICATION_FAILED', 'TRADER_STATUS_VERIFICATION_STATUS_MISSING', 'CANNOT_SELL_SEVENTEEN_PLUS_APPS', 'CANNOT_SELL_SEXUALLY_EXPLICIT', 'CANNOT_SELL_NON_IOS_GAMES', 'CANNOT_SELL_SEVENTEEN_PLUS_GAMES', 'CANNOT_SELL_FREQUENT_INTENSE_GAMBLING', 'CANNOT_SELL_CASINO', 'CANNOT_SELL_CASINO_WITHOUT_GRAC', 'CANNOT_SELL_CASINO_WITHOUT_AGE_VERIFICATION', 'CANNOT_SELL_FREQUENT_INTENSE_ALCOHOL_TOBACCO_DRUGS', 'CANNOT_SELL_FREQUENT_INTENSE_VIOLENCE', 'CANNOT_SELL_FREQUENT_INTENSE_SEXUAL_CONTENT_NUDITY', 'CANNOT_SELL_INFREQUENT_MILD_ALCOHOL_TOBACCO_DRUGS', 'CANNOT_SELL_INFREQUENT_MILD_SEXUAL_CONTENT_NUDITY', 'CANNOT_SELL_ADULT_ONLY', 'CANNOT_SELL_FREQUENT_INTENSE', 'CANNOT_SELL_FREQUENT_INTENSE_WITHOUT_GRAC', 'CANNOT_SELL_GAMBLING_CONTESTS', 'CANNOT_SELL_GAMBLING', 'CANNOT_SELL_CONTESTS', 'CANNOT_SELL']
                     }
                 }
             }
@@ -35772,6 +36608,66 @@ export const AppsBetaTesterUsagesV1MetricResponseSchema = {
     required: ['data', 'links']
 } as const;
 
+export const BetaPublicLinkUsagesV1MetricResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    dataPoints: {
+                        type: 'object',
+                        properties: {
+                            start: {
+                                type: 'string',
+                                format: 'date-time'
+                            },
+                            end: {
+                                type: 'string',
+                                format: 'date-time'
+                            },
+                            values: {
+                                type: 'object',
+                                properties: {
+                                    viewCount: {
+                                        type: 'integer'
+                                    },
+                                    acceptedCount: {
+                                        type: 'integer'
+                                    },
+                                    didNotAcceptCount: {
+                                        type: 'integer'
+                                    },
+                                    didNotMeetCriteriaCount: {
+                                        type: 'integer'
+                                    },
+                                    notRelevantRatio: {
+                                        type: 'number'
+                                    },
+                                    notClearRatio: {
+                                        type: 'number'
+                                    },
+                                    notInterestingRatio: {
+                                        type: 'number'
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
 export const BetaTesterUsagesV1MetricResponseSchema = {
     type: 'object',
     properties: {
@@ -36816,7 +37712,7 @@ export const CapabilityTypeSchema = {
 
 export const CertificateTypeSchema = {
     type: 'string',
-    enum: ['IOS_DEVELOPMENT', 'IOS_DISTRIBUTION', 'MAC_APP_DISTRIBUTION', 'MAC_INSTALLER_DISTRIBUTION', 'MAC_APP_DEVELOPMENT', 'DEVELOPER_ID_KEXT', 'DEVELOPER_ID_KEXT_G2', 'DEVELOPER_ID_APPLICATION', 'DEVELOPER_ID_APPLICATION_G2', 'DEVELOPMENT', 'DISTRIBUTION', 'PASS_TYPE_ID', 'PASS_TYPE_ID_WITH_NFC']
+    enum: ['APPLE_PAY', 'APPLE_PAY_MERCHANT_IDENTITY', 'APPLE_PAY_PSP_IDENTITY', 'APPLE_PAY_RSA', 'DEVELOPER_ID_KEXT', 'DEVELOPER_ID_KEXT_G2', 'DEVELOPER_ID_APPLICATION', 'DEVELOPER_ID_APPLICATION_G2', 'DEVELOPMENT', 'DISTRIBUTION', 'IDENTITY_ACCESS', 'IOS_DEVELOPMENT', 'IOS_DISTRIBUTION', 'MAC_APP_DISTRIBUTION', 'MAC_INSTALLER_DISTRIBUTION', 'MAC_APP_DEVELOPMENT', 'PASS_TYPE_ID', 'PASS_TYPE_ID_WITH_NFC']
 } as const;
 
 export const CiActionSchema = {
@@ -37137,6 +38033,26 @@ export const CiTestStatusSchema = {
     enum: ['SUCCESS', 'FAILURE', 'MIXED', 'SKIPPED', 'EXPECTED_FAILURE']
 } as const;
 
+export const DeviceFamilySchema = {
+    type: 'string',
+    enum: ['IPHONE', 'IPAD', 'APPLE_TV', 'APPLE_WATCH', 'MAC', 'VISION']
+} as const;
+
+export const DeviceFamilyOsVersionFilterSchema = {
+    type: 'object',
+    properties: {
+        deviceFamily: {
+            '$ref': '#/components/schemas/DeviceFamily'
+        },
+        minimumOsInclusive: {
+            type: 'string'
+        },
+        maximumOsInclusive: {
+            type: 'string'
+        }
+    }
+} as const;
+
 export const DiagnosticInsightSchema = {
     type: 'object',
     properties: {
@@ -37240,7 +38156,7 @@ export const FileLocationSchema = {
 
 export const GameCenterLeaderboardFormatterSchema = {
     type: 'string',
-    enum: ['INTEGER', 'DECIMAL_POINT_1_PLACE', 'DECIMAL_POINT_2_PLACE', 'DECIMAL_POINT_3_PLACE', 'ELAPSED_TIME_MILLISECOND', 'ELAPSED_TIME_CENTISECOND', 'ELAPSED_TIME_MINUTE', 'ELAPSED_TIME_SECOND', 'MONEY_POUND_DECIMAL', 'MONEY_POUND', 'MONEY_DOLLAR_DECIMAL', 'MONEY_DOLLAR', 'MONEY_EURO_DECIMAL', 'MONEY_EURO', 'MONEY_FRANC_DECIMAL', 'MONEY_FRANC', 'MONEY_KRONER_DECIMAL', 'MONEY_KRONER', 'MONEY_YEN']
+    enum: ['INTEGER', 'DECIMAL_POINT_1_PLACE', 'DECIMAL_POINT_2_PLACE', 'DECIMAL_POINT_3_PLACE', 'ELAPSED_TIME_CENTISECOND', 'ELAPSED_TIME_MINUTE', 'ELAPSED_TIME_SECOND', 'MONEY_POUND_DECIMAL', 'MONEY_POUND', 'MONEY_DOLLAR_DECIMAL', 'MONEY_DOLLAR', 'MONEY_EURO_DECIMAL', 'MONEY_EURO', 'MONEY_FRANC_DECIMAL', 'MONEY_FRANC', 'MONEY_KRONER_DECIMAL', 'MONEY_KRONER', 'MONEY_YEN']
 } as const;
 
 export const GameCenterMatchmakingTeamAssignmentSchema = {
