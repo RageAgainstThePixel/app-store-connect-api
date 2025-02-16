@@ -24,12 +24,12 @@ jobs:
           npm audit fix --save --force
           # download the latest version of the apple app store connect api schema
           # https://developer.apple.com/sample-code/app-store-connect/app-store-connect-openapi-specification.zip
-          curl -L https://developer.apple.com/sample-code/app-store-connect/app-store-connect-openapi-specification.zip -o app-store-connect-openapi-specification.zip
-          unzip app-store-connect-openapi-specification.zip -d /tmp
-          # find fist *.json file in the directory
-          schemaPath=$(find /tmp -type f -name "*.json" | head -n 1)
+          curl -L https://developer.apple.com/sample-code/app-store-connect/app-store-connect-openapi-specification.zip -o $RUNNER_TEMP/app-store-connect-openapi-specification.zip
+          unzip $RUNNER_TEMP/app-store-connect-openapi-specification.zip -d $RUNNER_TEMP
+          # find first *.json file in the directory
+          schemaPath=$(find $RUNNER_TEMP -type f -name "*.json" | head -n 1)
           cp $schemaPath app_store_connect_api_openapi.json
-          rm -rf app-store-connect-openapi-specification.zip
+          rm -rf $RUNNER_TEMP/app-store-connect-openapi-specification.zip
           rm -rf $schemaPath
           if [ $? -ne 0 ]; then
             echo "Error: npm run generate failed"
