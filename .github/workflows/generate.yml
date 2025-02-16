@@ -26,9 +26,11 @@ jobs:
           # https://developer.apple.com/sample-code/app-store-connect/app-store-connect-openapi-specification.zip
           curl -L https://developer.apple.com/sample-code/app-store-connect/app-store-connect-openapi-specification.zip -o app-store-connect-openapi-specification.zip
           unzip app-store-connect-openapi-specification.zip -d /tmp
-          cp /tmp/app_store_connect_api_openapi.json app_store_connect_api_openapi.json
+          # find fist *.json file in the directory
+          schemaPath=$(find /tmp -type f -name "*.json" | head -n 1)
+          cp $schemaPath app_store_connect_api_openapi.json
           rm -rf app-store-connect-openapi-specification.zip
-          rm -rf /tmp/app_store_connect_api_openapi.json
+          rm -rf $schemaPath
           if [ $? -ne 0 ]; then
             echo "Error: npm run generate failed"
             exit 1
