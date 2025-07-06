@@ -22,13 +22,12 @@ jobs:
       - run: |
           npm install
           npm update --save
-          npm audit fix --save
           # download the latest version of the apple app store connect api schema
           # https://developer.apple.com/sample-code/app-store-connect/app-store-connect-openapi-specification.zip
           curl -L https://developer.apple.com/sample-code/app-store-connect/app-store-connect-openapi-specification.zip -o $RUNNER_TEMP/app-store-connect-openapi-specification.zip
           unzip $RUNNER_TEMP/app-store-connect-openapi-specification.zip -d $RUNNER_TEMP/app-store-connect-openapi-specification
           # find first *.json file in the directory
-          schemaPath=$(find $RUNNER_TEMP/app-store-connect-openapi-specification -type f -name "*.json" | head -n 1)
+          schemaPath=$(find $RUNNER_TEMP/app-store-connect-openapi-specification -type f -name "*.json" ! -name '._*' | head -n 1)
           cp $schemaPath app_store_connect_api_openapi.json
           rm -rf $RUNNER_TEMP/app-store-connect-openapi-specification.zip
           rm -rf $RUNNER_TEMP/app-store-connect-openapi-specification
