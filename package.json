@@ -36,14 +36,14 @@
   "devDependencies": {
     "@hey-api/openapi-ts": "^0.53.12",
     "@types/jest": "^29.5.14",
-    "@types/node": "^22.13.4",
+    "@types/node": "^22.16.0",
     "jest": "^29.7.0",
-    "ts-jest": "^29.2.5",
+    "ts-jest": "^29.4.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.7.3"
+    "typescript": "^5.8.3"
   },
   "dependencies": {
     "@hey-api/client-fetch": "^0.4.4",
-    "jose": "^5.9.6"
+    "jose": "^5.10.0"
   }
 }
