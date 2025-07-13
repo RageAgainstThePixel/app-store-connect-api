@@ -9,7 +9,7 @@ async function main() {
         privateKey: process.env.PRIVATE_KEY,
     };
     const client = new AppStoreConnectClient(options);
-    const { data: response, error } = await client.api.appsGetCollection({
+    const { data: response, error } = await client.api.AppsService.appsGetCollection({
         query: {
             limit: 10
         }

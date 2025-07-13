@@ -6,7 +6,7 @@ import fs from 'fs';
  * Options for configuring the App Store Connect client.
  * @see https://developer.apple.com/documentation/appstoreconnectapi/creating_api_keys_for_app_store_connect_api
  */
-interface AppStoreConnectOptions {
+export interface AppStoreConnectOptions {
   /**
    * The issuer ID associated with the private key.
    */
@@ -33,7 +33,7 @@ interface AppStoreConnectOptions {
   expirationTime?: number;
 }
 
-class AppStoreConnectClient {
+export class AppStoreConnectClient {
   private appStoreConnectOptions: AppStoreConnectOptions;
   private bearerToken: string | null = null;
   private bearerTokenGeneratedAt = 0;
@@ -122,5 +122,3 @@ class AppStoreConnectClient {
     return token;
   }
 }
-
-export { AppStoreConnectOptions, AppStoreConnectClient };
