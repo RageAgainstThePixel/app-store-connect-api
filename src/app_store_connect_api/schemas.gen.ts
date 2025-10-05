@@ -109,31 +109,40 @@ export const AccessibilityDeclarationCreateRequestSchema = {
                             '$ref': '#/components/schemas/DeviceFamily'
                         },
                         supportsAudioDescriptions: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         supportsCaptions: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         supportsDarkInterface: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         supportsDifferentiateWithoutColorAlone: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         supportsLargerText: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         supportsReducedMotion: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         supportsSufficientContrast: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         supportsVoiceControl: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         supportsVoiceover: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     },
                     required: ['deviceFamily']
@@ -188,34 +197,44 @@ export const AccessibilityDeclarationUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         publish: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         supportsAudioDescriptions: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         supportsCaptions: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         supportsDarkInterface: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         supportsDifferentiateWithoutColorAlone: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         supportsLargerText: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         supportsReducedMotion: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         supportsSufficientContrast: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         supportsVoiceControl: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         supportsVoiceover: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     }
                 }
@@ -313,20 +332,30 @@ export const AgeRatingDeclarationSchema = {
         attributes: {
             type: 'object',
             properties: {
+                advertising: {
+                    type: 'boolean'
+                },
                 alcoholTobaccoOrDrugUseOrReferences: {
                     type: 'string',
-                    enum: ['NONE']
+                    enum: ['NONE', 'INFREQUENT_OR_MILD', 'FREQUENT_OR_INTENSE', 'INFREQUENT', 'FREQUENT']
                 },
                 contests: {
                     type: 'string',
-                    enum: ['NONE']
+                    enum: ['NONE', 'INFREQUENT_OR_MILD', 'FREQUENT_OR_INTENSE', 'INFREQUENT', 'FREQUENT']
                 },
                 gambling: {
                     type: 'boolean'
                 },
                 gamblingSimulated: {
                     type: 'string',
-                    enum: ['NONE']
+                    enum: ['NONE', 'INFREQUENT_OR_MILD', 'FREQUENT_OR_INTENSE', 'INFREQUENT', 'FREQUENT']
+                },
+                gunsOrOtherWeapons: {
+                    type: 'string',
+                    enum: ['NONE', 'INFREQUENT_OR_MILD', 'FREQUENT_OR_INTENSE', 'INFREQUENT', 'FREQUENT']
+                },
+                healthOrWellnessTopics: {
+                    type: 'boolean'
                 },
                 kidsAgeBand: {
                     '$ref': '#/components/schemas/KidsAgeBand'
@@ -336,46 +365,71 @@ export const AgeRatingDeclarationSchema = {
                 },
                 medicalOrTreatmentInformation: {
                     type: 'string',
-                    enum: ['NONE']
+                    enum: ['NONE', 'INFREQUENT_OR_MILD', 'FREQUENT_OR_INTENSE', 'INFREQUENT', 'FREQUENT']
+                },
+                messagingAndChat: {
+                    type: 'boolean'
+                },
+                parentalControls: {
+                    type: 'boolean'
                 },
                 profanityOrCrudeHumor: {
                     type: 'string',
-                    enum: ['NONE']
+                    enum: ['NONE', 'INFREQUENT_OR_MILD', 'FREQUENT_OR_INTENSE', 'INFREQUENT', 'FREQUENT']
+                },
+                ageAssurance: {
+                    type: 'boolean'
                 },
                 sexualContentGraphicAndNudity: {
                     type: 'string',
-                    enum: ['NONE']
+                    enum: ['NONE', 'INFREQUENT_OR_MILD', 'FREQUENT_OR_INTENSE', 'INFREQUENT', 'FREQUENT']
                 },
                 sexualContentOrNudity: {
                     type: 'string',
-                    enum: ['NONE']
+                    enum: ['NONE', 'INFREQUENT_OR_MILD', 'FREQUENT_OR_INTENSE', 'INFREQUENT', 'FREQUENT']
                 },
                 horrorOrFearThemes: {
                     type: 'string',
-                    enum: ['NONE']
+                    enum: ['NONE', 'INFREQUENT_OR_MILD', 'FREQUENT_OR_INTENSE', 'INFREQUENT', 'FREQUENT']
                 },
                 matureOrSuggestiveThemes: {
                     type: 'string',
-                    enum: ['NONE']
+                    enum: ['NONE', 'INFREQUENT_OR_MILD', 'FREQUENT_OR_INTENSE', 'INFREQUENT', 'FREQUENT']
                 },
                 unrestrictedWebAccess: {
                     type: 'boolean'
                 },
+                userGeneratedContent: {
+                    type: 'boolean'
+                },
                 violenceCartoonOrFantasy: {
                     type: 'string',
-                    enum: ['NONE']
+                    enum: ['NONE', 'INFREQUENT_OR_MILD', 'FREQUENT_OR_INTENSE', 'INFREQUENT', 'FREQUENT']
                 },
                 violenceRealisticProlongedGraphicOrSadistic: {
                     type: 'string',
-                    enum: ['NONE']
+                    enum: ['NONE', 'INFREQUENT_OR_MILD', 'FREQUENT_OR_INTENSE', 'INFREQUENT', 'FREQUENT']
                 },
                 violenceRealistic: {
                     type: 'string',
-                    enum: ['NONE']
+                    enum: ['NONE', 'INFREQUENT_OR_MILD', 'FREQUENT_OR_INTENSE', 'INFREQUENT', 'FREQUENT']
+                },
+                ageRatingOverride: {
+                    type: 'string',
+                    deprecated: true,
+                    enum: ['NONE', 'NINE_PLUS', 'THIRTEEN_PLUS', 'SIXTEEN_PLUS', 'SEVENTEEN_PLUS', 'UNRATED']
+                },
+                ageRatingOverrideV2: {
+                    type: 'string',
+                    enum: ['NONE', 'NINE_PLUS', 'THIRTEEN_PLUS', 'SIXTEEN_PLUS', 'EIGHTEEN_PLUS', 'UNRATED']
                 },
                 koreaAgeRatingOverride: {
                     type: 'string',
                     enum: ['NONE', 'FIFTEEN_PLUS', 'NINETEEN_PLUS']
+                },
+                developerAgeRatingInfoUrl: {
+                    type: 'string',
+                    format: 'uri'
                 }
             }
         },
@@ -417,69 +471,131 @@ export const AgeRatingDeclarationUpdateRequestSchema = {
                 attributes: {
                     type: 'object',
                     properties: {
+                        advertising: {
+                            type: 'boolean',
+                            nullable: true
+                        },
                         alcoholTobaccoOrDrugUseOrReferences: {
                             type: 'string',
-                            enum: ['NONE']
+                            nullable: true,
+                            enum: ['NONE', 'INFREQUENT_OR_MILD', 'FREQUENT_OR_INTENSE', 'INFREQUENT', 'FREQUENT']
                         },
                         contests: {
                             type: 'string',
-                            enum: ['NONE']
+                            nullable: true,
+                            enum: ['NONE', 'INFREQUENT_OR_MILD', 'FREQUENT_OR_INTENSE', 'INFREQUENT', 'FREQUENT']
                         },
                         gambling: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         gamblingSimulated: {
                             type: 'string',
-                            enum: ['NONE']
+                            nullable: true,
+                            enum: ['NONE', 'INFREQUENT_OR_MILD', 'FREQUENT_OR_INTENSE', 'INFREQUENT', 'FREQUENT']
+                        },
+                        gunsOrOtherWeapons: {
+                            type: 'string',
+                            nullable: true,
+                            enum: ['NONE', 'INFREQUENT_OR_MILD', 'FREQUENT_OR_INTENSE', 'INFREQUENT', 'FREQUENT']
+                        },
+                        healthOrWellnessTopics: {
+                            type: 'boolean',
+                            nullable: true
                         },
                         kidsAgeBand: {
+                            nullable: true,
                             '$ref': '#/components/schemas/KidsAgeBand'
                         },
                         lootBox: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         medicalOrTreatmentInformation: {
                             type: 'string',
-                            enum: ['NONE']
+                            nullable: true,
+                            enum: ['NONE', 'INFREQUENT_OR_MILD', 'FREQUENT_OR_INTENSE', 'INFREQUENT', 'FREQUENT']
+                        },
+                        messagingAndChat: {
+                            type: 'boolean',
+                            nullable: true
+                        },
+                        parentalControls: {
+                            type: 'boolean',
+                            nullable: true
                         },
                         profanityOrCrudeHumor: {
                             type: 'string',
-                            enum: ['NONE']
+                            nullable: true,
+                            enum: ['NONE', 'INFREQUENT_OR_MILD', 'FREQUENT_OR_INTENSE', 'INFREQUENT', 'FREQUENT']
+                        },
+                        ageAssurance: {
+                            type: 'boolean',
+                            nullable: true
                         },
                         sexualContentGraphicAndNudity: {
                             type: 'string',
-                            enum: ['NONE']
+                            nullable: true,
+                            enum: ['NONE', 'INFREQUENT_OR_MILD', 'FREQUENT_OR_INTENSE', 'INFREQUENT', 'FREQUENT']
                         },
                         sexualContentOrNudity: {
                             type: 'string',
-                            enum: ['NONE']
+                            nullable: true,
+                            enum: ['NONE', 'INFREQUENT_OR_MILD', 'FREQUENT_OR_INTENSE', 'INFREQUENT', 'FREQUENT']
                         },
                         horrorOrFearThemes: {
                             type: 'string',
-                            enum: ['NONE']
+                            nullable: true,
+                            enum: ['NONE', 'INFREQUENT_OR_MILD', 'FREQUENT_OR_INTENSE', 'INFREQUENT', 'FREQUENT']
                         },
                         matureOrSuggestiveThemes: {
                             type: 'string',
-                            enum: ['NONE']
+                            nullable: true,
+                            enum: ['NONE', 'INFREQUENT_OR_MILD', 'FREQUENT_OR_INTENSE', 'INFREQUENT', 'FREQUENT']
                         },
                         unrestrictedWebAccess: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
+                        },
+                        userGeneratedContent: {
+                            type: 'boolean',
+                            nullable: true
                         },
                         violenceCartoonOrFantasy: {
                             type: 'string',
-                            enum: ['NONE']
+                            nullable: true,
+                            enum: ['NONE', 'INFREQUENT_OR_MILD', 'FREQUENT_OR_INTENSE', 'INFREQUENT', 'FREQUENT']
                         },
                         violenceRealisticProlongedGraphicOrSadistic: {
                             type: 'string',
-                            enum: ['NONE']
+                            nullable: true,
+                            enum: ['NONE', 'INFREQUENT_OR_MILD', 'FREQUENT_OR_INTENSE', 'INFREQUENT', 'FREQUENT']
                         },
                         violenceRealistic: {
                             type: 'string',
-                            enum: ['NONE']
+                            nullable: true,
+                            enum: ['NONE', 'INFREQUENT_OR_MILD', 'FREQUENT_OR_INTENSE', 'INFREQUENT', 'FREQUENT']
+                        },
+                        ageRatingOverride: {
+                            type: 'string',
+                            deprecated: true,
+                            nullable: true,
+                            enum: ['NONE', 'NINE_PLUS', 'THIRTEEN_PLUS', 'SIXTEEN_PLUS', 'SEVENTEEN_PLUS', 'UNRATED']
+                        },
+                        ageRatingOverrideV2: {
+                            type: 'string',
+                            nullable: true,
+                            enum: ['NONE', 'NINE_PLUS', 'THIRTEEN_PLUS', 'SIXTEEN_PLUS', 'EIGHTEEN_PLUS', 'UNRATED']
                         },
                         koreaAgeRatingOverride: {
                             type: 'string',
+                            nullable: true,
                             enum: ['NONE', 'FIFTEEN_PLUS', 'NINETEEN_PLUS']
+                        },
+                        developerAgeRatingInfoUrl: {
+                            type: 'string',
+                            format: 'uri',
+                            nullable: true
                         }
                     }
                 }
@@ -972,15 +1088,23 @@ export const AlternativeDistributionPackageVersionsResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/AlternativeDistributionPackageVariant'
+                        '$ref': '#/components/schemas/AlternativeDistributionPackageDelta'
                     },
                     {
-                        '$ref': '#/components/schemas/AlternativeDistributionPackageDelta'
+                        '$ref': '#/components/schemas/AlternativeDistributionPackageVariant'
                     },
                     {
                         '$ref': '#/components/schemas/AlternativeDistributionPackage'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        alternativeDistributionPackages: '#/components/schemas/AlternativeDistributionPackage',
+                        alternativeDistributionPackageDeltas: '#/components/schemas/AlternativeDistributionPackageDelta',
+                        alternativeDistributionPackageVariants: '#/components/schemas/AlternativeDistributionPackageVariant'
+                    }
+                }
             }
         },
         links: {
@@ -1005,15 +1129,23 @@ export const AlternativeDistributionPackageVersionResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/AlternativeDistributionPackageVariant'
+                        '$ref': '#/components/schemas/AlternativeDistributionPackageDelta'
                     },
                     {
-                        '$ref': '#/components/schemas/AlternativeDistributionPackageDelta'
+                        '$ref': '#/components/schemas/AlternativeDistributionPackageVariant'
                     },
                     {
                         '$ref': '#/components/schemas/AlternativeDistributionPackage'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        alternativeDistributionPackages: '#/components/schemas/AlternativeDistributionPackage',
+                        alternativeDistributionPackageDeltas: '#/components/schemas/AlternativeDistributionPackageDelta',
+                        alternativeDistributionPackageVariants: '#/components/schemas/AlternativeDistributionPackageVariant'
+                    }
+                }
             }
         },
         links: {
@@ -1911,10 +2043,12 @@ export const AppClipAdvancedExperienceImageUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         sourceFileChecksum: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         uploaded: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     }
                 }
@@ -1971,13 +2105,16 @@ export const AppClipAdvancedExperienceLocalizationInlineCreateSchema = {
             type: 'object',
             properties: {
                 language: {
+                    nullable: true,
                     '$ref': '#/components/schemas/AppClipAdvancedExperienceLanguage'
                 },
                 title: {
-                    type: 'string'
+                    type: 'string',
+                    nullable: true
                 },
                 subtitle: {
-                    type: 'string'
+                    type: 'string',
+                    nullable: true
                 }
             }
         }
@@ -2219,15 +2356,23 @@ export const AppClipAdvancedExperiencesResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/AppClip'
-                    },
-                    {
                         '$ref': '#/components/schemas/AppClipAdvancedExperienceImage'
                     },
                     {
                         '$ref': '#/components/schemas/AppClipAdvancedExperienceLocalization'
+                    },
+                    {
+                        '$ref': '#/components/schemas/AppClip'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        appClipAdvancedExperienceLocalizations: '#/components/schemas/AppClipAdvancedExperienceLocalization',
+                        appClipAdvancedExperienceImages: '#/components/schemas/AppClipAdvancedExperienceImage',
+                        appClips: '#/components/schemas/AppClip'
+                    }
+                }
             }
         },
         links: {
@@ -2252,15 +2397,23 @@ export const AppClipAdvancedExperienceResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/AppClip'
-                    },
-                    {
                         '$ref': '#/components/schemas/AppClipAdvancedExperienceImage'
                     },
                     {
                         '$ref': '#/components/schemas/AppClipAdvancedExperienceLocalization'
+                    },
+                    {
+                        '$ref': '#/components/schemas/AppClip'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        appClipAdvancedExperienceLocalizations: '#/components/schemas/AppClipAdvancedExperienceLocalization',
+                        appClipAdvancedExperienceImages: '#/components/schemas/AppClipAdvancedExperienceImage',
+                        appClips: '#/components/schemas/AppClip'
+                    }
+                }
             }
         },
         links: {
@@ -2289,6 +2442,7 @@ export const AppClipAdvancedExperienceCreateRequestSchema = {
                             format: 'uri'
                         },
                         action: {
+                            nullable: true,
                             '$ref': '#/components/schemas/AppClipAction'
                         },
                         isPoweredBy: {
@@ -2395,10 +2549,12 @@ export const AppClipAdvancedExperienceCreateRequestSchema = {
                                         type: 'string'
                                     }
                                 }
-                            }
+                            },
+                            nullable: true
                         },
                         businessCategory: {
                             type: 'string',
+                            nullable: true,
                             enum: ['AUTOMOTIVE', 'BEAUTY', 'BIKES', 'BOOKS', 'CASINO', 'EDUCATION', 'EDUCATION_JAPAN', 'ENTERTAINMENT', 'EV_CHARGER', 'FINANCIAL_USD', 'FINANCIAL_CNY', 'FINANCIAL_GBP', 'FINANCIAL_JPY', 'FINANCIAL_EUR', 'FITNESS', 'FOOD_AND_DRINK', 'GAS', 'GROCERY', 'HEALTH_AND_MEDICAL', 'HOTEL_AND_TRAVEL', 'MUSIC', 'PARKING', 'PET_SERVICES', 'PROFESSIONAL_SERVICES', 'SHOPPING', 'TICKETING', 'TRANSIT']
                         },
                         defaultLanguage: {
@@ -2504,10 +2660,12 @@ export const AppClipAdvancedExperienceUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         action: {
+                            nullable: true,
                             '$ref': '#/components/schemas/AppClipAction'
                         },
                         isPoweredBy: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         place: {
                             type: 'object',
@@ -2610,17 +2768,21 @@ export const AppClipAdvancedExperienceUpdateRequestSchema = {
                                         type: 'string'
                                     }
                                 }
-                            }
+                            },
+                            nullable: true
                         },
                         businessCategory: {
                             type: 'string',
+                            nullable: true,
                             enum: ['AUTOMOTIVE', 'BEAUTY', 'BIKES', 'BOOKS', 'CASINO', 'EDUCATION', 'EDUCATION_JAPAN', 'ENTERTAINMENT', 'EV_CHARGER', 'FINANCIAL_USD', 'FINANCIAL_CNY', 'FINANCIAL_GBP', 'FINANCIAL_JPY', 'FINANCIAL_EUR', 'FITNESS', 'FOOD_AND_DRINK', 'GAS', 'GROCERY', 'HEALTH_AND_MEDICAL', 'HOTEL_AND_TRAVEL', 'MUSIC', 'PARKING', 'PET_SERVICES', 'PROFESSIONAL_SERVICES', 'SHOPPING', 'TICKETING', 'TRANSIT']
                         },
                         defaultLanguage: {
+                            nullable: true,
                             '$ref': '#/components/schemas/AppClipAdvancedExperienceLanguage'
                         },
                         removed: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     }
                 },
@@ -2791,7 +2953,8 @@ export const AppClipAppStoreReviewDetailCreateRequestSchema = {
                             items: {
                                 type: 'string',
                                 format: 'uri'
-                            }
+                            },
+                            nullable: true
                         }
                     }
                 },
@@ -2849,7 +3012,8 @@ export const AppClipAppStoreReviewDetailUpdateRequestSchema = {
                             items: {
                                 type: 'string',
                                 format: 'uri'
-                            }
+                            },
+                            nullable: true
                         }
                     }
                 }
@@ -2953,7 +3117,14 @@ export const AppClipDefaultExperienceLocalizationsResponseSchema = {
                     {
                         '$ref': '#/components/schemas/AppClipHeaderImage'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        appClipDefaultExperiences: '#/components/schemas/AppClipDefaultExperience',
+                        appClipHeaderImages: '#/components/schemas/AppClipHeaderImage'
+                    }
+                }
             }
         },
         links: {
@@ -2983,7 +3154,14 @@ export const AppClipDefaultExperienceLocalizationResponseSchema = {
                     {
                         '$ref': '#/components/schemas/AppClipHeaderImage'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        appClipDefaultExperiences: '#/components/schemas/AppClipDefaultExperience',
+                        appClipHeaderImages: '#/components/schemas/AppClipHeaderImage'
+                    }
+                }
             }
         },
         links: {
@@ -3011,7 +3189,8 @@ export const AppClipDefaultExperienceLocalizationCreateRequestSchema = {
                             type: 'string'
                         },
                         subtitle: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         }
                     },
                     required: ['locale']
@@ -3066,7 +3245,8 @@ export const AppClipDefaultExperienceLocalizationUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         subtitle: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         }
                     }
                 }
@@ -3210,18 +3390,27 @@ export const AppClipDefaultExperiencesResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/AppClip'
-                    },
-                    {
-                        '$ref': '#/components/schemas/AppStoreVersion'
+                        '$ref': '#/components/schemas/AppClipAppStoreReviewDetail'
                     },
                     {
                         '$ref': '#/components/schemas/AppClipDefaultExperienceLocalization'
                     },
                     {
-                        '$ref': '#/components/schemas/AppClipAppStoreReviewDetail'
+                        '$ref': '#/components/schemas/AppClip'
+                    },
+                    {
+                        '$ref': '#/components/schemas/AppStoreVersion'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        appClipDefaultExperienceLocalizations: '#/components/schemas/AppClipDefaultExperienceLocalization',
+                        appStoreVersions: '#/components/schemas/AppStoreVersion',
+                        appClipAppStoreReviewDetails: '#/components/schemas/AppClipAppStoreReviewDetail',
+                        appClips: '#/components/schemas/AppClip'
+                    }
+                }
             }
         },
         links: {
@@ -3246,18 +3435,27 @@ export const AppClipDefaultExperienceResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/AppClip'
-                    },
-                    {
-                        '$ref': '#/components/schemas/AppStoreVersion'
+                        '$ref': '#/components/schemas/AppClipAppStoreReviewDetail'
                     },
                     {
                         '$ref': '#/components/schemas/AppClipDefaultExperienceLocalization'
                     },
                     {
-                        '$ref': '#/components/schemas/AppClipAppStoreReviewDetail'
+                        '$ref': '#/components/schemas/AppClip'
+                    },
+                    {
+                        '$ref': '#/components/schemas/AppStoreVersion'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        appClipDefaultExperienceLocalizations: '#/components/schemas/AppClipDefaultExperienceLocalization',
+                        appStoreVersions: '#/components/schemas/AppStoreVersion',
+                        appClipAppStoreReviewDetails: '#/components/schemas/AppClipAppStoreReviewDetail',
+                        appClips: '#/components/schemas/AppClip'
+                    }
+                }
             }
         },
         links: {
@@ -3282,6 +3480,7 @@ export const AppClipDefaultExperienceCreateRequestSchema = {
                     type: 'object',
                     properties: {
                         action: {
+                            nullable: true,
                             '$ref': '#/components/schemas/AppClipAction'
                         }
                     }
@@ -3372,6 +3571,7 @@ export const AppClipDefaultExperienceUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         action: {
+                            nullable: true,
                             '$ref': '#/components/schemas/AppClipAction'
                         }
                     }
@@ -3629,10 +3829,12 @@ export const AppClipHeaderImageUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         sourceFileChecksum: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         uploaded: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     }
                 }
@@ -3742,12 +3944,19 @@ export const AppClipsResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/App'
+                        '$ref': '#/components/schemas/AppClipDefaultExperience'
                     },
                     {
-                        '$ref': '#/components/schemas/AppClipDefaultExperience'
+                        '$ref': '#/components/schemas/App'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        appClipDefaultExperiences: '#/components/schemas/AppClipDefaultExperience',
+                        apps: '#/components/schemas/App'
+                    }
+                }
             }
         },
         links: {
@@ -3772,12 +3981,19 @@ export const AppClipResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/App'
+                        '$ref': '#/components/schemas/AppClipDefaultExperience'
                     },
                     {
-                        '$ref': '#/components/schemas/AppClipDefaultExperience'
+                        '$ref': '#/components/schemas/App'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        appClipDefaultExperiences: '#/components/schemas/AppClipDefaultExperience',
+                        apps: '#/components/schemas/App'
+                    }
+                }
             }
         },
         links: {
@@ -3883,6 +4099,33 @@ export const AppCustomProductPageLocalizationSchema = {
                             }
                         }
                     }
+                },
+                searchKeywords: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            '$ref': '#/components/schemas/RelationshipLinks'
+                        },
+                        meta: {
+                            '$ref': '#/components/schemas/PagingInformation'
+                        },
+                        data: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    type: {
+                                        type: 'string',
+                                        enum: ['appKeywords']
+                                    },
+                                    id: {
+                                        type: 'string'
+                                    }
+                                },
+                                required: ['id', 'type']
+                            }
+                        }
+                    }
                 }
             }
         },
@@ -3910,7 +4153,8 @@ export const AppCustomProductPageLocalizationInlineCreateSchema = {
                     type: 'string'
                 },
                 promotionalText: {
-                    type: 'string'
+                    type: 'string',
+                    nullable: true
                 }
             },
             required: ['locale']
@@ -3960,12 +4204,24 @@ export const AppCustomProductPageLocalizationsResponseSchema = {
                         '$ref': '#/components/schemas/AppCustomProductPageVersion'
                     },
                     {
-                        '$ref': '#/components/schemas/AppScreenshotSet'
+                        '$ref': '#/components/schemas/AppKeyword'
                     },
                     {
                         '$ref': '#/components/schemas/AppPreviewSet'
+                    },
+                    {
+                        '$ref': '#/components/schemas/AppScreenshotSet'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        appScreenshotSets: '#/components/schemas/AppScreenshotSet',
+                        appKeywords: '#/components/schemas/AppKeyword',
+                        appCustomProductPageVersions: '#/components/schemas/AppCustomProductPageVersion',
+                        appPreviewSets: '#/components/schemas/AppPreviewSet'
+                    }
+                }
             }
         },
         links: {
@@ -3993,12 +4249,24 @@ export const AppCustomProductPageLocalizationResponseSchema = {
                         '$ref': '#/components/schemas/AppCustomProductPageVersion'
                     },
                     {
-                        '$ref': '#/components/schemas/AppScreenshotSet'
+                        '$ref': '#/components/schemas/AppKeyword'
                     },
                     {
                         '$ref': '#/components/schemas/AppPreviewSet'
+                    },
+                    {
+                        '$ref': '#/components/schemas/AppScreenshotSet'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        appScreenshotSets: '#/components/schemas/AppScreenshotSet',
+                        appKeywords: '#/components/schemas/AppKeyword',
+                        appCustomProductPageVersions: '#/components/schemas/AppCustomProductPageVersion',
+                        appPreviewSets: '#/components/schemas/AppPreviewSet'
+                    }
+                }
             }
         },
         links: {
@@ -4026,7 +4294,8 @@ export const AppCustomProductPageLocalizationCreateRequestSchema = {
                             type: 'string'
                         },
                         promotionalText: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         }
                     },
                     required: ['locale']
@@ -4081,7 +4350,8 @@ export const AppCustomProductPageLocalizationUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         promotionalText: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         }
                     }
                 }
@@ -4191,7 +4461,8 @@ export const AppCustomProductPageVersionInlineCreateSchema = {
             properties: {
                 deepLink: {
                     type: 'string',
-                    format: 'uri'
+                    format: 'uri',
+                    nullable: true
                 }
             }
         },
@@ -4258,12 +4529,19 @@ export const AppCustomProductPageVersionsResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/AppCustomProductPage'
+                        '$ref': '#/components/schemas/AppCustomProductPageLocalization'
                     },
                     {
-                        '$ref': '#/components/schemas/AppCustomProductPageLocalization'
+                        '$ref': '#/components/schemas/AppCustomProductPage'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        appCustomProductPageLocalizations: '#/components/schemas/AppCustomProductPageLocalization',
+                        appCustomProductPages: '#/components/schemas/AppCustomProductPage'
+                    }
+                }
             }
         },
         links: {
@@ -4288,12 +4566,19 @@ export const AppCustomProductPageVersionResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/AppCustomProductPage'
+                        '$ref': '#/components/schemas/AppCustomProductPageLocalization'
                     },
                     {
-                        '$ref': '#/components/schemas/AppCustomProductPageLocalization'
+                        '$ref': '#/components/schemas/AppCustomProductPage'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        appCustomProductPageLocalizations: '#/components/schemas/AppCustomProductPageLocalization',
+                        appCustomProductPages: '#/components/schemas/AppCustomProductPage'
+                    }
+                }
             }
         },
         links: {
@@ -4319,7 +4604,8 @@ export const AppCustomProductPageVersionCreateRequestSchema = {
                     properties: {
                         deepLink: {
                             type: 'string',
-                            format: 'uri'
+                            format: 'uri',
+                            nullable: true
                         }
                     }
                 },
@@ -4395,7 +4681,8 @@ export const AppCustomProductPageVersionUpdateRequestSchema = {
                     properties: {
                         deepLink: {
                             type: 'string',
-                            format: 'uri'
+                            format: 'uri',
+                            nullable: true
                         }
                     }
                 }
@@ -4504,12 +4791,23 @@ export const AppCustomProductPagesResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/App'
+                        '$ref': '#/components/schemas/AppCustomProductPageLocalization'
                     },
                     {
                         '$ref': '#/components/schemas/AppCustomProductPageVersion'
+                    },
+                    {
+                        '$ref': '#/components/schemas/App'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        appCustomProductPageLocalizations: '#/components/schemas/AppCustomProductPageLocalization',
+                        appCustomProductPageVersions: '#/components/schemas/AppCustomProductPageVersion',
+                        apps: '#/components/schemas/App'
+                    }
+                }
             }
         },
         links: {
@@ -4534,12 +4832,23 @@ export const AppCustomProductPageResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/App'
+                        '$ref': '#/components/schemas/AppCustomProductPageLocalization'
                     },
                     {
                         '$ref': '#/components/schemas/AppCustomProductPageVersion'
+                    },
+                    {
+                        '$ref': '#/components/schemas/App'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        appCustomProductPageLocalizations: '#/components/schemas/AppCustomProductPageLocalization',
+                        appCustomProductPageVersions: '#/components/schemas/AppCustomProductPageVersion',
+                        apps: '#/components/schemas/App'
+                    }
+                }
             }
         },
         links: {
@@ -4689,10 +4998,12 @@ export const AppCustomProductPageUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         name: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         visible: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     }
                 }
@@ -4838,10 +5149,12 @@ export const AppEncryptionDeclarationDocumentUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         sourceFileChecksum: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         uploaded: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     }
                 }
@@ -5016,15 +5329,23 @@ export const AppEncryptionDeclarationsResponseSchema = {
             items: {
                 oneOf: [
                     {
+                        '$ref': '#/components/schemas/AppEncryptionDeclarationDocument'
+                    },
+                    {
                         '$ref': '#/components/schemas/App'
                     },
                     {
                         '$ref': '#/components/schemas/Build'
-                    },
-                    {
-                        '$ref': '#/components/schemas/AppEncryptionDeclarationDocument'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        builds: '#/components/schemas/Build',
+                        appEncryptionDeclarationDocuments: '#/components/schemas/AppEncryptionDeclarationDocument',
+                        apps: '#/components/schemas/App'
+                    }
+                }
             }
         },
         links: {
@@ -5049,15 +5370,23 @@ export const AppEncryptionDeclarationResponseSchema = {
             items: {
                 oneOf: [
                     {
+                        '$ref': '#/components/schemas/AppEncryptionDeclarationDocument'
+                    },
+                    {
                         '$ref': '#/components/schemas/App'
                     },
                     {
                         '$ref': '#/components/schemas/Build'
-                    },
-                    {
-                        '$ref': '#/components/schemas/AppEncryptionDeclarationDocument'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        builds: '#/components/schemas/Build',
+                        appEncryptionDeclarationDocuments: '#/components/schemas/AppEncryptionDeclarationDocument',
+                        apps: '#/components/schemas/App'
+                    }
+                }
             }
         },
         links: {
@@ -5256,15 +5585,23 @@ export const AppEventLocalizationsResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/AppEvent'
-                    },
-                    {
                         '$ref': '#/components/schemas/AppEventScreenshot'
                     },
                     {
                         '$ref': '#/components/schemas/AppEventVideoClip'
+                    },
+                    {
+                        '$ref': '#/components/schemas/AppEvent'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        appEvents: '#/components/schemas/AppEvent',
+                        appEventVideoClips: '#/components/schemas/AppEventVideoClip',
+                        appEventScreenshots: '#/components/schemas/AppEventScreenshot'
+                    }
+                }
             }
         },
         links: {
@@ -5289,15 +5626,23 @@ export const AppEventLocalizationResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/AppEvent'
-                    },
-                    {
                         '$ref': '#/components/schemas/AppEventScreenshot'
                     },
                     {
                         '$ref': '#/components/schemas/AppEventVideoClip'
+                    },
+                    {
+                        '$ref': '#/components/schemas/AppEvent'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        appEvents: '#/components/schemas/AppEvent',
+                        appEventVideoClips: '#/components/schemas/AppEventVideoClip',
+                        appEventScreenshots: '#/components/schemas/AppEventScreenshot'
+                    }
+                }
             }
         },
         links: {
@@ -5325,13 +5670,16 @@ export const AppEventLocalizationCreateRequestSchema = {
                             type: 'string'
                         },
                         name: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         shortDescription: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         longDescription: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         }
                     },
                     required: ['locale']
@@ -5386,13 +5734,16 @@ export const AppEventLocalizationUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         name: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         shortDescription: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         longDescription: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         }
                     }
                 }
@@ -5595,7 +5946,8 @@ export const AppEventScreenshotUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         uploaded: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     }
                 }
@@ -5754,7 +6106,8 @@ export const AppEventVideoClipCreateRequestSchema = {
                             type: 'string'
                         },
                         previewFrameTimeCode: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         appEventAssetType: {
                             '$ref': '#/components/schemas/AppEventAssetType'
@@ -5812,10 +6165,12 @@ export const AppEventVideoClipUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         previewFrameTimeCode: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         uploaded: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     }
                 }
@@ -6027,24 +6382,30 @@ export const AppEventCreateRequestSchema = {
                         },
                         badge: {
                             type: 'string',
+                            nullable: true,
                             enum: ['LIVE_EVENT', 'PREMIERE', 'CHALLENGE', 'COMPETITION', 'NEW_SEASON', 'MAJOR_UPDATE', 'SPECIAL_EVENT']
                         },
                         deepLink: {
                             type: 'string',
-                            format: 'uri'
+                            format: 'uri',
+                            nullable: true
                         },
                         purchaseRequirement: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         primaryLocale: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         priority: {
                             type: 'string',
+                            nullable: true,
                             enum: ['HIGH', 'NORMAL']
                         },
                         purpose: {
                             type: 'string',
+                            nullable: true,
                             enum: ['APPROPRIATE_FOR_ALL_USERS', 'ATTRACT_NEW_USERS', 'KEEP_ACTIVE_USERS_INFORMED', 'BRING_BACK_LAPSED_USERS']
                         },
                         territorySchedules: {
@@ -6071,7 +6432,8 @@ export const AppEventCreateRequestSchema = {
                                         format: 'date-time'
                                     }
                                 }
-                            }
+                            },
+                            nullable: true
                         }
                     },
                     required: ['referenceName']
@@ -6126,28 +6488,35 @@ export const AppEventUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         referenceName: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         badge: {
                             type: 'string',
+                            nullable: true,
                             enum: ['LIVE_EVENT', 'PREMIERE', 'CHALLENGE', 'COMPETITION', 'NEW_SEASON', 'MAJOR_UPDATE', 'SPECIAL_EVENT']
                         },
                         deepLink: {
                             type: 'string',
-                            format: 'uri'
+                            format: 'uri',
+                            nullable: true
                         },
                         purchaseRequirement: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         primaryLocale: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         priority: {
                             type: 'string',
+                            nullable: true,
                             enum: ['HIGH', 'NORMAL']
                         },
                         purpose: {
                             type: 'string',
+                            nullable: true,
                             enum: ['APPROPRIATE_FOR_ALL_USERS', 'ATTRACT_NEW_USERS', 'KEEP_ACTIVE_USERS_INFORMED', 'BRING_BACK_LAPSED_USERS']
                         },
                         territorySchedules: {
@@ -6174,7 +6543,8 @@ export const AppEventUpdateRequestSchema = {
                                         format: 'date-time'
                                     }
                                 }
-                            }
+                            },
+                            nullable: true
                         }
                     }
                 }
@@ -6316,16 +6686,20 @@ export const AppInfoLocalizationCreateRequestSchema = {
                             type: 'string'
                         },
                         subtitle: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         privacyPolicyUrl: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         privacyChoicesUrl: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         privacyPolicyText: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         }
                     },
                     required: ['name', 'locale']
@@ -6380,19 +6754,24 @@ export const AppInfoLocalizationUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         name: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         subtitle: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         privacyPolicyUrl: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         privacyChoicesUrl: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         privacyPolicyText: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         }
                     }
                 }
@@ -6652,6 +7031,14 @@ export const AppInfoSchema = {
                             required: ['id', 'type']
                         }
                     }
+                },
+                territoryAgeRatings: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            '$ref': '#/components/schemas/RelationshipLinks'
+                        }
+                    }
                 }
             }
         },
@@ -6677,18 +7064,27 @@ export const AppInfosResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/App'
+                        '$ref': '#/components/schemas/AgeRatingDeclaration'
                     },
                     {
-                        '$ref': '#/components/schemas/AgeRatingDeclaration'
+                        '$ref': '#/components/schemas/AppCategory'
                     },
                     {
                         '$ref': '#/components/schemas/AppInfoLocalization'
                     },
                     {
-                        '$ref': '#/components/schemas/AppCategory'
+                        '$ref': '#/components/schemas/App'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        ageRatingDeclarations: '#/components/schemas/AgeRatingDeclaration',
+                        appCategories: '#/components/schemas/AppCategory',
+                        appInfoLocalizations: '#/components/schemas/AppInfoLocalization',
+                        apps: '#/components/schemas/App'
+                    }
+                }
             }
         },
         links: {
@@ -6713,18 +7109,27 @@ export const AppInfoResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/App'
+                        '$ref': '#/components/schemas/AgeRatingDeclaration'
                     },
                     {
-                        '$ref': '#/components/schemas/AgeRatingDeclaration'
+                        '$ref': '#/components/schemas/AppCategory'
                     },
                     {
                         '$ref': '#/components/schemas/AppInfoLocalization'
                     },
                     {
-                        '$ref': '#/components/schemas/AppCategory'
+                        '$ref': '#/components/schemas/App'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        ageRatingDeclarations: '#/components/schemas/AgeRatingDeclaration',
+                        appCategories: '#/components/schemas/AppCategory',
+                        appInfoLocalizations: '#/components/schemas/AppInfoLocalization',
+                        apps: '#/components/schemas/App'
+                    }
+                }
             }
         },
         links: {
@@ -6868,6 +7273,44 @@ export const AppInfoUpdateRequestSchema = {
     required: ['data']
 } as const;
 
+export const AppKeywordSchema = {
+    type: 'object',
+    title: 'AppKeyword',
+    properties: {
+        type: {
+            type: 'string',
+            enum: ['appKeywords']
+        },
+        id: {
+            type: 'string'
+        },
+        links: {
+            '$ref': '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: ['id', 'type']
+} as const;
+
+export const AppKeywordsResponseSchema = {
+    type: 'object',
+    title: 'AppKeywordsResponse',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/AppKeyword'
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
 export const AppPreviewSetSchema = {
     type: 'object',
     title: 'AppPreviewSet',
@@ -6995,18 +7438,27 @@ export const AppPreviewSetsResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/AppStoreVersionLocalization'
+                        '$ref': '#/components/schemas/AppCustomProductPageLocalization'
                     },
                     {
-                        '$ref': '#/components/schemas/AppCustomProductPageLocalization'
+                        '$ref': '#/components/schemas/AppPreview'
                     },
                     {
                         '$ref': '#/components/schemas/AppStoreVersionExperimentTreatmentLocalization'
                     },
                     {
-                        '$ref': '#/components/schemas/AppPreview'
+                        '$ref': '#/components/schemas/AppStoreVersionLocalization'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        appStoreVersionLocalizations: '#/components/schemas/AppStoreVersionLocalization',
+                        appCustomProductPageLocalizations: '#/components/schemas/AppCustomProductPageLocalization',
+                        appStoreVersionExperimentTreatmentLocalizations: '#/components/schemas/AppStoreVersionExperimentTreatmentLocalization',
+                        appPreviews: '#/components/schemas/AppPreview'
+                    }
+                }
             }
         },
         links: {
@@ -7031,18 +7483,27 @@ export const AppPreviewSetResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/AppStoreVersionLocalization'
+                        '$ref': '#/components/schemas/AppCustomProductPageLocalization'
                     },
                     {
-                        '$ref': '#/components/schemas/AppCustomProductPageLocalization'
+                        '$ref': '#/components/schemas/AppPreview'
                     },
                     {
                         '$ref': '#/components/schemas/AppStoreVersionExperimentTreatmentLocalization'
                     },
                     {
-                        '$ref': '#/components/schemas/AppPreview'
+                        '$ref': '#/components/schemas/AppStoreVersionLocalization'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        appStoreVersionLocalizations: '#/components/schemas/AppStoreVersionLocalization',
+                        appCustomProductPageLocalizations: '#/components/schemas/AppCustomProductPageLocalization',
+                        appStoreVersionExperimentTreatmentLocalizations: '#/components/schemas/AppStoreVersionExperimentTreatmentLocalization',
+                        appPreviews: '#/components/schemas/AppPreview'
+                    }
+                }
             }
         },
         links: {
@@ -7289,10 +7750,12 @@ export const AppPreviewCreateRequestSchema = {
                             type: 'string'
                         },
                         previewFrameTimeCode: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         mimeType: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         }
                     },
                     required: ['fileName', 'fileSize']
@@ -7347,13 +7810,16 @@ export const AppPreviewUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         sourceFileChecksum: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         previewFrameTimeCode: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         uploaded: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     }
                 }
@@ -7462,7 +7928,14 @@ export const AppPricePointsV3ResponseSchema = {
                     {
                         '$ref': '#/components/schemas/Territory'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        territories: '#/components/schemas/Territory',
+                        apps: '#/components/schemas/App'
+                    }
+                }
             }
         },
         links: {
@@ -7492,7 +7965,14 @@ export const AppPricePointV3ResponseSchema = {
                     {
                         '$ref': '#/components/schemas/Territory'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        territories: '#/components/schemas/Territory',
+                        apps: '#/components/schemas/App'
+                    }
+                }
             }
         },
         links: {
@@ -7630,15 +8110,23 @@ export const AppPriceScheduleResponseSchema = {
             items: {
                 oneOf: [
                     {
+                        '$ref': '#/components/schemas/AppPriceV2'
+                    },
+                    {
                         '$ref': '#/components/schemas/App'
                     },
                     {
                         '$ref': '#/components/schemas/Territory'
-                    },
-                    {
-                        '$ref': '#/components/schemas/AppPriceV2'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        territories: '#/components/schemas/Territory',
+                        appPrices: '#/components/schemas/AppPriceV2',
+                        apps: '#/components/schemas/App'
+                    }
+                }
             }
         },
         links: {
@@ -7854,7 +8342,14 @@ export const AppPricesV2ResponseSchema = {
                     {
                         '$ref': '#/components/schemas/Territory'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        territories: '#/components/schemas/Territory',
+                        appPricePoints: '#/components/schemas/AppPricePointV3'
+                    }
+                }
             }
         },
         links: {
@@ -7994,18 +8489,27 @@ export const AppScreenshotSetsResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/AppStoreVersionLocalization'
+                        '$ref': '#/components/schemas/AppCustomProductPageLocalization'
                     },
                     {
-                        '$ref': '#/components/schemas/AppCustomProductPageLocalization'
+                        '$ref': '#/components/schemas/AppScreenshot'
                     },
                     {
                         '$ref': '#/components/schemas/AppStoreVersionExperimentTreatmentLocalization'
                     },
                     {
-                        '$ref': '#/components/schemas/AppScreenshot'
+                        '$ref': '#/components/schemas/AppStoreVersionLocalization'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        appStoreVersionLocalizations: '#/components/schemas/AppStoreVersionLocalization',
+                        appCustomProductPageLocalizations: '#/components/schemas/AppCustomProductPageLocalization',
+                        appStoreVersionExperimentTreatmentLocalizations: '#/components/schemas/AppStoreVersionExperimentTreatmentLocalization',
+                        appScreenshots: '#/components/schemas/AppScreenshot'
+                    }
+                }
             }
         },
         links: {
@@ -8030,18 +8534,27 @@ export const AppScreenshotSetResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/AppStoreVersionLocalization'
+                        '$ref': '#/components/schemas/AppCustomProductPageLocalization'
                     },
                     {
-                        '$ref': '#/components/schemas/AppCustomProductPageLocalization'
+                        '$ref': '#/components/schemas/AppScreenshot'
                     },
                     {
                         '$ref': '#/components/schemas/AppStoreVersionExperimentTreatmentLocalization'
                     },
                     {
-                        '$ref': '#/components/schemas/AppScreenshot'
+                        '$ref': '#/components/schemas/AppStoreVersionLocalization'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        appStoreVersionLocalizations: '#/components/schemas/AppStoreVersionLocalization',
+                        appCustomProductPageLocalizations: '#/components/schemas/AppCustomProductPageLocalization',
+                        appStoreVersionExperimentTreatmentLocalizations: '#/components/schemas/AppStoreVersionExperimentTreatmentLocalization',
+                        appScreenshots: '#/components/schemas/AppScreenshot'
+                    }
+                }
             }
         },
         links: {
@@ -8329,10 +8842,12 @@ export const AppScreenshotUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         sourceFileChecksum: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         uploaded: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     }
                 }
@@ -8526,10 +9041,12 @@ export const AppStoreReviewAttachmentUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         sourceFileChecksum: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         uploaded: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     }
                 }
@@ -8649,12 +9166,19 @@ export const AppStoreReviewDetailResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/AppStoreVersion'
+                        '$ref': '#/components/schemas/AppStoreReviewAttachment'
                     },
                     {
-                        '$ref': '#/components/schemas/AppStoreReviewAttachment'
+                        '$ref': '#/components/schemas/AppStoreVersion'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        appStoreVersions: '#/components/schemas/AppStoreVersion',
+                        appStoreReviewAttachments: '#/components/schemas/AppStoreReviewAttachment'
+                    }
+                }
             }
         },
         links: {
@@ -8679,28 +9203,36 @@ export const AppStoreReviewDetailCreateRequestSchema = {
                     type: 'object',
                     properties: {
                         contactFirstName: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         contactLastName: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         contactPhone: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         contactEmail: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         demoAccountName: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         demoAccountPassword: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         demoAccountRequired: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         notes: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         }
                     }
                 },
@@ -8754,28 +9286,36 @@ export const AppStoreReviewDetailUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         contactFirstName: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         contactLastName: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         contactPhone: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         contactEmail: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         demoAccountName: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         demoAccountPassword: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         demoAccountRequired: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         notes: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         }
                     }
                 }
@@ -8904,15 +9444,23 @@ export const AppStoreVersionExperimentTreatmentLocalizationsResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/AppStoreVersionExperimentTreatment'
+                        '$ref': '#/components/schemas/AppPreviewSet'
                     },
                     {
                         '$ref': '#/components/schemas/AppScreenshotSet'
                     },
                     {
-                        '$ref': '#/components/schemas/AppPreviewSet'
+                        '$ref': '#/components/schemas/AppStoreVersionExperimentTreatment'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        appScreenshotSets: '#/components/schemas/AppScreenshotSet',
+                        appStoreVersionExperimentTreatments: '#/components/schemas/AppStoreVersionExperimentTreatment',
+                        appPreviewSets: '#/components/schemas/AppPreviewSet'
+                    }
+                }
             }
         },
         links: {
@@ -8937,15 +9485,23 @@ export const AppStoreVersionExperimentTreatmentLocalizationResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/AppStoreVersionExperimentTreatment'
+                        '$ref': '#/components/schemas/AppPreviewSet'
                     },
                     {
                         '$ref': '#/components/schemas/AppScreenshotSet'
                     },
                     {
-                        '$ref': '#/components/schemas/AppPreviewSet'
+                        '$ref': '#/components/schemas/AppStoreVersionExperimentTreatment'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        appScreenshotSets: '#/components/schemas/AppScreenshotSet',
+                        appStoreVersionExperimentTreatments: '#/components/schemas/AppStoreVersionExperimentTreatment',
+                        appPreviewSets: '#/components/schemas/AppPreviewSet'
+                    }
+                }
             }
         },
         links: {
@@ -9126,15 +9682,19 @@ export const AppStoreVersionExperimentTreatmentsResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/AppStoreVersionExperiment'
-                    },
-                    {
-                        '$ref': '#/components/schemas/AppStoreVersionExperimentV2'
-                    },
-                    {
                         '$ref': '#/components/schemas/AppStoreVersionExperimentTreatmentLocalization'
+                    },
+                    {
+                        '$ref': '#/components/schemas/AppStoreVersionExperiment'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        appStoreVersionExperimentTreatmentLocalizations: '#/components/schemas/AppStoreVersionExperimentTreatmentLocalization',
+                        appStoreVersionExperiments: '#/components/schemas/AppStoreVersionExperiment'
+                    }
+                }
             }
         },
         links: {
@@ -9159,15 +9719,19 @@ export const AppStoreVersionExperimentTreatmentResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/AppStoreVersionExperiment'
-                    },
-                    {
-                        '$ref': '#/components/schemas/AppStoreVersionExperimentV2'
-                    },
-                    {
                         '$ref': '#/components/schemas/AppStoreVersionExperimentTreatmentLocalization'
+                    },
+                    {
+                        '$ref': '#/components/schemas/AppStoreVersionExperiment'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        appStoreVersionExperimentTreatmentLocalizations: '#/components/schemas/AppStoreVersionExperimentTreatmentLocalization',
+                        appStoreVersionExperiments: '#/components/schemas/AppStoreVersionExperiment'
+                    }
+                }
             }
         },
         links: {
@@ -9195,7 +9759,8 @@ export const AppStoreVersionExperimentTreatmentCreateRequestSchema = {
                             type: 'string'
                         },
                         appIconName: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         }
                     },
                     required: ['name']
@@ -9266,10 +9831,12 @@ export const AppStoreVersionExperimentTreatmentUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         name: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         appIconName: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         }
                     }
                 }
@@ -9434,15 +10001,23 @@ export const AppStoreVersionExperimentsV2ResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/App'
+                        '$ref': '#/components/schemas/AppStoreVersionExperimentTreatment'
                     },
                     {
                         '$ref': '#/components/schemas/AppStoreVersion'
                     },
                     {
-                        '$ref': '#/components/schemas/AppStoreVersionExperimentTreatment'
+                        '$ref': '#/components/schemas/App'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        appStoreVersionExperimentTreatments: '#/components/schemas/AppStoreVersionExperimentTreatment',
+                        appStoreVersions: '#/components/schemas/AppStoreVersion',
+                        apps: '#/components/schemas/App'
+                    }
+                }
             }
         },
         links: {
@@ -9467,15 +10042,23 @@ export const AppStoreVersionExperimentV2ResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/App'
+                        '$ref': '#/components/schemas/AppStoreVersionExperimentTreatment'
                     },
                     {
                         '$ref': '#/components/schemas/AppStoreVersion'
                     },
                     {
-                        '$ref': '#/components/schemas/AppStoreVersionExperimentTreatment'
+                        '$ref': '#/components/schemas/App'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        appStoreVersionExperimentTreatments: '#/components/schemas/AppStoreVersionExperimentTreatment',
+                        appStoreVersions: '#/components/schemas/AppStoreVersion',
+                        apps: '#/components/schemas/App'
+                    }
+                }
             }
         },
         links: {
@@ -9561,13 +10144,16 @@ export const AppStoreVersionExperimentV2UpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         name: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         trafficProportion: {
-                            type: 'integer'
+                            type: 'integer',
+                            nullable: true
                         },
                         started: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     }
                 }
@@ -9688,12 +10274,19 @@ export const AppStoreVersionExperimentsResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/AppStoreVersion'
+                        '$ref': '#/components/schemas/AppStoreVersionExperimentTreatment'
                     },
                     {
-                        '$ref': '#/components/schemas/AppStoreVersionExperimentTreatment'
+                        '$ref': '#/components/schemas/AppStoreVersion'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        appStoreVersionExperimentTreatments: '#/components/schemas/AppStoreVersionExperimentTreatment',
+                        appStoreVersions: '#/components/schemas/AppStoreVersion'
+                    }
+                }
             }
         },
         links: {
@@ -9719,12 +10312,19 @@ export const AppStoreVersionExperimentResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/AppStoreVersion'
+                        '$ref': '#/components/schemas/AppStoreVersionExperimentTreatment'
                     },
                     {
-                        '$ref': '#/components/schemas/AppStoreVersionExperimentTreatment'
+                        '$ref': '#/components/schemas/AppStoreVersion'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        appStoreVersionExperimentTreatments: '#/components/schemas/AppStoreVersionExperimentTreatment',
+                        appStoreVersions: '#/components/schemas/AppStoreVersion'
+                    }
+                }
             }
         },
         links: {
@@ -9809,13 +10409,16 @@ export const AppStoreVersionExperimentUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         name: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         trafficProportion: {
-                            type: 'integer'
+                            type: 'integer',
+                            nullable: true
                         },
                         started: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     }
                 }
@@ -9940,6 +10543,33 @@ export const AppStoreVersionLocalizationSchema = {
                             }
                         }
                     }
+                },
+                searchKeywords: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            '$ref': '#/components/schemas/RelationshipLinks'
+                        },
+                        meta: {
+                            '$ref': '#/components/schemas/PagingInformation'
+                        },
+                        data: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    type: {
+                                        type: 'string',
+                                        enum: ['appKeywords']
+                                    },
+                                    id: {
+                                        type: 'string'
+                                    }
+                                },
+                                required: ['id', 'type']
+                            }
+                        }
+                    }
                 }
             }
         },
@@ -9965,15 +10595,27 @@ export const AppStoreVersionLocalizationsResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/AppStoreVersion'
+                        '$ref': '#/components/schemas/AppKeyword'
+                    },
+                    {
+                        '$ref': '#/components/schemas/AppPreviewSet'
                     },
                     {
                         '$ref': '#/components/schemas/AppScreenshotSet'
                     },
                     {
-                        '$ref': '#/components/schemas/AppPreviewSet'
+                        '$ref': '#/components/schemas/AppStoreVersion'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        appScreenshotSets: '#/components/schemas/AppScreenshotSet',
+                        appStoreVersions: '#/components/schemas/AppStoreVersion',
+                        appKeywords: '#/components/schemas/AppKeyword',
+                        appPreviewSets: '#/components/schemas/AppPreviewSet'
+                    }
+                }
             }
         },
         links: {
@@ -9998,15 +10640,27 @@ export const AppStoreVersionLocalizationResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/AppStoreVersion'
+                        '$ref': '#/components/schemas/AppKeyword'
+                    },
+                    {
+                        '$ref': '#/components/schemas/AppPreviewSet'
                     },
                     {
                         '$ref': '#/components/schemas/AppScreenshotSet'
                     },
                     {
-                        '$ref': '#/components/schemas/AppPreviewSet'
+                        '$ref': '#/components/schemas/AppStoreVersion'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        appScreenshotSets: '#/components/schemas/AppScreenshotSet',
+                        appStoreVersions: '#/components/schemas/AppStoreVersion',
+                        appKeywords: '#/components/schemas/AppKeyword',
+                        appPreviewSets: '#/components/schemas/AppPreviewSet'
+                    }
+                }
             }
         },
         links: {
@@ -10031,27 +10685,33 @@ export const AppStoreVersionLocalizationCreateRequestSchema = {
                     type: 'object',
                     properties: {
                         description: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         locale: {
                             type: 'string'
                         },
                         keywords: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         marketingUrl: {
                             type: 'string',
-                            format: 'uri'
+                            format: 'uri',
+                            nullable: true
                         },
                         promotionalText: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         supportUrl: {
                             type: 'string',
-                            format: 'uri'
+                            format: 'uri',
+                            nullable: true
                         },
                         whatsNew: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         }
                     },
                     required: ['locale']
@@ -10106,24 +10766,30 @@ export const AppStoreVersionLocalizationUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         description: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         keywords: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         marketingUrl: {
                             type: 'string',
-                            format: 'uri'
+                            format: 'uri',
+                            nullable: true
                         },
                         promotionalText: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         supportUrl: {
                             type: 'string',
-                            format: 'uri'
+                            format: 'uri',
+                            nullable: true
                         },
                         whatsNew: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         }
                     }
                 }
@@ -10199,6 +10865,7 @@ export const AppStoreVersionPhasedReleaseCreateRequestSchema = {
                     type: 'object',
                     properties: {
                         phasedReleaseState: {
+                            nullable: true,
                             '$ref': '#/components/schemas/PhasedReleaseState'
                         }
                     }
@@ -10253,6 +10920,7 @@ export const AppStoreVersionPhasedReleaseUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         phasedReleaseState: {
+                            nullable: true,
                             '$ref': '#/components/schemas/PhasedReleaseState'
                         }
                     }
@@ -10875,45 +11543,59 @@ export const AppStoreVersionsResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/App'
+                        '$ref': '#/components/schemas/AgeRatingDeclaration'
                     },
                     {
-                        '$ref': '#/components/schemas/AgeRatingDeclaration'
+                        '$ref': '#/components/schemas/AlternativeDistributionPackage'
+                    },
+                    {
+                        '$ref': '#/components/schemas/AppClipDefaultExperience'
+                    },
+                    {
+                        '$ref': '#/components/schemas/AppStoreReviewDetail'
+                    },
+                    {
+                        '$ref': '#/components/schemas/AppStoreVersionExperiment'
                     },
                     {
                         '$ref': '#/components/schemas/AppStoreVersionLocalization'
                     },
                     {
-                        '$ref': '#/components/schemas/Build'
+                        '$ref': '#/components/schemas/AppStoreVersionPhasedRelease'
                     },
                     {
-                        '$ref': '#/components/schemas/AppStoreVersionPhasedRelease'
+                        '$ref': '#/components/schemas/AppStoreVersionSubmission'
+                    },
+                    {
+                        '$ref': '#/components/schemas/App'
+                    },
+                    {
+                        '$ref': '#/components/schemas/Build'
                     },
                     {
                         '$ref': '#/components/schemas/GameCenterAppVersion'
                     },
                     {
                         '$ref': '#/components/schemas/RoutingAppCoverage'
-                    },
-                    {
-                        '$ref': '#/components/schemas/AppStoreReviewDetail'
-                    },
-                    {
-                        '$ref': '#/components/schemas/AppStoreVersionSubmission'
-                    },
-                    {
-                        '$ref': '#/components/schemas/AppClipDefaultExperience'
-                    },
-                    {
-                        '$ref': '#/components/schemas/AppStoreVersionExperiment'
-                    },
-                    {
-                        '$ref': '#/components/schemas/AppStoreVersionExperimentV2'
-                    },
-                    {
-                        '$ref': '#/components/schemas/AlternativeDistributionPackage'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        alternativeDistributionPackages: '#/components/schemas/AlternativeDistributionPackage',
+                        appClipDefaultExperiences: '#/components/schemas/AppClipDefaultExperience',
+                        appStoreVersionLocalizations: '#/components/schemas/AppStoreVersionLocalization',
+                        routingAppCoverages: '#/components/schemas/RoutingAppCoverage',
+                        appStoreVersionPhasedReleases: '#/components/schemas/AppStoreVersionPhasedRelease',
+                        ageRatingDeclarations: '#/components/schemas/AgeRatingDeclaration',
+                        appStoreReviewDetails: '#/components/schemas/AppStoreReviewDetail',
+                        appStoreVersionExperiments: '#/components/schemas/AppStoreVersionExperiment',
+                        builds: '#/components/schemas/Build',
+                        appStoreVersionSubmissions: '#/components/schemas/AppStoreVersionSubmission',
+                        gameCenterAppVersions: '#/components/schemas/GameCenterAppVersion',
+                        apps: '#/components/schemas/App'
+                    }
+                }
             }
         },
         links: {
@@ -10938,45 +11620,59 @@ export const AppStoreVersionResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/App'
+                        '$ref': '#/components/schemas/AgeRatingDeclaration'
                     },
                     {
-                        '$ref': '#/components/schemas/AgeRatingDeclaration'
+                        '$ref': '#/components/schemas/AlternativeDistributionPackage'
+                    },
+                    {
+                        '$ref': '#/components/schemas/AppClipDefaultExperience'
+                    },
+                    {
+                        '$ref': '#/components/schemas/AppStoreReviewDetail'
+                    },
+                    {
+                        '$ref': '#/components/schemas/AppStoreVersionExperiment'
                     },
                     {
                         '$ref': '#/components/schemas/AppStoreVersionLocalization'
                     },
                     {
-                        '$ref': '#/components/schemas/Build'
+                        '$ref': '#/components/schemas/AppStoreVersionPhasedRelease'
                     },
                     {
-                        '$ref': '#/components/schemas/AppStoreVersionPhasedRelease'
+                        '$ref': '#/components/schemas/AppStoreVersionSubmission'
+                    },
+                    {
+                        '$ref': '#/components/schemas/App'
+                    },
+                    {
+                        '$ref': '#/components/schemas/Build'
                     },
                     {
                         '$ref': '#/components/schemas/GameCenterAppVersion'
                     },
                     {
                         '$ref': '#/components/schemas/RoutingAppCoverage'
-                    },
-                    {
-                        '$ref': '#/components/schemas/AppStoreReviewDetail'
-                    },
-                    {
-                        '$ref': '#/components/schemas/AppStoreVersionSubmission'
-                    },
-                    {
-                        '$ref': '#/components/schemas/AppClipDefaultExperience'
-                    },
-                    {
-                        '$ref': '#/components/schemas/AppStoreVersionExperiment'
-                    },
-                    {
-                        '$ref': '#/components/schemas/AppStoreVersionExperimentV2'
-                    },
-                    {
-                        '$ref': '#/components/schemas/AlternativeDistributionPackage'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        alternativeDistributionPackages: '#/components/schemas/AlternativeDistributionPackage',
+                        appClipDefaultExperiences: '#/components/schemas/AppClipDefaultExperience',
+                        appStoreVersionLocalizations: '#/components/schemas/AppStoreVersionLocalization',
+                        routingAppCoverages: '#/components/schemas/RoutingAppCoverage',
+                        appStoreVersionPhasedReleases: '#/components/schemas/AppStoreVersionPhasedRelease',
+                        ageRatingDeclarations: '#/components/schemas/AgeRatingDeclaration',
+                        appStoreReviewDetails: '#/components/schemas/AppStoreReviewDetail',
+                        appStoreVersionExperiments: '#/components/schemas/AppStoreVersionExperiment',
+                        builds: '#/components/schemas/Build',
+                        appStoreVersionSubmissions: '#/components/schemas/AppStoreVersionSubmission',
+                        gameCenterAppVersions: '#/components/schemas/GameCenterAppVersion',
+                        apps: '#/components/schemas/App'
+                    }
+                }
             }
         },
         links: {
@@ -11007,23 +11703,28 @@ export const AppStoreVersionCreateRequestSchema = {
                             type: 'string'
                         },
                         copyright: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         reviewType: {
                             type: 'string',
+                            nullable: true,
                             enum: ['APP_STORE', 'NOTARIZATION']
                         },
                         releaseType: {
                             type: 'string',
+                            nullable: true,
                             enum: ['MANUAL', 'AFTER_APPROVAL', 'SCHEDULED']
                         },
                         earliestReleaseDate: {
                             type: 'string',
-                            format: 'date-time'
+                            format: 'date-time',
+                            nullable: true
                         },
                         usesIdfa: {
                             type: 'boolean',
-                            deprecated: true
+                            deprecated: true,
+                            nullable: true
                         }
                     },
                     required: ['versionString', 'platform']
@@ -11117,29 +11818,36 @@ export const AppStoreVersionUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         versionString: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         copyright: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         reviewType: {
                             type: 'string',
+                            nullable: true,
                             enum: ['APP_STORE', 'NOTARIZATION']
                         },
                         releaseType: {
                             type: 'string',
+                            nullable: true,
                             enum: ['MANUAL', 'AFTER_APPROVAL', 'SCHEDULED']
                         },
                         earliestReleaseDate: {
                             type: 'string',
-                            format: 'date-time'
+                            format: 'date-time',
+                            nullable: true
                         },
                         usesIdfa: {
                             type: 'boolean',
-                            deprecated: true
+                            deprecated: true,
+                            nullable: true
                         },
                         downloadable: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     }
                 },
@@ -11181,6 +11889,143 @@ export const AppStoreVersionUpdateRequestSchema = {
                                     required: ['id', 'type']
                                 }
                             }
+                        }
+                    }
+                }
+            },
+            required: ['id', 'type']
+        }
+    },
+    required: ['data']
+} as const;
+
+export const AppTagSchema = {
+    type: 'object',
+    title: 'AppTag',
+    properties: {
+        type: {
+            type: 'string',
+            enum: ['appTags']
+        },
+        id: {
+            type: 'string'
+        },
+        attributes: {
+            type: 'object',
+            properties: {
+                name: {
+                    type: 'string'
+                },
+                visibleInAppStore: {
+                    type: 'boolean'
+                }
+            }
+        },
+        relationships: {
+            type: 'object',
+            properties: {
+                territories: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            '$ref': '#/components/schemas/RelationshipLinks'
+                        },
+                        meta: {
+                            '$ref': '#/components/schemas/PagingInformation'
+                        },
+                        data: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    type: {
+                                        type: 'string',
+                                        enum: ['territories']
+                                    },
+                                    id: {
+                                        type: 'string'
+                                    }
+                                },
+                                required: ['id', 'type']
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: ['id', 'type']
+} as const;
+
+export const AppTagsResponseSchema = {
+    type: 'object',
+    title: 'AppTagsResponse',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/AppTag'
+            }
+        },
+        included: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/Territory'
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const AppTagResponseSchema = {
+    type: 'object',
+    title: 'AppTagResponse',
+    properties: {
+        data: {
+            '$ref': '#/components/schemas/AppTag'
+        },
+        included: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/Territory'
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const AppTagUpdateRequestSchema = {
+    type: 'object',
+    title: 'AppTagUpdateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['appTags']
+                },
+                id: {
+                    type: 'string'
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        visibleInAppStore: {
+                            type: 'boolean',
+                            nullable: true
                         }
                     }
                 }
@@ -11365,6 +12210,14 @@ export const AppSchema = {
                                 },
                                 required: ['id', 'type']
                             }
+                        }
+                    }
+                },
+                appTags: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            '$ref': '#/components/schemas/RelationshipLinks'
                         }
                     }
                 },
@@ -11924,6 +12777,14 @@ export const AppSchema = {
                         }
                     }
                 },
+                buildUploads: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            '$ref': '#/components/schemas/RelationshipLinks'
+                        }
+                    }
+                },
                 backgroundAssets: {
                     type: 'object',
                     properties: {
@@ -11941,6 +12802,14 @@ export const AppSchema = {
                     }
                 },
                 betaFeedbackCrashSubmissions: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            '$ref': '#/components/schemas/RelationshipLinks'
+                        }
+                    }
+                },
+                searchKeywords: {
                     type: 'object',
                     properties: {
                         links: {
@@ -11980,61 +12849,61 @@ export const AppsResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/AppEncryptionDeclaration'
-                    },
-                    {
-                        '$ref': '#/components/schemas/CiProduct'
-                    },
-                    {
-                        '$ref': '#/components/schemas/BetaGroup'
-                    },
-                    {
-                        '$ref': '#/components/schemas/AppStoreVersion'
-                    },
-                    {
-                        '$ref': '#/components/schemas/PrereleaseVersion'
-                    },
-                    {
-                        '$ref': '#/components/schemas/BetaAppLocalization'
-                    },
-                    {
-                        '$ref': '#/components/schemas/Build'
-                    },
-                    {
-                        '$ref': '#/components/schemas/BetaLicenseAgreement'
-                    },
-                    {
-                        '$ref': '#/components/schemas/BetaAppReviewDetail'
-                    },
-                    {
-                        '$ref': '#/components/schemas/AppInfo'
-                    },
-                    {
                         '$ref': '#/components/schemas/AppClip'
-                    },
-                    {
-                        '$ref': '#/components/schemas/EndUserLicenseAgreement'
-                    },
-                    {
-                        '$ref': '#/components/schemas/InAppPurchase'
-                    },
-                    {
-                        '$ref': '#/components/schemas/SubscriptionGroup'
-                    },
-                    {
-                        '$ref': '#/components/schemas/GameCenterEnabledVersion'
                     },
                     {
                         '$ref': '#/components/schemas/AppCustomProductPage'
                     },
                     {
-                        '$ref': '#/components/schemas/InAppPurchaseV2'
-                    },
-                    {
-                        '$ref': '#/components/schemas/PromotedPurchase'
+                        '$ref': '#/components/schemas/AppEncryptionDeclaration'
                     },
                     {
                         '$ref': '#/components/schemas/AppEvent'
+                    },
+                    {
+                        '$ref': '#/components/schemas/AppInfo'
+                    },
+                    {
+                        '$ref': '#/components/schemas/AppStoreVersionExperimentV2'
+                    },
+                    {
+                        '$ref': '#/components/schemas/AppStoreVersion'
+                    },
+                    {
+                        '$ref': '#/components/schemas/BetaAppLocalization'
+                    },
+                    {
+                        '$ref': '#/components/schemas/BetaAppReviewDetail'
+                    },
+                    {
+                        '$ref': '#/components/schemas/BetaGroup'
+                    },
+                    {
+                        '$ref': '#/components/schemas/BetaLicenseAgreement'
+                    },
+                    {
+                        '$ref': '#/components/schemas/Build'
+                    },
+                    {
+                        '$ref': '#/components/schemas/CiProduct'
+                    },
+                    {
+                        '$ref': '#/components/schemas/EndUserLicenseAgreement'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterDetail'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterEnabledVersion'
+                    },
+                    {
+                        '$ref': '#/components/schemas/InAppPurchase'
+                    },
+                    {
+                        '$ref': '#/components/schemas/PrereleaseVersion'
+                    },
+                    {
+                        '$ref': '#/components/schemas/PromotedPurchase'
                     },
                     {
                         '$ref': '#/components/schemas/ReviewSubmission'
@@ -12043,12 +12912,36 @@ export const AppsResponseSchema = {
                         '$ref': '#/components/schemas/SubscriptionGracePeriod'
                     },
                     {
-                        '$ref': '#/components/schemas/GameCenterDetail'
-                    },
-                    {
-                        '$ref': '#/components/schemas/AppStoreVersionExperimentV2'
+                        '$ref': '#/components/schemas/SubscriptionGroup'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        betaGroups: '#/components/schemas/BetaGroup',
+                        appEvents: '#/components/schemas/AppEvent',
+                        appEncryptionDeclarations: '#/components/schemas/AppEncryptionDeclaration',
+                        reviewSubmissions: '#/components/schemas/ReviewSubmission',
+                        subscriptionGracePeriods: '#/components/schemas/SubscriptionGracePeriod',
+                        appInfos: '#/components/schemas/AppInfo',
+                        preReleaseVersions: '#/components/schemas/PrereleaseVersion',
+                        appStoreVersionExperiments: '#/components/schemas/AppStoreVersionExperimentV2',
+                        appCustomProductPages: '#/components/schemas/AppCustomProductPage',
+                        inAppPurchases: '#/components/schemas/InAppPurchase',
+                        appClips: '#/components/schemas/AppClip',
+                        betaAppReviewDetails: '#/components/schemas/BetaAppReviewDetail',
+                        ciProducts: '#/components/schemas/CiProduct',
+                        gameCenterDetails: '#/components/schemas/GameCenterDetail',
+                        promotedPurchases: '#/components/schemas/PromotedPurchase',
+                        gameCenterEnabledVersions: '#/components/schemas/GameCenterEnabledVersion',
+                        subscriptionGroups: '#/components/schemas/SubscriptionGroup',
+                        appStoreVersions: '#/components/schemas/AppStoreVersion',
+                        builds: '#/components/schemas/Build',
+                        betaAppLocalizations: '#/components/schemas/BetaAppLocalization',
+                        betaLicenseAgreements: '#/components/schemas/BetaLicenseAgreement',
+                        endUserLicenseAgreements: '#/components/schemas/EndUserLicenseAgreement'
+                    }
+                }
             }
         },
         links: {
@@ -12073,61 +12966,61 @@ export const AppResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/AppEncryptionDeclaration'
-                    },
-                    {
-                        '$ref': '#/components/schemas/CiProduct'
-                    },
-                    {
-                        '$ref': '#/components/schemas/BetaGroup'
-                    },
-                    {
-                        '$ref': '#/components/schemas/AppStoreVersion'
-                    },
-                    {
-                        '$ref': '#/components/schemas/PrereleaseVersion'
-                    },
-                    {
-                        '$ref': '#/components/schemas/BetaAppLocalization'
-                    },
-                    {
-                        '$ref': '#/components/schemas/Build'
-                    },
-                    {
-                        '$ref': '#/components/schemas/BetaLicenseAgreement'
-                    },
-                    {
-                        '$ref': '#/components/schemas/BetaAppReviewDetail'
-                    },
-                    {
-                        '$ref': '#/components/schemas/AppInfo'
-                    },
-                    {
                         '$ref': '#/components/schemas/AppClip'
-                    },
-                    {
-                        '$ref': '#/components/schemas/EndUserLicenseAgreement'
-                    },
-                    {
-                        '$ref': '#/components/schemas/InAppPurchase'
-                    },
-                    {
-                        '$ref': '#/components/schemas/SubscriptionGroup'
-                    },
-                    {
-                        '$ref': '#/components/schemas/GameCenterEnabledVersion'
                     },
                     {
                         '$ref': '#/components/schemas/AppCustomProductPage'
                     },
                     {
-                        '$ref': '#/components/schemas/InAppPurchaseV2'
-                    },
-                    {
-                        '$ref': '#/components/schemas/PromotedPurchase'
+                        '$ref': '#/components/schemas/AppEncryptionDeclaration'
                     },
                     {
                         '$ref': '#/components/schemas/AppEvent'
+                    },
+                    {
+                        '$ref': '#/components/schemas/AppInfo'
+                    },
+                    {
+                        '$ref': '#/components/schemas/AppStoreVersionExperimentV2'
+                    },
+                    {
+                        '$ref': '#/components/schemas/AppStoreVersion'
+                    },
+                    {
+                        '$ref': '#/components/schemas/BetaAppLocalization'
+                    },
+                    {
+                        '$ref': '#/components/schemas/BetaAppReviewDetail'
+                    },
+                    {
+                        '$ref': '#/components/schemas/BetaGroup'
+                    },
+                    {
+                        '$ref': '#/components/schemas/BetaLicenseAgreement'
+                    },
+                    {
+                        '$ref': '#/components/schemas/Build'
+                    },
+                    {
+                        '$ref': '#/components/schemas/CiProduct'
+                    },
+                    {
+                        '$ref': '#/components/schemas/EndUserLicenseAgreement'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterDetail'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterEnabledVersion'
+                    },
+                    {
+                        '$ref': '#/components/schemas/InAppPurchase'
+                    },
+                    {
+                        '$ref': '#/components/schemas/PrereleaseVersion'
+                    },
+                    {
+                        '$ref': '#/components/schemas/PromotedPurchase'
                     },
                     {
                         '$ref': '#/components/schemas/ReviewSubmission'
@@ -12136,12 +13029,36 @@ export const AppResponseSchema = {
                         '$ref': '#/components/schemas/SubscriptionGracePeriod'
                     },
                     {
-                        '$ref': '#/components/schemas/GameCenterDetail'
-                    },
-                    {
-                        '$ref': '#/components/schemas/AppStoreVersionExperimentV2'
+                        '$ref': '#/components/schemas/SubscriptionGroup'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        betaGroups: '#/components/schemas/BetaGroup',
+                        appEvents: '#/components/schemas/AppEvent',
+                        appEncryptionDeclarations: '#/components/schemas/AppEncryptionDeclaration',
+                        reviewSubmissions: '#/components/schemas/ReviewSubmission',
+                        subscriptionGracePeriods: '#/components/schemas/SubscriptionGracePeriod',
+                        appInfos: '#/components/schemas/AppInfo',
+                        preReleaseVersions: '#/components/schemas/PrereleaseVersion',
+                        appStoreVersionExperiments: '#/components/schemas/AppStoreVersionExperimentV2',
+                        appCustomProductPages: '#/components/schemas/AppCustomProductPage',
+                        inAppPurchases: '#/components/schemas/InAppPurchase',
+                        appClips: '#/components/schemas/AppClip',
+                        betaAppReviewDetails: '#/components/schemas/BetaAppReviewDetail',
+                        ciProducts: '#/components/schemas/CiProduct',
+                        gameCenterDetails: '#/components/schemas/GameCenterDetail',
+                        promotedPurchases: '#/components/schemas/PromotedPurchase',
+                        gameCenterEnabledVersions: '#/components/schemas/GameCenterEnabledVersion',
+                        subscriptionGroups: '#/components/schemas/SubscriptionGroup',
+                        appStoreVersions: '#/components/schemas/AppStoreVersion',
+                        builds: '#/components/schemas/Build',
+                        betaAppLocalizations: '#/components/schemas/BetaAppLocalization',
+                        betaLicenseAgreements: '#/components/schemas/BetaLicenseAgreement',
+                        endUserLicenseAgreements: '#/components/schemas/EndUserLicenseAgreement'
+                    }
+                }
             }
         },
         links: {
@@ -12170,34 +13087,43 @@ export const AppUpdateRequestSchema = {
                     properties: {
                         accessibilityUrl: {
                             type: 'string',
-                            format: 'uri'
+                            format: 'uri',
+                            nullable: true
                         },
                         bundleId: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         primaryLocale: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         subscriptionStatusUrl: {
                             type: 'string',
-                            format: 'uri'
+                            format: 'uri',
+                            nullable: true
                         },
                         subscriptionStatusUrlVersion: {
+                            nullable: true,
                             '$ref': '#/components/schemas/SubscriptionStatusUrlVersion'
                         },
                         subscriptionStatusUrlForSandbox: {
                             type: 'string',
-                            format: 'uri'
+                            format: 'uri',
+                            nullable: true
                         },
                         subscriptionStatusUrlVersionForSandbox: {
+                            nullable: true,
                             '$ref': '#/components/schemas/SubscriptionStatusUrlVersion'
                         },
                         contentRightsDeclaration: {
                             type: 'string',
+                            nullable: true,
                             enum: ['DOES_NOT_USE_THIRD_PARTY_CONTENT', 'USES_THIRD_PARTY_CONTENT']
                         },
                         streamlinedPurchasingEnabled: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     }
                 }
@@ -12242,7 +13168,11 @@ export const BackgroundAssetUploadFileSchema = {
                     minimum: 1
                 },
                 sourceFileChecksum: {
-                    type: 'string'
+                    type: 'string',
+                    deprecated: true
+                },
+                sourceFileChecksums: {
+                    '$ref': '#/components/schemas/Checksums'
                 },
                 uploadOperations: {
                     type: 'array',
@@ -12373,10 +13303,17 @@ export const BackgroundAssetUploadFileUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         sourceFileChecksum: {
-                            type: 'string'
+                            type: 'string',
+                            deprecated: true,
+                            nullable: true
+                        },
+                        sourceFileChecksums: {
+                            nullable: true,
+                            '$ref': '#/components/schemas/Checksums'
                         },
                         uploaded: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     }
                 }
@@ -12385,6 +13322,144 @@ export const BackgroundAssetUploadFileUpdateRequestSchema = {
         }
     },
     required: ['data']
+} as const;
+
+export const BackgroundAssetVersionAppStoreReleaseSchema = {
+    type: 'object',
+    title: 'BackgroundAssetVersionAppStoreRelease',
+    properties: {
+        type: {
+            type: 'string',
+            enum: ['backgroundAssetVersionAppStoreReleases']
+        },
+        id: {
+            type: 'string'
+        },
+        attributes: {
+            type: 'object',
+            properties: {
+                state: {
+                    '$ref': '#/components/schemas/BackgroundAssetVersionAppStoreReleaseState'
+                }
+            }
+        },
+        relationships: {
+            type: 'object',
+            properties: {
+                backgroundAssetVersion: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['backgroundAssetVersions']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: ['id', 'type']
+} as const;
+
+export const BackgroundAssetVersionAppStoreReleaseResponseSchema = {
+    type: 'object',
+    title: 'BackgroundAssetVersionAppStoreReleaseResponse',
+    properties: {
+        data: {
+            '$ref': '#/components/schemas/BackgroundAssetVersionAppStoreRelease'
+        },
+        included: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/BackgroundAssetVersion'
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const BackgroundAssetVersionExternalBetaReleaseSchema = {
+    type: 'object',
+    title: 'BackgroundAssetVersionExternalBetaRelease',
+    properties: {
+        type: {
+            type: 'string',
+            enum: ['backgroundAssetVersionExternalBetaReleases']
+        },
+        id: {
+            type: 'string'
+        },
+        attributes: {
+            type: 'object',
+            properties: {
+                state: {
+                    '$ref': '#/components/schemas/BackgroundAssetVersionExternalBetaReleaseState'
+                }
+            }
+        },
+        relationships: {
+            type: 'object',
+            properties: {
+                backgroundAssetVersion: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['backgroundAssetVersions']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: ['id', 'type']
+} as const;
+
+export const BackgroundAssetVersionExternalBetaReleaseResponseSchema = {
+    type: 'object',
+    title: 'BackgroundAssetVersionExternalBetaReleaseResponse',
+    properties: {
+        data: {
+            '$ref': '#/components/schemas/BackgroundAssetVersionExternalBetaRelease'
+        },
+        included: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/BackgroundAssetVersion'
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: ['data', 'links']
 } as const;
 
 export const BackgroundAssetVersionInternalBetaReleaseSchema = {
@@ -12492,6 +13567,24 @@ export const BackgroundAssetVersionSchema = {
         relationships: {
             type: 'object',
             properties: {
+                backgroundAsset: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['backgroundAssets']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                },
                 internalBetaRelease: {
                     type: 'object',
                     properties: {
@@ -12501,6 +13594,42 @@ export const BackgroundAssetVersionSchema = {
                                 type: {
                                     type: 'string',
                                     enum: ['backgroundAssetVersionInternalBetaReleases']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                },
+                externalBetaRelease: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['backgroundAssetVersionExternalBetaReleases']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                },
+                appStoreRelease: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['backgroundAssetVersionAppStoreReleases']
                                 },
                                 id: {
                                     type: 'string'
@@ -12578,12 +13707,31 @@ export const BackgroundAssetVersionsResponseSchema = {
             items: {
                 oneOf: [
                     {
+                        '$ref': '#/components/schemas/BackgroundAssetUploadFile'
+                    },
+                    {
+                        '$ref': '#/components/schemas/BackgroundAssetVersionAppStoreRelease'
+                    },
+                    {
+                        '$ref': '#/components/schemas/BackgroundAssetVersionExternalBetaRelease'
+                    },
+                    {
                         '$ref': '#/components/schemas/BackgroundAssetVersionInternalBetaRelease'
                     },
                     {
-                        '$ref': '#/components/schemas/BackgroundAssetUploadFile'
+                        '$ref': '#/components/schemas/BackgroundAsset'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        backgroundAssetVersionAppStoreReleases: '#/components/schemas/BackgroundAssetVersionAppStoreRelease',
+                        backgroundAssetVersionInternalBetaReleases: '#/components/schemas/BackgroundAssetVersionInternalBetaRelease',
+                        backgroundAssets: '#/components/schemas/BackgroundAsset',
+                        backgroundAssetUploadFiles: '#/components/schemas/BackgroundAssetUploadFile',
+                        backgroundAssetVersionExternalBetaReleases: '#/components/schemas/BackgroundAssetVersionExternalBetaRelease'
+                    }
+                }
             }
         },
         links: {
@@ -12608,12 +13756,31 @@ export const BackgroundAssetVersionResponseSchema = {
             items: {
                 oneOf: [
                     {
+                        '$ref': '#/components/schemas/BackgroundAssetUploadFile'
+                    },
+                    {
+                        '$ref': '#/components/schemas/BackgroundAssetVersionAppStoreRelease'
+                    },
+                    {
+                        '$ref': '#/components/schemas/BackgroundAssetVersionExternalBetaRelease'
+                    },
+                    {
                         '$ref': '#/components/schemas/BackgroundAssetVersionInternalBetaRelease'
                     },
                     {
-                        '$ref': '#/components/schemas/BackgroundAssetUploadFile'
+                        '$ref': '#/components/schemas/BackgroundAsset'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        backgroundAssetVersionAppStoreReleases: '#/components/schemas/BackgroundAssetVersionAppStoreRelease',
+                        backgroundAssetVersionInternalBetaReleases: '#/components/schemas/BackgroundAssetVersionInternalBetaRelease',
+                        backgroundAssets: '#/components/schemas/BackgroundAsset',
+                        backgroundAssetUploadFiles: '#/components/schemas/BackgroundAssetUploadFile',
+                        backgroundAssetVersionExternalBetaReleases: '#/components/schemas/BackgroundAssetVersionExternalBetaRelease'
+                    }
+                }
             }
         },
         links: {
@@ -12692,6 +13859,24 @@ export const BackgroundAssetSchema = {
         relationships: {
             type: 'object',
             properties: {
+                app: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['apps']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                },
                 versions: {
                     type: 'object',
                     properties: {
@@ -12700,7 +13885,43 @@ export const BackgroundAssetSchema = {
                         }
                     }
                 },
+                appStoreVersion: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['backgroundAssetVersions']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                },
                 internalBetaVersion: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['backgroundAssetVersions']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                },
+                externalBetaVersion: {
                     type: 'object',
                     properties: {
                         data: {
@@ -12740,7 +13961,21 @@ export const BackgroundAssetsResponseSchema = {
         included: {
             type: 'array',
             items: {
-                '$ref': '#/components/schemas/BackgroundAssetVersion'
+                oneOf: [
+                    {
+                        '$ref': '#/components/schemas/App'
+                    },
+                    {
+                        '$ref': '#/components/schemas/BackgroundAssetVersion'
+                    }
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        backgroundAssetVersions: '#/components/schemas/BackgroundAssetVersion',
+                        apps: '#/components/schemas/App'
+                    }
+                }
             }
         },
         links: {
@@ -12763,7 +13998,21 @@ export const BackgroundAssetResponseSchema = {
         included: {
             type: 'array',
             items: {
-                '$ref': '#/components/schemas/BackgroundAssetVersion'
+                oneOf: [
+                    {
+                        '$ref': '#/components/schemas/App'
+                    },
+                    {
+                        '$ref': '#/components/schemas/BackgroundAssetVersion'
+                    }
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        backgroundAssetVersions: '#/components/schemas/BackgroundAssetVersion',
+                        apps: '#/components/schemas/App'
+                    }
+                }
             }
         },
         links: {
@@ -12990,7 +14239,8 @@ export const BetaAppClipInvocationLocalizationUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         title: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         }
                     }
                 }
@@ -13203,7 +14453,8 @@ export const BetaAppClipInvocationUpdateRequestSchema = {
                     properties: {
                         url: {
                             type: 'string',
-                            format: 'uri'
+                            format: 'uri',
+                            nullable: true
                         }
                     }
                 }
@@ -13342,19 +14593,24 @@ export const BetaAppLocalizationCreateRequestSchema = {
                     type: 'object',
                     properties: {
                         feedbackEmail: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         marketingUrl: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         privacyPolicyUrl: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         tvOsPrivacyPolicy: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         description: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         locale: {
                             type: 'string'
@@ -13412,19 +14668,24 @@ export const BetaAppLocalizationUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         feedbackEmail: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         marketingUrl: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         privacyPolicyUrl: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         tvOsPrivacyPolicy: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         description: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         }
                     }
                 }
@@ -13572,28 +14833,36 @@ export const BetaAppReviewDetailUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         contactFirstName: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         contactLastName: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         contactPhone: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         contactEmail: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         demoAccountName: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         demoAccountPassword: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         demoAccountRequired: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         notes: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         }
                     }
                 }
@@ -13865,7 +15134,8 @@ export const BetaBuildLocalizationCreateRequestSchema = {
                     type: 'object',
                     properties: {
                         whatsNew: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         locale: {
                             type: 'string'
@@ -13923,7 +15193,8 @@ export const BetaBuildLocalizationUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         whatsNew: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         }
                     }
                 }
@@ -14131,12 +15402,19 @@ export const BetaFeedbackCrashSubmissionsResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/Build'
+                        '$ref': '#/components/schemas/BetaTester'
                     },
                     {
-                        '$ref': '#/components/schemas/BetaTester'
+                        '$ref': '#/components/schemas/Build'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        builds: '#/components/schemas/Build',
+                        betaTesters: '#/components/schemas/BetaTester'
+                    }
+                }
             }
         },
         links: {
@@ -14161,12 +15439,19 @@ export const BetaFeedbackCrashSubmissionResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/Build'
+                        '$ref': '#/components/schemas/BetaTester'
                     },
                     {
-                        '$ref': '#/components/schemas/BetaTester'
+                        '$ref': '#/components/schemas/Build'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        builds: '#/components/schemas/Build',
+                        betaTesters: '#/components/schemas/BetaTester'
+                    }
+                }
             }
         },
         links: {
@@ -14331,12 +15616,19 @@ export const BetaFeedbackScreenshotSubmissionsResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/Build'
+                        '$ref': '#/components/schemas/BetaTester'
                     },
                     {
-                        '$ref': '#/components/schemas/BetaTester'
+                        '$ref': '#/components/schemas/Build'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        builds: '#/components/schemas/Build',
+                        betaTesters: '#/components/schemas/BetaTester'
+                    }
+                }
             }
         },
         links: {
@@ -14361,12 +15653,19 @@ export const BetaFeedbackScreenshotSubmissionResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/Build'
+                        '$ref': '#/components/schemas/BetaTester'
                     },
                     {
-                        '$ref': '#/components/schemas/BetaTester'
+                        '$ref': '#/components/schemas/Build'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        builds: '#/components/schemas/Build',
+                        betaTesters: '#/components/schemas/BetaTester'
+                    }
+                }
             }
         },
         links: {
@@ -14563,15 +15862,24 @@ export const BetaGroupsResponseSchema = {
                         '$ref': '#/components/schemas/App'
                     },
                     {
-                        '$ref': '#/components/schemas/Build'
+                        '$ref': '#/components/schemas/BetaRecruitmentCriterion'
                     },
                     {
                         '$ref': '#/components/schemas/BetaTester'
                     },
                     {
-                        '$ref': '#/components/schemas/BetaRecruitmentCriterion'
+                        '$ref': '#/components/schemas/Build'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        betaRecruitmentCriteria: '#/components/schemas/BetaRecruitmentCriterion',
+                        builds: '#/components/schemas/Build',
+                        betaTesters: '#/components/schemas/BetaTester',
+                        apps: '#/components/schemas/App'
+                    }
+                }
             }
         },
         links: {
@@ -14599,15 +15907,24 @@ export const BetaGroupResponseSchema = {
                         '$ref': '#/components/schemas/App'
                     },
                     {
-                        '$ref': '#/components/schemas/Build'
+                        '$ref': '#/components/schemas/BetaRecruitmentCriterion'
                     },
                     {
                         '$ref': '#/components/schemas/BetaTester'
                     },
                     {
-                        '$ref': '#/components/schemas/BetaRecruitmentCriterion'
+                        '$ref': '#/components/schemas/Build'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        betaRecruitmentCriteria: '#/components/schemas/BetaRecruitmentCriterion',
+                        builds: '#/components/schemas/Build',
+                        betaTesters: '#/components/schemas/BetaTester',
+                        apps: '#/components/schemas/App'
+                    }
+                }
             }
         },
         links: {
@@ -14635,22 +15952,28 @@ export const BetaGroupCreateRequestSchema = {
                             type: 'string'
                         },
                         isInternalGroup: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         hasAccessToAllBuilds: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         publicLinkEnabled: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         publicLinkLimitEnabled: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         publicLinkLimit: {
-                            type: 'integer'
+                            type: 'integer',
+                            nullable: true
                         },
                         feedbackEnabled: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     },
                     required: ['name']
@@ -14747,25 +16070,32 @@ export const BetaGroupUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         name: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         publicLinkEnabled: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         publicLinkLimitEnabled: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         publicLinkLimit: {
-                            type: 'integer'
+                            type: 'integer',
+                            nullable: true
                         },
                         feedbackEnabled: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         iosBuildsAvailableForAppleSiliconMac: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         iosBuildsAvailableForAppleVision: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     }
                 }
@@ -14892,7 +16222,8 @@ export const BetaLicenseAgreementUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         agreementText: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         }
                     }
                 }
@@ -15026,7 +16357,8 @@ export const BetaRecruitmentCriterionUpdateRequestSchema = {
                             type: 'array',
                             items: {
                                 '$ref': '#/components/schemas/DeviceFamilyOsVersionFilter'
-                            }
+                            },
+                            nullable: true
                         }
                     }
                 }
@@ -15379,7 +16711,15 @@ export const BetaTestersResponseSchema = {
                     {
                         '$ref': '#/components/schemas/Build'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        betaGroups: '#/components/schemas/BetaGroup',
+                        builds: '#/components/schemas/Build',
+                        apps: '#/components/schemas/App'
+                    }
+                }
             }
         },
         links: {
@@ -15412,7 +16752,15 @@ export const BetaTesterResponseSchema = {
                     {
                         '$ref': '#/components/schemas/Build'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        betaGroups: '#/components/schemas/BetaGroup',
+                        builds: '#/components/schemas/Build',
+                        apps: '#/components/schemas/App'
+                    }
+                }
             }
         },
         links: {
@@ -15437,10 +16785,12 @@ export const BetaTesterCreateRequestSchema = {
                     type: 'object',
                     properties: {
                         firstName: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         lastName: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         email: {
                             type: 'string',
@@ -15625,7 +16975,8 @@ export const BuildBetaDetailUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         autoNotifyEnabled: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     }
                 }
@@ -15986,6 +17337,9 @@ export const BuildIconSchema = {
                 iconType: {
                     '$ref': '#/components/schemas/IconAssetType'
                 },
+                masked: {
+                    type: 'boolean'
+                },
                 name: {
                     type: 'string'
                 }
@@ -16016,6 +17370,478 @@ export const BuildIconsResponseSchema = {
         }
     },
     required: ['data', 'links']
+} as const;
+
+export const BuildUploadFileSchema = {
+    type: 'object',
+    title: 'BuildUploadFile',
+    properties: {
+        type: {
+            type: 'string',
+            enum: ['buildUploadFiles']
+        },
+        id: {
+            type: 'string'
+        },
+        attributes: {
+            type: 'object',
+            properties: {
+                assetDeliveryState: {
+                    '$ref': '#/components/schemas/AppMediaAssetState'
+                },
+                assetToken: {
+                    type: 'string'
+                },
+                assetType: {
+                    type: 'string',
+                    enum: ['ASSET', 'ASSET_DESCRIPTION', 'ASSET_SPI']
+                },
+                fileName: {
+                    type: 'string'
+                },
+                fileSize: {
+                    type: 'integer',
+                    format: 'int64',
+                    maximum: 9007199254740991,
+                    minimum: 1
+                },
+                sourceFileChecksums: {
+                    '$ref': '#/components/schemas/Checksums'
+                },
+                uploadOperations: {
+                    type: 'array',
+                    items: {
+                        '$ref': '#/components/schemas/DeliveryFileUploadOperation'
+                    }
+                },
+                uti: {
+                    type: 'string',
+                    enum: ['com.apple.binary-property-list', 'com.apple.ipa', 'com.apple.pkg', 'com.apple.xml-property-list', 'com.pkware.zip-archive']
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: ['id', 'type']
+} as const;
+
+export const BuildUploadFilesResponseSchema = {
+    type: 'object',
+    title: 'BuildUploadFilesResponse',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/BuildUploadFile'
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const BuildUploadFileResponseSchema = {
+    type: 'object',
+    title: 'BuildUploadFileResponse',
+    properties: {
+        data: {
+            '$ref': '#/components/schemas/BuildUploadFile'
+        },
+        links: {
+            '$ref': '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const BuildUploadFileCreateRequestSchema = {
+    type: 'object',
+    title: 'BuildUploadFileCreateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['buildUploadFiles']
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        assetType: {
+                            type: 'string',
+                            enum: ['ASSET', 'ASSET_DESCRIPTION', 'ASSET_SPI']
+                        },
+                        fileName: {
+                            type: 'string'
+                        },
+                        fileSize: {
+                            type: 'integer',
+                            format: 'int64',
+                            maximum: 9007199254740991,
+                            minimum: 1
+                        },
+                        uti: {
+                            type: 'string',
+                            enum: ['com.apple.binary-property-list', 'com.apple.ipa', 'com.apple.pkg', 'com.apple.xml-property-list', 'com.pkware.zip-archive']
+                        }
+                    },
+                    required: ['fileName', 'fileSize', 'uti', 'assetType']
+                },
+                relationships: {
+                    type: 'object',
+                    properties: {
+                        buildUpload: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: ['buildUploads']
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: ['id', 'type']
+                                }
+                            },
+                            required: ['data']
+                        }
+                    },
+                    required: ['buildUpload']
+                }
+            },
+            required: ['relationships', 'attributes', 'type']
+        }
+    },
+    required: ['data']
+} as const;
+
+export const BuildUploadFileUpdateRequestSchema = {
+    type: 'object',
+    title: 'BuildUploadFileUpdateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['buildUploadFiles']
+                },
+                id: {
+                    type: 'string'
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        sourceFileChecksums: {
+                            nullable: true,
+                            '$ref': '#/components/schemas/Checksums'
+                        },
+                        uploaded: {
+                            type: 'boolean',
+                            nullable: true
+                        }
+                    }
+                }
+            },
+            required: ['id', 'type']
+        }
+    },
+    required: ['data']
+} as const;
+
+export const BuildUploadSchema = {
+    type: 'object',
+    title: 'BuildUpload',
+    properties: {
+        type: {
+            type: 'string',
+            enum: ['buildUploads']
+        },
+        id: {
+            type: 'string'
+        },
+        attributes: {
+            type: 'object',
+            properties: {
+                cfBundleShortVersionString: {
+                    type: 'string'
+                },
+                cfBundleVersion: {
+                    type: 'string'
+                },
+                createdDate: {
+                    type: 'string',
+                    format: 'date-time'
+                },
+                state: {
+                    type: 'object',
+                    properties: {
+                        errors: {
+                            type: 'array',
+                            items: {
+                                '$ref': '#/components/schemas/StateDetail'
+                            }
+                        },
+                        warnings: {
+                            type: 'array',
+                            items: {
+                                '$ref': '#/components/schemas/StateDetail'
+                            }
+                        },
+                        infos: {
+                            type: 'array',
+                            items: {
+                                '$ref': '#/components/schemas/StateDetail'
+                            }
+                        },
+                        state: {
+                            '$ref': '#/components/schemas/BuildUploadState'
+                        }
+                    }
+                },
+                platform: {
+                    '$ref': '#/components/schemas/Platform'
+                },
+                uploadedDate: {
+                    type: 'string',
+                    format: 'date-time'
+                }
+            }
+        },
+        relationships: {
+            type: 'object',
+            properties: {
+                build: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['builds']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                },
+                assetFile: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['buildUploadFiles']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                },
+                assetDescriptionFile: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['buildUploadFiles']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                },
+                assetSpiFile: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['buildUploadFiles']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                },
+                buildUploadFiles: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            '$ref': '#/components/schemas/RelationshipLinks'
+                        }
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: ['id', 'type']
+} as const;
+
+export const BuildUploadsResponseSchema = {
+    type: 'object',
+    title: 'BuildUploadsResponse',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/BuildUpload'
+            }
+        },
+        included: {
+            type: 'array',
+            items: {
+                oneOf: [
+                    {
+                        '$ref': '#/components/schemas/BuildUploadFile'
+                    },
+                    {
+                        '$ref': '#/components/schemas/Build'
+                    }
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        buildUploadFiles: '#/components/schemas/BuildUploadFile',
+                        builds: '#/components/schemas/Build'
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const BuildUploadResponseSchema = {
+    type: 'object',
+    title: 'BuildUploadResponse',
+    properties: {
+        data: {
+            '$ref': '#/components/schemas/BuildUpload'
+        },
+        included: {
+            type: 'array',
+            items: {
+                oneOf: [
+                    {
+                        '$ref': '#/components/schemas/BuildUploadFile'
+                    },
+                    {
+                        '$ref': '#/components/schemas/Build'
+                    }
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        buildUploadFiles: '#/components/schemas/BuildUploadFile',
+                        builds: '#/components/schemas/Build'
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const BuildUploadCreateRequestSchema = {
+    type: 'object',
+    title: 'BuildUploadCreateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['buildUploads']
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        cfBundleShortVersionString: {
+                            type: 'string'
+                        },
+                        cfBundleVersion: {
+                            type: 'string'
+                        },
+                        platform: {
+                            '$ref': '#/components/schemas/Platform'
+                        }
+                    },
+                    required: ['cfBundleVersion', 'cfBundleShortVersionString', 'platform']
+                },
+                relationships: {
+                    type: 'object',
+                    properties: {
+                        app: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: ['apps']
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: ['id', 'type']
+                                }
+                            },
+                            required: ['data']
+                        }
+                    },
+                    required: ['app']
+                }
+            },
+            required: ['relationships', 'attributes', 'type']
+        }
+    },
+    required: ['data']
 } as const;
 
 export const BuildSchema = {
@@ -16334,6 +18160,24 @@ export const BuildSchema = {
                         }
                     }
                 },
+                buildUpload: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['buildUploads']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                },
                 perfPowerMetrics: {
                     type: 'object',
                     properties: {
@@ -16374,39 +18218,59 @@ export const BuildsResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/PrereleaseVersion'
-                    },
-                    {
-                        '$ref': '#/components/schemas/BetaTester'
-                    },
-                    {
-                        '$ref': '#/components/schemas/BetaGroup'
-                    },
-                    {
-                        '$ref': '#/components/schemas/BetaBuildLocalization'
-                    },
-                    {
                         '$ref': '#/components/schemas/AppEncryptionDeclaration'
-                    },
-                    {
-                        '$ref': '#/components/schemas/BetaAppReviewSubmission'
-                    },
-                    {
-                        '$ref': '#/components/schemas/App'
-                    },
-                    {
-                        '$ref': '#/components/schemas/BuildBetaDetail'
                     },
                     {
                         '$ref': '#/components/schemas/AppStoreVersion'
                     },
                     {
-                        '$ref': '#/components/schemas/BuildIcon'
+                        '$ref': '#/components/schemas/App'
+                    },
+                    {
+                        '$ref': '#/components/schemas/BetaAppReviewSubmission'
+                    },
+                    {
+                        '$ref': '#/components/schemas/BetaBuildLocalization'
+                    },
+                    {
+                        '$ref': '#/components/schemas/BetaGroup'
+                    },
+                    {
+                        '$ref': '#/components/schemas/BetaTester'
+                    },
+                    {
+                        '$ref': '#/components/schemas/BuildBetaDetail'
                     },
                     {
                         '$ref': '#/components/schemas/BuildBundle'
+                    },
+                    {
+                        '$ref': '#/components/schemas/BuildIcon'
+                    },
+                    {
+                        '$ref': '#/components/schemas/BuildUpload'
+                    },
+                    {
+                        '$ref': '#/components/schemas/PrereleaseVersion'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        betaGroups: '#/components/schemas/BetaGroup',
+                        appEncryptionDeclarations: '#/components/schemas/AppEncryptionDeclaration',
+                        betaAppReviewSubmissions: '#/components/schemas/BetaAppReviewSubmission',
+                        buildBetaDetails: '#/components/schemas/BuildBetaDetail',
+                        buildIcons: '#/components/schemas/BuildIcon',
+                        buildUploads: '#/components/schemas/BuildUpload',
+                        appStoreVersions: '#/components/schemas/AppStoreVersion',
+                        preReleaseVersions: '#/components/schemas/PrereleaseVersion',
+                        buildBundles: '#/components/schemas/BuildBundle',
+                        betaTesters: '#/components/schemas/BetaTester',
+                        apps: '#/components/schemas/App',
+                        betaBuildLocalizations: '#/components/schemas/BetaBuildLocalization'
+                    }
+                }
             }
         },
         links: {
@@ -16431,39 +18295,59 @@ export const BuildResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/PrereleaseVersion'
-                    },
-                    {
-                        '$ref': '#/components/schemas/BetaTester'
-                    },
-                    {
-                        '$ref': '#/components/schemas/BetaGroup'
-                    },
-                    {
-                        '$ref': '#/components/schemas/BetaBuildLocalization'
-                    },
-                    {
                         '$ref': '#/components/schemas/AppEncryptionDeclaration'
-                    },
-                    {
-                        '$ref': '#/components/schemas/BetaAppReviewSubmission'
-                    },
-                    {
-                        '$ref': '#/components/schemas/App'
-                    },
-                    {
-                        '$ref': '#/components/schemas/BuildBetaDetail'
                     },
                     {
                         '$ref': '#/components/schemas/AppStoreVersion'
                     },
                     {
-                        '$ref': '#/components/schemas/BuildIcon'
+                        '$ref': '#/components/schemas/App'
+                    },
+                    {
+                        '$ref': '#/components/schemas/BetaAppReviewSubmission'
+                    },
+                    {
+                        '$ref': '#/components/schemas/BetaBuildLocalization'
+                    },
+                    {
+                        '$ref': '#/components/schemas/BetaGroup'
+                    },
+                    {
+                        '$ref': '#/components/schemas/BetaTester'
+                    },
+                    {
+                        '$ref': '#/components/schemas/BuildBetaDetail'
                     },
                     {
                         '$ref': '#/components/schemas/BuildBundle'
+                    },
+                    {
+                        '$ref': '#/components/schemas/BuildIcon'
+                    },
+                    {
+                        '$ref': '#/components/schemas/BuildUpload'
+                    },
+                    {
+                        '$ref': '#/components/schemas/PrereleaseVersion'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        betaGroups: '#/components/schemas/BetaGroup',
+                        appEncryptionDeclarations: '#/components/schemas/AppEncryptionDeclaration',
+                        betaAppReviewSubmissions: '#/components/schemas/BetaAppReviewSubmission',
+                        buildBetaDetails: '#/components/schemas/BuildBetaDetail',
+                        buildIcons: '#/components/schemas/BuildIcon',
+                        buildUploads: '#/components/schemas/BuildUpload',
+                        appStoreVersions: '#/components/schemas/AppStoreVersion',
+                        preReleaseVersions: '#/components/schemas/PrereleaseVersion',
+                        buildBundles: '#/components/schemas/BuildBundle',
+                        betaTesters: '#/components/schemas/BetaTester',
+                        apps: '#/components/schemas/App',
+                        betaBuildLocalizations: '#/components/schemas/BetaBuildLocalization'
+                    }
+                }
             }
         },
         links: {
@@ -16491,10 +18375,12 @@ export const BuildUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         expired: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         usesNonExemptEncryption: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     }
                 },
@@ -16615,7 +18501,8 @@ export const BundleIdCapabilityCreateRequestSchema = {
                             type: 'array',
                             items: {
                                 '$ref': '#/components/schemas/CapabilitySetting'
-                            }
+                            },
+                            nullable: true
                         }
                     },
                     required: ['capabilityType']
@@ -16670,13 +18557,15 @@ export const BundleIdCapabilityUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         capabilityType: {
+                            nullable: true,
                             '$ref': '#/components/schemas/CapabilityType'
                         },
                         settings: {
                             type: 'array',
                             items: {
                                 '$ref': '#/components/schemas/CapabilitySetting'
-                            }
+                            },
+                            nullable: true
                         }
                     }
                 }
@@ -16817,15 +18706,23 @@ export const BundleIdsResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/Profile'
+                        '$ref': '#/components/schemas/App'
                     },
                     {
                         '$ref': '#/components/schemas/BundleIdCapability'
                     },
                     {
-                        '$ref': '#/components/schemas/App'
+                        '$ref': '#/components/schemas/Profile'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        bundleIdCapabilities: '#/components/schemas/BundleIdCapability',
+                        profiles: '#/components/schemas/Profile',
+                        apps: '#/components/schemas/App'
+                    }
+                }
             }
         },
         links: {
@@ -16850,15 +18747,23 @@ export const BundleIdResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/Profile'
+                        '$ref': '#/components/schemas/App'
                     },
                     {
                         '$ref': '#/components/schemas/BundleIdCapability'
                     },
                     {
-                        '$ref': '#/components/schemas/App'
+                        '$ref': '#/components/schemas/Profile'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        bundleIdCapabilities: '#/components/schemas/BundleIdCapability',
+                        profiles: '#/components/schemas/Profile',
+                        apps: '#/components/schemas/App'
+                    }
+                }
             }
         },
         links: {
@@ -16892,7 +18797,8 @@ export const BundleIdCreateRequestSchema = {
                             type: 'string'
                         },
                         seedId: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         }
                     },
                     required: ['identifier', 'name', 'platform']
@@ -16922,7 +18828,8 @@ export const BundleIdUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         name: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         }
                     }
                 }
@@ -17142,7 +19049,8 @@ export const CertificateUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         activated: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     }
                 }
@@ -17617,10 +19525,10 @@ export const CiBuildRunsResponseSchema = {
                         '$ref': '#/components/schemas/Build'
                     },
                     {
-                        '$ref': '#/components/schemas/CiWorkflow'
+                        '$ref': '#/components/schemas/CiProduct'
                     },
                     {
-                        '$ref': '#/components/schemas/CiProduct'
+                        '$ref': '#/components/schemas/CiWorkflow'
                     },
                     {
                         '$ref': '#/components/schemas/ScmGitReference'
@@ -17628,7 +19536,17 @@ export const CiBuildRunsResponseSchema = {
                     {
                         '$ref': '#/components/schemas/ScmPullRequest'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        ciProducts: '#/components/schemas/CiProduct',
+                        builds: '#/components/schemas/Build',
+                        scmPullRequests: '#/components/schemas/ScmPullRequest',
+                        ciWorkflows: '#/components/schemas/CiWorkflow',
+                        scmGitReferences: '#/components/schemas/ScmGitReference'
+                    }
+                }
             }
         },
         links: {
@@ -17656,10 +19574,10 @@ export const CiBuildRunResponseSchema = {
                         '$ref': '#/components/schemas/Build'
                     },
                     {
-                        '$ref': '#/components/schemas/CiWorkflow'
+                        '$ref': '#/components/schemas/CiProduct'
                     },
                     {
-                        '$ref': '#/components/schemas/CiProduct'
+                        '$ref': '#/components/schemas/CiWorkflow'
                     },
                     {
                         '$ref': '#/components/schemas/ScmGitReference'
@@ -17667,7 +19585,17 @@ export const CiBuildRunResponseSchema = {
                     {
                         '$ref': '#/components/schemas/ScmPullRequest'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        ciProducts: '#/components/schemas/CiProduct',
+                        builds: '#/components/schemas/Build',
+                        scmPullRequests: '#/components/schemas/ScmPullRequest',
+                        ciWorkflows: '#/components/schemas/CiWorkflow',
+                        scmGitReferences: '#/components/schemas/ScmGitReference'
+                    }
+                }
             }
         },
         links: {
@@ -17692,7 +19620,8 @@ export const CiBuildRunCreateRequestSchema = {
                     type: 'object',
                     properties: {
                         clean: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     }
                 },
@@ -18109,7 +20038,15 @@ export const CiProductsResponseSchema = {
                     {
                         '$ref': '#/components/schemas/ScmRepository'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        scmRepositories: '#/components/schemas/ScmRepository',
+                        bundleIds: '#/components/schemas/BundleId',
+                        apps: '#/components/schemas/App'
+                    }
+                }
             }
         },
         links: {
@@ -18142,7 +20079,15 @@ export const CiProductResponseSchema = {
                     {
                         '$ref': '#/components/schemas/ScmRepository'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        scmRepositories: '#/components/schemas/ScmRepository',
+                        bundleIds: '#/components/schemas/BundleId',
+                        apps: '#/components/schemas/App'
+                    }
+                }
             }
         },
         links: {
@@ -18422,18 +20367,27 @@ export const CiWorkflowsResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/CiProduct'
+                        '$ref': '#/components/schemas/CiMacOsVersion'
                     },
                     {
-                        '$ref': '#/components/schemas/ScmRepository'
+                        '$ref': '#/components/schemas/CiProduct'
                     },
                     {
                         '$ref': '#/components/schemas/CiXcodeVersion'
                     },
                     {
-                        '$ref': '#/components/schemas/CiMacOsVersion'
+                        '$ref': '#/components/schemas/ScmRepository'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        scmRepositories: '#/components/schemas/ScmRepository',
+                        ciMacOsVersions: '#/components/schemas/CiMacOsVersion',
+                        ciProducts: '#/components/schemas/CiProduct',
+                        ciXcodeVersions: '#/components/schemas/CiXcodeVersion'
+                    }
+                }
             }
         },
         links: {
@@ -18458,18 +20412,27 @@ export const CiWorkflowResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/CiProduct'
+                        '$ref': '#/components/schemas/CiMacOsVersion'
                     },
                     {
-                        '$ref': '#/components/schemas/ScmRepository'
+                        '$ref': '#/components/schemas/CiProduct'
                     },
                     {
                         '$ref': '#/components/schemas/CiXcodeVersion'
                     },
                     {
-                        '$ref': '#/components/schemas/CiMacOsVersion'
+                        '$ref': '#/components/schemas/ScmRepository'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        scmRepositories: '#/components/schemas/ScmRepository',
+                        ciMacOsVersions: '#/components/schemas/CiMacOsVersion',
+                        ciProducts: '#/components/schemas/CiProduct',
+                        ciXcodeVersions: '#/components/schemas/CiXcodeVersion'
+                    }
+                }
             }
         },
         links: {
@@ -18500,24 +20463,31 @@ export const CiWorkflowCreateRequestSchema = {
                             type: 'string'
                         },
                         branchStartCondition: {
+                            nullable: true,
                             '$ref': '#/components/schemas/CiBranchStartCondition'
                         },
                         tagStartCondition: {
+                            nullable: true,
                             '$ref': '#/components/schemas/CiTagStartCondition'
                         },
                         pullRequestStartCondition: {
+                            nullable: true,
                             '$ref': '#/components/schemas/CiPullRequestStartCondition'
                         },
                         scheduledStartCondition: {
+                            nullable: true,
                             '$ref': '#/components/schemas/CiScheduledStartCondition'
                         },
                         manualBranchStartCondition: {
+                            nullable: true,
                             '$ref': '#/components/schemas/CiManualBranchStartCondition'
                         },
                         manualTagStartCondition: {
+                            nullable: true,
                             '$ref': '#/components/schemas/CiManualTagStartCondition'
                         },
                         manualPullRequestStartCondition: {
+                            nullable: true,
                             '$ref': '#/components/schemas/CiManualPullRequestStartCondition'
                         },
                         actions: {
@@ -18530,7 +20500,8 @@ export const CiWorkflowCreateRequestSchema = {
                             type: 'boolean'
                         },
                         isLockedForEditing: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         clean: {
                             type: 'boolean'
@@ -18648,49 +20619,63 @@ export const CiWorkflowUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         name: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         description: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         branchStartCondition: {
+                            nullable: true,
                             '$ref': '#/components/schemas/CiBranchStartCondition'
                         },
                         tagStartCondition: {
+                            nullable: true,
                             '$ref': '#/components/schemas/CiTagStartCondition'
                         },
                         pullRequestStartCondition: {
+                            nullable: true,
                             '$ref': '#/components/schemas/CiPullRequestStartCondition'
                         },
                         scheduledStartCondition: {
+                            nullable: true,
                             '$ref': '#/components/schemas/CiScheduledStartCondition'
                         },
                         manualBranchStartCondition: {
+                            nullable: true,
                             '$ref': '#/components/schemas/CiManualBranchStartCondition'
                         },
                         manualTagStartCondition: {
+                            nullable: true,
                             '$ref': '#/components/schemas/CiManualTagStartCondition'
                         },
                         manualPullRequestStartCondition: {
+                            nullable: true,
                             '$ref': '#/components/schemas/CiManualPullRequestStartCondition'
                         },
                         actions: {
                             type: 'array',
                             items: {
                                 '$ref': '#/components/schemas/CiAction'
-                            }
+                            },
+                            nullable: true
                         },
                         isEnabled: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         isLockedForEditing: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         clean: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         containerFilePath: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         }
                     }
                 },
@@ -19342,10 +21327,12 @@ export const DeviceUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         name: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         status: {
                             type: 'string',
+                            nullable: true,
                             enum: ['ENABLED', 'DISABLED']
                         }
                     }
@@ -19615,7 +21602,14 @@ export const EndUserLicenseAgreementResponseSchema = {
                     {
                         '$ref': '#/components/schemas/Territory'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        territories: '#/components/schemas/Territory',
+                        apps: '#/components/schemas/App'
+                    }
+                }
             }
         },
         links: {
@@ -19717,7 +21711,8 @@ export const EndUserLicenseAgreementUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         agreementText: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         }
                     }
                 },
@@ -19911,7 +21906,8 @@ export const GameCenterAchievementImageUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         uploaded: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     }
                 }
@@ -20019,12 +22015,19 @@ export const GameCenterAchievementLocalizationsResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/GameCenterAchievement'
+                        '$ref': '#/components/schemas/GameCenterAchievementImage'
                     },
                     {
-                        '$ref': '#/components/schemas/GameCenterAchievementImage'
+                        '$ref': '#/components/schemas/GameCenterAchievement'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterAchievements: '#/components/schemas/GameCenterAchievement',
+                        gameCenterAchievementImages: '#/components/schemas/GameCenterAchievementImage'
+                    }
+                }
             }
         },
         links: {
@@ -20049,12 +22052,19 @@ export const GameCenterAchievementLocalizationResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/GameCenterAchievement'
+                        '$ref': '#/components/schemas/GameCenterAchievementImage'
                     },
                     {
-                        '$ref': '#/components/schemas/GameCenterAchievementImage'
+                        '$ref': '#/components/schemas/GameCenterAchievement'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterAchievements: '#/components/schemas/GameCenterAchievement',
+                        gameCenterAchievementImages: '#/components/schemas/GameCenterAchievementImage'
+                    }
+                }
             }
         },
         links: {
@@ -20143,13 +22153,16 @@ export const GameCenterAchievementLocalizationUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         name: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         beforeEarnedDescription: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         afterEarnedDescription: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         }
                     }
                 }
@@ -20242,12 +22255,19 @@ export const GameCenterAchievementReleasesResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/GameCenterDetail'
+                        '$ref': '#/components/schemas/GameCenterAchievement'
                     },
                     {
-                        '$ref': '#/components/schemas/GameCenterAchievement'
+                        '$ref': '#/components/schemas/GameCenterDetail'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterDetails: '#/components/schemas/GameCenterDetail',
+                        gameCenterAchievements: '#/components/schemas/GameCenterAchievement'
+                    }
+                }
             }
         },
         links: {
@@ -20272,12 +22292,19 @@ export const GameCenterAchievementReleaseResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/GameCenterDetail'
+                        '$ref': '#/components/schemas/GameCenterAchievement'
                     },
                     {
-                        '$ref': '#/components/schemas/GameCenterAchievement'
+                        '$ref': '#/components/schemas/GameCenterDetail'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterDetails: '#/components/schemas/GameCenterDetail',
+                        gameCenterAchievements: '#/components/schemas/GameCenterAchievement'
+                    }
+                }
             }
         },
         links: {
@@ -20546,24 +22573,35 @@ export const GameCenterAchievementsResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/GameCenterDetail'
-                    },
-                    {
-                        '$ref': '#/components/schemas/GameCenterGroup'
-                    },
-                    {
-                        '$ref': '#/components/schemas/GameCenterAchievement'
-                    },
-                    {
                         '$ref': '#/components/schemas/GameCenterAchievementLocalization'
                     },
                     {
                         '$ref': '#/components/schemas/GameCenterAchievementRelease'
                     },
                     {
+                        '$ref': '#/components/schemas/GameCenterAchievement'
+                    },
+                    {
                         '$ref': '#/components/schemas/GameCenterActivity'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterDetail'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterGroup'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterDetails: '#/components/schemas/GameCenterDetail',
+                        gameCenterActivities: '#/components/schemas/GameCenterActivity',
+                        gameCenterGroups: '#/components/schemas/GameCenterGroup',
+                        gameCenterAchievementLocalizations: '#/components/schemas/GameCenterAchievementLocalization',
+                        gameCenterAchievements: '#/components/schemas/GameCenterAchievement',
+                        gameCenterAchievementReleases: '#/components/schemas/GameCenterAchievementRelease'
+                    }
+                }
             }
         },
         links: {
@@ -20588,24 +22626,35 @@ export const GameCenterAchievementResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/GameCenterDetail'
-                    },
-                    {
-                        '$ref': '#/components/schemas/GameCenterGroup'
-                    },
-                    {
-                        '$ref': '#/components/schemas/GameCenterAchievement'
-                    },
-                    {
                         '$ref': '#/components/schemas/GameCenterAchievementLocalization'
                     },
                     {
                         '$ref': '#/components/schemas/GameCenterAchievementRelease'
                     },
                     {
+                        '$ref': '#/components/schemas/GameCenterAchievement'
+                    },
+                    {
                         '$ref': '#/components/schemas/GameCenterActivity'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterDetail'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterGroup'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterDetails: '#/components/schemas/GameCenterDetail',
+                        gameCenterActivities: '#/components/schemas/GameCenterActivity',
+                        gameCenterGroups: '#/components/schemas/GameCenterGroup',
+                        gameCenterAchievementLocalizations: '#/components/schemas/GameCenterAchievementLocalization',
+                        gameCenterAchievements: '#/components/schemas/GameCenterAchievement',
+                        gameCenterAchievementReleases: '#/components/schemas/GameCenterAchievementRelease'
+                    }
+                }
             }
         },
         links: {
@@ -20645,6 +22694,7 @@ export const GameCenterAchievementCreateRequestSchema = {
                             type: 'boolean'
                         },
                         activityProperties: {
+                            nullable: true,
                             '$ref': '#/components/schemas/StringToStringMap'
                         }
                     },
@@ -20716,21 +22766,27 @@ export const GameCenterAchievementUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         referenceName: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         points: {
-                            type: 'integer'
+                            type: 'integer',
+                            nullable: true
                         },
                         showBeforeEarned: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         repeatable: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         archived: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         activityProperties: {
+                            nullable: true,
                             '$ref': '#/components/schemas/StringToStringMap'
                         }
                     }
@@ -20927,21 +22983,31 @@ export const GameCenterActivitiesResponseSchema = {
             items: {
                 oneOf: [
                     {
+                        '$ref': '#/components/schemas/GameCenterAchievement'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterActivityVersion'
+                    },
+                    {
                         '$ref': '#/components/schemas/GameCenterDetail'
                     },
                     {
                         '$ref': '#/components/schemas/GameCenterGroup'
                     },
                     {
-                        '$ref': '#/components/schemas/GameCenterAchievement'
-                    },
-                    {
                         '$ref': '#/components/schemas/GameCenterLeaderboard'
-                    },
-                    {
-                        '$ref': '#/components/schemas/GameCenterActivityVersion'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterDetails: '#/components/schemas/GameCenterDetail',
+                        gameCenterGroups: '#/components/schemas/GameCenterGroup',
+                        gameCenterAchievements: '#/components/schemas/GameCenterAchievement',
+                        gameCenterActivityVersions: '#/components/schemas/GameCenterActivityVersion',
+                        gameCenterLeaderboards: '#/components/schemas/GameCenterLeaderboard'
+                    }
+                }
             }
         },
         links: {
@@ -20966,21 +23032,31 @@ export const GameCenterActivityResponseSchema = {
             items: {
                 oneOf: [
                     {
+                        '$ref': '#/components/schemas/GameCenterAchievement'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterActivityVersion'
+                    },
+                    {
                         '$ref': '#/components/schemas/GameCenterDetail'
                     },
                     {
                         '$ref': '#/components/schemas/GameCenterGroup'
                     },
                     {
-                        '$ref': '#/components/schemas/GameCenterAchievement'
-                    },
-                    {
                         '$ref': '#/components/schemas/GameCenterLeaderboard'
-                    },
-                    {
-                        '$ref': '#/components/schemas/GameCenterActivityVersion'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterDetails: '#/components/schemas/GameCenterDetail',
+                        gameCenterGroups: '#/components/schemas/GameCenterGroup',
+                        gameCenterAchievements: '#/components/schemas/GameCenterAchievement',
+                        gameCenterActivityVersions: '#/components/schemas/GameCenterActivityVersion',
+                        gameCenterLeaderboards: '#/components/schemas/GameCenterLeaderboard'
+                    }
+                }
             }
         },
         links: {
@@ -21012,18 +23088,23 @@ export const GameCenterActivityCreateRequestSchema = {
                         },
                         playStyle: {
                             type: 'string',
+                            nullable: true,
                             enum: ['ASYNCHRONOUS', 'SYNCHRONOUS']
                         },
                         minimumPlayersCount: {
-                            type: 'integer'
+                            type: 'integer',
+                            nullable: true
                         },
                         maximumPlayersCount: {
-                            type: 'integer'
+                            type: 'integer',
+                            nullable: true
                         },
                         supportsPartyCode: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         properties: {
+                            nullable: true,
                             '$ref': '#/components/schemas/StringToStringMap'
                         }
                     },
@@ -21095,25 +23176,32 @@ export const GameCenterActivityUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         referenceName: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         playStyle: {
                             type: 'string',
+                            nullable: true,
                             enum: ['ASYNCHRONOUS', 'SYNCHRONOUS']
                         },
                         minimumPlayersCount: {
-                            type: 'integer'
+                            type: 'integer',
+                            nullable: true
                         },
                         maximumPlayersCount: {
-                            type: 'integer'
+                            type: 'integer',
+                            nullable: true
                         },
                         supportsPartyCode: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         archived: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         properties: {
+                            nullable: true,
                             '$ref': '#/components/schemas/StringToStringMap'
                         }
                     }
@@ -21269,7 +23357,8 @@ export const GameCenterActivityImageUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         uploaded: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     }
                 }
@@ -21371,12 +23460,19 @@ export const GameCenterActivityLocalizationsResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/GameCenterActivityVersion'
+                        '$ref': '#/components/schemas/GameCenterActivityImage'
                     },
                     {
-                        '$ref': '#/components/schemas/GameCenterActivityImage'
+                        '$ref': '#/components/schemas/GameCenterActivityVersion'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterActivityImages: '#/components/schemas/GameCenterActivityImage',
+                        gameCenterActivityVersions: '#/components/schemas/GameCenterActivityVersion'
+                    }
+                }
             }
         },
         links: {
@@ -21401,12 +23497,19 @@ export const GameCenterActivityLocalizationResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/GameCenterActivityVersion'
+                        '$ref': '#/components/schemas/GameCenterActivityImage'
                     },
                     {
-                        '$ref': '#/components/schemas/GameCenterActivityImage'
+                        '$ref': '#/components/schemas/GameCenterActivityVersion'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterActivityImages: '#/components/schemas/GameCenterActivityImage',
+                        gameCenterActivityVersions: '#/components/schemas/GameCenterActivityVersion'
+                    }
+                }
             }
         },
         links: {
@@ -21437,7 +23540,8 @@ export const GameCenterActivityLocalizationCreateRequestSchema = {
                             type: 'string'
                         },
                         description: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         }
                     },
                     required: ['name', 'locale']
@@ -21492,10 +23596,12 @@ export const GameCenterActivityLocalizationUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         name: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         description: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         }
                     }
                 }
@@ -21800,15 +23906,24 @@ export const GameCenterActivityVersionsResponseSchema = {
                         '$ref': '#/components/schemas/GameCenterActivity'
                     },
                     {
-                        '$ref': '#/components/schemas/GameCenterActivityLocalization'
+                        '$ref': '#/components/schemas/GameCenterActivityImage'
                     },
                     {
-                        '$ref': '#/components/schemas/GameCenterActivityImage'
+                        '$ref': '#/components/schemas/GameCenterActivityLocalization'
                     },
                     {
                         '$ref': '#/components/schemas/GameCenterActivityVersionRelease'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterActivityImages: '#/components/schemas/GameCenterActivityImage',
+                        gameCenterActivityLocalizations: '#/components/schemas/GameCenterActivityLocalization',
+                        gameCenterActivities: '#/components/schemas/GameCenterActivity',
+                        gameCenterActivityVersionReleases: '#/components/schemas/GameCenterActivityVersionRelease'
+                    }
+                }
             }
         },
         links: {
@@ -21836,15 +23951,24 @@ export const GameCenterActivityVersionResponseSchema = {
                         '$ref': '#/components/schemas/GameCenterActivity'
                     },
                     {
-                        '$ref': '#/components/schemas/GameCenterActivityLocalization'
+                        '$ref': '#/components/schemas/GameCenterActivityImage'
                     },
                     {
-                        '$ref': '#/components/schemas/GameCenterActivityImage'
+                        '$ref': '#/components/schemas/GameCenterActivityLocalization'
                     },
                     {
                         '$ref': '#/components/schemas/GameCenterActivityVersionRelease'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterActivityImages: '#/components/schemas/GameCenterActivityImage',
+                        gameCenterActivityLocalizations: '#/components/schemas/GameCenterActivityLocalization',
+                        gameCenterActivities: '#/components/schemas/GameCenterActivity',
+                        gameCenterActivityVersionReleases: '#/components/schemas/GameCenterActivityVersionRelease'
+                    }
+                }
             }
         },
         links: {
@@ -21869,7 +23993,8 @@ export const GameCenterActivityVersionCreateRequestSchema = {
                     type: 'object',
                     properties: {
                         fallbackUrl: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         }
                     }
                 },
@@ -21923,7 +24048,8 @@ export const GameCenterActivityVersionUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         fallbackUrl: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         }
                     }
                 }
@@ -22028,12 +24154,19 @@ export const GameCenterAppVersionsResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/GameCenterAppVersion'
+                        '$ref': '#/components/schemas/AppStoreVersion'
                     },
                     {
-                        '$ref': '#/components/schemas/AppStoreVersion'
+                        '$ref': '#/components/schemas/GameCenterAppVersion'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        appStoreVersions: '#/components/schemas/AppStoreVersion',
+                        gameCenterAppVersions: '#/components/schemas/GameCenterAppVersion'
+                    }
+                }
             }
         },
         links: {
@@ -22058,12 +24191,19 @@ export const GameCenterAppVersionResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/GameCenterAppVersion'
+                        '$ref': '#/components/schemas/AppStoreVersion'
                     },
                     {
-                        '$ref': '#/components/schemas/AppStoreVersion'
+                        '$ref': '#/components/schemas/GameCenterAppVersion'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        appStoreVersions: '#/components/schemas/AppStoreVersion',
+                        gameCenterAppVersions: '#/components/schemas/GameCenterAppVersion'
+                    }
+                }
             }
         },
         links: {
@@ -22134,7 +24274,8 @@ export const GameCenterAppVersionUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         enabled: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     }
                 }
@@ -22289,7 +24430,8 @@ export const GameCenterChallengeImageUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         uploaded: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     }
                 }
@@ -22391,12 +24533,19 @@ export const GameCenterChallengeLocalizationsResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/GameCenterChallengeVersion'
+                        '$ref': '#/components/schemas/GameCenterChallengeImage'
                     },
                     {
-                        '$ref': '#/components/schemas/GameCenterChallengeImage'
+                        '$ref': '#/components/schemas/GameCenterChallengeVersion'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterChallengeVersions: '#/components/schemas/GameCenterChallengeVersion',
+                        gameCenterChallengeImages: '#/components/schemas/GameCenterChallengeImage'
+                    }
+                }
             }
         },
         links: {
@@ -22421,12 +24570,19 @@ export const GameCenterChallengeLocalizationResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/GameCenterChallengeVersion'
+                        '$ref': '#/components/schemas/GameCenterChallengeImage'
                     },
                     {
-                        '$ref': '#/components/schemas/GameCenterChallengeImage'
+                        '$ref': '#/components/schemas/GameCenterChallengeVersion'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterChallengeVersions: '#/components/schemas/GameCenterChallengeVersion',
+                        gameCenterChallengeImages: '#/components/schemas/GameCenterChallengeImage'
+                    }
+                }
             }
         },
         links: {
@@ -22457,7 +24613,8 @@ export const GameCenterChallengeLocalizationCreateRequestSchema = {
                             type: 'string'
                         },
                         description: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         }
                     },
                     required: ['name', 'locale']
@@ -22512,10 +24669,12 @@ export const GameCenterChallengeLocalizationUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         name: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         description: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         }
                     }
                 }
@@ -22814,7 +24973,7 @@ export const GameCenterChallengeVersionsResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/GameCenterChallenge'
+                        '$ref': '#/components/schemas/GameCenterChallengeImage'
                     },
                     {
                         '$ref': '#/components/schemas/GameCenterChallengeLocalization'
@@ -22823,9 +24982,18 @@ export const GameCenterChallengeVersionsResponseSchema = {
                         '$ref': '#/components/schemas/GameCenterChallengeVersionRelease'
                     },
                     {
-                        '$ref': '#/components/schemas/GameCenterChallengeImage'
+                        '$ref': '#/components/schemas/GameCenterChallenge'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterChallengeLocalizations: '#/components/schemas/GameCenterChallengeLocalization',
+                        gameCenterChallenges: '#/components/schemas/GameCenterChallenge',
+                        gameCenterChallengeImages: '#/components/schemas/GameCenterChallengeImage',
+                        gameCenterChallengeVersionReleases: '#/components/schemas/GameCenterChallengeVersionRelease'
+                    }
+                }
             }
         },
         links: {
@@ -22850,7 +25018,7 @@ export const GameCenterChallengeVersionResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/GameCenterChallenge'
+                        '$ref': '#/components/schemas/GameCenterChallengeImage'
                     },
                     {
                         '$ref': '#/components/schemas/GameCenterChallengeLocalization'
@@ -22859,9 +25027,18 @@ export const GameCenterChallengeVersionResponseSchema = {
                         '$ref': '#/components/schemas/GameCenterChallengeVersionRelease'
                     },
                     {
-                        '$ref': '#/components/schemas/GameCenterChallengeImage'
+                        '$ref': '#/components/schemas/GameCenterChallenge'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterChallengeLocalizations: '#/components/schemas/GameCenterChallengeLocalization',
+                        gameCenterChallenges: '#/components/schemas/GameCenterChallenge',
+                        gameCenterChallengeImages: '#/components/schemas/GameCenterChallengeImage',
+                        gameCenterChallengeVersionReleases: '#/components/schemas/GameCenterChallengeVersionRelease'
+                    }
+                }
             }
         },
         links: {
@@ -22933,13 +25110,6 @@ export const GameCenterChallengeSchema = {
                 },
                 vendorIdentifier: {
                     type: 'string'
-                },
-                allowedDurations: {
-                    type: 'array',
-                    items: {
-                        type: 'string',
-                        enum: ['ONE_DAY', 'THREE_DAYS', 'ONE_WEEK']
-                    }
                 },
                 archived: {
                     type: 'boolean'
@@ -23064,18 +25234,27 @@ export const GameCenterChallengesResponseSchema = {
             items: {
                 oneOf: [
                     {
+                        '$ref': '#/components/schemas/GameCenterChallengeVersion'
+                    },
+                    {
                         '$ref': '#/components/schemas/GameCenterDetail'
                     },
                     {
                         '$ref': '#/components/schemas/GameCenterGroup'
                     },
                     {
-                        '$ref': '#/components/schemas/GameCenterChallengeVersion'
-                    },
-                    {
                         '$ref': '#/components/schemas/GameCenterLeaderboard'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterChallengeVersions: '#/components/schemas/GameCenterChallengeVersion',
+                        gameCenterDetails: '#/components/schemas/GameCenterDetail',
+                        gameCenterGroups: '#/components/schemas/GameCenterGroup',
+                        gameCenterLeaderboards: '#/components/schemas/GameCenterLeaderboard'
+                    }
+                }
             }
         },
         links: {
@@ -23100,18 +25279,27 @@ export const GameCenterChallengeResponseSchema = {
             items: {
                 oneOf: [
                     {
+                        '$ref': '#/components/schemas/GameCenterChallengeVersion'
+                    },
+                    {
                         '$ref': '#/components/schemas/GameCenterDetail'
                     },
                     {
                         '$ref': '#/components/schemas/GameCenterGroup'
                     },
                     {
-                        '$ref': '#/components/schemas/GameCenterChallengeVersion'
-                    },
-                    {
                         '$ref': '#/components/schemas/GameCenterLeaderboard'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterChallengeVersions: '#/components/schemas/GameCenterChallengeVersion',
+                        gameCenterDetails: '#/components/schemas/GameCenterDetail',
+                        gameCenterGroups: '#/components/schemas/GameCenterGroup',
+                        gameCenterLeaderboards: '#/components/schemas/GameCenterLeaderboard'
+                    }
+                }
             }
         },
         links: {
@@ -23141,19 +25329,13 @@ export const GameCenterChallengeCreateRequestSchema = {
                         vendorIdentifier: {
                             type: 'string'
                         },
-                        allowedDurations: {
-                            type: 'array',
-                            items: {
-                                type: 'string',
-                                enum: ['ONE_DAY', 'THREE_DAYS', 'ONE_WEEK']
-                            }
-                        },
                         challengeType: {
                             type: 'string',
                             enum: ['LEADERBOARD']
                         },
                         repeatable: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     },
                     required: ['vendorIdentifier', 'challengeType', 'referenceName']
@@ -23242,20 +25424,16 @@ export const GameCenterChallengeUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         referenceName: {
-                            type: 'string'
-                        },
-                        allowedDurations: {
-                            type: 'array',
-                            items: {
-                                type: 'string',
-                                enum: ['ONE_DAY', 'THREE_DAYS', 'ONE_WEEK']
-                            }
+                            type: 'string',
+                            nullable: true
                         },
                         archived: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         repeatable: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     }
                 },
@@ -23738,19 +25916,13 @@ export const GameCenterDetailsResponseSchema = {
             items: {
                 oneOf: [
                     {
+                        '$ref': '#/components/schemas/AppStoreVersion'
+                    },
+                    {
                         '$ref': '#/components/schemas/App'
                     },
                     {
-                        '$ref': '#/components/schemas/GameCenterAppVersion'
-                    },
-                    {
-                        '$ref': '#/components/schemas/GameCenterGroup'
-                    },
-                    {
-                        '$ref': '#/components/schemas/GameCenterLeaderboard'
-                    },
-                    {
-                        '$ref': '#/components/schemas/GameCenterLeaderboardSet'
+                        '$ref': '#/components/schemas/GameCenterAchievementRelease'
                     },
                     {
                         '$ref': '#/components/schemas/GameCenterAchievement'
@@ -23759,16 +25931,19 @@ export const GameCenterDetailsResponseSchema = {
                         '$ref': '#/components/schemas/GameCenterActivity'
                     },
                     {
-                        '$ref': '#/components/schemas/GameCenterChallenge'
-                    },
-                    {
-                        '$ref': '#/components/schemas/GameCenterAchievementRelease'
-                    },
-                    {
                         '$ref': '#/components/schemas/GameCenterActivityVersionRelease'
                     },
                     {
+                        '$ref': '#/components/schemas/GameCenterAppVersion'
+                    },
+                    {
                         '$ref': '#/components/schemas/GameCenterChallengeVersionRelease'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterChallenge'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterGroup'
                     },
                     {
                         '$ref': '#/components/schemas/GameCenterLeaderboardRelease'
@@ -23777,9 +25952,31 @@ export const GameCenterDetailsResponseSchema = {
                         '$ref': '#/components/schemas/GameCenterLeaderboardSetRelease'
                     },
                     {
-                        '$ref': '#/components/schemas/AppStoreVersion'
+                        '$ref': '#/components/schemas/GameCenterLeaderboardSet'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterLeaderboard'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterLeaderboardReleases: '#/components/schemas/GameCenterLeaderboardRelease',
+                        gameCenterActivities: '#/components/schemas/GameCenterActivity',
+                        gameCenterGroups: '#/components/schemas/GameCenterGroup',
+                        gameCenterAchievementReleases: '#/components/schemas/GameCenterAchievementRelease',
+                        gameCenterLeaderboardSetReleases: '#/components/schemas/GameCenterLeaderboardSetRelease',
+                        gameCenterAppVersions: '#/components/schemas/GameCenterAppVersion',
+                        gameCenterChallengeVersionReleases: '#/components/schemas/GameCenterChallengeVersionRelease',
+                        gameCenterLeaderboards: '#/components/schemas/GameCenterLeaderboard',
+                        gameCenterLeaderboardSets: '#/components/schemas/GameCenterLeaderboardSet',
+                        appStoreVersions: '#/components/schemas/AppStoreVersion',
+                        gameCenterAchievements: '#/components/schemas/GameCenterAchievement',
+                        gameCenterChallenges: '#/components/schemas/GameCenterChallenge',
+                        apps: '#/components/schemas/App',
+                        gameCenterActivityVersionReleases: '#/components/schemas/GameCenterActivityVersionRelease'
+                    }
+                }
             }
         },
         links: {
@@ -23804,19 +26001,13 @@ export const GameCenterDetailResponseSchema = {
             items: {
                 oneOf: [
                     {
+                        '$ref': '#/components/schemas/AppStoreVersion'
+                    },
+                    {
                         '$ref': '#/components/schemas/App'
                     },
                     {
-                        '$ref': '#/components/schemas/GameCenterAppVersion'
-                    },
-                    {
-                        '$ref': '#/components/schemas/GameCenterGroup'
-                    },
-                    {
-                        '$ref': '#/components/schemas/GameCenterLeaderboard'
-                    },
-                    {
-                        '$ref': '#/components/schemas/GameCenterLeaderboardSet'
+                        '$ref': '#/components/schemas/GameCenterAchievementRelease'
                     },
                     {
                         '$ref': '#/components/schemas/GameCenterAchievement'
@@ -23825,16 +26016,19 @@ export const GameCenterDetailResponseSchema = {
                         '$ref': '#/components/schemas/GameCenterActivity'
                     },
                     {
-                        '$ref': '#/components/schemas/GameCenterChallenge'
-                    },
-                    {
-                        '$ref': '#/components/schemas/GameCenterAchievementRelease'
-                    },
-                    {
                         '$ref': '#/components/schemas/GameCenterActivityVersionRelease'
                     },
                     {
+                        '$ref': '#/components/schemas/GameCenterAppVersion'
+                    },
+                    {
                         '$ref': '#/components/schemas/GameCenterChallengeVersionRelease'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterChallenge'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterGroup'
                     },
                     {
                         '$ref': '#/components/schemas/GameCenterLeaderboardRelease'
@@ -23843,9 +26037,31 @@ export const GameCenterDetailResponseSchema = {
                         '$ref': '#/components/schemas/GameCenterLeaderboardSetRelease'
                     },
                     {
-                        '$ref': '#/components/schemas/AppStoreVersion'
+                        '$ref': '#/components/schemas/GameCenterLeaderboardSet'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterLeaderboard'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterLeaderboardReleases: '#/components/schemas/GameCenterLeaderboardRelease',
+                        gameCenterActivities: '#/components/schemas/GameCenterActivity',
+                        gameCenterGroups: '#/components/schemas/GameCenterGroup',
+                        gameCenterAchievementReleases: '#/components/schemas/GameCenterAchievementRelease',
+                        gameCenterLeaderboardSetReleases: '#/components/schemas/GameCenterLeaderboardSetRelease',
+                        gameCenterAppVersions: '#/components/schemas/GameCenterAppVersion',
+                        gameCenterChallengeVersionReleases: '#/components/schemas/GameCenterChallengeVersionRelease',
+                        gameCenterLeaderboards: '#/components/schemas/GameCenterLeaderboard',
+                        gameCenterLeaderboardSets: '#/components/schemas/GameCenterLeaderboardSet',
+                        appStoreVersions: '#/components/schemas/AppStoreVersion',
+                        gameCenterAchievements: '#/components/schemas/GameCenterAchievement',
+                        gameCenterChallenges: '#/components/schemas/GameCenterChallenge',
+                        apps: '#/components/schemas/App',
+                        gameCenterActivityVersionReleases: '#/components/schemas/GameCenterActivityVersionRelease'
+                    }
+                }
             }
         },
         links: {
@@ -23871,7 +26087,8 @@ export const GameCenterDetailCreateRequestSchema = {
                     properties: {
                         challengeEnabled: {
                             type: 'boolean',
-                            deprecated: true
+                            deprecated: true,
+                            nullable: true
                         }
                     }
                 },
@@ -23926,7 +26143,8 @@ export const GameCenterDetailUpdateRequestSchema = {
                     properties: {
                         challengeEnabled: {
                             type: 'boolean',
-                            deprecated: true
+                            deprecated: true,
+                            nullable: true
                         }
                     }
                 },
@@ -24094,12 +26312,19 @@ export const GameCenterEnabledVersionsResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/GameCenterEnabledVersion'
+                        '$ref': '#/components/schemas/App'
                     },
                     {
-                        '$ref': '#/components/schemas/App'
+                        '$ref': '#/components/schemas/GameCenterEnabledVersion'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterEnabledVersions: '#/components/schemas/GameCenterEnabledVersion',
+                        apps: '#/components/schemas/App'
+                    }
+                }
             }
         },
         links: {
@@ -24321,15 +26546,6 @@ export const GameCenterGroupsResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/GameCenterDetail'
-                    },
-                    {
-                        '$ref': '#/components/schemas/GameCenterLeaderboard'
-                    },
-                    {
-                        '$ref': '#/components/schemas/GameCenterLeaderboardSet'
-                    },
-                    {
                         '$ref': '#/components/schemas/GameCenterAchievement'
                     },
                     {
@@ -24337,8 +26553,28 @@ export const GameCenterGroupsResponseSchema = {
                     },
                     {
                         '$ref': '#/components/schemas/GameCenterChallenge'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterDetail'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterLeaderboardSet'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterLeaderboard'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterDetails: '#/components/schemas/GameCenterDetail',
+                        gameCenterLeaderboardSets: '#/components/schemas/GameCenterLeaderboardSet',
+                        gameCenterActivities: '#/components/schemas/GameCenterActivity',
+                        gameCenterAchievements: '#/components/schemas/GameCenterAchievement',
+                        gameCenterChallenges: '#/components/schemas/GameCenterChallenge',
+                        gameCenterLeaderboards: '#/components/schemas/GameCenterLeaderboard'
+                    }
+                }
             }
         },
         links: {
@@ -24363,15 +26599,6 @@ export const GameCenterGroupResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/GameCenterDetail'
-                    },
-                    {
-                        '$ref': '#/components/schemas/GameCenterLeaderboard'
-                    },
-                    {
-                        '$ref': '#/components/schemas/GameCenterLeaderboardSet'
-                    },
-                    {
                         '$ref': '#/components/schemas/GameCenterAchievement'
                     },
                     {
@@ -24379,8 +26606,28 @@ export const GameCenterGroupResponseSchema = {
                     },
                     {
                         '$ref': '#/components/schemas/GameCenterChallenge'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterDetail'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterLeaderboardSet'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterLeaderboard'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterDetails: '#/components/schemas/GameCenterDetail',
+                        gameCenterLeaderboardSets: '#/components/schemas/GameCenterLeaderboardSet',
+                        gameCenterActivities: '#/components/schemas/GameCenterActivity',
+                        gameCenterAchievements: '#/components/schemas/GameCenterAchievement',
+                        gameCenterChallenges: '#/components/schemas/GameCenterChallenge',
+                        gameCenterLeaderboards: '#/components/schemas/GameCenterLeaderboard'
+                    }
+                }
             }
         },
         links: {
@@ -24405,7 +26652,8 @@ export const GameCenterGroupCreateRequestSchema = {
                     type: 'object',
                     properties: {
                         referenceName: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         }
                     }
                 }
@@ -24434,7 +26682,8 @@ export const GameCenterGroupUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         referenceName: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         }
                     }
                 }
@@ -24530,11 +26779,13 @@ export const GameCenterLeaderboardEntrySubmissionCreateRequestSchema = {
                             type: 'array',
                             items: {
                                 type: 'string'
-                            }
+                            },
+                            nullable: true
                         },
                         context: {
                             type: 'string',
-                            format: 'number'
+                            format: 'number',
+                            nullable: true
                         },
                         scopedPlayerId: {
                             type: 'string'
@@ -24545,7 +26796,8 @@ export const GameCenterLeaderboardEntrySubmissionCreateRequestSchema = {
                         },
                         submittedDate: {
                             type: 'string',
-                            format: 'date-time'
+                            format: 'date-time',
+                            nullable: true
                         },
                         vendorIdentifier: {
                             type: 'string'
@@ -24717,7 +26969,8 @@ export const GameCenterLeaderboardImageUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         uploaded: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     }
                 }
@@ -24755,6 +27008,9 @@ export const GameCenterLeaderboardLocalizationSchema = {
                     type: 'string'
                 },
                 formatterSuffixSingular: {
+                    type: 'string'
+                },
+                description: {
                     type: 'string'
                 }
             }
@@ -24825,12 +27081,19 @@ export const GameCenterLeaderboardLocalizationsResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/GameCenterLeaderboard'
+                        '$ref': '#/components/schemas/GameCenterLeaderboardImage'
                     },
                     {
-                        '$ref': '#/components/schemas/GameCenterLeaderboardImage'
+                        '$ref': '#/components/schemas/GameCenterLeaderboard'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterLeaderboardImages: '#/components/schemas/GameCenterLeaderboardImage',
+                        gameCenterLeaderboards: '#/components/schemas/GameCenterLeaderboard'
+                    }
+                }
             }
         },
         links: {
@@ -24855,12 +27118,19 @@ export const GameCenterLeaderboardLocalizationResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/GameCenterLeaderboard'
+                        '$ref': '#/components/schemas/GameCenterLeaderboardImage'
                     },
                     {
-                        '$ref': '#/components/schemas/GameCenterLeaderboardImage'
+                        '$ref': '#/components/schemas/GameCenterLeaderboard'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterLeaderboardImages: '#/components/schemas/GameCenterLeaderboardImage',
+                        gameCenterLeaderboards: '#/components/schemas/GameCenterLeaderboard'
+                    }
+                }
             }
         },
         links: {
@@ -24891,13 +27161,20 @@ export const GameCenterLeaderboardLocalizationCreateRequestSchema = {
                             type: 'string'
                         },
                         formatterOverride: {
+                            nullable: true,
                             '$ref': '#/components/schemas/GameCenterLeaderboardFormatter'
                         },
                         formatterSuffix: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         formatterSuffixSingular: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
+                        },
+                        description: {
+                            type: 'string',
+                            nullable: true
                         }
                     },
                     required: ['name', 'locale']
@@ -24952,16 +27229,24 @@ export const GameCenterLeaderboardLocalizationUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         name: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         formatterOverride: {
+                            nullable: true,
                             '$ref': '#/components/schemas/GameCenterLeaderboardFormatter'
                         },
                         formatterSuffix: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         formatterSuffixSingular: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
+                        },
+                        description: {
+                            type: 'string',
+                            nullable: true
                         }
                     }
                 }
@@ -25059,7 +27344,14 @@ export const GameCenterLeaderboardReleasesResponseSchema = {
                     {
                         '$ref': '#/components/schemas/GameCenterLeaderboard'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterDetails: '#/components/schemas/GameCenterDetail',
+                        gameCenterLeaderboards: '#/components/schemas/GameCenterLeaderboard'
+                    }
+                }
             }
         },
         links: {
@@ -25089,7 +27381,14 @@ export const GameCenterLeaderboardReleaseResponseSchema = {
                     {
                         '$ref': '#/components/schemas/GameCenterLeaderboard'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterDetails: '#/components/schemas/GameCenterDetail',
+                        gameCenterLeaderboards: '#/components/schemas/GameCenterLeaderboard'
+                    }
+                }
             }
         },
         links: {
@@ -25318,7 +27617,8 @@ export const GameCenterLeaderboardSetImageUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         uploaded: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     }
                 }
@@ -25417,12 +27717,19 @@ export const GameCenterLeaderboardSetLocalizationsResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/GameCenterLeaderboardSet'
+                        '$ref': '#/components/schemas/GameCenterLeaderboardSetImage'
                     },
                     {
-                        '$ref': '#/components/schemas/GameCenterLeaderboardSetImage'
+                        '$ref': '#/components/schemas/GameCenterLeaderboardSet'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterLeaderboardSets: '#/components/schemas/GameCenterLeaderboardSet',
+                        gameCenterLeaderboardSetImages: '#/components/schemas/GameCenterLeaderboardSetImage'
+                    }
+                }
             }
         },
         links: {
@@ -25447,12 +27754,19 @@ export const GameCenterLeaderboardSetLocalizationResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/GameCenterLeaderboardSet'
+                        '$ref': '#/components/schemas/GameCenterLeaderboardSetImage'
                     },
                     {
-                        '$ref': '#/components/schemas/GameCenterLeaderboardSetImage'
+                        '$ref': '#/components/schemas/GameCenterLeaderboardSet'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterLeaderboardSets: '#/components/schemas/GameCenterLeaderboardSet',
+                        gameCenterLeaderboardSetImages: '#/components/schemas/GameCenterLeaderboardSetImage'
+                    }
+                }
             }
         },
         links: {
@@ -25535,7 +27849,8 @@ export const GameCenterLeaderboardSetLocalizationUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         name: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         }
                     }
                 }
@@ -25642,7 +27957,14 @@ export const GameCenterLeaderboardSetMemberLocalizationsResponseSchema = {
                     {
                         '$ref': '#/components/schemas/GameCenterLeaderboard'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterLeaderboardSets: '#/components/schemas/GameCenterLeaderboardSet',
+                        gameCenterLeaderboards: '#/components/schemas/GameCenterLeaderboard'
+                    }
+                }
             }
         },
         links: {
@@ -25672,7 +27994,14 @@ export const GameCenterLeaderboardSetMemberLocalizationResponseSchema = {
                     {
                         '$ref': '#/components/schemas/GameCenterLeaderboard'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterLeaderboardSets: '#/components/schemas/GameCenterLeaderboardSet',
+                        gameCenterLeaderboards: '#/components/schemas/GameCenterLeaderboard'
+                    }
+                }
             }
         },
         links: {
@@ -25697,10 +28026,12 @@ export const GameCenterLeaderboardSetMemberLocalizationCreateRequestSchema = {
                     type: 'object',
                     properties: {
                         name: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         locale: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         }
                     }
                 },
@@ -25773,7 +28104,8 @@ export const GameCenterLeaderboardSetMemberLocalizationUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         name: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         }
                     }
                 }
@@ -25871,7 +28203,14 @@ export const GameCenterLeaderboardSetReleasesResponseSchema = {
                     {
                         '$ref': '#/components/schemas/GameCenterLeaderboardSet'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterDetails: '#/components/schemas/GameCenterDetail',
+                        gameCenterLeaderboardSets: '#/components/schemas/GameCenterLeaderboardSet'
+                    }
+                }
             }
         },
         links: {
@@ -25901,7 +28240,14 @@ export const GameCenterLeaderboardSetReleaseResponseSchema = {
                     {
                         '$ref': '#/components/schemas/GameCenterLeaderboardSet'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterDetails: '#/components/schemas/GameCenterDetail',
+                        gameCenterLeaderboardSets: '#/components/schemas/GameCenterLeaderboardSet'
+                    }
+                }
             }
         },
         links: {
@@ -26167,18 +28513,29 @@ export const GameCenterLeaderboardSetsResponseSchema = {
                         '$ref': '#/components/schemas/GameCenterGroup'
                     },
                     {
-                        '$ref': '#/components/schemas/GameCenterLeaderboardSet'
-                    },
-                    {
                         '$ref': '#/components/schemas/GameCenterLeaderboardSetLocalization'
                     },
                     {
-                        '$ref': '#/components/schemas/GameCenterLeaderboard'
+                        '$ref': '#/components/schemas/GameCenterLeaderboardSetRelease'
                     },
                     {
-                        '$ref': '#/components/schemas/GameCenterLeaderboardSetRelease'
+                        '$ref': '#/components/schemas/GameCenterLeaderboardSet'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterLeaderboard'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterDetails: '#/components/schemas/GameCenterDetail',
+                        gameCenterLeaderboardSets: '#/components/schemas/GameCenterLeaderboardSet',
+                        gameCenterGroups: '#/components/schemas/GameCenterGroup',
+                        gameCenterLeaderboardSetReleases: '#/components/schemas/GameCenterLeaderboardSetRelease',
+                        gameCenterLeaderboardSetLocalizations: '#/components/schemas/GameCenterLeaderboardSetLocalization',
+                        gameCenterLeaderboards: '#/components/schemas/GameCenterLeaderboard'
+                    }
+                }
             }
         },
         links: {
@@ -26209,18 +28566,29 @@ export const GameCenterLeaderboardSetResponseSchema = {
                         '$ref': '#/components/schemas/GameCenterGroup'
                     },
                     {
-                        '$ref': '#/components/schemas/GameCenterLeaderboardSet'
-                    },
-                    {
                         '$ref': '#/components/schemas/GameCenterLeaderboardSetLocalization'
                     },
                     {
-                        '$ref': '#/components/schemas/GameCenterLeaderboard'
+                        '$ref': '#/components/schemas/GameCenterLeaderboardSetRelease'
                     },
                     {
-                        '$ref': '#/components/schemas/GameCenterLeaderboardSetRelease'
+                        '$ref': '#/components/schemas/GameCenterLeaderboardSet'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterLeaderboard'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterDetails: '#/components/schemas/GameCenterDetail',
+                        gameCenterLeaderboardSets: '#/components/schemas/GameCenterLeaderboardSet',
+                        gameCenterGroups: '#/components/schemas/GameCenterGroup',
+                        gameCenterLeaderboardSetReleases: '#/components/schemas/GameCenterLeaderboardSetRelease',
+                        gameCenterLeaderboardSetLocalizations: '#/components/schemas/GameCenterLeaderboardSetLocalization',
+                        gameCenterLeaderboards: '#/components/schemas/GameCenterLeaderboard'
+                    }
+                }
             }
         },
         links: {
@@ -26340,7 +28708,8 @@ export const GameCenterLeaderboardSetUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         referenceName: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         }
                     }
                 }
@@ -26618,16 +28987,16 @@ export const GameCenterLeaderboardsResponseSchema = {
             items: {
                 oneOf: [
                     {
+                        '$ref': '#/components/schemas/GameCenterActivity'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterChallenge'
+                    },
+                    {
                         '$ref': '#/components/schemas/GameCenterDetail'
                     },
                     {
                         '$ref': '#/components/schemas/GameCenterGroup'
-                    },
-                    {
-                        '$ref': '#/components/schemas/GameCenterLeaderboard'
-                    },
-                    {
-                        '$ref': '#/components/schemas/GameCenterLeaderboardSet'
                     },
                     {
                         '$ref': '#/components/schemas/GameCenterLeaderboardLocalization'
@@ -26636,12 +29005,25 @@ export const GameCenterLeaderboardsResponseSchema = {
                         '$ref': '#/components/schemas/GameCenterLeaderboardRelease'
                     },
                     {
-                        '$ref': '#/components/schemas/GameCenterActivity'
+                        '$ref': '#/components/schemas/GameCenterLeaderboardSet'
                     },
                     {
-                        '$ref': '#/components/schemas/GameCenterChallenge'
+                        '$ref': '#/components/schemas/GameCenterLeaderboard'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterLeaderboardReleases: '#/components/schemas/GameCenterLeaderboardRelease',
+                        gameCenterDetails: '#/components/schemas/GameCenterDetail',
+                        gameCenterLeaderboardSets: '#/components/schemas/GameCenterLeaderboardSet',
+                        gameCenterActivities: '#/components/schemas/GameCenterActivity',
+                        gameCenterGroups: '#/components/schemas/GameCenterGroup',
+                        gameCenterLeaderboardLocalizations: '#/components/schemas/GameCenterLeaderboardLocalization',
+                        gameCenterChallenges: '#/components/schemas/GameCenterChallenge',
+                        gameCenterLeaderboards: '#/components/schemas/GameCenterLeaderboard'
+                    }
+                }
             }
         },
         links: {
@@ -26666,16 +29048,16 @@ export const GameCenterLeaderboardResponseSchema = {
             items: {
                 oneOf: [
                     {
+                        '$ref': '#/components/schemas/GameCenterActivity'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterChallenge'
+                    },
+                    {
                         '$ref': '#/components/schemas/GameCenterDetail'
                     },
                     {
                         '$ref': '#/components/schemas/GameCenterGroup'
-                    },
-                    {
-                        '$ref': '#/components/schemas/GameCenterLeaderboard'
-                    },
-                    {
-                        '$ref': '#/components/schemas/GameCenterLeaderboardSet'
                     },
                     {
                         '$ref': '#/components/schemas/GameCenterLeaderboardLocalization'
@@ -26684,12 +29066,25 @@ export const GameCenterLeaderboardResponseSchema = {
                         '$ref': '#/components/schemas/GameCenterLeaderboardRelease'
                     },
                     {
-                        '$ref': '#/components/schemas/GameCenterActivity'
+                        '$ref': '#/components/schemas/GameCenterLeaderboardSet'
                     },
                     {
-                        '$ref': '#/components/schemas/GameCenterChallenge'
+                        '$ref': '#/components/schemas/GameCenterLeaderboard'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterLeaderboardReleases: '#/components/schemas/GameCenterLeaderboardRelease',
+                        gameCenterDetails: '#/components/schemas/GameCenterDetail',
+                        gameCenterLeaderboardSets: '#/components/schemas/GameCenterLeaderboardSet',
+                        gameCenterActivities: '#/components/schemas/GameCenterActivity',
+                        gameCenterGroups: '#/components/schemas/GameCenterGroup',
+                        gameCenterLeaderboardLocalizations: '#/components/schemas/GameCenterLeaderboardLocalization',
+                        gameCenterChallenges: '#/components/schemas/GameCenterChallenge',
+                        gameCenterLeaderboards: '#/components/schemas/GameCenterLeaderboard'
+                    }
+                }
             }
         },
         links: {
@@ -26732,28 +29127,35 @@ export const GameCenterLeaderboardCreateRequestSchema = {
                         },
                         scoreRangeStart: {
                             type: 'string',
-                            format: 'number'
+                            format: 'number',
+                            nullable: true
                         },
                         scoreRangeEnd: {
                             type: 'string',
-                            format: 'number'
+                            format: 'number',
+                            nullable: true
                         },
                         recurrenceStartDate: {
                             type: 'string',
-                            format: 'date-time'
+                            format: 'date-time',
+                            nullable: true
                         },
                         recurrenceDuration: {
                             type: 'string',
-                            format: 'duration'
+                            format: 'duration',
+                            nullable: true
                         },
                         recurrenceRule: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         activityProperties: {
+                            nullable: true,
                             '$ref': '#/components/schemas/StringToStringMap'
                         },
                         visibility: {
                             type: 'string',
+                            nullable: true,
                             enum: ['SHOW_FOR_ALL', 'HIDE_FOR_ALL']
                         }
                     },
@@ -26846,46 +29248,58 @@ export const GameCenterLeaderboardUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         defaultFormatter: {
+                            nullable: true,
                             '$ref': '#/components/schemas/GameCenterLeaderboardFormatter'
                         },
                         referenceName: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         submissionType: {
                             type: 'string',
+                            nullable: true,
                             enum: ['BEST_SCORE', 'MOST_RECENT_SCORE']
                         },
                         scoreSortType: {
                             type: 'string',
+                            nullable: true,
                             enum: ['ASC', 'DESC']
                         },
                         scoreRangeStart: {
                             type: 'string',
-                            format: 'number'
+                            format: 'number',
+                            nullable: true
                         },
                         scoreRangeEnd: {
                             type: 'string',
-                            format: 'number'
+                            format: 'number',
+                            nullable: true
                         },
                         recurrenceStartDate: {
                             type: 'string',
-                            format: 'date-time'
+                            format: 'date-time',
+                            nullable: true
                         },
                         recurrenceDuration: {
                             type: 'string',
-                            format: 'duration'
+                            format: 'duration',
+                            nullable: true
                         },
                         recurrenceRule: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         archived: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         activityProperties: {
+                            nullable: true,
                             '$ref': '#/components/schemas/StringToStringMap'
                         },
                         visibility: {
                             type: 'string',
+                            nullable: true,
                             enum: ['SHOW_FOR_ALL', 'HIDE_FOR_ALL']
                         }
                     }
@@ -27037,7 +29451,8 @@ export const GameCenterMatchmakingQueueCreateRequestSchema = {
                             type: 'array',
                             items: {
                                 type: 'string'
-                            }
+                            },
+                            nullable: true
                         }
                     },
                     required: ['referenceName']
@@ -27113,7 +29528,8 @@ export const GameCenterMatchmakingQueueUpdateRequestSchema = {
                             type: 'array',
                             items: {
                                 type: 'string'
-                            }
+                            },
+                            nullable: true
                         }
                     }
                 },
@@ -27214,6 +29630,26 @@ export const GameCenterMatchmakingRuleSetTestResponseSchema = {
     properties: {
         data: {
             '$ref': '#/components/schemas/GameCenterMatchmakingRuleSetTest'
+        },
+        included: {
+            type: 'array',
+            items: {
+                oneOf: [
+                    {
+                        '$ref': '#/components/schemas/GameCenterMatchmakingTestPlayerProperty'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterMatchmakingTestRequest'
+                    }
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterMatchmakingTestRequests: '#/components/schemas/GameCenterMatchmakingTestRequest',
+                        gameCenterMatchmakingTestPlayerProperties: '#/components/schemas/GameCenterMatchmakingTestPlayerProperty'
+                    }
+                }
+            }
         },
         links: {
             '$ref': '#/components/schemas/DocumentLinks'
@@ -27436,15 +29872,23 @@ export const GameCenterMatchmakingRuleSetsResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/GameCenterMatchmakingTeam'
+                        '$ref': '#/components/schemas/GameCenterMatchmakingQueue'
                     },
                     {
                         '$ref': '#/components/schemas/GameCenterMatchmakingRule'
                     },
                     {
-                        '$ref': '#/components/schemas/GameCenterMatchmakingQueue'
+                        '$ref': '#/components/schemas/GameCenterMatchmakingTeam'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterMatchmakingQueues: '#/components/schemas/GameCenterMatchmakingQueue',
+                        gameCenterMatchmakingTeams: '#/components/schemas/GameCenterMatchmakingTeam',
+                        gameCenterMatchmakingRules: '#/components/schemas/GameCenterMatchmakingRule'
+                    }
+                }
             }
         },
         links: {
@@ -27469,15 +29913,23 @@ export const GameCenterMatchmakingRuleSetResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/GameCenterMatchmakingTeam'
+                        '$ref': '#/components/schemas/GameCenterMatchmakingQueue'
                     },
                     {
                         '$ref': '#/components/schemas/GameCenterMatchmakingRule'
                     },
                     {
-                        '$ref': '#/components/schemas/GameCenterMatchmakingQueue'
+                        '$ref': '#/components/schemas/GameCenterMatchmakingTeam'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterMatchmakingQueues: '#/components/schemas/GameCenterMatchmakingQueue',
+                        gameCenterMatchmakingTeams: '#/components/schemas/GameCenterMatchmakingTeam',
+                        gameCenterMatchmakingRules: '#/components/schemas/GameCenterMatchmakingRule'
+                    }
+                }
             }
         },
         links: {
@@ -27541,10 +29993,12 @@ export const GameCenterMatchmakingRuleSetUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         minPlayers: {
-                            type: 'integer'
+                            type: 'integer',
+                            nullable: true
                         },
                         maxPlayers: {
-                            type: 'integer'
+                            type: 'integer',
+                            nullable: true
                         }
                     }
                 }
@@ -27656,7 +30110,8 @@ export const GameCenterMatchmakingRuleCreateRequestSchema = {
                             type: 'string'
                         },
                         weight: {
-                            type: 'number'
+                            type: 'number',
+                            nullable: true
                         }
                     },
                     required: ['expression', 'description', 'type', 'referenceName']
@@ -27711,13 +30166,16 @@ export const GameCenterMatchmakingRuleUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         description: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         expression: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         weight: {
-                            type: 'number'
+                            type: 'number',
+                            nullable: true
                         }
                     }
                 }
@@ -27870,10 +30328,12 @@ export const GameCenterMatchmakingTeamUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         minPlayers: {
-                            type: 'integer'
+                            type: 'integer',
+                            nullable: true
                         },
                         maxPlayers: {
-                            type: 'integer'
+                            type: 'integer',
+                            nullable: true
                         }
                     }
                 }
@@ -27882,6 +30342,24 @@ export const GameCenterMatchmakingTeamUpdateRequestSchema = {
         }
     },
     required: ['data']
+} as const;
+
+export const GameCenterMatchmakingTestPlayerPropertySchema = {
+    type: 'object',
+    title: 'GameCenterMatchmakingTestPlayerProperty',
+    properties: {
+        type: {
+            type: 'string',
+            enum: ['gameCenterMatchmakingTestPlayerProperties']
+        },
+        id: {
+            type: 'string'
+        },
+        links: {
+            '$ref': '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: ['id', 'type']
 } as const;
 
 export const GameCenterMatchmakingTestPlayerPropertyInlineCreateSchema = {
@@ -27904,13 +30382,32 @@ export const GameCenterMatchmakingTestPlayerPropertyInlineCreateSchema = {
                     type: 'array',
                     items: {
                         '$ref': '#/components/schemas/Property'
-                    }
+                    },
+                    nullable: true
                 }
             },
             required: ['playerId']
         }
     },
     required: ['attributes', 'type']
+} as const;
+
+export const GameCenterMatchmakingTestRequestSchema = {
+    type: 'object',
+    title: 'GameCenterMatchmakingTestRequest',
+    properties: {
+        type: {
+            type: 'string',
+            enum: ['gameCenterMatchmakingTestRequests']
+        },
+        id: {
+            type: 'string'
+        },
+        links: {
+            '$ref': '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: ['id', 'type']
 } as const;
 
 export const GameCenterMatchmakingTestRequestInlineCreateSchema = {
@@ -27934,19 +30431,24 @@ export const GameCenterMatchmakingTestRequestInlineCreateSchema = {
                 },
                 locale: {
                     type: 'string',
+                    nullable: true,
                     enum: ['AR-SA', 'CA-ES', 'CS-CZ', 'DA-DK', 'DE-DE', 'EL-GR', 'EN-AU', 'EN-GB', 'EN-US', 'EN-KY', 'ES-ES', 'ES-MX', 'FI-FI', 'FR-CA', 'FR-FR', 'HI-IN', 'HR-HR', 'HU-HU', 'ID-ID', 'IT-IT', 'IW-IL', 'JA-JP', 'KO-KR', 'MS-MY', 'NL-NL', 'NO-NO', 'PL-PL', 'PT-BR', 'PT-PT', 'RO-RO', 'RU-RU', 'SK-SK', 'SV-SE', 'TH-TH', 'TR-TR', 'UK-UA', 'ZH-CN', 'ZH-TW', 'ZH-HK']
                 },
                 location: {
+                    nullable: true,
                     '$ref': '#/components/schemas/Location'
                 },
                 minPlayers: {
-                    type: 'integer'
+                    type: 'integer',
+                    nullable: true
                 },
                 maxPlayers: {
-                    type: 'integer'
+                    type: 'integer',
+                    nullable: true
                 },
                 playerCount: {
-                    type: 'integer'
+                    type: 'integer',
+                    nullable: true
                 },
                 bundleId: {
                     type: 'string'
@@ -28070,7 +30572,8 @@ export const GameCenterPlayerAchievementSubmissionCreateRequestSchema = {
                             type: 'array',
                             items: {
                                 type: 'string'
-                            }
+                            },
+                            nullable: true
                         },
                         percentageAchieved: {
                             type: 'integer'
@@ -28080,7 +30583,8 @@ export const GameCenterPlayerAchievementSubmissionCreateRequestSchema = {
                         },
                         submittedDate: {
                             type: 'string',
-                            format: 'date-time'
+                            format: 'date-time',
+                            nullable: true
                         },
                         vendorIdentifier: {
                             type: 'string'
@@ -28261,10 +30765,12 @@ export const InAppPurchaseAppStoreReviewScreenshotUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         sourceFileChecksum: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         uploaded: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     }
                 }
@@ -28697,10 +31203,12 @@ export const InAppPurchaseImageUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         sourceFileChecksum: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         uploaded: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     }
                 }
@@ -28837,7 +31345,8 @@ export const InAppPurchaseLocalizationCreateRequestSchema = {
                             type: 'string'
                         },
                         description: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         }
                     },
                     required: ['name', 'locale']
@@ -28892,10 +31401,12 @@ export const InAppPurchaseLocalizationUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         name: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         description: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         }
                     }
                 }
@@ -29102,12 +31613,19 @@ export const InAppPurchasePriceScheduleResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/Territory'
+                        '$ref': '#/components/schemas/InAppPurchasePrice'
                     },
                     {
-                        '$ref': '#/components/schemas/InAppPurchasePrice'
+                        '$ref': '#/components/schemas/Territory'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        territories: '#/components/schemas/Territory',
+                        inAppPurchasePrices: '#/components/schemas/InAppPurchasePrice'
+                    }
+                }
             }
         },
         links: {
@@ -29304,11 +31822,13 @@ export const InAppPurchasePriceInlineCreateSchema = {
             properties: {
                 startDate: {
                     type: 'string',
-                    format: 'date'
+                    format: 'date',
+                    nullable: true
                 },
                 endDate: {
                     type: 'string',
-                    format: 'date'
+                    format: 'date',
+                    nullable: true
                 }
             }
         },
@@ -29377,7 +31897,14 @@ export const InAppPurchasePricesResponseSchema = {
                     {
                         '$ref': '#/components/schemas/Territory'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        territories: '#/components/schemas/Territory',
+                        inAppPurchasePricePoints: '#/components/schemas/InAppPurchasePricePoint'
+                    }
+                }
             }
         },
         links: {
@@ -29859,30 +32386,43 @@ export const InAppPurchasesV2ResponseSchema = {
             items: {
                 oneOf: [
                     {
+                        '$ref': '#/components/schemas/InAppPurchaseAppStoreReviewScreenshot'
+                    },
+                    {
+                        '$ref': '#/components/schemas/InAppPurchaseAvailability'
+                    },
+                    {
+                        '$ref': '#/components/schemas/InAppPurchaseContent'
+                    },
+                    {
+                        '$ref': '#/components/schemas/InAppPurchaseImage'
+                    },
+                    {
                         '$ref': '#/components/schemas/InAppPurchaseLocalization'
                     },
                     {
                         '$ref': '#/components/schemas/InAppPurchasePricePoint'
                     },
                     {
-                        '$ref': '#/components/schemas/InAppPurchaseContent'
-                    },
-                    {
-                        '$ref': '#/components/schemas/InAppPurchaseAppStoreReviewScreenshot'
-                    },
-                    {
-                        '$ref': '#/components/schemas/PromotedPurchase'
-                    },
-                    {
                         '$ref': '#/components/schemas/InAppPurchasePriceSchedule'
                     },
                     {
-                        '$ref': '#/components/schemas/InAppPurchaseAvailability'
-                    },
-                    {
-                        '$ref': '#/components/schemas/InAppPurchaseImage'
+                        '$ref': '#/components/schemas/PromotedPurchase'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        inAppPurchaseAppStoreReviewScreenshots: '#/components/schemas/InAppPurchaseAppStoreReviewScreenshot',
+                        inAppPurchaseContents: '#/components/schemas/InAppPurchaseContent',
+                        inAppPurchasePriceSchedules: '#/components/schemas/InAppPurchasePriceSchedule',
+                        promotedPurchases: '#/components/schemas/PromotedPurchase',
+                        inAppPurchaseImages: '#/components/schemas/InAppPurchaseImage',
+                        inAppPurchaseAvailabilities: '#/components/schemas/InAppPurchaseAvailability',
+                        inAppPurchasePricePoints: '#/components/schemas/InAppPurchasePricePoint',
+                        inAppPurchaseLocalizations: '#/components/schemas/InAppPurchaseLocalization'
+                    }
+                }
             }
         },
         links: {
@@ -29907,30 +32447,43 @@ export const InAppPurchaseV2ResponseSchema = {
             items: {
                 oneOf: [
                     {
+                        '$ref': '#/components/schemas/InAppPurchaseAppStoreReviewScreenshot'
+                    },
+                    {
+                        '$ref': '#/components/schemas/InAppPurchaseAvailability'
+                    },
+                    {
+                        '$ref': '#/components/schemas/InAppPurchaseContent'
+                    },
+                    {
+                        '$ref': '#/components/schemas/InAppPurchaseImage'
+                    },
+                    {
                         '$ref': '#/components/schemas/InAppPurchaseLocalization'
                     },
                     {
                         '$ref': '#/components/schemas/InAppPurchasePricePoint'
                     },
                     {
-                        '$ref': '#/components/schemas/InAppPurchaseContent'
-                    },
-                    {
-                        '$ref': '#/components/schemas/InAppPurchaseAppStoreReviewScreenshot'
-                    },
-                    {
-                        '$ref': '#/components/schemas/PromotedPurchase'
-                    },
-                    {
                         '$ref': '#/components/schemas/InAppPurchasePriceSchedule'
                     },
                     {
-                        '$ref': '#/components/schemas/InAppPurchaseAvailability'
-                    },
-                    {
-                        '$ref': '#/components/schemas/InAppPurchaseImage'
+                        '$ref': '#/components/schemas/PromotedPurchase'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        inAppPurchaseAppStoreReviewScreenshots: '#/components/schemas/InAppPurchaseAppStoreReviewScreenshot',
+                        inAppPurchaseContents: '#/components/schemas/InAppPurchaseContent',
+                        inAppPurchasePriceSchedules: '#/components/schemas/InAppPurchasePriceSchedule',
+                        promotedPurchases: '#/components/schemas/PromotedPurchase',
+                        inAppPurchaseImages: '#/components/schemas/InAppPurchaseImage',
+                        inAppPurchaseAvailabilities: '#/components/schemas/InAppPurchaseAvailability',
+                        inAppPurchasePricePoints: '#/components/schemas/InAppPurchasePricePoint',
+                        inAppPurchaseLocalizations: '#/components/schemas/InAppPurchaseLocalization'
+                    }
+                }
             }
         },
         links: {
@@ -29964,10 +32517,12 @@ export const InAppPurchaseV2CreateRequestSchema = {
                             '$ref': '#/components/schemas/InAppPurchaseType'
                         },
                         reviewNote: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         familySharable: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     },
                     required: ['productId', 'name', 'inAppPurchaseType']
@@ -30022,13 +32577,16 @@ export const InAppPurchaseV2UpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         name: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         reviewNote: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         familySharable: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     }
                 }
@@ -30152,7 +32710,8 @@ export const MarketplaceSearchDetailUpdateRequestSchema = {
                     properties: {
                         catalogUrl: {
                             type: 'string',
-                            format: 'uri'
+                            format: 'uri',
+                            nullable: true
                         }
                     }
                 }
@@ -30187,7 +32746,8 @@ export const MarketplaceWebhookSchema = {
             '$ref': '#/components/schemas/ResourceLinks'
         }
     },
-    required: ['id', 'type']
+    required: ['id', 'type'],
+    deprecated: true
 } as const;
 
 export const MarketplaceWebhooksResponseSchema = {
@@ -30207,7 +32767,8 @@ export const MarketplaceWebhooksResponseSchema = {
             '$ref': '#/components/schemas/PagingInformation'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const MarketplaceWebhookResponseSchema = {
@@ -30221,7 +32782,8 @@ export const MarketplaceWebhookResponseSchema = {
             '$ref': '#/components/schemas/DocumentLinks'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const MarketplaceWebhookCreateRequestSchema = {
@@ -30252,7 +32814,8 @@ export const MarketplaceWebhookCreateRequestSchema = {
             required: ['attributes', 'type']
         }
     },
-    required: ['data']
+    required: ['data'],
+    deprecated: true
 } as const;
 
 export const MarketplaceWebhookUpdateRequestSchema = {
@@ -30274,10 +32837,12 @@ export const MarketplaceWebhookUpdateRequestSchema = {
                     properties: {
                         endpointUrl: {
                             type: 'string',
-                            format: 'uri'
+                            format: 'uri',
+                            nullable: true
                         },
                         secret: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         }
                     }
                 }
@@ -30285,7 +32850,8 @@ export const MarketplaceWebhookUpdateRequestSchema = {
             required: ['id', 'type']
         }
     },
-    required: ['data']
+    required: ['data'],
+    deprecated: true
 } as const;
 
 export const MerchantIdSchema = {
@@ -30443,7 +33009,8 @@ export const MerchantIdUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         name: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         }
                     }
                 }
@@ -30688,18 +33255,27 @@ export const NominationsResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/App'
-                    },
-                    {
                         '$ref': '#/components/schemas/Actor'
                     },
                     {
                         '$ref': '#/components/schemas/AppEvent'
                     },
                     {
+                        '$ref': '#/components/schemas/App'
+                    },
+                    {
                         '$ref': '#/components/schemas/Territory'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        actors: '#/components/schemas/Actor',
+                        appEvents: '#/components/schemas/AppEvent',
+                        territories: '#/components/schemas/Territory',
+                        apps: '#/components/schemas/App'
+                    }
+                }
             }
         },
         links: {
@@ -30724,18 +33300,27 @@ export const NominationResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/App'
-                    },
-                    {
                         '$ref': '#/components/schemas/Actor'
                     },
                     {
                         '$ref': '#/components/schemas/AppEvent'
                     },
                     {
+                        '$ref': '#/components/schemas/App'
+                    },
+                    {
                         '$ref': '#/components/schemas/Territory'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        actors: '#/components/schemas/Actor',
+                        appEvents: '#/components/schemas/AppEvent',
+                        territories: '#/components/schemas/Territory',
+                        apps: '#/components/schemas/App'
+                    }
+                }
             }
         },
         links: {
@@ -30778,38 +33363,46 @@ export const NominationCreateRequestSchema = {
                         },
                         publishEndDate: {
                             type: 'string',
-                            format: 'date-time'
+                            format: 'date-time',
+                            nullable: true
                         },
                         deviceFamilies: {
                             type: 'array',
                             items: {
                                 '$ref': '#/components/schemas/DeviceFamily'
-                            }
+                            },
+                            nullable: true
                         },
                         locales: {
                             type: 'array',
                             items: {
                                 type: 'string'
-                            }
+                            },
+                            nullable: true
                         },
                         supplementalMaterialsUris: {
                             type: 'array',
                             items: {
                                 type: 'string',
                                 format: 'uri'
-                            }
+                            },
+                            nullable: true
                         },
                         hasInAppEvents: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         launchInSelectMarketsFirst: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         notes: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         preOrderEnabled: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     },
                     required: ['submitted', 'publishStartDate', 'name', 'description', 'type']
@@ -30909,59 +33502,73 @@ export const NominationUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         name: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         type: {
                             type: 'string',
+                            nullable: true,
                             enum: ['APP_LAUNCH', 'APP_ENHANCEMENTS', 'NEW_CONTENT']
                         },
                         description: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         submitted: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         archived: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         publishStartDate: {
                             type: 'string',
-                            format: 'date-time'
+                            format: 'date-time',
+                            nullable: true
                         },
                         publishEndDate: {
                             type: 'string',
-                            format: 'date-time'
+                            format: 'date-time',
+                            nullable: true
                         },
                         deviceFamilies: {
                             type: 'array',
                             items: {
                                 '$ref': '#/components/schemas/DeviceFamily'
-                            }
+                            },
+                            nullable: true
                         },
                         locales: {
                             type: 'array',
                             items: {
                                 type: 'string'
-                            }
+                            },
+                            nullable: true
                         },
                         supplementalMaterialsUris: {
                             type: 'array',
                             items: {
                                 type: 'string',
                                 format: 'uri'
-                            }
+                            },
+                            nullable: true
                         },
                         hasInAppEvents: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         launchInSelectMarketsFirst: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         notes: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         preOrderEnabled: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     }
                 },
@@ -31195,7 +33802,8 @@ export const PassTypeIdUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         name: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         }
                     }
                 }
@@ -31337,12 +33945,19 @@ export const PreReleaseVersionsResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/Build'
+                        '$ref': '#/components/schemas/App'
                     },
                     {
-                        '$ref': '#/components/schemas/App'
+                        '$ref': '#/components/schemas/Build'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        builds: '#/components/schemas/Build',
+                        apps: '#/components/schemas/App'
+                    }
+                }
             }
         },
         links: {
@@ -31367,12 +33982,19 @@ export const PrereleaseVersionResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/Build'
+                        '$ref': '#/components/schemas/App'
                     },
                     {
-                        '$ref': '#/components/schemas/App'
+                        '$ref': '#/components/schemas/Build'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        builds: '#/components/schemas/Build',
+                        apps: '#/components/schemas/App'
+                    }
+                }
             }
         },
         links: {
@@ -31531,12 +34153,20 @@ export const ProfilesResponseSchema = {
                         '$ref': '#/components/schemas/BundleId'
                     },
                     {
-                        '$ref': '#/components/schemas/Device'
+                        '$ref': '#/components/schemas/Certificate'
                     },
                     {
-                        '$ref': '#/components/schemas/Certificate'
+                        '$ref': '#/components/schemas/Device'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        certificates: '#/components/schemas/Certificate',
+                        devices: '#/components/schemas/Device',
+                        bundleIds: '#/components/schemas/BundleId'
+                    }
+                }
             }
         },
         links: {
@@ -31564,12 +34194,20 @@ export const ProfileResponseSchema = {
                         '$ref': '#/components/schemas/BundleId'
                     },
                     {
-                        '$ref': '#/components/schemas/Device'
+                        '$ref': '#/components/schemas/Certificate'
                     },
                     {
-                        '$ref': '#/components/schemas/Certificate'
+                        '$ref': '#/components/schemas/Device'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        certificates: '#/components/schemas/Certificate',
+                        devices: '#/components/schemas/Device',
+                        bundleIds: '#/components/schemas/BundleId'
+                    }
+                }
             }
         },
         links: {
@@ -31772,7 +34410,14 @@ export const PromotedPurchasesResponseSchema = {
                     {
                         '$ref': '#/components/schemas/Subscription'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        subscriptions: '#/components/schemas/Subscription',
+                        inAppPurchases: '#/components/schemas/InAppPurchaseV2'
+                    }
+                }
             }
         },
         links: {
@@ -31802,7 +34447,14 @@ export const PromotedPurchaseResponseSchema = {
                     {
                         '$ref': '#/components/schemas/Subscription'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        subscriptions: '#/components/schemas/Subscription',
+                        inAppPurchases: '#/components/schemas/InAppPurchaseV2'
+                    }
+                }
             }
         },
         links: {
@@ -31830,7 +34482,8 @@ export const PromotedPurchaseCreateRequestSchema = {
                             type: 'boolean'
                         },
                         enabled: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     },
                     required: ['visibleForAllUsers']
@@ -31921,10 +34574,12 @@ export const PromotedPurchaseUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         visibleForAllUsers: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         enabled: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     }
                 }
@@ -32047,6 +34702,24 @@ export const ReviewSubmissionItemSchema = {
                             required: ['id', 'type']
                         }
                     }
+                },
+                backgroundAssetVersion: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['backgroundAssetVersions']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
                 }
             }
         },
@@ -32072,21 +34745,31 @@ export const ReviewSubmissionItemsResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/AppStoreVersion'
+                        '$ref': '#/components/schemas/AppCustomProductPageVersion'
                     },
                     {
-                        '$ref': '#/components/schemas/AppCustomProductPageVersion'
+                        '$ref': '#/components/schemas/AppEvent'
                     },
                     {
                         '$ref': '#/components/schemas/AppStoreVersionExperiment'
                     },
                     {
-                        '$ref': '#/components/schemas/AppStoreVersionExperimentV2'
+                        '$ref': '#/components/schemas/AppStoreVersion'
                     },
                     {
-                        '$ref': '#/components/schemas/AppEvent'
+                        '$ref': '#/components/schemas/BackgroundAssetVersion'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        appEvents: '#/components/schemas/AppEvent',
+                        appStoreVersions: '#/components/schemas/AppStoreVersion',
+                        appStoreVersionExperiments: '#/components/schemas/AppStoreVersionExperiment',
+                        backgroundAssetVersions: '#/components/schemas/BackgroundAssetVersion',
+                        appCustomProductPageVersions: '#/components/schemas/AppCustomProductPageVersion'
+                    }
+                }
             }
         },
         links: {
@@ -32111,21 +34794,31 @@ export const ReviewSubmissionItemResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/AppStoreVersion'
+                        '$ref': '#/components/schemas/AppCustomProductPageVersion'
                     },
                     {
-                        '$ref': '#/components/schemas/AppCustomProductPageVersion'
+                        '$ref': '#/components/schemas/AppEvent'
                     },
                     {
                         '$ref': '#/components/schemas/AppStoreVersionExperiment'
                     },
                     {
-                        '$ref': '#/components/schemas/AppStoreVersionExperimentV2'
+                        '$ref': '#/components/schemas/AppStoreVersion'
                     },
                     {
-                        '$ref': '#/components/schemas/AppEvent'
+                        '$ref': '#/components/schemas/BackgroundAssetVersion'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        appEvents: '#/components/schemas/AppEvent',
+                        appStoreVersions: '#/components/schemas/AppStoreVersion',
+                        appStoreVersionExperiments: '#/components/schemas/AppStoreVersionExperiment',
+                        backgroundAssetVersions: '#/components/schemas/BackgroundAssetVersion',
+                        appCustomProductPageVersions: '#/components/schemas/AppCustomProductPageVersion'
+                    }
+                }
             }
         },
         links: {
@@ -32257,6 +34950,24 @@ export const ReviewSubmissionItemCreateRequestSchema = {
                                     required: ['id', 'type']
                                 }
                             }
+                        },
+                        backgroundAssetVersion: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: ['backgroundAssetVersions']
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: ['id', 'type']
+                                }
+                            }
                         }
                     },
                     required: ['reviewSubmission']
@@ -32286,10 +34997,12 @@ export const ReviewSubmissionItemUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         resolved: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         removed: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     }
                 }
@@ -32453,18 +35166,27 @@ export const ReviewSubmissionsResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/App'
-                    },
-                    {
-                        '$ref': '#/components/schemas/ReviewSubmissionItem'
+                        '$ref': '#/components/schemas/Actor'
                     },
                     {
                         '$ref': '#/components/schemas/AppStoreVersion'
                     },
                     {
-                        '$ref': '#/components/schemas/Actor'
+                        '$ref': '#/components/schemas/App'
+                    },
+                    {
+                        '$ref': '#/components/schemas/ReviewSubmissionItem'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        actors: '#/components/schemas/Actor',
+                        reviewSubmissionItems: '#/components/schemas/ReviewSubmissionItem',
+                        appStoreVersions: '#/components/schemas/AppStoreVersion',
+                        apps: '#/components/schemas/App'
+                    }
+                }
             }
         },
         links: {
@@ -32489,18 +35211,27 @@ export const ReviewSubmissionResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/App'
-                    },
-                    {
-                        '$ref': '#/components/schemas/ReviewSubmissionItem'
+                        '$ref': '#/components/schemas/Actor'
                     },
                     {
                         '$ref': '#/components/schemas/AppStoreVersion'
                     },
                     {
-                        '$ref': '#/components/schemas/Actor'
+                        '$ref': '#/components/schemas/App'
+                    },
+                    {
+                        '$ref': '#/components/schemas/ReviewSubmissionItem'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        actors: '#/components/schemas/Actor',
+                        reviewSubmissionItems: '#/components/schemas/ReviewSubmissionItem',
+                        appStoreVersions: '#/components/schemas/AppStoreVersion',
+                        apps: '#/components/schemas/App'
+                    }
+                }
             }
         },
         links: {
@@ -32525,6 +35256,7 @@ export const ReviewSubmissionCreateRequestSchema = {
                     type: 'object',
                     properties: {
                         platform: {
+                            nullable: true,
                             '$ref': '#/components/schemas/Platform'
                         }
                     }
@@ -32579,13 +35311,16 @@ export const ReviewSubmissionUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         platform: {
+                            nullable: true,
                             '$ref': '#/components/schemas/Platform'
                         },
                         submitted: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         canceled: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     }
                 }
@@ -32753,10 +35488,12 @@ export const RoutingAppCoverageUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         sourceFileChecksum: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         uploaded: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     }
                 }
@@ -32864,13 +35601,16 @@ export const SandboxTesterV2UpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         territory: {
+                            nullable: true,
                             '$ref': '#/components/schemas/TerritoryCode'
                         },
                         interruptPurchases: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         subscriptionRenewalRate: {
                             type: 'string',
+                            nullable: true,
                             enum: ['MONTHLY_RENEWAL_EVERY_ONE_HOUR', 'MONTHLY_RENEWAL_EVERY_THIRTY_MINUTES', 'MONTHLY_RENEWAL_EVERY_FIFTEEN_MINUTES', 'MONTHLY_RENEWAL_EVERY_FIVE_MINUTES', 'MONTHLY_RENEWAL_EVERY_THREE_MINUTES']
                         }
                     }
@@ -33380,12 +36120,19 @@ export const ScmRepositoriesResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/ScmProvider'
+                        '$ref': '#/components/schemas/ScmGitReference'
                     },
                     {
-                        '$ref': '#/components/schemas/ScmGitReference'
+                        '$ref': '#/components/schemas/ScmProvider'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        scmProviders: '#/components/schemas/ScmProvider',
+                        scmGitReferences: '#/components/schemas/ScmGitReference'
+                    }
+                }
             }
         },
         links: {
@@ -33410,12 +36157,19 @@ export const ScmRepositoryResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/ScmProvider'
+                        '$ref': '#/components/schemas/ScmGitReference'
                     },
                     {
-                        '$ref': '#/components/schemas/ScmGitReference'
+                        '$ref': '#/components/schemas/ScmProvider'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        scmProviders: '#/components/schemas/ScmProvider',
+                        scmGitReferences: '#/components/schemas/ScmGitReference'
+                    }
+                }
             }
         },
         links: {
@@ -33591,10 +36345,12 @@ export const SubscriptionAppStoreReviewScreenshotUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         sourceFileChecksum: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         uploaded: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     }
                 }
@@ -33825,16 +36581,20 @@ export const SubscriptionGracePeriodUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         optIn: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         sandboxOptIn: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         duration: {
+                            nullable: true,
                             '$ref': '#/components/schemas/SubscriptionGracePeriodDuration'
                         },
                         renewalType: {
                             type: 'string',
+                            nullable: true,
                             enum: ['ALL_RENEWALS', 'PAID_TO_PAID_ONLY']
                         }
                     }
@@ -33969,7 +36729,8 @@ export const SubscriptionGroupLocalizationCreateRequestSchema = {
                             type: 'string'
                         },
                         customAppName: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         locale: {
                             type: 'string'
@@ -34027,10 +36788,12 @@ export const SubscriptionGroupLocalizationUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         name: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         customAppName: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         }
                     }
                 }
@@ -34216,12 +36979,19 @@ export const SubscriptionGroupsResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/Subscription'
+                        '$ref': '#/components/schemas/SubscriptionGroupLocalization'
                     },
                     {
-                        '$ref': '#/components/schemas/SubscriptionGroupLocalization'
+                        '$ref': '#/components/schemas/Subscription'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        subscriptions: '#/components/schemas/Subscription',
+                        subscriptionGroupLocalizations: '#/components/schemas/SubscriptionGroupLocalization'
+                    }
+                }
             }
         },
         links: {
@@ -34246,12 +37016,19 @@ export const SubscriptionGroupResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/Subscription'
+                        '$ref': '#/components/schemas/SubscriptionGroupLocalization'
                     },
                     {
-                        '$ref': '#/components/schemas/SubscriptionGroupLocalization'
+                        '$ref': '#/components/schemas/Subscription'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        subscriptions: '#/components/schemas/Subscription',
+                        subscriptionGroupLocalizations: '#/components/schemas/SubscriptionGroupLocalization'
+                    }
+                }
             }
         },
         links: {
@@ -34331,7 +37108,8 @@ export const SubscriptionGroupUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         referenceName: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         }
                     }
                 }
@@ -34532,10 +37310,12 @@ export const SubscriptionImageUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         sourceFileChecksum: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         uploaded: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     }
                 }
@@ -34660,11 +37440,13 @@ export const SubscriptionIntroductoryOfferInlineCreateSchema = {
             properties: {
                 startDate: {
                     type: 'string',
-                    format: 'date'
+                    format: 'date',
+                    nullable: true
                 },
                 endDate: {
                     type: 'string',
-                    format: 'date'
+                    format: 'date',
+                    nullable: true
                 },
                 duration: {
                     '$ref': '#/components/schemas/SubscriptionOfferDuration'
@@ -34756,15 +37538,23 @@ export const SubscriptionIntroductoryOffersResponseSchema = {
             items: {
                 oneOf: [
                     {
+                        '$ref': '#/components/schemas/SubscriptionPricePoint'
+                    },
+                    {
                         '$ref': '#/components/schemas/Subscription'
                     },
                     {
                         '$ref': '#/components/schemas/Territory'
-                    },
-                    {
-                        '$ref': '#/components/schemas/SubscriptionPricePoint'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        subscriptions: '#/components/schemas/Subscription',
+                        territories: '#/components/schemas/Territory',
+                        subscriptionPricePoints: '#/components/schemas/SubscriptionPricePoint'
+                    }
+                }
             }
         },
         links: {
@@ -34789,15 +37579,23 @@ export const SubscriptionIntroductoryOfferResponseSchema = {
             items: {
                 oneOf: [
                     {
+                        '$ref': '#/components/schemas/SubscriptionPricePoint'
+                    },
+                    {
                         '$ref': '#/components/schemas/Subscription'
                     },
                     {
                         '$ref': '#/components/schemas/Territory'
-                    },
-                    {
-                        '$ref': '#/components/schemas/SubscriptionPricePoint'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        subscriptions: '#/components/schemas/Subscription',
+                        territories: '#/components/schemas/Territory',
+                        subscriptionPricePoints: '#/components/schemas/SubscriptionPricePoint'
+                    }
+                }
             }
         },
         links: {
@@ -34823,11 +37621,13 @@ export const SubscriptionIntroductoryOfferCreateRequestSchema = {
                     properties: {
                         startDate: {
                             type: 'string',
-                            format: 'date'
+                            format: 'date',
+                            nullable: true
                         },
                         endDate: {
                             type: 'string',
-                            format: 'date'
+                            format: 'date',
+                            nullable: true
                         },
                         duration: {
                             '$ref': '#/components/schemas/SubscriptionOfferDuration'
@@ -34934,7 +37734,8 @@ export const SubscriptionIntroductoryOfferUpdateRequestSchema = {
                     properties: {
                         endDate: {
                             type: 'string',
-                            format: 'date'
+                            format: 'date',
+                            nullable: true
                         }
                     }
                 }
@@ -35071,7 +37872,8 @@ export const SubscriptionLocalizationCreateRequestSchema = {
                             type: 'string'
                         },
                         description: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         }
                     },
                     required: ['name', 'locale']
@@ -35126,10 +37928,12 @@ export const SubscriptionLocalizationUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         name: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         description: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         }
                     }
                 }
@@ -35271,7 +38075,8 @@ export const SubscriptionOfferCodeCustomCodeCreateRequestSchema = {
                         },
                         expirationDate: {
                             type: 'string',
-                            format: 'date'
+                            format: 'date',
+                            nullable: true
                         }
                     },
                     required: ['numberOfCodes', 'customCode']
@@ -35326,7 +38131,8 @@ export const SubscriptionOfferCodeCustomCodeUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         active: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     }
                 }
@@ -35543,7 +38349,8 @@ export const SubscriptionOfferCodeOneTimeUseCodeUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         active: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     }
                 }
@@ -35683,12 +38490,19 @@ export const SubscriptionOfferCodePricesResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/Territory'
+                        '$ref': '#/components/schemas/SubscriptionPricePoint'
                     },
                     {
-                        '$ref': '#/components/schemas/SubscriptionPricePoint'
+                        '$ref': '#/components/schemas/Territory'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        territories: '#/components/schemas/Territory',
+                        subscriptionPricePoints: '#/components/schemas/SubscriptionPricePoint'
+                    }
+                }
             }
         },
         links: {
@@ -35734,6 +38548,9 @@ export const SubscriptionOfferCodeSchema = {
                     '$ref': '#/components/schemas/SubscriptionOfferMode'
                 },
                 numberOfPeriods: {
+                    type: 'integer'
+                },
+                totalNumberOfCodes: {
                     type: 'integer'
                 },
                 active: {
@@ -35867,18 +38684,27 @@ export const SubscriptionOfferCodesResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/Subscription'
+                        '$ref': '#/components/schemas/SubscriptionOfferCodeCustomCode'
                     },
                     {
                         '$ref': '#/components/schemas/SubscriptionOfferCodeOneTimeUseCode'
                     },
                     {
-                        '$ref': '#/components/schemas/SubscriptionOfferCodeCustomCode'
+                        '$ref': '#/components/schemas/SubscriptionOfferCodePrice'
                     },
                     {
-                        '$ref': '#/components/schemas/SubscriptionOfferCodePrice'
+                        '$ref': '#/components/schemas/Subscription'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        subscriptionOfferCodePrices: '#/components/schemas/SubscriptionOfferCodePrice',
+                        subscriptions: '#/components/schemas/Subscription',
+                        subscriptionOfferCodeOneTimeUseCodes: '#/components/schemas/SubscriptionOfferCodeOneTimeUseCode',
+                        subscriptionOfferCodeCustomCodes: '#/components/schemas/SubscriptionOfferCodeCustomCode'
+                    }
+                }
             }
         },
         links: {
@@ -35903,18 +38729,27 @@ export const SubscriptionOfferCodeResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/Subscription'
+                        '$ref': '#/components/schemas/SubscriptionOfferCodeCustomCode'
                     },
                     {
                         '$ref': '#/components/schemas/SubscriptionOfferCodeOneTimeUseCode'
                     },
                     {
-                        '$ref': '#/components/schemas/SubscriptionOfferCodeCustomCode'
+                        '$ref': '#/components/schemas/SubscriptionOfferCodePrice'
                     },
                     {
-                        '$ref': '#/components/schemas/SubscriptionOfferCodePrice'
+                        '$ref': '#/components/schemas/Subscription'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        subscriptionOfferCodePrices: '#/components/schemas/SubscriptionOfferCodePrice',
+                        subscriptions: '#/components/schemas/Subscription',
+                        subscriptionOfferCodeOneTimeUseCodes: '#/components/schemas/SubscriptionOfferCodeOneTimeUseCode',
+                        subscriptionOfferCodeCustomCodes: '#/components/schemas/SubscriptionOfferCodeCustomCode'
+                    }
+                }
             }
         },
         links: {
@@ -36040,7 +38875,8 @@ export const SubscriptionOfferCodeUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         active: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     }
                 }
@@ -36260,10 +39096,12 @@ export const SubscriptionPriceInlineCreateSchema = {
             properties: {
                 startDate: {
                     type: 'string',
-                    format: 'date'
+                    format: 'date',
+                    nullable: true
                 },
                 preserveCurrentPrice: {
-                    type: 'boolean'
+                    type: 'boolean',
+                    nullable: true
                 }
             }
         },
@@ -36345,12 +39183,19 @@ export const SubscriptionPricesResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/Territory'
+                        '$ref': '#/components/schemas/SubscriptionPricePoint'
                     },
                     {
-                        '$ref': '#/components/schemas/SubscriptionPricePoint'
+                        '$ref': '#/components/schemas/Territory'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        territories: '#/components/schemas/Territory',
+                        subscriptionPricePoints: '#/components/schemas/SubscriptionPricePoint'
+                    }
+                }
             }
         },
         links: {
@@ -36375,12 +39220,19 @@ export const SubscriptionPriceResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/Territory'
+                        '$ref': '#/components/schemas/SubscriptionPricePoint'
                     },
                     {
-                        '$ref': '#/components/schemas/SubscriptionPricePoint'
+                        '$ref': '#/components/schemas/Territory'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        territories: '#/components/schemas/Territory',
+                        subscriptionPricePoints: '#/components/schemas/SubscriptionPricePoint'
+                    }
+                }
             }
         },
         links: {
@@ -36406,10 +39258,12 @@ export const SubscriptionPriceCreateRequestSchema = {
                     properties: {
                         startDate: {
                             type: 'string',
-                            format: 'date'
+                            format: 'date',
+                            nullable: true
                         },
                         preserveCurrentPrice: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     }
                 },
@@ -36611,12 +39465,19 @@ export const SubscriptionPromotionalOfferPricesResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/Territory'
+                        '$ref': '#/components/schemas/SubscriptionPricePoint'
                     },
                     {
-                        '$ref': '#/components/schemas/SubscriptionPricePoint'
+                        '$ref': '#/components/schemas/Territory'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        territories: '#/components/schemas/Territory',
+                        subscriptionPricePoints: '#/components/schemas/SubscriptionPricePoint'
+                    }
+                }
             }
         },
         links: {
@@ -36811,12 +39672,19 @@ export const SubscriptionPromotionalOffersResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/Subscription'
+                        '$ref': '#/components/schemas/SubscriptionPromotionalOfferPrice'
                     },
                     {
-                        '$ref': '#/components/schemas/SubscriptionPromotionalOfferPrice'
+                        '$ref': '#/components/schemas/Subscription'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        subscriptions: '#/components/schemas/Subscription',
+                        subscriptionPromotionalOfferPrices: '#/components/schemas/SubscriptionPromotionalOfferPrice'
+                    }
+                }
             }
         },
         links: {
@@ -36841,12 +39709,19 @@ export const SubscriptionPromotionalOfferResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/Subscription'
+                        '$ref': '#/components/schemas/SubscriptionPromotionalOfferPrice'
                     },
                     {
-                        '$ref': '#/components/schemas/SubscriptionPromotionalOfferPrice'
+                        '$ref': '#/components/schemas/Subscription'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        subscriptions: '#/components/schemas/Subscription',
+                        subscriptionPromotionalOfferPrices: '#/components/schemas/SubscriptionPromotionalOfferPrice'
+                    }
+                }
             }
         },
         links: {
@@ -37449,19 +40324,25 @@ export const SubscriptionsResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/SubscriptionLocalization'
+                        '$ref': '#/components/schemas/PromotedPurchase'
                     },
                     {
                         '$ref': '#/components/schemas/SubscriptionAppStoreReviewScreenshot'
                     },
                     {
+                        '$ref': '#/components/schemas/SubscriptionAvailability'
+                    },
+                    {
                         '$ref': '#/components/schemas/SubscriptionGroup'
+                    },
+                    {
+                        '$ref': '#/components/schemas/SubscriptionImage'
                     },
                     {
                         '$ref': '#/components/schemas/SubscriptionIntroductoryOffer'
                     },
                     {
-                        '$ref': '#/components/schemas/SubscriptionPromotionalOffer'
+                        '$ref': '#/components/schemas/SubscriptionLocalization'
                     },
                     {
                         '$ref': '#/components/schemas/SubscriptionOfferCode'
@@ -37470,18 +40351,28 @@ export const SubscriptionsResponseSchema = {
                         '$ref': '#/components/schemas/SubscriptionPrice'
                     },
                     {
-                        '$ref': '#/components/schemas/PromotedPurchase'
-                    },
-                    {
-                        '$ref': '#/components/schemas/SubscriptionAvailability'
+                        '$ref': '#/components/schemas/SubscriptionPromotionalOffer'
                     },
                     {
                         '$ref': '#/components/schemas/WinBackOffer'
-                    },
-                    {
-                        '$ref': '#/components/schemas/SubscriptionImage'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        subscriptionAppStoreReviewScreenshots: '#/components/schemas/SubscriptionAppStoreReviewScreenshot',
+                        promotedPurchases: '#/components/schemas/PromotedPurchase',
+                        subscriptionGroups: '#/components/schemas/SubscriptionGroup',
+                        subscriptionImages: '#/components/schemas/SubscriptionImage',
+                        subscriptionPrices: '#/components/schemas/SubscriptionPrice',
+                        winBackOffers: '#/components/schemas/WinBackOffer',
+                        subscriptionIntroductoryOffers: '#/components/schemas/SubscriptionIntroductoryOffer',
+                        subscriptionOfferCodes: '#/components/schemas/SubscriptionOfferCode',
+                        subscriptionPromotionalOffers: '#/components/schemas/SubscriptionPromotionalOffer',
+                        subscriptionLocalizations: '#/components/schemas/SubscriptionLocalization',
+                        subscriptionAvailabilities: '#/components/schemas/SubscriptionAvailability'
+                    }
+                }
             }
         },
         links: {
@@ -37506,19 +40397,25 @@ export const SubscriptionResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/SubscriptionLocalization'
+                        '$ref': '#/components/schemas/PromotedPurchase'
                     },
                     {
                         '$ref': '#/components/schemas/SubscriptionAppStoreReviewScreenshot'
                     },
                     {
+                        '$ref': '#/components/schemas/SubscriptionAvailability'
+                    },
+                    {
                         '$ref': '#/components/schemas/SubscriptionGroup'
+                    },
+                    {
+                        '$ref': '#/components/schemas/SubscriptionImage'
                     },
                     {
                         '$ref': '#/components/schemas/SubscriptionIntroductoryOffer'
                     },
                     {
-                        '$ref': '#/components/schemas/SubscriptionPromotionalOffer'
+                        '$ref': '#/components/schemas/SubscriptionLocalization'
                     },
                     {
                         '$ref': '#/components/schemas/SubscriptionOfferCode'
@@ -37527,18 +40424,28 @@ export const SubscriptionResponseSchema = {
                         '$ref': '#/components/schemas/SubscriptionPrice'
                     },
                     {
-                        '$ref': '#/components/schemas/PromotedPurchase'
-                    },
-                    {
-                        '$ref': '#/components/schemas/SubscriptionAvailability'
+                        '$ref': '#/components/schemas/SubscriptionPromotionalOffer'
                     },
                     {
                         '$ref': '#/components/schemas/WinBackOffer'
-                    },
-                    {
-                        '$ref': '#/components/schemas/SubscriptionImage'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        subscriptionAppStoreReviewScreenshots: '#/components/schemas/SubscriptionAppStoreReviewScreenshot',
+                        promotedPurchases: '#/components/schemas/PromotedPurchase',
+                        subscriptionGroups: '#/components/schemas/SubscriptionGroup',
+                        subscriptionImages: '#/components/schemas/SubscriptionImage',
+                        subscriptionPrices: '#/components/schemas/SubscriptionPrice',
+                        winBackOffers: '#/components/schemas/WinBackOffer',
+                        subscriptionIntroductoryOffers: '#/components/schemas/SubscriptionIntroductoryOffer',
+                        subscriptionOfferCodes: '#/components/schemas/SubscriptionOfferCode',
+                        subscriptionPromotionalOffers: '#/components/schemas/SubscriptionPromotionalOffer',
+                        subscriptionLocalizations: '#/components/schemas/SubscriptionLocalization',
+                        subscriptionAvailabilities: '#/components/schemas/SubscriptionAvailability'
+                    }
+                }
             }
         },
         links: {
@@ -37569,17 +40476,21 @@ export const SubscriptionCreateRequestSchema = {
                             type: 'string'
                         },
                         familySharable: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         subscriptionPeriod: {
                             type: 'string',
+                            nullable: true,
                             enum: ['ONE_WEEK', 'ONE_MONTH', 'TWO_MONTHS', 'THREE_MONTHS', 'SIX_MONTHS', 'ONE_YEAR']
                         },
                         reviewNote: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         groupLevel: {
-                            type: 'integer'
+                            type: 'integer',
+                            nullable: true
                         }
                     },
                     required: ['productId', 'name']
@@ -37634,20 +40545,25 @@ export const SubscriptionUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         name: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         familySharable: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         subscriptionPeriod: {
                             type: 'string',
+                            nullable: true,
                             enum: ['ONE_WEEK', 'ONE_MONTH', 'TWO_MONTHS', 'THREE_MONTHS', 'SIX_MONTHS', 'ONE_YEAR']
                         },
                         reviewNote: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         groupLevel: {
-                            type: 'integer'
+                            type: 'integer',
+                            nullable: true
                         }
                     }
                 },
@@ -37816,6 +40732,81 @@ export const TerritoryResponseSchema = {
     required: ['data', 'links']
 } as const;
 
+export const TerritoryAgeRatingSchema = {
+    type: 'object',
+    title: 'TerritoryAgeRating',
+    properties: {
+        type: {
+            type: 'string',
+            enum: ['territoryAgeRatings']
+        },
+        id: {
+            type: 'string'
+        },
+        attributes: {
+            type: 'object',
+            properties: {
+                appStoreAgeRating: {
+                    '$ref': '#/components/schemas/AppStoreAgeRating'
+                }
+            }
+        },
+        relationships: {
+            type: 'object',
+            properties: {
+                territory: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['territories']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: ['id', 'type']
+} as const;
+
+export const TerritoryAgeRatingsResponseSchema = {
+    type: 'object',
+    title: 'TerritoryAgeRatingsResponse',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/TerritoryAgeRating'
+            }
+        },
+        included: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/Territory'
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
 export const TerritoryAvailabilitySchema = {
     type: 'object',
     title: 'TerritoryAvailability',
@@ -37848,7 +40839,7 @@ export const TerritoryAvailabilitySchema = {
                     type: 'array',
                     items: {
                         type: 'string',
-                        enum: ['AVAILABLE', 'AVAILABLE_FOR_PREORDER_ON_DATE', 'PROCESSING_TO_NOT_AVAILABLE', 'PROCESSING_TO_AVAILABLE', 'PROCESSING_TO_PRE_ORDER', 'AVAILABLE_FOR_SALE_UNRELEASED_APP', 'PREORDER_ON_UNRELEASED_APP', 'AVAILABLE_FOR_PREORDER', 'MISSING_RATING', 'CANNOT_SELL_RESTRICTED_RATING', 'BRAZIL_REQUIRED_TAX_ID', 'MISSING_GRN', 'UNVERIFIED_GRN', 'ICP_NUMBER_INVALID', 'ICP_NUMBER_MISSING', 'TRADER_STATUS_NOT_PROVIDED', 'TRADER_STATUS_VERIFICATION_FAILED', 'TRADER_STATUS_VERIFICATION_STATUS_MISSING', 'CANNOT_SELL_SEVENTEEN_PLUS_APPS', 'CANNOT_SELL_SEXUALLY_EXPLICIT', 'CANNOT_SELL_NON_IOS_GAMES', 'CANNOT_SELL_SEVENTEEN_PLUS_GAMES', 'CANNOT_SELL_CASINO', 'CANNOT_SELL_CASINO_WITHOUT_GRAC', 'CANNOT_SELL_CASINO_WITHOUT_AGE_VERIFICATION', 'CANNOT_SELL_ADULT_ONLY', 'CANNOT_SELL_GAMBLING_CONTESTS', 'CANNOT_SELL_GAMBLING', 'CANNOT_SELL_CONTESTS', 'CANNOT_SELL']
+                        enum: ['AVAILABLE', 'AVAILABLE_FOR_PREORDER_ON_DATE', 'PROCESSING_TO_NOT_AVAILABLE', 'PROCESSING_TO_AVAILABLE', 'PROCESSING_TO_PRE_ORDER', 'AVAILABLE_FOR_SALE_UNRELEASED_APP', 'PREORDER_ON_UNRELEASED_APP', 'AVAILABLE_FOR_PREORDER', 'MISSING_RATING', 'CANNOT_SELL_RESTRICTED_RATING', 'BRAZIL_REQUIRED_TAX_ID', 'MISSING_GRN', 'UNVERIFIED_GRN', 'ICP_NUMBER_INVALID', 'ICP_NUMBER_MISSING', 'TRADER_STATUS_NOT_PROVIDED', 'TRADER_STATUS_VERIFICATION_FAILED', 'TRADER_STATUS_VERIFICATION_STATUS_MISSING', 'CANNOT_SELL_SEVENTEEN_PLUS_APPS', 'CANNOT_SELL_SEXUALLY_EXPLICIT', 'CANNOT_SELL_NON_IOS_GAMES', 'CANNOT_SELL_SEVENTEEN_PLUS_GAMES', 'CANNOT_SELL_CASINO', 'CANNOT_SELL_CASINO_WITHOUT_GRAC', 'CANNOT_SELL_CASINO_WITHOUT_AGE_VERIFICATION', 'CANNOT_SELL_ADULT_ONLY', 'CANNOT_SELL_GAMBLING_CONTESTS', 'CANNOT_SELL_GAMBLING', 'CANNOT_SELL_CONTESTS', 'CANNOT_SELL_NINETEEN_PLUS_WITHOUT_GRAC', 'CANNOT_SELL', 'CANNOT_SELL_FREQUENT_INTENSE_GAMBLING', 'CANNOT_SELL_FREQUENT_INTENSE_ALCOHOL_TOBACCO_DRUGS', 'CANNOT_SELL_FREQUENT_INTENSE_VIOLENCE', 'CANNOT_SELL_FREQUENT_INTENSE_SEXUAL_CONTENT_NUDITY', 'CANNOT_SELL_INFREQUENT_MILD_ALCOHOL_TOBACCO_DRUGS', 'CANNOT_SELL_INFREQUENT_MILD_SEXUAL_CONTENT_NUDITY', 'CANNOT_SELL_FREQUENT_INTENSE', 'CANNOT_SELL_FREQUENT_INTENSE_WITHOUT_GRAC', 'CANNOT_SELL_FREQUENT_GAMBLING', 'CANNOT_SELL_FREQUENT_ALCOHOL_TOBACCO_DRUGS', 'CANNOT_SELL_FREQUENT_VIOLENCE', 'CANNOT_SELL_FREQUENT_SEXUAL_CONTENT_NUDITY', 'CANNOT_SELL_INFREQUENT_ALCOHOL_TOBACCO_DRUGS', 'CANNOT_SELL_INFREQUENT_SEXUAL_CONTENT_NUDITY', 'CANNOT_SELL_FREQUENT', 'CANNOT_SELL_FREQUENT_WITHOUT_GRAC']
                     }
                 }
             }
@@ -37961,14 +40952,17 @@ export const TerritoryAvailabilityUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         available: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         releaseDate: {
                             type: 'string',
-                            format: 'date'
+                            format: 'date',
+                            nullable: true
                         },
                         preOrderEnabled: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     }
                 }
@@ -38137,10 +41131,12 @@ export const UserInvitationCreateRequestSchema = {
                             }
                         },
                         allAppsVisible: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         provisioningAllowed: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     },
                     required: ['firstName', 'lastName', 'roles', 'email']
@@ -38321,13 +41317,16 @@ export const UserUpdateRequestSchema = {
                             type: 'array',
                             items: {
                                 '$ref': '#/components/schemas/UserRole'
-                            }
+                            },
+                            nullable: true
                         },
                         allAppsVisible: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         provisioningAllowed: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         }
                     }
                 },
@@ -38850,23 +41849,28 @@ export const WebhookUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         enabled: {
-                            type: 'boolean'
+                            type: 'boolean',
+                            nullable: true
                         },
                         eventTypes: {
                             type: 'array',
                             items: {
                                 '$ref': '#/components/schemas/WebhookEventType'
-                            }
+                            },
+                            nullable: true
                         },
                         name: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         secret: {
-                            type: 'string'
+                            type: 'string',
+                            nullable: true
                         },
                         url: {
                             type: 'string',
-                            format: 'uri'
+                            format: 'uri',
+                            nullable: true
                         }
                     }
                 }
@@ -38965,12 +41969,19 @@ export const WinBackOfferPricesResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/Territory'
+                        '$ref': '#/components/schemas/SubscriptionPricePoint'
                     },
                     {
-                        '$ref': '#/components/schemas/SubscriptionPricePoint'
+                        '$ref': '#/components/schemas/Territory'
                     }
-                ]
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        territories: '#/components/schemas/Territory',
+                        subscriptionPricePoints: '#/components/schemas/SubscriptionPricePoint'
+                    }
+                }
             }
         },
         links: {
@@ -39160,7 +42171,8 @@ export const WinBackOfferCreateRequestSchema = {
                             '$ref': '#/components/schemas/IntegerRange'
                         },
                         customerEligibilityWaitBetweenOffersInMonths: {
-                            type: 'integer'
+                            type: 'integer',
+                            nullable: true
                         },
                         startDate: {
                             type: 'string',
@@ -39168,7 +42180,8 @@ export const WinBackOfferCreateRequestSchema = {
                         },
                         endDate: {
                             type: 'string',
-                            format: 'date'
+                            format: 'date',
+                            nullable: true
                         },
                         priority: {
                             type: 'string',
@@ -39176,6 +42189,7 @@ export const WinBackOfferCreateRequestSchema = {
                         },
                         promotionIntent: {
                             type: 'string',
+                            nullable: true,
                             enum: ['NOT_PROMOTED', 'USE_AUTO_GENERATED_ASSETS']
                         }
                     },
@@ -39259,28 +42273,35 @@ export const WinBackOfferUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         customerEligibilityPaidSubscriptionDurationInMonths: {
-                            type: 'integer'
+                            type: 'integer',
+                            nullable: true
                         },
                         customerEligibilityTimeSinceLastSubscribedInMonths: {
+                            nullable: true,
                             '$ref': '#/components/schemas/IntegerRange'
                         },
                         customerEligibilityWaitBetweenOffersInMonths: {
-                            type: 'integer'
+                            type: 'integer',
+                            nullable: true
                         },
                         startDate: {
                             type: 'string',
-                            format: 'date'
+                            format: 'date',
+                            nullable: true
                         },
                         endDate: {
                             type: 'string',
-                            format: 'date'
+                            format: 'date',
+                            nullable: true
                         },
                         priority: {
                             type: 'string',
+                            nullable: true,
                             enum: ['HIGH', 'NORMAL']
                         },
                         promotionIntent: {
                             type: 'string',
+                            nullable: true,
                             enum: ['NOT_PROMOTED', 'USE_AUTO_GENERATED_ASSETS']
                         }
                     }
@@ -39815,6 +42836,58 @@ export const AppCustomProductPageLocalizationAppScreenshotSetsLinkagesResponseSc
     required: ['data', 'links']
 } as const;
 
+export const AppCustomProductPageLocalizationSearchKeywordsLinkagesResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: ['appKeywords']
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: ['id', 'type']
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const AppCustomProductPageLocalizationSearchKeywordsLinkagesRequestSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: ['appKeywords']
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: ['id', 'type']
+            }
+        }
+    },
+    required: ['data']
+} as const;
+
 export const AppCustomProductPageVersionAppCustomProductPageLocalizationsLinkagesResponseSchema = {
     type: 'object',
     properties: {
@@ -40230,6 +43303,35 @@ export const AppInfoSecondarySubcategoryTwoLinkageResponseSchema = {
         },
         links: {
             '$ref': '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const AppInfoTerritoryAgeRatingsLinkagesResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: ['territoryAgeRatings']
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: ['id', 'type']
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
         }
     },
     required: ['data', 'links']
@@ -40682,6 +43784,58 @@ export const AppStoreVersionLocalizationAppScreenshotSetsLinkagesResponseSchema 
     required: ['data', 'links']
 } as const;
 
+export const AppStoreVersionLocalizationSearchKeywordsLinkagesResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: ['appKeywords']
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: ['id', 'type']
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const AppStoreVersionLocalizationSearchKeywordsLinkagesRequestSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: ['appKeywords']
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: ['id', 'type']
+            }
+        }
+    },
+    required: ['data']
+} as const;
+
 export const AgeRatingDeclarationWithoutIncludesResponseSchema = {
     type: 'object',
     title: 'AgeRatingDeclarationWithoutIncludesResponse',
@@ -41104,6 +44258,35 @@ export const AppStoreVersionRoutingAppCoverageLinkageResponseSchema = {
     required: ['data', 'links']
 } as const;
 
+export const AppTagTerritoriesLinkagesResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: ['territories']
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: ['id', 'type']
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
 export const AppAccessibilityDeclarationsLinkagesResponseSchema = {
     type: 'object',
     properties: {
@@ -41463,6 +44646,35 @@ export const AppAppStoreVersionsLinkagesResponseSchema = {
     required: ['data', 'links']
 } as const;
 
+export const AppAppTagsLinkagesResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: ['appTags']
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: ['id', 'type']
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
 export const AppBackgroundAssetsLinkagesResponseSchema = {
     type: 'object',
     properties: {
@@ -41743,6 +44955,35 @@ export const AppBetaTestersLinkagesRequestSchema = {
         }
     },
     required: ['data']
+} as const;
+
+export const AppBuildUploadsLinkagesResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: ['buildUploads']
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: ['id', 'type']
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
+        }
+    },
+    required: ['data', 'links']
 } as const;
 
 export const BuildsWithoutIncludesResponseSchema = {
@@ -42159,6 +45400,35 @@ export const AppReviewSubmissionsLinkagesResponseSchema = {
                     type: {
                         type: 'string',
                         enum: ['reviewSubmissions']
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: ['id', 'type']
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const AppSearchKeywordsLinkagesResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: ['appKeywords']
                     },
                     id: {
                         type: 'string'
@@ -42932,6 +46202,35 @@ export const BuildBundleBuildBundleFileSizesLinkagesResponseSchema = {
                     type: {
                         type: 'string',
                         enum: ['buildBundleFileSizes']
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: ['id', 'type']
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const BuildUploadBuildUploadFilesLinkagesResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: ['buildUploadFiles']
                     },
                     id: {
                         type: 'string'
@@ -48289,7 +51588,7 @@ export const AppMediaVideoStateSchema = {
 
 export const AppStoreAgeRatingSchema = {
     type: 'string',
-    enum: ['FOUR_PLUS', 'NINE_PLUS', 'TWELVE_PLUS', 'SEVENTEEN_PLUS', 'UNRATED']
+    enum: ['L', 'ALL', 'ONE_PLUS', 'TWO_PLUS', 'THREE_PLUS', 'FOUR_PLUS', 'FIVE_PLUS', 'SIX_PLUS', 'SEVEN_PLUS', 'EIGHT_PLUS', 'NINE_PLUS', 'TEN_PLUS', 'ELEVEN_PLUS', 'TWELVE_PLUS', 'THIRTEEN_PLUS', 'FOURTEEN_PLUS', 'FIFTEEN_PLUS', 'SIXTEEN_PLUS', 'SEVENTEEN_PLUS', 'EIGHTEEN_PLUS', 'NINETEEN_PLUS', 'TWENTY_PLUS', 'TWENTY_ONE_PLUS', 'UNRATED']
 } as const;
 
 export const AppStoreVersionStateSchema = {
@@ -48300,6 +51599,16 @@ export const AppStoreVersionStateSchema = {
 export const AppVersionStateSchema = {
     type: 'string',
     enum: ['ACCEPTED', 'DEVELOPER_REJECTED', 'IN_REVIEW', 'INVALID_BINARY', 'METADATA_REJECTED', 'PENDING_APPLE_RELEASE', 'PENDING_DEVELOPER_RELEASE', 'PREPARE_FOR_SUBMISSION', 'PROCESSING_FOR_DISTRIBUTION', 'READY_FOR_DISTRIBUTION', 'READY_FOR_REVIEW', 'REJECTED', 'REPLACED_WITH_NEW_VERSION', 'WAITING_FOR_EXPORT_COMPLIANCE', 'WAITING_FOR_REVIEW']
+} as const;
+
+export const BackgroundAssetVersionAppStoreReleaseStateSchema = {
+    type: 'string',
+    enum: ['PREPARE_FOR_SUBMISSION', 'READY_FOR_REVIEW', 'WAITING_FOR_REVIEW', 'IN_REVIEW', 'ACCEPTED', 'REJECTED', 'PROCESSING_FOR_DISTRIBUTION', 'READY_FOR_DISTRIBUTION', 'SUPERSEDED']
+} as const;
+
+export const BackgroundAssetVersionExternalBetaReleaseStateSchema = {
+    type: 'string',
+    enum: ['READY_FOR_BETA_SUBMISSION', 'WAITING_FOR_REVIEW', 'IN_REVIEW', 'REJECTED', 'PROCESSING_FOR_TESTING', 'READY_FOR_TESTING', 'SUPERSEDED']
 } as const;
 
 export const BackgroundAssetVersionStateSchema = {
@@ -48354,6 +51663,11 @@ export const BuildAudienceTypeSchema = {
 export const BuildBundleTypeSchema = {
     type: 'string',
     enum: ['APP', 'APP_CLIP']
+} as const;
+
+export const BuildUploadStateSchema = {
+    type: 'string',
+    enum: ['AWAITING_UPLOAD', 'PROCESSING', 'FAILED', 'COMPLETE']
 } as const;
 
 export const BundleIdPlatformSchema = {
@@ -48429,6 +51743,40 @@ export const CapabilityTypeSchema = {
 export const CertificateTypeSchema = {
     type: 'string',
     enum: ['APPLE_PAY', 'APPLE_PAY_MERCHANT_IDENTITY', 'APPLE_PAY_PSP_IDENTITY', 'APPLE_PAY_RSA', 'DEVELOPER_ID_KEXT', 'DEVELOPER_ID_KEXT_G2', 'DEVELOPER_ID_APPLICATION', 'DEVELOPER_ID_APPLICATION_G2', 'DEVELOPMENT', 'DISTRIBUTION', 'IDENTITY_ACCESS', 'IOS_DEVELOPMENT', 'IOS_DISTRIBUTION', 'MAC_APP_DISTRIBUTION', 'MAC_INSTALLER_DISTRIBUTION', 'MAC_APP_DEVELOPMENT', 'PASS_TYPE_ID', 'PASS_TYPE_ID_WITH_NFC']
+} as const;
+
+export const ChecksumAlgorithmSchema = {
+    type: 'string',
+    enum: ['MD5', 'SHA_256']
+} as const;
+
+export const ChecksumsSchema = {
+    type: 'object',
+    properties: {
+        file: {
+            type: 'object',
+            properties: {
+                hash: {
+                    type: 'string'
+                },
+                algorithm: {
+                    '$ref': '#/components/schemas/ChecksumAlgorithm'
+                }
+            }
+        },
+        composite: {
+            type: 'object',
+            properties: {
+                hash: {
+                    type: 'string'
+                },
+                algorithm: {
+                    type: 'string',
+                    enum: ['MD5']
+                }
+            }
+        }
+    }
 } as const;
 
 export const CiActionSchema = {
@@ -48937,7 +52285,7 @@ export const GameCenterMatchmakingTeamAssignmentSchema = {
 
 export const GameCenterVersionStateSchema = {
     type: 'string',
-    enum: ['PREPARE_FOR_SUBMISSION', 'READY_FOR_REVIEW', 'WAITING_FOR_REVIEW', 'IN_REVIEW', 'REJECTED', 'ACCEPTED', 'PENDING_RELEASE', 'LIVE', 'REPLACED_WITH_NEW_VERSION']
+    enum: ['PREPARE_FOR_SUBMISSION', 'READY_FOR_REVIEW', 'WAITING_FOR_REVIEW', 'IN_REVIEW', 'DEVELOPER_REJECTED', 'REJECTED', 'ACCEPTED', 'PENDING_RELEASE', 'LIVE', 'REPLACED_WITH_NEW_VERSION']
 } as const;
 
 export const HttpHeaderSchema = {
@@ -49137,6 +52485,18 @@ export const ScreenshotDisplayTypeSchema = {
     enum: ['APP_IPHONE_67', 'APP_IPHONE_61', 'APP_IPHONE_65', 'APP_IPHONE_58', 'APP_IPHONE_55', 'APP_IPHONE_47', 'APP_IPHONE_40', 'APP_IPHONE_35', 'APP_IPAD_PRO_3GEN_129', 'APP_IPAD_PRO_3GEN_11', 'APP_IPAD_PRO_129', 'APP_IPAD_105', 'APP_IPAD_97', 'APP_DESKTOP', 'APP_WATCH_ULTRA', 'APP_WATCH_SERIES_10', 'APP_WATCH_SERIES_7', 'APP_WATCH_SERIES_4', 'APP_WATCH_SERIES_3', 'APP_APPLE_TV', 'APP_APPLE_VISION_PRO', 'IMESSAGE_APP_IPHONE_67', 'IMESSAGE_APP_IPHONE_61', 'IMESSAGE_APP_IPHONE_65', 'IMESSAGE_APP_IPHONE_58', 'IMESSAGE_APP_IPHONE_55', 'IMESSAGE_APP_IPHONE_47', 'IMESSAGE_APP_IPHONE_40', 'IMESSAGE_APP_IPAD_PRO_3GEN_129', 'IMESSAGE_APP_IPAD_PRO_3GEN_11', 'IMESSAGE_APP_IPAD_PRO_129', 'IMESSAGE_APP_IPAD_105', 'IMESSAGE_APP_IPAD_97']
 } as const;
 
+export const StateDetailSchema = {
+    type: 'object',
+    properties: {
+        code: {
+            type: 'string'
+        },
+        description: {
+            type: 'string'
+        }
+    }
+} as const;
+
 export const StringToStringMapSchema = {
     type: 'object',
     additionalProperties: {
@@ -49210,7 +52570,7 @@ export const UserRoleSchema = {
 
 export const WebhookEventTypeSchema = {
     type: 'string',
-    enum: ['APP_STORE_VERSION_APP_VERSION_STATE_UPDATED', 'BETA_FEEDBACK_CRASH_SUBMISSION_CREATED', 'BETA_FEEDBACK_SCREENSHOT_SUBMISSION_CREATED']
+    enum: ['APP_STORE_VERSION_APP_VERSION_STATE_UPDATED', 'BACKGROUND_ASSET_VERSION_APP_STORE_RELEASE_STATE_UPDATED', 'BACKGROUND_ASSET_VERSION_EXTERNAL_BETA_RELEASE_STATE_UPDATED', 'BACKGROUND_ASSET_VERSION_INTERNAL_BETA_RELEASE_CREATED', 'BACKGROUND_ASSET_VERSION_STATE_UPDATED', 'BETA_FEEDBACK_CRASH_SUBMISSION_CREATED', 'BETA_FEEDBACK_SCREENSHOT_SUBMISSION_CREATED', 'BUILD_BETA_DETAIL_EXTERNAL_BUILD_STATE_UPDATED', 'BUILD_UPLOAD_STATE_UPDATED']
 } as const;
 
 export const csvSchema = {
