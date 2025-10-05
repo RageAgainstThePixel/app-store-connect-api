@@ -2,7 +2,7 @@
 # This script generates the API client code using OpenAPI Generator.
 # download the latest version of the apple app store connect api schema.
 # https://developer.apple.com/sample-code/app-store-connect/app-store-connect-openapi-specification.zip
-set -xe
+set -e
 # GitHub Actions sets RUNNER_TEMP, local dev fallback to cwd/tmp
 temp_dir=${RUNNER_TEMP:-./tmp}
 

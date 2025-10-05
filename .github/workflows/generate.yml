@@ -22,7 +22,6 @@ jobs:
       - name: generate
         id: generate
         run: |
-          set -xe
           npm install
           npm update --save
           ./.github/workflows/scripts/generate.sh
