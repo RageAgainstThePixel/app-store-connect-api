@@ -40,6 +40,9 @@ jobs:
           lastVersion=$(npm show @rage-against-the-pixel/app-store-connect-api version)
           # set the package version to be the same as the schema version
           version=$(node -p "require('./app_store_connect_api_openapi.json').info.version")
+          # normalize 'version' to be semver compliant (e.g. 1.0 -> 1.0.0)
+          version=$(npx semver $version --coerce)
+          echo "Last version: $lastVersion"
           # if the schema version is the same as the last version of the package, exit
           echo "$lastVersion -> $version"
           # if the version is less than or equal to the last version, exit
