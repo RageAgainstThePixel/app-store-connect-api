@@ -20,47 +20,13 @@ jobs:
           node-version: '20.x'
           registry-url: 'https://registry.npmjs.org'
       - run: |
+          set -xe
           npm install
           npm update --save
-          # download the latest version of the apple app store connect api schema
-          # https://developer.apple.com/sample-code/app-store-connect/app-store-connect-openapi-specification.zip
-          curl -L https://developer.apple.com/sample-code/app-store-connect/app-store-connect-openapi-specification.zip -o $RUNNER_TEMP/app-store-connect-openapi-specification.zip
-          unzip $RUNNER_TEMP/app-store-connect-openapi-specification.zip -d $RUNNER_TEMP/app-store-connect-openapi-specification
-          # find first *.json file in the directory
-          schemaPath=$(find $RUNNER_TEMP/app-store-connect-openapi-specification -type f -name "*.json" ! -name '._*' | head -n 1)
-          cp $schemaPath app_store_connect_api_openapi.json
-          rm -rf $RUNNER_TEMP/app-store-connect-openapi-specification.zip
-          rm -rf $RUNNER_TEMP/app-store-connect-openapi-specification
-          rm -rf $schemaPath
-          if [ $? -ne 0 ]; then
-            echo "Error: npm run generate failed"
-            exit 1
-          fi
-          # get the last version of the package from the npm registry
-          lastVersion=$(npm show @rage-against-the-pixel/app-store-connect-api version)
-          # set the package version to be the same as the schema version
-          version=$(node -p "require('./app_store_connect_api_openapi.json').info.version")
-          # normalize 'version' to be semver compliant (e.g. 1.0 -> 1.0.0)
-          version=$(npx semver $version --coerce)
-          echo "Last version: $lastVersion"
-          # if the schema version is the same as the last version of the package, exit
-          echo "$lastVersion -> $version"
-          # if the version is less than or equal to the last version, exit
-          if npx semver "$version" -r "<=$lastVersion"; then
-            echo "No changes detected"
-            exit 0
-          else
-            echo "New version detected"
-          fi
+          ./github/workflows/scripts/generate.sh
+          # setup git credentials as github actions bot
           git config --global user.email github-actions[bot]@users.noreply.github.com
           git config --global user.name "build bot"
-          git status
-          git stash
-          # set the package version to be the same as the schema version
-          npm version $version
-          git stash pop
-          npm run generate
-          # commit the changes as build bot on a new branch named after the new version
           echo "VERSION=$version" >> $GITHUB_ENV
           git checkout -b "release/v$version"
           git add .

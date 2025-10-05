@@ -1,4 +1,5 @@
-import * as services from './app_store_connect_api/services.gen';
+import * as services from './app_store_connect_api/sdk.gen';
+import { client } from './app_store_connect_api/client.gen';
 import * as jose from 'jose';
 import fs from 'fs';
 
@@ -44,8 +45,8 @@ export class AppStoreConnectClient {
       throw new Error('AppStoreConnectOptions is required');
     }
     this.appStoreConnectOptions = appStoreConnectOptions;
-    services.client.setConfig({ baseUrl: 'https://api.appstoreconnect.apple.com' });
-    services.client.interceptors.request.use(async (request, _options): Promise<Request> => {
+    client.setConfig({ baseUrl: 'https://api.appstoreconnect.apple.com' });
+    client.interceptors.request.use(async (request, _options): Promise<Request> => {
       request.headers.set('Authorization', `Bearer ${await this.getToken()}`);
       return request;
     });
