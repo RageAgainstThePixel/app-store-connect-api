@@ -19,24 +19,28 @@ jobs:
         with:
           node-version: '20.x'
           registry-url: 'https://registry.npmjs.org'
-      - run: |
+      - name: generate
+        id: generate
+        run: |
           set -xe
           npm install
           npm update --save
           ./.github/workflows/scripts/generate.sh
+      - name: create release branch
+        if: steps.generate.outputs.version != ''
+        run: |
           # setup git credentials as github actions bot
           git config --global user.email github-actions[bot]@users.noreply.github.com
           git config --global user.name "build bot"
-          echo "VERSION=$version" >> $GITHUB_ENV
-          git checkout -b "release/v$version"
+          git checkout -b "release/v${{ steps.generate.outputs.version }}"
           git add .
-          git commit -m "chore: release v$version"
-          git push origin "release/v$version"
-      - uses: actions/github-script@v7
-        if: env.VERSION != ''
+          git commit -m "chore: release v${{ steps.generate.outputs.version }}"
+          git push origin "release/v${{ steps.generate.outputs.version }}"
+      - uses: actions/github-script@v8
+        if: steps.generate.outputs.version != ''
         with:
           script: |
-            const version = process.env.VERSION;
+            const version = '${{ steps.generate.outputs.version }}';
             const changeNotesVersion = version.split('.').slice(0, 2).join('-');
             const appStoreConnectChangeNotesUri = `https://developer.apple.com/documentation/appstoreconnectapi/app-store-connect-api-${changeNotesVersion}-release-notes`;
             const { data: pullRequest } = await github.rest.pulls.create({

@@ -48,3 +48,8 @@ if ! npm run generate; then
     echo "Error: npm run generate failed"
     exit 1
 fi
+
+# If running inside GitHub Actions, export VERSION for subsequent steps as OUTPUT
+if [ -n "${GITHUB_OUTPUT:-}" ]; then
+    echo "VERSION=${version}" >> "${GITHUB_OUTPUT}"
+fi
