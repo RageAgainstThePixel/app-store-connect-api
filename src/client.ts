@@ -1,4 +1,4 @@
-import * as services from './app_store_connect_api/sdk.gen';
+import * as api from './app_store_connect_api/sdk.gen';
 import { client } from './app_store_connect_api/client.gen';
 import * as jose from 'jose';
 import fs from 'fs';
@@ -38,7 +38,7 @@ export class AppStoreConnectClient {
   private appStoreConnectOptions: AppStoreConnectOptions;
   private bearerToken: string | null = null;
   private bearerTokenGeneratedAt = 0;
-  api = services;
+  public readonly api = api;
 
   constructor(appStoreConnectOptions: AppStoreConnectOptions) {
     if (!appStoreConnectOptions) {
