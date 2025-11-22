@@ -1,6 +1,6 @@
 {
   "name": "@rage-against-the-pixel/app-store-connect-api",
-  "version": "4.1.1",
+  "version": "4.1.2",
   "description": "A TypeScript package for communicating with Apple App Store Connect API",
   "author": "RageAgainstThePixel",
   "license": "MIT",
