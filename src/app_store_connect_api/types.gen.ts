@@ -452,6 +452,9 @@ export type AlternativeDistributionPackageVersionResponse = {
 export type AlternativeDistributionPackage = {
     type: 'alternativeDistributionPackages';
     id: string;
+    attributes?: {
+        sourceFileChecksum?: Checksums;
+    };
     relationships?: {
         versions?: {
             links?: RelationshipLinks;
@@ -652,6 +655,71 @@ export type AnalyticsReportsResponse = {
 export type AnalyticsReportResponse = {
     data: AnalyticsReport;
     links: DocumentLinks;
+};
+
+/**
+ * AndroidToIosAppMappingDetail
+ */
+export type AndroidToIosAppMappingDetail = {
+    type: 'androidToIosAppMappingDetails';
+    id: string;
+    attributes?: {
+        packageName?: string;
+        appSigningKeyPublicCertificateSha256Fingerprints?: Array<string>;
+    };
+    links?: ResourceLinks;
+};
+
+/**
+ * AndroidToIosAppMappingDetailsResponse
+ */
+export type AndroidToIosAppMappingDetailsResponse = {
+    data: Array<AndroidToIosAppMappingDetail>;
+    links: PagedDocumentLinks;
+    meta?: PagingInformation;
+};
+
+/**
+ * AndroidToIosAppMappingDetailResponse
+ */
+export type AndroidToIosAppMappingDetailResponse = {
+    data: AndroidToIosAppMappingDetail;
+    links: DocumentLinks;
+};
+
+/**
+ * AndroidToIosAppMappingDetailCreateRequest
+ */
+export type AndroidToIosAppMappingDetailCreateRequest = {
+    data: {
+        type: 'androidToIosAppMappingDetails';
+        attributes: {
+            packageName: string;
+            appSigningKeyPublicCertificateSha256Fingerprints: Array<string>;
+        };
+        relationships: {
+            app: {
+                data: {
+                    type: 'apps';
+                    id: string;
+                };
+            };
+        };
+    };
+};
+
+/**
+ * AndroidToIosAppMappingDetailUpdateRequest
+ */
+export type AndroidToIosAppMappingDetailUpdateRequest = {
+    data: {
+        type: 'androidToIosAppMappingDetails';
+        id: string;
+        attributes?: {
+            packageName?: string | null;
+            appSigningKeyPublicCertificateSha256Fingerprints?: Array<string> | null;
+        };
+    };
 };
 
 /**
@@ -870,7 +938,7 @@ export type AppClipAdvancedExperience = {
                 };
                 source?: 'CALCULATED' | 'MANUALLY_PLACED';
             };
-            mapAction?: 'BUY_TICKETS' | 'VIEW_AVAILABILITY' | 'VIEW_PRICING' | 'HOTEL_BOOK_ROOM' | 'PARKING_RESERVE_PARKING' | 'RESTAURANT_JOIN_WAITLIST' | 'RESTAURANT_ORDER_DELIVERY' | 'RESTAURANT_ORDER_FOOD' | 'RESTAURANT_ORDER_TAKEOUT' | 'RESTAURANT_RESERVATION' | 'SCHEDULE_APPOINTMENT' | 'RESTAURANT_VIEW_MENU' | 'THEATER_NOW_PLAYING' | 'AIRLINE_BOOK_TRAVEL' | 'AIRLINE_CHECK_IN' | 'AIRLINE_FLIGHT_STATUS' | 'APPLY' | 'BOOK' | 'BOOK_ACTIVITIES' | 'BOOK_RIDES' | 'BOOK_TEETIMES' | 'BOOK_TOURS' | 'CAREERS' | 'CHARGE_EV' | 'COUPONS' | 'DONATE' | 'EVENTS' | 'EVENTS_SHOWS' | 'EVENTS_SPORTS' | 'GIFT_CARD' | 'HOTEL_AMENITIES' | 'JOIN' | 'PARKING_AVAILABLE' | 'RESTAURANT_PICKUP' | 'RETAIL_SERVICE_QUOTE' | 'RETAIL_STORE_DELIVERY' | 'RETAIL_STORE_PICKUP' | 'RETAIL_STORE_SHOP' | 'SERVICES' | 'SUPPORT';
+            mapAction?: 'BUY_TICKETS' | 'VIEW_AVAILABILITY' | 'VIEW_PRICING' | 'HOTEL_BOOK_ROOM' | 'PARKING_RESERVE_PARKING' | 'RESTAURANT_JOIN_WAITLIST' | 'RESTAURANT_ORDER_DELIVERY' | 'RESTAURANT_ORDER_FOOD' | 'RESTAURANT_ORDER_TAKEOUT' | 'RESTAURANT_RESERVATION' | 'SCHEDULE_APPOINTMENT' | 'RESTAURANT_VIEW_MENU' | 'THEATER_NOW_PLAYING' | 'AIRLINE_BOOK_TRAVEL' | 'AIRLINE_CHECK_IN' | 'AIRLINE_FLIGHT_STATUS' | 'APPLY' | 'BOOK' | 'BOOK_ACTIVITIES' | 'BOOK_RIDES' | 'BOOK_TEETIMES' | 'BOOK_TOURS' | 'CAREERS' | 'CHARGE_EV' | 'COUPONS' | 'DONATE' | 'EVENTS' | 'EVENTS_SHOWS' | 'EVENTS_SPORTS' | 'GIFT_CARD' | 'HOTEL_AMENITIES' | 'JOIN' | 'PARKING_AVAILABLE' | 'RESTAURANT_PICKUP' | 'RETAIL_SERVICE_QUOTE' | 'RETAIL_STORE_DELIVERY' | 'RETAIL_STORE_PICKUP' | 'RETAIL_STORE_SHOP' | 'SERVICES' | 'SUPPORT' | 'PAY_TO_PARK';
             relationship?: 'OWNER' | 'AUTHORIZED' | 'OTHER';
             phoneNumber?: {
                 number?: string;
@@ -971,7 +1039,7 @@ export type AppClipAdvancedExperienceCreateRequest = {
                     };
                     source?: 'CALCULATED' | 'MANUALLY_PLACED';
                 };
-                mapAction?: 'BUY_TICKETS' | 'VIEW_AVAILABILITY' | 'VIEW_PRICING' | 'HOTEL_BOOK_ROOM' | 'PARKING_RESERVE_PARKING' | 'RESTAURANT_JOIN_WAITLIST' | 'RESTAURANT_ORDER_DELIVERY' | 'RESTAURANT_ORDER_FOOD' | 'RESTAURANT_ORDER_TAKEOUT' | 'RESTAURANT_RESERVATION' | 'SCHEDULE_APPOINTMENT' | 'RESTAURANT_VIEW_MENU' | 'THEATER_NOW_PLAYING' | 'AIRLINE_BOOK_TRAVEL' | 'AIRLINE_CHECK_IN' | 'AIRLINE_FLIGHT_STATUS' | 'APPLY' | 'BOOK' | 'BOOK_ACTIVITIES' | 'BOOK_RIDES' | 'BOOK_TEETIMES' | 'BOOK_TOURS' | 'CAREERS' | 'CHARGE_EV' | 'COUPONS' | 'DONATE' | 'EVENTS' | 'EVENTS_SHOWS' | 'EVENTS_SPORTS' | 'GIFT_CARD' | 'HOTEL_AMENITIES' | 'JOIN' | 'PARKING_AVAILABLE' | 'RESTAURANT_PICKUP' | 'RETAIL_SERVICE_QUOTE' | 'RETAIL_STORE_DELIVERY' | 'RETAIL_STORE_PICKUP' | 'RETAIL_STORE_SHOP' | 'SERVICES' | 'SUPPORT';
+                mapAction?: 'BUY_TICKETS' | 'VIEW_AVAILABILITY' | 'VIEW_PRICING' | 'HOTEL_BOOK_ROOM' | 'PARKING_RESERVE_PARKING' | 'RESTAURANT_JOIN_WAITLIST' | 'RESTAURANT_ORDER_DELIVERY' | 'RESTAURANT_ORDER_FOOD' | 'RESTAURANT_ORDER_TAKEOUT' | 'RESTAURANT_RESERVATION' | 'SCHEDULE_APPOINTMENT' | 'RESTAURANT_VIEW_MENU' | 'THEATER_NOW_PLAYING' | 'AIRLINE_BOOK_TRAVEL' | 'AIRLINE_CHECK_IN' | 'AIRLINE_FLIGHT_STATUS' | 'APPLY' | 'BOOK' | 'BOOK_ACTIVITIES' | 'BOOK_RIDES' | 'BOOK_TEETIMES' | 'BOOK_TOURS' | 'CAREERS' | 'CHARGE_EV' | 'COUPONS' | 'DONATE' | 'EVENTS' | 'EVENTS_SHOWS' | 'EVENTS_SPORTS' | 'GIFT_CARD' | 'HOTEL_AMENITIES' | 'JOIN' | 'PARKING_AVAILABLE' | 'RESTAURANT_PICKUP' | 'RETAIL_SERVICE_QUOTE' | 'RETAIL_STORE_DELIVERY' | 'RETAIL_STORE_PICKUP' | 'RETAIL_STORE_SHOP' | 'SERVICES' | 'SUPPORT' | 'PAY_TO_PARK';
                 relationship?: 'OWNER' | 'AUTHORIZED' | 'OTHER';
                 phoneNumber?: {
                     number?: string;
@@ -1040,7 +1108,7 @@ export type AppClipAdvancedExperienceUpdateRequest = {
                     };
                     source?: 'CALCULATED' | 'MANUALLY_PLACED';
                 };
-                mapAction?: 'BUY_TICKETS' | 'VIEW_AVAILABILITY' | 'VIEW_PRICING' | 'HOTEL_BOOK_ROOM' | 'PARKING_RESERVE_PARKING' | 'RESTAURANT_JOIN_WAITLIST' | 'RESTAURANT_ORDER_DELIVERY' | 'RESTAURANT_ORDER_FOOD' | 'RESTAURANT_ORDER_TAKEOUT' | 'RESTAURANT_RESERVATION' | 'SCHEDULE_APPOINTMENT' | 'RESTAURANT_VIEW_MENU' | 'THEATER_NOW_PLAYING' | 'AIRLINE_BOOK_TRAVEL' | 'AIRLINE_CHECK_IN' | 'AIRLINE_FLIGHT_STATUS' | 'APPLY' | 'BOOK' | 'BOOK_ACTIVITIES' | 'BOOK_RIDES' | 'BOOK_TEETIMES' | 'BOOK_TOURS' | 'CAREERS' | 'CHARGE_EV' | 'COUPONS' | 'DONATE' | 'EVENTS' | 'EVENTS_SHOWS' | 'EVENTS_SPORTS' | 'GIFT_CARD' | 'HOTEL_AMENITIES' | 'JOIN' | 'PARKING_AVAILABLE' | 'RESTAURANT_PICKUP' | 'RETAIL_SERVICE_QUOTE' | 'RETAIL_STORE_DELIVERY' | 'RETAIL_STORE_PICKUP' | 'RETAIL_STORE_SHOP' | 'SERVICES' | 'SUPPORT';
+                mapAction?: 'BUY_TICKETS' | 'VIEW_AVAILABILITY' | 'VIEW_PRICING' | 'HOTEL_BOOK_ROOM' | 'PARKING_RESERVE_PARKING' | 'RESTAURANT_JOIN_WAITLIST' | 'RESTAURANT_ORDER_DELIVERY' | 'RESTAURANT_ORDER_FOOD' | 'RESTAURANT_ORDER_TAKEOUT' | 'RESTAURANT_RESERVATION' | 'SCHEDULE_APPOINTMENT' | 'RESTAURANT_VIEW_MENU' | 'THEATER_NOW_PLAYING' | 'AIRLINE_BOOK_TRAVEL' | 'AIRLINE_CHECK_IN' | 'AIRLINE_FLIGHT_STATUS' | 'APPLY' | 'BOOK' | 'BOOK_ACTIVITIES' | 'BOOK_RIDES' | 'BOOK_TEETIMES' | 'BOOK_TOURS' | 'CAREERS' | 'CHARGE_EV' | 'COUPONS' | 'DONATE' | 'EVENTS' | 'EVENTS_SHOWS' | 'EVENTS_SPORTS' | 'GIFT_CARD' | 'HOTEL_AMENITIES' | 'JOIN' | 'PARKING_AVAILABLE' | 'RESTAURANT_PICKUP' | 'RETAIL_SERVICE_QUOTE' | 'RETAIL_STORE_DELIVERY' | 'RETAIL_STORE_PICKUP' | 'RETAIL_STORE_SHOP' | 'SERVICES' | 'SUPPORT' | 'PAY_TO_PARK';
                 relationship?: 'OWNER' | 'AUTHORIZED' | 'OTHER';
                 phoneNumber?: {
                     number?: string;
@@ -4536,6 +4604,12 @@ export type App = {
                 id: string;
             }>;
         };
+        appStoreIcon?: {
+            data?: {
+                type: 'buildIcons';
+                id: string;
+            };
+        };
         ciProduct?: {
             links?: RelationshipLinks;
             data?: {
@@ -4760,6 +4834,14 @@ export type App = {
         webhooks?: {
             links?: RelationshipLinks;
         };
+        androidToIosAppMappingDetails?: {
+            links?: RelationshipLinks;
+            meta?: PagingInformation;
+            data?: Array<{
+                type: 'androidToIosAppMappingDetails';
+                id: string;
+            }>;
+        };
     };
     links?: ResourceLinks;
 };
@@ -4770,6 +4852,8 @@ export type App = {
 export type AppsResponse = {
     data: Array<App>;
     included?: Array<({
+        type: 'androidToIosAppMappingDetails';
+    } & AndroidToIosAppMappingDetail) | ({
         type: 'appClips';
     } & AppClip) | ({
         type: 'appCustomProductPages';
@@ -4792,6 +4876,8 @@ export type AppsResponse = {
     } & BetaGroup) | ({
         type: 'betaLicenseAgreements';
     } & BetaLicenseAgreement) | ({
+        type: 'buildIcons';
+    } & BuildIcon) | ({
         type: 'builds';
     } & Build) | ({
         type: 'ciProducts';
@@ -4824,6 +4910,8 @@ export type AppsResponse = {
 export type AppResponse = {
     data: App;
     included?: Array<({
+        type: 'androidToIosAppMappingDetails';
+    } & AndroidToIosAppMappingDetail) | ({
         type: 'appClips';
     } & AppClip) | ({
         type: 'appCustomProductPages';
@@ -4846,6 +4934,8 @@ export type AppResponse = {
     } & BetaGroup) | ({
         type: 'betaLicenseAgreements';
     } & BetaLicenseAgreement) | ({
+        type: 'buildIcons';
+    } & BuildIcon) | ({
         type: 'builds';
     } & Build) | ({
         type: 'ciProducts';
@@ -5068,6 +5158,11 @@ export type BackgroundAssetVersion = {
         createdDate?: string;
         platforms?: Array<Platform>;
         state?: BackgroundAssetVersionState;
+        stateDetails?: {
+            errors?: Array<StateDetail>;
+            warnings?: Array<StateDetail>;
+            infos?: Array<StateDetail>;
+        };
         version?: string;
     };
     relationships?: {
@@ -5177,6 +5272,7 @@ export type BackgroundAsset = {
     type: 'backgroundAssets';
     id: string;
     attributes?: {
+        archived?: boolean;
         assetPackIdentifier?: string;
         createdDate?: string;
     };
@@ -5255,6 +5351,19 @@ export type BackgroundAssetCreateRequest = {
                     id: string;
                 };
             };
+        };
+    };
+};
+
+/**
+ * BackgroundAssetUpdateRequest
+ */
+export type BackgroundAssetUpdateRequest = {
+    data: {
+        type: 'backgroundAssets';
+        id: string;
+        attributes?: {
+            archived?: boolean | null;
         };
     };
 };
@@ -6222,6 +6331,12 @@ export type BetaTester = {
         email?: string;
         inviteType?: BetaInviteType;
         state?: BetaTesterState;
+        appDevices?: Array<{
+            model?: string;
+            platform?: 'IOS' | 'MAC_OS' | 'TV_OS' | 'WATCH_OS' | 'VISION_OS';
+            osVersion?: string;
+            appBuildVersion?: string;
+        }>;
     };
     relationships?: {
         apps?: {
@@ -8232,6 +8347,168 @@ export type GameCenterAchievementImageUpdateRequest = {
 };
 
 /**
+ * GameCenterAchievementImageV2
+ */
+export type GameCenterAchievementImageV2 = {
+    type: 'gameCenterAchievementImages';
+    id: string;
+    attributes?: {
+        fileSize?: number;
+        fileName?: string;
+        imageAsset?: ImageAsset;
+        uploadOperations?: Array<UploadOperation>;
+        assetDeliveryState?: AppMediaAssetState;
+    };
+    relationships?: {
+        localization?: {
+            data?: {
+                type: 'gameCenterAchievementLocalizations';
+                id: string;
+            };
+        };
+    };
+    links?: ResourceLinks;
+};
+
+/**
+ * GameCenterAchievementImageV2Response
+ */
+export type GameCenterAchievementImageV2Response = {
+    data: GameCenterAchievementImageV2;
+    included?: Array<GameCenterAchievementLocalizationV2>;
+    links: DocumentLinks;
+};
+
+/**
+ * GameCenterAchievementImageV2CreateRequest
+ */
+export type GameCenterAchievementImageV2CreateRequest = {
+    data: {
+        type: 'gameCenterAchievementImages';
+        attributes: {
+            fileSize: number;
+            fileName: string;
+        };
+        relationships: {
+            localization: {
+                data: {
+                    type: 'gameCenterAchievementLocalizations';
+                    id: string;
+                };
+            };
+        };
+    };
+};
+
+/**
+ * GameCenterAchievementImageV2UpdateRequest
+ */
+export type GameCenterAchievementImageV2UpdateRequest = {
+    data: {
+        type: 'gameCenterAchievementImages';
+        id: string;
+        attributes?: {
+            uploaded?: boolean | null;
+        };
+    };
+};
+
+/**
+ * GameCenterAchievementLocalizationV2
+ */
+export type GameCenterAchievementLocalizationV2 = {
+    type: 'gameCenterAchievementLocalizations';
+    id: string;
+    attributes?: {
+        locale?: string;
+        name?: string;
+        beforeEarnedDescription?: string;
+        afterEarnedDescription?: string;
+    };
+    relationships?: {
+        version?: {
+            data?: {
+                type: 'gameCenterAchievementVersions';
+                id: string;
+            };
+        };
+        image?: {
+            links?: RelationshipLinks;
+            data?: {
+                type: 'gameCenterAchievementImages';
+                id: string;
+            };
+        };
+    };
+    links?: ResourceLinks;
+};
+
+/**
+ * GameCenterAchievementLocalizationsV2Response
+ */
+export type GameCenterAchievementLocalizationsV2Response = {
+    data: Array<GameCenterAchievementLocalizationV2>;
+    included?: Array<({
+        type: 'gameCenterAchievementImages';
+    } & GameCenterAchievementImageV2) | ({
+        type: 'gameCenterAchievementVersions';
+    } & GameCenterAchievementVersionV2)>;
+    links: PagedDocumentLinks;
+    meta?: PagingInformation;
+};
+
+/**
+ * GameCenterAchievementLocalizationV2Response
+ */
+export type GameCenterAchievementLocalizationV2Response = {
+    data: GameCenterAchievementLocalizationV2;
+    included?: Array<({
+        type: 'gameCenterAchievementImages';
+    } & GameCenterAchievementImageV2) | ({
+        type: 'gameCenterAchievementVersions';
+    } & GameCenterAchievementVersionV2)>;
+    links: DocumentLinks;
+};
+
+/**
+ * GameCenterAchievementLocalizationV2CreateRequest
+ */
+export type GameCenterAchievementLocalizationV2CreateRequest = {
+    data: {
+        type: 'gameCenterAchievementLocalizations';
+        attributes: {
+            locale: string;
+            name: string;
+            beforeEarnedDescription: string;
+            afterEarnedDescription: string;
+        };
+        relationships: {
+            version: {
+                data: {
+                    type: 'gameCenterAchievementVersions';
+                    id: string;
+                };
+            };
+        };
+    };
+};
+
+/**
+ * GameCenterAchievementLocalizationV2UpdateRequest
+ */
+export type GameCenterAchievementLocalizationV2UpdateRequest = {
+    data: {
+        type: 'gameCenterAchievementLocalizations';
+        id: string;
+        attributes?: {
+            name?: string | null;
+            beforeEarnedDescription?: string | null;
+            afterEarnedDescription?: string | null;
+        };
+    };
+};
+
+/**
  * GameCenterAchievementLocalization
  */
 export type GameCenterAchievementLocalization = {
@@ -8399,6 +8676,230 @@ export type GameCenterAchievementReleaseCreateRequest = {
                     id: string;
                 };
             };
+        };
+    };
+};
+
+/**
+ * GameCenterAchievementVersionV2
+ */
+export type GameCenterAchievementVersionV2 = {
+    type: 'gameCenterAchievementVersions';
+    id: string;
+    attributes?: {
+        version?: number;
+        state?: GameCenterVersionState;
+    };
+    relationships?: {
+        achievement?: {
+            data?: {
+                type: 'gameCenterAchievements';
+                id: string;
+            };
+        };
+        localizations?: {
+            links?: RelationshipLinks;
+            meta?: PagingInformation;
+            data?: Array<{
+                type: 'gameCenterAchievementLocalizations';
+                id: string;
+            }>;
+        };
+    };
+    links?: ResourceLinks;
+};
+
+export type GameCenterAchievementVersionV2InlineCreate = {
+    type: 'gameCenterAchievementVersions';
+    id?: string;
+    relationships?: {
+        achievement?: {
+            data?: {
+                type: 'gameCenterAchievements';
+                id: string;
+            };
+        };
+    };
+};
+
+/**
+ * GameCenterAchievementVersionsV2Response
+ */
+export type GameCenterAchievementVersionsV2Response = {
+    data: Array<GameCenterAchievementVersionV2>;
+    included?: Array<({
+        type: 'gameCenterAchievementLocalizations';
+    } & GameCenterAchievementLocalizationV2) | ({
+        type: 'gameCenterAchievements';
+    } & GameCenterAchievementV2)>;
+    links: PagedDocumentLinks;
+    meta?: PagingInformation;
+};
+
+/**
+ * GameCenterAchievementVersionV2Response
+ */
+export type GameCenterAchievementVersionV2Response = {
+    data: GameCenterAchievementVersionV2;
+    included?: Array<({
+        type: 'gameCenterAchievementLocalizations';
+    } & GameCenterAchievementLocalizationV2) | ({
+        type: 'gameCenterAchievements';
+    } & GameCenterAchievementV2)>;
+    links: DocumentLinks;
+};
+
+/**
+ * GameCenterAchievementVersionV2CreateRequest
+ */
+export type GameCenterAchievementVersionV2CreateRequest = {
+    data: {
+        type: 'gameCenterAchievementVersions';
+        relationships: {
+            achievement: {
+                data: {
+                    type: 'gameCenterAchievements';
+                    id: string;
+                };
+            };
+        };
+    };
+};
+
+/**
+ * GameCenterAchievementV2
+ */
+export type GameCenterAchievementV2 = {
+    type: 'gameCenterAchievements';
+    id: string;
+    attributes?: {
+        referenceName?: string;
+        vendorIdentifier?: string;
+        points?: number;
+        showBeforeEarned?: boolean;
+        repeatable?: boolean;
+        archived?: boolean;
+        activityProperties?: StringToStringMap;
+    };
+    relationships?: {
+        gameCenterDetail?: {
+            data?: {
+                type: 'gameCenterDetails';
+                id: string;
+            };
+        };
+        gameCenterGroup?: {
+            data?: {
+                type: 'gameCenterGroups';
+                id: string;
+            };
+        };
+        activity?: {
+            links?: RelationshipLinks;
+            data?: {
+                type: 'gameCenterActivities';
+                id: string;
+            };
+        };
+        versions?: {
+            links?: RelationshipLinks;
+            meta?: PagingInformation;
+            data?: Array<{
+                type: 'gameCenterAchievementVersions';
+                id: string;
+            }>;
+        };
+    };
+    links?: ResourceLinks;
+};
+
+/**
+ * GameCenterAchievementsV2Response
+ */
+export type GameCenterAchievementsV2Response = {
+    data: Array<GameCenterAchievementV2>;
+    included?: Array<({
+        type: 'gameCenterAchievementVersions';
+    } & GameCenterAchievementVersionV2) | ({
+        type: 'gameCenterActivities';
+    } & GameCenterActivity) | ({
+        type: 'gameCenterDetails';
+    } & GameCenterDetail) | ({
+        type: 'gameCenterGroups';
+    } & GameCenterGroup)>;
+    links: PagedDocumentLinks;
+    meta?: PagingInformation;
+};
+
+/**
+ * GameCenterAchievementV2Response
+ */
+export type GameCenterAchievementV2Response = {
+    data: GameCenterAchievementV2;
+    included?: Array<({
+        type: 'gameCenterAchievementVersions';
+    } & GameCenterAchievementVersionV2) | ({
+        type: 'gameCenterActivities';
+    } & GameCenterActivity) | ({
+        type: 'gameCenterDetails';
+    } & GameCenterDetail) | ({
+        type: 'gameCenterGroups';
+    } & GameCenterGroup)>;
+    links: DocumentLinks;
+};
+
+/**
+ * GameCenterAchievementV2CreateRequest
+ */
+export type GameCenterAchievementV2CreateRequest = {
+    data: {
+        type: 'gameCenterAchievements';
+        attributes: {
+            referenceName: string;
+            vendorIdentifier: string;
+            points: number;
+            showBeforeEarned: boolean;
+            repeatable: boolean;
+            activityProperties?: StringToStringMap;
+        };
+        relationships: {
+            gameCenterDetail?: {
+                data?: {
+                    type: 'gameCenterDetails';
+                    id: string;
+                };
+            };
+            gameCenterGroup?: {
+                data?: {
+                    type: 'gameCenterGroups';
+                    id: string;
+                };
+            };
+            versions: {
+                data: Array<{
+                    type: 'gameCenterAchievementVersions';
+                    id: string;
+                }>;
+            };
+        };
+    };
+    included?: Array<GameCenterAchievementVersionV2InlineCreate>;
+};
+
+/**
+ * GameCenterAchievementV2UpdateRequest
+ */
+export type GameCenterAchievementV2UpdateRequest = {
+    data: {
+        type: 'gameCenterAchievements';
+        id: string;
+        attributes?: {
+            referenceName?: string | null;
+            points?: number | null;
+            showBeforeEarned?: boolean | null;
+            repeatable?: boolean | null;
+            archived?: boolean | null;
+            activityProperties?: StringToStringMap;
         };
     };
 };
@@ -8597,7 +9098,23 @@ export type GameCenterActivity = {
                 id: string;
             }>;
         };
+        achievementsV2?: {
+            links?: RelationshipLinks;
+            meta?: PagingInformation;
+            data?: Array<{
+                type: 'gameCenterAchievements';
+                id: string;
+            }>;
+        };
         leaderboards?: {
+            links?: RelationshipLinks;
+            meta?: PagingInformation;
+            data?: Array<{
+                type: 'gameCenterLeaderboards';
+                id: string;
+            }>;
+        };
+        leaderboardsV2?: {
             links?: RelationshipLinks;
             meta?: PagingInformation;
             data?: Array<{
@@ -9471,6 +9988,13 @@ export type GameCenterChallenge = {
                 id: string;
             };
         };
+        leaderboardV2?: {
+            links?: RelationshipLinks;
+            data?: {
+                type: 'gameCenterLeaderboards';
+                id: string;
+            };
+        };
     };
     links?: ResourceLinks;
 };
@@ -9541,6 +10065,12 @@ export type GameCenterChallengeCreateRequest = {
                     id: string;
                 };
             };
+            leaderboardV2?: {
+                data?: {
+                    type: 'gameCenterLeaderboards';
+                    id: string;
+                };
+            };
         };
     };
 };
@@ -9559,6 +10089,12 @@ export type GameCenterChallengeUpdateRequest = {
         };
         relationships?: {
             leaderboard?: {
+                data?: {
+                    type: 'gameCenterLeaderboards';
+                    id: string;
+                };
+            };
+            leaderboardV2?: {
                 data?: {
                     type: 'gameCenterLeaderboards';
                     id: string;
@@ -9611,6 +10147,14 @@ export type GameCenterDetail = {
                 id: string;
             }>;
         };
+        gameCenterLeaderboardsV2?: {
+            links?: RelationshipLinks;
+            meta?: PagingInformation;
+            data?: Array<{
+                type: 'gameCenterLeaderboards';
+                id: string;
+            }>;
+        };
         gameCenterLeaderboardSets?: {
             links?: RelationshipLinks;
             meta?: PagingInformation;
@@ -9619,7 +10163,23 @@ export type GameCenterDetail = {
                 id: string;
             }>;
         };
+        gameCenterLeaderboardSetsV2?: {
+            links?: RelationshipLinks;
+            meta?: PagingInformation;
+            data?: Array<{
+                type: 'gameCenterLeaderboardSets';
+                id: string;
+            }>;
+        };
         gameCenterAchievements?: {
+            links?: RelationshipLinks;
+            meta?: PagingInformation;
+            data?: Array<{
+                type: 'gameCenterAchievements';
+                id: string;
+            }>;
+        };
+        gameCenterAchievementsV2?: {
             links?: RelationshipLinks;
             meta?: PagingInformation;
             data?: Array<{
@@ -9649,7 +10209,19 @@ export type GameCenterDetail = {
                 id: string;
             };
         };
+        defaultLeaderboardV2?: {
+            data?: {
+                type: 'gameCenterLeaderboards';
+                id: string;
+            };
+        };
         defaultGroupLeaderboard?: {
+            data?: {
+                type: 'gameCenterLeaderboards';
+                id: string;
+            };
+        };
+        defaultGroupLeaderboardV2?: {
             data?: {
                 type: 'gameCenterLeaderboards';
                 id: string;
@@ -9831,7 +10403,19 @@ export type GameCenterDetailUpdateRequest = {
                     id: string;
                 };
             };
+            defaultLeaderboardV2?: {
+                data?: {
+                    type: 'gameCenterLeaderboards';
+                    id: string;
+                };
+            };
             defaultGroupLeaderboard?: {
+                data?: {
+                    type: 'gameCenterLeaderboards';
+                    id: string;
+                };
+            };
+            defaultGroupLeaderboardV2?: {
                 data?: {
                     type: 'gameCenterLeaderboards';
                     id: string;
@@ -9913,6 +10497,14 @@ export type GameCenterGroup = {
                 id: string;
             }>;
         };
+        gameCenterLeaderboardsV2?: {
+            links?: RelationshipLinks;
+            meta?: PagingInformation;
+            data?: Array<{
+                type: 'gameCenterLeaderboards';
+                id: string;
+            }>;
+        };
         gameCenterLeaderboardSets?: {
             links?: RelationshipLinks;
             meta?: PagingInformation;
@@ -9921,7 +10513,23 @@ export type GameCenterGroup = {
                 id: string;
             }>;
         };
+        gameCenterLeaderboardSetsV2?: {
+            links?: RelationshipLinks;
+            meta?: PagingInformation;
+            data?: Array<{
+                type: 'gameCenterLeaderboardSets';
+                id: string;
+            }>;
+        };
         gameCenterAchievements?: {
+            links?: RelationshipLinks;
+            meta?: PagingInformation;
+            data?: Array<{
+                type: 'gameCenterAchievements';
+                id: string;
+            }>;
+        };
+        gameCenterAchievementsV2?: {
             links?: RelationshipLinks;
             meta?: PagingInformation;
             data?: Array<{
@@ -10129,6 +10737,73 @@ export type GameCenterLeaderboardImageUpdateRequest = {
 };
 
 /**
+ * GameCenterLeaderboardImageV2
+ */
+export type GameCenterLeaderboardImageV2 = {
+    type: 'gameCenterLeaderboardImages';
+    id: string;
+    attributes?: {
+        fileSize?: number;
+        fileName?: string;
+        imageAsset?: ImageAsset;
+        uploadOperations?: Array<UploadOperation>;
+        assetDeliveryState?: AppMediaAssetState;
+    };
+    relationships?: {
+        localization?: {
+            data?: {
+                type: 'gameCenterLeaderboardLocalizations';
+                id: string;
+            };
+        };
+    };
+    links?: ResourceLinks;
+};
+
+/**
+ * GameCenterLeaderboardImageV2Response
+ */
+export type GameCenterLeaderboardImageV2Response = {
+    data: GameCenterLeaderboardImageV2;
+    included?: Array<GameCenterLeaderboardLocalizationV2>;
+    links: DocumentLinks;
+};
+
+/**
+ * GameCenterLeaderboardImageV2CreateRequest
+ */
+export type GameCenterLeaderboardImageV2CreateRequest = {
+    data: {
+        type: 'gameCenterLeaderboardImages';
+        attributes: {
+            fileSize: number;
+            fileName: string;
+        };
+        relationships: {
+            localization: {
+                data: {
+                    type: 'gameCenterLeaderboardLocalizations';
+                    id: string;
+                };
+            };
+        };
+    };
+};
+
+/**
+ * GameCenterLeaderboardImageV2UpdateRequest
+ */
+export type GameCenterLeaderboardImageV2UpdateRequest = {
+    data: {
+        type: 'gameCenterLeaderboardImages';
+        id: string;
+        attributes?: {
+            uploaded?: boolean | null;
+        };
+    };
+};
+
+/**
  * GameCenterLeaderboardLocalization
  */
 export type GameCenterLeaderboardLocalization = {
@@ -10216,6 +10891,107 @@ export type GameCenterLeaderboardLocalizationCreateRequest = {
  * GameCenterLeaderboardLocalizationUpdateRequest
  */
 export type GameCenterLeaderboardLocalizationUpdateRequest = {
+    data: {
+        type: 'gameCenterLeaderboardLocalizations';
+        id: string;
+        attributes?: {
+            name?: string | null;
+            formatterOverride?: GameCenterLeaderboardFormatter;
+            formatterSuffix?: string | null;
+            formatterSuffixSingular?: string | null;
+            description?: string | null;
+        };
+    };
+};
+
+/**
+ * GameCenterLeaderboardLocalizationV2
+ */
+export type GameCenterLeaderboardLocalizationV2 = {
+    type: 'gameCenterLeaderboardLocalizations';
+    id: string;
+    attributes?: {
+        locale?: string;
+        name?: string;
+        formatterOverride?: GameCenterLeaderboardFormatter;
+        formatterSuffix?: string;
+        formatterSuffixSingular?: string;
+        description?: string;
+    };
+    relationships?: {
+        version?: {
+            data?: {
+                type: 'gameCenterLeaderboardVersions';
+                id: string;
+            };
+        };
+        image?: {
+            links?: RelationshipLinks;
+            data?: {
+                type: 'gameCenterLeaderboardImages';
+                id: string;
+            };
+        };
+    };
+    links?: ResourceLinks;
+};
+
+/**
+ * GameCenterLeaderboardLocalizationsV2Response
+ */
+export type GameCenterLeaderboardLocalizationsV2Response = {
+    data: Array<GameCenterLeaderboardLocalizationV2>;
+    included?: Array<({
+        type: 'gameCenterLeaderboardImages';
+    } & GameCenterLeaderboardImageV2) | ({
+        type: 'gameCenterLeaderboardVersions';
+    } & GameCenterLeaderboardVersionV2)>;
+    links: PagedDocumentLinks;
+    meta?: PagingInformation;
+};
+
+/**
+ * GameCenterLeaderboardLocalizationV2Response
+ */
+export type GameCenterLeaderboardLocalizationV2Response = {
+    data: GameCenterLeaderboardLocalizationV2;
+    included?: Array<({
+        type: 'gameCenterLeaderboardImages';
+    } & GameCenterLeaderboardImageV2) | ({
+        type: 'gameCenterLeaderboardVersions';
+    } & GameCenterLeaderboardVersionV2)>;
+    links: DocumentLinks;
+};
+
+/**
+ * GameCenterLeaderboardLocalizationV2CreateRequest
+ */
+export type GameCenterLeaderboardLocalizationV2CreateRequest = {
+    data: {
+        type: 'gameCenterLeaderboardLocalizations';
+        attributes: {
+            locale: string;
+            name: string;
+            formatterOverride?: GameCenterLeaderboardFormatter;
+            formatterSuffix?: string | null;
+            formatterSuffixSingular?: string | null;
+            description?: string | null;
+        };
+        relationships: {
+            version: {
+                data: {
+                    type: 'gameCenterLeaderboardVersions';
+                    id: string;
+                };
+            };
+        };
+    };
+};
+
+/**
+ * GameCenterLeaderboardLocalizationV2UpdateRequest
+ */
+export type GameCenterLeaderboardLocalizationV2UpdateRequest = {
     data: {
         type: 'gameCenterLeaderboardLocalizations';
         id: string;
@@ -10373,6 +11149,73 @@ export type GameCenterLeaderboardSetImageUpdateRequest = {
 };
 
 /**
+ * GameCenterLeaderboardSetImageV2
+ */
+export type GameCenterLeaderboardSetImageV2 = {
+    type: 'gameCenterLeaderboardSetImages';
+    id: string;
+    attributes?: {
+        fileSize?: number;
+        fileName?: string;
+        imageAsset?: ImageAsset;
+        uploadOperations?: Array<UploadOperation>;
+        assetDeliveryState?: AppMediaAssetState;
+    };
+    relationships?: {
+        localization?: {
+            data?: {
+                type: 'gameCenterLeaderboardSetLocalizations';
+                id: string;
+            };
+        };
+    };
+    links?: ResourceLinks;
+};
+
+/**
+ * GameCenterLeaderboardSetImageV2Response
+ */
+export type GameCenterLeaderboardSetImageV2Response = {
+    data: GameCenterLeaderboardSetImageV2;
+    included?: Array<GameCenterLeaderboardSetLocalizationV2>;
+    links: DocumentLinks;
+};
+
+/**
+ * GameCenterLeaderboardSetImageV2CreateRequest
+ */
+export type GameCenterLeaderboardSetImageV2CreateRequest = {
+    data: {
+        type: 'gameCenterLeaderboardSetImages';
+        attributes: {
+            fileSize: number;
+            fileName: string;
+        };
+        relationships: {
+            localization: {
+                data: {
+                    type: 'gameCenterLeaderboardSetLocalizations';
+                    id: string;
+                };
+            };
+        };
+    };
+};
+
+/**
+ * GameCenterLeaderboardSetImageV2UpdateRequest
+ */
+export type GameCenterLeaderboardSetImageV2UpdateRequest = {
+    data: {
+        type: 'gameCenterLeaderboardSetImages';
+        id: string;
+        attributes?: {
+            uploaded?: boolean | null;
+        };
+    };
+};
+
+/**
  * GameCenterLeaderboardSetLocalization
  */
 export type GameCenterLeaderboardSetLocalization = {
@@ -10452,6 +11295,95 @@ export type GameCenterLeaderboardSetLocalizationCreateRequest = {
  * GameCenterLeaderboardSetLocalizationUpdateRequest
  */
 export type GameCenterLeaderboardSetLocalizationUpdateRequest = {
+    data: {
+        type: 'gameCenterLeaderboardSetLocalizations';
+        id: string;
+        attributes?: {
+            name?: string | null;
+        };
+    };
+};
+
+/**
+ * GameCenterLeaderboardSetLocalizationV2
+ */
+export type GameCenterLeaderboardSetLocalizationV2 = {
+    type: 'gameCenterLeaderboardSetLocalizations';
+    id: string;
+    attributes?: {
+        locale?: string;
+        name?: string;
+    };
+    relationships?: {
+        version?: {
+            data?: {
+                type: 'gameCenterLeaderboardSetVersions';
+                id: string;
+            };
+        };
+        image?: {
+            links?: RelationshipLinks;
+            data?: {
+                type: 'gameCenterLeaderboardSetImages';
+                id: string;
+            };
+        };
+    };
+    links?: ResourceLinks;
+};
+
+/**
+ * GameCenterLeaderboardSetLocalizationsV2Response
+ */
+export type GameCenterLeaderboardSetLocalizationsV2Response = {
+    data: Array<GameCenterLeaderboardSetLocalizationV2>;
+    included?: Array<({
+        type: 'gameCenterLeaderboardSetImages';
+    } & GameCenterLeaderboardSetImageV2) | ({
+        type: 'gameCenterLeaderboardSetVersions';
+    } & GameCenterLeaderboardSetVersionV2)>;
+    links: PagedDocumentLinks;
+    meta?: PagingInformation;
+};
+
+/**
+ * GameCenterLeaderboardSetLocalizationV2Response
+ */
+export type GameCenterLeaderboardSetLocalizationV2Response = {
+    data: GameCenterLeaderboardSetLocalizationV2;
+    included?: Array<({
+        type: 'gameCenterLeaderboardSetImages';
+    } & GameCenterLeaderboardSetImageV2) | ({
+        type: 'gameCenterLeaderboardSetVersions';
+    } & GameCenterLeaderboardSetVersionV2)>;
+    links: DocumentLinks;
+};
+
+/**
+ * GameCenterLeaderboardSetLocalizationV2CreateRequest
+ */
+export type GameCenterLeaderboardSetLocalizationV2CreateRequest = {
+    data: {
+        type: 'gameCenterLeaderboardSetLocalizations';
+        attributes: {
+            locale: string;
+            name: string;
+        };
+        relationships: {
+            version: {
+                data: {
+                    type: 'gameCenterLeaderboardSetVersions';
+                    id: string;
+                };
+            };
+        };
+    };
+};
+
+/**
+ * GameCenterLeaderboardSetLocalizationV2UpdateRequest
+ */
+export type GameCenterLeaderboardSetLocalizationV2UpdateRequest = {
     data: {
         type: 'gameCenterLeaderboardSetLocalizations';
         id: string;
@@ -10634,6 +11566,223 @@ export type GameCenterLeaderboardSetReleaseCreateRequest = {
 };
 
 /**
+ * GameCenterLeaderboardSetVersionV2
+ */
+export type GameCenterLeaderboardSetVersionV2 = {
+    type: 'gameCenterLeaderboardSetVersions';
+    id: string;
+    attributes?: {
+        version?: number;
+        state?: GameCenterVersionState;
+    };
+    relationships?: {
+        leaderboardSet?: {
+            data?: {
+                type: 'gameCenterLeaderboardSets';
+                id: string;
+            };
+        };
+        localizations?: {
+            links?: RelationshipLinks;
+            meta?: PagingInformation;
+            data?: Array<{
+                type: 'gameCenterLeaderboardSetLocalizations';
+                id: string;
+            }>;
+        };
+    };
+    links?: ResourceLinks;
+};
+
+export type GameCenterLeaderboardSetVersionV2InlineCreate = {
+    type: 'gameCenterLeaderboardSetVersions';
+    id?: string;
+    relationships?: {
+        leaderboardSet?: {
+            data?: {
+                type: 'gameCenterLeaderboardSets';
+                id: string;
+            };
+        };
+    };
+};
+
+/**
+ * GameCenterLeaderboardSetVersionsV2Response
+ */
+export type GameCenterLeaderboardSetVersionsV2Response = {
+    data: Array<GameCenterLeaderboardSetVersionV2>;
+    included?: Array<({
+        type: 'gameCenterLeaderboardSetLocalizations';
+    } & GameCenterLeaderboardSetLocalizationV2) | ({
+        type: 'gameCenterLeaderboardSets';
+    } & GameCenterLeaderboardSetV2)>;
+    links: PagedDocumentLinks;
+    meta?: PagingInformation;
+};
+
+/**
+ * GameCenterLeaderboardSetVersionV2Response
+ */
+export type GameCenterLeaderboardSetVersionV2Response = {
+    data: GameCenterLeaderboardSetVersionV2;
+    included?: Array<({
+        type: 'gameCenterLeaderboardSetLocalizations';
+    } & GameCenterLeaderboardSetLocalizationV2) | ({
+        type: 'gameCenterLeaderboardSets';
+    } & GameCenterLeaderboardSetV2)>;
+    links: DocumentLinks;
+};
+
+/**
+ * GameCenterLeaderboardSetVersionV2CreateRequest
+ */
+export type GameCenterLeaderboardSetVersionV2CreateRequest = {
+    data: {
+        type: 'gameCenterLeaderboardSetVersions';
+        relationships: {
+            leaderboardSet: {
+                data: {
+                    type: 'gameCenterLeaderboardSets';
+                    id: string;
+                };
+            };
+        };
+    };
+};
+
+/**
+ * GameCenterLeaderboardSetV2
+ */
+export type GameCenterLeaderboardSetV2 = {
+    type: 'gameCenterLeaderboardSets';
+    id: string;
+    attributes?: {
+        referenceName?: string;
+        vendorIdentifier?: string;
+    };
+    relationships?: {
+        gameCenterDetail?: {
+            data?: {
+                type: 'gameCenterDetails';
+                id: string;
+            };
+        };
+        gameCenterGroup?: {
+            data?: {
+                type: 'gameCenterGroups';
+                id: string;
+            };
+        };
+        gameCenterLeaderboards?: {
+            links?: RelationshipLinks;
+            meta?: PagingInformation;
+            data?: Array<{
+                type: 'gameCenterLeaderboards';
+                id: string;
+            }>;
+        };
+        versions?: {
+            links?: RelationshipLinks;
+            meta?: PagingInformation;
+            data?: Array<{
+                type: 'gameCenterLeaderboardSetVersions';
+                id: string;
+            }>;
+        };
+    };
+    links?: ResourceLinks;
+};
+
+/**
+ * GameCenterLeaderboardSetsV2Response
+ */
+export type GameCenterLeaderboardSetsV2Response = {
+    data: Array<GameCenterLeaderboardSetV2>;
+    included?: Array<({
+        type: 'gameCenterDetails';
+    } & GameCenterDetail) | ({
+        type: 'gameCenterGroups';
+    } & GameCenterGroup) | ({
+        type: 'gameCenterLeaderboardSetVersions';
+    } & GameCenterLeaderboardSetVersionV2) | ({
+        type: 'gameCenterLeaderboards';
+    } & GameCenterLeaderboardV2)>;
+    links: PagedDocumentLinks;
+    meta?: PagingInformation;
+};
+
+/**
+ * GameCenterLeaderboardSetV2Response
+ */
+export type GameCenterLeaderboardSetV2Response = {
+    data: GameCenterLeaderboardSetV2;
+    included?: Array<({
+        type: 'gameCenterDetails';
+    } & GameCenterDetail) | ({
+        type: 'gameCenterGroups';
+    } & GameCenterGroup) | ({
+        type: 'gameCenterLeaderboardSetVersions';
+    } & GameCenterLeaderboardSetVersionV2) | ({
+        type: 'gameCenterLeaderboards';
+    } & GameCenterLeaderboardV2)>;
+    links: DocumentLinks;
+};
+
+/**
+ * GameCenterLeaderboardSetV2CreateRequest
+ */
+export type GameCenterLeaderboardSetV2CreateRequest = {
+    data: {
+        type: 'gameCenterLeaderboardSets';
+        attributes: {
+            referenceName: string;
+            vendorIdentifier: string;
+        };
+        relationships: {
+            gameCenterDetail?: {
+                data?: {
+                    type: 'gameCenterDetails';
+                    id: string;
+                };
+            };
+            gameCenterGroup?: {
+                data?: {
+                    type: 'gameCenterGroups';
+                    id: string;
+                };
+            };
+            gameCenterLeaderboards?: {
+                data?: Array<{
+                    type: 'gameCenterLeaderboards';
+                    id: string;
+                }>;
+            };
+            versions: {
+                data: Array<{
+                    type: 'gameCenterLeaderboardSetVersions';
+                    id: string;
+                }>;
+            };
+        };
+    };
+    included?: Array<GameCenterLeaderboardSetVersionV2InlineCreate>;
+};
+
+/**
+ * GameCenterLeaderboardSetV2UpdateRequest
+ */
+export type GameCenterLeaderboardSetV2UpdateRequest = {
+    data: {
+        type: 'gameCenterLeaderboardSets';
+        id: string;
+        attributes?: {
+            referenceName?: string | null;
+        };
+    };
+};
+
+/**
  * GameCenterLeaderboardSet
  */
 export type GameCenterLeaderboardSet = {
@@ -10779,6 +11928,92 @@ export type GameCenterLeaderboardSetUpdateRequest = {
         id: string;
         attributes?: {
             referenceName?: string | null;
+        };
+    };
+};
+
+/**
+ * GameCenterLeaderboardVersionV2
+ */
+export type GameCenterLeaderboardVersionV2 = {
+    type: 'gameCenterLeaderboardVersions';
+    id: string;
+    attributes?: {
+        version?: number;
+        state?: GameCenterVersionState;
+    };
+    relationships?: {
+        leaderboard?: {
+            data?: {
+                type: 'gameCenterLeaderboards';
+                id: string;
+            };
+        };
+        localizations?: {
+            links?: RelationshipLinks;
+            meta?: PagingInformation;
+            data?: Array<{
+                type: 'gameCenterLeaderboardLocalizations';
+                id: string;
+            }>;
+        };
+    };
+    links?: ResourceLinks;
+};
+
+export type GameCenterLeaderboardVersionV2InlineCreate = {
+    type: 'gameCenterLeaderboardVersions';
+    id?: string;
+    relationships?: {
+        leaderboard?: {
+            data?: {
+                type: 'gameCenterLeaderboards';
+                id: string;
+            };
+        };
+    };
+};
+
+/**
+ * GameCenterLeaderboardVersionsV2Response
+ */
+export type GameCenterLeaderboardVersionsV2Response = {
+    data: Array<GameCenterLeaderboardVersionV2>;
+    included?: Array<({
+        type: 'gameCenterLeaderboardLocalizations';
+    } & GameCenterLeaderboardLocalizationV2) | ({
+        type: 'gameCenterLeaderboards';
+    } & GameCenterLeaderboardV2)>;
+    links: PagedDocumentLinks;
+    meta?: PagingInformation;
+};
+
+/**
+ * GameCenterLeaderboardVersionV2Response
+ */
+export type GameCenterLeaderboardVersionV2Response = {
+    data: GameCenterLeaderboardVersionV2;
+    included?: Array<({
+        type: 'gameCenterLeaderboardLocalizations';
+    } & GameCenterLeaderboardLocalizationV2) | ({
+        type: 'gameCenterLeaderboards';
+    } & GameCenterLeaderboardV2)>;
+    links: DocumentLinks;
+};
+
+/**
+ * GameCenterLeaderboardVersionV2CreateRequest
+ */
+export type GameCenterLeaderboardVersionV2CreateRequest = {
+    data: {
+        type: 'gameCenterLeaderboardVersions';
+        relationships: {
+            leaderboard: {
+                data: {
+                    type: 'gameCenterLeaderboards';
+                    id: string;
+                };
+            };
         };
     };
 };
@@ -10966,6 +12201,190 @@ export type GameCenterLeaderboardCreateRequest = {
  * GameCenterLeaderboardUpdateRequest
  */
 export type GameCenterLeaderboardUpdateRequest = {
+    data: {
+        type: 'gameCenterLeaderboards';
+        id: string;
+        attributes?: {
+            defaultFormatter?: GameCenterLeaderboardFormatter;
+            referenceName?: string | null;
+            submissionType?: 'BEST_SCORE' | 'MOST_RECENT_SCORE';
+            scoreSortType?: 'ASC' | 'DESC';
+            scoreRangeStart?: string | null;
+            scoreRangeEnd?: string | null;
+            recurrenceStartDate?: string | null;
+            recurrenceDuration?: string | null;
+            recurrenceRule?: string | null;
+            archived?: boolean | null;
+            activityProperties?: StringToStringMap;
+            visibility?: 'SHOW_FOR_ALL' | 'HIDE_FOR_ALL';
+        };
+    };
+};
+
+/**
+ * GameCenterLeaderboardV2
+ */
+export type GameCenterLeaderboardV2 = {
+    type: 'gameCenterLeaderboards';
+    id: string;
+    attributes?: {
+        defaultFormatter?: GameCenterLeaderboardFormatter;
+        referenceName?: string;
+        vendorIdentifier?: string;
+        submissionType?: 'BEST_SCORE' | 'MOST_RECENT_SCORE';
+        scoreSortType?: 'ASC' | 'DESC';
+        scoreRangeStart?: string;
+        scoreRangeEnd?: string;
+        recurrenceStartDate?: string;
+        recurrenceDuration?: string;
+        recurrenceRule?: string;
+        archived?: boolean;
+        activityProperties?: StringToStringMap;
+        visibility?: 'SHOW_FOR_ALL' | 'HIDE_FOR_ALL';
+    };
+    relationships?: {
+        gameCenterDetail?: {
+            data?: {
+                type: 'gameCenterDetails';
+                id: string;
+            };
+        };
+        gameCenterGroup?: {
+            data?: {
+                type: 'gameCenterGroups';
+                id: string;
+            };
+        };
+        gameCenterLeaderboardSets?: {
+            meta?: PagingInformation;
+            data?: Array<{
+                type: 'gameCenterLeaderboardSets';
+                id: string;
+            }>;
+        };
+        activity?: {
+            links?: RelationshipLinks;
+            data?: {
+                type: 'gameCenterActivities';
+                id: string;
+            };
+        };
+        challenge?: {
+            links?: RelationshipLinks;
+            data?: {
+                type: 'gameCenterChallenges';
+                id: string;
+            };
+        };
+        versions?: {
+            links?: RelationshipLinks;
+            meta?: PagingInformation;
+            data?: Array<{
+                type: 'gameCenterLeaderboardVersions';
+                id: string;
+            }>;
+        };
+    };
+    links?: ResourceLinks;
+};
+
+/**
+ * GameCenterLeaderboardsV2Response
+ */
+export type GameCenterLeaderboardsV2Response = {
+    data: Array<GameCenterLeaderboardV2>;
+    included?: Array<({
+        type: 'gameCenterActivities';
+    } & GameCenterActivity) | ({
+        type: 'gameCenterChallenges';
+    } & GameCenterChallenge) | ({
+        type: 'gameCenterDetails';
+    } & GameCenterDetail) | ({
+        type: 'gameCenterGroups';
+    } & GameCenterGroup) | ({
+        type: 'gameCenterLeaderboardSets';
+    } & GameCenterLeaderboardSetV2) | ({
+        type: 'gameCenterLeaderboardVersions';
+    } & GameCenterLeaderboardVersionV2)>;
+    links: PagedDocumentLinks;
+    meta?: PagingInformation;
+};
+
+/**
+ * GameCenterLeaderboardV2Response
+ */
+export type GameCenterLeaderboardV2Response = {
+    data: GameCenterLeaderboardV2;
+    included?: Array<({
+        type: 'gameCenterActivities';
+    } & GameCenterActivity) | ({
+        type: 'gameCenterChallenges';
+    } & GameCenterChallenge) | ({
+        type: 'gameCenterDetails';
+    } & GameCenterDetail) | ({
+        type: 'gameCenterGroups';
+    } & GameCenterGroup) | ({
+        type: 'gameCenterLeaderboardSets';
+    } & GameCenterLeaderboardSetV2) | ({
+        type: 'gameCenterLeaderboardVersions';
+    } & GameCenterLeaderboardVersionV2)>;
+    links: DocumentLinks;
+};
+
+/**
+ * GameCenterLeaderboardV2CreateRequest
+ */
+export type GameCenterLeaderboardV2CreateRequest = {
+    data: {
+        type: 'gameCenterLeaderboards';
+        attributes: {
+            defaultFormatter: GameCenterLeaderboardFormatter;
+            referenceName: string;
+            vendorIdentifier: string;
+            submissionType: 'BEST_SCORE' | 'MOST_RECENT_SCORE';
+            scoreSortType: 'ASC' | 'DESC';
+            scoreRangeStart?: string | null;
+            scoreRangeEnd?: string | null;
+            recurrenceStartDate?: string | null;
+            recurrenceDuration?: string | null;
+            recurrenceRule?: string | null;
+            activityProperties?: StringToStringMap;
+            visibility?: 'SHOW_FOR_ALL' | 'HIDE_FOR_ALL';
+        };
+        relationships: {
+            gameCenterDetail?: {
+                data?: {
+                    type: 'gameCenterDetails';
+                    id: string;
+                };
+            };
+            gameCenterGroup?: {
+                data?: {
+                    type: 'gameCenterGroups';
+                    id: string;
+                };
+            };
+            gameCenterLeaderboardSets?: {
+                data?: Array<{
+                    type: 'gameCenterLeaderboardSets';
+                    id: string;
+                }>;
+            };
+            versions: {
+                data: Array<{
+                    type: 'gameCenterLeaderboardVersions';
+                    id: string;
+                }>;
+            };
+        };
+    };
+    included?: Array<GameCenterLeaderboardVersionV2InlineCreate>;
+};
+
+/**
+ * GameCenterLeaderboardV2UpdateRequest
+ */
+export type GameCenterLeaderboardV2UpdateRequest = {
     data: {
         type: 'gameCenterLeaderboards';
         id: string;
@@ -11791,6 +13210,356 @@ export type InAppPurchaseLocalizationUpdateRequest = {
 };
 
 /**
+ * InAppPurchaseOfferCodeCustomCode
+ */
+export type InAppPurchaseOfferCodeCustomCode = {
+    type: 'inAppPurchaseOfferCodeCustomCodes';
+    id: string;
+    attributes?: {
+        customCode?: string;
+        numberOfCodes?: number;
+        createdDate?: string;
+        expirationDate?: string;
+        active?: boolean;
+    };
+    relationships?: {
+        createdByActor?: {
+            data?: {
+                type: 'actors';
+                id: string;
+            };
+        };
+        deactivatedByActor?: {
+            data?: {
+                type: 'actors';
+                id: string;
+            };
+        };
+    };
+    links?: ResourceLinks;
+};
+
+/**
+ * InAppPurchaseOfferCodeCustomCodesResponse
+ */
+export type InAppPurchaseOfferCodeCustomCodesResponse = {
+    data: Array<InAppPurchaseOfferCodeCustomCode>;
+    included?: Array<Actor>;
+    links: PagedDocumentLinks;
+    meta?: PagingInformation;
+};
+
+/**
+ * InAppPurchaseOfferCodeCustomCodeResponse
+ */
+export type InAppPurchaseOfferCodeCustomCodeResponse = {
+    data: InAppPurchaseOfferCodeCustomCode;
+    included?: Array<Actor>;
+    links: DocumentLinks;
+};
+
+/**
+ * InAppPurchaseOfferCodeCustomCodeCreateRequest
+ */
+export type InAppPurchaseOfferCodeCustomCodeCreateRequest = {
+    data: {
+        type: 'inAppPurchaseOfferCodeCustomCodes';
+        attributes: {
+            customCode: string;
+            numberOfCodes: number;
+            expirationDate?: string | null;
+        };
+        relationships: {
+            offerCode: {
+                data: {
+                    type: 'inAppPurchaseOfferCodes';
+                    id: string;
+                };
+            };
+        };
+    };
+};
+
+/**
+ * InAppPurchaseOfferCodeCustomCodeUpdateRequest
+ */
+export type InAppPurchaseOfferCodeCustomCodeUpdateRequest = {
+    data: {
+        type: 'inAppPurchaseOfferCodeCustomCodes';
+        id: string;
+        attributes?: {
+            active?: boolean | null;
+        };
+    };
+};
+
+/**
+ * InAppPurchaseOfferCodeOneTimeUseCodeValue
+ */
+export type InAppPurchaseOfferCodeOneTimeUseCodeValue = {
+    type: 'inAppPurchaseOfferCodeOneTimeUseCodeValues';
+    id: string;
+    links?: ResourceLinks;
+};
+
+/**
+ * InAppPurchaseOfferCodeOneTimeUseCode
+ */
+export type InAppPurchaseOfferCodeOneTimeUseCode = {
+    type: 'inAppPurchaseOfferCodeOneTimeUseCodes';
+    id: string;
+    attributes?: {
+        numberOfCodes?: number;
+        createdDate?: string;
+        expirationDate?: string;
+        active?: boolean;
+        environment?: OfferCodeEnvironment;
+    };
+    relationships?: {
+        values?: {
+            links?: RelationshipLinks;
+        };
+        createdByActor?: {
+            data?: {
+                type: 'actors';
+                id: string;
+            };
+        };
+        deactivatedByActor?: {
+            data?: {
+                type: 'actors';
+                id: string;
+            };
+        };
+    };
+    links?: ResourceLinks;
+};
+
+/**
+ * InAppPurchaseOfferCodeOneTimeUseCodesResponse
+ */
+export type InAppPurchaseOfferCodeOneTimeUseCodesResponse = {
+    data: Array<InAppPurchaseOfferCodeOneTimeUseCode>;
+    included?: Array<Actor>;
+    links: PagedDocumentLinks;
+    meta?: PagingInformation;
+};
+
+/**
+ * InAppPurchaseOfferCodeOneTimeUseCodeResponse
+ */
+export type InAppPurchaseOfferCodeOneTimeUseCodeResponse = {
+    data: InAppPurchaseOfferCodeOneTimeUseCode;
+    included?: Array<Actor>;
+    links: DocumentLinks;
+};
+
+/**
+ * InAppPurchaseOfferCodeOneTimeUseCodeCreateRequest
+ */
+export type InAppPurchaseOfferCodeOneTimeUseCodeCreateRequest = {
+    data: {
+        type: 'inAppPurchaseOfferCodeOneTimeUseCodes';
+        attributes: {
+            numberOfCodes: number;
+            expirationDate: string;
+            environment?: OfferCodeEnvironment;
+        };
+        relationships: {
+            offerCode: {
+                data: {
+                    type: 'inAppPurchaseOfferCodes';
+                    id: string;
+                };
+            };
+        };
+    };
+};
+
+/**
+ * InAppPurchaseOfferCodeOneTimeUseCodeUpdateRequest
+ */
+export type InAppPurchaseOfferCodeOneTimeUseCodeUpdateRequest = {
+    data: {
+        type: 'inAppPurchaseOfferCodeOneTimeUseCodes';
+        id: string;
+        attributes?: {
+            active?: boolean | null;
+        };
+    };
+};
+
+/**
+ * InAppPurchaseOfferCode
+ */
+export type InAppPurchaseOfferCode = {
+    type: 'inAppPurchaseOfferCodes';
+    id: string;
+    attributes?: {
+        name?: string;
+        customerEligibilities?: Array<'NON_SPENDER' | 'ACTIVE_SPENDER' | 'CHURNED_SPENDER'>;
+        productionCodeCount?: number;
+        sandboxCodeCount?: number;
+        active?: boolean;
+    };
+    relationships?: {
+        oneTimeUseCodes?: {
+            links?: RelationshipLinks;
+            meta?: PagingInformation;
+            data?: Array<{
+                type: 'inAppPurchaseOfferCodeOneTimeUseCodes';
+                id: string;
+            }>;
+        };
+        customCodes?: {
+            links?: RelationshipLinks;
+            meta?: PagingInformation;
+            data?: Array<{
+                type: 'inAppPurchaseOfferCodeCustomCodes';
+                id: string;
+            }>;
+        };
+        prices?: {
+            links?: RelationshipLinks;
+            meta?: PagingInformation;
+            data?: Array<{
+                type: 'inAppPurchaseOfferPrices';
+                id: string;
+            }>;
+        };
+    };
+    links?: ResourceLinks;
+};
+
+/**
+ * InAppPurchaseOfferCodesResponse
+ */
+export type InAppPurchaseOfferCodesResponse = {
+    data: Array<InAppPurchaseOfferCode>;
+    included?: Array<({
+        type: 'inAppPurchaseOfferCodeCustomCodes';
+    } & InAppPurchaseOfferCodeCustomCode) | ({
+        type: 'inAppPurchaseOfferCodeOneTimeUseCodes';
+    } & InAppPurchaseOfferCodeOneTimeUseCode) | ({
+        type: 'inAppPurchaseOfferPrices';
+    } & InAppPurchaseOfferPrice)>;
+    links: PagedDocumentLinks;
+    meta?: PagingInformation;
+};
+
+/**
+ * InAppPurchaseOfferCodeResponse
+ */
+export type InAppPurchaseOfferCodeResponse = {
+    data: InAppPurchaseOfferCode;
+    included?: Array<({
+        type: 'inAppPurchaseOfferCodeCustomCodes';
+    } & InAppPurchaseOfferCodeCustomCode) | ({
+        type: 'inAppPurchaseOfferCodeOneTimeUseCodes';
+    } & InAppPurchaseOfferCodeOneTimeUseCode) | ({
+        type: 'inAppPurchaseOfferPrices';
+    } & InAppPurchaseOfferPrice)>;
+    links: DocumentLinks;
+};
+
+/**
+ * InAppPurchaseOfferCodeCreateRequest
+ */
+export type InAppPurchaseOfferCodeCreateRequest = {
+    data: {
+        type: 'inAppPurchaseOfferCodes';
+        attributes: {
+            name: string;
+            customerEligibilities: Array<'NON_SPENDER' | 'ACTIVE_SPENDER' | 'CHURNED_SPENDER'>;
+        };
+        relationships: {
+            inAppPurchase: {
+                data: {
+                    type: 'inAppPurchases';
+                    id: string;
+                };
+            };
+            prices: {
+                data: Array<{
+                    type: 'inAppPurchaseOfferPrices';
+                    id: string;
+                }>;
+            };
+        };
+    };
+    included?: Array<InAppPurchaseOfferPriceInlineCreate>;
+};
+
+/**
+ * InAppPurchaseOfferCodeUpdateRequest
+ */
+export type InAppPurchaseOfferCodeUpdateRequest = {
+    data: {
+        type: 'inAppPurchaseOfferCodes';
+        id: string;
+        attributes?: {
+            active?: boolean | null;
+        };
+    };
+};
+
+/**
+ * InAppPurchaseOfferPrice
+ */
+export type InAppPurchaseOfferPrice = {
+    type: 'inAppPurchaseOfferPrices';
+    id: string;
+    relationships?: {
+        territory?: {
+            data?: {
+                type: 'territories';
+                id: string;
+            };
+        };
+        pricePoint?: {
+            data?: {
+                type: 'inAppPurchasePricePoints';
+                id: string;
+            };
+        };
+    };
+    links?: ResourceLinks;
+};
+
+export type InAppPurchaseOfferPriceInlineCreate = {
+    type: 'inAppPurchaseOfferPrices';
+    id?: string;
+    relationships?: {
+        territory?: {
+            data?: {
+                type: 'territories';
+                id: string;
+            };
+        };
+        pricePoint?: {
+            data?: {
+                type: 'inAppPurchasePricePoints';
+                id: string;
+            };
+        };
+    };
+};
+
+/**
+ * InAppPurchaseOfferPricesResponse
+ */
+export type InAppPurchaseOfferPricesResponse = {
+    data: Array<InAppPurchaseOfferPrice>;
+    included?: Array<({
+        type: 'inAppPurchasePricePoints';
+    } & InAppPurchasePricePoint) | ({
+        type: 'territories';
+    } & Territory)>;
+    links: PagedDocumentLinks;
+    meta?: PagingInformation;
+};
+
+/**
  * InAppPurchasePricePoint
  */
 export type InAppPurchasePricePoint = {
@@ -12130,6 +13899,14 @@ export type InAppPurchaseV2 = {
                 id: string;
             }>;
         };
+        offerCodes?: {
+            links?: RelationshipLinks;
+            meta?: PagingInformation;
+            data?: Array<{
+                type: 'inAppPurchaseOfferCodes';
+                id: string;
+            }>;
+        };
     };
     links?: ResourceLinks;
 };
@@ -12150,6 +13927,8 @@ export type InAppPurchasesV2Response = {
     } & InAppPurchaseImage) | ({
         type: 'inAppPurchaseLocalizations';
     } & InAppPurchaseLocalization) | ({
+        type: 'inAppPurchaseOfferCodes';
+    } & InAppPurchaseOfferCode) | ({
         type: 'inAppPurchasePricePoints';
     } & InAppPurchasePricePoint) | ({
         type: 'inAppPurchasePriceSchedules';
@@ -12176,6 +13955,8 @@ export type InAppPurchaseV2Response = {
     } & InAppPurchaseImage) | ({
         type: 'inAppPurchaseLocalizations';
     } & InAppPurchaseLocalization) | ({
+        type: 'inAppPurchaseOfferCodes';
+    } & InAppPurchaseOfferCode) | ({
         type: 'inAppPurchasePricePoints';
     } & InAppPurchasePricePoint) | ({
         type: 'inAppPurchasePriceSchedules';
@@ -12994,6 +14775,36 @@ export type ReviewSubmissionItem = {
                 id: string;
             };
         };
+        gameCenterAchievementVersion?: {
+            data?: {
+                type: 'gameCenterAchievementVersions';
+                id: string;
+            };
+        };
+        gameCenterActivityVersion?: {
+            data?: {
+                type: 'gameCenterActivityVersions';
+                id: string;
+            };
+        };
+        gameCenterChallengeVersion?: {
+            data?: {
+                type: 'gameCenterChallengeVersions';
+                id: string;
+            };
+        };
+        gameCenterLeaderboardSetVersion?: {
+            data?: {
+                type: 'gameCenterLeaderboardSetVersions';
+                id: string;
+            };
+        };
+        gameCenterLeaderboardVersion?: {
+            data?: {
+                type: 'gameCenterLeaderboardVersions';
+                id: string;
+            };
+        };
     };
     links?: ResourceLinks;
 };
@@ -13013,7 +14824,17 @@ export type ReviewSubmissionItemsResponse = {
         type: 'appStoreVersions';
     } & AppStoreVersion) | ({
         type: 'backgroundAssetVersions';
-    } & BackgroundAssetVersion)>;
+    } & BackgroundAssetVersion) | ({
+        type: 'gameCenterAchievementVersions';
+    } & GameCenterAchievementVersionV2) | ({
+        type: 'gameCenterActivityVersions';
+    } & GameCenterActivityVersion) | ({
+        type: 'gameCenterChallengeVersions';
+    } & GameCenterChallengeVersion) | ({
+        type: 'gameCenterLeaderboardSetVersions';
+    } & GameCenterLeaderboardSetVersionV2) | ({
+        type: 'gameCenterLeaderboardVersions';
+    } & GameCenterLeaderboardVersionV2)>;
     links: PagedDocumentLinks;
     meta?: PagingInformation;
 };
@@ -13033,7 +14854,17 @@ export type ReviewSubmissionItemResponse = {
         type: 'appStoreVersions';
     } & AppStoreVersion) | ({
         type: 'backgroundAssetVersions';
-    } & BackgroundAssetVersion)>;
+    } & BackgroundAssetVersion) | ({
+        type: 'gameCenterAchievementVersions';
+    } & GameCenterAchievementVersionV2) | ({
+        type: 'gameCenterActivityVersions';
+    } & GameCenterActivityVersion) | ({
+        type: 'gameCenterChallengeVersions';
+    } & GameCenterChallengeVersion) | ({
+        type: 'gameCenterLeaderboardSetVersions';
+    } & GameCenterLeaderboardSetVersionV2) | ({
+        type: 'gameCenterLeaderboardVersions';
+    } & GameCenterLeaderboardVersionV2)>;
     links: DocumentLinks;
 };
 
@@ -13083,6 +14914,36 @@ export type ReviewSubmissionItemCreateRequest = {
             backgroundAssetVersion?: {
                 data?: {
                     type: 'backgroundAssetVersions';
+                    id: string;
+                };
+            };
+            gameCenterAchievementVersion?: {
+                data?: {
+                    type: 'gameCenterAchievementVersions';
+                    id: string;
+                };
+            };
+            gameCenterActivityVersion?: {
+                data?: {
+                    type: 'gameCenterActivityVersions';
+                    id: string;
+                };
+            };
+            gameCenterChallengeVersion?: {
+                data?: {
+                    type: 'gameCenterChallengeVersions';
+                    id: string;
+                };
+            };
+            gameCenterLeaderboardSetVersion?: {
+                data?: {
+                    type: 'gameCenterLeaderboardSetVersions';
+                    id: string;
+                };
+            };
+            gameCenterLeaderboardVersion?: {
+                data?: {
+                    type: 'gameCenterLeaderboardVersions';
                     id: string;
                 };
             };
@@ -14337,6 +16198,7 @@ export type SubscriptionOfferCodeOneTimeUseCode = {
         createdDate?: string;
         expirationDate?: string;
         active?: boolean;
+        environment?: OfferCodeEnvironment;
     };
     relationships?: {
         offerCode?: {
@@ -14380,6 +16242,7 @@ export type SubscriptionOfferCodeOneTimeUseCodeCreateRequest = {
         attributes: {
             numberOfCodes: number;
             expirationDate: string;
+            environment?: OfferCodeEnvironment;
         };
         relationships: {
             offerCode: {
@@ -14475,7 +16338,10 @@ export type SubscriptionOfferCode = {
         offerMode?: SubscriptionOfferMode;
         numberOfPeriods?: number;
         totalNumberOfCodes?: number;
+        productionCodeCount?: number;
+        sandboxCodeCount?: number;
         active?: boolean;
+        autoRenewEnabled?: boolean;
     };
     relationships?: {
         subscription?: {
@@ -14560,6 +16426,7 @@ export type SubscriptionOfferCodeCreateRequest = {
             duration: SubscriptionOfferDuration;
             offerMode: SubscriptionOfferMode;
             numberOfPeriods: number;
+            autoRenewEnabled?: boolean | null;
         };
         relationships: {
             subscription: {
@@ -16494,14 +18361,6 @@ export type AppStoreVersionGameCenterAppVersionLinkageResponse = {
     links: DocumentLinks;
 };
 
-/**
- * RoutingAppCoverageWithoutIncludesResponse
- */
-export type RoutingAppCoverageWithoutIncludesResponse = {
-    data: RoutingAppCoverage;
-    links: DocumentLinks;
-};
-
 export type AppStoreVersionRoutingAppCoverageLinkageResponse = {
     data: {
         type: 'routingAppCoverages';
@@ -16539,6 +18398,15 @@ export type AppAlternativeDistributionKeyLinkageResponse = {
 export type AppAnalyticsReportRequestsLinkagesResponse = {
     data: Array<{
         type: 'analyticsReportRequests';
+        id: string;
+    }>;
+    links: PagedDocumentLinks;
+    meta?: PagingInformation;
+};
+
+export type AppAndroidToIosAppMappingDetailsLinkagesResponse = {
+    data: Array<{
+        type: 'androidToIosAppMappingDetails';
         id: string;
     }>;
     links: PagedDocumentLinks;
@@ -17554,6 +19422,14 @@ export type EndUserLicenseAgreementTerritoriesLinkagesResponse = {
     meta?: PagingInformation;
 };
 
+export type GameCenterAchievementLocalizationV2ImageLinkageResponse = {
+    data: {
+        type: 'gameCenterAchievementImages';
+        id: string;
+    };
+    links: DocumentLinks;
+};
+
 export type GameCenterAchievementLocalizationGameCenterAchievementLinkageResponse = {
     data: {
         type: 'gameCenterAchievements';
@@ -17568,6 +19444,31 @@ export type GameCenterAchievementLocalizationGameCenterAchievementImageLinkageRe
         id: string;
     };
     links: DocumentLinks;
+};
+
+export type GameCenterAchievementVersionV2LocalizationsLinkagesResponse = {
+    data: Array<{
+        type: 'gameCenterAchievementLocalizations';
+        id: string;
+    }>;
+    links: PagedDocumentLinks;
+    meta?: PagingInformation;
+};
+
+export type GameCenterAchievementV2ActivityLinkageRequest = {
+    data: {
+        type: 'gameCenterActivities';
+        id: string;
+    };
+};
+
+export type GameCenterAchievementV2VersionsLinkagesResponse = {
+    data: Array<{
+        type: 'gameCenterAchievementVersions';
+        id: string;
+    }>;
+    links: PagedDocumentLinks;
+    meta?: PagingInformation;
 };
 
 export type GameCenterAchievementActivityLinkageRequest = {
@@ -17623,7 +19524,21 @@ export type GameCenterActivityAchievementsLinkagesRequest = {
     }>;
 };
 
+export type GameCenterActivityAchievementsV2LinkagesRequest = {
+    data: Array<{
+        type: 'gameCenterAchievements';
+        id: string;
+    }>;
+};
+
 export type GameCenterActivityLeaderboardsLinkagesRequest = {
+    data: Array<{
+        type: 'gameCenterLeaderboards';
+        id: string;
+    }>;
+};
+
+export type GameCenterActivityLeaderboardsV2LinkagesRequest = {
     data: Array<{
         type: 'gameCenterLeaderboards';
         id: string;
@@ -17720,6 +19635,13 @@ export type GameCenterChallengeLeaderboardLinkageRequest = {
     };
 };
 
+export type GameCenterChallengeLeaderboardV2LinkageRequest = {
+    data: {
+        type: 'gameCenterLeaderboards';
+        id: string;
+    };
+};
+
 export type GameCenterChallengeVersionsLinkagesResponse = {
     data: Array<{
         type: 'gameCenterChallengeVersions';
@@ -17779,6 +19701,22 @@ export type GameCenterDetailGameCenterAchievementsLinkagesRequest = {
     }>;
 };
 
+export type GameCenterDetailGameCenterAchievementsV2LinkagesResponse = {
+    data: Array<{
+        type: 'gameCenterAchievements';
+        id: string;
+    }>;
+    links: PagedDocumentLinks;
+    meta?: PagingInformation;
+};
+
+export type GameCenterDetailGameCenterAchievementsV2LinkagesRequest = {
+    data: Array<{
+        type: 'gameCenterAchievements';
+        id: string;
+    }>;
+};
+
 export type GameCenterDetailGameCenterActivitiesLinkagesResponse = {
     data: Array<{
         type: 'gameCenterActivities';
@@ -17830,6 +19768,22 @@ export type GameCenterDetailGameCenterLeaderboardSetsLinkagesRequest = {
     }>;
 };
 
+export type GameCenterDetailGameCenterLeaderboardSetsV2LinkagesResponse = {
+    data: Array<{
+        type: 'gameCenterLeaderboardSets';
+        id: string;
+    }>;
+    links: PagedDocumentLinks;
+    meta?: PagingInformation;
+};
+
+export type GameCenterDetailGameCenterLeaderboardSetsV2LinkagesRequest = {
+    data: Array<{
+        type: 'gameCenterLeaderboardSets';
+        id: string;
+    }>;
+};
+
 export type GameCenterDetailGameCenterLeaderboardsLinkagesResponse = {
     data: Array<{
         type: 'gameCenterLeaderboards';
@@ -17840,6 +19794,22 @@ export type GameCenterDetailGameCenterLeaderboardsLinkagesResponse = {
 };
 
 export type GameCenterDetailGameCenterLeaderboardsLinkagesRequest = {
+    data: Array<{
+        type: 'gameCenterLeaderboards';
+        id: string;
+    }>;
+};
+
+export type GameCenterDetailGameCenterLeaderboardsV2LinkagesResponse = {
+    data: Array<{
+        type: 'gameCenterLeaderboards';
+        id: string;
+    }>;
+    links: PagedDocumentLinks;
+    meta?: PagingInformation;
+};
+
+export type GameCenterDetailGameCenterLeaderboardsV2LinkagesRequest = {
     data: Array<{
         type: 'gameCenterLeaderboards';
         id: string;
@@ -17902,6 +19872,22 @@ export type GameCenterGroupGameCenterAchievementsLinkagesRequest = {
     }>;
 };
 
+export type GameCenterGroupGameCenterAchievementsV2LinkagesResponse = {
+    data: Array<{
+        type: 'gameCenterAchievements';
+        id: string;
+    }>;
+    links: PagedDocumentLinks;
+    meta?: PagingInformation;
+};
+
+export type GameCenterGroupGameCenterAchievementsV2LinkagesRequest = {
+    data: Array<{
+        type: 'gameCenterAchievements';
+        id: string;
+    }>;
+};
+
 export type GameCenterGroupGameCenterActivitiesLinkagesResponse = {
     data: Array<{
         type: 'gameCenterActivities';
@@ -17945,6 +19931,22 @@ export type GameCenterGroupGameCenterLeaderboardSetsLinkagesRequest = {
     }>;
 };
 
+export type GameCenterGroupGameCenterLeaderboardSetsV2LinkagesResponse = {
+    data: Array<{
+        type: 'gameCenterLeaderboardSets';
+        id: string;
+    }>;
+    links: PagedDocumentLinks;
+    meta?: PagingInformation;
+};
+
+export type GameCenterGroupGameCenterLeaderboardSetsV2LinkagesRequest = {
+    data: Array<{
+        type: 'gameCenterLeaderboardSets';
+        id: string;
+    }>;
+};
+
 export type GameCenterGroupGameCenterLeaderboardsLinkagesResponse = {
     data: Array<{
         type: 'gameCenterLeaderboards';
@@ -17961,6 +19963,22 @@ export type GameCenterGroupGameCenterLeaderboardsLinkagesRequest = {
     }>;
 };
 
+export type GameCenterGroupGameCenterLeaderboardsV2LinkagesResponse = {
+    data: Array<{
+        type: 'gameCenterLeaderboards';
+        id: string;
+    }>;
+    links: PagedDocumentLinks;
+    meta?: PagingInformation;
+};
+
+export type GameCenterGroupGameCenterLeaderboardsV2LinkagesRequest = {
+    data: Array<{
+        type: 'gameCenterLeaderboards';
+        id: string;
+    }>;
+};
+
 export type GameCenterLeaderboardLocalizationGameCenterLeaderboardImageLinkageResponse = {
     data: {
         type: 'gameCenterLeaderboardImages';
@@ -17969,7 +19987,23 @@ export type GameCenterLeaderboardLocalizationGameCenterLeaderboardImageLinkageRe
     links: DocumentLinks;
 };
 
+export type GameCenterLeaderboardLocalizationV2ImageLinkageResponse = {
+    data: {
+        type: 'gameCenterLeaderboardImages';
+        id: string;
+    };
+    links: DocumentLinks;
+};
+
 export type GameCenterLeaderboardSetLocalizationGameCenterLeaderboardSetImageLinkageResponse = {
+    data: {
+        type: 'gameCenterLeaderboardSetImages';
+        id: string;
+    };
+    links: DocumentLinks;
+};
+
+export type GameCenterLeaderboardSetLocalizationV2ImageLinkageResponse = {
     data: {
         type: 'gameCenterLeaderboardSetImages';
         id: string;
@@ -17991,6 +20025,40 @@ export type GameCenterLeaderboardSetMemberLocalizationGameCenterLeaderboardSetLi
         id: string;
     };
     links: DocumentLinks;
+};
+
+export type GameCenterLeaderboardSetVersionV2LocalizationsLinkagesResponse = {
+    data: Array<{
+        type: 'gameCenterLeaderboardSetLocalizations';
+        id: string;
+    }>;
+    links: PagedDocumentLinks;
+    meta?: PagingInformation;
+};
+
+export type GameCenterLeaderboardSetV2GameCenterLeaderboardsLinkagesResponse = {
+    data: Array<{
+        type: 'gameCenterLeaderboards';
+        id: string;
+    }>;
+    links: PagedDocumentLinks;
+    meta?: PagingInformation;
+};
+
+export type GameCenterLeaderboardSetV2GameCenterLeaderboardsLinkagesRequest = {
+    data: Array<{
+        type: 'gameCenterLeaderboards';
+        id: string;
+    }>;
+};
+
+export type GameCenterLeaderboardSetV2VersionsLinkagesResponse = {
+    data: Array<{
+        type: 'gameCenterLeaderboardSetVersions';
+        id: string;
+    }>;
+    links: PagedDocumentLinks;
+    meta?: PagingInformation;
 };
 
 export type GameCenterLeaderboardSetGameCenterLeaderboardsLinkagesResponse = {
@@ -18042,6 +20110,15 @@ export type GameCenterLeaderboardSetLocalizationsLinkagesResponse = {
 export type GameCenterLeaderboardSetReleasesLinkagesResponse = {
     data: Array<{
         type: 'gameCenterLeaderboardSetReleases';
+        id: string;
+    }>;
+    links: PagedDocumentLinks;
+    meta?: PagingInformation;
+};
+
+export type GameCenterLeaderboardVersionV2LocalizationsLinkagesResponse = {
+    data: Array<{
+        type: 'gameCenterLeaderboardLocalizations';
         id: string;
     }>;
     links: PagedDocumentLinks;
@@ -18101,6 +20178,29 @@ export type GameCenterLeaderboardReleasesLinkagesResponse = {
     meta?: PagingInformation;
 };
 
+export type GameCenterLeaderboardV2ActivityLinkageRequest = {
+    data: {
+        type: 'gameCenterActivities';
+        id: string;
+    };
+};
+
+export type GameCenterLeaderboardV2ChallengeLinkageRequest = {
+    data: {
+        type: 'gameCenterChallenges';
+        id: string;
+    };
+};
+
+export type GameCenterLeaderboardV2VersionsLinkagesResponse = {
+    data: Array<{
+        type: 'gameCenterLeaderboardVersions';
+        id: string;
+    }>;
+    links: PagedDocumentLinks;
+    meta?: PagingInformation;
+};
+
 export type GameCenterMatchmakingRuleSetMatchmakingQueuesLinkagesResponse = {
     data: Array<{
         type: 'gameCenterMatchmakingQueues';
@@ -18131,6 +20231,41 @@ export type GameCenterMatchmakingRuleSetTeamsLinkagesResponse = {
 export type InAppPurchaseAvailabilityAvailableTerritoriesLinkagesResponse = {
     data: Array<{
         type: 'territories';
+        id: string;
+    }>;
+    links: PagedDocumentLinks;
+    meta?: PagingInformation;
+};
+
+export type InAppPurchaseOfferCodeOneTimeUseCodeValuesLinkageResponse = {
+    data: {
+        type: 'inAppPurchaseOfferCodeOneTimeUseCodeValues';
+        id: string;
+    };
+    links: DocumentLinks;
+};
+
+export type InAppPurchaseOfferCodeCustomCodesLinkagesResponse = {
+    data: Array<{
+        type: 'inAppPurchaseOfferCodeCustomCodes';
+        id: string;
+    }>;
+    links: PagedDocumentLinks;
+    meta?: PagingInformation;
+};
+
+export type InAppPurchaseOfferCodeOneTimeUseCodesLinkagesResponse = {
+    data: Array<{
+        type: 'inAppPurchaseOfferCodeOneTimeUseCodes';
+        id: string;
+    }>;
+    links: PagedDocumentLinks;
+    meta?: PagingInformation;
+};
+
+export type InAppPurchaseOfferCodePricesLinkagesResponse = {
+    data: Array<{
+        type: 'inAppPurchaseOfferPrices';
         id: string;
     }>;
     links: PagedDocumentLinks;
@@ -18216,6 +20351,15 @@ export type InAppPurchaseV2InAppPurchaseAvailabilityLinkageResponse = {
 export type InAppPurchaseV2InAppPurchaseLocalizationsLinkagesResponse = {
     data: Array<{
         type: 'inAppPurchaseLocalizations';
+        id: string;
+    }>;
+    links: PagedDocumentLinks;
+    meta?: PagingInformation;
+};
+
+export type InAppPurchaseV2OfferCodesLinkagesResponse = {
+    data: Array<{
+        type: 'inAppPurchaseOfferCodes';
         id: string;
     }>;
     links: PagedDocumentLinks;
@@ -19617,6 +21761,11 @@ export type MetricsInsight = {
     }>;
 };
 
+export enum OfferCodeEnvironment {
+    PRODUCTION = 'PRODUCTION',
+    SANDBOX = 'SANDBOX'
+}
+
 export enum PhasedReleaseState {
     INACTIVE = 'INACTIVE',
     ACTIVE = 'ACTIVE',
@@ -19979,6 +22128,7 @@ export enum TerritoryCode {
     VUT = 'VUT',
     WLF = 'WLF',
     WSM = 'WSM',
+    XKS = 'XKS',
     YEM = 'YEM',
     ZAF = 'ZAF',
     ZMB = 'ZMB',
@@ -20010,6 +22160,9 @@ export enum UserRole {
 }
 
 export enum WebhookEventType {
+    ALTERNATIVE_DISTRIBUTION_PACKAGE_AVAILABLE_UPDATED = 'ALTERNATIVE_DISTRIBUTION_PACKAGE_AVAILABLE_UPDATED',
+    ALTERNATIVE_DISTRIBUTION_PACKAGE_VERSION_CREATED = 'ALTERNATIVE_DISTRIBUTION_PACKAGE_VERSION_CREATED',
+    ALTERNATIVE_DISTRIBUTION_TERRITORY_AVAILABILITY_UPDATED = 'ALTERNATIVE_DISTRIBUTION_TERRITORY_AVAILABILITY_UPDATED',
     APP_STORE_VERSION_APP_VERSION_STATE_UPDATED = 'APP_STORE_VERSION_APP_VERSION_STATE_UPDATED',
     BACKGROUND_ASSET_VERSION_APP_STORE_RELEASE_STATE_UPDATED = 'BACKGROUND_ASSET_VERSION_APP_STORE_RELEASE_STATE_UPDATED',
     BACKGROUND_ASSET_VERSION_EXTERNAL_BETA_RELEASE_STATE_UPDATED = 'BACKGROUND_ASSET_VERSION_EXTERNAL_BETA_RELEASE_STATE_UPDATED',
@@ -21094,7 +23247,7 @@ export type AlternativeDistributionPackagesGetInstanceData = {
         /**
          * the fields to include for returned resources of type alternativeDistributionPackages
          */
-        'fields[alternativeDistributionPackages]'?: Array<'versions'>;
+        'fields[alternativeDistributionPackages]'?: Array<'sourceFileChecksum' | 'versions'>;
         /**
          * the fields to include for returned resources of type alternativeDistributionPackageVersions
          */
@@ -21458,6 +23611,212 @@ export type AnalyticsReportsGetInstanceResponses = {
 };
 
 export type AnalyticsReportsGetInstanceResponse = AnalyticsReportsGetInstanceResponses[keyof AnalyticsReportsGetInstanceResponses];
+
+export type AndroidToIosAppMappingDetailsCreateInstanceData = {
+    /**
+     * AndroidToIosAppMappingDetail representation
+     */
+    body: AndroidToIosAppMappingDetailCreateRequest;
+    path?: never;
+    query?: never;
+    url: '/v1/androidToIosAppMappingDetails';
+};
+
+export type AndroidToIosAppMappingDetailsCreateInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type AndroidToIosAppMappingDetailsCreateInstanceError = AndroidToIosAppMappingDetailsCreateInstanceErrors[keyof AndroidToIosAppMappingDetailsCreateInstanceErrors];
+
+export type AndroidToIosAppMappingDetailsCreateInstanceResponses = {
+    /**
+     * Single AndroidToIosAppMappingDetail
+     */
+    201: AndroidToIosAppMappingDetailResponse;
+};
+
+export type AndroidToIosAppMappingDetailsCreateInstanceResponse = AndroidToIosAppMappingDetailsCreateInstanceResponses[keyof AndroidToIosAppMappingDetailsCreateInstanceResponses];
+
+export type AndroidToIosAppMappingDetailsDeleteInstanceData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v1/androidToIosAppMappingDetails/{id}';
+};
+
+export type AndroidToIosAppMappingDetailsDeleteInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type AndroidToIosAppMappingDetailsDeleteInstanceError = AndroidToIosAppMappingDetailsDeleteInstanceErrors[keyof AndroidToIosAppMappingDetailsDeleteInstanceErrors];
+
+export type AndroidToIosAppMappingDetailsDeleteInstanceResponses = {
+    /**
+     * Success (no content)
+     */
+    204: void;
+};
+
+export type AndroidToIosAppMappingDetailsDeleteInstanceResponse = AndroidToIosAppMappingDetailsDeleteInstanceResponses[keyof AndroidToIosAppMappingDetailsDeleteInstanceResponses];
+
+export type AndroidToIosAppMappingDetailsGetInstanceData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * the fields to include for returned resources of type androidToIosAppMappingDetails
+         */
+        'fields[androidToIosAppMappingDetails]'?: Array<'packageName' | 'appSigningKeyPublicCertificateSha256Fingerprints'>;
+    };
+    url: '/v1/androidToIosAppMappingDetails/{id}';
+};
+
+export type AndroidToIosAppMappingDetailsGetInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type AndroidToIosAppMappingDetailsGetInstanceError = AndroidToIosAppMappingDetailsGetInstanceErrors[keyof AndroidToIosAppMappingDetailsGetInstanceErrors];
+
+export type AndroidToIosAppMappingDetailsGetInstanceResponses = {
+    /**
+     * Single AndroidToIosAppMappingDetail
+     */
+    200: AndroidToIosAppMappingDetailResponse;
+};
+
+export type AndroidToIosAppMappingDetailsGetInstanceResponse = AndroidToIosAppMappingDetailsGetInstanceResponses[keyof AndroidToIosAppMappingDetailsGetInstanceResponses];
+
+export type AndroidToIosAppMappingDetailsUpdateInstanceData = {
+    /**
+     * AndroidToIosAppMappingDetail representation
+     */
+    body: AndroidToIosAppMappingDetailUpdateRequest;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v1/androidToIosAppMappingDetails/{id}';
+};
+
+export type AndroidToIosAppMappingDetailsUpdateInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type AndroidToIosAppMappingDetailsUpdateInstanceError = AndroidToIosAppMappingDetailsUpdateInstanceErrors[keyof AndroidToIosAppMappingDetailsUpdateInstanceErrors];
+
+export type AndroidToIosAppMappingDetailsUpdateInstanceResponses = {
+    /**
+     * Single AndroidToIosAppMappingDetail
+     */
+    200: AndroidToIosAppMappingDetailResponse;
+};
+
+export type AndroidToIosAppMappingDetailsUpdateInstanceResponse = AndroidToIosAppMappingDetailsUpdateInstanceResponses[keyof AndroidToIosAppMappingDetailsUpdateInstanceResponses];
 
 export type AppAvailabilitiesV2CreateInstanceData = {
     /**
@@ -23681,7 +26040,7 @@ export type AppEncryptionDeclarationsGetCollectionData = {
          * the fields to include for returned resources of type apps
          * @deprecated
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type appEncryptionDeclarationDocuments
          */
@@ -23797,7 +26156,7 @@ export type AppEncryptionDeclarationsGetInstanceData = {
          * the fields to include for returned resources of type apps
          * @deprecated
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type appEncryptionDeclarationDocuments
          */
@@ -27858,7 +30217,7 @@ export type AppStoreVersionsGetInstanceData = {
         /**
          * the fields to include for returned resources of type alternativeDistributionPackages
          */
-        'fields[alternativeDistributionPackages]'?: Array<'versions'>;
+        'fields[alternativeDistributionPackages]'?: Array<'sourceFileChecksum' | 'versions'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -28085,7 +30444,7 @@ export type AppsGetCollectionData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type appEncryptionDeclarations
          */
@@ -28137,7 +30496,7 @@ export type AppsGetCollectionData = {
         /**
          * the fields to include for returned resources of type inAppPurchases
          */
-        'fields[inAppPurchases]'?: Array<'referenceName' | 'productId' | 'inAppPurchaseType' | 'state' | 'apps' | 'name' | 'reviewNote' | 'familySharable' | 'contentHosting' | 'inAppPurchaseLocalizations' | 'pricePoints' | 'content' | 'appStoreReviewScreenshot' | 'promotedPurchase' | 'iapPriceSchedule' | 'inAppPurchaseAvailability' | 'images'>;
+        'fields[inAppPurchases]'?: Array<'referenceName' | 'productId' | 'inAppPurchaseType' | 'state' | 'apps' | 'name' | 'reviewNote' | 'familySharable' | 'contentHosting' | 'inAppPurchaseLocalizations' | 'pricePoints' | 'content' | 'appStoreReviewScreenshot' | 'promotedPurchase' | 'iapPriceSchedule' | 'inAppPurchaseAvailability' | 'images' | 'offerCodes'>;
         /**
          * the fields to include for returned resources of type subscriptionGroups
          */
@@ -28170,11 +30529,15 @@ export type AppsGetCollectionData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultGroupLeaderboard' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type appStoreVersionExperiments
          */
         'fields[appStoreVersionExperiments]'?: Array<'name' | 'platform' | 'trafficProportion' | 'state' | 'reviewRequired' | 'startDate' | 'endDate' | 'app' | 'latestControlVersion' | 'controlVersions' | 'appStoreVersionExperimentTreatments'>;
+        /**
+         * the fields to include for returned resources of type androidToIosAppMappingDetails
+         */
+        'fields[androidToIosAppMappingDetails]'?: Array<'packageName' | 'appSigningKeyPublicCertificateSha256Fingerprints'>;
         /**
          * maximum resources per page
          */
@@ -28182,7 +30545,11 @@ export type AppsGetCollectionData = {
         /**
          * comma-separated list of relationships to include
          */
-        include?: Array<'appEncryptionDeclarations' | 'ciProduct' | 'betaGroups' | 'appStoreVersions' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'endUserLicenseAgreement' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2'>;
+        include?: Array<'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaGroups' | 'appStoreVersions' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'endUserLicenseAgreement' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'androidToIosAppMappingDetails'>;
+        /**
+         * maximum number of related androidToIosAppMappingDetails returned (when they are included)
+         */
+        'limit[androidToIosAppMappingDetails]'?: number;
         /**
          * maximum number of related appClips returned (when they are included)
          */
@@ -28299,7 +30666,7 @@ export type AppsGetInstanceData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type appEncryptionDeclarations
          */
@@ -28351,7 +30718,7 @@ export type AppsGetInstanceData = {
         /**
          * the fields to include for returned resources of type inAppPurchases
          */
-        'fields[inAppPurchases]'?: Array<'referenceName' | 'productId' | 'inAppPurchaseType' | 'state' | 'apps' | 'name' | 'reviewNote' | 'familySharable' | 'contentHosting' | 'inAppPurchaseLocalizations' | 'pricePoints' | 'content' | 'appStoreReviewScreenshot' | 'promotedPurchase' | 'iapPriceSchedule' | 'inAppPurchaseAvailability' | 'images'>;
+        'fields[inAppPurchases]'?: Array<'referenceName' | 'productId' | 'inAppPurchaseType' | 'state' | 'apps' | 'name' | 'reviewNote' | 'familySharable' | 'contentHosting' | 'inAppPurchaseLocalizations' | 'pricePoints' | 'content' | 'appStoreReviewScreenshot' | 'promotedPurchase' | 'iapPriceSchedule' | 'inAppPurchaseAvailability' | 'images' | 'offerCodes'>;
         /**
          * the fields to include for returned resources of type subscriptionGroups
          */
@@ -28384,15 +30751,23 @@ export type AppsGetInstanceData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultGroupLeaderboard' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type appStoreVersionExperiments
          */
         'fields[appStoreVersionExperiments]'?: Array<'name' | 'platform' | 'trafficProportion' | 'state' | 'reviewRequired' | 'startDate' | 'endDate' | 'app' | 'latestControlVersion' | 'controlVersions' | 'appStoreVersionExperimentTreatments'>;
         /**
+         * the fields to include for returned resources of type androidToIosAppMappingDetails
+         */
+        'fields[androidToIosAppMappingDetails]'?: Array<'packageName' | 'appSigningKeyPublicCertificateSha256Fingerprints'>;
+        /**
          * comma-separated list of relationships to include
          */
-        include?: Array<'appEncryptionDeclarations' | 'ciProduct' | 'betaGroups' | 'appStoreVersions' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'endUserLicenseAgreement' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2'>;
+        include?: Array<'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaGroups' | 'appStoreVersions' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'endUserLicenseAgreement' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'androidToIosAppMappingDetails'>;
+        /**
+         * maximum number of related androidToIosAppMappingDetails returned (when they are included)
+         */
+        'limit[androidToIosAppMappingDetails]'?: number;
         /**
          * maximum number of related appClips returned (when they are included)
          */
@@ -28939,7 +31314,7 @@ export type BackgroundAssetVersionsGetInstanceData = {
         /**
          * the fields to include for returned resources of type backgroundAssetVersions
          */
-        'fields[backgroundAssetVersions]'?: Array<'createdDate' | 'platforms' | 'state' | 'version' | 'backgroundAsset' | 'internalBetaRelease' | 'externalBetaRelease' | 'appStoreRelease' | 'assetFile' | 'manifestFile' | 'backgroundAssetUploadFiles'>;
+        'fields[backgroundAssetVersions]'?: Array<'createdDate' | 'platforms' | 'state' | 'stateDetails' | 'version' | 'backgroundAsset' | 'internalBetaRelease' | 'externalBetaRelease' | 'appStoreRelease' | 'assetFile' | 'manifestFile' | 'backgroundAssetUploadFiles'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -29042,7 +31417,7 @@ export type BackgroundAssetsGetInstanceData = {
         /**
          * the fields to include for returned resources of type backgroundAssets
          */
-        'fields[backgroundAssets]'?: Array<'assetPackIdentifier' | 'createdDate' | 'app' | 'versions' | 'appStoreVersion' | 'internalBetaVersion' | 'externalBetaVersion'>;
+        'fields[backgroundAssets]'?: Array<'archived' | 'assetPackIdentifier' | 'createdDate' | 'app' | 'versions' | 'appStoreVersion' | 'internalBetaVersion' | 'externalBetaVersion'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -29084,6 +31459,63 @@ export type BackgroundAssetsGetInstanceResponses = {
 };
 
 export type BackgroundAssetsGetInstanceResponse = BackgroundAssetsGetInstanceResponses[keyof BackgroundAssetsGetInstanceResponses];
+
+export type BackgroundAssetsUpdateInstanceData = {
+    /**
+     * BackgroundAsset representation
+     */
+    body: BackgroundAssetUpdateRequest;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v1/backgroundAssets/{id}';
+};
+
+export type BackgroundAssetsUpdateInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type BackgroundAssetsUpdateInstanceError = BackgroundAssetsUpdateInstanceErrors[keyof BackgroundAssetsUpdateInstanceErrors];
+
+export type BackgroundAssetsUpdateInstanceResponses = {
+    /**
+     * Single BackgroundAsset
+     */
+    200: BackgroundAssetResponse;
+};
+
+export type BackgroundAssetsUpdateInstanceResponse = BackgroundAssetsUpdateInstanceResponses[keyof BackgroundAssetsUpdateInstanceResponses];
 
 export type BetaAppClipInvocationLocalizationsCreateInstanceData = {
     /**
@@ -29473,7 +31905,7 @@ export type BetaAppLocalizationsGetCollectionData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * maximum resources per page
          */
@@ -29630,7 +32062,7 @@ export type BetaAppLocalizationsGetInstanceData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -29745,7 +32177,7 @@ export type BetaAppReviewDetailsGetCollectionData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * maximum resources per page
          */
@@ -29804,7 +32236,7 @@ export type BetaAppReviewDetailsGetInstanceData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -30657,7 +33089,7 @@ export type BetaGroupsGetCollectionData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type builds
          */
@@ -30665,7 +33097,7 @@ export type BetaGroupsGetCollectionData = {
         /**
          * the fields to include for returned resources of type betaTesters
          */
-        'fields[betaTesters]'?: Array<'firstName' | 'lastName' | 'email' | 'inviteType' | 'state' | 'apps' | 'betaGroups' | 'builds'>;
+        'fields[betaTesters]'?: Array<'firstName' | 'lastName' | 'email' | 'inviteType' | 'state' | 'appDevices' | 'apps' | 'betaGroups' | 'builds'>;
         /**
          * the fields to include for returned resources of type betaRecruitmentCriteria
          */
@@ -30834,7 +33266,7 @@ export type BetaGroupsGetInstanceData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type builds
          */
@@ -30842,7 +33274,7 @@ export type BetaGroupsGetInstanceData = {
         /**
          * the fields to include for returned resources of type betaTesters
          */
-        'fields[betaTesters]'?: Array<'firstName' | 'lastName' | 'email' | 'inviteType' | 'state' | 'apps' | 'betaGroups' | 'builds'>;
+        'fields[betaTesters]'?: Array<'firstName' | 'lastName' | 'email' | 'inviteType' | 'state' | 'appDevices' | 'apps' | 'betaGroups' | 'builds'>;
         /**
          * the fields to include for returned resources of type betaRecruitmentCriteria
          */
@@ -30969,7 +33401,7 @@ export type BetaLicenseAgreementsGetCollectionData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * maximum resources per page
          */
@@ -31028,7 +33460,7 @@ export type BetaLicenseAgreementsGetInstanceData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -31420,11 +33852,11 @@ export type BetaTestersGetCollectionData = {
         /**
          * the fields to include for returned resources of type betaTesters
          */
-        'fields[betaTesters]'?: Array<'firstName' | 'lastName' | 'email' | 'inviteType' | 'state' | 'apps' | 'betaGroups' | 'builds'>;
+        'fields[betaTesters]'?: Array<'firstName' | 'lastName' | 'email' | 'inviteType' | 'state' | 'appDevices' | 'apps' | 'betaGroups' | 'builds'>;
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type betaGroups
          */
@@ -31601,11 +34033,11 @@ export type BetaTestersGetInstanceData = {
         /**
          * the fields to include for returned resources of type betaTesters
          */
-        'fields[betaTesters]'?: Array<'firstName' | 'lastName' | 'email' | 'inviteType' | 'state' | 'apps' | 'betaGroups' | 'builds'>;
+        'fields[betaTesters]'?: Array<'firstName' | 'lastName' | 'email' | 'inviteType' | 'state' | 'appDevices' | 'apps' | 'betaGroups' | 'builds'>;
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type betaGroups
          */
@@ -32278,7 +34710,7 @@ export type BuildsGetCollectionData = {
         /**
          * the fields to include for returned resources of type betaTesters
          */
-        'fields[betaTesters]'?: Array<'firstName' | 'lastName' | 'email' | 'inviteType' | 'state' | 'apps' | 'betaGroups' | 'builds'>;
+        'fields[betaTesters]'?: Array<'firstName' | 'lastName' | 'email' | 'inviteType' | 'state' | 'appDevices' | 'apps' | 'betaGroups' | 'builds'>;
         /**
          * the fields to include for returned resources of type betaBuildLocalizations
          */
@@ -32294,7 +34726,7 @@ export type BuildsGetCollectionData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type buildBetaDetails
          */
@@ -32389,7 +34821,7 @@ export type BuildsGetInstanceData = {
         /**
          * the fields to include for returned resources of type betaTesters
          */
-        'fields[betaTesters]'?: Array<'firstName' | 'lastName' | 'email' | 'inviteType' | 'state' | 'apps' | 'betaGroups' | 'builds'>;
+        'fields[betaTesters]'?: Array<'firstName' | 'lastName' | 'email' | 'inviteType' | 'state' | 'appDevices' | 'apps' | 'betaGroups' | 'builds'>;
         /**
          * the fields to include for returned resources of type betaBuildLocalizations
          */
@@ -32405,7 +34837,7 @@ export type BuildsGetInstanceData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type buildBetaDetails
          */
@@ -32735,7 +35167,7 @@ export type BundleIdsGetCollectionData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * maximum resources per page
          */
@@ -32908,7 +35340,7 @@ export type BundleIdsGetInstanceData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -33716,7 +36148,7 @@ export type CiProductsGetCollectionData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type scmRepositories
          */
@@ -33833,7 +36265,7 @@ export type CiProductsGetInstanceData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type scmRepositories
          */
@@ -35238,6 +37670,430 @@ export type GameCenterAchievementImagesUpdateInstanceResponses = {
 
 export type GameCenterAchievementImagesUpdateInstanceResponse = GameCenterAchievementImagesUpdateInstanceResponses[keyof GameCenterAchievementImagesUpdateInstanceResponses];
 
+export type GameCenterAchievementImagesV2CreateInstanceData = {
+    /**
+     * GameCenterAchievementImage representation
+     */
+    body: GameCenterAchievementImageV2CreateRequest;
+    path?: never;
+    query?: never;
+    url: '/v2/gameCenterAchievementImages';
+};
+
+export type GameCenterAchievementImagesV2CreateInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterAchievementImagesV2CreateInstanceError = GameCenterAchievementImagesV2CreateInstanceErrors[keyof GameCenterAchievementImagesV2CreateInstanceErrors];
+
+export type GameCenterAchievementImagesV2CreateInstanceResponses = {
+    /**
+     * Single GameCenterAchievementImage
+     */
+    201: GameCenterAchievementImageV2Response;
+};
+
+export type GameCenterAchievementImagesV2CreateInstanceResponse = GameCenterAchievementImagesV2CreateInstanceResponses[keyof GameCenterAchievementImagesV2CreateInstanceResponses];
+
+export type GameCenterAchievementImagesV2DeleteInstanceData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v2/gameCenterAchievementImages/{id}';
+};
+
+export type GameCenterAchievementImagesV2DeleteInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterAchievementImagesV2DeleteInstanceError = GameCenterAchievementImagesV2DeleteInstanceErrors[keyof GameCenterAchievementImagesV2DeleteInstanceErrors];
+
+export type GameCenterAchievementImagesV2DeleteInstanceResponses = {
+    /**
+     * Success (no content)
+     */
+    204: void;
+};
+
+export type GameCenterAchievementImagesV2DeleteInstanceResponse = GameCenterAchievementImagesV2DeleteInstanceResponses[keyof GameCenterAchievementImagesV2DeleteInstanceResponses];
+
+export type GameCenterAchievementImagesV2GetInstanceData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * the fields to include for returned resources of type gameCenterAchievementImages
+         */
+        'fields[gameCenterAchievementImages]'?: Array<'fileSize' | 'fileName' | 'imageAsset' | 'uploadOperations' | 'assetDeliveryState' | 'localization'>;
+        /**
+         * comma-separated list of relationships to include
+         */
+        include?: Array<'localization'>;
+    };
+    url: '/v2/gameCenterAchievementImages/{id}';
+};
+
+export type GameCenterAchievementImagesV2GetInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterAchievementImagesV2GetInstanceError = GameCenterAchievementImagesV2GetInstanceErrors[keyof GameCenterAchievementImagesV2GetInstanceErrors];
+
+export type GameCenterAchievementImagesV2GetInstanceResponses = {
+    /**
+     * Single GameCenterAchievementImage
+     */
+    200: GameCenterAchievementImageV2Response;
+};
+
+export type GameCenterAchievementImagesV2GetInstanceResponse = GameCenterAchievementImagesV2GetInstanceResponses[keyof GameCenterAchievementImagesV2GetInstanceResponses];
+
+export type GameCenterAchievementImagesV2UpdateInstanceData = {
+    /**
+     * GameCenterAchievementImage representation
+     */
+    body: GameCenterAchievementImageV2UpdateRequest;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v2/gameCenterAchievementImages/{id}';
+};
+
+export type GameCenterAchievementImagesV2UpdateInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterAchievementImagesV2UpdateInstanceError = GameCenterAchievementImagesV2UpdateInstanceErrors[keyof GameCenterAchievementImagesV2UpdateInstanceErrors];
+
+export type GameCenterAchievementImagesV2UpdateInstanceResponses = {
+    /**
+     * Single GameCenterAchievementImage
+     */
+    200: GameCenterAchievementImageV2Response;
+};
+
+export type GameCenterAchievementImagesV2UpdateInstanceResponse = GameCenterAchievementImagesV2UpdateInstanceResponses[keyof GameCenterAchievementImagesV2UpdateInstanceResponses];
+
+export type GameCenterAchievementLocalizationsV2CreateInstanceData = {
+    /**
+     * GameCenterAchievementLocalization representation
+     */
+    body: GameCenterAchievementLocalizationV2CreateRequest;
+    path?: never;
+    query?: never;
+    url: '/v2/gameCenterAchievementLocalizations';
+};
+
+export type GameCenterAchievementLocalizationsV2CreateInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterAchievementLocalizationsV2CreateInstanceError = GameCenterAchievementLocalizationsV2CreateInstanceErrors[keyof GameCenterAchievementLocalizationsV2CreateInstanceErrors];
+
+export type GameCenterAchievementLocalizationsV2CreateInstanceResponses = {
+    /**
+     * Single GameCenterAchievementLocalization
+     */
+    201: GameCenterAchievementLocalizationV2Response;
+};
+
+export type GameCenterAchievementLocalizationsV2CreateInstanceResponse = GameCenterAchievementLocalizationsV2CreateInstanceResponses[keyof GameCenterAchievementLocalizationsV2CreateInstanceResponses];
+
+export type GameCenterAchievementLocalizationsV2DeleteInstanceData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v2/gameCenterAchievementLocalizations/{id}';
+};
+
+export type GameCenterAchievementLocalizationsV2DeleteInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterAchievementLocalizationsV2DeleteInstanceError = GameCenterAchievementLocalizationsV2DeleteInstanceErrors[keyof GameCenterAchievementLocalizationsV2DeleteInstanceErrors];
+
+export type GameCenterAchievementLocalizationsV2DeleteInstanceResponses = {
+    /**
+     * Success (no content)
+     */
+    204: void;
+};
+
+export type GameCenterAchievementLocalizationsV2DeleteInstanceResponse = GameCenterAchievementLocalizationsV2DeleteInstanceResponses[keyof GameCenterAchievementLocalizationsV2DeleteInstanceResponses];
+
+export type GameCenterAchievementLocalizationsV2GetInstanceData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * the fields to include for returned resources of type gameCenterAchievementLocalizations
+         */
+        'fields[gameCenterAchievementLocalizations]'?: Array<'locale' | 'name' | 'beforeEarnedDescription' | 'afterEarnedDescription' | 'version' | 'image'>;
+        /**
+         * the fields to include for returned resources of type gameCenterAchievementImages
+         */
+        'fields[gameCenterAchievementImages]'?: Array<'fileSize' | 'fileName' | 'imageAsset' | 'uploadOperations' | 'assetDeliveryState' | 'localization'>;
+        /**
+         * comma-separated list of relationships to include
+         */
+        include?: Array<'version' | 'image'>;
+    };
+    url: '/v2/gameCenterAchievementLocalizations/{id}';
+};
+
+export type GameCenterAchievementLocalizationsV2GetInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterAchievementLocalizationsV2GetInstanceError = GameCenterAchievementLocalizationsV2GetInstanceErrors[keyof GameCenterAchievementLocalizationsV2GetInstanceErrors];
+
+export type GameCenterAchievementLocalizationsV2GetInstanceResponses = {
+    /**
+     * Single GameCenterAchievementLocalization
+     */
+    200: GameCenterAchievementLocalizationV2Response;
+};
+
+export type GameCenterAchievementLocalizationsV2GetInstanceResponse = GameCenterAchievementLocalizationsV2GetInstanceResponses[keyof GameCenterAchievementLocalizationsV2GetInstanceResponses];
+
+export type GameCenterAchievementLocalizationsV2UpdateInstanceData = {
+    /**
+     * GameCenterAchievementLocalization representation
+     */
+    body: GameCenterAchievementLocalizationV2UpdateRequest;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v2/gameCenterAchievementLocalizations/{id}';
+};
+
+export type GameCenterAchievementLocalizationsV2UpdateInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterAchievementLocalizationsV2UpdateInstanceError = GameCenterAchievementLocalizationsV2UpdateInstanceErrors[keyof GameCenterAchievementLocalizationsV2UpdateInstanceErrors];
+
+export type GameCenterAchievementLocalizationsV2UpdateInstanceResponses = {
+    /**
+     * Single GameCenterAchievementLocalization
+     */
+    200: GameCenterAchievementLocalizationV2Response;
+};
+
+export type GameCenterAchievementLocalizationsV2UpdateInstanceResponse = GameCenterAchievementLocalizationsV2UpdateInstanceResponses[keyof GameCenterAchievementLocalizationsV2UpdateInstanceResponses];
+
 export type GameCenterAchievementLocalizationsCreateInstanceData = {
     /**
      * GameCenterAchievementLocalization representation
@@ -35609,6 +38465,335 @@ export type GameCenterAchievementReleasesGetInstanceResponses = {
 
 export type GameCenterAchievementReleasesGetInstanceResponse = GameCenterAchievementReleasesGetInstanceResponses[keyof GameCenterAchievementReleasesGetInstanceResponses];
 
+export type GameCenterAchievementVersionsV2CreateInstanceData = {
+    /**
+     * GameCenterAchievementVersion representation
+     */
+    body: GameCenterAchievementVersionV2CreateRequest;
+    path?: never;
+    query?: never;
+    url: '/v2/gameCenterAchievementVersions';
+};
+
+export type GameCenterAchievementVersionsV2CreateInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterAchievementVersionsV2CreateInstanceError = GameCenterAchievementVersionsV2CreateInstanceErrors[keyof GameCenterAchievementVersionsV2CreateInstanceErrors];
+
+export type GameCenterAchievementVersionsV2CreateInstanceResponses = {
+    /**
+     * Single GameCenterAchievementVersion
+     */
+    201: GameCenterAchievementVersionV2Response;
+};
+
+export type GameCenterAchievementVersionsV2CreateInstanceResponse = GameCenterAchievementVersionsV2CreateInstanceResponses[keyof GameCenterAchievementVersionsV2CreateInstanceResponses];
+
+export type GameCenterAchievementVersionsV2GetInstanceData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * the fields to include for returned resources of type gameCenterAchievementVersions
+         */
+        'fields[gameCenterAchievementVersions]'?: Array<'version' | 'state' | 'achievement' | 'localizations'>;
+        /**
+         * the fields to include for returned resources of type gameCenterAchievementLocalizations
+         */
+        'fields[gameCenterAchievementLocalizations]'?: Array<'locale' | 'name' | 'beforeEarnedDescription' | 'afterEarnedDescription' | 'version' | 'image'>;
+        /**
+         * comma-separated list of relationships to include
+         */
+        include?: Array<'achievement' | 'localizations'>;
+        /**
+         * maximum number of related localizations returned (when they are included)
+         */
+        'limit[localizations]'?: number;
+    };
+    url: '/v2/gameCenterAchievementVersions/{id}';
+};
+
+export type GameCenterAchievementVersionsV2GetInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterAchievementVersionsV2GetInstanceError = GameCenterAchievementVersionsV2GetInstanceErrors[keyof GameCenterAchievementVersionsV2GetInstanceErrors];
+
+export type GameCenterAchievementVersionsV2GetInstanceResponses = {
+    /**
+     * Single GameCenterAchievementVersion
+     */
+    200: GameCenterAchievementVersionV2Response;
+};
+
+export type GameCenterAchievementVersionsV2GetInstanceResponse = GameCenterAchievementVersionsV2GetInstanceResponses[keyof GameCenterAchievementVersionsV2GetInstanceResponses];
+
+export type GameCenterAchievementsV2CreateInstanceData = {
+    /**
+     * GameCenterAchievement representation
+     */
+    body: GameCenterAchievementV2CreateRequest;
+    path?: never;
+    query?: never;
+    url: '/v2/gameCenterAchievements';
+};
+
+export type GameCenterAchievementsV2CreateInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterAchievementsV2CreateInstanceError = GameCenterAchievementsV2CreateInstanceErrors[keyof GameCenterAchievementsV2CreateInstanceErrors];
+
+export type GameCenterAchievementsV2CreateInstanceResponses = {
+    /**
+     * Single GameCenterAchievement
+     */
+    201: GameCenterAchievementV2Response;
+};
+
+export type GameCenterAchievementsV2CreateInstanceResponse = GameCenterAchievementsV2CreateInstanceResponses[keyof GameCenterAchievementsV2CreateInstanceResponses];
+
+export type GameCenterAchievementsV2DeleteInstanceData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v2/gameCenterAchievements/{id}';
+};
+
+export type GameCenterAchievementsV2DeleteInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterAchievementsV2DeleteInstanceError = GameCenterAchievementsV2DeleteInstanceErrors[keyof GameCenterAchievementsV2DeleteInstanceErrors];
+
+export type GameCenterAchievementsV2DeleteInstanceResponses = {
+    /**
+     * Success (no content)
+     */
+    204: void;
+};
+
+export type GameCenterAchievementsV2DeleteInstanceResponse = GameCenterAchievementsV2DeleteInstanceResponses[keyof GameCenterAchievementsV2DeleteInstanceResponses];
+
+export type GameCenterAchievementsV2GetInstanceData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * the fields to include for returned resources of type gameCenterAchievements
+         */
+        'fields[gameCenterAchievements]'?: Array<'referenceName' | 'vendorIdentifier' | 'points' | 'showBeforeEarned' | 'repeatable' | 'archived' | 'activityProperties' | 'gameCenterDetail' | 'gameCenterGroup' | 'activity' | 'versions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterAchievementVersions
+         */
+        'fields[gameCenterAchievementVersions]'?: Array<'version' | 'state' | 'achievement' | 'localizations'>;
+        /**
+         * comma-separated list of relationships to include
+         */
+        include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'activity' | 'versions'>;
+        /**
+         * maximum number of related versions returned (when they are included)
+         */
+        'limit[versions]'?: number;
+    };
+    url: '/v2/gameCenterAchievements/{id}';
+};
+
+export type GameCenterAchievementsV2GetInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterAchievementsV2GetInstanceError = GameCenterAchievementsV2GetInstanceErrors[keyof GameCenterAchievementsV2GetInstanceErrors];
+
+export type GameCenterAchievementsV2GetInstanceResponses = {
+    /**
+     * Single GameCenterAchievement
+     */
+    200: GameCenterAchievementV2Response;
+};
+
+export type GameCenterAchievementsV2GetInstanceResponse = GameCenterAchievementsV2GetInstanceResponses[keyof GameCenterAchievementsV2GetInstanceResponses];
+
+export type GameCenterAchievementsV2UpdateInstanceData = {
+    /**
+     * GameCenterAchievement representation
+     */
+    body: GameCenterAchievementV2UpdateRequest;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v2/gameCenterAchievements/{id}';
+};
+
+export type GameCenterAchievementsV2UpdateInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterAchievementsV2UpdateInstanceError = GameCenterAchievementsV2UpdateInstanceErrors[keyof GameCenterAchievementsV2UpdateInstanceErrors];
+
+export type GameCenterAchievementsV2UpdateInstanceResponses = {
+    /**
+     * Single GameCenterAchievement
+     */
+    200: GameCenterAchievementV2Response;
+};
+
+export type GameCenterAchievementsV2UpdateInstanceResponse = GameCenterAchievementsV2UpdateInstanceResponses[keyof GameCenterAchievementsV2UpdateInstanceResponses];
+
 export type GameCenterAchievementsCreateInstanceData = {
     /**
      * GameCenterAchievement representation
@@ -35945,7 +39130,7 @@ export type GameCenterActivitiesGetInstanceData = {
         /**
          * the fields to include for returned resources of type gameCenterActivities
          */
-        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'leaderboards' | 'versions'>;
+        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'achievementsV2' | 'leaderboards' | 'leaderboardsV2' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterActivityVersions
          */
@@ -35953,15 +39138,23 @@ export type GameCenterActivitiesGetInstanceData = {
         /**
          * comma-separated list of relationships to include
          */
-        include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'leaderboards' | 'versions'>;
+        include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'achievementsV2' | 'leaderboards' | 'leaderboardsV2' | 'versions'>;
         /**
          * maximum number of related achievements returned (when they are included)
          */
         'limit[achievements]'?: number;
         /**
+         * maximum number of related achievementsV2 returned (when they are included)
+         */
+        'limit[achievementsV2]'?: number;
+        /**
          * maximum number of related leaderboards returned (when they are included)
          */
         'limit[leaderboards]'?: number;
+        /**
+         * maximum number of related leaderboardsV2 returned (when they are included)
+         */
+        'limit[leaderboardsV2]'?: number;
         /**
          * maximum number of related versions returned (when they are included)
          */
@@ -37780,7 +40973,7 @@ export type GameCenterChallengesGetInstanceData = {
         /**
          * the fields to include for returned resources of type gameCenterChallenges
          */
-        'fields[gameCenterChallenges]'?: Array<'referenceName' | 'vendorIdentifier' | 'archived' | 'challengeType' | 'repeatable' | 'gameCenterDetail' | 'gameCenterGroup' | 'versions' | 'leaderboard'>;
+        'fields[gameCenterChallenges]'?: Array<'referenceName' | 'vendorIdentifier' | 'archived' | 'challengeType' | 'repeatable' | 'gameCenterDetail' | 'gameCenterGroup' | 'versions' | 'leaderboard' | 'leaderboardV2'>;
         /**
          * the fields to include for returned resources of type gameCenterChallengeVersions
          */
@@ -37788,7 +40981,7 @@ export type GameCenterChallengesGetInstanceData = {
         /**
          * comma-separated list of relationships to include
          */
-        include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'versions' | 'leaderboard'>;
+        include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'versions' | 'leaderboard' | 'leaderboardV2'>;
         /**
          * maximum number of related versions returned (when they are included)
          */
@@ -37948,7 +41141,7 @@ export type GameCenterDetailsGetInstanceData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultGroupLeaderboard' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterAppVersions
          */
@@ -37956,27 +41149,27 @@ export type GameCenterDetailsGetInstanceData = {
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
-        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges'>;
+        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboards
          */
-        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge'>;
+        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardSets
          */
-        'fields[gameCenterLeaderboardSets]'?: Array<'referenceName' | 'vendorIdentifier' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboardSet' | 'localizations' | 'gameCenterLeaderboards' | 'releases'>;
+        'fields[gameCenterLeaderboardSets]'?: Array<'referenceName' | 'vendorIdentifier' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboardSet' | 'localizations' | 'gameCenterLeaderboards' | 'releases' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterAchievements
          */
-        'fields[gameCenterAchievements]'?: Array<'referenceName' | 'vendorIdentifier' | 'points' | 'showBeforeEarned' | 'repeatable' | 'archived' | 'activityProperties' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupAchievement' | 'localizations' | 'releases' | 'activity'>;
+        'fields[gameCenterAchievements]'?: Array<'referenceName' | 'vendorIdentifier' | 'points' | 'showBeforeEarned' | 'repeatable' | 'archived' | 'activityProperties' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupAchievement' | 'localizations' | 'releases' | 'activity' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterActivities
          */
-        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'leaderboards' | 'versions'>;
+        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'achievementsV2' | 'leaderboards' | 'leaderboardsV2' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterChallenges
          */
-        'fields[gameCenterChallenges]'?: Array<'referenceName' | 'vendorIdentifier' | 'archived' | 'challengeType' | 'repeatable' | 'gameCenterDetail' | 'gameCenterGroup' | 'versions' | 'leaderboard'>;
+        'fields[gameCenterChallenges]'?: Array<'referenceName' | 'vendorIdentifier' | 'archived' | 'challengeType' | 'repeatable' | 'gameCenterDetail' | 'gameCenterGroup' | 'versions' | 'leaderboard' | 'leaderboardV2'>;
         /**
          * the fields to include for returned resources of type gameCenterAchievementReleases
          */
@@ -38000,7 +41193,7 @@ export type GameCenterDetailsGetInstanceData = {
         /**
          * comma-separated list of relationships to include
          */
-        include?: Array<'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultGroupLeaderboard' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        include?: Array<'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
         /**
          * maximum number of related achievementReleases returned (when they are included)
          */
@@ -38022,6 +41215,10 @@ export type GameCenterDetailsGetInstanceData = {
          */
         'limit[gameCenterAchievements]'?: number;
         /**
+         * maximum number of related gameCenterAchievementsV2 returned (when they are included)
+         */
+        'limit[gameCenterAchievementsV2]'?: number;
+        /**
          * maximum number of related gameCenterActivities returned (when they are included)
          */
         'limit[gameCenterActivities]'?: number;
@@ -38038,9 +41235,17 @@ export type GameCenterDetailsGetInstanceData = {
          */
         'limit[gameCenterLeaderboardSets]'?: number;
         /**
+         * maximum number of related gameCenterLeaderboardSetsV2 returned (when they are included)
+         */
+        'limit[gameCenterLeaderboardSetsV2]'?: number;
+        /**
          * maximum number of related gameCenterLeaderboards returned (when they are included)
          */
         'limit[gameCenterLeaderboards]'?: number;
+        /**
+         * maximum number of related gameCenterLeaderboardsV2 returned (when they are included)
+         */
+        'limit[gameCenterLeaderboardsV2]'?: number;
         /**
          * maximum number of related leaderboardReleases returned (when they are included)
          */
@@ -38155,31 +41360,31 @@ export type GameCenterGroupsGetCollectionData = {
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
-        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges'>;
+        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultGroupLeaderboard' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboards
          */
-        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge'>;
+        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardSets
          */
-        'fields[gameCenterLeaderboardSets]'?: Array<'referenceName' | 'vendorIdentifier' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboardSet' | 'localizations' | 'gameCenterLeaderboards' | 'releases'>;
+        'fields[gameCenterLeaderboardSets]'?: Array<'referenceName' | 'vendorIdentifier' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboardSet' | 'localizations' | 'gameCenterLeaderboards' | 'releases' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterAchievements
          */
-        'fields[gameCenterAchievements]'?: Array<'referenceName' | 'vendorIdentifier' | 'points' | 'showBeforeEarned' | 'repeatable' | 'archived' | 'activityProperties' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupAchievement' | 'localizations' | 'releases' | 'activity'>;
+        'fields[gameCenterAchievements]'?: Array<'referenceName' | 'vendorIdentifier' | 'points' | 'showBeforeEarned' | 'repeatable' | 'archived' | 'activityProperties' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupAchievement' | 'localizations' | 'releases' | 'activity' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterActivities
          */
-        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'leaderboards' | 'versions'>;
+        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'achievementsV2' | 'leaderboards' | 'leaderboardsV2' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterChallenges
          */
-        'fields[gameCenterChallenges]'?: Array<'referenceName' | 'vendorIdentifier' | 'archived' | 'challengeType' | 'repeatable' | 'gameCenterDetail' | 'gameCenterGroup' | 'versions' | 'leaderboard'>;
+        'fields[gameCenterChallenges]'?: Array<'referenceName' | 'vendorIdentifier' | 'archived' | 'challengeType' | 'repeatable' | 'gameCenterDetail' | 'gameCenterGroup' | 'versions' | 'leaderboard' | 'leaderboardV2'>;
         /**
          * maximum resources per page
          */
@@ -38187,11 +41392,15 @@ export type GameCenterGroupsGetCollectionData = {
         /**
          * comma-separated list of relationships to include
          */
-        include?: Array<'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges'>;
+        include?: Array<'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
         /**
          * maximum number of related gameCenterAchievements returned (when they are included)
          */
         'limit[gameCenterAchievements]'?: number;
+        /**
+         * maximum number of related gameCenterAchievementsV2 returned (when they are included)
+         */
+        'limit[gameCenterAchievementsV2]'?: number;
         /**
          * maximum number of related gameCenterActivities returned (when they are included)
          */
@@ -38209,9 +41418,17 @@ export type GameCenterGroupsGetCollectionData = {
          */
         'limit[gameCenterLeaderboardSets]'?: number;
         /**
+         * maximum number of related gameCenterLeaderboardSetsV2 returned (when they are included)
+         */
+        'limit[gameCenterLeaderboardSetsV2]'?: number;
+        /**
          * maximum number of related gameCenterLeaderboards returned (when they are included)
          */
         'limit[gameCenterLeaderboards]'?: number;
+        /**
+         * maximum number of related gameCenterLeaderboardsV2 returned (when they are included)
+         */
+        'limit[gameCenterLeaderboardsV2]'?: number;
     };
     url: '/v1/gameCenterGroups';
 };
@@ -38356,39 +41573,43 @@ export type GameCenterGroupsGetInstanceData = {
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
-        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges'>;
+        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultGroupLeaderboard' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboards
          */
-        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge'>;
+        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardSets
          */
-        'fields[gameCenterLeaderboardSets]'?: Array<'referenceName' | 'vendorIdentifier' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboardSet' | 'localizations' | 'gameCenterLeaderboards' | 'releases'>;
+        'fields[gameCenterLeaderboardSets]'?: Array<'referenceName' | 'vendorIdentifier' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboardSet' | 'localizations' | 'gameCenterLeaderboards' | 'releases' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterAchievements
          */
-        'fields[gameCenterAchievements]'?: Array<'referenceName' | 'vendorIdentifier' | 'points' | 'showBeforeEarned' | 'repeatable' | 'archived' | 'activityProperties' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupAchievement' | 'localizations' | 'releases' | 'activity'>;
+        'fields[gameCenterAchievements]'?: Array<'referenceName' | 'vendorIdentifier' | 'points' | 'showBeforeEarned' | 'repeatable' | 'archived' | 'activityProperties' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupAchievement' | 'localizations' | 'releases' | 'activity' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterActivities
          */
-        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'leaderboards' | 'versions'>;
+        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'achievementsV2' | 'leaderboards' | 'leaderboardsV2' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterChallenges
          */
-        'fields[gameCenterChallenges]'?: Array<'referenceName' | 'vendorIdentifier' | 'archived' | 'challengeType' | 'repeatable' | 'gameCenterDetail' | 'gameCenterGroup' | 'versions' | 'leaderboard'>;
+        'fields[gameCenterChallenges]'?: Array<'referenceName' | 'vendorIdentifier' | 'archived' | 'challengeType' | 'repeatable' | 'gameCenterDetail' | 'gameCenterGroup' | 'versions' | 'leaderboard' | 'leaderboardV2'>;
         /**
          * comma-separated list of relationships to include
          */
-        include?: Array<'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges'>;
+        include?: Array<'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
         /**
          * maximum number of related gameCenterAchievements returned (when they are included)
          */
         'limit[gameCenterAchievements]'?: number;
+        /**
+         * maximum number of related gameCenterAchievementsV2 returned (when they are included)
+         */
+        'limit[gameCenterAchievementsV2]'?: number;
         /**
          * maximum number of related gameCenterActivities returned (when they are included)
          */
@@ -38406,9 +41627,17 @@ export type GameCenterGroupsGetInstanceData = {
          */
         'limit[gameCenterLeaderboardSets]'?: number;
         /**
+         * maximum number of related gameCenterLeaderboardSetsV2 returned (when they are included)
+         */
+        'limit[gameCenterLeaderboardSetsV2]'?: number;
+        /**
          * maximum number of related gameCenterLeaderboards returned (when they are included)
          */
         'limit[gameCenterLeaderboards]'?: number;
+        /**
+         * maximum number of related gameCenterLeaderboardsV2 returned (when they are included)
+         */
+        'limit[gameCenterLeaderboardsV2]'?: number;
     };
     url: '/v1/gameCenterGroups/{id}';
 };
@@ -38762,6 +41991,216 @@ export type GameCenterLeaderboardImagesUpdateInstanceResponses = {
 
 export type GameCenterLeaderboardImagesUpdateInstanceResponse = GameCenterLeaderboardImagesUpdateInstanceResponses[keyof GameCenterLeaderboardImagesUpdateInstanceResponses];
 
+export type GameCenterLeaderboardImagesV2CreateInstanceData = {
+    /**
+     * GameCenterLeaderboardImage representation
+     */
+    body: GameCenterLeaderboardImageV2CreateRequest;
+    path?: never;
+    query?: never;
+    url: '/v2/gameCenterLeaderboardImages';
+};
+
+export type GameCenterLeaderboardImagesV2CreateInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardImagesV2CreateInstanceError = GameCenterLeaderboardImagesV2CreateInstanceErrors[keyof GameCenterLeaderboardImagesV2CreateInstanceErrors];
+
+export type GameCenterLeaderboardImagesV2CreateInstanceResponses = {
+    /**
+     * Single GameCenterLeaderboardImage
+     */
+    201: GameCenterLeaderboardImageV2Response;
+};
+
+export type GameCenterLeaderboardImagesV2CreateInstanceResponse = GameCenterLeaderboardImagesV2CreateInstanceResponses[keyof GameCenterLeaderboardImagesV2CreateInstanceResponses];
+
+export type GameCenterLeaderboardImagesV2DeleteInstanceData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v2/gameCenterLeaderboardImages/{id}';
+};
+
+export type GameCenterLeaderboardImagesV2DeleteInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardImagesV2DeleteInstanceError = GameCenterLeaderboardImagesV2DeleteInstanceErrors[keyof GameCenterLeaderboardImagesV2DeleteInstanceErrors];
+
+export type GameCenterLeaderboardImagesV2DeleteInstanceResponses = {
+    /**
+     * Success (no content)
+     */
+    204: void;
+};
+
+export type GameCenterLeaderboardImagesV2DeleteInstanceResponse = GameCenterLeaderboardImagesV2DeleteInstanceResponses[keyof GameCenterLeaderboardImagesV2DeleteInstanceResponses];
+
+export type GameCenterLeaderboardImagesV2GetInstanceData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboardImages
+         */
+        'fields[gameCenterLeaderboardImages]'?: Array<'fileSize' | 'fileName' | 'imageAsset' | 'uploadOperations' | 'assetDeliveryState' | 'localization'>;
+        /**
+         * comma-separated list of relationships to include
+         */
+        include?: Array<'localization'>;
+    };
+    url: '/v2/gameCenterLeaderboardImages/{id}';
+};
+
+export type GameCenterLeaderboardImagesV2GetInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardImagesV2GetInstanceError = GameCenterLeaderboardImagesV2GetInstanceErrors[keyof GameCenterLeaderboardImagesV2GetInstanceErrors];
+
+export type GameCenterLeaderboardImagesV2GetInstanceResponses = {
+    /**
+     * Single GameCenterLeaderboardImage
+     */
+    200: GameCenterLeaderboardImageV2Response;
+};
+
+export type GameCenterLeaderboardImagesV2GetInstanceResponse = GameCenterLeaderboardImagesV2GetInstanceResponses[keyof GameCenterLeaderboardImagesV2GetInstanceResponses];
+
+export type GameCenterLeaderboardImagesV2UpdateInstanceData = {
+    /**
+     * GameCenterLeaderboardImage representation
+     */
+    body: GameCenterLeaderboardImageV2UpdateRequest;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v2/gameCenterLeaderboardImages/{id}';
+};
+
+export type GameCenterLeaderboardImagesV2UpdateInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardImagesV2UpdateInstanceError = GameCenterLeaderboardImagesV2UpdateInstanceErrors[keyof GameCenterLeaderboardImagesV2UpdateInstanceErrors];
+
+export type GameCenterLeaderboardImagesV2UpdateInstanceResponses = {
+    /**
+     * Single GameCenterLeaderboardImage
+     */
+    200: GameCenterLeaderboardImageV2Response;
+};
+
+export type GameCenterLeaderboardImagesV2UpdateInstanceResponse = GameCenterLeaderboardImagesV2UpdateInstanceResponses[keyof GameCenterLeaderboardImagesV2UpdateInstanceResponses];
+
 export type GameCenterLeaderboardLocalizationsCreateInstanceData = {
     /**
      * GameCenterLeaderboardLocalization representation
@@ -38975,6 +42414,220 @@ export type GameCenterLeaderboardLocalizationsUpdateInstanceResponses = {
 };
 
 export type GameCenterLeaderboardLocalizationsUpdateInstanceResponse = GameCenterLeaderboardLocalizationsUpdateInstanceResponses[keyof GameCenterLeaderboardLocalizationsUpdateInstanceResponses];
+
+export type GameCenterLeaderboardLocalizationsV2CreateInstanceData = {
+    /**
+     * GameCenterLeaderboardLocalization representation
+     */
+    body: GameCenterLeaderboardLocalizationV2CreateRequest;
+    path?: never;
+    query?: never;
+    url: '/v2/gameCenterLeaderboardLocalizations';
+};
+
+export type GameCenterLeaderboardLocalizationsV2CreateInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardLocalizationsV2CreateInstanceError = GameCenterLeaderboardLocalizationsV2CreateInstanceErrors[keyof GameCenterLeaderboardLocalizationsV2CreateInstanceErrors];
+
+export type GameCenterLeaderboardLocalizationsV2CreateInstanceResponses = {
+    /**
+     * Single GameCenterLeaderboardLocalization
+     */
+    201: GameCenterLeaderboardLocalizationV2Response;
+};
+
+export type GameCenterLeaderboardLocalizationsV2CreateInstanceResponse = GameCenterLeaderboardLocalizationsV2CreateInstanceResponses[keyof GameCenterLeaderboardLocalizationsV2CreateInstanceResponses];
+
+export type GameCenterLeaderboardLocalizationsV2DeleteInstanceData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v2/gameCenterLeaderboardLocalizations/{id}';
+};
+
+export type GameCenterLeaderboardLocalizationsV2DeleteInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardLocalizationsV2DeleteInstanceError = GameCenterLeaderboardLocalizationsV2DeleteInstanceErrors[keyof GameCenterLeaderboardLocalizationsV2DeleteInstanceErrors];
+
+export type GameCenterLeaderboardLocalizationsV2DeleteInstanceResponses = {
+    /**
+     * Success (no content)
+     */
+    204: void;
+};
+
+export type GameCenterLeaderboardLocalizationsV2DeleteInstanceResponse = GameCenterLeaderboardLocalizationsV2DeleteInstanceResponses[keyof GameCenterLeaderboardLocalizationsV2DeleteInstanceResponses];
+
+export type GameCenterLeaderboardLocalizationsV2GetInstanceData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboardLocalizations
+         */
+        'fields[gameCenterLeaderboardLocalizations]'?: Array<'locale' | 'name' | 'formatterOverride' | 'formatterSuffix' | 'formatterSuffixSingular' | 'description' | 'version' | 'image'>;
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboardImages
+         */
+        'fields[gameCenterLeaderboardImages]'?: Array<'fileSize' | 'fileName' | 'imageAsset' | 'uploadOperations' | 'assetDeliveryState' | 'localization'>;
+        /**
+         * comma-separated list of relationships to include
+         */
+        include?: Array<'version' | 'image'>;
+    };
+    url: '/v2/gameCenterLeaderboardLocalizations/{id}';
+};
+
+export type GameCenterLeaderboardLocalizationsV2GetInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardLocalizationsV2GetInstanceError = GameCenterLeaderboardLocalizationsV2GetInstanceErrors[keyof GameCenterLeaderboardLocalizationsV2GetInstanceErrors];
+
+export type GameCenterLeaderboardLocalizationsV2GetInstanceResponses = {
+    /**
+     * Single GameCenterLeaderboardLocalization
+     */
+    200: GameCenterLeaderboardLocalizationV2Response;
+};
+
+export type GameCenterLeaderboardLocalizationsV2GetInstanceResponse = GameCenterLeaderboardLocalizationsV2GetInstanceResponses[keyof GameCenterLeaderboardLocalizationsV2GetInstanceResponses];
+
+export type GameCenterLeaderboardLocalizationsV2UpdateInstanceData = {
+    /**
+     * GameCenterLeaderboardLocalization representation
+     */
+    body: GameCenterLeaderboardLocalizationV2UpdateRequest;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v2/gameCenterLeaderboardLocalizations/{id}';
+};
+
+export type GameCenterLeaderboardLocalizationsV2UpdateInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardLocalizationsV2UpdateInstanceError = GameCenterLeaderboardLocalizationsV2UpdateInstanceErrors[keyof GameCenterLeaderboardLocalizationsV2UpdateInstanceErrors];
+
+export type GameCenterLeaderboardLocalizationsV2UpdateInstanceResponses = {
+    /**
+     * Single GameCenterLeaderboardLocalization
+     */
+    200: GameCenterLeaderboardLocalizationV2Response;
+};
+
+export type GameCenterLeaderboardLocalizationsV2UpdateInstanceResponse = GameCenterLeaderboardLocalizationsV2UpdateInstanceResponses[keyof GameCenterLeaderboardLocalizationsV2UpdateInstanceResponses];
 
 export type GameCenterLeaderboardReleasesCreateInstanceData = {
     /**
@@ -39339,6 +42992,216 @@ export type GameCenterLeaderboardSetImagesUpdateInstanceResponses = {
 
 export type GameCenterLeaderboardSetImagesUpdateInstanceResponse = GameCenterLeaderboardSetImagesUpdateInstanceResponses[keyof GameCenterLeaderboardSetImagesUpdateInstanceResponses];
 
+export type GameCenterLeaderboardSetImagesV2CreateInstanceData = {
+    /**
+     * GameCenterLeaderboardSetImage representation
+     */
+    body: GameCenterLeaderboardSetImageV2CreateRequest;
+    path?: never;
+    query?: never;
+    url: '/v2/gameCenterLeaderboardSetImages';
+};
+
+export type GameCenterLeaderboardSetImagesV2CreateInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardSetImagesV2CreateInstanceError = GameCenterLeaderboardSetImagesV2CreateInstanceErrors[keyof GameCenterLeaderboardSetImagesV2CreateInstanceErrors];
+
+export type GameCenterLeaderboardSetImagesV2CreateInstanceResponses = {
+    /**
+     * Single GameCenterLeaderboardSetImage
+     */
+    201: GameCenterLeaderboardSetImageV2Response;
+};
+
+export type GameCenterLeaderboardSetImagesV2CreateInstanceResponse = GameCenterLeaderboardSetImagesV2CreateInstanceResponses[keyof GameCenterLeaderboardSetImagesV2CreateInstanceResponses];
+
+export type GameCenterLeaderboardSetImagesV2DeleteInstanceData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v2/gameCenterLeaderboardSetImages/{id}';
+};
+
+export type GameCenterLeaderboardSetImagesV2DeleteInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardSetImagesV2DeleteInstanceError = GameCenterLeaderboardSetImagesV2DeleteInstanceErrors[keyof GameCenterLeaderboardSetImagesV2DeleteInstanceErrors];
+
+export type GameCenterLeaderboardSetImagesV2DeleteInstanceResponses = {
+    /**
+     * Success (no content)
+     */
+    204: void;
+};
+
+export type GameCenterLeaderboardSetImagesV2DeleteInstanceResponse = GameCenterLeaderboardSetImagesV2DeleteInstanceResponses[keyof GameCenterLeaderboardSetImagesV2DeleteInstanceResponses];
+
+export type GameCenterLeaderboardSetImagesV2GetInstanceData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboardSetImages
+         */
+        'fields[gameCenterLeaderboardSetImages]'?: Array<'fileSize' | 'fileName' | 'imageAsset' | 'uploadOperations' | 'assetDeliveryState' | 'localization'>;
+        /**
+         * comma-separated list of relationships to include
+         */
+        include?: Array<'localization'>;
+    };
+    url: '/v2/gameCenterLeaderboardSetImages/{id}';
+};
+
+export type GameCenterLeaderboardSetImagesV2GetInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardSetImagesV2GetInstanceError = GameCenterLeaderboardSetImagesV2GetInstanceErrors[keyof GameCenterLeaderboardSetImagesV2GetInstanceErrors];
+
+export type GameCenterLeaderboardSetImagesV2GetInstanceResponses = {
+    /**
+     * Single GameCenterLeaderboardSetImage
+     */
+    200: GameCenterLeaderboardSetImageV2Response;
+};
+
+export type GameCenterLeaderboardSetImagesV2GetInstanceResponse = GameCenterLeaderboardSetImagesV2GetInstanceResponses[keyof GameCenterLeaderboardSetImagesV2GetInstanceResponses];
+
+export type GameCenterLeaderboardSetImagesV2UpdateInstanceData = {
+    /**
+     * GameCenterLeaderboardSetImage representation
+     */
+    body: GameCenterLeaderboardSetImageV2UpdateRequest;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v2/gameCenterLeaderboardSetImages/{id}';
+};
+
+export type GameCenterLeaderboardSetImagesV2UpdateInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardSetImagesV2UpdateInstanceError = GameCenterLeaderboardSetImagesV2UpdateInstanceErrors[keyof GameCenterLeaderboardSetImagesV2UpdateInstanceErrors];
+
+export type GameCenterLeaderboardSetImagesV2UpdateInstanceResponses = {
+    /**
+     * Single GameCenterLeaderboardSetImage
+     */
+    200: GameCenterLeaderboardSetImageV2Response;
+};
+
+export type GameCenterLeaderboardSetImagesV2UpdateInstanceResponse = GameCenterLeaderboardSetImagesV2UpdateInstanceResponses[keyof GameCenterLeaderboardSetImagesV2UpdateInstanceResponses];
+
 export type GameCenterLeaderboardSetLocalizationsCreateInstanceData = {
     /**
      * GameCenterLeaderboardSetLocalization representation
@@ -39552,6 +43415,220 @@ export type GameCenterLeaderboardSetLocalizationsUpdateInstanceResponses = {
 };
 
 export type GameCenterLeaderboardSetLocalizationsUpdateInstanceResponse = GameCenterLeaderboardSetLocalizationsUpdateInstanceResponses[keyof GameCenterLeaderboardSetLocalizationsUpdateInstanceResponses];
+
+export type GameCenterLeaderboardSetLocalizationsV2CreateInstanceData = {
+    /**
+     * GameCenterLeaderboardSetLocalization representation
+     */
+    body: GameCenterLeaderboardSetLocalizationV2CreateRequest;
+    path?: never;
+    query?: never;
+    url: '/v2/gameCenterLeaderboardSetLocalizations';
+};
+
+export type GameCenterLeaderboardSetLocalizationsV2CreateInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardSetLocalizationsV2CreateInstanceError = GameCenterLeaderboardSetLocalizationsV2CreateInstanceErrors[keyof GameCenterLeaderboardSetLocalizationsV2CreateInstanceErrors];
+
+export type GameCenterLeaderboardSetLocalizationsV2CreateInstanceResponses = {
+    /**
+     * Single GameCenterLeaderboardSetLocalization
+     */
+    201: GameCenterLeaderboardSetLocalizationV2Response;
+};
+
+export type GameCenterLeaderboardSetLocalizationsV2CreateInstanceResponse = GameCenterLeaderboardSetLocalizationsV2CreateInstanceResponses[keyof GameCenterLeaderboardSetLocalizationsV2CreateInstanceResponses];
+
+export type GameCenterLeaderboardSetLocalizationsV2DeleteInstanceData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v2/gameCenterLeaderboardSetLocalizations/{id}';
+};
+
+export type GameCenterLeaderboardSetLocalizationsV2DeleteInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardSetLocalizationsV2DeleteInstanceError = GameCenterLeaderboardSetLocalizationsV2DeleteInstanceErrors[keyof GameCenterLeaderboardSetLocalizationsV2DeleteInstanceErrors];
+
+export type GameCenterLeaderboardSetLocalizationsV2DeleteInstanceResponses = {
+    /**
+     * Success (no content)
+     */
+    204: void;
+};
+
+export type GameCenterLeaderboardSetLocalizationsV2DeleteInstanceResponse = GameCenterLeaderboardSetLocalizationsV2DeleteInstanceResponses[keyof GameCenterLeaderboardSetLocalizationsV2DeleteInstanceResponses];
+
+export type GameCenterLeaderboardSetLocalizationsV2GetInstanceData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboardSetLocalizations
+         */
+        'fields[gameCenterLeaderboardSetLocalizations]'?: Array<'locale' | 'name' | 'version' | 'image'>;
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboardSetImages
+         */
+        'fields[gameCenterLeaderboardSetImages]'?: Array<'fileSize' | 'fileName' | 'imageAsset' | 'uploadOperations' | 'assetDeliveryState' | 'localization'>;
+        /**
+         * comma-separated list of relationships to include
+         */
+        include?: Array<'version' | 'image'>;
+    };
+    url: '/v2/gameCenterLeaderboardSetLocalizations/{id}';
+};
+
+export type GameCenterLeaderboardSetLocalizationsV2GetInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardSetLocalizationsV2GetInstanceError = GameCenterLeaderboardSetLocalizationsV2GetInstanceErrors[keyof GameCenterLeaderboardSetLocalizationsV2GetInstanceErrors];
+
+export type GameCenterLeaderboardSetLocalizationsV2GetInstanceResponses = {
+    /**
+     * Single GameCenterLeaderboardSetLocalization
+     */
+    200: GameCenterLeaderboardSetLocalizationV2Response;
+};
+
+export type GameCenterLeaderboardSetLocalizationsV2GetInstanceResponse = GameCenterLeaderboardSetLocalizationsV2GetInstanceResponses[keyof GameCenterLeaderboardSetLocalizationsV2GetInstanceResponses];
+
+export type GameCenterLeaderboardSetLocalizationsV2UpdateInstanceData = {
+    /**
+     * GameCenterLeaderboardSetLocalization representation
+     */
+    body: GameCenterLeaderboardSetLocalizationV2UpdateRequest;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v2/gameCenterLeaderboardSetLocalizations/{id}';
+};
+
+export type GameCenterLeaderboardSetLocalizationsV2UpdateInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardSetLocalizationsV2UpdateInstanceError = GameCenterLeaderboardSetLocalizationsV2UpdateInstanceErrors[keyof GameCenterLeaderboardSetLocalizationsV2UpdateInstanceErrors];
+
+export type GameCenterLeaderboardSetLocalizationsV2UpdateInstanceResponses = {
+    /**
+     * Single GameCenterLeaderboardSetLocalization
+     */
+    200: GameCenterLeaderboardSetLocalizationV2Response;
+};
+
+export type GameCenterLeaderboardSetLocalizationsV2UpdateInstanceResponse = GameCenterLeaderboardSetLocalizationsV2UpdateInstanceResponses[keyof GameCenterLeaderboardSetLocalizationsV2UpdateInstanceResponses];
 
 export type GameCenterLeaderboardSetMemberLocalizationsGetCollectionData = {
     body?: never;
@@ -39927,6 +44004,343 @@ export type GameCenterLeaderboardSetReleasesGetInstanceResponses = {
 
 export type GameCenterLeaderboardSetReleasesGetInstanceResponse = GameCenterLeaderboardSetReleasesGetInstanceResponses[keyof GameCenterLeaderboardSetReleasesGetInstanceResponses];
 
+export type GameCenterLeaderboardSetVersionsV2CreateInstanceData = {
+    /**
+     * GameCenterLeaderboardSetVersion representation
+     */
+    body: GameCenterLeaderboardSetVersionV2CreateRequest;
+    path?: never;
+    query?: never;
+    url: '/v2/gameCenterLeaderboardSetVersions';
+};
+
+export type GameCenterLeaderboardSetVersionsV2CreateInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardSetVersionsV2CreateInstanceError = GameCenterLeaderboardSetVersionsV2CreateInstanceErrors[keyof GameCenterLeaderboardSetVersionsV2CreateInstanceErrors];
+
+export type GameCenterLeaderboardSetVersionsV2CreateInstanceResponses = {
+    /**
+     * Single GameCenterLeaderboardSetVersion
+     */
+    201: GameCenterLeaderboardSetVersionV2Response;
+};
+
+export type GameCenterLeaderboardSetVersionsV2CreateInstanceResponse = GameCenterLeaderboardSetVersionsV2CreateInstanceResponses[keyof GameCenterLeaderboardSetVersionsV2CreateInstanceResponses];
+
+export type GameCenterLeaderboardSetVersionsV2GetInstanceData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboardSetVersions
+         */
+        'fields[gameCenterLeaderboardSetVersions]'?: Array<'version' | 'state' | 'leaderboardSet' | 'localizations'>;
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboardSetLocalizations
+         */
+        'fields[gameCenterLeaderboardSetLocalizations]'?: Array<'locale' | 'name' | 'version' | 'image'>;
+        /**
+         * comma-separated list of relationships to include
+         */
+        include?: Array<'leaderboardSet' | 'localizations'>;
+        /**
+         * maximum number of related localizations returned (when they are included)
+         */
+        'limit[localizations]'?: number;
+    };
+    url: '/v2/gameCenterLeaderboardSetVersions/{id}';
+};
+
+export type GameCenterLeaderboardSetVersionsV2GetInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardSetVersionsV2GetInstanceError = GameCenterLeaderboardSetVersionsV2GetInstanceErrors[keyof GameCenterLeaderboardSetVersionsV2GetInstanceErrors];
+
+export type GameCenterLeaderboardSetVersionsV2GetInstanceResponses = {
+    /**
+     * Single GameCenterLeaderboardSetVersion
+     */
+    200: GameCenterLeaderboardSetVersionV2Response;
+};
+
+export type GameCenterLeaderboardSetVersionsV2GetInstanceResponse = GameCenterLeaderboardSetVersionsV2GetInstanceResponses[keyof GameCenterLeaderboardSetVersionsV2GetInstanceResponses];
+
+export type GameCenterLeaderboardSetsV2CreateInstanceData = {
+    /**
+     * GameCenterLeaderboardSet representation
+     */
+    body: GameCenterLeaderboardSetV2CreateRequest;
+    path?: never;
+    query?: never;
+    url: '/v2/gameCenterLeaderboardSets';
+};
+
+export type GameCenterLeaderboardSetsV2CreateInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardSetsV2CreateInstanceError = GameCenterLeaderboardSetsV2CreateInstanceErrors[keyof GameCenterLeaderboardSetsV2CreateInstanceErrors];
+
+export type GameCenterLeaderboardSetsV2CreateInstanceResponses = {
+    /**
+     * Single GameCenterLeaderboardSet
+     */
+    201: GameCenterLeaderboardSetV2Response;
+};
+
+export type GameCenterLeaderboardSetsV2CreateInstanceResponse = GameCenterLeaderboardSetsV2CreateInstanceResponses[keyof GameCenterLeaderboardSetsV2CreateInstanceResponses];
+
+export type GameCenterLeaderboardSetsV2DeleteInstanceData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v2/gameCenterLeaderboardSets/{id}';
+};
+
+export type GameCenterLeaderboardSetsV2DeleteInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardSetsV2DeleteInstanceError = GameCenterLeaderboardSetsV2DeleteInstanceErrors[keyof GameCenterLeaderboardSetsV2DeleteInstanceErrors];
+
+export type GameCenterLeaderboardSetsV2DeleteInstanceResponses = {
+    /**
+     * Success (no content)
+     */
+    204: void;
+};
+
+export type GameCenterLeaderboardSetsV2DeleteInstanceResponse = GameCenterLeaderboardSetsV2DeleteInstanceResponses[keyof GameCenterLeaderboardSetsV2DeleteInstanceResponses];
+
+export type GameCenterLeaderboardSetsV2GetInstanceData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboardSets
+         */
+        'fields[gameCenterLeaderboardSets]'?: Array<'referenceName' | 'vendorIdentifier' | 'gameCenterDetail' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'versions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboards
+         */
+        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'gameCenterLeaderboardSets' | 'activity' | 'challenge' | 'versions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboardSetVersions
+         */
+        'fields[gameCenterLeaderboardSetVersions]'?: Array<'version' | 'state' | 'leaderboardSet' | 'localizations'>;
+        /**
+         * comma-separated list of relationships to include
+         */
+        include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'versions'>;
+        /**
+         * maximum number of related gameCenterLeaderboards returned (when they are included)
+         */
+        'limit[gameCenterLeaderboards]'?: number;
+        /**
+         * maximum number of related versions returned (when they are included)
+         */
+        'limit[versions]'?: number;
+    };
+    url: '/v2/gameCenterLeaderboardSets/{id}';
+};
+
+export type GameCenterLeaderboardSetsV2GetInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardSetsV2GetInstanceError = GameCenterLeaderboardSetsV2GetInstanceErrors[keyof GameCenterLeaderboardSetsV2GetInstanceErrors];
+
+export type GameCenterLeaderboardSetsV2GetInstanceResponses = {
+    /**
+     * Single GameCenterLeaderboardSet
+     */
+    200: GameCenterLeaderboardSetV2Response;
+};
+
+export type GameCenterLeaderboardSetsV2GetInstanceResponse = GameCenterLeaderboardSetsV2GetInstanceResponses[keyof GameCenterLeaderboardSetsV2GetInstanceResponses];
+
+export type GameCenterLeaderboardSetsV2UpdateInstanceData = {
+    /**
+     * GameCenterLeaderboardSet representation
+     */
+    body: GameCenterLeaderboardSetV2UpdateRequest;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v2/gameCenterLeaderboardSets/{id}';
+};
+
+export type GameCenterLeaderboardSetsV2UpdateInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardSetsV2UpdateInstanceError = GameCenterLeaderboardSetsV2UpdateInstanceErrors[keyof GameCenterLeaderboardSetsV2UpdateInstanceErrors];
+
+export type GameCenterLeaderboardSetsV2UpdateInstanceResponses = {
+    /**
+     * Single GameCenterLeaderboardSet
+     */
+    200: GameCenterLeaderboardSetV2Response;
+};
+
+export type GameCenterLeaderboardSetsV2UpdateInstanceResponse = GameCenterLeaderboardSetsV2UpdateInstanceResponses[keyof GameCenterLeaderboardSetsV2UpdateInstanceResponses];
+
 export type GameCenterLeaderboardSetsCreateInstanceData = {
     /**
      * GameCenterLeaderboardSet representation
@@ -40161,6 +44575,117 @@ export type GameCenterLeaderboardSetsUpdateInstanceResponses = {
 
 export type GameCenterLeaderboardSetsUpdateInstanceResponse = GameCenterLeaderboardSetsUpdateInstanceResponses[keyof GameCenterLeaderboardSetsUpdateInstanceResponses];
 
+export type GameCenterLeaderboardVersionsV2CreateInstanceData = {
+    /**
+     * GameCenterLeaderboardVersion representation
+     */
+    body: GameCenterLeaderboardVersionV2CreateRequest;
+    path?: never;
+    query?: never;
+    url: '/v2/gameCenterLeaderboardVersions';
+};
+
+export type GameCenterLeaderboardVersionsV2CreateInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardVersionsV2CreateInstanceError = GameCenterLeaderboardVersionsV2CreateInstanceErrors[keyof GameCenterLeaderboardVersionsV2CreateInstanceErrors];
+
+export type GameCenterLeaderboardVersionsV2CreateInstanceResponses = {
+    /**
+     * Single GameCenterLeaderboardVersion
+     */
+    201: GameCenterLeaderboardVersionV2Response;
+};
+
+export type GameCenterLeaderboardVersionsV2CreateInstanceResponse = GameCenterLeaderboardVersionsV2CreateInstanceResponses[keyof GameCenterLeaderboardVersionsV2CreateInstanceResponses];
+
+export type GameCenterLeaderboardVersionsV2GetInstanceData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboardVersions
+         */
+        'fields[gameCenterLeaderboardVersions]'?: Array<'version' | 'state' | 'leaderboard' | 'localizations'>;
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboardLocalizations
+         */
+        'fields[gameCenterLeaderboardLocalizations]'?: Array<'locale' | 'name' | 'formatterOverride' | 'formatterSuffix' | 'formatterSuffixSingular' | 'description' | 'version' | 'image'>;
+        /**
+         * comma-separated list of relationships to include
+         */
+        include?: Array<'leaderboard' | 'localizations'>;
+        /**
+         * maximum number of related localizations returned (when they are included)
+         */
+        'limit[localizations]'?: number;
+    };
+    url: '/v2/gameCenterLeaderboardVersions/{id}';
+};
+
+export type GameCenterLeaderboardVersionsV2GetInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardVersionsV2GetInstanceError = GameCenterLeaderboardVersionsV2GetInstanceErrors[keyof GameCenterLeaderboardVersionsV2GetInstanceErrors];
+
+export type GameCenterLeaderboardVersionsV2GetInstanceResponses = {
+    /**
+     * Single GameCenterLeaderboardVersion
+     */
+    200: GameCenterLeaderboardVersionV2Response;
+};
+
+export type GameCenterLeaderboardVersionsV2GetInstanceResponse = GameCenterLeaderboardVersionsV2GetInstanceResponses[keyof GameCenterLeaderboardVersionsV2GetInstanceResponses];
+
 export type GameCenterLeaderboardsCreateInstanceData = {
     /**
      * GameCenterLeaderboard representation
@@ -40390,6 +44915,228 @@ export type GameCenterLeaderboardsUpdateInstanceResponses = {
 };
 
 export type GameCenterLeaderboardsUpdateInstanceResponse = GameCenterLeaderboardsUpdateInstanceResponses[keyof GameCenterLeaderboardsUpdateInstanceResponses];
+
+export type GameCenterLeaderboardsV2CreateInstanceData = {
+    /**
+     * GameCenterLeaderboard representation
+     */
+    body: GameCenterLeaderboardV2CreateRequest;
+    path?: never;
+    query?: never;
+    url: '/v2/gameCenterLeaderboards';
+};
+
+export type GameCenterLeaderboardsV2CreateInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardsV2CreateInstanceError = GameCenterLeaderboardsV2CreateInstanceErrors[keyof GameCenterLeaderboardsV2CreateInstanceErrors];
+
+export type GameCenterLeaderboardsV2CreateInstanceResponses = {
+    /**
+     * Single GameCenterLeaderboard
+     */
+    201: GameCenterLeaderboardV2Response;
+};
+
+export type GameCenterLeaderboardsV2CreateInstanceResponse = GameCenterLeaderboardsV2CreateInstanceResponses[keyof GameCenterLeaderboardsV2CreateInstanceResponses];
+
+export type GameCenterLeaderboardsV2DeleteInstanceData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v2/gameCenterLeaderboards/{id}';
+};
+
+export type GameCenterLeaderboardsV2DeleteInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardsV2DeleteInstanceError = GameCenterLeaderboardsV2DeleteInstanceErrors[keyof GameCenterLeaderboardsV2DeleteInstanceErrors];
+
+export type GameCenterLeaderboardsV2DeleteInstanceResponses = {
+    /**
+     * Success (no content)
+     */
+    204: void;
+};
+
+export type GameCenterLeaderboardsV2DeleteInstanceResponse = GameCenterLeaderboardsV2DeleteInstanceResponses[keyof GameCenterLeaderboardsV2DeleteInstanceResponses];
+
+export type GameCenterLeaderboardsV2GetInstanceData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboards
+         */
+        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'gameCenterLeaderboardSets' | 'activity' | 'challenge' | 'versions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboardVersions
+         */
+        'fields[gameCenterLeaderboardVersions]'?: Array<'version' | 'state' | 'leaderboard' | 'localizations'>;
+        /**
+         * comma-separated list of relationships to include
+         */
+        include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'gameCenterLeaderboardSets' | 'activity' | 'challenge' | 'versions'>;
+        /**
+         * maximum number of related gameCenterLeaderboardSets returned (when they are included)
+         */
+        'limit[gameCenterLeaderboardSets]'?: number;
+        /**
+         * maximum number of related versions returned (when they are included)
+         */
+        'limit[versions]'?: number;
+    };
+    url: '/v2/gameCenterLeaderboards/{id}';
+};
+
+export type GameCenterLeaderboardsV2GetInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardsV2GetInstanceError = GameCenterLeaderboardsV2GetInstanceErrors[keyof GameCenterLeaderboardsV2GetInstanceErrors];
+
+export type GameCenterLeaderboardsV2GetInstanceResponses = {
+    /**
+     * Single GameCenterLeaderboard
+     */
+    200: GameCenterLeaderboardV2Response;
+};
+
+export type GameCenterLeaderboardsV2GetInstanceResponse = GameCenterLeaderboardsV2GetInstanceResponses[keyof GameCenterLeaderboardsV2GetInstanceResponses];
+
+export type GameCenterLeaderboardsV2UpdateInstanceData = {
+    /**
+     * GameCenterLeaderboard representation
+     */
+    body: GameCenterLeaderboardV2UpdateRequest;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v2/gameCenterLeaderboards/{id}';
+};
+
+export type GameCenterLeaderboardsV2UpdateInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardsV2UpdateInstanceError = GameCenterLeaderboardsV2UpdateInstanceErrors[keyof GameCenterLeaderboardsV2UpdateInstanceErrors];
+
+export type GameCenterLeaderboardsV2UpdateInstanceResponses = {
+    /**
+     * Single GameCenterLeaderboard
+     */
+    200: GameCenterLeaderboardV2Response;
+};
+
+export type GameCenterLeaderboardsV2UpdateInstanceResponse = GameCenterLeaderboardsV2UpdateInstanceResponses[keyof GameCenterLeaderboardsV2UpdateInstanceResponses];
 
 export type GameCenterMatchmakingQueuesGetCollectionData = {
     body?: never;
@@ -42161,6 +46908,510 @@ export type InAppPurchaseLocalizationsUpdateInstanceResponses = {
 
 export type InAppPurchaseLocalizationsUpdateInstanceResponse = InAppPurchaseLocalizationsUpdateInstanceResponses[keyof InAppPurchaseLocalizationsUpdateInstanceResponses];
 
+export type InAppPurchaseOfferCodeCustomCodesCreateInstanceData = {
+    /**
+     * InAppPurchaseOfferCodeCustomCode representation
+     */
+    body: InAppPurchaseOfferCodeCustomCodeCreateRequest;
+    path?: never;
+    query?: never;
+    url: '/v1/inAppPurchaseOfferCodeCustomCodes';
+};
+
+export type InAppPurchaseOfferCodeCustomCodesCreateInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type InAppPurchaseOfferCodeCustomCodesCreateInstanceError = InAppPurchaseOfferCodeCustomCodesCreateInstanceErrors[keyof InAppPurchaseOfferCodeCustomCodesCreateInstanceErrors];
+
+export type InAppPurchaseOfferCodeCustomCodesCreateInstanceResponses = {
+    /**
+     * Single InAppPurchaseOfferCodeCustomCode
+     */
+    201: InAppPurchaseOfferCodeCustomCodeResponse;
+};
+
+export type InAppPurchaseOfferCodeCustomCodesCreateInstanceResponse = InAppPurchaseOfferCodeCustomCodesCreateInstanceResponses[keyof InAppPurchaseOfferCodeCustomCodesCreateInstanceResponses];
+
+export type InAppPurchaseOfferCodeCustomCodesGetInstanceData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * the fields to include for returned resources of type inAppPurchaseOfferCodeCustomCodes
+         */
+        'fields[inAppPurchaseOfferCodeCustomCodes]'?: Array<'customCode' | 'numberOfCodes' | 'createdDate' | 'expirationDate' | 'active' | 'createdByActor' | 'deactivatedByActor'>;
+        /**
+         * comma-separated list of relationships to include
+         */
+        include?: Array<'createdByActor' | 'deactivatedByActor'>;
+    };
+    url: '/v1/inAppPurchaseOfferCodeCustomCodes/{id}';
+};
+
+export type InAppPurchaseOfferCodeCustomCodesGetInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type InAppPurchaseOfferCodeCustomCodesGetInstanceError = InAppPurchaseOfferCodeCustomCodesGetInstanceErrors[keyof InAppPurchaseOfferCodeCustomCodesGetInstanceErrors];
+
+export type InAppPurchaseOfferCodeCustomCodesGetInstanceResponses = {
+    /**
+     * Single InAppPurchaseOfferCodeCustomCode
+     */
+    200: InAppPurchaseOfferCodeCustomCodeResponse;
+};
+
+export type InAppPurchaseOfferCodeCustomCodesGetInstanceResponse = InAppPurchaseOfferCodeCustomCodesGetInstanceResponses[keyof InAppPurchaseOfferCodeCustomCodesGetInstanceResponses];
+
+export type InAppPurchaseOfferCodeCustomCodesUpdateInstanceData = {
+    /**
+     * InAppPurchaseOfferCodeCustomCode representation
+     */
+    body: InAppPurchaseOfferCodeCustomCodeUpdateRequest;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v1/inAppPurchaseOfferCodeCustomCodes/{id}';
+};
+
+export type InAppPurchaseOfferCodeCustomCodesUpdateInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type InAppPurchaseOfferCodeCustomCodesUpdateInstanceError = InAppPurchaseOfferCodeCustomCodesUpdateInstanceErrors[keyof InAppPurchaseOfferCodeCustomCodesUpdateInstanceErrors];
+
+export type InAppPurchaseOfferCodeCustomCodesUpdateInstanceResponses = {
+    /**
+     * Single InAppPurchaseOfferCodeCustomCode
+     */
+    200: InAppPurchaseOfferCodeCustomCodeResponse;
+};
+
+export type InAppPurchaseOfferCodeCustomCodesUpdateInstanceResponse = InAppPurchaseOfferCodeCustomCodesUpdateInstanceResponses[keyof InAppPurchaseOfferCodeCustomCodesUpdateInstanceResponses];
+
+export type InAppPurchaseOfferCodeOneTimeUseCodesCreateInstanceData = {
+    /**
+     * InAppPurchaseOfferCodeOneTimeUseCode representation
+     */
+    body: InAppPurchaseOfferCodeOneTimeUseCodeCreateRequest;
+    path?: never;
+    query?: never;
+    url: '/v1/inAppPurchaseOfferCodeOneTimeUseCodes';
+};
+
+export type InAppPurchaseOfferCodeOneTimeUseCodesCreateInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type InAppPurchaseOfferCodeOneTimeUseCodesCreateInstanceError = InAppPurchaseOfferCodeOneTimeUseCodesCreateInstanceErrors[keyof InAppPurchaseOfferCodeOneTimeUseCodesCreateInstanceErrors];
+
+export type InAppPurchaseOfferCodeOneTimeUseCodesCreateInstanceResponses = {
+    /**
+     * Single InAppPurchaseOfferCodeOneTimeUseCode
+     */
+    201: InAppPurchaseOfferCodeOneTimeUseCodeResponse;
+};
+
+export type InAppPurchaseOfferCodeOneTimeUseCodesCreateInstanceResponse = InAppPurchaseOfferCodeOneTimeUseCodesCreateInstanceResponses[keyof InAppPurchaseOfferCodeOneTimeUseCodesCreateInstanceResponses];
+
+export type InAppPurchaseOfferCodeOneTimeUseCodesGetInstanceData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * the fields to include for returned resources of type inAppPurchaseOfferCodeOneTimeUseCodes
+         */
+        'fields[inAppPurchaseOfferCodeOneTimeUseCodes]'?: Array<'numberOfCodes' | 'createdDate' | 'expirationDate' | 'active' | 'environment' | 'values' | 'createdByActor' | 'deactivatedByActor'>;
+        /**
+         * comma-separated list of relationships to include
+         */
+        include?: Array<'createdByActor' | 'deactivatedByActor'>;
+    };
+    url: '/v1/inAppPurchaseOfferCodeOneTimeUseCodes/{id}';
+};
+
+export type InAppPurchaseOfferCodeOneTimeUseCodesGetInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type InAppPurchaseOfferCodeOneTimeUseCodesGetInstanceError = InAppPurchaseOfferCodeOneTimeUseCodesGetInstanceErrors[keyof InAppPurchaseOfferCodeOneTimeUseCodesGetInstanceErrors];
+
+export type InAppPurchaseOfferCodeOneTimeUseCodesGetInstanceResponses = {
+    /**
+     * Single InAppPurchaseOfferCodeOneTimeUseCode
+     */
+    200: InAppPurchaseOfferCodeOneTimeUseCodeResponse;
+};
+
+export type InAppPurchaseOfferCodeOneTimeUseCodesGetInstanceResponse = InAppPurchaseOfferCodeOneTimeUseCodesGetInstanceResponses[keyof InAppPurchaseOfferCodeOneTimeUseCodesGetInstanceResponses];
+
+export type InAppPurchaseOfferCodeOneTimeUseCodesUpdateInstanceData = {
+    /**
+     * InAppPurchaseOfferCodeOneTimeUseCode representation
+     */
+    body: InAppPurchaseOfferCodeOneTimeUseCodeUpdateRequest;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v1/inAppPurchaseOfferCodeOneTimeUseCodes/{id}';
+};
+
+export type InAppPurchaseOfferCodeOneTimeUseCodesUpdateInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type InAppPurchaseOfferCodeOneTimeUseCodesUpdateInstanceError = InAppPurchaseOfferCodeOneTimeUseCodesUpdateInstanceErrors[keyof InAppPurchaseOfferCodeOneTimeUseCodesUpdateInstanceErrors];
+
+export type InAppPurchaseOfferCodeOneTimeUseCodesUpdateInstanceResponses = {
+    /**
+     * Single InAppPurchaseOfferCodeOneTimeUseCode
+     */
+    200: InAppPurchaseOfferCodeOneTimeUseCodeResponse;
+};
+
+export type InAppPurchaseOfferCodeOneTimeUseCodesUpdateInstanceResponse = InAppPurchaseOfferCodeOneTimeUseCodesUpdateInstanceResponses[keyof InAppPurchaseOfferCodeOneTimeUseCodesUpdateInstanceResponses];
+
+export type InAppPurchaseOfferCodesCreateInstanceData = {
+    /**
+     * InAppPurchaseOfferCode representation
+     */
+    body: InAppPurchaseOfferCodeCreateRequest;
+    path?: never;
+    query?: never;
+    url: '/v1/inAppPurchaseOfferCodes';
+};
+
+export type InAppPurchaseOfferCodesCreateInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type InAppPurchaseOfferCodesCreateInstanceError = InAppPurchaseOfferCodesCreateInstanceErrors[keyof InAppPurchaseOfferCodesCreateInstanceErrors];
+
+export type InAppPurchaseOfferCodesCreateInstanceResponses = {
+    /**
+     * Single InAppPurchaseOfferCode
+     */
+    201: InAppPurchaseOfferCodeResponse;
+};
+
+export type InAppPurchaseOfferCodesCreateInstanceResponse = InAppPurchaseOfferCodesCreateInstanceResponses[keyof InAppPurchaseOfferCodesCreateInstanceResponses];
+
+export type InAppPurchaseOfferCodesGetInstanceData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * the fields to include for returned resources of type inAppPurchaseOfferCodes
+         */
+        'fields[inAppPurchaseOfferCodes]'?: Array<'name' | 'customerEligibilities' | 'productionCodeCount' | 'sandboxCodeCount' | 'active' | 'oneTimeUseCodes' | 'customCodes' | 'prices'>;
+        /**
+         * the fields to include for returned resources of type inAppPurchaseOfferCodeOneTimeUseCodes
+         */
+        'fields[inAppPurchaseOfferCodeOneTimeUseCodes]'?: Array<'numberOfCodes' | 'createdDate' | 'expirationDate' | 'active' | 'environment' | 'values' | 'createdByActor' | 'deactivatedByActor'>;
+        /**
+         * the fields to include for returned resources of type inAppPurchaseOfferCodeCustomCodes
+         */
+        'fields[inAppPurchaseOfferCodeCustomCodes]'?: Array<'customCode' | 'numberOfCodes' | 'createdDate' | 'expirationDate' | 'active' | 'createdByActor' | 'deactivatedByActor'>;
+        /**
+         * the fields to include for returned resources of type inAppPurchaseOfferPrices
+         */
+        'fields[inAppPurchaseOfferPrices]'?: Array<'territory' | 'pricePoint'>;
+        /**
+         * comma-separated list of relationships to include
+         */
+        include?: Array<'oneTimeUseCodes' | 'customCodes' | 'prices'>;
+        /**
+         * maximum number of related customCodes returned (when they are included)
+         */
+        'limit[customCodes]'?: number;
+        /**
+         * maximum number of related oneTimeUseCodes returned (when they are included)
+         */
+        'limit[oneTimeUseCodes]'?: number;
+        /**
+         * maximum number of related prices returned (when they are included)
+         */
+        'limit[prices]'?: number;
+    };
+    url: '/v1/inAppPurchaseOfferCodes/{id}';
+};
+
+export type InAppPurchaseOfferCodesGetInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type InAppPurchaseOfferCodesGetInstanceError = InAppPurchaseOfferCodesGetInstanceErrors[keyof InAppPurchaseOfferCodesGetInstanceErrors];
+
+export type InAppPurchaseOfferCodesGetInstanceResponses = {
+    /**
+     * Single InAppPurchaseOfferCode
+     */
+    200: InAppPurchaseOfferCodeResponse;
+};
+
+export type InAppPurchaseOfferCodesGetInstanceResponse = InAppPurchaseOfferCodesGetInstanceResponses[keyof InAppPurchaseOfferCodesGetInstanceResponses];
+
+export type InAppPurchaseOfferCodesUpdateInstanceData = {
+    /**
+     * InAppPurchaseOfferCode representation
+     */
+    body: InAppPurchaseOfferCodeUpdateRequest;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v1/inAppPurchaseOfferCodes/{id}';
+};
+
+export type InAppPurchaseOfferCodesUpdateInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type InAppPurchaseOfferCodesUpdateInstanceError = InAppPurchaseOfferCodesUpdateInstanceErrors[keyof InAppPurchaseOfferCodesUpdateInstanceErrors];
+
+export type InAppPurchaseOfferCodesUpdateInstanceResponses = {
+    /**
+     * Single InAppPurchaseOfferCode
+     */
+    200: InAppPurchaseOfferCodeResponse;
+};
+
+export type InAppPurchaseOfferCodesUpdateInstanceResponse = InAppPurchaseOfferCodesUpdateInstanceResponses[keyof InAppPurchaseOfferCodesUpdateInstanceResponses];
+
 export type InAppPurchasePriceSchedulesCreateInstanceData = {
     /**
      * InAppPurchasePriceSchedule representation
@@ -42497,7 +47748,7 @@ export type InAppPurchasesV2GetInstanceData = {
         /**
          * the fields to include for returned resources of type inAppPurchases
          */
-        'fields[inAppPurchases]'?: Array<'name' | 'productId' | 'inAppPurchaseType' | 'state' | 'reviewNote' | 'familySharable' | 'contentHosting' | 'inAppPurchaseLocalizations' | 'pricePoints' | 'content' | 'appStoreReviewScreenshot' | 'promotedPurchase' | 'iapPriceSchedule' | 'inAppPurchaseAvailability' | 'images'>;
+        'fields[inAppPurchases]'?: Array<'name' | 'productId' | 'inAppPurchaseType' | 'state' | 'reviewNote' | 'familySharable' | 'contentHosting' | 'inAppPurchaseLocalizations' | 'pricePoints' | 'content' | 'appStoreReviewScreenshot' | 'promotedPurchase' | 'iapPriceSchedule' | 'inAppPurchaseAvailability' | 'images' | 'offerCodes'>;
         /**
          * the fields to include for returned resources of type inAppPurchaseLocalizations
          */
@@ -42531,9 +47782,13 @@ export type InAppPurchasesV2GetInstanceData = {
          */
         'fields[inAppPurchaseImages]'?: Array<'fileSize' | 'fileName' | 'sourceFileChecksum' | 'assetToken' | 'imageAsset' | 'uploadOperations' | 'state' | 'inAppPurchase'>;
         /**
+         * the fields to include for returned resources of type inAppPurchaseOfferCodes
+         */
+        'fields[inAppPurchaseOfferCodes]'?: Array<'name' | 'customerEligibilities' | 'productionCodeCount' | 'sandboxCodeCount' | 'active' | 'oneTimeUseCodes' | 'customCodes' | 'prices'>;
+        /**
          * comma-separated list of relationships to include
          */
-        include?: Array<'inAppPurchaseLocalizations' | 'pricePoints' | 'content' | 'appStoreReviewScreenshot' | 'promotedPurchase' | 'iapPriceSchedule' | 'inAppPurchaseAvailability' | 'images'>;
+        include?: Array<'inAppPurchaseLocalizations' | 'pricePoints' | 'content' | 'appStoreReviewScreenshot' | 'promotedPurchase' | 'iapPriceSchedule' | 'inAppPurchaseAvailability' | 'images' | 'offerCodes'>;
         /**
          * maximum number of related images returned (when they are included)
          */
@@ -42542,6 +47797,10 @@ export type InAppPurchasesV2GetInstanceData = {
          * maximum number of related inAppPurchaseLocalizations returned (when they are included)
          */
         'limit[inAppPurchaseLocalizations]'?: number;
+        /**
+         * maximum number of related offerCodes returned (when they are included)
+         */
+        'limit[offerCodes]'?: number;
         /**
          * maximum number of related pricePoints returned (when they are included)
          */
@@ -43928,7 +49187,7 @@ export type PreReleaseVersionsGetCollectionData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * maximum resources per page
          */
@@ -43995,7 +49254,7 @@ export type PreReleaseVersionsGetInstanceData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -44693,7 +49952,7 @@ export type ReviewSubmissionsGetCollectionData = {
         /**
          * the fields to include for returned resources of type reviewSubmissionItems
          */
-        'fields[reviewSubmissionItems]'?: Array<'state' | 'appStoreVersion' | 'appCustomProductPageVersion' | 'appStoreVersionExperiment' | 'appStoreVersionExperimentV2' | 'appEvent' | 'backgroundAssetVersion'>;
+        'fields[reviewSubmissionItems]'?: Array<'state' | 'appStoreVersion' | 'appCustomProductPageVersion' | 'appStoreVersionExperiment' | 'appStoreVersionExperimentV2' | 'appEvent' | 'backgroundAssetVersion' | 'gameCenterAchievementVersion' | 'gameCenterActivityVersion' | 'gameCenterChallengeVersion' | 'gameCenterLeaderboardSetVersion' | 'gameCenterLeaderboardVersion'>;
         /**
          * maximum resources per page
          */
@@ -44804,7 +50063,7 @@ export type ReviewSubmissionsGetInstanceData = {
         /**
          * the fields to include for returned resources of type reviewSubmissionItems
          */
-        'fields[reviewSubmissionItems]'?: Array<'state' | 'appStoreVersion' | 'appCustomProductPageVersion' | 'appStoreVersionExperiment' | 'appStoreVersionExperimentV2' | 'appEvent' | 'backgroundAssetVersion'>;
+        'fields[reviewSubmissionItems]'?: Array<'state' | 'appStoreVersion' | 'appCustomProductPageVersion' | 'appStoreVersionExperiment' | 'appStoreVersionExperimentV2' | 'appEvent' | 'backgroundAssetVersion' | 'gameCenterAchievementVersion' | 'gameCenterActivityVersion' | 'gameCenterChallengeVersion' | 'gameCenterLeaderboardSetVersion' | 'gameCenterLeaderboardVersion'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -47355,7 +52614,7 @@ export type SubscriptionOfferCodeOneTimeUseCodesGetInstanceData = {
         /**
          * the fields to include for returned resources of type subscriptionOfferCodeOneTimeUseCodes
          */
-        'fields[subscriptionOfferCodeOneTimeUseCodes]'?: Array<'numberOfCodes' | 'createdDate' | 'expirationDate' | 'active' | 'offerCode' | 'values'>;
+        'fields[subscriptionOfferCodeOneTimeUseCodes]'?: Array<'numberOfCodes' | 'createdDate' | 'expirationDate' | 'active' | 'environment' | 'offerCode' | 'values'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -47515,11 +52774,11 @@ export type SubscriptionOfferCodesGetInstanceData = {
         /**
          * the fields to include for returned resources of type subscriptionOfferCodes
          */
-        'fields[subscriptionOfferCodes]'?: Array<'name' | 'customerEligibilities' | 'offerEligibility' | 'duration' | 'offerMode' | 'numberOfPeriods' | 'totalNumberOfCodes' | 'active' | 'subscription' | 'oneTimeUseCodes' | 'customCodes' | 'prices'>;
+        'fields[subscriptionOfferCodes]'?: Array<'name' | 'customerEligibilities' | 'offerEligibility' | 'duration' | 'offerMode' | 'numberOfPeriods' | 'totalNumberOfCodes' | 'productionCodeCount' | 'sandboxCodeCount' | 'active' | 'autoRenewEnabled' | 'subscription' | 'oneTimeUseCodes' | 'customCodes' | 'prices'>;
         /**
          * the fields to include for returned resources of type subscriptionOfferCodeOneTimeUseCodes
          */
-        'fields[subscriptionOfferCodeOneTimeUseCodes]'?: Array<'numberOfCodes' | 'createdDate' | 'expirationDate' | 'active' | 'offerCode' | 'values'>;
+        'fields[subscriptionOfferCodeOneTimeUseCodes]'?: Array<'numberOfCodes' | 'createdDate' | 'expirationDate' | 'active' | 'environment' | 'offerCode' | 'values'>;
         /**
          * the fields to include for returned resources of type subscriptionOfferCodeCustomCodes
          */
@@ -48188,7 +53447,7 @@ export type SubscriptionsGetInstanceData = {
         /**
          * the fields to include for returned resources of type subscriptionOfferCodes
          */
-        'fields[subscriptionOfferCodes]'?: Array<'name' | 'customerEligibilities' | 'offerEligibility' | 'duration' | 'offerMode' | 'numberOfPeriods' | 'totalNumberOfCodes' | 'active' | 'subscription' | 'oneTimeUseCodes' | 'customCodes' | 'prices'>;
+        'fields[subscriptionOfferCodes]'?: Array<'name' | 'customerEligibilities' | 'offerEligibility' | 'duration' | 'offerMode' | 'numberOfPeriods' | 'totalNumberOfCodes' | 'productionCodeCount' | 'sandboxCodeCount' | 'active' | 'autoRenewEnabled' | 'subscription' | 'oneTimeUseCodes' | 'customCodes' | 'prices'>;
         /**
          * the fields to include for returned resources of type subscriptionPrices
          */
@@ -48466,7 +53725,7 @@ export type UserInvitationsGetCollectionData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * maximum resources per page
          */
@@ -48627,7 +53886,7 @@ export type UserInvitationsGetInstanceData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -48701,7 +53960,7 @@ export type UsersGetCollectionData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * maximum resources per page
          */
@@ -48814,7 +54073,7 @@ export type UsersGetInstanceData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -49733,7 +54992,7 @@ export type AlternativeDistributionPackagesVersionsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type alternativeDistributionPackages
          */
-        'fields[alternativeDistributionPackages]'?: Array<'versions'>;
+        'fields[alternativeDistributionPackages]'?: Array<'sourceFileChecksum' | 'versions'>;
         /**
          * maximum resources per page
          */
@@ -50886,7 +56145,7 @@ export type AppClipDefaultExperiencesReleaseWithAppStoreVersionGetToOneRelatedDa
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type ageRatingDeclarations
          */
@@ -50930,7 +56189,7 @@ export type AppClipDefaultExperiencesReleaseWithAppStoreVersionGetToOneRelatedDa
         /**
          * the fields to include for returned resources of type alternativeDistributionPackages
          */
-        'fields[alternativeDistributionPackages]'?: Array<'versions'>;
+        'fields[alternativeDistributionPackages]'?: Array<'sourceFileChecksum' | 'versions'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -52088,7 +57347,7 @@ export type AppEncryptionDeclarationsAppGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
     };
     url: '/v1/appEncryptionDeclarations/{id}/app';
 };
@@ -53832,7 +59091,7 @@ export type AppPricePointsV3EqualizationsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type territories
          */
@@ -55842,7 +61101,7 @@ export type AppStoreVersionsAlternativeDistributionPackageGetToOneRelatedData = 
         /**
          * the fields to include for returned resources of type alternativeDistributionPackages
          */
-        'fields[alternativeDistributionPackages]'?: Array<'versions'>;
+        'fields[alternativeDistributionPackages]'?: Array<'sourceFileChecksum' | 'versions'>;
         /**
          * the fields to include for returned resources of type alternativeDistributionPackageVersions
          */
@@ -56377,7 +61636,7 @@ export type AppStoreVersionsAppStoreVersionExperimentsV2GetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type appStoreVersions
          */
@@ -56997,7 +62256,7 @@ export type AppStoreVersionsCustomerReviewsGetToManyRelatedData = {
         /**
          * filter by attribute 'territory'
          */
-        'filter[territory]'?: Array<'ABW' | 'AFG' | 'AGO' | 'AIA' | 'ALB' | 'AND' | 'ANT' | 'ARE' | 'ARG' | 'ARM' | 'ASM' | 'ATG' | 'AUS' | 'AUT' | 'AZE' | 'BDI' | 'BEL' | 'BEN' | 'BES' | 'BFA' | 'BGD' | 'BGR' | 'BHR' | 'BHS' | 'BIH' | 'BLR' | 'BLZ' | 'BMU' | 'BOL' | 'BRA' | 'BRB' | 'BRN' | 'BTN' | 'BWA' | 'CAF' | 'CAN' | 'CHE' | 'CHL' | 'CHN' | 'CIV' | 'CMR' | 'COD' | 'COG' | 'COK' | 'COL' | 'COM' | 'CPV' | 'CRI' | 'CUB' | 'CUW' | 'CXR' | 'CYM' | 'CYP' | 'CZE' | 'DEU' | 'DJI' | 'DMA' | 'DNK' | 'DOM' | 'DZA' | 'ECU' | 'EGY' | 'ERI' | 'ESP' | 'EST' | 'ETH' | 'FIN' | 'FJI' | 'FLK' | 'FRA' | 'FRO' | 'FSM' | 'GAB' | 'GBR' | 'GEO' | 'GGY' | 'GHA' | 'GIB' | 'GIN' | 'GLP' | 'GMB' | 'GNB' | 'GNQ' | 'GRC' | 'GRD' | 'GRL' | 'GTM' | 'GUF' | 'GUM' | 'GUY' | 'HKG' | 'HND' | 'HRV' | 'HTI' | 'HUN' | 'IDN' | 'IMN' | 'IND' | 'IRL' | 'IRQ' | 'ISL' | 'ISR' | 'ITA' | 'JAM' | 'JEY' | 'JOR' | 'JPN' | 'KAZ' | 'KEN' | 'KGZ' | 'KHM' | 'KIR' | 'KNA' | 'KOR' | 'KWT' | 'LAO' | 'LBN' | 'LBR' | 'LBY' | 'LCA' | 'LIE' | 'LKA' | 'LSO' | 'LTU' | 'LUX' | 'LVA' | 'MAC' | 'MAR' | 'MCO' | 'MDA' | 'MDG' | 'MDV' | 'MEX' | 'MHL' | 'MKD' | 'MLI' | 'MLT' | 'MMR' | 'MNE' | 'MNG' | 'MNP' | 'MOZ' | 'MRT' | 'MSR' | 'MTQ' | 'MUS' | 'MWI' | 'MYS' | 'MYT' | 'NAM' | 'NCL' | 'NER' | 'NFK' | 'NGA' | 'NIC' | 'NIU' | 'NLD' | 'NOR' | 'NPL' | 'NRU' | 'NZL' | 'OMN' | 'PAK' | 'PAN' | 'PER' | 'PHL' | 'PLW' | 'PNG' | 'POL' | 'PRI' | 'PRT' | 'PRY' | 'PSE' | 'PYF' | 'QAT' | 'REU' | 'ROU' | 'RUS' | 'RWA' | 'SAU' | 'SEN' | 'SGP' | 'SHN' | 'SLB' | 'SLE' | 'SLV' | 'SMR' | 'SOM' | 'SPM' | 'SRB' | 'SSD' | 'STP' | 'SUR' | 'SVK' | 'SVN' | 'SWE' | 'SWZ' | 'SXM' | 'SYC' | 'TCA' | 'TCD' | 'TGO' | 'THA' | 'TJK' | 'TKM' | 'TLS' | 'TON' | 'TTO' | 'TUN' | 'TUR' | 'TUV' | 'TWN' | 'TZA' | 'UGA' | 'UKR' | 'UMI' | 'URY' | 'USA' | 'UZB' | 'VAT' | 'VCT' | 'VEN' | 'VGB' | 'VIR' | 'VNM' | 'VUT' | 'WLF' | 'WSM' | 'YEM' | 'ZAF' | 'ZMB' | 'ZWE'>;
+        'filter[territory]'?: Array<'ABW' | 'AFG' | 'AGO' | 'AIA' | 'ALB' | 'AND' | 'ANT' | 'ARE' | 'ARG' | 'ARM' | 'ASM' | 'ATG' | 'AUS' | 'AUT' | 'AZE' | 'BDI' | 'BEL' | 'BEN' | 'BES' | 'BFA' | 'BGD' | 'BGR' | 'BHR' | 'BHS' | 'BIH' | 'BLR' | 'BLZ' | 'BMU' | 'BOL' | 'BRA' | 'BRB' | 'BRN' | 'BTN' | 'BWA' | 'CAF' | 'CAN' | 'CHE' | 'CHL' | 'CHN' | 'CIV' | 'CMR' | 'COD' | 'COG' | 'COK' | 'COL' | 'COM' | 'CPV' | 'CRI' | 'CUB' | 'CUW' | 'CXR' | 'CYM' | 'CYP' | 'CZE' | 'DEU' | 'DJI' | 'DMA' | 'DNK' | 'DOM' | 'DZA' | 'ECU' | 'EGY' | 'ERI' | 'ESP' | 'EST' | 'ETH' | 'FIN' | 'FJI' | 'FLK' | 'FRA' | 'FRO' | 'FSM' | 'GAB' | 'GBR' | 'GEO' | 'GGY' | 'GHA' | 'GIB' | 'GIN' | 'GLP' | 'GMB' | 'GNB' | 'GNQ' | 'GRC' | 'GRD' | 'GRL' | 'GTM' | 'GUF' | 'GUM' | 'GUY' | 'HKG' | 'HND' | 'HRV' | 'HTI' | 'HUN' | 'IDN' | 'IMN' | 'IND' | 'IRL' | 'IRQ' | 'ISL' | 'ISR' | 'ITA' | 'JAM' | 'JEY' | 'JOR' | 'JPN' | 'KAZ' | 'KEN' | 'KGZ' | 'KHM' | 'KIR' | 'KNA' | 'KOR' | 'KWT' | 'LAO' | 'LBN' | 'LBR' | 'LBY' | 'LCA' | 'LIE' | 'LKA' | 'LSO' | 'LTU' | 'LUX' | 'LVA' | 'MAC' | 'MAR' | 'MCO' | 'MDA' | 'MDG' | 'MDV' | 'MEX' | 'MHL' | 'MKD' | 'MLI' | 'MLT' | 'MMR' | 'MNE' | 'MNG' | 'MNP' | 'MOZ' | 'MRT' | 'MSR' | 'MTQ' | 'MUS' | 'MWI' | 'MYS' | 'MYT' | 'NAM' | 'NCL' | 'NER' | 'NFK' | 'NGA' | 'NIC' | 'NIU' | 'NLD' | 'NOR' | 'NPL' | 'NRU' | 'NZL' | 'OMN' | 'PAK' | 'PAN' | 'PER' | 'PHL' | 'PLW' | 'PNG' | 'POL' | 'PRI' | 'PRT' | 'PRY' | 'PSE' | 'PYF' | 'QAT' | 'REU' | 'ROU' | 'RUS' | 'RWA' | 'SAU' | 'SEN' | 'SGP' | 'SHN' | 'SLB' | 'SLE' | 'SLV' | 'SMR' | 'SOM' | 'SPM' | 'SRB' | 'SSD' | 'STP' | 'SUR' | 'SVK' | 'SVN' | 'SWE' | 'SWZ' | 'SXM' | 'SYC' | 'TCA' | 'TCD' | 'TGO' | 'THA' | 'TJK' | 'TKM' | 'TLS' | 'TON' | 'TTO' | 'TUN' | 'TUR' | 'TUV' | 'TWN' | 'TZA' | 'UGA' | 'UKR' | 'UMI' | 'URY' | 'USA' | 'UZB' | 'VAT' | 'VCT' | 'VEN' | 'VGB' | 'VIR' | 'VNM' | 'VUT' | 'WLF' | 'WSM' | 'XKS' | 'YEM' | 'ZAF' | 'ZMB' | 'ZWE'>;
         /**
          * filter by attribute 'rating'
          */
@@ -57232,6 +62491,14 @@ export type AppStoreVersionsRoutingAppCoverageGetToOneRelatedData = {
          * the fields to include for returned resources of type routingAppCoverages
          */
         'fields[routingAppCoverages]'?: Array<'fileSize' | 'fileName' | 'sourceFileChecksum' | 'uploadOperations' | 'assetDeliveryState' | 'appStoreVersion'>;
+        /**
+         * the fields to include for returned resources of type appStoreVersions
+         */
+        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'ageRatingDeclaration' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
+        /**
+         * comma-separated list of relationships to include
+         */
+        include?: Array<'appStoreVersion'>;
     };
     url: '/v1/appStoreVersions/{id}/routingAppCoverage';
 };
@@ -57263,9 +62530,9 @@ export type AppStoreVersionsRoutingAppCoverageGetToOneRelatedError = AppStoreVer
 
 export type AppStoreVersionsRoutingAppCoverageGetToOneRelatedResponses = {
     /**
-     * Single RoutingAppCoverage with get
+     * Single RoutingAppCoverage
      */
-    200: RoutingAppCoverageWithoutIncludesResponse;
+    200: RoutingAppCoverageResponse;
 };
 
 export type AppStoreVersionsRoutingAppCoverageGetToOneRelatedResponse = AppStoreVersionsRoutingAppCoverageGetToOneRelatedResponses[keyof AppStoreVersionsRoutingAppCoverageGetToOneRelatedResponses];
@@ -57709,6 +62976,112 @@ export type AppsAnalyticsReportRequestsGetToManyRelatedResponses = {
 
 export type AppsAnalyticsReportRequestsGetToManyRelatedResponse = AppsAnalyticsReportRequestsGetToManyRelatedResponses[keyof AppsAnalyticsReportRequestsGetToManyRelatedResponses];
 
+export type AppsAndroidToIosAppMappingDetailsGetToManyRelationshipData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+    };
+    url: '/v1/apps/{id}/relationships/androidToIosAppMappingDetails';
+};
+
+export type AppsAndroidToIosAppMappingDetailsGetToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type AppsAndroidToIosAppMappingDetailsGetToManyRelationshipError = AppsAndroidToIosAppMappingDetailsGetToManyRelationshipErrors[keyof AppsAndroidToIosAppMappingDetailsGetToManyRelationshipErrors];
+
+export type AppsAndroidToIosAppMappingDetailsGetToManyRelationshipResponses = {
+    /**
+     * List of related linkages
+     */
+    200: AppAndroidToIosAppMappingDetailsLinkagesResponse;
+};
+
+export type AppsAndroidToIosAppMappingDetailsGetToManyRelationshipResponse = AppsAndroidToIosAppMappingDetailsGetToManyRelationshipResponses[keyof AppsAndroidToIosAppMappingDetailsGetToManyRelationshipResponses];
+
+export type AppsAndroidToIosAppMappingDetailsGetToManyRelatedData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * the fields to include for returned resources of type androidToIosAppMappingDetails
+         */
+        'fields[androidToIosAppMappingDetails]'?: Array<'packageName' | 'appSigningKeyPublicCertificateSha256Fingerprints'>;
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+    };
+    url: '/v1/apps/{id}/androidToIosAppMappingDetails';
+};
+
+export type AppsAndroidToIosAppMappingDetailsGetToManyRelatedErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type AppsAndroidToIosAppMappingDetailsGetToManyRelatedError = AppsAndroidToIosAppMappingDetailsGetToManyRelatedErrors[keyof AppsAndroidToIosAppMappingDetailsGetToManyRelatedErrors];
+
+export type AppsAndroidToIosAppMappingDetailsGetToManyRelatedResponses = {
+    /**
+     * List of AndroidToIosAppMappingDetails
+     */
+    200: AndroidToIosAppMappingDetailsResponse;
+};
+
+export type AppsAndroidToIosAppMappingDetailsGetToManyRelatedResponse = AppsAndroidToIosAppMappingDetailsGetToManyRelatedResponses[keyof AppsAndroidToIosAppMappingDetailsGetToManyRelatedResponses];
+
 export type AppsAppAvailabilityV2GetToOneRelationshipData = {
     body?: never;
     path: {
@@ -57889,7 +63262,7 @@ export type AppsAppClipsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type appClipDefaultExperiences
          */
@@ -58015,7 +63388,7 @@ export type AppsAppCustomProductPagesGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type appCustomProductPageVersions
          */
@@ -58146,7 +63519,7 @@ export type AppsAppEncryptionDeclarationsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type builds
          */
@@ -58398,7 +63771,7 @@ export type AppsAppInfosGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type ageRatingDeclarations
          */
@@ -58532,7 +63905,7 @@ export type AppsAppPricePointsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type territories
          */
@@ -58645,7 +64018,7 @@ export type AppsAppPriceScheduleGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type territories
          */
@@ -58775,7 +64148,7 @@ export type AppsAppStoreVersionExperimentsV2GetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type appStoreVersions
          */
@@ -58926,7 +64299,7 @@ export type AppsAppStoreVersionsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type ageRatingDeclarations
          */
@@ -58970,7 +64343,7 @@ export type AppsAppStoreVersionsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type alternativeDistributionPackages
          */
-        'fields[alternativeDistributionPackages]'?: Array<'versions'>;
+        'fields[alternativeDistributionPackages]'?: Array<'sourceFileChecksum' | 'versions'>;
         /**
          * maximum resources per page
          */
@@ -59217,21 +64590,25 @@ export type AppsBackgroundAssetsGetToManyRelatedData = {
     };
     query?: {
         /**
+         * filter by attribute 'archived'
+         */
+        'filter[archived]'?: Array<string>;
+        /**
          * filter by attribute 'assetPackIdentifier'
          */
         'filter[assetPackIdentifier]'?: Array<string>;
         /**
          * the fields to include for returned resources of type backgroundAssets
          */
-        'fields[backgroundAssets]'?: Array<'assetPackIdentifier' | 'createdDate' | 'app' | 'versions' | 'appStoreVersion' | 'internalBetaVersion' | 'externalBetaVersion'>;
+        'fields[backgroundAssets]'?: Array<'archived' | 'assetPackIdentifier' | 'createdDate' | 'app' | 'versions' | 'appStoreVersion' | 'internalBetaVersion' | 'externalBetaVersion'>;
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type backgroundAssetVersions
          */
-        'fields[backgroundAssetVersions]'?: Array<'createdDate' | 'platforms' | 'state' | 'version' | 'backgroundAsset' | 'internalBetaRelease' | 'externalBetaRelease' | 'appStoreRelease' | 'assetFile' | 'manifestFile' | 'backgroundAssetUploadFiles'>;
+        'fields[backgroundAssetVersions]'?: Array<'createdDate' | 'platforms' | 'state' | 'stateDetails' | 'version' | 'backgroundAsset' | 'internalBetaRelease' | 'externalBetaRelease' | 'appStoreRelease' | 'assetFile' | 'manifestFile' | 'backgroundAssetUploadFiles'>;
         /**
          * maximum resources per page
          */
@@ -59584,7 +64961,7 @@ export type AppsBetaFeedbackCrashSubmissionsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type betaTesters
          */
-        'fields[betaTesters]'?: Array<'firstName' | 'lastName' | 'email' | 'inviteType' | 'state' | 'apps' | 'betaGroups' | 'builds'>;
+        'fields[betaTesters]'?: Array<'firstName' | 'lastName' | 'email' | 'inviteType' | 'state' | 'appDevices' | 'apps' | 'betaGroups' | 'builds'>;
         /**
          * maximum resources per page
          */
@@ -59734,7 +65111,7 @@ export type AppsBetaFeedbackScreenshotSubmissionsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type betaTesters
          */
-        'fields[betaTesters]'?: Array<'firstName' | 'lastName' | 'email' | 'inviteType' | 'state' | 'apps' | 'betaGroups' | 'builds'>;
+        'fields[betaTesters]'?: Array<'firstName' | 'lastName' | 'email' | 'inviteType' | 'state' | 'appDevices' | 'apps' | 'betaGroups' | 'builds'>;
         /**
          * maximum resources per page
          */
@@ -60347,7 +65724,7 @@ export type AppsCiProductGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type bundleIds
          */
@@ -60536,7 +65913,7 @@ export type AppsCustomerReviewsGetToManyRelatedData = {
         /**
          * filter by attribute 'territory'
          */
-        'filter[territory]'?: Array<'ABW' | 'AFG' | 'AGO' | 'AIA' | 'ALB' | 'AND' | 'ANT' | 'ARE' | 'ARG' | 'ARM' | 'ASM' | 'ATG' | 'AUS' | 'AUT' | 'AZE' | 'BDI' | 'BEL' | 'BEN' | 'BES' | 'BFA' | 'BGD' | 'BGR' | 'BHR' | 'BHS' | 'BIH' | 'BLR' | 'BLZ' | 'BMU' | 'BOL' | 'BRA' | 'BRB' | 'BRN' | 'BTN' | 'BWA' | 'CAF' | 'CAN' | 'CHE' | 'CHL' | 'CHN' | 'CIV' | 'CMR' | 'COD' | 'COG' | 'COK' | 'COL' | 'COM' | 'CPV' | 'CRI' | 'CUB' | 'CUW' | 'CXR' | 'CYM' | 'CYP' | 'CZE' | 'DEU' | 'DJI' | 'DMA' | 'DNK' | 'DOM' | 'DZA' | 'ECU' | 'EGY' | 'ERI' | 'ESP' | 'EST' | 'ETH' | 'FIN' | 'FJI' | 'FLK' | 'FRA' | 'FRO' | 'FSM' | 'GAB' | 'GBR' | 'GEO' | 'GGY' | 'GHA' | 'GIB' | 'GIN' | 'GLP' | 'GMB' | 'GNB' | 'GNQ' | 'GRC' | 'GRD' | 'GRL' | 'GTM' | 'GUF' | 'GUM' | 'GUY' | 'HKG' | 'HND' | 'HRV' | 'HTI' | 'HUN' | 'IDN' | 'IMN' | 'IND' | 'IRL' | 'IRQ' | 'ISL' | 'ISR' | 'ITA' | 'JAM' | 'JEY' | 'JOR' | 'JPN' | 'KAZ' | 'KEN' | 'KGZ' | 'KHM' | 'KIR' | 'KNA' | 'KOR' | 'KWT' | 'LAO' | 'LBN' | 'LBR' | 'LBY' | 'LCA' | 'LIE' | 'LKA' | 'LSO' | 'LTU' | 'LUX' | 'LVA' | 'MAC' | 'MAR' | 'MCO' | 'MDA' | 'MDG' | 'MDV' | 'MEX' | 'MHL' | 'MKD' | 'MLI' | 'MLT' | 'MMR' | 'MNE' | 'MNG' | 'MNP' | 'MOZ' | 'MRT' | 'MSR' | 'MTQ' | 'MUS' | 'MWI' | 'MYS' | 'MYT' | 'NAM' | 'NCL' | 'NER' | 'NFK' | 'NGA' | 'NIC' | 'NIU' | 'NLD' | 'NOR' | 'NPL' | 'NRU' | 'NZL' | 'OMN' | 'PAK' | 'PAN' | 'PER' | 'PHL' | 'PLW' | 'PNG' | 'POL' | 'PRI' | 'PRT' | 'PRY' | 'PSE' | 'PYF' | 'QAT' | 'REU' | 'ROU' | 'RUS' | 'RWA' | 'SAU' | 'SEN' | 'SGP' | 'SHN' | 'SLB' | 'SLE' | 'SLV' | 'SMR' | 'SOM' | 'SPM' | 'SRB' | 'SSD' | 'STP' | 'SUR' | 'SVK' | 'SVN' | 'SWE' | 'SWZ' | 'SXM' | 'SYC' | 'TCA' | 'TCD' | 'TGO' | 'THA' | 'TJK' | 'TKM' | 'TLS' | 'TON' | 'TTO' | 'TUN' | 'TUR' | 'TUV' | 'TWN' | 'TZA' | 'UGA' | 'UKR' | 'UMI' | 'URY' | 'USA' | 'UZB' | 'VAT' | 'VCT' | 'VEN' | 'VGB' | 'VIR' | 'VNM' | 'VUT' | 'WLF' | 'WSM' | 'YEM' | 'ZAF' | 'ZMB' | 'ZWE'>;
+        'filter[territory]'?: Array<'ABW' | 'AFG' | 'AGO' | 'AIA' | 'ALB' | 'AND' | 'ANT' | 'ARE' | 'ARG' | 'ARM' | 'ASM' | 'ATG' | 'AUS' | 'AUT' | 'AZE' | 'BDI' | 'BEL' | 'BEN' | 'BES' | 'BFA' | 'BGD' | 'BGR' | 'BHR' | 'BHS' | 'BIH' | 'BLR' | 'BLZ' | 'BMU' | 'BOL' | 'BRA' | 'BRB' | 'BRN' | 'BTN' | 'BWA' | 'CAF' | 'CAN' | 'CHE' | 'CHL' | 'CHN' | 'CIV' | 'CMR' | 'COD' | 'COG' | 'COK' | 'COL' | 'COM' | 'CPV' | 'CRI' | 'CUB' | 'CUW' | 'CXR' | 'CYM' | 'CYP' | 'CZE' | 'DEU' | 'DJI' | 'DMA' | 'DNK' | 'DOM' | 'DZA' | 'ECU' | 'EGY' | 'ERI' | 'ESP' | 'EST' | 'ETH' | 'FIN' | 'FJI' | 'FLK' | 'FRA' | 'FRO' | 'FSM' | 'GAB' | 'GBR' | 'GEO' | 'GGY' | 'GHA' | 'GIB' | 'GIN' | 'GLP' | 'GMB' | 'GNB' | 'GNQ' | 'GRC' | 'GRD' | 'GRL' | 'GTM' | 'GUF' | 'GUM' | 'GUY' | 'HKG' | 'HND' | 'HRV' | 'HTI' | 'HUN' | 'IDN' | 'IMN' | 'IND' | 'IRL' | 'IRQ' | 'ISL' | 'ISR' | 'ITA' | 'JAM' | 'JEY' | 'JOR' | 'JPN' | 'KAZ' | 'KEN' | 'KGZ' | 'KHM' | 'KIR' | 'KNA' | 'KOR' | 'KWT' | 'LAO' | 'LBN' | 'LBR' | 'LBY' | 'LCA' | 'LIE' | 'LKA' | 'LSO' | 'LTU' | 'LUX' | 'LVA' | 'MAC' | 'MAR' | 'MCO' | 'MDA' | 'MDG' | 'MDV' | 'MEX' | 'MHL' | 'MKD' | 'MLI' | 'MLT' | 'MMR' | 'MNE' | 'MNG' | 'MNP' | 'MOZ' | 'MRT' | 'MSR' | 'MTQ' | 'MUS' | 'MWI' | 'MYS' | 'MYT' | 'NAM' | 'NCL' | 'NER' | 'NFK' | 'NGA' | 'NIC' | 'NIU' | 'NLD' | 'NOR' | 'NPL' | 'NRU' | 'NZL' | 'OMN' | 'PAK' | 'PAN' | 'PER' | 'PHL' | 'PLW' | 'PNG' | 'POL' | 'PRI' | 'PRT' | 'PRY' | 'PSE' | 'PYF' | 'QAT' | 'REU' | 'ROU' | 'RUS' | 'RWA' | 'SAU' | 'SEN' | 'SGP' | 'SHN' | 'SLB' | 'SLE' | 'SLV' | 'SMR' | 'SOM' | 'SPM' | 'SRB' | 'SSD' | 'STP' | 'SUR' | 'SVK' | 'SVN' | 'SWE' | 'SWZ' | 'SXM' | 'SYC' | 'TCA' | 'TCD' | 'TGO' | 'THA' | 'TJK' | 'TKM' | 'TLS' | 'TON' | 'TTO' | 'TUN' | 'TUR' | 'TUV' | 'TWN' | 'TZA' | 'UGA' | 'UKR' | 'UMI' | 'URY' | 'USA' | 'UZB' | 'VAT' | 'VCT' | 'VEN' | 'VGB' | 'VIR' | 'VNM' | 'VUT' | 'WLF' | 'WSM' | 'XKS' | 'YEM' | 'ZAF' | 'ZMB' | 'ZWE'>;
         /**
          * filter by attribute 'rating'
          */
@@ -60758,11 +66135,11 @@ export type AppsGameCenterDetailGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultGroupLeaderboard' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type gameCenterAppVersions
          */
@@ -60770,27 +66147,27 @@ export type AppsGameCenterDetailGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
-        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges'>;
+        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboards
          */
-        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge'>;
+        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardSets
          */
-        'fields[gameCenterLeaderboardSets]'?: Array<'referenceName' | 'vendorIdentifier' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboardSet' | 'localizations' | 'gameCenterLeaderboards' | 'releases'>;
+        'fields[gameCenterLeaderboardSets]'?: Array<'referenceName' | 'vendorIdentifier' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboardSet' | 'localizations' | 'gameCenterLeaderboards' | 'releases' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterAchievements
          */
-        'fields[gameCenterAchievements]'?: Array<'referenceName' | 'vendorIdentifier' | 'points' | 'showBeforeEarned' | 'repeatable' | 'archived' | 'activityProperties' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupAchievement' | 'localizations' | 'releases' | 'activity'>;
+        'fields[gameCenterAchievements]'?: Array<'referenceName' | 'vendorIdentifier' | 'points' | 'showBeforeEarned' | 'repeatable' | 'archived' | 'activityProperties' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupAchievement' | 'localizations' | 'releases' | 'activity' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterActivities
          */
-        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'leaderboards' | 'versions'>;
+        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'achievementsV2' | 'leaderboards' | 'leaderboardsV2' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterChallenges
          */
-        'fields[gameCenterChallenges]'?: Array<'referenceName' | 'vendorIdentifier' | 'archived' | 'challengeType' | 'repeatable' | 'gameCenterDetail' | 'gameCenterGroup' | 'versions' | 'leaderboard'>;
+        'fields[gameCenterChallenges]'?: Array<'referenceName' | 'vendorIdentifier' | 'archived' | 'challengeType' | 'repeatable' | 'gameCenterDetail' | 'gameCenterGroup' | 'versions' | 'leaderboard' | 'leaderboardV2'>;
         /**
          * the fields to include for returned resources of type gameCenterAchievementReleases
          */
@@ -60818,7 +66195,7 @@ export type AppsGameCenterDetailGetToOneRelatedData = {
         /**
          * comma-separated list of relationships to include
          */
-        include?: Array<'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultGroupLeaderboard' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        include?: Array<'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
         /**
          * maximum number of related gameCenterAppVersions returned (when they are included)
          */
@@ -60828,13 +66205,25 @@ export type AppsGameCenterDetailGetToOneRelatedData = {
          */
         'limit[gameCenterLeaderboards]'?: number;
         /**
+         * maximum number of related gameCenterLeaderboardsV2 returned (when they are included)
+         */
+        'limit[gameCenterLeaderboardsV2]'?: number;
+        /**
          * maximum number of related gameCenterLeaderboardSets returned (when they are included)
          */
         'limit[gameCenterLeaderboardSets]'?: number;
         /**
+         * maximum number of related gameCenterLeaderboardSetsV2 returned (when they are included)
+         */
+        'limit[gameCenterLeaderboardSetsV2]'?: number;
+        /**
          * maximum number of related gameCenterAchievements returned (when they are included)
          */
         'limit[gameCenterAchievements]'?: number;
+        /**
+         * maximum number of related gameCenterAchievementsV2 returned (when they are included)
+         */
+        'limit[gameCenterAchievementsV2]'?: number;
         /**
          * maximum number of related gameCenterActivities returned (when they are included)
          */
@@ -60988,7 +66377,7 @@ export type AppsGameCenterEnabledVersionsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * maximum resources per page
          */
@@ -61119,7 +66508,7 @@ export type AppsInAppPurchasesGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * maximum resources per page
          */
@@ -61253,7 +66642,7 @@ export type AppsInAppPurchasesV2GetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type inAppPurchases
          */
-        'fields[inAppPurchases]'?: Array<'name' | 'productId' | 'inAppPurchaseType' | 'state' | 'reviewNote' | 'familySharable' | 'contentHosting' | 'inAppPurchaseLocalizations' | 'pricePoints' | 'content' | 'appStoreReviewScreenshot' | 'promotedPurchase' | 'iapPriceSchedule' | 'inAppPurchaseAvailability' | 'images'>;
+        'fields[inAppPurchases]'?: Array<'name' | 'productId' | 'inAppPurchaseType' | 'state' | 'reviewNote' | 'familySharable' | 'contentHosting' | 'inAppPurchaseLocalizations' | 'pricePoints' | 'content' | 'appStoreReviewScreenshot' | 'promotedPurchase' | 'iapPriceSchedule' | 'inAppPurchaseAvailability' | 'images' | 'offerCodes'>;
         /**
          * the fields to include for returned resources of type inAppPurchaseLocalizations
          */
@@ -61283,13 +66672,17 @@ export type AppsInAppPurchasesV2GetToManyRelatedData = {
          */
         'fields[inAppPurchaseImages]'?: Array<'fileSize' | 'fileName' | 'sourceFileChecksum' | 'assetToken' | 'imageAsset' | 'uploadOperations' | 'state' | 'inAppPurchase'>;
         /**
+         * the fields to include for returned resources of type inAppPurchaseOfferCodes
+         */
+        'fields[inAppPurchaseOfferCodes]'?: Array<'name' | 'customerEligibilities' | 'productionCodeCount' | 'sandboxCodeCount' | 'active' | 'oneTimeUseCodes' | 'customCodes' | 'prices'>;
+        /**
          * maximum resources per page
          */
         limit?: number;
         /**
          * comma-separated list of relationships to include
          */
-        include?: Array<'inAppPurchaseLocalizations' | 'content' | 'appStoreReviewScreenshot' | 'promotedPurchase' | 'iapPriceSchedule' | 'inAppPurchaseAvailability' | 'images'>;
+        include?: Array<'inAppPurchaseLocalizations' | 'content' | 'appStoreReviewScreenshot' | 'promotedPurchase' | 'iapPriceSchedule' | 'inAppPurchaseAvailability' | 'images' | 'offerCodes'>;
         /**
          * maximum number of related inAppPurchaseLocalizations returned (when they are included)
          */
@@ -61298,6 +66691,10 @@ export type AppsInAppPurchasesV2GetToManyRelatedData = {
          * maximum number of related images returned (when they are included)
          */
         'limit[images]'?: number;
+        /**
+         * maximum number of related offerCodes returned (when they are included)
+         */
+        'limit[offerCodes]'?: number;
     };
     url: '/v1/apps/{id}/inAppPurchasesV2';
 };
@@ -61718,7 +67115,7 @@ export type AppsPromotedPurchasesGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type inAppPurchases
          */
-        'fields[inAppPurchases]'?: Array<'name' | 'productId' | 'inAppPurchaseType' | 'state' | 'reviewNote' | 'familySharable' | 'contentHosting' | 'inAppPurchaseLocalizations' | 'pricePoints' | 'content' | 'appStoreReviewScreenshot' | 'promotedPurchase' | 'iapPriceSchedule' | 'inAppPurchaseAvailability' | 'images'>;
+        'fields[inAppPurchases]'?: Array<'name' | 'productId' | 'inAppPurchaseType' | 'state' | 'reviewNote' | 'familySharable' | 'contentHosting' | 'inAppPurchaseLocalizations' | 'pricePoints' | 'content' | 'appStoreReviewScreenshot' | 'promotedPurchase' | 'iapPriceSchedule' | 'inAppPurchaseAvailability' | 'images' | 'offerCodes'>;
         /**
          * the fields to include for returned resources of type subscriptions
          */
@@ -61844,11 +67241,11 @@ export type AppsReviewSubmissionsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type reviewSubmissionItems
          */
-        'fields[reviewSubmissionItems]'?: Array<'state' | 'appStoreVersion' | 'appCustomProductPageVersion' | 'appStoreVersionExperiment' | 'appStoreVersionExperimentV2' | 'appEvent' | 'backgroundAssetVersion'>;
+        'fields[reviewSubmissionItems]'?: Array<'state' | 'appStoreVersion' | 'appCustomProductPageVersion' | 'appStoreVersionExperiment' | 'appStoreVersionExperimentV2' | 'appEvent' | 'backgroundAssetVersion' | 'gameCenterAchievementVersion' | 'gameCenterActivityVersion' | 'gameCenterChallengeVersion' | 'gameCenterLeaderboardSetVersion' | 'gameCenterLeaderboardVersion'>;
         /**
          * the fields to include for returned resources of type appStoreVersions
          */
@@ -62323,7 +67720,7 @@ export type AppsWebhooksGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * maximum resources per page
          */
@@ -62563,11 +67960,11 @@ export type BackgroundAssetsVersionsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type backgroundAssetVersions
          */
-        'fields[backgroundAssetVersions]'?: Array<'createdDate' | 'platforms' | 'state' | 'version' | 'backgroundAsset' | 'internalBetaRelease' | 'externalBetaRelease' | 'appStoreRelease' | 'assetFile' | 'manifestFile' | 'backgroundAssetUploadFiles'>;
+        'fields[backgroundAssetVersions]'?: Array<'createdDate' | 'platforms' | 'state' | 'stateDetails' | 'version' | 'backgroundAsset' | 'internalBetaRelease' | 'externalBetaRelease' | 'appStoreRelease' | 'assetFile' | 'manifestFile' | 'backgroundAssetUploadFiles'>;
         /**
          * the fields to include for returned resources of type backgroundAssets
          */
-        'fields[backgroundAssets]'?: Array<'assetPackIdentifier' | 'createdDate' | 'app' | 'versions' | 'appStoreVersion' | 'internalBetaVersion' | 'externalBetaVersion'>;
+        'fields[backgroundAssets]'?: Array<'archived' | 'assetPackIdentifier' | 'createdDate' | 'app' | 'versions' | 'appStoreVersion' | 'internalBetaVersion' | 'externalBetaVersion'>;
         /**
          * the fields to include for returned resources of type backgroundAssetVersionInternalBetaReleases
          */
@@ -62688,7 +68085,7 @@ export type BetaAppLocalizationsAppGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
     };
     url: '/v1/betaAppLocalizations/{id}/app';
 };
@@ -62785,7 +68182,7 @@ export type BetaAppReviewDetailsAppGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
     };
     url: '/v1/betaAppReviewDetails/{id}/app';
 };
@@ -63173,7 +68570,7 @@ export type BetaGroupsAppGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
     };
     url: '/v1/betaGroups/{id}/app';
 };
@@ -63575,7 +68972,7 @@ export type BetaGroupsBetaTestersGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type betaTesters
          */
-        'fields[betaTesters]'?: Array<'firstName' | 'lastName' | 'email' | 'inviteType' | 'state' | 'apps' | 'betaGroups' | 'builds'>;
+        'fields[betaTesters]'?: Array<'firstName' | 'lastName' | 'email' | 'inviteType' | 'state' | 'appDevices' | 'apps' | 'betaGroups' | 'builds'>;
         /**
          * maximum resources per page
          */
@@ -63888,7 +69285,7 @@ export type BetaLicenseAgreementsAppGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
     };
     url: '/v1/betaLicenseAgreements/{id}/app';
 };
@@ -64047,7 +69444,7 @@ export type BetaTestersAppsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * maximum resources per page
          */
@@ -64580,7 +69977,7 @@ export type BuildBetaDetailsBuildGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type betaTesters
          */
-        'fields[betaTesters]'?: Array<'firstName' | 'lastName' | 'email' | 'inviteType' | 'state' | 'apps' | 'betaGroups' | 'builds'>;
+        'fields[betaTesters]'?: Array<'firstName' | 'lastName' | 'email' | 'inviteType' | 'state' | 'appDevices' | 'apps' | 'betaGroups' | 'builds'>;
         /**
          * the fields to include for returned resources of type betaGroups
          */
@@ -64600,7 +69997,7 @@ export type BuildBetaDetailsBuildGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type buildBetaDetails
          */
@@ -65265,7 +70662,7 @@ export type BuildsAppGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
     };
     url: '/v1/builds/{id}/app';
 };
@@ -65516,7 +70913,7 @@ export type BuildsAppStoreVersionGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type ageRatingDeclarations
          */
@@ -65560,7 +70957,7 @@ export type BuildsAppStoreVersionGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type alternativeDistributionPackages
          */
-        'fields[alternativeDistributionPackages]'?: Array<'versions'>;
+        'fields[alternativeDistributionPackages]'?: Array<'sourceFileChecksum' | 'versions'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -66415,7 +71812,7 @@ export type BuildsIndividualTestersGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type betaTesters
          */
-        'fields[betaTesters]'?: Array<'firstName' | 'lastName' | 'email' | 'inviteType' | 'state' | 'apps' | 'betaGroups' | 'builds'>;
+        'fields[betaTesters]'?: Array<'firstName' | 'lastName' | 'email' | 'inviteType' | 'state' | 'appDevices' | 'apps' | 'betaGroups' | 'builds'>;
         /**
          * maximum resources per page
          */
@@ -66672,7 +72069,7 @@ export type BundleIdsAppGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
     };
     url: '/v1/bundleIds/{id}/app';
 };
@@ -67720,7 +73117,7 @@ export type CiBuildRunsBuildsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type betaTesters
          */
-        'fields[betaTesters]'?: Array<'firstName' | 'lastName' | 'email' | 'inviteType' | 'state' | 'apps' | 'betaGroups' | 'builds'>;
+        'fields[betaTesters]'?: Array<'firstName' | 'lastName' | 'email' | 'inviteType' | 'state' | 'appDevices' | 'apps' | 'betaGroups' | 'builds'>;
         /**
          * the fields to include for returned resources of type betaGroups
          */
@@ -67740,7 +73137,7 @@ export type CiBuildRunsBuildsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type buildBetaDetails
          */
@@ -68125,11 +73522,15 @@ export type CiProductsAppGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type appEncryptionDeclarations
          */
         'fields[appEncryptionDeclarations]'?: Array<'appDescription' | 'createdDate' | 'usesEncryption' | 'exempt' | 'containsProprietaryCryptography' | 'containsThirdPartyCryptography' | 'availableOnFrenchStore' | 'platform' | 'uploadedDate' | 'documentUrl' | 'documentName' | 'documentType' | 'appEncryptionDeclarationState' | 'codeValue' | 'app' | 'builds' | 'appEncryptionDeclarationDocument'>;
+        /**
+         * the fields to include for returned resources of type buildIcons
+         */
+        'fields[buildIcons]'?: Array<'iconAsset' | 'iconType' | 'masked' | 'name'>;
         /**
          * the fields to include for returned resources of type ciProducts
          */
@@ -68177,7 +73578,7 @@ export type CiProductsAppGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type inAppPurchases
          */
-        'fields[inAppPurchases]'?: Array<'referenceName' | 'productId' | 'inAppPurchaseType' | 'state' | 'apps' | 'name' | 'reviewNote' | 'familySharable' | 'contentHosting' | 'inAppPurchaseLocalizations' | 'pricePoints' | 'content' | 'appStoreReviewScreenshot' | 'promotedPurchase' | 'iapPriceSchedule' | 'inAppPurchaseAvailability' | 'images'>;
+        'fields[inAppPurchases]'?: Array<'referenceName' | 'productId' | 'inAppPurchaseType' | 'state' | 'apps' | 'name' | 'reviewNote' | 'familySharable' | 'contentHosting' | 'inAppPurchaseLocalizations' | 'pricePoints' | 'content' | 'appStoreReviewScreenshot' | 'promotedPurchase' | 'iapPriceSchedule' | 'inAppPurchaseAvailability' | 'images' | 'offerCodes'>;
         /**
          * the fields to include for returned resources of type subscriptionGroups
          */
@@ -68209,15 +73610,19 @@ export type CiProductsAppGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultGroupLeaderboard' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type appStoreVersionExperiments
          */
         'fields[appStoreVersionExperiments]'?: Array<'name' | 'platform' | 'trafficProportion' | 'state' | 'reviewRequired' | 'startDate' | 'endDate' | 'app' | 'latestControlVersion' | 'controlVersions' | 'appStoreVersionExperimentTreatments'>;
         /**
+         * the fields to include for returned resources of type androidToIosAppMappingDetails
+         */
+        'fields[androidToIosAppMappingDetails]'?: Array<'packageName' | 'appSigningKeyPublicCertificateSha256Fingerprints'>;
+        /**
          * comma-separated list of relationships to include
          */
-        include?: Array<'appEncryptionDeclarations' | 'ciProduct' | 'betaGroups' | 'appStoreVersions' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'endUserLicenseAgreement' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2'>;
+        include?: Array<'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaGroups' | 'appStoreVersions' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'endUserLicenseAgreement' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'androidToIosAppMappingDetails'>;
         /**
          * maximum number of related appEncryptionDeclarations returned (when they are included)
          */
@@ -68288,6 +73693,10 @@ export type CiProductsAppGetToOneRelatedData = {
          * maximum number of related appStoreVersionExperimentsV2 returned (when they are included)
          */
         'limit[appStoreVersionExperimentsV2]'?: number;
+        /**
+         * maximum number of related androidToIosAppMappingDetails returned (when they are included)
+         */
+        'limit[androidToIosAppMappingDetails]'?: number;
     };
     url: '/v1/ciProducts/{id}/app';
 };
@@ -69347,6 +74756,111 @@ export type EndUserLicenseAgreementsTerritoriesGetToManyRelatedResponses = {
 
 export type EndUserLicenseAgreementsTerritoriesGetToManyRelatedResponse = EndUserLicenseAgreementsTerritoriesGetToManyRelatedResponses[keyof EndUserLicenseAgreementsTerritoriesGetToManyRelatedResponses];
 
+export type GameCenterAchievementLocalizationsV2ImageGetToOneRelationshipData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v2/gameCenterAchievementLocalizations/{id}/relationships/image';
+};
+
+export type GameCenterAchievementLocalizationsV2ImageGetToOneRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterAchievementLocalizationsV2ImageGetToOneRelationshipError = GameCenterAchievementLocalizationsV2ImageGetToOneRelationshipErrors[keyof GameCenterAchievementLocalizationsV2ImageGetToOneRelationshipErrors];
+
+export type GameCenterAchievementLocalizationsV2ImageGetToOneRelationshipResponses = {
+    /**
+     * Related linkage
+     */
+    200: GameCenterAchievementLocalizationV2ImageLinkageResponse;
+};
+
+export type GameCenterAchievementLocalizationsV2ImageGetToOneRelationshipResponse = GameCenterAchievementLocalizationsV2ImageGetToOneRelationshipResponses[keyof GameCenterAchievementLocalizationsV2ImageGetToOneRelationshipResponses];
+
+export type GameCenterAchievementLocalizationsV2ImageGetToOneRelatedData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * the fields to include for returned resources of type gameCenterAchievementImages
+         */
+        'fields[gameCenterAchievementImages]'?: Array<'fileSize' | 'fileName' | 'imageAsset' | 'uploadOperations' | 'assetDeliveryState' | 'localization'>;
+        /**
+         * the fields to include for returned resources of type gameCenterAchievementLocalizations
+         */
+        'fields[gameCenterAchievementLocalizations]'?: Array<'locale' | 'name' | 'beforeEarnedDescription' | 'afterEarnedDescription' | 'version' | 'image'>;
+        /**
+         * comma-separated list of relationships to include
+         */
+        include?: Array<'localization'>;
+    };
+    url: '/v2/gameCenterAchievementLocalizations/{id}/image';
+};
+
+export type GameCenterAchievementLocalizationsV2ImageGetToOneRelatedErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterAchievementLocalizationsV2ImageGetToOneRelatedError = GameCenterAchievementLocalizationsV2ImageGetToOneRelatedErrors[keyof GameCenterAchievementLocalizationsV2ImageGetToOneRelatedErrors];
+
+export type GameCenterAchievementLocalizationsV2ImageGetToOneRelatedResponses = {
+    /**
+     * Single GameCenterAchievementImage
+     */
+    200: GameCenterAchievementImageV2Response;
+};
+
+export type GameCenterAchievementLocalizationsV2ImageGetToOneRelatedResponse = GameCenterAchievementLocalizationsV2ImageGetToOneRelatedResponses[keyof GameCenterAchievementLocalizationsV2ImageGetToOneRelatedResponses];
+
 export type GameCenterAchievementLocalizationsGameCenterAchievementGetToOneRelationshipData = {
     body?: never;
     path: {
@@ -69409,11 +74923,11 @@ export type GameCenterAchievementLocalizationsGameCenterAchievementGetToOneRelat
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultGroupLeaderboard' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
-        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges'>;
+        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
         /**
          * the fields to include for returned resources of type gameCenterAchievementLocalizations
          */
@@ -69425,7 +74939,7 @@ export type GameCenterAchievementLocalizationsGameCenterAchievementGetToOneRelat
         /**
          * the fields to include for returned resources of type gameCenterActivities
          */
-        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'leaderboards' | 'versions'>;
+        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'achievementsV2' | 'leaderboards' | 'leaderboardsV2' | 'versions'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -69580,6 +75094,299 @@ export type GameCenterAchievementLocalizationsGameCenterAchievementImageGetToOne
 };
 
 export type GameCenterAchievementLocalizationsGameCenterAchievementImageGetToOneRelatedResponse = GameCenterAchievementLocalizationsGameCenterAchievementImageGetToOneRelatedResponses[keyof GameCenterAchievementLocalizationsGameCenterAchievementImageGetToOneRelatedResponses];
+
+export type GameCenterAchievementVersionsV2LocalizationsGetToManyRelationshipData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+    };
+    url: '/v2/gameCenterAchievementVersions/{id}/relationships/localizations';
+};
+
+export type GameCenterAchievementVersionsV2LocalizationsGetToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterAchievementVersionsV2LocalizationsGetToManyRelationshipError = GameCenterAchievementVersionsV2LocalizationsGetToManyRelationshipErrors[keyof GameCenterAchievementVersionsV2LocalizationsGetToManyRelationshipErrors];
+
+export type GameCenterAchievementVersionsV2LocalizationsGetToManyRelationshipResponses = {
+    /**
+     * List of related linkages
+     */
+    200: GameCenterAchievementVersionV2LocalizationsLinkagesResponse;
+};
+
+export type GameCenterAchievementVersionsV2LocalizationsGetToManyRelationshipResponse = GameCenterAchievementVersionsV2LocalizationsGetToManyRelationshipResponses[keyof GameCenterAchievementVersionsV2LocalizationsGetToManyRelationshipResponses];
+
+export type GameCenterAchievementVersionsV2LocalizationsGetToManyRelatedData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * the fields to include for returned resources of type gameCenterAchievementLocalizations
+         */
+        'fields[gameCenterAchievementLocalizations]'?: Array<'locale' | 'name' | 'beforeEarnedDescription' | 'afterEarnedDescription' | 'version' | 'image'>;
+        /**
+         * the fields to include for returned resources of type gameCenterAchievementVersions
+         */
+        'fields[gameCenterAchievementVersions]'?: Array<'version' | 'state' | 'achievement' | 'localizations'>;
+        /**
+         * the fields to include for returned resources of type gameCenterAchievementImages
+         */
+        'fields[gameCenterAchievementImages]'?: Array<'fileSize' | 'fileName' | 'imageAsset' | 'uploadOperations' | 'assetDeliveryState' | 'localization'>;
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+        /**
+         * comma-separated list of relationships to include
+         */
+        include?: Array<'version' | 'image'>;
+    };
+    url: '/v2/gameCenterAchievementVersions/{id}/localizations';
+};
+
+export type GameCenterAchievementVersionsV2LocalizationsGetToManyRelatedErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterAchievementVersionsV2LocalizationsGetToManyRelatedError = GameCenterAchievementVersionsV2LocalizationsGetToManyRelatedErrors[keyof GameCenterAchievementVersionsV2LocalizationsGetToManyRelatedErrors];
+
+export type GameCenterAchievementVersionsV2LocalizationsGetToManyRelatedResponses = {
+    /**
+     * List of GameCenterAchievementLocalizations
+     */
+    200: GameCenterAchievementLocalizationsV2Response;
+};
+
+export type GameCenterAchievementVersionsV2LocalizationsGetToManyRelatedResponse = GameCenterAchievementVersionsV2LocalizationsGetToManyRelatedResponses[keyof GameCenterAchievementVersionsV2LocalizationsGetToManyRelatedResponses];
+
+export type GameCenterAchievementsV2ActivityUpdateToOneRelationshipData = {
+    /**
+     * Related linkage
+     */
+    body: GameCenterAchievementV2ActivityLinkageRequest;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v2/gameCenterAchievements/{id}/relationships/activity';
+};
+
+export type GameCenterAchievementsV2ActivityUpdateToOneRelationshipErrors = {
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterAchievementsV2ActivityUpdateToOneRelationshipError = GameCenterAchievementsV2ActivityUpdateToOneRelationshipErrors[keyof GameCenterAchievementsV2ActivityUpdateToOneRelationshipErrors];
+
+export type GameCenterAchievementsV2ActivityUpdateToOneRelationshipResponses = {
+    /**
+     * Success (no content)
+     */
+    204: void;
+};
+
+export type GameCenterAchievementsV2ActivityUpdateToOneRelationshipResponse = GameCenterAchievementsV2ActivityUpdateToOneRelationshipResponses[keyof GameCenterAchievementsV2ActivityUpdateToOneRelationshipResponses];
+
+export type GameCenterAchievementsV2VersionsGetToManyRelationshipData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+    };
+    url: '/v2/gameCenterAchievements/{id}/relationships/versions';
+};
+
+export type GameCenterAchievementsV2VersionsGetToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterAchievementsV2VersionsGetToManyRelationshipError = GameCenterAchievementsV2VersionsGetToManyRelationshipErrors[keyof GameCenterAchievementsV2VersionsGetToManyRelationshipErrors];
+
+export type GameCenterAchievementsV2VersionsGetToManyRelationshipResponses = {
+    /**
+     * List of related linkages
+     */
+    200: GameCenterAchievementV2VersionsLinkagesResponse;
+};
+
+export type GameCenterAchievementsV2VersionsGetToManyRelationshipResponse = GameCenterAchievementsV2VersionsGetToManyRelationshipResponses[keyof GameCenterAchievementsV2VersionsGetToManyRelationshipResponses];
+
+export type GameCenterAchievementsV2VersionsGetToManyRelatedData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * the fields to include for returned resources of type gameCenterAchievementVersions
+         */
+        'fields[gameCenterAchievementVersions]'?: Array<'version' | 'state' | 'achievement' | 'localizations'>;
+        /**
+         * the fields to include for returned resources of type gameCenterAchievements
+         */
+        'fields[gameCenterAchievements]'?: Array<'referenceName' | 'vendorIdentifier' | 'points' | 'showBeforeEarned' | 'repeatable' | 'archived' | 'activityProperties' | 'gameCenterDetail' | 'gameCenterGroup' | 'activity' | 'versions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterAchievementLocalizations
+         */
+        'fields[gameCenterAchievementLocalizations]'?: Array<'locale' | 'name' | 'beforeEarnedDescription' | 'afterEarnedDescription' | 'version' | 'image'>;
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+        /**
+         * comma-separated list of relationships to include
+         */
+        include?: Array<'achievement' | 'localizations'>;
+        /**
+         * maximum number of related localizations returned (when they are included)
+         */
+        'limit[localizations]'?: number;
+    };
+    url: '/v2/gameCenterAchievements/{id}/versions';
+};
+
+export type GameCenterAchievementsV2VersionsGetToManyRelatedErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterAchievementsV2VersionsGetToManyRelatedError = GameCenterAchievementsV2VersionsGetToManyRelatedErrors[keyof GameCenterAchievementsV2VersionsGetToManyRelatedErrors];
+
+export type GameCenterAchievementsV2VersionsGetToManyRelatedResponses = {
+    /**
+     * List of GameCenterAchievementVersions
+     */
+    200: GameCenterAchievementVersionsV2Response;
+};
+
+export type GameCenterAchievementsV2VersionsGetToManyRelatedResponse = GameCenterAchievementsV2VersionsGetToManyRelatedResponses[keyof GameCenterAchievementsV2VersionsGetToManyRelatedResponses];
 
 export type GameCenterAchievementsActivityUpdateToOneRelationshipData = {
     /**
@@ -69749,11 +75556,11 @@ export type GameCenterAchievementsGroupAchievementGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultGroupLeaderboard' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
-        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges'>;
+        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
         /**
          * the fields to include for returned resources of type gameCenterAchievementLocalizations
          */
@@ -69765,7 +75572,7 @@ export type GameCenterAchievementsGroupAchievementGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterActivities
          */
-        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'leaderboards' | 'versions'>;
+        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'achievementsV2' | 'leaderboards' | 'leaderboardsV2' | 'versions'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -70009,7 +75816,7 @@ export type GameCenterAchievementsReleasesGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultGroupLeaderboard' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterAchievements
          */
@@ -70166,6 +75973,112 @@ export type GameCenterActivitiesAchievementsCreateToManyRelationshipResponses = 
 
 export type GameCenterActivitiesAchievementsCreateToManyRelationshipResponse = GameCenterActivitiesAchievementsCreateToManyRelationshipResponses[keyof GameCenterActivitiesAchievementsCreateToManyRelationshipResponses];
 
+export type GameCenterActivitiesAchievementsV2DeleteToManyRelationshipData = {
+    /**
+     * List of related linkages
+     */
+    body: GameCenterActivityAchievementsV2LinkagesRequest;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v1/gameCenterActivities/{id}/relationships/achievementsV2';
+};
+
+export type GameCenterActivitiesAchievementsV2DeleteToManyRelationshipErrors = {
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterActivitiesAchievementsV2DeleteToManyRelationshipError = GameCenterActivitiesAchievementsV2DeleteToManyRelationshipErrors[keyof GameCenterActivitiesAchievementsV2DeleteToManyRelationshipErrors];
+
+export type GameCenterActivitiesAchievementsV2DeleteToManyRelationshipResponses = {
+    /**
+     * Success (no content)
+     */
+    204: void;
+};
+
+export type GameCenterActivitiesAchievementsV2DeleteToManyRelationshipResponse = GameCenterActivitiesAchievementsV2DeleteToManyRelationshipResponses[keyof GameCenterActivitiesAchievementsV2DeleteToManyRelationshipResponses];
+
+export type GameCenterActivitiesAchievementsV2CreateToManyRelationshipData = {
+    /**
+     * List of related linkages
+     */
+    body: GameCenterActivityAchievementsV2LinkagesRequest;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v1/gameCenterActivities/{id}/relationships/achievementsV2';
+};
+
+export type GameCenterActivitiesAchievementsV2CreateToManyRelationshipErrors = {
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterActivitiesAchievementsV2CreateToManyRelationshipError = GameCenterActivitiesAchievementsV2CreateToManyRelationshipErrors[keyof GameCenterActivitiesAchievementsV2CreateToManyRelationshipErrors];
+
+export type GameCenterActivitiesAchievementsV2CreateToManyRelationshipResponses = {
+    /**
+     * Success (no content)
+     */
+    204: void;
+};
+
+export type GameCenterActivitiesAchievementsV2CreateToManyRelationshipResponse = GameCenterActivitiesAchievementsV2CreateToManyRelationshipResponses[keyof GameCenterActivitiesAchievementsV2CreateToManyRelationshipResponses];
+
 export type GameCenterActivitiesLeaderboardsDeleteToManyRelationshipData = {
     /**
      * List of related linkages
@@ -70272,6 +76185,112 @@ export type GameCenterActivitiesLeaderboardsCreateToManyRelationshipResponses = 
 
 export type GameCenterActivitiesLeaderboardsCreateToManyRelationshipResponse = GameCenterActivitiesLeaderboardsCreateToManyRelationshipResponses[keyof GameCenterActivitiesLeaderboardsCreateToManyRelationshipResponses];
 
+export type GameCenterActivitiesLeaderboardsV2DeleteToManyRelationshipData = {
+    /**
+     * List of related linkages
+     */
+    body: GameCenterActivityLeaderboardsV2LinkagesRequest;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v1/gameCenterActivities/{id}/relationships/leaderboardsV2';
+};
+
+export type GameCenterActivitiesLeaderboardsV2DeleteToManyRelationshipErrors = {
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterActivitiesLeaderboardsV2DeleteToManyRelationshipError = GameCenterActivitiesLeaderboardsV2DeleteToManyRelationshipErrors[keyof GameCenterActivitiesLeaderboardsV2DeleteToManyRelationshipErrors];
+
+export type GameCenterActivitiesLeaderboardsV2DeleteToManyRelationshipResponses = {
+    /**
+     * Success (no content)
+     */
+    204: void;
+};
+
+export type GameCenterActivitiesLeaderboardsV2DeleteToManyRelationshipResponse = GameCenterActivitiesLeaderboardsV2DeleteToManyRelationshipResponses[keyof GameCenterActivitiesLeaderboardsV2DeleteToManyRelationshipResponses];
+
+export type GameCenterActivitiesLeaderboardsV2CreateToManyRelationshipData = {
+    /**
+     * List of related linkages
+     */
+    body: GameCenterActivityLeaderboardsV2LinkagesRequest;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v1/gameCenterActivities/{id}/relationships/leaderboardsV2';
+};
+
+export type GameCenterActivitiesLeaderboardsV2CreateToManyRelationshipErrors = {
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterActivitiesLeaderboardsV2CreateToManyRelationshipError = GameCenterActivitiesLeaderboardsV2CreateToManyRelationshipErrors[keyof GameCenterActivitiesLeaderboardsV2CreateToManyRelationshipErrors];
+
+export type GameCenterActivitiesLeaderboardsV2CreateToManyRelationshipResponses = {
+    /**
+     * Success (no content)
+     */
+    204: void;
+};
+
+export type GameCenterActivitiesLeaderboardsV2CreateToManyRelationshipResponse = GameCenterActivitiesLeaderboardsV2CreateToManyRelationshipResponses[keyof GameCenterActivitiesLeaderboardsV2CreateToManyRelationshipResponses];
+
 export type GameCenterActivitiesVersionsGetToManyRelationshipData = {
     body?: never;
     path: {
@@ -70339,7 +76358,7 @@ export type GameCenterActivitiesVersionsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterActivities
          */
-        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'leaderboards' | 'versions'>;
+        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'achievementsV2' | 'leaderboards' | 'leaderboardsV2' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterActivityLocalizations
          */
@@ -70780,7 +76799,7 @@ export type GameCenterAppVersionsAppStoreVersionGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type ageRatingDeclarations
          */
@@ -70824,7 +76843,7 @@ export type GameCenterAppVersionsAppStoreVersionGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type alternativeDistributionPackages
          */
-        'fields[alternativeDistributionPackages]'?: Array<'versions'>;
+        'fields[alternativeDistributionPackages]'?: Array<'sourceFileChecksum' | 'versions'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -71473,6 +77492,59 @@ export type GameCenterChallengesLeaderboardUpdateToOneRelationshipResponses = {
 
 export type GameCenterChallengesLeaderboardUpdateToOneRelationshipResponse = GameCenterChallengesLeaderboardUpdateToOneRelationshipResponses[keyof GameCenterChallengesLeaderboardUpdateToOneRelationshipResponses];
 
+export type GameCenterChallengesLeaderboardV2UpdateToOneRelationshipData = {
+    /**
+     * Related linkage
+     */
+    body: GameCenterChallengeLeaderboardV2LinkageRequest;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v1/gameCenterChallenges/{id}/relationships/leaderboardV2';
+};
+
+export type GameCenterChallengesLeaderboardV2UpdateToOneRelationshipErrors = {
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterChallengesLeaderboardV2UpdateToOneRelationshipError = GameCenterChallengesLeaderboardV2UpdateToOneRelationshipErrors[keyof GameCenterChallengesLeaderboardV2UpdateToOneRelationshipErrors];
+
+export type GameCenterChallengesLeaderboardV2UpdateToOneRelationshipResponses = {
+    /**
+     * Success (no content)
+     */
+    204: void;
+};
+
+export type GameCenterChallengesLeaderboardV2UpdateToOneRelationshipResponse = GameCenterChallengesLeaderboardV2UpdateToOneRelationshipResponses[keyof GameCenterChallengesLeaderboardV2UpdateToOneRelationshipResponses];
+
 export type GameCenterChallengesVersionsGetToManyRelationshipData = {
     body?: never;
     path: {
@@ -71540,7 +77612,7 @@ export type GameCenterChallengesVersionsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterChallenges
          */
-        'fields[gameCenterChallenges]'?: Array<'referenceName' | 'vendorIdentifier' | 'archived' | 'challengeType' | 'repeatable' | 'gameCenterDetail' | 'gameCenterGroup' | 'versions' | 'leaderboard'>;
+        'fields[gameCenterChallenges]'?: Array<'referenceName' | 'vendorIdentifier' | 'archived' | 'challengeType' | 'repeatable' | 'gameCenterDetail' | 'gameCenterGroup' | 'versions' | 'leaderboard' | 'leaderboardV2'>;
         /**
          * the fields to include for returned resources of type gameCenterChallengeLocalizations
          */
@@ -71682,7 +77754,7 @@ export type GameCenterDetailsAchievementReleasesGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultGroupLeaderboard' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterAchievements
          */
@@ -72146,11 +78218,11 @@ export type GameCenterDetailsGameCenterAchievementsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultGroupLeaderboard' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
-        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges'>;
+        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
         /**
          * the fields to include for returned resources of type gameCenterAchievementLocalizations
          */
@@ -72162,7 +78234,7 @@ export type GameCenterDetailsGameCenterAchievementsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterActivities
          */
-        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'leaderboards' | 'versions'>;
+        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'achievementsV2' | 'leaderboards' | 'leaderboardsV2' | 'versions'>;
         /**
          * maximum resources per page
          */
@@ -72216,6 +78288,201 @@ export type GameCenterDetailsGameCenterAchievementsGetToManyRelatedResponses = {
 };
 
 export type GameCenterDetailsGameCenterAchievementsGetToManyRelatedResponse = GameCenterDetailsGameCenterAchievementsGetToManyRelatedResponses[keyof GameCenterDetailsGameCenterAchievementsGetToManyRelatedResponses];
+
+export type GameCenterDetailsGameCenterAchievementsV2GetToManyRelationshipData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+    };
+    url: '/v1/gameCenterDetails/{id}/relationships/gameCenterAchievementsV2';
+};
+
+export type GameCenterDetailsGameCenterAchievementsV2GetToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterDetailsGameCenterAchievementsV2GetToManyRelationshipError = GameCenterDetailsGameCenterAchievementsV2GetToManyRelationshipErrors[keyof GameCenterDetailsGameCenterAchievementsV2GetToManyRelationshipErrors];
+
+export type GameCenterDetailsGameCenterAchievementsV2GetToManyRelationshipResponses = {
+    /**
+     * List of related linkages
+     */
+    200: GameCenterDetailGameCenterAchievementsV2LinkagesResponse;
+};
+
+export type GameCenterDetailsGameCenterAchievementsV2GetToManyRelationshipResponse = GameCenterDetailsGameCenterAchievementsV2GetToManyRelationshipResponses[keyof GameCenterDetailsGameCenterAchievementsV2GetToManyRelationshipResponses];
+
+export type GameCenterDetailsGameCenterAchievementsV2ReplaceToManyRelationshipData = {
+    /**
+     * List of related linkages
+     */
+    body: GameCenterDetailGameCenterAchievementsV2LinkagesRequest;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v1/gameCenterDetails/{id}/relationships/gameCenterAchievementsV2';
+};
+
+export type GameCenterDetailsGameCenterAchievementsV2ReplaceToManyRelationshipErrors = {
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterDetailsGameCenterAchievementsV2ReplaceToManyRelationshipError = GameCenterDetailsGameCenterAchievementsV2ReplaceToManyRelationshipErrors[keyof GameCenterDetailsGameCenterAchievementsV2ReplaceToManyRelationshipErrors];
+
+export type GameCenterDetailsGameCenterAchievementsV2ReplaceToManyRelationshipResponses = {
+    /**
+     * Success (no content)
+     */
+    204: void;
+};
+
+export type GameCenterDetailsGameCenterAchievementsV2ReplaceToManyRelationshipResponse = GameCenterDetailsGameCenterAchievementsV2ReplaceToManyRelationshipResponses[keyof GameCenterDetailsGameCenterAchievementsV2ReplaceToManyRelationshipResponses];
+
+export type GameCenterDetailsGameCenterAchievementsV2GetToManyRelatedData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * filter by attribute 'referenceName'
+         */
+        'filter[referenceName]'?: Array<string>;
+        /**
+         * filter by attribute 'archived'
+         */
+        'filter[archived]'?: Array<string>;
+        /**
+         * filter by id(s)
+         */
+        'filter[id]'?: Array<string>;
+        /**
+         * the fields to include for returned resources of type gameCenterAchievements
+         */
+        'fields[gameCenterAchievements]'?: Array<'referenceName' | 'vendorIdentifier' | 'points' | 'showBeforeEarned' | 'repeatable' | 'archived' | 'activityProperties' | 'gameCenterDetail' | 'gameCenterGroup' | 'activity' | 'versions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterDetails
+         */
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterGroups
+         */
+        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
+        /**
+         * the fields to include for returned resources of type gameCenterActivities
+         */
+        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'achievementsV2' | 'leaderboards' | 'leaderboardsV2' | 'versions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterAchievementVersions
+         */
+        'fields[gameCenterAchievementVersions]'?: Array<'version' | 'state' | 'achievement' | 'localizations'>;
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+        /**
+         * comma-separated list of relationships to include
+         */
+        include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'activity' | 'versions'>;
+        /**
+         * maximum number of related versions returned (when they are included)
+         */
+        'limit[versions]'?: number;
+    };
+    url: '/v1/gameCenterDetails/{id}/gameCenterAchievementsV2';
+};
+
+export type GameCenterDetailsGameCenterAchievementsV2GetToManyRelatedErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterDetailsGameCenterAchievementsV2GetToManyRelatedError = GameCenterDetailsGameCenterAchievementsV2GetToManyRelatedErrors[keyof GameCenterDetailsGameCenterAchievementsV2GetToManyRelatedErrors];
+
+export type GameCenterDetailsGameCenterAchievementsV2GetToManyRelatedResponses = {
+    /**
+     * List of GameCenterAchievements
+     */
+    200: GameCenterAchievementsV2Response;
+};
+
+export type GameCenterDetailsGameCenterAchievementsV2GetToManyRelatedResponse = GameCenterDetailsGameCenterAchievementsV2GetToManyRelatedResponses[keyof GameCenterDetailsGameCenterAchievementsV2GetToManyRelatedResponses];
 
 export type GameCenterDetailsGameCenterActivitiesGetToManyRelationshipData = {
     body?: never;
@@ -72280,23 +78547,23 @@ export type GameCenterDetailsGameCenterActivitiesGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterActivities
          */
-        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'leaderboards' | 'versions'>;
+        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'achievementsV2' | 'leaderboards' | 'leaderboardsV2' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultGroupLeaderboard' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
-        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges'>;
+        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
         /**
          * the fields to include for returned resources of type gameCenterAchievements
          */
-        'fields[gameCenterAchievements]'?: Array<'referenceName' | 'vendorIdentifier' | 'points' | 'showBeforeEarned' | 'repeatable' | 'archived' | 'activityProperties' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupAchievement' | 'localizations' | 'releases' | 'activity'>;
+        'fields[gameCenterAchievements]'?: Array<'referenceName' | 'vendorIdentifier' | 'points' | 'showBeforeEarned' | 'repeatable' | 'archived' | 'activityProperties' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupAchievement' | 'localizations' | 'releases' | 'activity' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboards
          */
-        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge'>;
+        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterActivityVersions
          */
@@ -72308,15 +78575,23 @@ export type GameCenterDetailsGameCenterActivitiesGetToManyRelatedData = {
         /**
          * comma-separated list of relationships to include
          */
-        include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'leaderboards' | 'versions'>;
+        include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'achievementsV2' | 'leaderboards' | 'leaderboardsV2' | 'versions'>;
         /**
          * maximum number of related achievements returned (when they are included)
          */
         'limit[achievements]'?: number;
         /**
+         * maximum number of related achievementsV2 returned (when they are included)
+         */
+        'limit[achievementsV2]'?: number;
+        /**
          * maximum number of related leaderboards returned (when they are included)
          */
         'limit[leaderboards]'?: number;
+        /**
+         * maximum number of related leaderboardsV2 returned (when they are included)
+         */
+        'limit[leaderboardsV2]'?: number;
         /**
          * maximum number of related versions returned (when they are included)
          */
@@ -72556,15 +78831,15 @@ export type GameCenterDetailsGameCenterChallengesGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterChallenges
          */
-        'fields[gameCenterChallenges]'?: Array<'referenceName' | 'vendorIdentifier' | 'archived' | 'challengeType' | 'repeatable' | 'gameCenterDetail' | 'gameCenterGroup' | 'versions' | 'leaderboard'>;
+        'fields[gameCenterChallenges]'?: Array<'referenceName' | 'vendorIdentifier' | 'archived' | 'challengeType' | 'repeatable' | 'gameCenterDetail' | 'gameCenterGroup' | 'versions' | 'leaderboard' | 'leaderboardV2'>;
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultGroupLeaderboard' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
-        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges'>;
+        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
         /**
          * the fields to include for returned resources of type gameCenterChallengeVersions
          */
@@ -72572,7 +78847,7 @@ export type GameCenterDetailsGameCenterChallengesGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterLeaderboards
          */
-        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge'>;
+        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge' | 'versions'>;
         /**
          * maximum resources per page
          */
@@ -72580,7 +78855,7 @@ export type GameCenterDetailsGameCenterChallengesGetToManyRelatedData = {
         /**
          * comma-separated list of relationships to include
          */
-        include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'versions' | 'leaderboard'>;
+        include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'versions' | 'leaderboard' | 'leaderboardV2'>;
         /**
          * maximum number of related versions returned (when they are included)
          */
@@ -72681,35 +78956,35 @@ export type GameCenterDetailsGameCenterGroupGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
-        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges'>;
+        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultGroupLeaderboard' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboards
          */
-        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge'>;
+        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardSets
          */
-        'fields[gameCenterLeaderboardSets]'?: Array<'referenceName' | 'vendorIdentifier' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboardSet' | 'localizations' | 'gameCenterLeaderboards' | 'releases'>;
+        'fields[gameCenterLeaderboardSets]'?: Array<'referenceName' | 'vendorIdentifier' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboardSet' | 'localizations' | 'gameCenterLeaderboards' | 'releases' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterAchievements
          */
-        'fields[gameCenterAchievements]'?: Array<'referenceName' | 'vendorIdentifier' | 'points' | 'showBeforeEarned' | 'repeatable' | 'archived' | 'activityProperties' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupAchievement' | 'localizations' | 'releases' | 'activity'>;
+        'fields[gameCenterAchievements]'?: Array<'referenceName' | 'vendorIdentifier' | 'points' | 'showBeforeEarned' | 'repeatable' | 'archived' | 'activityProperties' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupAchievement' | 'localizations' | 'releases' | 'activity' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterActivities
          */
-        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'leaderboards' | 'versions'>;
+        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'achievementsV2' | 'leaderboards' | 'leaderboardsV2' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterChallenges
          */
-        'fields[gameCenterChallenges]'?: Array<'referenceName' | 'vendorIdentifier' | 'archived' | 'challengeType' | 'repeatable' | 'gameCenterDetail' | 'gameCenterGroup' | 'versions' | 'leaderboard'>;
+        'fields[gameCenterChallenges]'?: Array<'referenceName' | 'vendorIdentifier' | 'archived' | 'challengeType' | 'repeatable' | 'gameCenterDetail' | 'gameCenterGroup' | 'versions' | 'leaderboard' | 'leaderboardV2'>;
         /**
          * comma-separated list of relationships to include
          */
-        include?: Array<'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges'>;
+        include?: Array<'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
         /**
          * maximum number of related gameCenterDetails returned (when they are included)
          */
@@ -72719,13 +78994,25 @@ export type GameCenterDetailsGameCenterGroupGetToOneRelatedData = {
          */
         'limit[gameCenterLeaderboards]'?: number;
         /**
+         * maximum number of related gameCenterLeaderboardsV2 returned (when they are included)
+         */
+        'limit[gameCenterLeaderboardsV2]'?: number;
+        /**
          * maximum number of related gameCenterLeaderboardSets returned (when they are included)
          */
         'limit[gameCenterLeaderboardSets]'?: number;
         /**
+         * maximum number of related gameCenterLeaderboardSetsV2 returned (when they are included)
+         */
+        'limit[gameCenterLeaderboardSetsV2]'?: number;
+        /**
          * maximum number of related gameCenterAchievements returned (when they are included)
          */
         'limit[gameCenterAchievements]'?: number;
+        /**
+         * maximum number of related gameCenterAchievementsV2 returned (when they are included)
+         */
+        'limit[gameCenterAchievementsV2]'?: number;
         /**
          * maximum number of related gameCenterActivities returned (when they are included)
          */
@@ -72900,11 +79187,11 @@ export type GameCenterDetailsGameCenterLeaderboardSetsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultGroupLeaderboard' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
-        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges'>;
+        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardSetLocalizations
          */
@@ -72974,6 +79261,201 @@ export type GameCenterDetailsGameCenterLeaderboardSetsGetToManyRelatedResponses 
 };
 
 export type GameCenterDetailsGameCenterLeaderboardSetsGetToManyRelatedResponse = GameCenterDetailsGameCenterLeaderboardSetsGetToManyRelatedResponses[keyof GameCenterDetailsGameCenterLeaderboardSetsGetToManyRelatedResponses];
+
+export type GameCenterDetailsGameCenterLeaderboardSetsV2GetToManyRelationshipData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+    };
+    url: '/v1/gameCenterDetails/{id}/relationships/gameCenterLeaderboardSetsV2';
+};
+
+export type GameCenterDetailsGameCenterLeaderboardSetsV2GetToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterDetailsGameCenterLeaderboardSetsV2GetToManyRelationshipError = GameCenterDetailsGameCenterLeaderboardSetsV2GetToManyRelationshipErrors[keyof GameCenterDetailsGameCenterLeaderboardSetsV2GetToManyRelationshipErrors];
+
+export type GameCenterDetailsGameCenterLeaderboardSetsV2GetToManyRelationshipResponses = {
+    /**
+     * List of related linkages
+     */
+    200: GameCenterDetailGameCenterLeaderboardSetsV2LinkagesResponse;
+};
+
+export type GameCenterDetailsGameCenterLeaderboardSetsV2GetToManyRelationshipResponse = GameCenterDetailsGameCenterLeaderboardSetsV2GetToManyRelationshipResponses[keyof GameCenterDetailsGameCenterLeaderboardSetsV2GetToManyRelationshipResponses];
+
+export type GameCenterDetailsGameCenterLeaderboardSetsV2ReplaceToManyRelationshipData = {
+    /**
+     * List of related linkages
+     */
+    body: GameCenterDetailGameCenterLeaderboardSetsV2LinkagesRequest;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v1/gameCenterDetails/{id}/relationships/gameCenterLeaderboardSetsV2';
+};
+
+export type GameCenterDetailsGameCenterLeaderboardSetsV2ReplaceToManyRelationshipErrors = {
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterDetailsGameCenterLeaderboardSetsV2ReplaceToManyRelationshipError = GameCenterDetailsGameCenterLeaderboardSetsV2ReplaceToManyRelationshipErrors[keyof GameCenterDetailsGameCenterLeaderboardSetsV2ReplaceToManyRelationshipErrors];
+
+export type GameCenterDetailsGameCenterLeaderboardSetsV2ReplaceToManyRelationshipResponses = {
+    /**
+     * Success (no content)
+     */
+    204: void;
+};
+
+export type GameCenterDetailsGameCenterLeaderboardSetsV2ReplaceToManyRelationshipResponse = GameCenterDetailsGameCenterLeaderboardSetsV2ReplaceToManyRelationshipResponses[keyof GameCenterDetailsGameCenterLeaderboardSetsV2ReplaceToManyRelationshipResponses];
+
+export type GameCenterDetailsGameCenterLeaderboardSetsV2GetToManyRelatedData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * filter by attribute 'referenceName'
+         */
+        'filter[referenceName]'?: Array<string>;
+        /**
+         * filter by id(s)
+         */
+        'filter[id]'?: Array<string>;
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboardSets
+         */
+        'fields[gameCenterLeaderboardSets]'?: Array<'referenceName' | 'vendorIdentifier' | 'gameCenterDetail' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'versions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterDetails
+         */
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterGroups
+         */
+        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboards
+         */
+        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'gameCenterLeaderboardSets' | 'activity' | 'challenge' | 'versions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboardSetVersions
+         */
+        'fields[gameCenterLeaderboardSetVersions]'?: Array<'version' | 'state' | 'leaderboardSet' | 'localizations'>;
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+        /**
+         * comma-separated list of relationships to include
+         */
+        include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'versions'>;
+        /**
+         * maximum number of related gameCenterLeaderboards returned (when they are included)
+         */
+        'limit[gameCenterLeaderboards]'?: number;
+        /**
+         * maximum number of related versions returned (when they are included)
+         */
+        'limit[versions]'?: number;
+    };
+    url: '/v1/gameCenterDetails/{id}/gameCenterLeaderboardSetsV2';
+};
+
+export type GameCenterDetailsGameCenterLeaderboardSetsV2GetToManyRelatedErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterDetailsGameCenterLeaderboardSetsV2GetToManyRelatedError = GameCenterDetailsGameCenterLeaderboardSetsV2GetToManyRelatedErrors[keyof GameCenterDetailsGameCenterLeaderboardSetsV2GetToManyRelatedErrors];
+
+export type GameCenterDetailsGameCenterLeaderboardSetsV2GetToManyRelatedResponses = {
+    /**
+     * List of GameCenterLeaderboardSets
+     */
+    200: GameCenterLeaderboardSetsV2Response;
+};
+
+export type GameCenterDetailsGameCenterLeaderboardSetsV2GetToManyRelatedResponse = GameCenterDetailsGameCenterLeaderboardSetsV2GetToManyRelatedResponses[keyof GameCenterDetailsGameCenterLeaderboardSetsV2GetToManyRelatedResponses];
 
 export type GameCenterDetailsGameCenterLeaderboardsGetToManyRelationshipData = {
     body?: never;
@@ -73107,11 +79589,11 @@ export type GameCenterDetailsGameCenterLeaderboardsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultGroupLeaderboard' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
-        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges'>;
+        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardSets
          */
@@ -73127,11 +79609,11 @@ export type GameCenterDetailsGameCenterLeaderboardsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterActivities
          */
-        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'leaderboards' | 'versions'>;
+        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'achievementsV2' | 'leaderboards' | 'leaderboardsV2' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterChallenges
          */
-        'fields[gameCenterChallenges]'?: Array<'referenceName' | 'vendorIdentifier' | 'archived' | 'challengeType' | 'repeatable' | 'gameCenterDetail' | 'gameCenterGroup' | 'versions' | 'leaderboard'>;
+        'fields[gameCenterChallenges]'?: Array<'referenceName' | 'vendorIdentifier' | 'archived' | 'challengeType' | 'repeatable' | 'gameCenterDetail' | 'gameCenterGroup' | 'versions' | 'leaderboard' | 'leaderboardV2'>;
         /**
          * maximum resources per page
          */
@@ -73189,6 +79671,213 @@ export type GameCenterDetailsGameCenterLeaderboardsGetToManyRelatedResponses = {
 };
 
 export type GameCenterDetailsGameCenterLeaderboardsGetToManyRelatedResponse = GameCenterDetailsGameCenterLeaderboardsGetToManyRelatedResponses[keyof GameCenterDetailsGameCenterLeaderboardsGetToManyRelatedResponses];
+
+export type GameCenterDetailsGameCenterLeaderboardsV2GetToManyRelationshipData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+    };
+    url: '/v1/gameCenterDetails/{id}/relationships/gameCenterLeaderboardsV2';
+};
+
+export type GameCenterDetailsGameCenterLeaderboardsV2GetToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterDetailsGameCenterLeaderboardsV2GetToManyRelationshipError = GameCenterDetailsGameCenterLeaderboardsV2GetToManyRelationshipErrors[keyof GameCenterDetailsGameCenterLeaderboardsV2GetToManyRelationshipErrors];
+
+export type GameCenterDetailsGameCenterLeaderboardsV2GetToManyRelationshipResponses = {
+    /**
+     * List of related linkages
+     */
+    200: GameCenterDetailGameCenterLeaderboardsV2LinkagesResponse;
+};
+
+export type GameCenterDetailsGameCenterLeaderboardsV2GetToManyRelationshipResponse = GameCenterDetailsGameCenterLeaderboardsV2GetToManyRelationshipResponses[keyof GameCenterDetailsGameCenterLeaderboardsV2GetToManyRelationshipResponses];
+
+export type GameCenterDetailsGameCenterLeaderboardsV2ReplaceToManyRelationshipData = {
+    /**
+     * List of related linkages
+     */
+    body: GameCenterDetailGameCenterLeaderboardsV2LinkagesRequest;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v1/gameCenterDetails/{id}/relationships/gameCenterLeaderboardsV2';
+};
+
+export type GameCenterDetailsGameCenterLeaderboardsV2ReplaceToManyRelationshipErrors = {
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterDetailsGameCenterLeaderboardsV2ReplaceToManyRelationshipError = GameCenterDetailsGameCenterLeaderboardsV2ReplaceToManyRelationshipErrors[keyof GameCenterDetailsGameCenterLeaderboardsV2ReplaceToManyRelationshipErrors];
+
+export type GameCenterDetailsGameCenterLeaderboardsV2ReplaceToManyRelationshipResponses = {
+    /**
+     * Success (no content)
+     */
+    204: void;
+};
+
+export type GameCenterDetailsGameCenterLeaderboardsV2ReplaceToManyRelationshipResponse = GameCenterDetailsGameCenterLeaderboardsV2ReplaceToManyRelationshipResponses[keyof GameCenterDetailsGameCenterLeaderboardsV2ReplaceToManyRelationshipResponses];
+
+export type GameCenterDetailsGameCenterLeaderboardsV2GetToManyRelatedData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * filter by attribute 'referenceName'
+         */
+        'filter[referenceName]'?: Array<string>;
+        /**
+         * filter by attribute 'archived'
+         */
+        'filter[archived]'?: Array<string>;
+        /**
+         * filter by id(s)
+         */
+        'filter[id]'?: Array<string>;
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboards
+         */
+        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'gameCenterLeaderboardSets' | 'activity' | 'challenge' | 'versions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterDetails
+         */
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterGroups
+         */
+        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboardSets
+         */
+        'fields[gameCenterLeaderboardSets]'?: Array<'referenceName' | 'vendorIdentifier' | 'gameCenterDetail' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'versions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterActivities
+         */
+        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'achievementsV2' | 'leaderboards' | 'leaderboardsV2' | 'versions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterChallenges
+         */
+        'fields[gameCenterChallenges]'?: Array<'referenceName' | 'vendorIdentifier' | 'archived' | 'challengeType' | 'repeatable' | 'gameCenterDetail' | 'gameCenterGroup' | 'versions' | 'leaderboard' | 'leaderboardV2'>;
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboardVersions
+         */
+        'fields[gameCenterLeaderboardVersions]'?: Array<'version' | 'state' | 'leaderboard' | 'localizations'>;
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+        /**
+         * comma-separated list of relationships to include
+         */
+        include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'gameCenterLeaderboardSets' | 'activity' | 'challenge' | 'versions'>;
+        /**
+         * maximum number of related gameCenterLeaderboardSets returned (when they are included)
+         */
+        'limit[gameCenterLeaderboardSets]'?: number;
+        /**
+         * maximum number of related versions returned (when they are included)
+         */
+        'limit[versions]'?: number;
+    };
+    url: '/v1/gameCenterDetails/{id}/gameCenterLeaderboardsV2';
+};
+
+export type GameCenterDetailsGameCenterLeaderboardsV2GetToManyRelatedErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterDetailsGameCenterLeaderboardsV2GetToManyRelatedError = GameCenterDetailsGameCenterLeaderboardsV2GetToManyRelatedErrors[keyof GameCenterDetailsGameCenterLeaderboardsV2GetToManyRelatedErrors];
+
+export type GameCenterDetailsGameCenterLeaderboardsV2GetToManyRelatedResponses = {
+    /**
+     * List of GameCenterLeaderboards
+     */
+    200: GameCenterLeaderboardsV2Response;
+};
+
+export type GameCenterDetailsGameCenterLeaderboardsV2GetToManyRelatedResponse = GameCenterDetailsGameCenterLeaderboardsV2GetToManyRelatedResponses[keyof GameCenterDetailsGameCenterLeaderboardsV2GetToManyRelatedResponses];
 
 export type GameCenterDetailsLeaderboardReleasesGetToManyRelationshipData = {
     body?: never;
@@ -73265,7 +79954,7 @@ export type GameCenterDetailsLeaderboardReleasesGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultGroupLeaderboard' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboards
          */
@@ -73391,7 +80080,7 @@ export type GameCenterDetailsLeaderboardSetReleasesGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultGroupLeaderboard' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardSets
          */
@@ -73688,7 +80377,7 @@ export type GameCenterEnabledVersionsCompatibleVersionsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * maximum resources per page
          */
@@ -73872,11 +80561,11 @@ export type GameCenterGroupsGameCenterAchievementsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultGroupLeaderboard' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
-        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges'>;
+        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
         /**
          * the fields to include for returned resources of type gameCenterAchievementLocalizations
          */
@@ -73888,7 +80577,7 @@ export type GameCenterGroupsGameCenterAchievementsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterActivities
          */
-        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'leaderboards' | 'versions'>;
+        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'achievementsV2' | 'leaderboards' | 'leaderboardsV2' | 'versions'>;
         /**
          * maximum resources per page
          */
@@ -73942,6 +80631,201 @@ export type GameCenterGroupsGameCenterAchievementsGetToManyRelatedResponses = {
 };
 
 export type GameCenterGroupsGameCenterAchievementsGetToManyRelatedResponse = GameCenterGroupsGameCenterAchievementsGetToManyRelatedResponses[keyof GameCenterGroupsGameCenterAchievementsGetToManyRelatedResponses];
+
+export type GameCenterGroupsGameCenterAchievementsV2GetToManyRelationshipData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+    };
+    url: '/v1/gameCenterGroups/{id}/relationships/gameCenterAchievementsV2';
+};
+
+export type GameCenterGroupsGameCenterAchievementsV2GetToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterGroupsGameCenterAchievementsV2GetToManyRelationshipError = GameCenterGroupsGameCenterAchievementsV2GetToManyRelationshipErrors[keyof GameCenterGroupsGameCenterAchievementsV2GetToManyRelationshipErrors];
+
+export type GameCenterGroupsGameCenterAchievementsV2GetToManyRelationshipResponses = {
+    /**
+     * List of related linkages
+     */
+    200: GameCenterGroupGameCenterAchievementsV2LinkagesResponse;
+};
+
+export type GameCenterGroupsGameCenterAchievementsV2GetToManyRelationshipResponse = GameCenterGroupsGameCenterAchievementsV2GetToManyRelationshipResponses[keyof GameCenterGroupsGameCenterAchievementsV2GetToManyRelationshipResponses];
+
+export type GameCenterGroupsGameCenterAchievementsV2ReplaceToManyRelationshipData = {
+    /**
+     * List of related linkages
+     */
+    body: GameCenterGroupGameCenterAchievementsV2LinkagesRequest;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v1/gameCenterGroups/{id}/relationships/gameCenterAchievementsV2';
+};
+
+export type GameCenterGroupsGameCenterAchievementsV2ReplaceToManyRelationshipErrors = {
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterGroupsGameCenterAchievementsV2ReplaceToManyRelationshipError = GameCenterGroupsGameCenterAchievementsV2ReplaceToManyRelationshipErrors[keyof GameCenterGroupsGameCenterAchievementsV2ReplaceToManyRelationshipErrors];
+
+export type GameCenterGroupsGameCenterAchievementsV2ReplaceToManyRelationshipResponses = {
+    /**
+     * Success (no content)
+     */
+    204: void;
+};
+
+export type GameCenterGroupsGameCenterAchievementsV2ReplaceToManyRelationshipResponse = GameCenterGroupsGameCenterAchievementsV2ReplaceToManyRelationshipResponses[keyof GameCenterGroupsGameCenterAchievementsV2ReplaceToManyRelationshipResponses];
+
+export type GameCenterGroupsGameCenterAchievementsV2GetToManyRelatedData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * filter by attribute 'referenceName'
+         */
+        'filter[referenceName]'?: Array<string>;
+        /**
+         * filter by attribute 'archived'
+         */
+        'filter[archived]'?: Array<string>;
+        /**
+         * filter by id(s)
+         */
+        'filter[id]'?: Array<string>;
+        /**
+         * the fields to include for returned resources of type gameCenterAchievements
+         */
+        'fields[gameCenterAchievements]'?: Array<'referenceName' | 'vendorIdentifier' | 'points' | 'showBeforeEarned' | 'repeatable' | 'archived' | 'activityProperties' | 'gameCenterDetail' | 'gameCenterGroup' | 'activity' | 'versions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterDetails
+         */
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterGroups
+         */
+        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
+        /**
+         * the fields to include for returned resources of type gameCenterActivities
+         */
+        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'achievementsV2' | 'leaderboards' | 'leaderboardsV2' | 'versions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterAchievementVersions
+         */
+        'fields[gameCenterAchievementVersions]'?: Array<'version' | 'state' | 'achievement' | 'localizations'>;
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+        /**
+         * comma-separated list of relationships to include
+         */
+        include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'activity' | 'versions'>;
+        /**
+         * maximum number of related versions returned (when they are included)
+         */
+        'limit[versions]'?: number;
+    };
+    url: '/v1/gameCenterGroups/{id}/gameCenterAchievementsV2';
+};
+
+export type GameCenterGroupsGameCenterAchievementsV2GetToManyRelatedErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterGroupsGameCenterAchievementsV2GetToManyRelatedError = GameCenterGroupsGameCenterAchievementsV2GetToManyRelatedErrors[keyof GameCenterGroupsGameCenterAchievementsV2GetToManyRelatedErrors];
+
+export type GameCenterGroupsGameCenterAchievementsV2GetToManyRelatedResponses = {
+    /**
+     * List of GameCenterAchievements
+     */
+    200: GameCenterAchievementsV2Response;
+};
+
+export type GameCenterGroupsGameCenterAchievementsV2GetToManyRelatedResponse = GameCenterGroupsGameCenterAchievementsV2GetToManyRelatedResponses[keyof GameCenterGroupsGameCenterAchievementsV2GetToManyRelatedResponses];
 
 export type GameCenterGroupsGameCenterActivitiesGetToManyRelationshipData = {
     body?: never;
@@ -74006,23 +80890,23 @@ export type GameCenterGroupsGameCenterActivitiesGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterActivities
          */
-        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'leaderboards' | 'versions'>;
+        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'achievementsV2' | 'leaderboards' | 'leaderboardsV2' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultGroupLeaderboard' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
-        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges'>;
+        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
         /**
          * the fields to include for returned resources of type gameCenterAchievements
          */
-        'fields[gameCenterAchievements]'?: Array<'referenceName' | 'vendorIdentifier' | 'points' | 'showBeforeEarned' | 'repeatable' | 'archived' | 'activityProperties' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupAchievement' | 'localizations' | 'releases' | 'activity'>;
+        'fields[gameCenterAchievements]'?: Array<'referenceName' | 'vendorIdentifier' | 'points' | 'showBeforeEarned' | 'repeatable' | 'archived' | 'activityProperties' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupAchievement' | 'localizations' | 'releases' | 'activity' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboards
          */
-        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge'>;
+        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterActivityVersions
          */
@@ -74034,15 +80918,23 @@ export type GameCenterGroupsGameCenterActivitiesGetToManyRelatedData = {
         /**
          * comma-separated list of relationships to include
          */
-        include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'leaderboards' | 'versions'>;
+        include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'achievementsV2' | 'leaderboards' | 'leaderboardsV2' | 'versions'>;
         /**
          * maximum number of related achievements returned (when they are included)
          */
         'limit[achievements]'?: number;
         /**
+         * maximum number of related achievementsV2 returned (when they are included)
+         */
+        'limit[achievementsV2]'?: number;
+        /**
          * maximum number of related leaderboards returned (when they are included)
          */
         'limit[leaderboards]'?: number;
+        /**
+         * maximum number of related leaderboardsV2 returned (when they are included)
+         */
+        'limit[leaderboardsV2]'?: number;
         /**
          * maximum number of related versions returned (when they are included)
          */
@@ -74160,15 +81052,15 @@ export type GameCenterGroupsGameCenterChallengesGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterChallenges
          */
-        'fields[gameCenterChallenges]'?: Array<'referenceName' | 'vendorIdentifier' | 'archived' | 'challengeType' | 'repeatable' | 'gameCenterDetail' | 'gameCenterGroup' | 'versions' | 'leaderboard'>;
+        'fields[gameCenterChallenges]'?: Array<'referenceName' | 'vendorIdentifier' | 'archived' | 'challengeType' | 'repeatable' | 'gameCenterDetail' | 'gameCenterGroup' | 'versions' | 'leaderboard' | 'leaderboardV2'>;
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultGroupLeaderboard' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
-        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges'>;
+        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
         /**
          * the fields to include for returned resources of type gameCenterChallengeVersions
          */
@@ -74176,7 +81068,7 @@ export type GameCenterGroupsGameCenterChallengesGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterLeaderboards
          */
-        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge'>;
+        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge' | 'versions'>;
         /**
          * maximum resources per page
          */
@@ -74184,7 +81076,7 @@ export type GameCenterGroupsGameCenterChallengesGetToManyRelatedData = {
         /**
          * comma-separated list of relationships to include
          */
-        include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'versions' | 'leaderboard'>;
+        include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'versions' | 'leaderboard' | 'leaderboardV2'>;
         /**
          * maximum number of related versions returned (when they are included)
          */
@@ -74294,11 +81186,11 @@ export type GameCenterGroupsGameCenterDetailsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultGroupLeaderboard' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type gameCenterAppVersions
          */
@@ -74306,27 +81198,27 @@ export type GameCenterGroupsGameCenterDetailsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
-        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges'>;
+        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboards
          */
-        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge'>;
+        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardSets
          */
-        'fields[gameCenterLeaderboardSets]'?: Array<'referenceName' | 'vendorIdentifier' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboardSet' | 'localizations' | 'gameCenterLeaderboards' | 'releases'>;
+        'fields[gameCenterLeaderboardSets]'?: Array<'referenceName' | 'vendorIdentifier' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboardSet' | 'localizations' | 'gameCenterLeaderboards' | 'releases' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterAchievements
          */
-        'fields[gameCenterAchievements]'?: Array<'referenceName' | 'vendorIdentifier' | 'points' | 'showBeforeEarned' | 'repeatable' | 'archived' | 'activityProperties' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupAchievement' | 'localizations' | 'releases' | 'activity'>;
+        'fields[gameCenterAchievements]'?: Array<'referenceName' | 'vendorIdentifier' | 'points' | 'showBeforeEarned' | 'repeatable' | 'archived' | 'activityProperties' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupAchievement' | 'localizations' | 'releases' | 'activity' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterActivities
          */
-        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'leaderboards' | 'versions'>;
+        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'achievementsV2' | 'leaderboards' | 'leaderboardsV2' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterChallenges
          */
-        'fields[gameCenterChallenges]'?: Array<'referenceName' | 'vendorIdentifier' | 'archived' | 'challengeType' | 'repeatable' | 'gameCenterDetail' | 'gameCenterGroup' | 'versions' | 'leaderboard'>;
+        'fields[gameCenterChallenges]'?: Array<'referenceName' | 'vendorIdentifier' | 'archived' | 'challengeType' | 'repeatable' | 'gameCenterDetail' | 'gameCenterGroup' | 'versions' | 'leaderboard' | 'leaderboardV2'>;
         /**
          * the fields to include for returned resources of type gameCenterAchievementReleases
          */
@@ -74358,7 +81250,7 @@ export type GameCenterGroupsGameCenterDetailsGetToManyRelatedData = {
         /**
          * comma-separated list of relationships to include
          */
-        include?: Array<'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultGroupLeaderboard' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        include?: Array<'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
         /**
          * maximum number of related gameCenterAppVersions returned (when they are included)
          */
@@ -74368,13 +81260,25 @@ export type GameCenterGroupsGameCenterDetailsGetToManyRelatedData = {
          */
         'limit[gameCenterLeaderboards]'?: number;
         /**
+         * maximum number of related gameCenterLeaderboardsV2 returned (when they are included)
+         */
+        'limit[gameCenterLeaderboardsV2]'?: number;
+        /**
          * maximum number of related gameCenterLeaderboardSets returned (when they are included)
          */
         'limit[gameCenterLeaderboardSets]'?: number;
         /**
+         * maximum number of related gameCenterLeaderboardSetsV2 returned (when they are included)
+         */
+        'limit[gameCenterLeaderboardSetsV2]'?: number;
+        /**
          * maximum number of related gameCenterAchievements returned (when they are included)
          */
         'limit[gameCenterAchievements]'?: number;
+        /**
+         * maximum number of related gameCenterAchievementsV2 returned (when they are included)
+         */
+        'limit[gameCenterAchievementsV2]'?: number;
         /**
          * maximum number of related gameCenterActivities returned (when they are included)
          */
@@ -74573,11 +81477,11 @@ export type GameCenterGroupsGameCenterLeaderboardSetsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultGroupLeaderboard' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
-        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges'>;
+        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardSetLocalizations
          */
@@ -74647,6 +81551,201 @@ export type GameCenterGroupsGameCenterLeaderboardSetsGetToManyRelatedResponses =
 };
 
 export type GameCenterGroupsGameCenterLeaderboardSetsGetToManyRelatedResponse = GameCenterGroupsGameCenterLeaderboardSetsGetToManyRelatedResponses[keyof GameCenterGroupsGameCenterLeaderboardSetsGetToManyRelatedResponses];
+
+export type GameCenterGroupsGameCenterLeaderboardSetsV2GetToManyRelationshipData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+    };
+    url: '/v1/gameCenterGroups/{id}/relationships/gameCenterLeaderboardSetsV2';
+};
+
+export type GameCenterGroupsGameCenterLeaderboardSetsV2GetToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterGroupsGameCenterLeaderboardSetsV2GetToManyRelationshipError = GameCenterGroupsGameCenterLeaderboardSetsV2GetToManyRelationshipErrors[keyof GameCenterGroupsGameCenterLeaderboardSetsV2GetToManyRelationshipErrors];
+
+export type GameCenterGroupsGameCenterLeaderboardSetsV2GetToManyRelationshipResponses = {
+    /**
+     * List of related linkages
+     */
+    200: GameCenterGroupGameCenterLeaderboardSetsV2LinkagesResponse;
+};
+
+export type GameCenterGroupsGameCenterLeaderboardSetsV2GetToManyRelationshipResponse = GameCenterGroupsGameCenterLeaderboardSetsV2GetToManyRelationshipResponses[keyof GameCenterGroupsGameCenterLeaderboardSetsV2GetToManyRelationshipResponses];
+
+export type GameCenterGroupsGameCenterLeaderboardSetsV2ReplaceToManyRelationshipData = {
+    /**
+     * List of related linkages
+     */
+    body: GameCenterGroupGameCenterLeaderboardSetsV2LinkagesRequest;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v1/gameCenterGroups/{id}/relationships/gameCenterLeaderboardSetsV2';
+};
+
+export type GameCenterGroupsGameCenterLeaderboardSetsV2ReplaceToManyRelationshipErrors = {
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterGroupsGameCenterLeaderboardSetsV2ReplaceToManyRelationshipError = GameCenterGroupsGameCenterLeaderboardSetsV2ReplaceToManyRelationshipErrors[keyof GameCenterGroupsGameCenterLeaderboardSetsV2ReplaceToManyRelationshipErrors];
+
+export type GameCenterGroupsGameCenterLeaderboardSetsV2ReplaceToManyRelationshipResponses = {
+    /**
+     * Success (no content)
+     */
+    204: void;
+};
+
+export type GameCenterGroupsGameCenterLeaderboardSetsV2ReplaceToManyRelationshipResponse = GameCenterGroupsGameCenterLeaderboardSetsV2ReplaceToManyRelationshipResponses[keyof GameCenterGroupsGameCenterLeaderboardSetsV2ReplaceToManyRelationshipResponses];
+
+export type GameCenterGroupsGameCenterLeaderboardSetsV2GetToManyRelatedData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * filter by attribute 'referenceName'
+         */
+        'filter[referenceName]'?: Array<string>;
+        /**
+         * filter by id(s)
+         */
+        'filter[id]'?: Array<string>;
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboardSets
+         */
+        'fields[gameCenterLeaderboardSets]'?: Array<'referenceName' | 'vendorIdentifier' | 'gameCenterDetail' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'versions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterDetails
+         */
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterGroups
+         */
+        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboards
+         */
+        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'gameCenterLeaderboardSets' | 'activity' | 'challenge' | 'versions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboardSetVersions
+         */
+        'fields[gameCenterLeaderboardSetVersions]'?: Array<'version' | 'state' | 'leaderboardSet' | 'localizations'>;
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+        /**
+         * comma-separated list of relationships to include
+         */
+        include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'versions'>;
+        /**
+         * maximum number of related gameCenterLeaderboards returned (when they are included)
+         */
+        'limit[gameCenterLeaderboards]'?: number;
+        /**
+         * maximum number of related versions returned (when they are included)
+         */
+        'limit[versions]'?: number;
+    };
+    url: '/v1/gameCenterGroups/{id}/gameCenterLeaderboardSetsV2';
+};
+
+export type GameCenterGroupsGameCenterLeaderboardSetsV2GetToManyRelatedErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterGroupsGameCenterLeaderboardSetsV2GetToManyRelatedError = GameCenterGroupsGameCenterLeaderboardSetsV2GetToManyRelatedErrors[keyof GameCenterGroupsGameCenterLeaderboardSetsV2GetToManyRelatedErrors];
+
+export type GameCenterGroupsGameCenterLeaderboardSetsV2GetToManyRelatedResponses = {
+    /**
+     * List of GameCenterLeaderboardSets
+     */
+    200: GameCenterLeaderboardSetsV2Response;
+};
+
+export type GameCenterGroupsGameCenterLeaderboardSetsV2GetToManyRelatedResponse = GameCenterGroupsGameCenterLeaderboardSetsV2GetToManyRelatedResponses[keyof GameCenterGroupsGameCenterLeaderboardSetsV2GetToManyRelatedResponses];
 
 export type GameCenterGroupsGameCenterLeaderboardsGetToManyRelationshipData = {
     body?: never;
@@ -74780,11 +81879,11 @@ export type GameCenterGroupsGameCenterLeaderboardsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultGroupLeaderboard' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
-        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges'>;
+        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardSets
          */
@@ -74800,11 +81899,11 @@ export type GameCenterGroupsGameCenterLeaderboardsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterActivities
          */
-        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'leaderboards' | 'versions'>;
+        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'achievementsV2' | 'leaderboards' | 'leaderboardsV2' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterChallenges
          */
-        'fields[gameCenterChallenges]'?: Array<'referenceName' | 'vendorIdentifier' | 'archived' | 'challengeType' | 'repeatable' | 'gameCenterDetail' | 'gameCenterGroup' | 'versions' | 'leaderboard'>;
+        'fields[gameCenterChallenges]'?: Array<'referenceName' | 'vendorIdentifier' | 'archived' | 'challengeType' | 'repeatable' | 'gameCenterDetail' | 'gameCenterGroup' | 'versions' | 'leaderboard' | 'leaderboardV2'>;
         /**
          * maximum resources per page
          */
@@ -74862,6 +81961,213 @@ export type GameCenterGroupsGameCenterLeaderboardsGetToManyRelatedResponses = {
 };
 
 export type GameCenterGroupsGameCenterLeaderboardsGetToManyRelatedResponse = GameCenterGroupsGameCenterLeaderboardsGetToManyRelatedResponses[keyof GameCenterGroupsGameCenterLeaderboardsGetToManyRelatedResponses];
+
+export type GameCenterGroupsGameCenterLeaderboardsV2GetToManyRelationshipData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+    };
+    url: '/v1/gameCenterGroups/{id}/relationships/gameCenterLeaderboardsV2';
+};
+
+export type GameCenterGroupsGameCenterLeaderboardsV2GetToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterGroupsGameCenterLeaderboardsV2GetToManyRelationshipError = GameCenterGroupsGameCenterLeaderboardsV2GetToManyRelationshipErrors[keyof GameCenterGroupsGameCenterLeaderboardsV2GetToManyRelationshipErrors];
+
+export type GameCenterGroupsGameCenterLeaderboardsV2GetToManyRelationshipResponses = {
+    /**
+     * List of related linkages
+     */
+    200: GameCenterGroupGameCenterLeaderboardsV2LinkagesResponse;
+};
+
+export type GameCenterGroupsGameCenterLeaderboardsV2GetToManyRelationshipResponse = GameCenterGroupsGameCenterLeaderboardsV2GetToManyRelationshipResponses[keyof GameCenterGroupsGameCenterLeaderboardsV2GetToManyRelationshipResponses];
+
+export type GameCenterGroupsGameCenterLeaderboardsV2ReplaceToManyRelationshipData = {
+    /**
+     * List of related linkages
+     */
+    body: GameCenterGroupGameCenterLeaderboardsV2LinkagesRequest;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v1/gameCenterGroups/{id}/relationships/gameCenterLeaderboardsV2';
+};
+
+export type GameCenterGroupsGameCenterLeaderboardsV2ReplaceToManyRelationshipErrors = {
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterGroupsGameCenterLeaderboardsV2ReplaceToManyRelationshipError = GameCenterGroupsGameCenterLeaderboardsV2ReplaceToManyRelationshipErrors[keyof GameCenterGroupsGameCenterLeaderboardsV2ReplaceToManyRelationshipErrors];
+
+export type GameCenterGroupsGameCenterLeaderboardsV2ReplaceToManyRelationshipResponses = {
+    /**
+     * Success (no content)
+     */
+    204: void;
+};
+
+export type GameCenterGroupsGameCenterLeaderboardsV2ReplaceToManyRelationshipResponse = GameCenterGroupsGameCenterLeaderboardsV2ReplaceToManyRelationshipResponses[keyof GameCenterGroupsGameCenterLeaderboardsV2ReplaceToManyRelationshipResponses];
+
+export type GameCenterGroupsGameCenterLeaderboardsV2GetToManyRelatedData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * filter by attribute 'referenceName'
+         */
+        'filter[referenceName]'?: Array<string>;
+        /**
+         * filter by attribute 'archived'
+         */
+        'filter[archived]'?: Array<string>;
+        /**
+         * filter by id(s)
+         */
+        'filter[id]'?: Array<string>;
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboards
+         */
+        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'gameCenterLeaderboardSets' | 'activity' | 'challenge' | 'versions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterDetails
+         */
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterGroups
+         */
+        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboardSets
+         */
+        'fields[gameCenterLeaderboardSets]'?: Array<'referenceName' | 'vendorIdentifier' | 'gameCenterDetail' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'versions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterActivities
+         */
+        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'achievementsV2' | 'leaderboards' | 'leaderboardsV2' | 'versions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterChallenges
+         */
+        'fields[gameCenterChallenges]'?: Array<'referenceName' | 'vendorIdentifier' | 'archived' | 'challengeType' | 'repeatable' | 'gameCenterDetail' | 'gameCenterGroup' | 'versions' | 'leaderboard' | 'leaderboardV2'>;
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboardVersions
+         */
+        'fields[gameCenterLeaderboardVersions]'?: Array<'version' | 'state' | 'leaderboard' | 'localizations'>;
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+        /**
+         * comma-separated list of relationships to include
+         */
+        include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'gameCenterLeaderboardSets' | 'activity' | 'challenge' | 'versions'>;
+        /**
+         * maximum number of related gameCenterLeaderboardSets returned (when they are included)
+         */
+        'limit[gameCenterLeaderboardSets]'?: number;
+        /**
+         * maximum number of related versions returned (when they are included)
+         */
+        'limit[versions]'?: number;
+    };
+    url: '/v1/gameCenterGroups/{id}/gameCenterLeaderboardsV2';
+};
+
+export type GameCenterGroupsGameCenterLeaderboardsV2GetToManyRelatedErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterGroupsGameCenterLeaderboardsV2GetToManyRelatedError = GameCenterGroupsGameCenterLeaderboardsV2GetToManyRelatedErrors[keyof GameCenterGroupsGameCenterLeaderboardsV2GetToManyRelatedErrors];
+
+export type GameCenterGroupsGameCenterLeaderboardsV2GetToManyRelatedResponses = {
+    /**
+     * List of GameCenterLeaderboards
+     */
+    200: GameCenterLeaderboardsV2Response;
+};
+
+export type GameCenterGroupsGameCenterLeaderboardsV2GetToManyRelatedResponse = GameCenterGroupsGameCenterLeaderboardsV2GetToManyRelatedResponses[keyof GameCenterGroupsGameCenterLeaderboardsV2GetToManyRelatedResponses];
 
 export type GameCenterLeaderboardLocalizationsGameCenterLeaderboardImageGetToOneRelationshipData = {
     body?: never;
@@ -74968,6 +82274,111 @@ export type GameCenterLeaderboardLocalizationsGameCenterLeaderboardImageGetToOne
 
 export type GameCenterLeaderboardLocalizationsGameCenterLeaderboardImageGetToOneRelatedResponse = GameCenterLeaderboardLocalizationsGameCenterLeaderboardImageGetToOneRelatedResponses[keyof GameCenterLeaderboardLocalizationsGameCenterLeaderboardImageGetToOneRelatedResponses];
 
+export type GameCenterLeaderboardLocalizationsV2ImageGetToOneRelationshipData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v2/gameCenterLeaderboardLocalizations/{id}/relationships/image';
+};
+
+export type GameCenterLeaderboardLocalizationsV2ImageGetToOneRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardLocalizationsV2ImageGetToOneRelationshipError = GameCenterLeaderboardLocalizationsV2ImageGetToOneRelationshipErrors[keyof GameCenterLeaderboardLocalizationsV2ImageGetToOneRelationshipErrors];
+
+export type GameCenterLeaderboardLocalizationsV2ImageGetToOneRelationshipResponses = {
+    /**
+     * Related linkage
+     */
+    200: GameCenterLeaderboardLocalizationV2ImageLinkageResponse;
+};
+
+export type GameCenterLeaderboardLocalizationsV2ImageGetToOneRelationshipResponse = GameCenterLeaderboardLocalizationsV2ImageGetToOneRelationshipResponses[keyof GameCenterLeaderboardLocalizationsV2ImageGetToOneRelationshipResponses];
+
+export type GameCenterLeaderboardLocalizationsV2ImageGetToOneRelatedData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboardImages
+         */
+        'fields[gameCenterLeaderboardImages]'?: Array<'fileSize' | 'fileName' | 'imageAsset' | 'uploadOperations' | 'assetDeliveryState' | 'localization'>;
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboardLocalizations
+         */
+        'fields[gameCenterLeaderboardLocalizations]'?: Array<'locale' | 'name' | 'formatterOverride' | 'formatterSuffix' | 'formatterSuffixSingular' | 'description' | 'version' | 'image'>;
+        /**
+         * comma-separated list of relationships to include
+         */
+        include?: Array<'localization'>;
+    };
+    url: '/v2/gameCenterLeaderboardLocalizations/{id}/image';
+};
+
+export type GameCenterLeaderboardLocalizationsV2ImageGetToOneRelatedErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardLocalizationsV2ImageGetToOneRelatedError = GameCenterLeaderboardLocalizationsV2ImageGetToOneRelatedErrors[keyof GameCenterLeaderboardLocalizationsV2ImageGetToOneRelatedErrors];
+
+export type GameCenterLeaderboardLocalizationsV2ImageGetToOneRelatedResponses = {
+    /**
+     * Single GameCenterLeaderboardImage
+     */
+    200: GameCenterLeaderboardImageV2Response;
+};
+
+export type GameCenterLeaderboardLocalizationsV2ImageGetToOneRelatedResponse = GameCenterLeaderboardLocalizationsV2ImageGetToOneRelatedResponses[keyof GameCenterLeaderboardLocalizationsV2ImageGetToOneRelatedResponses];
+
 export type GameCenterLeaderboardSetLocalizationsGameCenterLeaderboardSetImageGetToOneRelationshipData = {
     body?: never;
     path: {
@@ -75073,6 +82484,111 @@ export type GameCenterLeaderboardSetLocalizationsGameCenterLeaderboardSetImageGe
 
 export type GameCenterLeaderboardSetLocalizationsGameCenterLeaderboardSetImageGetToOneRelatedResponse = GameCenterLeaderboardSetLocalizationsGameCenterLeaderboardSetImageGetToOneRelatedResponses[keyof GameCenterLeaderboardSetLocalizationsGameCenterLeaderboardSetImageGetToOneRelatedResponses];
 
+export type GameCenterLeaderboardSetLocalizationsV2ImageGetToOneRelationshipData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v2/gameCenterLeaderboardSetLocalizations/{id}/relationships/image';
+};
+
+export type GameCenterLeaderboardSetLocalizationsV2ImageGetToOneRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardSetLocalizationsV2ImageGetToOneRelationshipError = GameCenterLeaderboardSetLocalizationsV2ImageGetToOneRelationshipErrors[keyof GameCenterLeaderboardSetLocalizationsV2ImageGetToOneRelationshipErrors];
+
+export type GameCenterLeaderboardSetLocalizationsV2ImageGetToOneRelationshipResponses = {
+    /**
+     * Related linkage
+     */
+    200: GameCenterLeaderboardSetLocalizationV2ImageLinkageResponse;
+};
+
+export type GameCenterLeaderboardSetLocalizationsV2ImageGetToOneRelationshipResponse = GameCenterLeaderboardSetLocalizationsV2ImageGetToOneRelationshipResponses[keyof GameCenterLeaderboardSetLocalizationsV2ImageGetToOneRelationshipResponses];
+
+export type GameCenterLeaderboardSetLocalizationsV2ImageGetToOneRelatedData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboardSetImages
+         */
+        'fields[gameCenterLeaderboardSetImages]'?: Array<'fileSize' | 'fileName' | 'imageAsset' | 'uploadOperations' | 'assetDeliveryState' | 'localization'>;
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboardSetLocalizations
+         */
+        'fields[gameCenterLeaderboardSetLocalizations]'?: Array<'locale' | 'name' | 'version' | 'image'>;
+        /**
+         * comma-separated list of relationships to include
+         */
+        include?: Array<'localization'>;
+    };
+    url: '/v2/gameCenterLeaderboardSetLocalizations/{id}/image';
+};
+
+export type GameCenterLeaderboardSetLocalizationsV2ImageGetToOneRelatedErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardSetLocalizationsV2ImageGetToOneRelatedError = GameCenterLeaderboardSetLocalizationsV2ImageGetToOneRelatedErrors[keyof GameCenterLeaderboardSetLocalizationsV2ImageGetToOneRelatedErrors];
+
+export type GameCenterLeaderboardSetLocalizationsV2ImageGetToOneRelatedResponses = {
+    /**
+     * Single GameCenterLeaderboardSetImage
+     */
+    200: GameCenterLeaderboardSetImageV2Response;
+};
+
+export type GameCenterLeaderboardSetLocalizationsV2ImageGetToOneRelatedResponse = GameCenterLeaderboardSetLocalizationsV2ImageGetToOneRelatedResponses[keyof GameCenterLeaderboardSetLocalizationsV2ImageGetToOneRelatedResponses];
+
 export type GameCenterLeaderboardSetMemberLocalizationsGameCenterLeaderboardGetToOneRelationshipData = {
     body?: never;
     path: {
@@ -75135,11 +82651,11 @@ export type GameCenterLeaderboardSetMemberLocalizationsGameCenterLeaderboardGetT
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultGroupLeaderboard' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
-        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges'>;
+        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardSets
          */
@@ -75155,11 +82671,11 @@ export type GameCenterLeaderboardSetMemberLocalizationsGameCenterLeaderboardGetT
         /**
          * the fields to include for returned resources of type gameCenterActivities
          */
-        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'leaderboards' | 'versions'>;
+        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'achievementsV2' | 'leaderboards' | 'leaderboardsV2' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterChallenges
          */
-        'fields[gameCenterChallenges]'?: Array<'referenceName' | 'vendorIdentifier' | 'archived' | 'challengeType' | 'repeatable' | 'gameCenterDetail' | 'gameCenterGroup' | 'versions' | 'leaderboard'>;
+        'fields[gameCenterChallenges]'?: Array<'referenceName' | 'vendorIdentifier' | 'archived' | 'challengeType' | 'repeatable' | 'gameCenterDetail' | 'gameCenterGroup' | 'versions' | 'leaderboard' | 'leaderboardV2'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -75276,11 +82792,11 @@ export type GameCenterLeaderboardSetMemberLocalizationsGameCenterLeaderboardSetG
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultGroupLeaderboard' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
-        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges'>;
+        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardSetLocalizations
          */
@@ -75346,6 +82862,559 @@ export type GameCenterLeaderboardSetMemberLocalizationsGameCenterLeaderboardSetG
 };
 
 export type GameCenterLeaderboardSetMemberLocalizationsGameCenterLeaderboardSetGetToOneRelatedResponse = GameCenterLeaderboardSetMemberLocalizationsGameCenterLeaderboardSetGetToOneRelatedResponses[keyof GameCenterLeaderboardSetMemberLocalizationsGameCenterLeaderboardSetGetToOneRelatedResponses];
+
+export type GameCenterLeaderboardSetVersionsV2LocalizationsGetToManyRelationshipData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+    };
+    url: '/v2/gameCenterLeaderboardSetVersions/{id}/relationships/localizations';
+};
+
+export type GameCenterLeaderboardSetVersionsV2LocalizationsGetToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardSetVersionsV2LocalizationsGetToManyRelationshipError = GameCenterLeaderboardSetVersionsV2LocalizationsGetToManyRelationshipErrors[keyof GameCenterLeaderboardSetVersionsV2LocalizationsGetToManyRelationshipErrors];
+
+export type GameCenterLeaderboardSetVersionsV2LocalizationsGetToManyRelationshipResponses = {
+    /**
+     * List of related linkages
+     */
+    200: GameCenterLeaderboardSetVersionV2LocalizationsLinkagesResponse;
+};
+
+export type GameCenterLeaderboardSetVersionsV2LocalizationsGetToManyRelationshipResponse = GameCenterLeaderboardSetVersionsV2LocalizationsGetToManyRelationshipResponses[keyof GameCenterLeaderboardSetVersionsV2LocalizationsGetToManyRelationshipResponses];
+
+export type GameCenterLeaderboardSetVersionsV2LocalizationsGetToManyRelatedData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboardSetLocalizations
+         */
+        'fields[gameCenterLeaderboardSetLocalizations]'?: Array<'locale' | 'name' | 'version' | 'image'>;
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboardSetVersions
+         */
+        'fields[gameCenterLeaderboardSetVersions]'?: Array<'version' | 'state' | 'leaderboardSet' | 'localizations'>;
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboardSetImages
+         */
+        'fields[gameCenterLeaderboardSetImages]'?: Array<'fileSize' | 'fileName' | 'imageAsset' | 'uploadOperations' | 'assetDeliveryState' | 'localization'>;
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+        /**
+         * comma-separated list of relationships to include
+         */
+        include?: Array<'version' | 'image'>;
+    };
+    url: '/v2/gameCenterLeaderboardSetVersions/{id}/localizations';
+};
+
+export type GameCenterLeaderboardSetVersionsV2LocalizationsGetToManyRelatedErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardSetVersionsV2LocalizationsGetToManyRelatedError = GameCenterLeaderboardSetVersionsV2LocalizationsGetToManyRelatedErrors[keyof GameCenterLeaderboardSetVersionsV2LocalizationsGetToManyRelatedErrors];
+
+export type GameCenterLeaderboardSetVersionsV2LocalizationsGetToManyRelatedResponses = {
+    /**
+     * List of GameCenterLeaderboardSetLocalizations
+     */
+    200: GameCenterLeaderboardSetLocalizationsV2Response;
+};
+
+export type GameCenterLeaderboardSetVersionsV2LocalizationsGetToManyRelatedResponse = GameCenterLeaderboardSetVersionsV2LocalizationsGetToManyRelatedResponses[keyof GameCenterLeaderboardSetVersionsV2LocalizationsGetToManyRelatedResponses];
+
+export type GameCenterLeaderboardSetsV2GameCenterLeaderboardsDeleteToManyRelationshipData = {
+    /**
+     * List of related linkages
+     */
+    body: GameCenterLeaderboardSetV2GameCenterLeaderboardsLinkagesRequest;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v2/gameCenterLeaderboardSets/{id}/relationships/gameCenterLeaderboards';
+};
+
+export type GameCenterLeaderboardSetsV2GameCenterLeaderboardsDeleteToManyRelationshipErrors = {
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardSetsV2GameCenterLeaderboardsDeleteToManyRelationshipError = GameCenterLeaderboardSetsV2GameCenterLeaderboardsDeleteToManyRelationshipErrors[keyof GameCenterLeaderboardSetsV2GameCenterLeaderboardsDeleteToManyRelationshipErrors];
+
+export type GameCenterLeaderboardSetsV2GameCenterLeaderboardsDeleteToManyRelationshipResponses = {
+    /**
+     * Success (no content)
+     */
+    204: void;
+};
+
+export type GameCenterLeaderboardSetsV2GameCenterLeaderboardsDeleteToManyRelationshipResponse = GameCenterLeaderboardSetsV2GameCenterLeaderboardsDeleteToManyRelationshipResponses[keyof GameCenterLeaderboardSetsV2GameCenterLeaderboardsDeleteToManyRelationshipResponses];
+
+export type GameCenterLeaderboardSetsV2GameCenterLeaderboardsGetToManyRelationshipData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+    };
+    url: '/v2/gameCenterLeaderboardSets/{id}/relationships/gameCenterLeaderboards';
+};
+
+export type GameCenterLeaderboardSetsV2GameCenterLeaderboardsGetToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardSetsV2GameCenterLeaderboardsGetToManyRelationshipError = GameCenterLeaderboardSetsV2GameCenterLeaderboardsGetToManyRelationshipErrors[keyof GameCenterLeaderboardSetsV2GameCenterLeaderboardsGetToManyRelationshipErrors];
+
+export type GameCenterLeaderboardSetsV2GameCenterLeaderboardsGetToManyRelationshipResponses = {
+    /**
+     * List of related linkages
+     */
+    200: GameCenterLeaderboardSetV2GameCenterLeaderboardsLinkagesResponse;
+};
+
+export type GameCenterLeaderboardSetsV2GameCenterLeaderboardsGetToManyRelationshipResponse = GameCenterLeaderboardSetsV2GameCenterLeaderboardsGetToManyRelationshipResponses[keyof GameCenterLeaderboardSetsV2GameCenterLeaderboardsGetToManyRelationshipResponses];
+
+export type GameCenterLeaderboardSetsV2GameCenterLeaderboardsReplaceToManyRelationshipData = {
+    /**
+     * List of related linkages
+     */
+    body: GameCenterLeaderboardSetV2GameCenterLeaderboardsLinkagesRequest;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v2/gameCenterLeaderboardSets/{id}/relationships/gameCenterLeaderboards';
+};
+
+export type GameCenterLeaderboardSetsV2GameCenterLeaderboardsReplaceToManyRelationshipErrors = {
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardSetsV2GameCenterLeaderboardsReplaceToManyRelationshipError = GameCenterLeaderboardSetsV2GameCenterLeaderboardsReplaceToManyRelationshipErrors[keyof GameCenterLeaderboardSetsV2GameCenterLeaderboardsReplaceToManyRelationshipErrors];
+
+export type GameCenterLeaderboardSetsV2GameCenterLeaderboardsReplaceToManyRelationshipResponses = {
+    /**
+     * Success (no content)
+     */
+    204: void;
+};
+
+export type GameCenterLeaderboardSetsV2GameCenterLeaderboardsReplaceToManyRelationshipResponse = GameCenterLeaderboardSetsV2GameCenterLeaderboardsReplaceToManyRelationshipResponses[keyof GameCenterLeaderboardSetsV2GameCenterLeaderboardsReplaceToManyRelationshipResponses];
+
+export type GameCenterLeaderboardSetsV2GameCenterLeaderboardsCreateToManyRelationshipData = {
+    /**
+     * List of related linkages
+     */
+    body: GameCenterLeaderboardSetV2GameCenterLeaderboardsLinkagesRequest;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v2/gameCenterLeaderboardSets/{id}/relationships/gameCenterLeaderboards';
+};
+
+export type GameCenterLeaderboardSetsV2GameCenterLeaderboardsCreateToManyRelationshipErrors = {
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardSetsV2GameCenterLeaderboardsCreateToManyRelationshipError = GameCenterLeaderboardSetsV2GameCenterLeaderboardsCreateToManyRelationshipErrors[keyof GameCenterLeaderboardSetsV2GameCenterLeaderboardsCreateToManyRelationshipErrors];
+
+export type GameCenterLeaderboardSetsV2GameCenterLeaderboardsCreateToManyRelationshipResponses = {
+    /**
+     * Success (no content)
+     */
+    204: void;
+};
+
+export type GameCenterLeaderboardSetsV2GameCenterLeaderboardsCreateToManyRelationshipResponse = GameCenterLeaderboardSetsV2GameCenterLeaderboardsCreateToManyRelationshipResponses[keyof GameCenterLeaderboardSetsV2GameCenterLeaderboardsCreateToManyRelationshipResponses];
+
+export type GameCenterLeaderboardSetsV2GameCenterLeaderboardsGetToManyRelatedData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * filter by attribute 'referenceName'
+         */
+        'filter[referenceName]'?: Array<string>;
+        /**
+         * filter by attribute 'archived'
+         */
+        'filter[archived]'?: Array<string>;
+        /**
+         * filter by id(s)
+         */
+        'filter[id]'?: Array<string>;
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboards
+         */
+        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'gameCenterLeaderboardSets' | 'activity' | 'challenge' | 'versions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterDetails
+         */
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterGroups
+         */
+        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboardSets
+         */
+        'fields[gameCenterLeaderboardSets]'?: Array<'referenceName' | 'vendorIdentifier' | 'gameCenterDetail' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'versions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterActivities
+         */
+        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'achievementsV2' | 'leaderboards' | 'leaderboardsV2' | 'versions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterChallenges
+         */
+        'fields[gameCenterChallenges]'?: Array<'referenceName' | 'vendorIdentifier' | 'archived' | 'challengeType' | 'repeatable' | 'gameCenterDetail' | 'gameCenterGroup' | 'versions' | 'leaderboard' | 'leaderboardV2'>;
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboardVersions
+         */
+        'fields[gameCenterLeaderboardVersions]'?: Array<'version' | 'state' | 'leaderboard' | 'localizations'>;
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+        /**
+         * comma-separated list of relationships to include
+         */
+        include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'gameCenterLeaderboardSets' | 'activity' | 'challenge' | 'versions'>;
+        /**
+         * maximum number of related gameCenterLeaderboardSets returned (when they are included)
+         */
+        'limit[gameCenterLeaderboardSets]'?: number;
+        /**
+         * maximum number of related versions returned (when they are included)
+         */
+        'limit[versions]'?: number;
+    };
+    url: '/v2/gameCenterLeaderboardSets/{id}/gameCenterLeaderboards';
+};
+
+export type GameCenterLeaderboardSetsV2GameCenterLeaderboardsGetToManyRelatedErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardSetsV2GameCenterLeaderboardsGetToManyRelatedError = GameCenterLeaderboardSetsV2GameCenterLeaderboardsGetToManyRelatedErrors[keyof GameCenterLeaderboardSetsV2GameCenterLeaderboardsGetToManyRelatedErrors];
+
+export type GameCenterLeaderboardSetsV2GameCenterLeaderboardsGetToManyRelatedResponses = {
+    /**
+     * List of GameCenterLeaderboards
+     */
+    200: GameCenterLeaderboardsV2Response;
+};
+
+export type GameCenterLeaderboardSetsV2GameCenterLeaderboardsGetToManyRelatedResponse = GameCenterLeaderboardSetsV2GameCenterLeaderboardsGetToManyRelatedResponses[keyof GameCenterLeaderboardSetsV2GameCenterLeaderboardsGetToManyRelatedResponses];
+
+export type GameCenterLeaderboardSetsV2VersionsGetToManyRelationshipData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+    };
+    url: '/v2/gameCenterLeaderboardSets/{id}/relationships/versions';
+};
+
+export type GameCenterLeaderboardSetsV2VersionsGetToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardSetsV2VersionsGetToManyRelationshipError = GameCenterLeaderboardSetsV2VersionsGetToManyRelationshipErrors[keyof GameCenterLeaderboardSetsV2VersionsGetToManyRelationshipErrors];
+
+export type GameCenterLeaderboardSetsV2VersionsGetToManyRelationshipResponses = {
+    /**
+     * List of related linkages
+     */
+    200: GameCenterLeaderboardSetV2VersionsLinkagesResponse;
+};
+
+export type GameCenterLeaderboardSetsV2VersionsGetToManyRelationshipResponse = GameCenterLeaderboardSetsV2VersionsGetToManyRelationshipResponses[keyof GameCenterLeaderboardSetsV2VersionsGetToManyRelationshipResponses];
+
+export type GameCenterLeaderboardSetsV2VersionsGetToManyRelatedData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboardSetVersions
+         */
+        'fields[gameCenterLeaderboardSetVersions]'?: Array<'version' | 'state' | 'leaderboardSet' | 'localizations'>;
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboardSets
+         */
+        'fields[gameCenterLeaderboardSets]'?: Array<'referenceName' | 'vendorIdentifier' | 'gameCenterDetail' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'versions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboardSetLocalizations
+         */
+        'fields[gameCenterLeaderboardSetLocalizations]'?: Array<'locale' | 'name' | 'version' | 'image'>;
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+        /**
+         * comma-separated list of relationships to include
+         */
+        include?: Array<'leaderboardSet' | 'localizations'>;
+        /**
+         * maximum number of related localizations returned (when they are included)
+         */
+        'limit[localizations]'?: number;
+    };
+    url: '/v2/gameCenterLeaderboardSets/{id}/versions';
+};
+
+export type GameCenterLeaderboardSetsV2VersionsGetToManyRelatedErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardSetsV2VersionsGetToManyRelatedError = GameCenterLeaderboardSetsV2VersionsGetToManyRelatedErrors[keyof GameCenterLeaderboardSetsV2VersionsGetToManyRelatedErrors];
+
+export type GameCenterLeaderboardSetsV2VersionsGetToManyRelatedResponses = {
+    /**
+     * List of GameCenterLeaderboardSetVersions
+     */
+    200: GameCenterLeaderboardSetVersionsV2Response;
+};
+
+export type GameCenterLeaderboardSetsV2VersionsGetToManyRelatedResponse = GameCenterLeaderboardSetsV2VersionsGetToManyRelatedResponses[keyof GameCenterLeaderboardSetsV2VersionsGetToManyRelatedResponses];
 
 export type GameCenterLeaderboardSetsGameCenterLeaderboardsDeleteToManyRelationshipData = {
     /**
@@ -75585,11 +83654,11 @@ export type GameCenterLeaderboardSetsGameCenterLeaderboardsGetToManyRelatedData 
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultGroupLeaderboard' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
-        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges'>;
+        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardSets
          */
@@ -75605,11 +83674,11 @@ export type GameCenterLeaderboardSetsGameCenterLeaderboardsGetToManyRelatedData 
         /**
          * the fields to include for returned resources of type gameCenterActivities
          */
-        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'leaderboards' | 'versions'>;
+        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'achievementsV2' | 'leaderboards' | 'leaderboardsV2' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterChallenges
          */
-        'fields[gameCenterChallenges]'?: Array<'referenceName' | 'vendorIdentifier' | 'archived' | 'challengeType' | 'repeatable' | 'gameCenterDetail' | 'gameCenterGroup' | 'versions' | 'leaderboard'>;
+        'fields[gameCenterChallenges]'?: Array<'referenceName' | 'vendorIdentifier' | 'archived' | 'challengeType' | 'repeatable' | 'gameCenterDetail' | 'gameCenterGroup' | 'versions' | 'leaderboard' | 'leaderboardV2'>;
         /**
          * maximum resources per page
          */
@@ -75783,11 +83852,11 @@ export type GameCenterLeaderboardSetsGroupLeaderboardSetGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultGroupLeaderboard' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
-        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges'>;
+        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardSetLocalizations
          */
@@ -76047,7 +84116,7 @@ export type GameCenterLeaderboardSetsReleasesGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultGroupLeaderboard' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardSets
          */
@@ -76097,6 +84166,124 @@ export type GameCenterLeaderboardSetsReleasesGetToManyRelatedResponses = {
 };
 
 export type GameCenterLeaderboardSetsReleasesGetToManyRelatedResponse = GameCenterLeaderboardSetsReleasesGetToManyRelatedResponses[keyof GameCenterLeaderboardSetsReleasesGetToManyRelatedResponses];
+
+export type GameCenterLeaderboardVersionsV2LocalizationsGetToManyRelationshipData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+    };
+    url: '/v2/gameCenterLeaderboardVersions/{id}/relationships/localizations';
+};
+
+export type GameCenterLeaderboardVersionsV2LocalizationsGetToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardVersionsV2LocalizationsGetToManyRelationshipError = GameCenterLeaderboardVersionsV2LocalizationsGetToManyRelationshipErrors[keyof GameCenterLeaderboardVersionsV2LocalizationsGetToManyRelationshipErrors];
+
+export type GameCenterLeaderboardVersionsV2LocalizationsGetToManyRelationshipResponses = {
+    /**
+     * List of related linkages
+     */
+    200: GameCenterLeaderboardVersionV2LocalizationsLinkagesResponse;
+};
+
+export type GameCenterLeaderboardVersionsV2LocalizationsGetToManyRelationshipResponse = GameCenterLeaderboardVersionsV2LocalizationsGetToManyRelationshipResponses[keyof GameCenterLeaderboardVersionsV2LocalizationsGetToManyRelationshipResponses];
+
+export type GameCenterLeaderboardVersionsV2LocalizationsGetToManyRelatedData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboardLocalizations
+         */
+        'fields[gameCenterLeaderboardLocalizations]'?: Array<'locale' | 'name' | 'formatterOverride' | 'formatterSuffix' | 'formatterSuffixSingular' | 'description' | 'version' | 'image'>;
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboardVersions
+         */
+        'fields[gameCenterLeaderboardVersions]'?: Array<'version' | 'state' | 'leaderboard' | 'localizations'>;
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboardImages
+         */
+        'fields[gameCenterLeaderboardImages]'?: Array<'fileSize' | 'fileName' | 'imageAsset' | 'uploadOperations' | 'assetDeliveryState' | 'localization'>;
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+        /**
+         * comma-separated list of relationships to include
+         */
+        include?: Array<'version' | 'image'>;
+    };
+    url: '/v2/gameCenterLeaderboardVersions/{id}/localizations';
+};
+
+export type GameCenterLeaderboardVersionsV2LocalizationsGetToManyRelatedErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardVersionsV2LocalizationsGetToManyRelatedError = GameCenterLeaderboardVersionsV2LocalizationsGetToManyRelatedErrors[keyof GameCenterLeaderboardVersionsV2LocalizationsGetToManyRelatedErrors];
+
+export type GameCenterLeaderboardVersionsV2LocalizationsGetToManyRelatedResponses = {
+    /**
+     * List of GameCenterLeaderboardLocalizations
+     */
+    200: GameCenterLeaderboardLocalizationsV2Response;
+};
+
+export type GameCenterLeaderboardVersionsV2LocalizationsGetToManyRelatedResponse = GameCenterLeaderboardVersionsV2LocalizationsGetToManyRelatedResponses[keyof GameCenterLeaderboardVersionsV2LocalizationsGetToManyRelatedResponses];
 
 export type GameCenterLeaderboardsActivityUpdateToOneRelationshipData = {
     /**
@@ -76319,11 +84506,11 @@ export type GameCenterLeaderboardsGroupLeaderboardGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultGroupLeaderboard' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
-        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges'>;
+        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardSets
          */
@@ -76339,11 +84526,11 @@ export type GameCenterLeaderboardsGroupLeaderboardGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterActivities
          */
-        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'leaderboards' | 'versions'>;
+        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'achievementsV2' | 'leaderboards' | 'leaderboardsV2' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterChallenges
          */
-        'fields[gameCenterChallenges]'?: Array<'referenceName' | 'vendorIdentifier' | 'archived' | 'challengeType' | 'repeatable' | 'gameCenterDetail' | 'gameCenterGroup' | 'versions' | 'leaderboard'>;
+        'fields[gameCenterChallenges]'?: Array<'referenceName' | 'vendorIdentifier' | 'archived' | 'challengeType' | 'repeatable' | 'gameCenterDetail' | 'gameCenterGroup' | 'versions' | 'leaderboard' | 'leaderboardV2'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -76591,7 +84778,7 @@ export type GameCenterLeaderboardsReleasesGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardSets' | 'gameCenterAchievements' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultGroupLeaderboard' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboards
          */
@@ -76641,6 +84828,234 @@ export type GameCenterLeaderboardsReleasesGetToManyRelatedResponses = {
 };
 
 export type GameCenterLeaderboardsReleasesGetToManyRelatedResponse = GameCenterLeaderboardsReleasesGetToManyRelatedResponses[keyof GameCenterLeaderboardsReleasesGetToManyRelatedResponses];
+
+export type GameCenterLeaderboardsV2ActivityUpdateToOneRelationshipData = {
+    /**
+     * Related linkage
+     */
+    body: GameCenterLeaderboardV2ActivityLinkageRequest;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v2/gameCenterLeaderboards/{id}/relationships/activity';
+};
+
+export type GameCenterLeaderboardsV2ActivityUpdateToOneRelationshipErrors = {
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardsV2ActivityUpdateToOneRelationshipError = GameCenterLeaderboardsV2ActivityUpdateToOneRelationshipErrors[keyof GameCenterLeaderboardsV2ActivityUpdateToOneRelationshipErrors];
+
+export type GameCenterLeaderboardsV2ActivityUpdateToOneRelationshipResponses = {
+    /**
+     * Success (no content)
+     */
+    204: void;
+};
+
+export type GameCenterLeaderboardsV2ActivityUpdateToOneRelationshipResponse = GameCenterLeaderboardsV2ActivityUpdateToOneRelationshipResponses[keyof GameCenterLeaderboardsV2ActivityUpdateToOneRelationshipResponses];
+
+export type GameCenterLeaderboardsV2ChallengeUpdateToOneRelationshipData = {
+    /**
+     * Related linkage
+     */
+    body: GameCenterLeaderboardV2ChallengeLinkageRequest;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v2/gameCenterLeaderboards/{id}/relationships/challenge';
+};
+
+export type GameCenterLeaderboardsV2ChallengeUpdateToOneRelationshipErrors = {
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardsV2ChallengeUpdateToOneRelationshipError = GameCenterLeaderboardsV2ChallengeUpdateToOneRelationshipErrors[keyof GameCenterLeaderboardsV2ChallengeUpdateToOneRelationshipErrors];
+
+export type GameCenterLeaderboardsV2ChallengeUpdateToOneRelationshipResponses = {
+    /**
+     * Success (no content)
+     */
+    204: void;
+};
+
+export type GameCenterLeaderboardsV2ChallengeUpdateToOneRelationshipResponse = GameCenterLeaderboardsV2ChallengeUpdateToOneRelationshipResponses[keyof GameCenterLeaderboardsV2ChallengeUpdateToOneRelationshipResponses];
+
+export type GameCenterLeaderboardsV2VersionsGetToManyRelationshipData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+    };
+    url: '/v2/gameCenterLeaderboards/{id}/relationships/versions';
+};
+
+export type GameCenterLeaderboardsV2VersionsGetToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardsV2VersionsGetToManyRelationshipError = GameCenterLeaderboardsV2VersionsGetToManyRelationshipErrors[keyof GameCenterLeaderboardsV2VersionsGetToManyRelationshipErrors];
+
+export type GameCenterLeaderboardsV2VersionsGetToManyRelationshipResponses = {
+    /**
+     * List of related linkages
+     */
+    200: GameCenterLeaderboardV2VersionsLinkagesResponse;
+};
+
+export type GameCenterLeaderboardsV2VersionsGetToManyRelationshipResponse = GameCenterLeaderboardsV2VersionsGetToManyRelationshipResponses[keyof GameCenterLeaderboardsV2VersionsGetToManyRelationshipResponses];
+
+export type GameCenterLeaderboardsV2VersionsGetToManyRelatedData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboardVersions
+         */
+        'fields[gameCenterLeaderboardVersions]'?: Array<'version' | 'state' | 'leaderboard' | 'localizations'>;
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboards
+         */
+        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'gameCenterLeaderboardSets' | 'activity' | 'challenge' | 'versions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboardLocalizations
+         */
+        'fields[gameCenterLeaderboardLocalizations]'?: Array<'locale' | 'name' | 'formatterOverride' | 'formatterSuffix' | 'formatterSuffixSingular' | 'description' | 'version' | 'image'>;
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+        /**
+         * comma-separated list of relationships to include
+         */
+        include?: Array<'leaderboard' | 'localizations'>;
+        /**
+         * maximum number of related localizations returned (when they are included)
+         */
+        'limit[localizations]'?: number;
+    };
+    url: '/v2/gameCenterLeaderboards/{id}/versions';
+};
+
+export type GameCenterLeaderboardsV2VersionsGetToManyRelatedErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardsV2VersionsGetToManyRelatedError = GameCenterLeaderboardsV2VersionsGetToManyRelatedErrors[keyof GameCenterLeaderboardsV2VersionsGetToManyRelatedErrors];
+
+export type GameCenterLeaderboardsV2VersionsGetToManyRelatedResponses = {
+    /**
+     * List of GameCenterLeaderboardVersions
+     */
+    200: GameCenterLeaderboardVersionsV2Response;
+};
+
+export type GameCenterLeaderboardsV2VersionsGetToManyRelatedResponse = GameCenterLeaderboardsV2VersionsGetToManyRelatedResponses[keyof GameCenterLeaderboardsV2VersionsGetToManyRelatedResponses];
 
 export type GameCenterMatchmakingRuleSetsMatchmakingQueuesGetToManyRelationshipData = {
     body?: never;
@@ -77073,6 +85488,402 @@ export type InAppPurchaseAvailabilitiesAvailableTerritoriesGetToManyRelatedRespo
 };
 
 export type InAppPurchaseAvailabilitiesAvailableTerritoriesGetToManyRelatedResponse = InAppPurchaseAvailabilitiesAvailableTerritoriesGetToManyRelatedResponses[keyof InAppPurchaseAvailabilitiesAvailableTerritoriesGetToManyRelatedResponses];
+
+export type InAppPurchaseOfferCodeOneTimeUseCodesValuesGetToOneRelatedData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v1/inAppPurchaseOfferCodeOneTimeUseCodes/{id}/values';
+};
+
+export type InAppPurchaseOfferCodeOneTimeUseCodesValuesGetToOneRelatedErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type InAppPurchaseOfferCodeOneTimeUseCodesValuesGetToOneRelatedError = InAppPurchaseOfferCodeOneTimeUseCodesValuesGetToOneRelatedErrors[keyof InAppPurchaseOfferCodeOneTimeUseCodesValuesGetToOneRelatedErrors];
+
+export type InAppPurchaseOfferCodeOneTimeUseCodesValuesGetToOneRelatedResponses = {
+    /**
+     * Single InAppPurchaseOfferCodeOneTimeUseCodeValue
+     */
+    200: Csv;
+};
+
+export type InAppPurchaseOfferCodeOneTimeUseCodesValuesGetToOneRelatedResponse = InAppPurchaseOfferCodeOneTimeUseCodesValuesGetToOneRelatedResponses[keyof InAppPurchaseOfferCodeOneTimeUseCodesValuesGetToOneRelatedResponses];
+
+export type InAppPurchaseOfferCodesCustomCodesGetToManyRelationshipData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+    };
+    url: '/v1/inAppPurchaseOfferCodes/{id}/relationships/customCodes';
+};
+
+export type InAppPurchaseOfferCodesCustomCodesGetToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type InAppPurchaseOfferCodesCustomCodesGetToManyRelationshipError = InAppPurchaseOfferCodesCustomCodesGetToManyRelationshipErrors[keyof InAppPurchaseOfferCodesCustomCodesGetToManyRelationshipErrors];
+
+export type InAppPurchaseOfferCodesCustomCodesGetToManyRelationshipResponses = {
+    /**
+     * List of related linkages
+     */
+    200: InAppPurchaseOfferCodeCustomCodesLinkagesResponse;
+};
+
+export type InAppPurchaseOfferCodesCustomCodesGetToManyRelationshipResponse = InAppPurchaseOfferCodesCustomCodesGetToManyRelationshipResponses[keyof InAppPurchaseOfferCodesCustomCodesGetToManyRelationshipResponses];
+
+export type InAppPurchaseOfferCodesCustomCodesGetToManyRelatedData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * the fields to include for returned resources of type inAppPurchaseOfferCodeCustomCodes
+         */
+        'fields[inAppPurchaseOfferCodeCustomCodes]'?: Array<'customCode' | 'numberOfCodes' | 'createdDate' | 'expirationDate' | 'active' | 'createdByActor' | 'deactivatedByActor'>;
+        /**
+         * the fields to include for returned resources of type actors
+         */
+        'fields[actors]'?: Array<'actorType' | 'userFirstName' | 'userLastName' | 'userEmail' | 'apiKeyId'>;
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+        /**
+         * comma-separated list of relationships to include
+         */
+        include?: Array<'createdByActor' | 'deactivatedByActor'>;
+    };
+    url: '/v1/inAppPurchaseOfferCodes/{id}/customCodes';
+};
+
+export type InAppPurchaseOfferCodesCustomCodesGetToManyRelatedErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type InAppPurchaseOfferCodesCustomCodesGetToManyRelatedError = InAppPurchaseOfferCodesCustomCodesGetToManyRelatedErrors[keyof InAppPurchaseOfferCodesCustomCodesGetToManyRelatedErrors];
+
+export type InAppPurchaseOfferCodesCustomCodesGetToManyRelatedResponses = {
+    /**
+     * List of InAppPurchaseOfferCodeCustomCodes
+     */
+    200: InAppPurchaseOfferCodeCustomCodesResponse;
+};
+
+export type InAppPurchaseOfferCodesCustomCodesGetToManyRelatedResponse = InAppPurchaseOfferCodesCustomCodesGetToManyRelatedResponses[keyof InAppPurchaseOfferCodesCustomCodesGetToManyRelatedResponses];
+
+export type InAppPurchaseOfferCodesOneTimeUseCodesGetToManyRelationshipData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+    };
+    url: '/v1/inAppPurchaseOfferCodes/{id}/relationships/oneTimeUseCodes';
+};
+
+export type InAppPurchaseOfferCodesOneTimeUseCodesGetToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type InAppPurchaseOfferCodesOneTimeUseCodesGetToManyRelationshipError = InAppPurchaseOfferCodesOneTimeUseCodesGetToManyRelationshipErrors[keyof InAppPurchaseOfferCodesOneTimeUseCodesGetToManyRelationshipErrors];
+
+export type InAppPurchaseOfferCodesOneTimeUseCodesGetToManyRelationshipResponses = {
+    /**
+     * List of related linkages
+     */
+    200: InAppPurchaseOfferCodeOneTimeUseCodesLinkagesResponse;
+};
+
+export type InAppPurchaseOfferCodesOneTimeUseCodesGetToManyRelationshipResponse = InAppPurchaseOfferCodesOneTimeUseCodesGetToManyRelationshipResponses[keyof InAppPurchaseOfferCodesOneTimeUseCodesGetToManyRelationshipResponses];
+
+export type InAppPurchaseOfferCodesOneTimeUseCodesGetToManyRelatedData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * the fields to include for returned resources of type inAppPurchaseOfferCodeOneTimeUseCodes
+         */
+        'fields[inAppPurchaseOfferCodeOneTimeUseCodes]'?: Array<'numberOfCodes' | 'createdDate' | 'expirationDate' | 'active' | 'environment' | 'values' | 'createdByActor' | 'deactivatedByActor'>;
+        /**
+         * the fields to include for returned resources of type actors
+         */
+        'fields[actors]'?: Array<'actorType' | 'userFirstName' | 'userLastName' | 'userEmail' | 'apiKeyId'>;
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+        /**
+         * comma-separated list of relationships to include
+         */
+        include?: Array<'createdByActor' | 'deactivatedByActor'>;
+    };
+    url: '/v1/inAppPurchaseOfferCodes/{id}/oneTimeUseCodes';
+};
+
+export type InAppPurchaseOfferCodesOneTimeUseCodesGetToManyRelatedErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type InAppPurchaseOfferCodesOneTimeUseCodesGetToManyRelatedError = InAppPurchaseOfferCodesOneTimeUseCodesGetToManyRelatedErrors[keyof InAppPurchaseOfferCodesOneTimeUseCodesGetToManyRelatedErrors];
+
+export type InAppPurchaseOfferCodesOneTimeUseCodesGetToManyRelatedResponses = {
+    /**
+     * List of InAppPurchaseOfferCodeOneTimeUseCodes
+     */
+    200: InAppPurchaseOfferCodeOneTimeUseCodesResponse;
+};
+
+export type InAppPurchaseOfferCodesOneTimeUseCodesGetToManyRelatedResponse = InAppPurchaseOfferCodesOneTimeUseCodesGetToManyRelatedResponses[keyof InAppPurchaseOfferCodesOneTimeUseCodesGetToManyRelatedResponses];
+
+export type InAppPurchaseOfferCodesPricesGetToManyRelationshipData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+    };
+    url: '/v1/inAppPurchaseOfferCodes/{id}/relationships/prices';
+};
+
+export type InAppPurchaseOfferCodesPricesGetToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type InAppPurchaseOfferCodesPricesGetToManyRelationshipError = InAppPurchaseOfferCodesPricesGetToManyRelationshipErrors[keyof InAppPurchaseOfferCodesPricesGetToManyRelationshipErrors];
+
+export type InAppPurchaseOfferCodesPricesGetToManyRelationshipResponses = {
+    /**
+     * List of related linkages
+     */
+    200: InAppPurchaseOfferCodePricesLinkagesResponse;
+};
+
+export type InAppPurchaseOfferCodesPricesGetToManyRelationshipResponse = InAppPurchaseOfferCodesPricesGetToManyRelationshipResponses[keyof InAppPurchaseOfferCodesPricesGetToManyRelationshipResponses];
+
+export type InAppPurchaseOfferCodesPricesGetToManyRelatedData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * filter by id(s) of related 'territory'
+         */
+        'filter[territory]'?: Array<string>;
+        /**
+         * the fields to include for returned resources of type inAppPurchaseOfferPrices
+         */
+        'fields[inAppPurchaseOfferPrices]'?: Array<'territory' | 'pricePoint'>;
+        /**
+         * the fields to include for returned resources of type territories
+         */
+        'fields[territories]'?: Array<'currency'>;
+        /**
+         * the fields to include for returned resources of type inAppPurchasePricePoints
+         */
+        'fields[inAppPurchasePricePoints]'?: Array<'customerPrice' | 'proceeds' | 'territory' | 'equalizations'>;
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+        /**
+         * comma-separated list of relationships to include
+         */
+        include?: Array<'territory' | 'pricePoint'>;
+    };
+    url: '/v1/inAppPurchaseOfferCodes/{id}/prices';
+};
+
+export type InAppPurchaseOfferCodesPricesGetToManyRelatedErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type InAppPurchaseOfferCodesPricesGetToManyRelatedError = InAppPurchaseOfferCodesPricesGetToManyRelatedErrors[keyof InAppPurchaseOfferCodesPricesGetToManyRelatedErrors];
+
+export type InAppPurchaseOfferCodesPricesGetToManyRelatedResponses = {
+    /**
+     * List of InAppPurchaseOfferPrices
+     */
+    200: InAppPurchaseOfferPricesResponse;
+};
+
+export type InAppPurchaseOfferCodesPricesGetToManyRelatedResponse = InAppPurchaseOfferCodesPricesGetToManyRelatedResponses[keyof InAppPurchaseOfferCodesPricesGetToManyRelatedResponses];
 
 export type InAppPurchasePricePointsEqualizationsGetToManyRelationshipData = {
     body?: never;
@@ -77599,7 +86410,7 @@ export type InAppPurchasesV2AppStoreReviewScreenshotGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type inAppPurchases
          */
-        'fields[inAppPurchases]'?: Array<'name' | 'productId' | 'inAppPurchaseType' | 'state' | 'reviewNote' | 'familySharable' | 'contentHosting' | 'inAppPurchaseLocalizations' | 'pricePoints' | 'content' | 'appStoreReviewScreenshot' | 'promotedPurchase' | 'iapPriceSchedule' | 'inAppPurchaseAvailability' | 'images'>;
+        'fields[inAppPurchases]'?: Array<'name' | 'productId' | 'inAppPurchaseType' | 'state' | 'reviewNote' | 'familySharable' | 'contentHosting' | 'inAppPurchaseLocalizations' | 'pricePoints' | 'content' | 'appStoreReviewScreenshot' | 'promotedPurchase' | 'iapPriceSchedule' | 'inAppPurchaseAvailability' | 'images' | 'offerCodes'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -77704,7 +86515,7 @@ export type InAppPurchasesV2ContentGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type inAppPurchases
          */
-        'fields[inAppPurchases]'?: Array<'name' | 'productId' | 'inAppPurchaseType' | 'state' | 'reviewNote' | 'familySharable' | 'contentHosting' | 'inAppPurchaseLocalizations' | 'pricePoints' | 'content' | 'appStoreReviewScreenshot' | 'promotedPurchase' | 'iapPriceSchedule' | 'inAppPurchaseAvailability' | 'images'>;
+        'fields[inAppPurchases]'?: Array<'name' | 'productId' | 'inAppPurchaseType' | 'state' | 'reviewNote' | 'familySharable' | 'contentHosting' | 'inAppPurchaseLocalizations' | 'pricePoints' | 'content' | 'appStoreReviewScreenshot' | 'promotedPurchase' | 'iapPriceSchedule' | 'inAppPurchaseAvailability' | 'images' | 'offerCodes'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -77931,7 +86742,7 @@ export type InAppPurchasesV2ImagesGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type inAppPurchases
          */
-        'fields[inAppPurchases]'?: Array<'name' | 'productId' | 'inAppPurchaseType' | 'state' | 'reviewNote' | 'familySharable' | 'contentHosting' | 'inAppPurchaseLocalizations' | 'pricePoints' | 'content' | 'appStoreReviewScreenshot' | 'promotedPurchase' | 'iapPriceSchedule' | 'inAppPurchaseAvailability' | 'images'>;
+        'fields[inAppPurchases]'?: Array<'name' | 'productId' | 'inAppPurchaseType' | 'state' | 'reviewNote' | 'familySharable' | 'contentHosting' | 'inAppPurchaseLocalizations' | 'pricePoints' | 'content' | 'appStoreReviewScreenshot' | 'promotedPurchase' | 'iapPriceSchedule' | 'inAppPurchaseAvailability' | 'images' | 'offerCodes'>;
         /**
          * maximum resources per page
          */
@@ -78154,7 +86965,7 @@ export type InAppPurchasesV2InAppPurchaseLocalizationsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type inAppPurchases
          */
-        'fields[inAppPurchases]'?: Array<'name' | 'productId' | 'inAppPurchaseType' | 'state' | 'reviewNote' | 'familySharable' | 'contentHosting' | 'inAppPurchaseLocalizations' | 'pricePoints' | 'content' | 'appStoreReviewScreenshot' | 'promotedPurchase' | 'iapPriceSchedule' | 'inAppPurchaseAvailability' | 'images'>;
+        'fields[inAppPurchases]'?: Array<'name' | 'productId' | 'inAppPurchaseType' | 'state' | 'reviewNote' | 'familySharable' | 'contentHosting' | 'inAppPurchaseLocalizations' | 'pricePoints' | 'content' | 'appStoreReviewScreenshot' | 'promotedPurchase' | 'iapPriceSchedule' | 'inAppPurchaseAvailability' | 'images' | 'offerCodes'>;
         /**
          * maximum resources per page
          */
@@ -78200,6 +87011,144 @@ export type InAppPurchasesV2InAppPurchaseLocalizationsGetToManyRelatedResponses 
 };
 
 export type InAppPurchasesV2InAppPurchaseLocalizationsGetToManyRelatedResponse = InAppPurchasesV2InAppPurchaseLocalizationsGetToManyRelatedResponses[keyof InAppPurchasesV2InAppPurchaseLocalizationsGetToManyRelatedResponses];
+
+export type InAppPurchasesV2OfferCodesGetToManyRelationshipData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+    };
+    url: '/v2/inAppPurchases/{id}/relationships/offerCodes';
+};
+
+export type InAppPurchasesV2OfferCodesGetToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type InAppPurchasesV2OfferCodesGetToManyRelationshipError = InAppPurchasesV2OfferCodesGetToManyRelationshipErrors[keyof InAppPurchasesV2OfferCodesGetToManyRelationshipErrors];
+
+export type InAppPurchasesV2OfferCodesGetToManyRelationshipResponses = {
+    /**
+     * List of related linkages
+     */
+    200: InAppPurchaseV2OfferCodesLinkagesResponse;
+};
+
+export type InAppPurchasesV2OfferCodesGetToManyRelationshipResponse = InAppPurchasesV2OfferCodesGetToManyRelationshipResponses[keyof InAppPurchasesV2OfferCodesGetToManyRelationshipResponses];
+
+export type InAppPurchasesV2OfferCodesGetToManyRelatedData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * filter by territory
+         */
+        'filter[territory]'?: Array<string>;
+        /**
+         * the fields to include for returned resources of type inAppPurchaseOfferCodes
+         */
+        'fields[inAppPurchaseOfferCodes]'?: Array<'name' | 'customerEligibilities' | 'productionCodeCount' | 'sandboxCodeCount' | 'active' | 'oneTimeUseCodes' | 'customCodes' | 'prices'>;
+        /**
+         * the fields to include for returned resources of type inAppPurchaseOfferCodeOneTimeUseCodes
+         */
+        'fields[inAppPurchaseOfferCodeOneTimeUseCodes]'?: Array<'numberOfCodes' | 'createdDate' | 'expirationDate' | 'active' | 'environment' | 'values' | 'createdByActor' | 'deactivatedByActor'>;
+        /**
+         * the fields to include for returned resources of type inAppPurchaseOfferCodeCustomCodes
+         */
+        'fields[inAppPurchaseOfferCodeCustomCodes]'?: Array<'customCode' | 'numberOfCodes' | 'createdDate' | 'expirationDate' | 'active' | 'createdByActor' | 'deactivatedByActor'>;
+        /**
+         * the fields to include for returned resources of type inAppPurchaseOfferPrices
+         */
+        'fields[inAppPurchaseOfferPrices]'?: Array<'territory' | 'pricePoint'>;
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+        /**
+         * comma-separated list of relationships to include
+         */
+        include?: Array<'oneTimeUseCodes' | 'customCodes' | 'prices'>;
+        /**
+         * maximum number of related oneTimeUseCodes returned (when they are included)
+         */
+        'limit[oneTimeUseCodes]'?: number;
+        /**
+         * maximum number of related customCodes returned (when they are included)
+         */
+        'limit[customCodes]'?: number;
+        /**
+         * maximum number of related prices returned (when they are included)
+         */
+        'limit[prices]'?: number;
+    };
+    url: '/v2/inAppPurchases/{id}/offerCodes';
+};
+
+export type InAppPurchasesV2OfferCodesGetToManyRelatedErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type InAppPurchasesV2OfferCodesGetToManyRelatedError = InAppPurchasesV2OfferCodesGetToManyRelatedErrors[keyof InAppPurchasesV2OfferCodesGetToManyRelatedErrors];
+
+export type InAppPurchasesV2OfferCodesGetToManyRelatedResponses = {
+    /**
+     * List of InAppPurchaseOfferCodes
+     */
+    200: InAppPurchaseOfferCodesResponse;
+};
+
+export type InAppPurchasesV2OfferCodesGetToManyRelatedResponse = InAppPurchasesV2OfferCodesGetToManyRelatedResponses[keyof InAppPurchasesV2OfferCodesGetToManyRelatedResponses];
 
 export type InAppPurchasesV2PricePointsGetToManyRelationshipData = {
     body?: never;
@@ -78381,7 +87330,7 @@ export type InAppPurchasesV2PromotedPurchaseGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type inAppPurchases
          */
-        'fields[inAppPurchases]'?: Array<'name' | 'productId' | 'inAppPurchaseType' | 'state' | 'reviewNote' | 'familySharable' | 'contentHosting' | 'inAppPurchaseLocalizations' | 'pricePoints' | 'content' | 'appStoreReviewScreenshot' | 'promotedPurchase' | 'iapPriceSchedule' | 'inAppPurchaseAvailability' | 'images'>;
+        'fields[inAppPurchases]'?: Array<'name' | 'productId' | 'inAppPurchaseType' | 'state' | 'reviewNote' | 'familySharable' | 'contentHosting' | 'inAppPurchaseLocalizations' | 'pricePoints' | 'content' | 'appStoreReviewScreenshot' | 'promotedPurchase' | 'iapPriceSchedule' | 'inAppPurchaseAvailability' | 'images' | 'offerCodes'>;
         /**
          * the fields to include for returned resources of type subscriptions
          */
@@ -78754,7 +87703,7 @@ export type PreReleaseVersionsAppGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
     };
     url: '/v1/preReleaseVersions/{id}/app';
 };
@@ -79271,7 +88220,7 @@ export type ReviewSubmissionsItemsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type reviewSubmissionItems
          */
-        'fields[reviewSubmissionItems]'?: Array<'state' | 'appStoreVersion' | 'appCustomProductPageVersion' | 'appStoreVersionExperiment' | 'appStoreVersionExperimentV2' | 'appEvent' | 'backgroundAssetVersion'>;
+        'fields[reviewSubmissionItems]'?: Array<'state' | 'appStoreVersion' | 'appCustomProductPageVersion' | 'appStoreVersionExperiment' | 'appStoreVersionExperimentV2' | 'appEvent' | 'backgroundAssetVersion' | 'gameCenterAchievementVersion' | 'gameCenterActivityVersion' | 'gameCenterChallengeVersion' | 'gameCenterLeaderboardSetVersion' | 'gameCenterLeaderboardVersion'>;
         /**
          * the fields to include for returned resources of type appStoreVersions
          */
@@ -79291,7 +88240,27 @@ export type ReviewSubmissionsItemsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type backgroundAssetVersions
          */
-        'fields[backgroundAssetVersions]'?: Array<'createdDate' | 'platforms' | 'state' | 'version' | 'backgroundAsset' | 'internalBetaRelease' | 'externalBetaRelease' | 'appStoreRelease' | 'assetFile' | 'manifestFile' | 'backgroundAssetUploadFiles'>;
+        'fields[backgroundAssetVersions]'?: Array<'createdDate' | 'platforms' | 'state' | 'stateDetails' | 'version' | 'backgroundAsset' | 'internalBetaRelease' | 'externalBetaRelease' | 'appStoreRelease' | 'assetFile' | 'manifestFile' | 'backgroundAssetUploadFiles'>;
+        /**
+         * the fields to include for returned resources of type gameCenterAchievementVersions
+         */
+        'fields[gameCenterAchievementVersions]'?: Array<'version' | 'state' | 'achievement' | 'localizations'>;
+        /**
+         * the fields to include for returned resources of type gameCenterActivityVersions
+         */
+        'fields[gameCenterActivityVersions]'?: Array<'version' | 'state' | 'fallbackUrl' | 'activity' | 'localizations' | 'defaultImage' | 'releases'>;
+        /**
+         * the fields to include for returned resources of type gameCenterChallengeVersions
+         */
+        'fields[gameCenterChallengeVersions]'?: Array<'version' | 'state' | 'challenge' | 'localizations' | 'releases' | 'defaultImage'>;
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboardSetVersions
+         */
+        'fields[gameCenterLeaderboardSetVersions]'?: Array<'version' | 'state' | 'leaderboardSet' | 'localizations'>;
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboardVersions
+         */
+        'fields[gameCenterLeaderboardVersions]'?: Array<'version' | 'state' | 'leaderboard' | 'localizations'>;
         /**
          * maximum resources per page
          */
@@ -79299,7 +88268,7 @@ export type ReviewSubmissionsItemsGetToManyRelatedData = {
         /**
          * comma-separated list of relationships to include
          */
-        include?: Array<'appStoreVersion' | 'appCustomProductPageVersion' | 'appStoreVersionExperiment' | 'appStoreVersionExperimentV2' | 'appEvent' | 'backgroundAssetVersion'>;
+        include?: Array<'appStoreVersion' | 'appCustomProductPageVersion' | 'appStoreVersionExperiment' | 'appStoreVersionExperimentV2' | 'appEvent' | 'backgroundAssetVersion' | 'gameCenterAchievementVersion' | 'gameCenterActivityVersion' | 'gameCenterChallengeVersion' | 'gameCenterLeaderboardSetVersion' | 'gameCenterLeaderboardVersion'>;
     };
     url: '/v1/reviewSubmissions/{id}/items';
 };
@@ -80011,7 +88980,7 @@ export type SubscriptionGroupsSubscriptionsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type subscriptionOfferCodes
          */
-        'fields[subscriptionOfferCodes]'?: Array<'name' | 'customerEligibilities' | 'offerEligibility' | 'duration' | 'offerMode' | 'numberOfPeriods' | 'totalNumberOfCodes' | 'active' | 'subscription' | 'oneTimeUseCodes' | 'customCodes' | 'prices'>;
+        'fields[subscriptionOfferCodes]'?: Array<'name' | 'customerEligibilities' | 'offerEligibility' | 'duration' | 'offerMode' | 'numberOfPeriods' | 'totalNumberOfCodes' | 'productionCodeCount' | 'sandboxCodeCount' | 'active' | 'autoRenewEnabled' | 'subscription' | 'oneTimeUseCodes' | 'customCodes' | 'prices'>;
         /**
          * the fields to include for returned resources of type subscriptionPrices
          */
@@ -80219,7 +89188,7 @@ export type SubscriptionOfferCodesCustomCodesGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type subscriptionOfferCodes
          */
-        'fields[subscriptionOfferCodes]'?: Array<'name' | 'customerEligibilities' | 'offerEligibility' | 'duration' | 'offerMode' | 'numberOfPeriods' | 'totalNumberOfCodes' | 'active' | 'subscription' | 'oneTimeUseCodes' | 'customCodes' | 'prices'>;
+        'fields[subscriptionOfferCodes]'?: Array<'name' | 'customerEligibilities' | 'offerEligibility' | 'duration' | 'offerMode' | 'numberOfPeriods' | 'totalNumberOfCodes' | 'productionCodeCount' | 'sandboxCodeCount' | 'active' | 'autoRenewEnabled' | 'subscription' | 'oneTimeUseCodes' | 'customCodes' | 'prices'>;
         /**
          * maximum resources per page
          */
@@ -80329,11 +89298,11 @@ export type SubscriptionOfferCodesOneTimeUseCodesGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type subscriptionOfferCodeOneTimeUseCodes
          */
-        'fields[subscriptionOfferCodeOneTimeUseCodes]'?: Array<'numberOfCodes' | 'createdDate' | 'expirationDate' | 'active' | 'offerCode' | 'values'>;
+        'fields[subscriptionOfferCodeOneTimeUseCodes]'?: Array<'numberOfCodes' | 'createdDate' | 'expirationDate' | 'active' | 'environment' | 'offerCode' | 'values'>;
         /**
          * the fields to include for returned resources of type subscriptionOfferCodes
          */
-        'fields[subscriptionOfferCodes]'?: Array<'name' | 'customerEligibilities' | 'offerEligibility' | 'duration' | 'offerMode' | 'numberOfPeriods' | 'totalNumberOfCodes' | 'active' | 'subscription' | 'oneTimeUseCodes' | 'customCodes' | 'prices'>;
+        'fields[subscriptionOfferCodes]'?: Array<'name' | 'customerEligibilities' | 'offerEligibility' | 'duration' | 'offerMode' | 'numberOfPeriods' | 'totalNumberOfCodes' | 'productionCodeCount' | 'sandboxCodeCount' | 'active' | 'autoRenewEnabled' | 'subscription' | 'oneTimeUseCodes' | 'customCodes' | 'prices'>;
         /**
          * maximum resources per page
          */
@@ -81211,7 +90180,7 @@ export type SubscriptionsOfferCodesGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type subscriptionOfferCodes
          */
-        'fields[subscriptionOfferCodes]'?: Array<'name' | 'customerEligibilities' | 'offerEligibility' | 'duration' | 'offerMode' | 'numberOfPeriods' | 'totalNumberOfCodes' | 'active' | 'subscription' | 'oneTimeUseCodes' | 'customCodes' | 'prices'>;
+        'fields[subscriptionOfferCodes]'?: Array<'name' | 'customerEligibilities' | 'offerEligibility' | 'duration' | 'offerMode' | 'numberOfPeriods' | 'totalNumberOfCodes' | 'productionCodeCount' | 'sandboxCodeCount' | 'active' | 'autoRenewEnabled' | 'subscription' | 'oneTimeUseCodes' | 'customCodes' | 'prices'>;
         /**
          * the fields to include for returned resources of type subscriptions
          */
@@ -81219,7 +90188,7 @@ export type SubscriptionsOfferCodesGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type subscriptionOfferCodeOneTimeUseCodes
          */
-        'fields[subscriptionOfferCodeOneTimeUseCodes]'?: Array<'numberOfCodes' | 'createdDate' | 'expirationDate' | 'active' | 'offerCode' | 'values'>;
+        'fields[subscriptionOfferCodeOneTimeUseCodes]'?: Array<'numberOfCodes' | 'createdDate' | 'expirationDate' | 'active' | 'environment' | 'offerCode' | 'values'>;
         /**
          * the fields to include for returned resources of type subscriptionOfferCodeCustomCodes
          */
@@ -81645,7 +90614,7 @@ export type SubscriptionsPromotedPurchaseGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type inAppPurchases
          */
-        'fields[inAppPurchases]'?: Array<'name' | 'productId' | 'inAppPurchaseType' | 'state' | 'reviewNote' | 'familySharable' | 'contentHosting' | 'inAppPurchaseLocalizations' | 'pricePoints' | 'content' | 'appStoreReviewScreenshot' | 'promotedPurchase' | 'iapPriceSchedule' | 'inAppPurchaseAvailability' | 'images'>;
+        'fields[inAppPurchases]'?: Array<'name' | 'productId' | 'inAppPurchaseType' | 'state' | 'reviewNote' | 'familySharable' | 'contentHosting' | 'inAppPurchaseLocalizations' | 'pricePoints' | 'content' | 'appStoreReviewScreenshot' | 'promotedPurchase' | 'iapPriceSchedule' | 'inAppPurchaseAvailability' | 'images' | 'offerCodes'>;
         /**
          * the fields to include for returned resources of type subscriptions
          */
@@ -82222,7 +91191,7 @@ export type UserInvitationsVisibleAppsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * maximum resources per page
          */
@@ -82487,7 +91456,7 @@ export type UsersVisibleAppsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * maximum resources per page
          */
