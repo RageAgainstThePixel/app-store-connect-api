@@ -1166,6 +1166,14 @@ export const AlternativeDistributionPackageSchema = {
         id: {
             type: 'string'
         },
+        attributes: {
+            type: 'object',
+            properties: {
+                sourceFileChecksum: {
+                    '$ref': '#/components/schemas/Checksums'
+                }
+            }
+        },
         relationships: {
             type: 'object',
             properties: {
@@ -1649,6 +1657,167 @@ export const AnalyticsReportResponseSchema = {
         }
     },
     required: ['data', 'links']
+} as const;
+
+export const AndroidToIosAppMappingDetailSchema = {
+    type: 'object',
+    title: 'AndroidToIosAppMappingDetail',
+    properties: {
+        type: {
+            type: 'string',
+            enum: ['androidToIosAppMappingDetails']
+        },
+        id: {
+            type: 'string'
+        },
+        attributes: {
+            type: 'object',
+            properties: {
+                packageName: {
+                    type: 'string'
+                },
+                appSigningKeyPublicCertificateSha256Fingerprints: {
+                    type: 'array',
+                    items: {
+                        type: 'string'
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: ['id', 'type']
+} as const;
+
+export const AndroidToIosAppMappingDetailsResponseSchema = {
+    type: 'object',
+    title: 'AndroidToIosAppMappingDetailsResponse',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/AndroidToIosAppMappingDetail'
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const AndroidToIosAppMappingDetailResponseSchema = {
+    type: 'object',
+    title: 'AndroidToIosAppMappingDetailResponse',
+    properties: {
+        data: {
+            '$ref': '#/components/schemas/AndroidToIosAppMappingDetail'
+        },
+        links: {
+            '$ref': '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const AndroidToIosAppMappingDetailCreateRequestSchema = {
+    type: 'object',
+    title: 'AndroidToIosAppMappingDetailCreateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['androidToIosAppMappingDetails']
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        packageName: {
+                            type: 'string'
+                        },
+                        appSigningKeyPublicCertificateSha256Fingerprints: {
+                            type: 'array',
+                            items: {
+                                type: 'string'
+                            }
+                        }
+                    },
+                    required: ['appSigningKeyPublicCertificateSha256Fingerprints', 'packageName']
+                },
+                relationships: {
+                    type: 'object',
+                    properties: {
+                        app: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: ['apps']
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: ['id', 'type']
+                                }
+                            },
+                            required: ['data']
+                        }
+                    },
+                    required: ['app']
+                }
+            },
+            required: ['relationships', 'attributes', 'type']
+        }
+    },
+    required: ['data']
+} as const;
+
+export const AndroidToIosAppMappingDetailUpdateRequestSchema = {
+    type: 'object',
+    title: 'AndroidToIosAppMappingDetailUpdateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['androidToIosAppMappingDetails']
+                },
+                id: {
+                    type: 'string'
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        packageName: {
+                            type: 'string',
+                            nullable: true
+                        },
+                        appSigningKeyPublicCertificateSha256Fingerprints: {
+                            type: 'array',
+                            items: {
+                                type: 'string'
+                            },
+                            nullable: true
+                        }
+                    }
+                }
+            },
+            required: ['id', 'type']
+        }
+    },
+    required: ['data']
 } as const;
 
 export const AppAvailabilityV2Schema = {
@@ -2224,7 +2393,7 @@ export const AppClipAdvancedExperienceSchema = {
                         },
                         mapAction: {
                             type: 'string',
-                            enum: ['BUY_TICKETS', 'VIEW_AVAILABILITY', 'VIEW_PRICING', 'HOTEL_BOOK_ROOM', 'PARKING_RESERVE_PARKING', 'RESTAURANT_JOIN_WAITLIST', 'RESTAURANT_ORDER_DELIVERY', 'RESTAURANT_ORDER_FOOD', 'RESTAURANT_ORDER_TAKEOUT', 'RESTAURANT_RESERVATION', 'SCHEDULE_APPOINTMENT', 'RESTAURANT_VIEW_MENU', 'THEATER_NOW_PLAYING', 'AIRLINE_BOOK_TRAVEL', 'AIRLINE_CHECK_IN', 'AIRLINE_FLIGHT_STATUS', 'APPLY', 'BOOK', 'BOOK_ACTIVITIES', 'BOOK_RIDES', 'BOOK_TEETIMES', 'BOOK_TOURS', 'CAREERS', 'CHARGE_EV', 'COUPONS', 'DONATE', 'EVENTS', 'EVENTS_SHOWS', 'EVENTS_SPORTS', 'GIFT_CARD', 'HOTEL_AMENITIES', 'JOIN', 'PARKING_AVAILABLE', 'RESTAURANT_PICKUP', 'RETAIL_SERVICE_QUOTE', 'RETAIL_STORE_DELIVERY', 'RETAIL_STORE_PICKUP', 'RETAIL_STORE_SHOP', 'SERVICES', 'SUPPORT']
+                            enum: ['BUY_TICKETS', 'VIEW_AVAILABILITY', 'VIEW_PRICING', 'HOTEL_BOOK_ROOM', 'PARKING_RESERVE_PARKING', 'RESTAURANT_JOIN_WAITLIST', 'RESTAURANT_ORDER_DELIVERY', 'RESTAURANT_ORDER_FOOD', 'RESTAURANT_ORDER_TAKEOUT', 'RESTAURANT_RESERVATION', 'SCHEDULE_APPOINTMENT', 'RESTAURANT_VIEW_MENU', 'THEATER_NOW_PLAYING', 'AIRLINE_BOOK_TRAVEL', 'AIRLINE_CHECK_IN', 'AIRLINE_FLIGHT_STATUS', 'APPLY', 'BOOK', 'BOOK_ACTIVITIES', 'BOOK_RIDES', 'BOOK_TEETIMES', 'BOOK_TOURS', 'CAREERS', 'CHARGE_EV', 'COUPONS', 'DONATE', 'EVENTS', 'EVENTS_SHOWS', 'EVENTS_SPORTS', 'GIFT_CARD', 'HOTEL_AMENITIES', 'JOIN', 'PARKING_AVAILABLE', 'RESTAURANT_PICKUP', 'RETAIL_SERVICE_QUOTE', 'RETAIL_STORE_DELIVERY', 'RETAIL_STORE_PICKUP', 'RETAIL_STORE_SHOP', 'SERVICES', 'SUPPORT', 'PAY_TO_PARK']
                         },
                         relationship: {
                             type: 'string',
@@ -2519,7 +2688,7 @@ export const AppClipAdvancedExperienceCreateRequestSchema = {
                                 },
                                 mapAction: {
                                     type: 'string',
-                                    enum: ['BUY_TICKETS', 'VIEW_AVAILABILITY', 'VIEW_PRICING', 'HOTEL_BOOK_ROOM', 'PARKING_RESERVE_PARKING', 'RESTAURANT_JOIN_WAITLIST', 'RESTAURANT_ORDER_DELIVERY', 'RESTAURANT_ORDER_FOOD', 'RESTAURANT_ORDER_TAKEOUT', 'RESTAURANT_RESERVATION', 'SCHEDULE_APPOINTMENT', 'RESTAURANT_VIEW_MENU', 'THEATER_NOW_PLAYING', 'AIRLINE_BOOK_TRAVEL', 'AIRLINE_CHECK_IN', 'AIRLINE_FLIGHT_STATUS', 'APPLY', 'BOOK', 'BOOK_ACTIVITIES', 'BOOK_RIDES', 'BOOK_TEETIMES', 'BOOK_TOURS', 'CAREERS', 'CHARGE_EV', 'COUPONS', 'DONATE', 'EVENTS', 'EVENTS_SHOWS', 'EVENTS_SPORTS', 'GIFT_CARD', 'HOTEL_AMENITIES', 'JOIN', 'PARKING_AVAILABLE', 'RESTAURANT_PICKUP', 'RETAIL_SERVICE_QUOTE', 'RETAIL_STORE_DELIVERY', 'RETAIL_STORE_PICKUP', 'RETAIL_STORE_SHOP', 'SERVICES', 'SUPPORT']
+                                    enum: ['BUY_TICKETS', 'VIEW_AVAILABILITY', 'VIEW_PRICING', 'HOTEL_BOOK_ROOM', 'PARKING_RESERVE_PARKING', 'RESTAURANT_JOIN_WAITLIST', 'RESTAURANT_ORDER_DELIVERY', 'RESTAURANT_ORDER_FOOD', 'RESTAURANT_ORDER_TAKEOUT', 'RESTAURANT_RESERVATION', 'SCHEDULE_APPOINTMENT', 'RESTAURANT_VIEW_MENU', 'THEATER_NOW_PLAYING', 'AIRLINE_BOOK_TRAVEL', 'AIRLINE_CHECK_IN', 'AIRLINE_FLIGHT_STATUS', 'APPLY', 'BOOK', 'BOOK_ACTIVITIES', 'BOOK_RIDES', 'BOOK_TEETIMES', 'BOOK_TOURS', 'CAREERS', 'CHARGE_EV', 'COUPONS', 'DONATE', 'EVENTS', 'EVENTS_SHOWS', 'EVENTS_SPORTS', 'GIFT_CARD', 'HOTEL_AMENITIES', 'JOIN', 'PARKING_AVAILABLE', 'RESTAURANT_PICKUP', 'RETAIL_SERVICE_QUOTE', 'RETAIL_STORE_DELIVERY', 'RETAIL_STORE_PICKUP', 'RETAIL_STORE_SHOP', 'SERVICES', 'SUPPORT', 'PAY_TO_PARK']
                                 },
                                 relationship: {
                                     type: 'string',
@@ -2738,7 +2907,7 @@ export const AppClipAdvancedExperienceUpdateRequestSchema = {
                                 },
                                 mapAction: {
                                     type: 'string',
-                                    enum: ['BUY_TICKETS', 'VIEW_AVAILABILITY', 'VIEW_PRICING', 'HOTEL_BOOK_ROOM', 'PARKING_RESERVE_PARKING', 'RESTAURANT_JOIN_WAITLIST', 'RESTAURANT_ORDER_DELIVERY', 'RESTAURANT_ORDER_FOOD', 'RESTAURANT_ORDER_TAKEOUT', 'RESTAURANT_RESERVATION', 'SCHEDULE_APPOINTMENT', 'RESTAURANT_VIEW_MENU', 'THEATER_NOW_PLAYING', 'AIRLINE_BOOK_TRAVEL', 'AIRLINE_CHECK_IN', 'AIRLINE_FLIGHT_STATUS', 'APPLY', 'BOOK', 'BOOK_ACTIVITIES', 'BOOK_RIDES', 'BOOK_TEETIMES', 'BOOK_TOURS', 'CAREERS', 'CHARGE_EV', 'COUPONS', 'DONATE', 'EVENTS', 'EVENTS_SHOWS', 'EVENTS_SPORTS', 'GIFT_CARD', 'HOTEL_AMENITIES', 'JOIN', 'PARKING_AVAILABLE', 'RESTAURANT_PICKUP', 'RETAIL_SERVICE_QUOTE', 'RETAIL_STORE_DELIVERY', 'RETAIL_STORE_PICKUP', 'RETAIL_STORE_SHOP', 'SERVICES', 'SUPPORT']
+                                    enum: ['BUY_TICKETS', 'VIEW_AVAILABILITY', 'VIEW_PRICING', 'HOTEL_BOOK_ROOM', 'PARKING_RESERVE_PARKING', 'RESTAURANT_JOIN_WAITLIST', 'RESTAURANT_ORDER_DELIVERY', 'RESTAURANT_ORDER_FOOD', 'RESTAURANT_ORDER_TAKEOUT', 'RESTAURANT_RESERVATION', 'SCHEDULE_APPOINTMENT', 'RESTAURANT_VIEW_MENU', 'THEATER_NOW_PLAYING', 'AIRLINE_BOOK_TRAVEL', 'AIRLINE_CHECK_IN', 'AIRLINE_FLIGHT_STATUS', 'APPLY', 'BOOK', 'BOOK_ACTIVITIES', 'BOOK_RIDES', 'BOOK_TEETIMES', 'BOOK_TOURS', 'CAREERS', 'CHARGE_EV', 'COUPONS', 'DONATE', 'EVENTS', 'EVENTS_SHOWS', 'EVENTS_SPORTS', 'GIFT_CARD', 'HOTEL_AMENITIES', 'JOIN', 'PARKING_AVAILABLE', 'RESTAURANT_PICKUP', 'RETAIL_SERVICE_QUOTE', 'RETAIL_STORE_DELIVERY', 'RETAIL_STORE_PICKUP', 'RETAIL_STORE_SHOP', 'SERVICES', 'SUPPORT', 'PAY_TO_PARK']
                                 },
                                 relationship: {
                                     type: 'string',
@@ -6833,6 +7002,7 @@ export const AppInfoSchema = {
                     enum: ['ALL', 'TWELVE', 'FIFTEEN', 'NINETEEN', 'NOT_APPLICABLE']
                 },
                 kidsAgeBand: {
+                    deprecated: true,
                     '$ref': '#/components/schemas/KidsAgeBand'
                 }
             }
@@ -12130,6 +12300,24 @@ export const AppSchema = {
                         }
                     }
                 },
+                appStoreIcon: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['buildIcons']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                },
                 ciProduct: {
                     type: 'object',
                     properties: {
@@ -12824,6 +13012,33 @@ export const AppSchema = {
                             '$ref': '#/components/schemas/RelationshipLinks'
                         }
                     }
+                },
+                androidToIosAppMappingDetails: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            '$ref': '#/components/schemas/RelationshipLinks'
+                        },
+                        meta: {
+                            '$ref': '#/components/schemas/PagingInformation'
+                        },
+                        data: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    type: {
+                                        type: 'string',
+                                        enum: ['androidToIosAppMappingDetails']
+                                    },
+                                    id: {
+                                        type: 'string'
+                                    }
+                                },
+                                required: ['id', 'type']
+                            }
+                        }
+                    }
                 }
             }
         },
@@ -12848,6 +13063,9 @@ export const AppsResponseSchema = {
             type: 'array',
             items: {
                 oneOf: [
+                    {
+                        '$ref': '#/components/schemas/AndroidToIosAppMappingDetail'
+                    },
                     {
                         '$ref': '#/components/schemas/AppClip'
                     },
@@ -12880,6 +13098,9 @@ export const AppsResponseSchema = {
                     },
                     {
                         '$ref': '#/components/schemas/BetaLicenseAgreement'
+                    },
+                    {
+                        '$ref': '#/components/schemas/BuildIcon'
                     },
                     {
                         '$ref': '#/components/schemas/Build'
@@ -12930,9 +13151,11 @@ export const AppsResponseSchema = {
                         inAppPurchases: '#/components/schemas/InAppPurchase',
                         appClips: '#/components/schemas/AppClip',
                         betaAppReviewDetails: '#/components/schemas/BetaAppReviewDetail',
+                        buildIcons: '#/components/schemas/BuildIcon',
                         ciProducts: '#/components/schemas/CiProduct',
                         gameCenterDetails: '#/components/schemas/GameCenterDetail',
                         promotedPurchases: '#/components/schemas/PromotedPurchase',
+                        androidToIosAppMappingDetails: '#/components/schemas/AndroidToIosAppMappingDetail',
                         gameCenterEnabledVersions: '#/components/schemas/GameCenterEnabledVersion',
                         subscriptionGroups: '#/components/schemas/SubscriptionGroup',
                         appStoreVersions: '#/components/schemas/AppStoreVersion',
@@ -12966,6 +13189,9 @@ export const AppResponseSchema = {
             items: {
                 oneOf: [
                     {
+                        '$ref': '#/components/schemas/AndroidToIosAppMappingDetail'
+                    },
+                    {
                         '$ref': '#/components/schemas/AppClip'
                     },
                     {
@@ -12997,6 +13223,9 @@ export const AppResponseSchema = {
                     },
                     {
                         '$ref': '#/components/schemas/BetaLicenseAgreement'
+                    },
+                    {
+                        '$ref': '#/components/schemas/BuildIcon'
                     },
                     {
                         '$ref': '#/components/schemas/Build'
@@ -13047,9 +13276,11 @@ export const AppResponseSchema = {
                         inAppPurchases: '#/components/schemas/InAppPurchase',
                         appClips: '#/components/schemas/AppClip',
                         betaAppReviewDetails: '#/components/schemas/BetaAppReviewDetail',
+                        buildIcons: '#/components/schemas/BuildIcon',
                         ciProducts: '#/components/schemas/CiProduct',
                         gameCenterDetails: '#/components/schemas/GameCenterDetail',
                         promotedPurchases: '#/components/schemas/PromotedPurchase',
+                        androidToIosAppMappingDetails: '#/components/schemas/AndroidToIosAppMappingDetail',
                         gameCenterEnabledVersions: '#/components/schemas/GameCenterEnabledVersion',
                         subscriptionGroups: '#/components/schemas/SubscriptionGroup',
                         appStoreVersions: '#/components/schemas/AppStoreVersion',
@@ -13559,6 +13790,29 @@ export const BackgroundAssetVersionSchema = {
                 state: {
                     '$ref': '#/components/schemas/BackgroundAssetVersionState'
                 },
+                stateDetails: {
+                    type: 'object',
+                    properties: {
+                        errors: {
+                            type: 'array',
+                            items: {
+                                '$ref': '#/components/schemas/StateDetail'
+                            }
+                        },
+                        warnings: {
+                            type: 'array',
+                            items: {
+                                '$ref': '#/components/schemas/StateDetail'
+                            }
+                        },
+                        infos: {
+                            type: 'array',
+                            items: {
+                                '$ref': '#/components/schemas/StateDetail'
+                            }
+                        }
+                    }
+                },
                 version: {
                     type: 'string'
                 }
@@ -13847,6 +14101,9 @@ export const BackgroundAssetSchema = {
         attributes: {
             type: 'object',
             properties: {
+                archived: {
+                    type: 'boolean'
+                },
                 assetPackIdentifier: {
                     type: 'string'
                 },
@@ -14069,6 +14326,36 @@ export const BackgroundAssetCreateRequestSchema = {
                 }
             },
             required: ['relationships', 'attributes', 'type']
+        }
+    },
+    required: ['data']
+} as const;
+
+export const BackgroundAssetUpdateRequestSchema = {
+    type: 'object',
+    title: 'BackgroundAssetUpdateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['backgroundAssets']
+                },
+                id: {
+                    type: 'string'
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        archived: {
+                            type: 'boolean',
+                            nullable: true
+                        }
+                    }
+                }
+            },
+            required: ['id', 'type']
         }
     },
     required: ['data']
@@ -16592,6 +16879,27 @@ export const BetaTesterSchema = {
                 },
                 state: {
                     '$ref': '#/components/schemas/BetaTesterState'
+                },
+                appDevices: {
+                    type: 'array',
+                    items: {
+                        type: 'object',
+                        properties: {
+                            model: {
+                                type: 'string'
+                            },
+                            platform: {
+                                type: 'string',
+                                enum: ['IOS', 'MAC_OS', 'TV_OS', 'WATCH_OS', 'VISION_OS']
+                            },
+                            osVersion: {
+                                type: 'string'
+                            },
+                            appBuildVersion: {
+                                type: 'string'
+                            }
+                        }
+                    }
                 }
             }
         },
@@ -21918,6 +22226,427 @@ export const GameCenterAchievementImageUpdateRequestSchema = {
     required: ['data']
 } as const;
 
+export const GameCenterAchievementImageV2Schema = {
+    type: 'object',
+    title: 'GameCenterAchievementImageV2',
+    properties: {
+        type: {
+            type: 'string',
+            enum: ['gameCenterAchievementImages']
+        },
+        id: {
+            type: 'string'
+        },
+        attributes: {
+            type: 'object',
+            properties: {
+                fileSize: {
+                    type: 'integer'
+                },
+                fileName: {
+                    type: 'string'
+                },
+                imageAsset: {
+                    '$ref': '#/components/schemas/ImageAsset'
+                },
+                uploadOperations: {
+                    type: 'array',
+                    items: {
+                        '$ref': '#/components/schemas/UploadOperation'
+                    }
+                },
+                assetDeliveryState: {
+                    '$ref': '#/components/schemas/AppMediaAssetState'
+                }
+            }
+        },
+        relationships: {
+            type: 'object',
+            properties: {
+                localization: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['gameCenterAchievementLocalizations']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: ['id', 'type']
+} as const;
+
+export const GameCenterAchievementImageV2ResponseSchema = {
+    type: 'object',
+    title: 'GameCenterAchievementImageV2Response',
+    properties: {
+        data: {
+            '$ref': '#/components/schemas/GameCenterAchievementImageV2'
+        },
+        included: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/GameCenterAchievementLocalizationV2'
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const GameCenterAchievementImageV2CreateRequestSchema = {
+    type: 'object',
+    title: 'GameCenterAchievementImageV2CreateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['gameCenterAchievementImages']
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        fileSize: {
+                            type: 'integer'
+                        },
+                        fileName: {
+                            type: 'string'
+                        }
+                    },
+                    required: ['fileName', 'fileSize']
+                },
+                relationships: {
+                    type: 'object',
+                    properties: {
+                        localization: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: ['gameCenterAchievementLocalizations']
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: ['id', 'type']
+                                }
+                            },
+                            required: ['data']
+                        }
+                    },
+                    required: ['localization']
+                }
+            },
+            required: ['relationships', 'attributes', 'type']
+        }
+    },
+    required: ['data']
+} as const;
+
+export const GameCenterAchievementImageV2UpdateRequestSchema = {
+    type: 'object',
+    title: 'GameCenterAchievementImageV2UpdateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['gameCenterAchievementImages']
+                },
+                id: {
+                    type: 'string'
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        uploaded: {
+                            type: 'boolean',
+                            nullable: true
+                        }
+                    }
+                }
+            },
+            required: ['id', 'type']
+        }
+    },
+    required: ['data']
+} as const;
+
+export const GameCenterAchievementLocalizationV2Schema = {
+    type: 'object',
+    title: 'GameCenterAchievementLocalizationV2',
+    properties: {
+        type: {
+            type: 'string',
+            enum: ['gameCenterAchievementLocalizations']
+        },
+        id: {
+            type: 'string'
+        },
+        attributes: {
+            type: 'object',
+            properties: {
+                locale: {
+                    type: 'string'
+                },
+                name: {
+                    type: 'string'
+                },
+                beforeEarnedDescription: {
+                    type: 'string'
+                },
+                afterEarnedDescription: {
+                    type: 'string'
+                }
+            }
+        },
+        relationships: {
+            type: 'object',
+            properties: {
+                version: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['gameCenterAchievementVersions']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                },
+                image: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            '$ref': '#/components/schemas/RelationshipLinks'
+                        },
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['gameCenterAchievementImages']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: ['id', 'type']
+} as const;
+
+export const GameCenterAchievementLocalizationsV2ResponseSchema = {
+    type: 'object',
+    title: 'GameCenterAchievementLocalizationsV2Response',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/GameCenterAchievementLocalizationV2'
+            }
+        },
+        included: {
+            type: 'array',
+            items: {
+                oneOf: [
+                    {
+                        '$ref': '#/components/schemas/GameCenterAchievementImageV2'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterAchievementVersionV2'
+                    }
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterAchievementVersions: '#/components/schemas/GameCenterAchievementVersionV2',
+                        gameCenterAchievementImages: '#/components/schemas/GameCenterAchievementImageV2'
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const GameCenterAchievementLocalizationV2ResponseSchema = {
+    type: 'object',
+    title: 'GameCenterAchievementLocalizationV2Response',
+    properties: {
+        data: {
+            '$ref': '#/components/schemas/GameCenterAchievementLocalizationV2'
+        },
+        included: {
+            type: 'array',
+            items: {
+                oneOf: [
+                    {
+                        '$ref': '#/components/schemas/GameCenterAchievementImageV2'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterAchievementVersionV2'
+                    }
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterAchievementVersions: '#/components/schemas/GameCenterAchievementVersionV2',
+                        gameCenterAchievementImages: '#/components/schemas/GameCenterAchievementImageV2'
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const GameCenterAchievementLocalizationV2CreateRequestSchema = {
+    type: 'object',
+    title: 'GameCenterAchievementLocalizationV2CreateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['gameCenterAchievementLocalizations']
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        locale: {
+                            type: 'string'
+                        },
+                        name: {
+                            type: 'string'
+                        },
+                        beforeEarnedDescription: {
+                            type: 'string'
+                        },
+                        afterEarnedDescription: {
+                            type: 'string'
+                        }
+                    },
+                    required: ['name', 'beforeEarnedDescription', 'locale', 'afterEarnedDescription']
+                },
+                relationships: {
+                    type: 'object',
+                    properties: {
+                        version: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: ['gameCenterAchievementVersions']
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: ['id', 'type']
+                                }
+                            },
+                            required: ['data']
+                        }
+                    },
+                    required: ['version']
+                }
+            },
+            required: ['relationships', 'attributes', 'type']
+        }
+    },
+    required: ['data']
+} as const;
+
+export const GameCenterAchievementLocalizationV2UpdateRequestSchema = {
+    type: 'object',
+    title: 'GameCenterAchievementLocalizationV2UpdateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['gameCenterAchievementLocalizations']
+                },
+                id: {
+                    type: 'string'
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        name: {
+                            type: 'string',
+                            nullable: true
+                        },
+                        beforeEarnedDescription: {
+                            type: 'string',
+                            nullable: true
+                        },
+                        afterEarnedDescription: {
+                            type: 'string',
+                            nullable: true
+                        }
+                    }
+                }
+            },
+            required: ['id', 'type']
+        }
+    },
+    required: ['data']
+} as const;
+
 export const GameCenterAchievementLocalizationSchema = {
     type: 'object',
     title: 'GameCenterAchievementLocalization',
@@ -22371,6 +23100,625 @@ export const GameCenterAchievementReleaseCreateRequestSchema = {
                 }
             },
             required: ['relationships', 'type']
+        }
+    },
+    required: ['data']
+} as const;
+
+export const GameCenterAchievementVersionV2Schema = {
+    type: 'object',
+    title: 'GameCenterAchievementVersionV2',
+    properties: {
+        type: {
+            type: 'string',
+            enum: ['gameCenterAchievementVersions']
+        },
+        id: {
+            type: 'string'
+        },
+        attributes: {
+            type: 'object',
+            properties: {
+                version: {
+                    type: 'integer'
+                },
+                state: {
+                    '$ref': '#/components/schemas/GameCenterVersionState'
+                }
+            }
+        },
+        relationships: {
+            type: 'object',
+            properties: {
+                achievement: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['gameCenterAchievements']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                },
+                localizations: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            '$ref': '#/components/schemas/RelationshipLinks'
+                        },
+                        meta: {
+                            '$ref': '#/components/schemas/PagingInformation'
+                        },
+                        data: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    type: {
+                                        type: 'string',
+                                        enum: ['gameCenterAchievementLocalizations']
+                                    },
+                                    id: {
+                                        type: 'string'
+                                    }
+                                },
+                                required: ['id', 'type']
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: ['id', 'type']
+} as const;
+
+export const GameCenterAchievementVersionV2InlineCreateSchema = {
+    type: 'object',
+    properties: {
+        type: {
+            type: 'string',
+            enum: ['gameCenterAchievementVersions']
+        },
+        id: {
+            type: 'string'
+        },
+        relationships: {
+            type: 'object',
+            properties: {
+                achievement: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['gameCenterAchievements']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                }
+            }
+        }
+    },
+    required: ['type']
+} as const;
+
+export const GameCenterAchievementVersionsV2ResponseSchema = {
+    type: 'object',
+    title: 'GameCenterAchievementVersionsV2Response',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/GameCenterAchievementVersionV2'
+            }
+        },
+        included: {
+            type: 'array',
+            items: {
+                oneOf: [
+                    {
+                        '$ref': '#/components/schemas/GameCenterAchievementLocalizationV2'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterAchievementV2'
+                    }
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterAchievementLocalizations: '#/components/schemas/GameCenterAchievementLocalizationV2',
+                        gameCenterAchievements: '#/components/schemas/GameCenterAchievementV2'
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const GameCenterAchievementVersionV2ResponseSchema = {
+    type: 'object',
+    title: 'GameCenterAchievementVersionV2Response',
+    properties: {
+        data: {
+            '$ref': '#/components/schemas/GameCenterAchievementVersionV2'
+        },
+        included: {
+            type: 'array',
+            items: {
+                oneOf: [
+                    {
+                        '$ref': '#/components/schemas/GameCenterAchievementLocalizationV2'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterAchievementV2'
+                    }
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterAchievementLocalizations: '#/components/schemas/GameCenterAchievementLocalizationV2',
+                        gameCenterAchievements: '#/components/schemas/GameCenterAchievementV2'
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const GameCenterAchievementVersionV2CreateRequestSchema = {
+    type: 'object',
+    title: 'GameCenterAchievementVersionV2CreateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['gameCenterAchievementVersions']
+                },
+                relationships: {
+                    type: 'object',
+                    properties: {
+                        achievement: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: ['gameCenterAchievements']
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: ['id', 'type']
+                                }
+                            },
+                            required: ['data']
+                        }
+                    },
+                    required: ['achievement']
+                }
+            },
+            required: ['relationships', 'type']
+        }
+    },
+    required: ['data']
+} as const;
+
+export const GameCenterAchievementV2Schema = {
+    type: 'object',
+    title: 'GameCenterAchievementV2',
+    properties: {
+        type: {
+            type: 'string',
+            enum: ['gameCenterAchievements']
+        },
+        id: {
+            type: 'string'
+        },
+        attributes: {
+            type: 'object',
+            properties: {
+                referenceName: {
+                    type: 'string'
+                },
+                vendorIdentifier: {
+                    type: 'string'
+                },
+                points: {
+                    type: 'integer'
+                },
+                showBeforeEarned: {
+                    type: 'boolean'
+                },
+                repeatable: {
+                    type: 'boolean'
+                },
+                archived: {
+                    type: 'boolean'
+                },
+                activityProperties: {
+                    '$ref': '#/components/schemas/StringToStringMap'
+                }
+            }
+        },
+        relationships: {
+            type: 'object',
+            properties: {
+                gameCenterDetail: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['gameCenterDetails']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                },
+                gameCenterGroup: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['gameCenterGroups']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                },
+                activity: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            '$ref': '#/components/schemas/RelationshipLinks'
+                        },
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['gameCenterActivities']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                },
+                versions: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            '$ref': '#/components/schemas/RelationshipLinks'
+                        },
+                        meta: {
+                            '$ref': '#/components/schemas/PagingInformation'
+                        },
+                        data: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    type: {
+                                        type: 'string',
+                                        enum: ['gameCenterAchievementVersions']
+                                    },
+                                    id: {
+                                        type: 'string'
+                                    }
+                                },
+                                required: ['id', 'type']
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: ['id', 'type']
+} as const;
+
+export const GameCenterAchievementsV2ResponseSchema = {
+    type: 'object',
+    title: 'GameCenterAchievementsV2Response',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/GameCenterAchievementV2'
+            }
+        },
+        included: {
+            type: 'array',
+            items: {
+                oneOf: [
+                    {
+                        '$ref': '#/components/schemas/GameCenterAchievementVersionV2'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterActivity'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterDetail'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterGroup'
+                    }
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterAchievementVersions: '#/components/schemas/GameCenterAchievementVersionV2',
+                        gameCenterDetails: '#/components/schemas/GameCenterDetail',
+                        gameCenterActivities: '#/components/schemas/GameCenterActivity',
+                        gameCenterGroups: '#/components/schemas/GameCenterGroup'
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const GameCenterAchievementV2ResponseSchema = {
+    type: 'object',
+    title: 'GameCenterAchievementV2Response',
+    properties: {
+        data: {
+            '$ref': '#/components/schemas/GameCenterAchievementV2'
+        },
+        included: {
+            type: 'array',
+            items: {
+                oneOf: [
+                    {
+                        '$ref': '#/components/schemas/GameCenterAchievementVersionV2'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterActivity'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterDetail'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterGroup'
+                    }
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterAchievementVersions: '#/components/schemas/GameCenterAchievementVersionV2',
+                        gameCenterDetails: '#/components/schemas/GameCenterDetail',
+                        gameCenterActivities: '#/components/schemas/GameCenterActivity',
+                        gameCenterGroups: '#/components/schemas/GameCenterGroup'
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const GameCenterAchievementV2CreateRequestSchema = {
+    type: 'object',
+    title: 'GameCenterAchievementV2CreateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['gameCenterAchievements']
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        referenceName: {
+                            type: 'string'
+                        },
+                        vendorIdentifier: {
+                            type: 'string'
+                        },
+                        points: {
+                            type: 'integer'
+                        },
+                        showBeforeEarned: {
+                            type: 'boolean'
+                        },
+                        repeatable: {
+                            type: 'boolean'
+                        },
+                        activityProperties: {
+                            nullable: true,
+                            '$ref': '#/components/schemas/StringToStringMap'
+                        }
+                    },
+                    required: ['vendorIdentifier', 'repeatable', 'showBeforeEarned', 'referenceName', 'points']
+                },
+                relationships: {
+                    type: 'object',
+                    properties: {
+                        gameCenterDetail: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: ['gameCenterDetails']
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: ['id', 'type']
+                                }
+                            }
+                        },
+                        gameCenterGroup: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: ['gameCenterGroups']
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: ['id', 'type']
+                                }
+                            }
+                        },
+                        versions: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'array',
+                                    items: {
+                                        type: 'object',
+                                        properties: {
+                                            type: {
+                                                type: 'string',
+                                                enum: ['gameCenterAchievementVersions']
+                                            },
+                                            id: {
+                                                type: 'string'
+                                            }
+                                        },
+                                        required: ['id', 'type']
+                                    }
+                                }
+                            },
+                            required: ['data']
+                        }
+                    },
+                    required: ['versions']
+                }
+            },
+            required: ['relationships', 'attributes', 'type']
+        },
+        included: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/GameCenterAchievementVersionV2InlineCreate'
+            }
+        }
+    },
+    required: ['data']
+} as const;
+
+export const GameCenterAchievementV2UpdateRequestSchema = {
+    type: 'object',
+    title: 'GameCenterAchievementV2UpdateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['gameCenterAchievements']
+                },
+                id: {
+                    type: 'string'
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        referenceName: {
+                            type: 'string',
+                            nullable: true
+                        },
+                        points: {
+                            type: 'integer',
+                            nullable: true
+                        },
+                        showBeforeEarned: {
+                            type: 'boolean',
+                            nullable: true
+                        },
+                        repeatable: {
+                            type: 'boolean',
+                            nullable: true
+                        },
+                        archived: {
+                            type: 'boolean',
+                            nullable: true
+                        },
+                        activityProperties: {
+                            nullable: true,
+                            '$ref': '#/components/schemas/StringToStringMap'
+                        }
+                    }
+                }
+            },
+            required: ['id', 'type']
         }
     },
     required: ['data']
@@ -22905,7 +24253,61 @@ export const GameCenterActivitySchema = {
                         }
                     }
                 },
+                achievementsV2: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            '$ref': '#/components/schemas/RelationshipLinks'
+                        },
+                        meta: {
+                            '$ref': '#/components/schemas/PagingInformation'
+                        },
+                        data: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    type: {
+                                        type: 'string',
+                                        enum: ['gameCenterAchievements']
+                                    },
+                                    id: {
+                                        type: 'string'
+                                    }
+                                },
+                                required: ['id', 'type']
+                            }
+                        }
+                    }
+                },
                 leaderboards: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            '$ref': '#/components/schemas/RelationshipLinks'
+                        },
+                        meta: {
+                            '$ref': '#/components/schemas/PagingInformation'
+                        },
+                        data: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    type: {
+                                        type: 'string',
+                                        enum: ['gameCenterLeaderboards']
+                                    },
+                                    id: {
+                                        type: 'string'
+                                    }
+                                },
+                                required: ['id', 'type']
+                            }
+                        }
+                    }
+                },
+                leaderboardsV2: {
                     type: 'object',
                     properties: {
                         links: {
@@ -25209,6 +26611,27 @@ export const GameCenterChallengeSchema = {
                             required: ['id', 'type']
                         }
                     }
+                },
+                leaderboardV2: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            '$ref': '#/components/schemas/RelationshipLinks'
+                        },
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['gameCenterLeaderboards']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
                 }
             }
         },
@@ -25396,6 +26819,24 @@ export const GameCenterChallengeCreateRequestSchema = {
                                     required: ['id', 'type']
                                 }
                             }
+                        },
+                        leaderboardV2: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: ['gameCenterLeaderboards']
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: ['id', 'type']
+                                }
+                            }
                         }
                     }
                 }
@@ -25441,6 +26882,24 @@ export const GameCenterChallengeUpdateRequestSchema = {
                     type: 'object',
                     properties: {
                         leaderboard: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: ['gameCenterLeaderboards']
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: ['id', 'type']
+                                }
+                            }
+                        },
+                        leaderboardV2: {
                             type: 'object',
                             properties: {
                                 data: {
@@ -25586,6 +27045,33 @@ export const GameCenterDetailSchema = {
                         }
                     }
                 },
+                gameCenterLeaderboardsV2: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            '$ref': '#/components/schemas/RelationshipLinks'
+                        },
+                        meta: {
+                            '$ref': '#/components/schemas/PagingInformation'
+                        },
+                        data: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    type: {
+                                        type: 'string',
+                                        enum: ['gameCenterLeaderboards']
+                                    },
+                                    id: {
+                                        type: 'string'
+                                    }
+                                },
+                                required: ['id', 'type']
+                            }
+                        }
+                    }
+                },
                 gameCenterLeaderboardSets: {
                     type: 'object',
                     properties: {
@@ -25613,7 +27099,61 @@ export const GameCenterDetailSchema = {
                         }
                     }
                 },
+                gameCenterLeaderboardSetsV2: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            '$ref': '#/components/schemas/RelationshipLinks'
+                        },
+                        meta: {
+                            '$ref': '#/components/schemas/PagingInformation'
+                        },
+                        data: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    type: {
+                                        type: 'string',
+                                        enum: ['gameCenterLeaderboardSets']
+                                    },
+                                    id: {
+                                        type: 'string'
+                                    }
+                                },
+                                required: ['id', 'type']
+                            }
+                        }
+                    }
+                },
                 gameCenterAchievements: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            '$ref': '#/components/schemas/RelationshipLinks'
+                        },
+                        meta: {
+                            '$ref': '#/components/schemas/PagingInformation'
+                        },
+                        data: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    type: {
+                                        type: 'string',
+                                        enum: ['gameCenterAchievements']
+                                    },
+                                    id: {
+                                        type: 'string'
+                                    }
+                                },
+                                required: ['id', 'type']
+                            }
+                        }
+                    }
+                },
+                gameCenterAchievementsV2: {
                     type: 'object',
                     properties: {
                         links: {
@@ -25712,7 +27252,43 @@ export const GameCenterDetailSchema = {
                         }
                     }
                 },
+                defaultLeaderboardV2: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['gameCenterLeaderboards']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                },
                 defaultGroupLeaderboard: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['gameCenterLeaderboards']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                },
+                defaultGroupLeaderboardV2: {
                     type: 'object',
                     properties: {
                         data: {
@@ -26187,7 +27763,43 @@ export const GameCenterDetailUpdateRequestSchema = {
                                 }
                             }
                         },
+                        defaultLeaderboardV2: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: ['gameCenterLeaderboards']
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: ['id', 'type']
+                                }
+                            }
+                        },
                         defaultGroupLeaderboard: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: ['gameCenterLeaderboards']
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: ['id', 'type']
+                                }
+                            }
+                        },
+                        defaultGroupLeaderboardV2: {
                             type: 'object',
                             properties: {
                                 data: {
@@ -26414,6 +28026,33 @@ export const GameCenterGroupSchema = {
                         }
                     }
                 },
+                gameCenterLeaderboardsV2: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            '$ref': '#/components/schemas/RelationshipLinks'
+                        },
+                        meta: {
+                            '$ref': '#/components/schemas/PagingInformation'
+                        },
+                        data: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    type: {
+                                        type: 'string',
+                                        enum: ['gameCenterLeaderboards']
+                                    },
+                                    id: {
+                                        type: 'string'
+                                    }
+                                },
+                                required: ['id', 'type']
+                            }
+                        }
+                    }
+                },
                 gameCenterLeaderboardSets: {
                     type: 'object',
                     properties: {
@@ -26441,7 +28080,61 @@ export const GameCenterGroupSchema = {
                         }
                     }
                 },
+                gameCenterLeaderboardSetsV2: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            '$ref': '#/components/schemas/RelationshipLinks'
+                        },
+                        meta: {
+                            '$ref': '#/components/schemas/PagingInformation'
+                        },
+                        data: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    type: {
+                                        type: 'string',
+                                        enum: ['gameCenterLeaderboardSets']
+                                    },
+                                    id: {
+                                        type: 'string'
+                                    }
+                                },
+                                required: ['id', 'type']
+                            }
+                        }
+                    }
+                },
                 gameCenterAchievements: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            '$ref': '#/components/schemas/RelationshipLinks'
+                        },
+                        meta: {
+                            '$ref': '#/components/schemas/PagingInformation'
+                        },
+                        data: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    type: {
+                                        type: 'string',
+                                        enum: ['gameCenterAchievements']
+                                    },
+                                    id: {
+                                        type: 'string'
+                                    }
+                                },
+                                required: ['id', 'type']
+                            }
+                        }
+                    }
+                },
+                gameCenterAchievementsV2: {
                     type: 'object',
                     properties: {
                         links: {
@@ -26981,6 +28674,175 @@ export const GameCenterLeaderboardImageUpdateRequestSchema = {
     required: ['data']
 } as const;
 
+export const GameCenterLeaderboardImageV2Schema = {
+    type: 'object',
+    title: 'GameCenterLeaderboardImageV2',
+    properties: {
+        type: {
+            type: 'string',
+            enum: ['gameCenterLeaderboardImages']
+        },
+        id: {
+            type: 'string'
+        },
+        attributes: {
+            type: 'object',
+            properties: {
+                fileSize: {
+                    type: 'integer'
+                },
+                fileName: {
+                    type: 'string'
+                },
+                imageAsset: {
+                    '$ref': '#/components/schemas/ImageAsset'
+                },
+                uploadOperations: {
+                    type: 'array',
+                    items: {
+                        '$ref': '#/components/schemas/UploadOperation'
+                    }
+                },
+                assetDeliveryState: {
+                    '$ref': '#/components/schemas/AppMediaAssetState'
+                }
+            }
+        },
+        relationships: {
+            type: 'object',
+            properties: {
+                localization: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['gameCenterLeaderboardLocalizations']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: ['id', 'type']
+} as const;
+
+export const GameCenterLeaderboardImageV2ResponseSchema = {
+    type: 'object',
+    title: 'GameCenterLeaderboardImageV2Response',
+    properties: {
+        data: {
+            '$ref': '#/components/schemas/GameCenterLeaderboardImageV2'
+        },
+        included: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/GameCenterLeaderboardLocalizationV2'
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const GameCenterLeaderboardImageV2CreateRequestSchema = {
+    type: 'object',
+    title: 'GameCenterLeaderboardImageV2CreateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['gameCenterLeaderboardImages']
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        fileSize: {
+                            type: 'integer'
+                        },
+                        fileName: {
+                            type: 'string'
+                        }
+                    },
+                    required: ['fileName', 'fileSize']
+                },
+                relationships: {
+                    type: 'object',
+                    properties: {
+                        localization: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: ['gameCenterLeaderboardLocalizations']
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: ['id', 'type']
+                                }
+                            },
+                            required: ['data']
+                        }
+                    },
+                    required: ['localization']
+                }
+            },
+            required: ['relationships', 'attributes', 'type']
+        }
+    },
+    required: ['data']
+} as const;
+
+export const GameCenterLeaderboardImageV2UpdateRequestSchema = {
+    type: 'object',
+    title: 'GameCenterLeaderboardImageV2UpdateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['gameCenterLeaderboardImages']
+                },
+                id: {
+                    type: 'string'
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        uploaded: {
+                            type: 'boolean',
+                            nullable: true
+                        }
+                    }
+                }
+            },
+            required: ['id', 'type']
+        }
+    },
+    required: ['data']
+} as const;
+
 export const GameCenterLeaderboardLocalizationSchema = {
     type: 'object',
     title: 'GameCenterLeaderboardLocalization',
@@ -27214,6 +29076,282 @@ export const GameCenterLeaderboardLocalizationCreateRequestSchema = {
 export const GameCenterLeaderboardLocalizationUpdateRequestSchema = {
     type: 'object',
     title: 'GameCenterLeaderboardLocalizationUpdateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['gameCenterLeaderboardLocalizations']
+                },
+                id: {
+                    type: 'string'
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        name: {
+                            type: 'string',
+                            nullable: true
+                        },
+                        formatterOverride: {
+                            nullable: true,
+                            '$ref': '#/components/schemas/GameCenterLeaderboardFormatter'
+                        },
+                        formatterSuffix: {
+                            type: 'string',
+                            nullable: true
+                        },
+                        formatterSuffixSingular: {
+                            type: 'string',
+                            nullable: true
+                        },
+                        description: {
+                            type: 'string',
+                            nullable: true
+                        }
+                    }
+                }
+            },
+            required: ['id', 'type']
+        }
+    },
+    required: ['data']
+} as const;
+
+export const GameCenterLeaderboardLocalizationV2Schema = {
+    type: 'object',
+    title: 'GameCenterLeaderboardLocalizationV2',
+    properties: {
+        type: {
+            type: 'string',
+            enum: ['gameCenterLeaderboardLocalizations']
+        },
+        id: {
+            type: 'string'
+        },
+        attributes: {
+            type: 'object',
+            properties: {
+                locale: {
+                    type: 'string'
+                },
+                name: {
+                    type: 'string'
+                },
+                formatterOverride: {
+                    '$ref': '#/components/schemas/GameCenterLeaderboardFormatter'
+                },
+                formatterSuffix: {
+                    type: 'string'
+                },
+                formatterSuffixSingular: {
+                    type: 'string'
+                },
+                description: {
+                    type: 'string'
+                }
+            }
+        },
+        relationships: {
+            type: 'object',
+            properties: {
+                version: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['gameCenterLeaderboardVersions']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                },
+                image: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            '$ref': '#/components/schemas/RelationshipLinks'
+                        },
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['gameCenterLeaderboardImages']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: ['id', 'type']
+} as const;
+
+export const GameCenterLeaderboardLocalizationsV2ResponseSchema = {
+    type: 'object',
+    title: 'GameCenterLeaderboardLocalizationsV2Response',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/GameCenterLeaderboardLocalizationV2'
+            }
+        },
+        included: {
+            type: 'array',
+            items: {
+                oneOf: [
+                    {
+                        '$ref': '#/components/schemas/GameCenterLeaderboardImageV2'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterLeaderboardVersionV2'
+                    }
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterLeaderboardImages: '#/components/schemas/GameCenterLeaderboardImageV2',
+                        gameCenterLeaderboardVersions: '#/components/schemas/GameCenterLeaderboardVersionV2'
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const GameCenterLeaderboardLocalizationV2ResponseSchema = {
+    type: 'object',
+    title: 'GameCenterLeaderboardLocalizationV2Response',
+    properties: {
+        data: {
+            '$ref': '#/components/schemas/GameCenterLeaderboardLocalizationV2'
+        },
+        included: {
+            type: 'array',
+            items: {
+                oneOf: [
+                    {
+                        '$ref': '#/components/schemas/GameCenterLeaderboardImageV2'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterLeaderboardVersionV2'
+                    }
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterLeaderboardImages: '#/components/schemas/GameCenterLeaderboardImageV2',
+                        gameCenterLeaderboardVersions: '#/components/schemas/GameCenterLeaderboardVersionV2'
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const GameCenterLeaderboardLocalizationV2CreateRequestSchema = {
+    type: 'object',
+    title: 'GameCenterLeaderboardLocalizationV2CreateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['gameCenterLeaderboardLocalizations']
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        locale: {
+                            type: 'string'
+                        },
+                        name: {
+                            type: 'string'
+                        },
+                        formatterOverride: {
+                            nullable: true,
+                            '$ref': '#/components/schemas/GameCenterLeaderboardFormatter'
+                        },
+                        formatterSuffix: {
+                            type: 'string',
+                            nullable: true
+                        },
+                        formatterSuffixSingular: {
+                            type: 'string',
+                            nullable: true
+                        },
+                        description: {
+                            type: 'string',
+                            nullable: true
+                        }
+                    },
+                    required: ['name', 'locale']
+                },
+                relationships: {
+                    type: 'object',
+                    properties: {
+                        version: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: ['gameCenterLeaderboardVersions']
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: ['id', 'type']
+                                }
+                            },
+                            required: ['data']
+                        }
+                    },
+                    required: ['version']
+                }
+            },
+            required: ['relationships', 'attributes', 'type']
+        }
+    },
+    required: ['data']
+} as const;
+
+export const GameCenterLeaderboardLocalizationV2UpdateRequestSchema = {
+    type: 'object',
+    title: 'GameCenterLeaderboardLocalizationV2UpdateRequest',
     properties: {
         data: {
             type: 'object',
@@ -27629,6 +29767,175 @@ export const GameCenterLeaderboardSetImageUpdateRequestSchema = {
     required: ['data']
 } as const;
 
+export const GameCenterLeaderboardSetImageV2Schema = {
+    type: 'object',
+    title: 'GameCenterLeaderboardSetImageV2',
+    properties: {
+        type: {
+            type: 'string',
+            enum: ['gameCenterLeaderboardSetImages']
+        },
+        id: {
+            type: 'string'
+        },
+        attributes: {
+            type: 'object',
+            properties: {
+                fileSize: {
+                    type: 'integer'
+                },
+                fileName: {
+                    type: 'string'
+                },
+                imageAsset: {
+                    '$ref': '#/components/schemas/ImageAsset'
+                },
+                uploadOperations: {
+                    type: 'array',
+                    items: {
+                        '$ref': '#/components/schemas/UploadOperation'
+                    }
+                },
+                assetDeliveryState: {
+                    '$ref': '#/components/schemas/AppMediaAssetState'
+                }
+            }
+        },
+        relationships: {
+            type: 'object',
+            properties: {
+                localization: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['gameCenterLeaderboardSetLocalizations']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: ['id', 'type']
+} as const;
+
+export const GameCenterLeaderboardSetImageV2ResponseSchema = {
+    type: 'object',
+    title: 'GameCenterLeaderboardSetImageV2Response',
+    properties: {
+        data: {
+            '$ref': '#/components/schemas/GameCenterLeaderboardSetImageV2'
+        },
+        included: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/GameCenterLeaderboardSetLocalizationV2'
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const GameCenterLeaderboardSetImageV2CreateRequestSchema = {
+    type: 'object',
+    title: 'GameCenterLeaderboardSetImageV2CreateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['gameCenterLeaderboardSetImages']
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        fileSize: {
+                            type: 'integer'
+                        },
+                        fileName: {
+                            type: 'string'
+                        }
+                    },
+                    required: ['fileName', 'fileSize']
+                },
+                relationships: {
+                    type: 'object',
+                    properties: {
+                        localization: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: ['gameCenterLeaderboardSetLocalizations']
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: ['id', 'type']
+                                }
+                            },
+                            required: ['data']
+                        }
+                    },
+                    required: ['localization']
+                }
+            },
+            required: ['relationships', 'attributes', 'type']
+        }
+    },
+    required: ['data']
+} as const;
+
+export const GameCenterLeaderboardSetImageV2UpdateRequestSchema = {
+    type: 'object',
+    title: 'GameCenterLeaderboardSetImageV2UpdateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['gameCenterLeaderboardSetImages']
+                },
+                id: {
+                    type: 'string'
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        uploaded: {
+                            type: 'boolean',
+                            nullable: true
+                        }
+                    }
+                }
+            },
+            required: ['id', 'type']
+        }
+    },
+    required: ['data']
+} as const;
+
 export const GameCenterLeaderboardSetLocalizationSchema = {
     type: 'object',
     title: 'GameCenterLeaderboardSetLocalization',
@@ -27834,6 +30141,238 @@ export const GameCenterLeaderboardSetLocalizationCreateRequestSchema = {
 export const GameCenterLeaderboardSetLocalizationUpdateRequestSchema = {
     type: 'object',
     title: 'GameCenterLeaderboardSetLocalizationUpdateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['gameCenterLeaderboardSetLocalizations']
+                },
+                id: {
+                    type: 'string'
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        name: {
+                            type: 'string',
+                            nullable: true
+                        }
+                    }
+                }
+            },
+            required: ['id', 'type']
+        }
+    },
+    required: ['data']
+} as const;
+
+export const GameCenterLeaderboardSetLocalizationV2Schema = {
+    type: 'object',
+    title: 'GameCenterLeaderboardSetLocalizationV2',
+    properties: {
+        type: {
+            type: 'string',
+            enum: ['gameCenterLeaderboardSetLocalizations']
+        },
+        id: {
+            type: 'string'
+        },
+        attributes: {
+            type: 'object',
+            properties: {
+                locale: {
+                    type: 'string'
+                },
+                name: {
+                    type: 'string'
+                }
+            }
+        },
+        relationships: {
+            type: 'object',
+            properties: {
+                version: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['gameCenterLeaderboardSetVersions']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                },
+                image: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            '$ref': '#/components/schemas/RelationshipLinks'
+                        },
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['gameCenterLeaderboardSetImages']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: ['id', 'type']
+} as const;
+
+export const GameCenterLeaderboardSetLocalizationsV2ResponseSchema = {
+    type: 'object',
+    title: 'GameCenterLeaderboardSetLocalizationsV2Response',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/GameCenterLeaderboardSetLocalizationV2'
+            }
+        },
+        included: {
+            type: 'array',
+            items: {
+                oneOf: [
+                    {
+                        '$ref': '#/components/schemas/GameCenterLeaderboardSetImageV2'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterLeaderboardSetVersionV2'
+                    }
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterLeaderboardSetImages: '#/components/schemas/GameCenterLeaderboardSetImageV2',
+                        gameCenterLeaderboardSetVersions: '#/components/schemas/GameCenterLeaderboardSetVersionV2'
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const GameCenterLeaderboardSetLocalizationV2ResponseSchema = {
+    type: 'object',
+    title: 'GameCenterLeaderboardSetLocalizationV2Response',
+    properties: {
+        data: {
+            '$ref': '#/components/schemas/GameCenterLeaderboardSetLocalizationV2'
+        },
+        included: {
+            type: 'array',
+            items: {
+                oneOf: [
+                    {
+                        '$ref': '#/components/schemas/GameCenterLeaderboardSetImageV2'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterLeaderboardSetVersionV2'
+                    }
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterLeaderboardSetImages: '#/components/schemas/GameCenterLeaderboardSetImageV2',
+                        gameCenterLeaderboardSetVersions: '#/components/schemas/GameCenterLeaderboardSetVersionV2'
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const GameCenterLeaderboardSetLocalizationV2CreateRequestSchema = {
+    type: 'object',
+    title: 'GameCenterLeaderboardSetLocalizationV2CreateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['gameCenterLeaderboardSetLocalizations']
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        locale: {
+                            type: 'string'
+                        },
+                        name: {
+                            type: 'string'
+                        }
+                    },
+                    required: ['name', 'locale']
+                },
+                relationships: {
+                    type: 'object',
+                    properties: {
+                        version: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: ['gameCenterLeaderboardSetVersions']
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: ['id', 'type']
+                                }
+                            },
+                            required: ['data']
+                        }
+                    },
+                    required: ['version']
+                }
+            },
+            required: ['relationships', 'attributes', 'type']
+        }
+    },
+    required: ['data']
+} as const;
+
+export const GameCenterLeaderboardSetLocalizationV2UpdateRequestSchema = {
+    type: 'object',
+    title: 'GameCenterLeaderboardSetLocalizationV2UpdateRequest',
     properties: {
         data: {
             type: 'object',
@@ -28319,6 +30858,604 @@ export const GameCenterLeaderboardSetReleaseCreateRequestSchema = {
     required: ['data']
 } as const;
 
+export const GameCenterLeaderboardSetVersionV2Schema = {
+    type: 'object',
+    title: 'GameCenterLeaderboardSetVersionV2',
+    properties: {
+        type: {
+            type: 'string',
+            enum: ['gameCenterLeaderboardSetVersions']
+        },
+        id: {
+            type: 'string'
+        },
+        attributes: {
+            type: 'object',
+            properties: {
+                version: {
+                    type: 'integer'
+                },
+                state: {
+                    '$ref': '#/components/schemas/GameCenterVersionState'
+                }
+            }
+        },
+        relationships: {
+            type: 'object',
+            properties: {
+                leaderboardSet: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['gameCenterLeaderboardSets']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                },
+                localizations: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            '$ref': '#/components/schemas/RelationshipLinks'
+                        },
+                        meta: {
+                            '$ref': '#/components/schemas/PagingInformation'
+                        },
+                        data: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    type: {
+                                        type: 'string',
+                                        enum: ['gameCenterLeaderboardSetLocalizations']
+                                    },
+                                    id: {
+                                        type: 'string'
+                                    }
+                                },
+                                required: ['id', 'type']
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: ['id', 'type']
+} as const;
+
+export const GameCenterLeaderboardSetVersionV2InlineCreateSchema = {
+    type: 'object',
+    properties: {
+        type: {
+            type: 'string',
+            enum: ['gameCenterLeaderboardSetVersions']
+        },
+        id: {
+            type: 'string'
+        },
+        relationships: {
+            type: 'object',
+            properties: {
+                leaderboardSet: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['gameCenterLeaderboardSets']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                }
+            }
+        }
+    },
+    required: ['type']
+} as const;
+
+export const GameCenterLeaderboardSetVersionsV2ResponseSchema = {
+    type: 'object',
+    title: 'GameCenterLeaderboardSetVersionsV2Response',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/GameCenterLeaderboardSetVersionV2'
+            }
+        },
+        included: {
+            type: 'array',
+            items: {
+                oneOf: [
+                    {
+                        '$ref': '#/components/schemas/GameCenterLeaderboardSetLocalizationV2'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterLeaderboardSetV2'
+                    }
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterLeaderboardSets: '#/components/schemas/GameCenterLeaderboardSetV2',
+                        gameCenterLeaderboardSetLocalizations: '#/components/schemas/GameCenterLeaderboardSetLocalizationV2'
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const GameCenterLeaderboardSetVersionV2ResponseSchema = {
+    type: 'object',
+    title: 'GameCenterLeaderboardSetVersionV2Response',
+    properties: {
+        data: {
+            '$ref': '#/components/schemas/GameCenterLeaderboardSetVersionV2'
+        },
+        included: {
+            type: 'array',
+            items: {
+                oneOf: [
+                    {
+                        '$ref': '#/components/schemas/GameCenterLeaderboardSetLocalizationV2'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterLeaderboardSetV2'
+                    }
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterLeaderboardSets: '#/components/schemas/GameCenterLeaderboardSetV2',
+                        gameCenterLeaderboardSetLocalizations: '#/components/schemas/GameCenterLeaderboardSetLocalizationV2'
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const GameCenterLeaderboardSetVersionV2CreateRequestSchema = {
+    type: 'object',
+    title: 'GameCenterLeaderboardSetVersionV2CreateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['gameCenterLeaderboardSetVersions']
+                },
+                relationships: {
+                    type: 'object',
+                    properties: {
+                        leaderboardSet: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: ['gameCenterLeaderboardSets']
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: ['id', 'type']
+                                }
+                            },
+                            required: ['data']
+                        }
+                    },
+                    required: ['leaderboardSet']
+                }
+            },
+            required: ['relationships', 'type']
+        }
+    },
+    required: ['data']
+} as const;
+
+export const GameCenterLeaderboardSetV2Schema = {
+    type: 'object',
+    title: 'GameCenterLeaderboardSetV2',
+    properties: {
+        type: {
+            type: 'string',
+            enum: ['gameCenterLeaderboardSets']
+        },
+        id: {
+            type: 'string'
+        },
+        attributes: {
+            type: 'object',
+            properties: {
+                referenceName: {
+                    type: 'string'
+                },
+                vendorIdentifier: {
+                    type: 'string'
+                }
+            }
+        },
+        relationships: {
+            type: 'object',
+            properties: {
+                gameCenterDetail: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['gameCenterDetails']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                },
+                gameCenterGroup: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['gameCenterGroups']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                },
+                gameCenterLeaderboards: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            '$ref': '#/components/schemas/RelationshipLinks'
+                        },
+                        meta: {
+                            '$ref': '#/components/schemas/PagingInformation'
+                        },
+                        data: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    type: {
+                                        type: 'string',
+                                        enum: ['gameCenterLeaderboards']
+                                    },
+                                    id: {
+                                        type: 'string'
+                                    }
+                                },
+                                required: ['id', 'type']
+                            }
+                        }
+                    }
+                },
+                versions: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            '$ref': '#/components/schemas/RelationshipLinks'
+                        },
+                        meta: {
+                            '$ref': '#/components/schemas/PagingInformation'
+                        },
+                        data: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    type: {
+                                        type: 'string',
+                                        enum: ['gameCenterLeaderboardSetVersions']
+                                    },
+                                    id: {
+                                        type: 'string'
+                                    }
+                                },
+                                required: ['id', 'type']
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: ['id', 'type']
+} as const;
+
+export const GameCenterLeaderboardSetsV2ResponseSchema = {
+    type: 'object',
+    title: 'GameCenterLeaderboardSetsV2Response',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/GameCenterLeaderboardSetV2'
+            }
+        },
+        included: {
+            type: 'array',
+            items: {
+                oneOf: [
+                    {
+                        '$ref': '#/components/schemas/GameCenterDetail'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterGroup'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterLeaderboardSetVersionV2'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterLeaderboardV2'
+                    }
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterDetails: '#/components/schemas/GameCenterDetail',
+                        gameCenterGroups: '#/components/schemas/GameCenterGroup',
+                        gameCenterLeaderboardSetVersions: '#/components/schemas/GameCenterLeaderboardSetVersionV2',
+                        gameCenterLeaderboards: '#/components/schemas/GameCenterLeaderboardV2'
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const GameCenterLeaderboardSetV2ResponseSchema = {
+    type: 'object',
+    title: 'GameCenterLeaderboardSetV2Response',
+    properties: {
+        data: {
+            '$ref': '#/components/schemas/GameCenterLeaderboardSetV2'
+        },
+        included: {
+            type: 'array',
+            items: {
+                oneOf: [
+                    {
+                        '$ref': '#/components/schemas/GameCenterDetail'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterGroup'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterLeaderboardSetVersionV2'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterLeaderboardV2'
+                    }
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterDetails: '#/components/schemas/GameCenterDetail',
+                        gameCenterGroups: '#/components/schemas/GameCenterGroup',
+                        gameCenterLeaderboardSetVersions: '#/components/schemas/GameCenterLeaderboardSetVersionV2',
+                        gameCenterLeaderboards: '#/components/schemas/GameCenterLeaderboardV2'
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const GameCenterLeaderboardSetV2CreateRequestSchema = {
+    type: 'object',
+    title: 'GameCenterLeaderboardSetV2CreateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['gameCenterLeaderboardSets']
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        referenceName: {
+                            type: 'string'
+                        },
+                        vendorIdentifier: {
+                            type: 'string'
+                        }
+                    },
+                    required: ['vendorIdentifier', 'referenceName']
+                },
+                relationships: {
+                    type: 'object',
+                    properties: {
+                        gameCenterDetail: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: ['gameCenterDetails']
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: ['id', 'type']
+                                }
+                            }
+                        },
+                        gameCenterGroup: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: ['gameCenterGroups']
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: ['id', 'type']
+                                }
+                            }
+                        },
+                        gameCenterLeaderboards: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'array',
+                                    items: {
+                                        type: 'object',
+                                        properties: {
+                                            type: {
+                                                type: 'string',
+                                                enum: ['gameCenterLeaderboards']
+                                            },
+                                            id: {
+                                                type: 'string'
+                                            }
+                                        },
+                                        required: ['id', 'type']
+                                    }
+                                }
+                            }
+                        },
+                        versions: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'array',
+                                    items: {
+                                        type: 'object',
+                                        properties: {
+                                            type: {
+                                                type: 'string',
+                                                enum: ['gameCenterLeaderboardSetVersions']
+                                            },
+                                            id: {
+                                                type: 'string'
+                                            }
+                                        },
+                                        required: ['id', 'type']
+                                    }
+                                }
+                            },
+                            required: ['data']
+                        }
+                    },
+                    required: ['versions']
+                }
+            },
+            required: ['relationships', 'attributes', 'type']
+        },
+        included: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/GameCenterLeaderboardSetVersionV2InlineCreate'
+            }
+        }
+    },
+    required: ['data']
+} as const;
+
+export const GameCenterLeaderboardSetV2UpdateRequestSchema = {
+    type: 'object',
+    title: 'GameCenterLeaderboardSetV2UpdateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['gameCenterLeaderboardSets']
+                },
+                id: {
+                    type: 'string'
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        referenceName: {
+                            type: 'string',
+                            nullable: true
+                        }
+                    }
+                }
+            },
+            required: ['id', 'type']
+        }
+    },
+    required: ['data']
+} as const;
+
 export const GameCenterLeaderboardSetSchema = {
     type: 'object',
     title: 'GameCenterLeaderboardSet',
@@ -28715,6 +31852,239 @@ export const GameCenterLeaderboardSetUpdateRequestSchema = {
                 }
             },
             required: ['id', 'type']
+        }
+    },
+    required: ['data']
+} as const;
+
+export const GameCenterLeaderboardVersionV2Schema = {
+    type: 'object',
+    title: 'GameCenterLeaderboardVersionV2',
+    properties: {
+        type: {
+            type: 'string',
+            enum: ['gameCenterLeaderboardVersions']
+        },
+        id: {
+            type: 'string'
+        },
+        attributes: {
+            type: 'object',
+            properties: {
+                version: {
+                    type: 'integer'
+                },
+                state: {
+                    '$ref': '#/components/schemas/GameCenterVersionState'
+                }
+            }
+        },
+        relationships: {
+            type: 'object',
+            properties: {
+                leaderboard: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['gameCenterLeaderboards']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                },
+                localizations: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            '$ref': '#/components/schemas/RelationshipLinks'
+                        },
+                        meta: {
+                            '$ref': '#/components/schemas/PagingInformation'
+                        },
+                        data: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    type: {
+                                        type: 'string',
+                                        enum: ['gameCenterLeaderboardLocalizations']
+                                    },
+                                    id: {
+                                        type: 'string'
+                                    }
+                                },
+                                required: ['id', 'type']
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: ['id', 'type']
+} as const;
+
+export const GameCenterLeaderboardVersionV2InlineCreateSchema = {
+    type: 'object',
+    properties: {
+        type: {
+            type: 'string',
+            enum: ['gameCenterLeaderboardVersions']
+        },
+        id: {
+            type: 'string'
+        },
+        relationships: {
+            type: 'object',
+            properties: {
+                leaderboard: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['gameCenterLeaderboards']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                }
+            }
+        }
+    },
+    required: ['type']
+} as const;
+
+export const GameCenterLeaderboardVersionsV2ResponseSchema = {
+    type: 'object',
+    title: 'GameCenterLeaderboardVersionsV2Response',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/GameCenterLeaderboardVersionV2'
+            }
+        },
+        included: {
+            type: 'array',
+            items: {
+                oneOf: [
+                    {
+                        '$ref': '#/components/schemas/GameCenterLeaderboardLocalizationV2'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterLeaderboardV2'
+                    }
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterLeaderboardLocalizations: '#/components/schemas/GameCenterLeaderboardLocalizationV2',
+                        gameCenterLeaderboards: '#/components/schemas/GameCenterLeaderboardV2'
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const GameCenterLeaderboardVersionV2ResponseSchema = {
+    type: 'object',
+    title: 'GameCenterLeaderboardVersionV2Response',
+    properties: {
+        data: {
+            '$ref': '#/components/schemas/GameCenterLeaderboardVersionV2'
+        },
+        included: {
+            type: 'array',
+            items: {
+                oneOf: [
+                    {
+                        '$ref': '#/components/schemas/GameCenterLeaderboardLocalizationV2'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterLeaderboardV2'
+                    }
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterLeaderboardLocalizations: '#/components/schemas/GameCenterLeaderboardLocalizationV2',
+                        gameCenterLeaderboards: '#/components/schemas/GameCenterLeaderboardV2'
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const GameCenterLeaderboardVersionV2CreateRequestSchema = {
+    type: 'object',
+    title: 'GameCenterLeaderboardVersionV2CreateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['gameCenterLeaderboardVersions']
+                },
+                relationships: {
+                    type: 'object',
+                    properties: {
+                        leaderboard: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: ['gameCenterLeaderboards']
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: ['id', 'type']
+                                }
+                            },
+                            required: ['data']
+                        }
+                    },
+                    required: ['leaderboard']
+                }
+            },
+            required: ['relationships', 'type']
         }
     },
     required: ['data']
@@ -29233,6 +32603,561 @@ export const GameCenterLeaderboardCreateRequestSchema = {
 export const GameCenterLeaderboardUpdateRequestSchema = {
     type: 'object',
     title: 'GameCenterLeaderboardUpdateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['gameCenterLeaderboards']
+                },
+                id: {
+                    type: 'string'
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        defaultFormatter: {
+                            nullable: true,
+                            '$ref': '#/components/schemas/GameCenterLeaderboardFormatter'
+                        },
+                        referenceName: {
+                            type: 'string',
+                            nullable: true
+                        },
+                        submissionType: {
+                            type: 'string',
+                            nullable: true,
+                            enum: ['BEST_SCORE', 'MOST_RECENT_SCORE']
+                        },
+                        scoreSortType: {
+                            type: 'string',
+                            nullable: true,
+                            enum: ['ASC', 'DESC']
+                        },
+                        scoreRangeStart: {
+                            type: 'string',
+                            format: 'number',
+                            nullable: true
+                        },
+                        scoreRangeEnd: {
+                            type: 'string',
+                            format: 'number',
+                            nullable: true
+                        },
+                        recurrenceStartDate: {
+                            type: 'string',
+                            format: 'date-time',
+                            nullable: true
+                        },
+                        recurrenceDuration: {
+                            type: 'string',
+                            format: 'duration',
+                            nullable: true
+                        },
+                        recurrenceRule: {
+                            type: 'string',
+                            nullable: true
+                        },
+                        archived: {
+                            type: 'boolean',
+                            nullable: true
+                        },
+                        activityProperties: {
+                            nullable: true,
+                            '$ref': '#/components/schemas/StringToStringMap'
+                        },
+                        visibility: {
+                            type: 'string',
+                            nullable: true,
+                            enum: ['SHOW_FOR_ALL', 'HIDE_FOR_ALL']
+                        }
+                    }
+                }
+            },
+            required: ['id', 'type']
+        }
+    },
+    required: ['data']
+} as const;
+
+export const GameCenterLeaderboardV2Schema = {
+    type: 'object',
+    title: 'GameCenterLeaderboardV2',
+    properties: {
+        type: {
+            type: 'string',
+            enum: ['gameCenterLeaderboards']
+        },
+        id: {
+            type: 'string'
+        },
+        attributes: {
+            type: 'object',
+            properties: {
+                defaultFormatter: {
+                    '$ref': '#/components/schemas/GameCenterLeaderboardFormatter'
+                },
+                referenceName: {
+                    type: 'string'
+                },
+                vendorIdentifier: {
+                    type: 'string'
+                },
+                submissionType: {
+                    type: 'string',
+                    enum: ['BEST_SCORE', 'MOST_RECENT_SCORE']
+                },
+                scoreSortType: {
+                    type: 'string',
+                    enum: ['ASC', 'DESC']
+                },
+                scoreRangeStart: {
+                    type: 'string',
+                    format: 'number'
+                },
+                scoreRangeEnd: {
+                    type: 'string',
+                    format: 'number'
+                },
+                recurrenceStartDate: {
+                    type: 'string',
+                    format: 'date-time'
+                },
+                recurrenceDuration: {
+                    type: 'string',
+                    format: 'duration'
+                },
+                recurrenceRule: {
+                    type: 'string'
+                },
+                archived: {
+                    type: 'boolean'
+                },
+                activityProperties: {
+                    '$ref': '#/components/schemas/StringToStringMap'
+                },
+                visibility: {
+                    type: 'string',
+                    enum: ['SHOW_FOR_ALL', 'HIDE_FOR_ALL']
+                }
+            }
+        },
+        relationships: {
+            type: 'object',
+            properties: {
+                gameCenterDetail: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['gameCenterDetails']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                },
+                gameCenterGroup: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['gameCenterGroups']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                },
+                gameCenterLeaderboardSets: {
+                    type: 'object',
+                    properties: {
+                        meta: {
+                            '$ref': '#/components/schemas/PagingInformation'
+                        },
+                        data: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    type: {
+                                        type: 'string',
+                                        enum: ['gameCenterLeaderboardSets']
+                                    },
+                                    id: {
+                                        type: 'string'
+                                    }
+                                },
+                                required: ['id', 'type']
+                            }
+                        }
+                    }
+                },
+                activity: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            '$ref': '#/components/schemas/RelationshipLinks'
+                        },
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['gameCenterActivities']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                },
+                challenge: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            '$ref': '#/components/schemas/RelationshipLinks'
+                        },
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['gameCenterChallenges']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                },
+                versions: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            '$ref': '#/components/schemas/RelationshipLinks'
+                        },
+                        meta: {
+                            '$ref': '#/components/schemas/PagingInformation'
+                        },
+                        data: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    type: {
+                                        type: 'string',
+                                        enum: ['gameCenterLeaderboardVersions']
+                                    },
+                                    id: {
+                                        type: 'string'
+                                    }
+                                },
+                                required: ['id', 'type']
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: ['id', 'type']
+} as const;
+
+export const GameCenterLeaderboardsV2ResponseSchema = {
+    type: 'object',
+    title: 'GameCenterLeaderboardsV2Response',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/GameCenterLeaderboardV2'
+            }
+        },
+        included: {
+            type: 'array',
+            items: {
+                oneOf: [
+                    {
+                        '$ref': '#/components/schemas/GameCenterActivity'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterChallenge'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterDetail'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterGroup'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterLeaderboardSetV2'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterLeaderboardVersionV2'
+                    }
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterDetails: '#/components/schemas/GameCenterDetail',
+                        gameCenterLeaderboardSets: '#/components/schemas/GameCenterLeaderboardSetV2',
+                        gameCenterActivities: '#/components/schemas/GameCenterActivity',
+                        gameCenterGroups: '#/components/schemas/GameCenterGroup',
+                        gameCenterChallenges: '#/components/schemas/GameCenterChallenge',
+                        gameCenterLeaderboardVersions: '#/components/schemas/GameCenterLeaderboardVersionV2'
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const GameCenterLeaderboardV2ResponseSchema = {
+    type: 'object',
+    title: 'GameCenterLeaderboardV2Response',
+    properties: {
+        data: {
+            '$ref': '#/components/schemas/GameCenterLeaderboardV2'
+        },
+        included: {
+            type: 'array',
+            items: {
+                oneOf: [
+                    {
+                        '$ref': '#/components/schemas/GameCenterActivity'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterChallenge'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterDetail'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterGroup'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterLeaderboardSetV2'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterLeaderboardVersionV2'
+                    }
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        gameCenterDetails: '#/components/schemas/GameCenterDetail',
+                        gameCenterLeaderboardSets: '#/components/schemas/GameCenterLeaderboardSetV2',
+                        gameCenterActivities: '#/components/schemas/GameCenterActivity',
+                        gameCenterGroups: '#/components/schemas/GameCenterGroup',
+                        gameCenterChallenges: '#/components/schemas/GameCenterChallenge',
+                        gameCenterLeaderboardVersions: '#/components/schemas/GameCenterLeaderboardVersionV2'
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const GameCenterLeaderboardV2CreateRequestSchema = {
+    type: 'object',
+    title: 'GameCenterLeaderboardV2CreateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['gameCenterLeaderboards']
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        defaultFormatter: {
+                            '$ref': '#/components/schemas/GameCenterLeaderboardFormatter'
+                        },
+                        referenceName: {
+                            type: 'string'
+                        },
+                        vendorIdentifier: {
+                            type: 'string'
+                        },
+                        submissionType: {
+                            type: 'string',
+                            enum: ['BEST_SCORE', 'MOST_RECENT_SCORE']
+                        },
+                        scoreSortType: {
+                            type: 'string',
+                            enum: ['ASC', 'DESC']
+                        },
+                        scoreRangeStart: {
+                            type: 'string',
+                            format: 'number',
+                            nullable: true
+                        },
+                        scoreRangeEnd: {
+                            type: 'string',
+                            format: 'number',
+                            nullable: true
+                        },
+                        recurrenceStartDate: {
+                            type: 'string',
+                            format: 'date-time',
+                            nullable: true
+                        },
+                        recurrenceDuration: {
+                            type: 'string',
+                            format: 'duration',
+                            nullable: true
+                        },
+                        recurrenceRule: {
+                            type: 'string',
+                            nullable: true
+                        },
+                        activityProperties: {
+                            nullable: true,
+                            '$ref': '#/components/schemas/StringToStringMap'
+                        },
+                        visibility: {
+                            type: 'string',
+                            nullable: true,
+                            enum: ['SHOW_FOR_ALL', 'HIDE_FOR_ALL']
+                        }
+                    },
+                    required: ['vendorIdentifier', 'submissionType', 'defaultFormatter', 'scoreSortType', 'referenceName']
+                },
+                relationships: {
+                    type: 'object',
+                    properties: {
+                        gameCenterDetail: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: ['gameCenterDetails']
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: ['id', 'type']
+                                }
+                            }
+                        },
+                        gameCenterGroup: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: ['gameCenterGroups']
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: ['id', 'type']
+                                }
+                            }
+                        },
+                        gameCenterLeaderboardSets: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'array',
+                                    items: {
+                                        type: 'object',
+                                        properties: {
+                                            type: {
+                                                type: 'string',
+                                                enum: ['gameCenterLeaderboardSets']
+                                            },
+                                            id: {
+                                                type: 'string'
+                                            }
+                                        },
+                                        required: ['id', 'type']
+                                    }
+                                }
+                            }
+                        },
+                        versions: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'array',
+                                    items: {
+                                        type: 'object',
+                                        properties: {
+                                            type: {
+                                                type: 'string',
+                                                enum: ['gameCenterLeaderboardVersions']
+                                            },
+                                            id: {
+                                                type: 'string'
+                                            }
+                                        },
+                                        required: ['id', 'type']
+                                    }
+                                }
+                            },
+                            required: ['data']
+                        }
+                    },
+                    required: ['versions']
+                }
+            },
+            required: ['relationships', 'attributes', 'type']
+        },
+        included: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/GameCenterLeaderboardVersionV2InlineCreate'
+            }
+        }
+    },
+    required: ['data']
+} as const;
+
+export const GameCenterLeaderboardV2UpdateRequestSchema = {
+    type: 'object',
+    title: 'GameCenterLeaderboardV2UpdateRequest',
     properties: {
         data: {
             type: 'object',
@@ -31417,6 +35342,947 @@ export const InAppPurchaseLocalizationUpdateRequestSchema = {
     required: ['data']
 } as const;
 
+export const InAppPurchaseOfferCodeCustomCodeSchema = {
+    type: 'object',
+    title: 'InAppPurchaseOfferCodeCustomCode',
+    properties: {
+        type: {
+            type: 'string',
+            enum: ['inAppPurchaseOfferCodeCustomCodes']
+        },
+        id: {
+            type: 'string'
+        },
+        attributes: {
+            type: 'object',
+            properties: {
+                customCode: {
+                    type: 'string'
+                },
+                numberOfCodes: {
+                    type: 'integer'
+                },
+                createdDate: {
+                    type: 'string',
+                    format: 'date-time'
+                },
+                expirationDate: {
+                    type: 'string',
+                    format: 'date'
+                },
+                active: {
+                    type: 'boolean'
+                }
+            }
+        },
+        relationships: {
+            type: 'object',
+            properties: {
+                createdByActor: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['actors']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                },
+                deactivatedByActor: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['actors']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: ['id', 'type']
+} as const;
+
+export const InAppPurchaseOfferCodeCustomCodesResponseSchema = {
+    type: 'object',
+    title: 'InAppPurchaseOfferCodeCustomCodesResponse',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/InAppPurchaseOfferCodeCustomCode'
+            }
+        },
+        included: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/Actor'
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const InAppPurchaseOfferCodeCustomCodeResponseSchema = {
+    type: 'object',
+    title: 'InAppPurchaseOfferCodeCustomCodeResponse',
+    properties: {
+        data: {
+            '$ref': '#/components/schemas/InAppPurchaseOfferCodeCustomCode'
+        },
+        included: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/Actor'
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const InAppPurchaseOfferCodeCustomCodeCreateRequestSchema = {
+    type: 'object',
+    title: 'InAppPurchaseOfferCodeCustomCodeCreateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['inAppPurchaseOfferCodeCustomCodes']
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        customCode: {
+                            type: 'string'
+                        },
+                        numberOfCodes: {
+                            type: 'integer'
+                        },
+                        expirationDate: {
+                            type: 'string',
+                            format: 'date',
+                            nullable: true
+                        }
+                    },
+                    required: ['numberOfCodes', 'customCode']
+                },
+                relationships: {
+                    type: 'object',
+                    properties: {
+                        offerCode: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: ['inAppPurchaseOfferCodes']
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: ['id', 'type']
+                                }
+                            },
+                            required: ['data']
+                        }
+                    },
+                    required: ['offerCode']
+                }
+            },
+            required: ['relationships', 'attributes', 'type']
+        }
+    },
+    required: ['data']
+} as const;
+
+export const InAppPurchaseOfferCodeCustomCodeUpdateRequestSchema = {
+    type: 'object',
+    title: 'InAppPurchaseOfferCodeCustomCodeUpdateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['inAppPurchaseOfferCodeCustomCodes']
+                },
+                id: {
+                    type: 'string'
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        active: {
+                            type: 'boolean',
+                            nullable: true
+                        }
+                    }
+                }
+            },
+            required: ['id', 'type']
+        }
+    },
+    required: ['data']
+} as const;
+
+export const InAppPurchaseOfferCodeOneTimeUseCodeValueSchema = {
+    type: 'object',
+    title: 'InAppPurchaseOfferCodeOneTimeUseCodeValue',
+    properties: {
+        type: {
+            type: 'string',
+            enum: ['inAppPurchaseOfferCodeOneTimeUseCodeValues']
+        },
+        id: {
+            type: 'string'
+        },
+        links: {
+            '$ref': '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: ['id', 'type']
+} as const;
+
+export const InAppPurchaseOfferCodeOneTimeUseCodeSchema = {
+    type: 'object',
+    title: 'InAppPurchaseOfferCodeOneTimeUseCode',
+    properties: {
+        type: {
+            type: 'string',
+            enum: ['inAppPurchaseOfferCodeOneTimeUseCodes']
+        },
+        id: {
+            type: 'string'
+        },
+        attributes: {
+            type: 'object',
+            properties: {
+                numberOfCodes: {
+                    type: 'integer'
+                },
+                createdDate: {
+                    type: 'string',
+                    format: 'date-time'
+                },
+                expirationDate: {
+                    type: 'string',
+                    format: 'date'
+                },
+                active: {
+                    type: 'boolean'
+                },
+                environment: {
+                    '$ref': '#/components/schemas/OfferCodeEnvironment'
+                }
+            }
+        },
+        relationships: {
+            type: 'object',
+            properties: {
+                values: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            '$ref': '#/components/schemas/RelationshipLinks'
+                        }
+                    }
+                },
+                createdByActor: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['actors']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                },
+                deactivatedByActor: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['actors']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: ['id', 'type']
+} as const;
+
+export const InAppPurchaseOfferCodeOneTimeUseCodesResponseSchema = {
+    type: 'object',
+    title: 'InAppPurchaseOfferCodeOneTimeUseCodesResponse',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/InAppPurchaseOfferCodeOneTimeUseCode'
+            }
+        },
+        included: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/Actor'
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const InAppPurchaseOfferCodeOneTimeUseCodeResponseSchema = {
+    type: 'object',
+    title: 'InAppPurchaseOfferCodeOneTimeUseCodeResponse',
+    properties: {
+        data: {
+            '$ref': '#/components/schemas/InAppPurchaseOfferCodeOneTimeUseCode'
+        },
+        included: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/Actor'
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const InAppPurchaseOfferCodeOneTimeUseCodeCreateRequestSchema = {
+    type: 'object',
+    title: 'InAppPurchaseOfferCodeOneTimeUseCodeCreateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['inAppPurchaseOfferCodeOneTimeUseCodes']
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        numberOfCodes: {
+                            type: 'integer'
+                        },
+                        expirationDate: {
+                            type: 'string',
+                            format: 'date'
+                        },
+                        environment: {
+                            nullable: true,
+                            '$ref': '#/components/schemas/OfferCodeEnvironment'
+                        }
+                    },
+                    required: ['numberOfCodes', 'expirationDate']
+                },
+                relationships: {
+                    type: 'object',
+                    properties: {
+                        offerCode: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: ['inAppPurchaseOfferCodes']
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: ['id', 'type']
+                                }
+                            },
+                            required: ['data']
+                        }
+                    },
+                    required: ['offerCode']
+                }
+            },
+            required: ['relationships', 'attributes', 'type']
+        }
+    },
+    required: ['data']
+} as const;
+
+export const InAppPurchaseOfferCodeOneTimeUseCodeUpdateRequestSchema = {
+    type: 'object',
+    title: 'InAppPurchaseOfferCodeOneTimeUseCodeUpdateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['inAppPurchaseOfferCodeOneTimeUseCodes']
+                },
+                id: {
+                    type: 'string'
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        active: {
+                            type: 'boolean',
+                            nullable: true
+                        }
+                    }
+                }
+            },
+            required: ['id', 'type']
+        }
+    },
+    required: ['data']
+} as const;
+
+export const InAppPurchaseOfferCodeSchema = {
+    type: 'object',
+    title: 'InAppPurchaseOfferCode',
+    properties: {
+        type: {
+            type: 'string',
+            enum: ['inAppPurchaseOfferCodes']
+        },
+        id: {
+            type: 'string'
+        },
+        attributes: {
+            type: 'object',
+            properties: {
+                name: {
+                    type: 'string'
+                },
+                customerEligibilities: {
+                    type: 'array',
+                    items: {
+                        type: 'string',
+                        enum: ['NON_SPENDER', 'ACTIVE_SPENDER', 'CHURNED_SPENDER']
+                    }
+                },
+                productionCodeCount: {
+                    type: 'integer'
+                },
+                sandboxCodeCount: {
+                    type: 'integer'
+                },
+                active: {
+                    type: 'boolean'
+                }
+            }
+        },
+        relationships: {
+            type: 'object',
+            properties: {
+                oneTimeUseCodes: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            '$ref': '#/components/schemas/RelationshipLinks'
+                        },
+                        meta: {
+                            '$ref': '#/components/schemas/PagingInformation'
+                        },
+                        data: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    type: {
+                                        type: 'string',
+                                        enum: ['inAppPurchaseOfferCodeOneTimeUseCodes']
+                                    },
+                                    id: {
+                                        type: 'string'
+                                    }
+                                },
+                                required: ['id', 'type']
+                            }
+                        }
+                    }
+                },
+                customCodes: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            '$ref': '#/components/schemas/RelationshipLinks'
+                        },
+                        meta: {
+                            '$ref': '#/components/schemas/PagingInformation'
+                        },
+                        data: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    type: {
+                                        type: 'string',
+                                        enum: ['inAppPurchaseOfferCodeCustomCodes']
+                                    },
+                                    id: {
+                                        type: 'string'
+                                    }
+                                },
+                                required: ['id', 'type']
+                            }
+                        }
+                    }
+                },
+                prices: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            '$ref': '#/components/schemas/RelationshipLinks'
+                        },
+                        meta: {
+                            '$ref': '#/components/schemas/PagingInformation'
+                        },
+                        data: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    type: {
+                                        type: 'string',
+                                        enum: ['inAppPurchaseOfferPrices']
+                                    },
+                                    id: {
+                                        type: 'string'
+                                    }
+                                },
+                                required: ['id', 'type']
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: ['id', 'type']
+} as const;
+
+export const InAppPurchaseOfferCodesResponseSchema = {
+    type: 'object',
+    title: 'InAppPurchaseOfferCodesResponse',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/InAppPurchaseOfferCode'
+            }
+        },
+        included: {
+            type: 'array',
+            items: {
+                oneOf: [
+                    {
+                        '$ref': '#/components/schemas/InAppPurchaseOfferCodeCustomCode'
+                    },
+                    {
+                        '$ref': '#/components/schemas/InAppPurchaseOfferCodeOneTimeUseCode'
+                    },
+                    {
+                        '$ref': '#/components/schemas/InAppPurchaseOfferPrice'
+                    }
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        inAppPurchaseOfferPrices: '#/components/schemas/InAppPurchaseOfferPrice',
+                        inAppPurchaseOfferCodeOneTimeUseCodes: '#/components/schemas/InAppPurchaseOfferCodeOneTimeUseCode',
+                        inAppPurchaseOfferCodeCustomCodes: '#/components/schemas/InAppPurchaseOfferCodeCustomCode'
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const InAppPurchaseOfferCodeResponseSchema = {
+    type: 'object',
+    title: 'InAppPurchaseOfferCodeResponse',
+    properties: {
+        data: {
+            '$ref': '#/components/schemas/InAppPurchaseOfferCode'
+        },
+        included: {
+            type: 'array',
+            items: {
+                oneOf: [
+                    {
+                        '$ref': '#/components/schemas/InAppPurchaseOfferCodeCustomCode'
+                    },
+                    {
+                        '$ref': '#/components/schemas/InAppPurchaseOfferCodeOneTimeUseCode'
+                    },
+                    {
+                        '$ref': '#/components/schemas/InAppPurchaseOfferPrice'
+                    }
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        inAppPurchaseOfferPrices: '#/components/schemas/InAppPurchaseOfferPrice',
+                        inAppPurchaseOfferCodeOneTimeUseCodes: '#/components/schemas/InAppPurchaseOfferCodeOneTimeUseCode',
+                        inAppPurchaseOfferCodeCustomCodes: '#/components/schemas/InAppPurchaseOfferCodeCustomCode'
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const InAppPurchaseOfferCodeCreateRequestSchema = {
+    type: 'object',
+    title: 'InAppPurchaseOfferCodeCreateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['inAppPurchaseOfferCodes']
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        name: {
+                            type: 'string'
+                        },
+                        customerEligibilities: {
+                            type: 'array',
+                            items: {
+                                type: 'string',
+                                enum: ['NON_SPENDER', 'ACTIVE_SPENDER', 'CHURNED_SPENDER']
+                            }
+                        }
+                    },
+                    required: ['name', 'customerEligibilities']
+                },
+                relationships: {
+                    type: 'object',
+                    properties: {
+                        inAppPurchase: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: ['inAppPurchases']
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: ['id', 'type']
+                                }
+                            },
+                            required: ['data']
+                        },
+                        prices: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'array',
+                                    items: {
+                                        type: 'object',
+                                        properties: {
+                                            type: {
+                                                type: 'string',
+                                                enum: ['inAppPurchaseOfferPrices']
+                                            },
+                                            id: {
+                                                type: 'string'
+                                            }
+                                        },
+                                        required: ['id', 'type']
+                                    }
+                                }
+                            },
+                            required: ['data']
+                        }
+                    },
+                    required: ['inAppPurchase', 'prices']
+                }
+            },
+            required: ['relationships', 'attributes', 'type']
+        },
+        included: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/InAppPurchaseOfferPriceInlineCreate'
+            }
+        }
+    },
+    required: ['data']
+} as const;
+
+export const InAppPurchaseOfferCodeUpdateRequestSchema = {
+    type: 'object',
+    title: 'InAppPurchaseOfferCodeUpdateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['inAppPurchaseOfferCodes']
+                },
+                id: {
+                    type: 'string'
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        active: {
+                            type: 'boolean',
+                            nullable: true
+                        }
+                    }
+                }
+            },
+            required: ['id', 'type']
+        }
+    },
+    required: ['data']
+} as const;
+
+export const InAppPurchaseOfferPriceSchema = {
+    type: 'object',
+    title: 'InAppPurchaseOfferPrice',
+    properties: {
+        type: {
+            type: 'string',
+            enum: ['inAppPurchaseOfferPrices']
+        },
+        id: {
+            type: 'string'
+        },
+        relationships: {
+            type: 'object',
+            properties: {
+                territory: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['territories']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                },
+                pricePoint: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['inAppPurchasePricePoints']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: ['id', 'type']
+} as const;
+
+export const InAppPurchaseOfferPriceInlineCreateSchema = {
+    type: 'object',
+    properties: {
+        type: {
+            type: 'string',
+            enum: ['inAppPurchaseOfferPrices']
+        },
+        id: {
+            type: 'string'
+        },
+        relationships: {
+            type: 'object',
+            properties: {
+                territory: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['territories']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                },
+                pricePoint: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['inAppPurchasePricePoints']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                }
+            }
+        }
+    },
+    required: ['type']
+} as const;
+
+export const InAppPurchaseOfferPricesResponseSchema = {
+    type: 'object',
+    title: 'InAppPurchaseOfferPricesResponse',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/InAppPurchaseOfferPrice'
+            }
+        },
+        included: {
+            type: 'array',
+            items: {
+                oneOf: [
+                    {
+                        '$ref': '#/components/schemas/InAppPurchasePricePoint'
+                    },
+                    {
+                        '$ref': '#/components/schemas/Territory'
+                    }
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        territories: '#/components/schemas/Territory',
+                        inAppPurchasePricePoints: '#/components/schemas/InAppPurchasePricePoint'
+                    }
+                }
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
 export const InAppPurchasePricePointSchema = {
     type: 'object',
     title: 'InAppPurchasePricePoint',
@@ -32361,6 +37227,33 @@ export const InAppPurchaseV2Schema = {
                             }
                         }
                     }
+                },
+                offerCodes: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            '$ref': '#/components/schemas/RelationshipLinks'
+                        },
+                        meta: {
+                            '$ref': '#/components/schemas/PagingInformation'
+                        },
+                        data: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    type: {
+                                        type: 'string',
+                                        enum: ['inAppPurchaseOfferCodes']
+                                    },
+                                    id: {
+                                        type: 'string'
+                                    }
+                                },
+                                required: ['id', 'type']
+                            }
+                        }
+                    }
                 }
             }
         },
@@ -32401,6 +37294,9 @@ export const InAppPurchasesV2ResponseSchema = {
                         '$ref': '#/components/schemas/InAppPurchaseLocalization'
                     },
                     {
+                        '$ref': '#/components/schemas/InAppPurchaseOfferCode'
+                    },
+                    {
                         '$ref': '#/components/schemas/InAppPurchasePricePoint'
                     },
                     {
@@ -32415,6 +37311,7 @@ export const InAppPurchasesV2ResponseSchema = {
                     mapping: {
                         inAppPurchaseAppStoreReviewScreenshots: '#/components/schemas/InAppPurchaseAppStoreReviewScreenshot',
                         inAppPurchaseContents: '#/components/schemas/InAppPurchaseContent',
+                        inAppPurchaseOfferCodes: '#/components/schemas/InAppPurchaseOfferCode',
                         inAppPurchasePriceSchedules: '#/components/schemas/InAppPurchasePriceSchedule',
                         promotedPurchases: '#/components/schemas/PromotedPurchase',
                         inAppPurchaseImages: '#/components/schemas/InAppPurchaseImage',
@@ -32462,6 +37359,9 @@ export const InAppPurchaseV2ResponseSchema = {
                         '$ref': '#/components/schemas/InAppPurchaseLocalization'
                     },
                     {
+                        '$ref': '#/components/schemas/InAppPurchaseOfferCode'
+                    },
+                    {
                         '$ref': '#/components/schemas/InAppPurchasePricePoint'
                     },
                     {
@@ -32476,6 +37376,7 @@ export const InAppPurchaseV2ResponseSchema = {
                     mapping: {
                         inAppPurchaseAppStoreReviewScreenshots: '#/components/schemas/InAppPurchaseAppStoreReviewScreenshot',
                         inAppPurchaseContents: '#/components/schemas/InAppPurchaseContent',
+                        inAppPurchaseOfferCodes: '#/components/schemas/InAppPurchaseOfferCode',
                         inAppPurchasePriceSchedules: '#/components/schemas/InAppPurchasePriceSchedule',
                         promotedPurchases: '#/components/schemas/PromotedPurchase',
                         inAppPurchaseImages: '#/components/schemas/InAppPurchaseImage',
@@ -34720,6 +39621,96 @@ export const ReviewSubmissionItemSchema = {
                             required: ['id', 'type']
                         }
                     }
+                },
+                gameCenterAchievementVersion: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['gameCenterAchievementVersions']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                },
+                gameCenterActivityVersion: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['gameCenterActivityVersions']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                },
+                gameCenterChallengeVersion: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['gameCenterChallengeVersions']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                },
+                gameCenterLeaderboardSetVersion: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['gameCenterLeaderboardSetVersions']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                },
+                gameCenterLeaderboardVersion: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['gameCenterLeaderboardVersions']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
                 }
             }
         },
@@ -34758,16 +39749,36 @@ export const ReviewSubmissionItemsResponseSchema = {
                     },
                     {
                         '$ref': '#/components/schemas/BackgroundAssetVersion'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterAchievementVersionV2'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterActivityVersion'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterChallengeVersion'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterLeaderboardSetVersionV2'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterLeaderboardVersionV2'
                     }
                 ],
                 discriminator: {
                     propertyName: 'type',
                     mapping: {
                         appEvents: '#/components/schemas/AppEvent',
+                        gameCenterAchievementVersions: '#/components/schemas/GameCenterAchievementVersionV2',
+                        gameCenterChallengeVersions: '#/components/schemas/GameCenterChallengeVersion',
                         appStoreVersions: '#/components/schemas/AppStoreVersion',
                         appStoreVersionExperiments: '#/components/schemas/AppStoreVersionExperiment',
                         backgroundAssetVersions: '#/components/schemas/BackgroundAssetVersion',
-                        appCustomProductPageVersions: '#/components/schemas/AppCustomProductPageVersion'
+                        gameCenterActivityVersions: '#/components/schemas/GameCenterActivityVersion',
+                        gameCenterLeaderboardSetVersions: '#/components/schemas/GameCenterLeaderboardSetVersionV2',
+                        appCustomProductPageVersions: '#/components/schemas/AppCustomProductPageVersion',
+                        gameCenterLeaderboardVersions: '#/components/schemas/GameCenterLeaderboardVersionV2'
                     }
                 }
             }
@@ -34807,16 +39818,36 @@ export const ReviewSubmissionItemResponseSchema = {
                     },
                     {
                         '$ref': '#/components/schemas/BackgroundAssetVersion'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterAchievementVersionV2'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterActivityVersion'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterChallengeVersion'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterLeaderboardSetVersionV2'
+                    },
+                    {
+                        '$ref': '#/components/schemas/GameCenterLeaderboardVersionV2'
                     }
                 ],
                 discriminator: {
                     propertyName: 'type',
                     mapping: {
                         appEvents: '#/components/schemas/AppEvent',
+                        gameCenterAchievementVersions: '#/components/schemas/GameCenterAchievementVersionV2',
+                        gameCenterChallengeVersions: '#/components/schemas/GameCenterChallengeVersion',
                         appStoreVersions: '#/components/schemas/AppStoreVersion',
                         appStoreVersionExperiments: '#/components/schemas/AppStoreVersionExperiment',
                         backgroundAssetVersions: '#/components/schemas/BackgroundAssetVersion',
-                        appCustomProductPageVersions: '#/components/schemas/AppCustomProductPageVersion'
+                        gameCenterActivityVersions: '#/components/schemas/GameCenterActivityVersion',
+                        gameCenterLeaderboardSetVersions: '#/components/schemas/GameCenterLeaderboardSetVersionV2',
+                        appCustomProductPageVersions: '#/components/schemas/AppCustomProductPageVersion',
+                        gameCenterLeaderboardVersions: '#/components/schemas/GameCenterLeaderboardVersionV2'
                     }
                 }
             }
@@ -34960,6 +39991,96 @@ export const ReviewSubmissionItemCreateRequestSchema = {
                                         type: {
                                             type: 'string',
                                             enum: ['backgroundAssetVersions']
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: ['id', 'type']
+                                }
+                            }
+                        },
+                        gameCenterAchievementVersion: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: ['gameCenterAchievementVersions']
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: ['id', 'type']
+                                }
+                            }
+                        },
+                        gameCenterActivityVersion: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: ['gameCenterActivityVersions']
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: ['id', 'type']
+                                }
+                            }
+                        },
+                        gameCenterChallengeVersion: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: ['gameCenterChallengeVersions']
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: ['id', 'type']
+                                }
+                            }
+                        },
+                        gameCenterLeaderboardSetVersion: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: ['gameCenterLeaderboardSetVersions']
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: ['id', 'type']
+                                }
+                            }
+                        },
+                        gameCenterLeaderboardVersion: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: ['gameCenterLeaderboardVersions']
                                         },
                                         id: {
                                             type: 'string'
@@ -38188,6 +43309,9 @@ export const SubscriptionOfferCodeOneTimeUseCodeSchema = {
                 },
                 active: {
                     type: 'boolean'
+                },
+                environment: {
+                    '$ref': '#/components/schemas/OfferCodeEnvironment'
                 }
             }
         },
@@ -38295,6 +43419,10 @@ export const SubscriptionOfferCodeOneTimeUseCodeCreateRequestSchema = {
                         expirationDate: {
                             type: 'string',
                             format: 'date'
+                        },
+                        environment: {
+                            nullable: true,
+                            '$ref': '#/components/schemas/OfferCodeEnvironment'
                         }
                     },
                     required: ['numberOfCodes', 'expirationDate']
@@ -38553,7 +43681,16 @@ export const SubscriptionOfferCodeSchema = {
                 totalNumberOfCodes: {
                     type: 'integer'
                 },
+                productionCodeCount: {
+                    type: 'integer'
+                },
+                sandboxCodeCount: {
+                    type: 'integer'
+                },
                 active: {
+                    type: 'boolean'
+                },
+                autoRenewEnabled: {
                     type: 'boolean'
                 }
             }
@@ -38793,6 +43930,10 @@ export const SubscriptionOfferCodeCreateRequestSchema = {
                         },
                         numberOfPeriods: {
                             type: 'integer'
+                        },
+                        autoRenewEnabled: {
+                            type: 'boolean',
+                            nullable: true
                         }
                     },
                     required: ['duration', 'offerEligibility', 'name', 'numberOfPeriods', 'offerMode', 'customerEligibilities']
@@ -44221,20 +49362,6 @@ export const AppStoreVersionGameCenterAppVersionLinkageResponseSchema = {
     required: ['data', 'links']
 } as const;
 
-export const RoutingAppCoverageWithoutIncludesResponseSchema = {
-    type: 'object',
-    title: 'RoutingAppCoverageWithoutIncludesResponse',
-    properties: {
-        data: {
-            '$ref': '#/components/schemas/RoutingAppCoverage'
-        },
-        links: {
-            '$ref': '#/components/schemas/DocumentLinks'
-        }
-    },
-    required: ['data', 'links']
-} as const;
-
 export const AppStoreVersionRoutingAppCoverageLinkageResponseSchema = {
     type: 'object',
     properties: {
@@ -44350,6 +49477,35 @@ export const AppAnalyticsReportRequestsLinkagesResponseSchema = {
                     type: {
                         type: 'string',
                         enum: ['analyticsReportRequests']
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: ['id', 'type']
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const AppAndroidToIosAppMappingDetailsLinkagesResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: ['androidToIosAppMappingDetails']
                     },
                     id: {
                         type: 'string'
@@ -47342,6 +52498,29 @@ export const EndUserLicenseAgreementTerritoriesLinkagesResponseSchema = {
     required: ['data', 'links']
 } as const;
 
+export const GameCenterAchievementLocalizationV2ImageLinkageResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['gameCenterAchievementImages']
+                },
+                id: {
+                    type: 'string'
+                }
+            },
+            required: ['id', 'type']
+        },
+        links: {
+            '$ref': '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
 export const GameCenterAchievementLocalizationGameCenterAchievementLinkageResponseSchema = {
     type: 'object',
     properties: {
@@ -47383,6 +52562,84 @@ export const GameCenterAchievementLocalizationGameCenterAchievementImageLinkageR
         },
         links: {
             '$ref': '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const GameCenterAchievementVersionV2LocalizationsLinkagesResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: ['gameCenterAchievementLocalizations']
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: ['id', 'type']
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const GameCenterAchievementV2ActivityLinkageRequestSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['gameCenterActivities']
+                },
+                id: {
+                    type: 'string'
+                }
+            },
+            required: ['id', 'type']
+        }
+    },
+    required: ['data']
+} as const;
+
+export const GameCenterAchievementV2VersionsLinkagesResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: ['gameCenterAchievementVersions']
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: ['id', 'type']
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
         }
     },
     required: ['data', 'links']
@@ -47534,7 +52791,53 @@ export const GameCenterActivityAchievementsLinkagesRequestSchema = {
     required: ['data']
 } as const;
 
+export const GameCenterActivityAchievementsV2LinkagesRequestSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: ['gameCenterAchievements']
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: ['id', 'type']
+            }
+        }
+    },
+    required: ['data']
+} as const;
+
 export const GameCenterActivityLeaderboardsLinkagesRequestSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: ['gameCenterLeaderboards']
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: ['id', 'type']
+            }
+        }
+    },
+    required: ['data']
+} as const;
+
+export const GameCenterActivityLeaderboardsV2LinkagesRequestSchema = {
     type: 'object',
     properties: {
         data: {
@@ -47831,6 +53134,26 @@ export const GameCenterChallengeLeaderboardLinkageRequestSchema = {
     required: ['data']
 } as const;
 
+export const GameCenterChallengeLeaderboardV2LinkageRequestSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['gameCenterLeaderboards']
+                },
+                id: {
+                    type: 'string'
+                }
+            },
+            required: ['id', 'type']
+        }
+    },
+    required: ['data']
+} as const;
+
 export const GameCenterChallengeVersionsLinkagesResponseSchema = {
     type: 'object',
     properties: {
@@ -48022,6 +53345,58 @@ export const GameCenterDetailGameCenterAchievementsLinkagesRequestSchema = {
     required: ['data']
 } as const;
 
+export const GameCenterDetailGameCenterAchievementsV2LinkagesResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: ['gameCenterAchievements']
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: ['id', 'type']
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const GameCenterDetailGameCenterAchievementsV2LinkagesRequestSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: ['gameCenterAchievements']
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: ['id', 'type']
+            }
+        }
+    },
+    required: ['data']
+} as const;
+
 export const GameCenterDetailGameCenterActivitiesLinkagesResponseSchema = {
     type: 'object',
     properties: {
@@ -48184,6 +53559,58 @@ export const GameCenterDetailGameCenterLeaderboardSetsLinkagesRequestSchema = {
     required: ['data']
 } as const;
 
+export const GameCenterDetailGameCenterLeaderboardSetsV2LinkagesResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: ['gameCenterLeaderboardSets']
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: ['id', 'type']
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const GameCenterDetailGameCenterLeaderboardSetsV2LinkagesRequestSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: ['gameCenterLeaderboardSets']
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: ['id', 'type']
+            }
+        }
+    },
+    required: ['data']
+} as const;
+
 export const GameCenterDetailGameCenterLeaderboardsLinkagesResponseSchema = {
     type: 'object',
     properties: {
@@ -48214,6 +53641,58 @@ export const GameCenterDetailGameCenterLeaderboardsLinkagesResponseSchema = {
 } as const;
 
 export const GameCenterDetailGameCenterLeaderboardsLinkagesRequestSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: ['gameCenterLeaderboards']
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: ['id', 'type']
+            }
+        }
+    },
+    required: ['data']
+} as const;
+
+export const GameCenterDetailGameCenterLeaderboardsV2LinkagesResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: ['gameCenterLeaderboards']
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: ['id', 'type']
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const GameCenterDetailGameCenterLeaderboardsV2LinkagesRequestSchema = {
     type: 'object',
     properties: {
         data: {
@@ -48400,6 +53879,58 @@ export const GameCenterGroupGameCenterAchievementsLinkagesRequestSchema = {
     required: ['data']
 } as const;
 
+export const GameCenterGroupGameCenterAchievementsV2LinkagesResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: ['gameCenterAchievements']
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: ['id', 'type']
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const GameCenterGroupGameCenterAchievementsV2LinkagesRequestSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: ['gameCenterAchievements']
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: ['id', 'type']
+            }
+        }
+    },
+    required: ['data']
+} as const;
+
 export const GameCenterGroupGameCenterActivitiesLinkagesResponseSchema = {
     type: 'object',
     properties: {
@@ -48539,6 +54070,58 @@ export const GameCenterGroupGameCenterLeaderboardSetsLinkagesRequestSchema = {
     required: ['data']
 } as const;
 
+export const GameCenterGroupGameCenterLeaderboardSetsV2LinkagesResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: ['gameCenterLeaderboardSets']
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: ['id', 'type']
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const GameCenterGroupGameCenterLeaderboardSetsV2LinkagesRequestSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: ['gameCenterLeaderboardSets']
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: ['id', 'type']
+            }
+        }
+    },
+    required: ['data']
+} as const;
+
 export const GameCenterGroupGameCenterLeaderboardsLinkagesResponseSchema = {
     type: 'object',
     properties: {
@@ -48591,6 +54174,58 @@ export const GameCenterGroupGameCenterLeaderboardsLinkagesRequestSchema = {
     required: ['data']
 } as const;
 
+export const GameCenterGroupGameCenterLeaderboardsV2LinkagesResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: ['gameCenterLeaderboards']
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: ['id', 'type']
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const GameCenterGroupGameCenterLeaderboardsV2LinkagesRequestSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: ['gameCenterLeaderboards']
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: ['id', 'type']
+            }
+        }
+    },
+    required: ['data']
+} as const;
+
 export const GameCenterLeaderboardLocalizationGameCenterLeaderboardImageLinkageResponseSchema = {
     type: 'object',
     properties: {
@@ -48614,7 +54249,53 @@ export const GameCenterLeaderboardLocalizationGameCenterLeaderboardImageLinkageR
     required: ['data', 'links']
 } as const;
 
+export const GameCenterLeaderboardLocalizationV2ImageLinkageResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['gameCenterLeaderboardImages']
+                },
+                id: {
+                    type: 'string'
+                }
+            },
+            required: ['id', 'type']
+        },
+        links: {
+            '$ref': '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
 export const GameCenterLeaderboardSetLocalizationGameCenterLeaderboardSetImageLinkageResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['gameCenterLeaderboardSetImages']
+                },
+                id: {
+                    type: 'string'
+                }
+            },
+            required: ['id', 'type']
+        },
+        links: {
+            '$ref': '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const GameCenterLeaderboardSetLocalizationV2ImageLinkageResponseSchema = {
     type: 'object',
     properties: {
         data: {
@@ -48678,6 +54359,116 @@ export const GameCenterLeaderboardSetMemberLocalizationGameCenterLeaderboardSetL
         },
         links: {
             '$ref': '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const GameCenterLeaderboardSetVersionV2LocalizationsLinkagesResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: ['gameCenterLeaderboardSetLocalizations']
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: ['id', 'type']
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const GameCenterLeaderboardSetV2GameCenterLeaderboardsLinkagesResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: ['gameCenterLeaderboards']
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: ['id', 'type']
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const GameCenterLeaderboardSetV2GameCenterLeaderboardsLinkagesRequestSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: ['gameCenterLeaderboards']
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: ['id', 'type']
+            }
+        }
+    },
+    required: ['data']
+} as const;
+
+export const GameCenterLeaderboardSetV2VersionsLinkagesResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: ['gameCenterLeaderboardSetVersions']
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: ['id', 'type']
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
         }
     },
     required: ['data', 'links']
@@ -48820,6 +54611,35 @@ export const GameCenterLeaderboardSetReleasesLinkagesResponseSchema = {
                     type: {
                         type: 'string',
                         enum: ['gameCenterLeaderboardSetReleases']
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: ['id', 'type']
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const GameCenterLeaderboardVersionV2LocalizationsLinkagesResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: ['gameCenterLeaderboardLocalizations']
                     },
                     id: {
                         type: 'string'
@@ -48981,6 +54801,75 @@ export const GameCenterLeaderboardReleasesLinkagesResponseSchema = {
     required: ['data', 'links']
 } as const;
 
+export const GameCenterLeaderboardV2ActivityLinkageRequestSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['gameCenterActivities']
+                },
+                id: {
+                    type: 'string'
+                }
+            },
+            required: ['id', 'type']
+        }
+    },
+    required: ['data']
+} as const;
+
+export const GameCenterLeaderboardV2ChallengeLinkageRequestSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['gameCenterChallenges']
+                },
+                id: {
+                    type: 'string'
+                }
+            },
+            required: ['id', 'type']
+        }
+    },
+    required: ['data']
+} as const;
+
+export const GameCenterLeaderboardV2VersionsLinkagesResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: ['gameCenterLeaderboardVersions']
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: ['id', 'type']
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
 export const GameCenterMatchmakingRuleSetMatchmakingQueuesLinkagesResponseSchema = {
     type: 'object',
     properties: {
@@ -49079,6 +54968,116 @@ export const InAppPurchaseAvailabilityAvailableTerritoriesLinkagesResponseSchema
                     type: {
                         type: 'string',
                         enum: ['territories']
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: ['id', 'type']
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const InAppPurchaseOfferCodeOneTimeUseCodeValuesLinkageResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: ['inAppPurchaseOfferCodeOneTimeUseCodeValues']
+                },
+                id: {
+                    type: 'string'
+                }
+            },
+            required: ['id', 'type']
+        },
+        links: {
+            '$ref': '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const InAppPurchaseOfferCodeCustomCodesLinkagesResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: ['inAppPurchaseOfferCodeCustomCodes']
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: ['id', 'type']
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const InAppPurchaseOfferCodeOneTimeUseCodesLinkagesResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: ['inAppPurchaseOfferCodeOneTimeUseCodes']
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: ['id', 'type']
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const InAppPurchaseOfferCodePricesLinkagesResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: ['inAppPurchaseOfferPrices']
                     },
                     id: {
                         type: 'string'
@@ -49339,6 +55338,35 @@ export const InAppPurchaseV2InAppPurchaseLocalizationsLinkagesResponseSchema = {
                     type: {
                         type: 'string',
                         enum: ['inAppPurchaseLocalizations']
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: ['id', 'type']
+            }
+        },
+        links: {
+            '$ref': '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            '$ref': '#/components/schemas/PagingInformation'
+        }
+    },
+    required: ['data', 'links']
+} as const;
+
+export const InAppPurchaseV2OfferCodesLinkagesResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: ['inAppPurchaseOfferCodes']
                     },
                     id: {
                         type: 'string'
@@ -52425,6 +58453,11 @@ export const MetricsInsightSchema = {
     }
 } as const;
 
+export const OfferCodeEnvironmentSchema = {
+    type: 'string',
+    enum: ['PRODUCTION', 'SANDBOX']
+} as const;
+
 export const PhasedReleaseStateSchema = {
     type: 'string',
     enum: ['INACTIVE', 'ACTIVE', 'PAUSED', 'COMPLETE']
@@ -52536,7 +58569,7 @@ export const SubscriptionStatusUrlVersionSchema = {
 
 export const TerritoryCodeSchema = {
     type: 'string',
-    enum: ['ABW', 'AFG', 'AGO', 'AIA', 'ALB', 'AND', 'ANT', 'ARE', 'ARG', 'ARM', 'ASM', 'ATG', 'AUS', 'AUT', 'AZE', 'BDI', 'BEL', 'BEN', 'BES', 'BFA', 'BGD', 'BGR', 'BHR', 'BHS', 'BIH', 'BLR', 'BLZ', 'BMU', 'BOL', 'BRA', 'BRB', 'BRN', 'BTN', 'BWA', 'CAF', 'CAN', 'CHE', 'CHL', 'CHN', 'CIV', 'CMR', 'COD', 'COG', 'COK', 'COL', 'COM', 'CPV', 'CRI', 'CUB', 'CUW', 'CXR', 'CYM', 'CYP', 'CZE', 'DEU', 'DJI', 'DMA', 'DNK', 'DOM', 'DZA', 'ECU', 'EGY', 'ERI', 'ESP', 'EST', 'ETH', 'FIN', 'FJI', 'FLK', 'FRA', 'FRO', 'FSM', 'GAB', 'GBR', 'GEO', 'GGY', 'GHA', 'GIB', 'GIN', 'GLP', 'GMB', 'GNB', 'GNQ', 'GRC', 'GRD', 'GRL', 'GTM', 'GUF', 'GUM', 'GUY', 'HKG', 'HND', 'HRV', 'HTI', 'HUN', 'IDN', 'IMN', 'IND', 'IRL', 'IRQ', 'ISL', 'ISR', 'ITA', 'JAM', 'JEY', 'JOR', 'JPN', 'KAZ', 'KEN', 'KGZ', 'KHM', 'KIR', 'KNA', 'KOR', 'KWT', 'LAO', 'LBN', 'LBR', 'LBY', 'LCA', 'LIE', 'LKA', 'LSO', 'LTU', 'LUX', 'LVA', 'MAC', 'MAR', 'MCO', 'MDA', 'MDG', 'MDV', 'MEX', 'MHL', 'MKD', 'MLI', 'MLT', 'MMR', 'MNE', 'MNG', 'MNP', 'MOZ', 'MRT', 'MSR', 'MTQ', 'MUS', 'MWI', 'MYS', 'MYT', 'NAM', 'NCL', 'NER', 'NFK', 'NGA', 'NIC', 'NIU', 'NLD', 'NOR', 'NPL', 'NRU', 'NZL', 'OMN', 'PAK', 'PAN', 'PER', 'PHL', 'PLW', 'PNG', 'POL', 'PRI', 'PRT', 'PRY', 'PSE', 'PYF', 'QAT', 'REU', 'ROU', 'RUS', 'RWA', 'SAU', 'SEN', 'SGP', 'SHN', 'SLB', 'SLE', 'SLV', 'SMR', 'SOM', 'SPM', 'SRB', 'SSD', 'STP', 'SUR', 'SVK', 'SVN', 'SWE', 'SWZ', 'SXM', 'SYC', 'TCA', 'TCD', 'TGO', 'THA', 'TJK', 'TKM', 'TLS', 'TON', 'TTO', 'TUN', 'TUR', 'TUV', 'TWN', 'TZA', 'UGA', 'UKR', 'UMI', 'URY', 'USA', 'UZB', 'VAT', 'VCT', 'VEN', 'VGB', 'VIR', 'VNM', 'VUT', 'WLF', 'WSM', 'YEM', 'ZAF', 'ZMB', 'ZWE']
+    enum: ['ABW', 'AFG', 'AGO', 'AIA', 'ALB', 'AND', 'ANT', 'ARE', 'ARG', 'ARM', 'ASM', 'ATG', 'AUS', 'AUT', 'AZE', 'BDI', 'BEL', 'BEN', 'BES', 'BFA', 'BGD', 'BGR', 'BHR', 'BHS', 'BIH', 'BLR', 'BLZ', 'BMU', 'BOL', 'BRA', 'BRB', 'BRN', 'BTN', 'BWA', 'CAF', 'CAN', 'CHE', 'CHL', 'CHN', 'CIV', 'CMR', 'COD', 'COG', 'COK', 'COL', 'COM', 'CPV', 'CRI', 'CUB', 'CUW', 'CXR', 'CYM', 'CYP', 'CZE', 'DEU', 'DJI', 'DMA', 'DNK', 'DOM', 'DZA', 'ECU', 'EGY', 'ERI', 'ESP', 'EST', 'ETH', 'FIN', 'FJI', 'FLK', 'FRA', 'FRO', 'FSM', 'GAB', 'GBR', 'GEO', 'GGY', 'GHA', 'GIB', 'GIN', 'GLP', 'GMB', 'GNB', 'GNQ', 'GRC', 'GRD', 'GRL', 'GTM', 'GUF', 'GUM', 'GUY', 'HKG', 'HND', 'HRV', 'HTI', 'HUN', 'IDN', 'IMN', 'IND', 'IRL', 'IRQ', 'ISL', 'ISR', 'ITA', 'JAM', 'JEY', 'JOR', 'JPN', 'KAZ', 'KEN', 'KGZ', 'KHM', 'KIR', 'KNA', 'KOR', 'KWT', 'LAO', 'LBN', 'LBR', 'LBY', 'LCA', 'LIE', 'LKA', 'LSO', 'LTU', 'LUX', 'LVA', 'MAC', 'MAR', 'MCO', 'MDA', 'MDG', 'MDV', 'MEX', 'MHL', 'MKD', 'MLI', 'MLT', 'MMR', 'MNE', 'MNG', 'MNP', 'MOZ', 'MRT', 'MSR', 'MTQ', 'MUS', 'MWI', 'MYS', 'MYT', 'NAM', 'NCL', 'NER', 'NFK', 'NGA', 'NIC', 'NIU', 'NLD', 'NOR', 'NPL', 'NRU', 'NZL', 'OMN', 'PAK', 'PAN', 'PER', 'PHL', 'PLW', 'PNG', 'POL', 'PRI', 'PRT', 'PRY', 'PSE', 'PYF', 'QAT', 'REU', 'ROU', 'RUS', 'RWA', 'SAU', 'SEN', 'SGP', 'SHN', 'SLB', 'SLE', 'SLV', 'SMR', 'SOM', 'SPM', 'SRB', 'SSD', 'STP', 'SUR', 'SVK', 'SVN', 'SWE', 'SWZ', 'SXM', 'SYC', 'TCA', 'TCD', 'TGO', 'THA', 'TJK', 'TKM', 'TLS', 'TON', 'TTO', 'TUN', 'TUR', 'TUV', 'TWN', 'TZA', 'UGA', 'UKR', 'UMI', 'URY', 'USA', 'UZB', 'VAT', 'VCT', 'VEN', 'VGB', 'VIR', 'VNM', 'VUT', 'WLF', 'WSM', 'XKS', 'YEM', 'ZAF', 'ZMB', 'ZWE']
 } as const;
 
 export const UploadOperationSchema = {
@@ -52570,7 +58603,7 @@ export const UserRoleSchema = {
 
 export const WebhookEventTypeSchema = {
     type: 'string',
-    enum: ['APP_STORE_VERSION_APP_VERSION_STATE_UPDATED', 'BACKGROUND_ASSET_VERSION_APP_STORE_RELEASE_STATE_UPDATED', 'BACKGROUND_ASSET_VERSION_EXTERNAL_BETA_RELEASE_STATE_UPDATED', 'BACKGROUND_ASSET_VERSION_INTERNAL_BETA_RELEASE_CREATED', 'BACKGROUND_ASSET_VERSION_STATE_UPDATED', 'BETA_FEEDBACK_CRASH_SUBMISSION_CREATED', 'BETA_FEEDBACK_SCREENSHOT_SUBMISSION_CREATED', 'BUILD_BETA_DETAIL_EXTERNAL_BUILD_STATE_UPDATED', 'BUILD_UPLOAD_STATE_UPDATED']
+    enum: ['ALTERNATIVE_DISTRIBUTION_PACKAGE_AVAILABLE_UPDATED', 'ALTERNATIVE_DISTRIBUTION_PACKAGE_VERSION_CREATED', 'ALTERNATIVE_DISTRIBUTION_TERRITORY_AVAILABILITY_UPDATED', 'APP_STORE_VERSION_APP_VERSION_STATE_UPDATED', 'BACKGROUND_ASSET_VERSION_APP_STORE_RELEASE_STATE_UPDATED', 'BACKGROUND_ASSET_VERSION_EXTERNAL_BETA_RELEASE_STATE_UPDATED', 'BACKGROUND_ASSET_VERSION_INTERNAL_BETA_RELEASE_CREATED', 'BACKGROUND_ASSET_VERSION_STATE_UPDATED', 'BETA_FEEDBACK_CRASH_SUBMISSION_CREATED', 'BETA_FEEDBACK_SCREENSHOT_SUBMISSION_CREATED', 'BUILD_BETA_DETAIL_EXTERNAL_BUILD_STATE_UPDATED', 'BUILD_UPLOAD_STATE_UPDATED']
 } as const;
 
 export const csvSchema = {
