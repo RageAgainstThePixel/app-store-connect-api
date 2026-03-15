@@ -11410,28 +11410,6 @@ export const AppStoreVersionSchema = {
                         }
                     }
                 },
-                ageRatingDeclaration: {
-                    type: 'object',
-                    properties: {
-                        links: {
-                            '$ref': '#/components/schemas/RelationshipLinks'
-                        },
-                        data: {
-                            type: 'object',
-                            properties: {
-                                type: {
-                                    type: 'string',
-                                    enum: ['ageRatingDeclarations']
-                                },
-                                id: {
-                                    type: 'string'
-                                }
-                            },
-                            required: ['id', 'type']
-                        }
-                    },
-                    deprecated: true
-                },
                 appStoreVersionLocalizations: {
                     type: 'object',
                     properties: {
@@ -11713,9 +11691,6 @@ export const AppStoreVersionsResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/AgeRatingDeclaration'
-                    },
-                    {
                         '$ref': '#/components/schemas/AlternativeDistributionPackage'
                     },
                     {
@@ -11757,7 +11732,6 @@ export const AppStoreVersionsResponseSchema = {
                         appStoreVersionLocalizations: '#/components/schemas/AppStoreVersionLocalization',
                         routingAppCoverages: '#/components/schemas/RoutingAppCoverage',
                         appStoreVersionPhasedReleases: '#/components/schemas/AppStoreVersionPhasedRelease',
-                        ageRatingDeclarations: '#/components/schemas/AgeRatingDeclaration',
                         appStoreReviewDetails: '#/components/schemas/AppStoreReviewDetail',
                         appStoreVersionExperiments: '#/components/schemas/AppStoreVersionExperiment',
                         builds: '#/components/schemas/Build',
@@ -11790,9 +11764,6 @@ export const AppStoreVersionResponseSchema = {
             items: {
                 oneOf: [
                     {
-                        '$ref': '#/components/schemas/AgeRatingDeclaration'
-                    },
-                    {
                         '$ref': '#/components/schemas/AlternativeDistributionPackage'
                     },
                     {
@@ -11834,7 +11805,6 @@ export const AppStoreVersionResponseSchema = {
                         appStoreVersionLocalizations: '#/components/schemas/AppStoreVersionLocalization',
                         routingAppCoverages: '#/components/schemas/RoutingAppCoverage',
                         appStoreVersionPhasedReleases: '#/components/schemas/AppStoreVersionPhasedRelease',
-                        ageRatingDeclarations: '#/components/schemas/AgeRatingDeclaration',
                         appStoreReviewDetails: '#/components/schemas/AppStoreReviewDetail',
                         appStoreVersionExperiments: '#/components/schemas/AppStoreVersionExperiment',
                         builds: '#/components/schemas/Build',
@@ -14110,6 +14080,12 @@ export const BackgroundAssetSchema = {
                 createdDate: {
                     type: 'string',
                     format: 'date-time'
+                },
+                usedBytes: {
+                    type: 'integer',
+                    format: 'int64',
+                    maximum: 9007199254740991,
+                    minimum: 0
                 }
             }
         },
@@ -17514,6 +17490,9 @@ export const BuildBundleSchema = {
                 },
                 baMaxInstallSize: {
                     type: 'integer'
+                },
+                minimumOsVersion: {
+                    type: 'string'
                 }
             }
         },
@@ -22118,7 +22097,8 @@ export const GameCenterAchievementImageSchema = {
             '$ref': '#/components/schemas/ResourceLinks'
         }
     },
-    required: ['id', 'type']
+    required: ['id', 'type'],
+    deprecated: true
 } as const;
 
 export const GameCenterAchievementImageResponseSchema = {
@@ -22138,7 +22118,8 @@ export const GameCenterAchievementImageResponseSchema = {
             '$ref': '#/components/schemas/DocumentLinks'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterAchievementImageCreateRequestSchema = {
@@ -22193,7 +22174,8 @@ export const GameCenterAchievementImageCreateRequestSchema = {
             required: ['relationships', 'attributes', 'type']
         }
     },
-    required: ['data']
+    required: ['data'],
+    deprecated: true
 } as const;
 
 export const GameCenterAchievementImageUpdateRequestSchema = {
@@ -22223,7 +22205,8 @@ export const GameCenterAchievementImageUpdateRequestSchema = {
             required: ['id', 'type']
         }
     },
-    required: ['data']
+    required: ['data'],
+    deprecated: true
 } as const;
 
 export const GameCenterAchievementImageV2Schema = {
@@ -22726,7 +22709,8 @@ export const GameCenterAchievementLocalizationSchema = {
             '$ref': '#/components/schemas/ResourceLinks'
         }
     },
-    required: ['id', 'type']
+    required: ['id', 'type'],
+    deprecated: true
 } as const;
 
 export const GameCenterAchievementLocalizationsResponseSchema = {
@@ -22766,7 +22750,8 @@ export const GameCenterAchievementLocalizationsResponseSchema = {
             '$ref': '#/components/schemas/PagingInformation'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterAchievementLocalizationResponseSchema = {
@@ -22800,7 +22785,8 @@ export const GameCenterAchievementLocalizationResponseSchema = {
             '$ref': '#/components/schemas/DocumentLinks'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterAchievementLocalizationCreateRequestSchema = {
@@ -22861,7 +22847,8 @@ export const GameCenterAchievementLocalizationCreateRequestSchema = {
             required: ['relationships', 'attributes', 'type']
         }
     },
-    required: ['data']
+    required: ['data'],
+    deprecated: true
 } as const;
 
 export const GameCenterAchievementLocalizationUpdateRequestSchema = {
@@ -22899,7 +22886,8 @@ export const GameCenterAchievementLocalizationUpdateRequestSchema = {
             required: ['id', 'type']
         }
     },
-    required: ['data']
+    required: ['data'],
+    deprecated: true
 } as const;
 
 export const GameCenterAchievementReleaseSchema = {
@@ -22966,7 +22954,8 @@ export const GameCenterAchievementReleaseSchema = {
             '$ref': '#/components/schemas/ResourceLinks'
         }
     },
-    required: ['id', 'type']
+    required: ['id', 'type'],
+    deprecated: true
 } as const;
 
 export const GameCenterAchievementReleasesResponseSchema = {
@@ -23006,7 +22995,8 @@ export const GameCenterAchievementReleasesResponseSchema = {
             '$ref': '#/components/schemas/PagingInformation'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterAchievementReleaseResponseSchema = {
@@ -23040,7 +23030,8 @@ export const GameCenterAchievementReleaseResponseSchema = {
             '$ref': '#/components/schemas/DocumentLinks'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterAchievementReleaseCreateRequestSchema = {
@@ -23102,7 +23093,8 @@ export const GameCenterAchievementReleaseCreateRequestSchema = {
             required: ['relationships', 'type']
         }
     },
-    required: ['data']
+    required: ['data'],
+    deprecated: true
 } as const;
 
 export const GameCenterAchievementVersionV2Schema = {
@@ -23903,7 +23895,8 @@ export const GameCenterAchievementSchema = {
             '$ref': '#/components/schemas/ResourceLinks'
         }
     },
-    required: ['id', 'type']
+    required: ['id', 'type'],
+    deprecated: true
 } as const;
 
 export const GameCenterAchievementsResponseSchema = {
@@ -23959,7 +23952,8 @@ export const GameCenterAchievementsResponseSchema = {
             '$ref': '#/components/schemas/PagingInformation'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterAchievementResponseSchema = {
@@ -24009,7 +24003,8 @@ export const GameCenterAchievementResponseSchema = {
             '$ref': '#/components/schemas/DocumentLinks'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterAchievementCreateRequestSchema = {
@@ -24093,7 +24088,8 @@ export const GameCenterAchievementCreateRequestSchema = {
             required: ['attributes', 'type']
         }
     },
-    required: ['data']
+    required: ['data'],
+    deprecated: true
 } as const;
 
 export const GameCenterAchievementUpdateRequestSchema = {
@@ -24143,7 +24139,8 @@ export const GameCenterAchievementUpdateRequestSchema = {
             required: ['id', 'type']
         }
     },
-    required: ['data']
+    required: ['data'],
+    deprecated: true
 } as const;
 
 export const GameCenterActivitySchema = {
@@ -24251,7 +24248,8 @@ export const GameCenterActivitySchema = {
                                 required: ['id', 'type']
                             }
                         }
-                    }
+                    },
+                    deprecated: true
                 },
                 achievementsV2: {
                     type: 'object',
@@ -24305,7 +24303,8 @@ export const GameCenterActivitySchema = {
                                 required: ['id', 'type']
                             }
                         }
-                    }
+                    },
+                    deprecated: true
                 },
                 leaderboardsV2: {
                     type: 'object',
@@ -24550,11 +24549,38 @@ export const GameCenterActivityCreateRequestSchema = {
                                     required: ['id', 'type']
                                 }
                             }
+                        },
+                        versions: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'array',
+                                    items: {
+                                        type: 'object',
+                                        properties: {
+                                            type: {
+                                                type: 'string',
+                                                enum: ['gameCenterActivityVersions']
+                                            },
+                                            id: {
+                                                type: 'string'
+                                            }
+                                        },
+                                        required: ['id', 'type']
+                                    }
+                                }
+                            }
                         }
                     }
                 }
             },
             required: ['attributes', 'type']
+        },
+        included: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/GameCenterActivityVersionInlineCreate'
+            }
         }
     },
     required: ['data']
@@ -25052,7 +25078,8 @@ export const GameCenterActivityVersionReleaseSchema = {
             '$ref': '#/components/schemas/ResourceLinks'
         }
     },
-    required: ['id', 'type']
+    required: ['id', 'type'],
+    deprecated: true
 } as const;
 
 export const GameCenterActivityVersionReleasesResponseSchema = {
@@ -25078,7 +25105,8 @@ export const GameCenterActivityVersionReleasesResponseSchema = {
             '$ref': '#/components/schemas/PagingInformation'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterActivityVersionReleaseResponseSchema = {
@@ -25098,7 +25126,8 @@ export const GameCenterActivityVersionReleaseResponseSchema = {
             '$ref': '#/components/schemas/DocumentLinks'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterActivityVersionReleaseCreateRequestSchema = {
@@ -25160,7 +25189,8 @@ export const GameCenterActivityVersionReleaseCreateRequestSchema = {
             required: ['relationships', 'type']
         }
     },
-    required: ['data']
+    required: ['data'],
+    deprecated: true
 } as const;
 
 export const GameCenterActivityVersionSchema = {
@@ -25288,6 +25318,52 @@ export const GameCenterActivityVersionSchema = {
         }
     },
     required: ['id', 'type']
+} as const;
+
+export const GameCenterActivityVersionInlineCreateSchema = {
+    type: 'object',
+    properties: {
+        type: {
+            type: 'string',
+            enum: ['gameCenterActivityVersions']
+        },
+        id: {
+            type: 'string'
+        },
+        attributes: {
+            type: 'object',
+            properties: {
+                fallbackUrl: {
+                    type: 'string',
+                    nullable: true
+                }
+            }
+        },
+        relationships: {
+            type: 'object',
+            properties: {
+                activity: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['gameCenterActivities']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                }
+            }
+        }
+    },
+    required: ['type']
 } as const;
 
 export const GameCenterActivityVersionsResponseSchema = {
@@ -26125,7 +26201,8 @@ export const GameCenterChallengeVersionReleaseSchema = {
             '$ref': '#/components/schemas/ResourceLinks'
         }
     },
-    required: ['id', 'type']
+    required: ['id', 'type'],
+    deprecated: true
 } as const;
 
 export const GameCenterChallengeVersionReleasesResponseSchema = {
@@ -26151,7 +26228,8 @@ export const GameCenterChallengeVersionReleasesResponseSchema = {
             '$ref': '#/components/schemas/PagingInformation'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterChallengeVersionReleaseResponseSchema = {
@@ -26171,7 +26249,8 @@ export const GameCenterChallengeVersionReleaseResponseSchema = {
             '$ref': '#/components/schemas/DocumentLinks'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterChallengeVersionReleaseCreateRequestSchema = {
@@ -26233,7 +26312,8 @@ export const GameCenterChallengeVersionReleaseCreateRequestSchema = {
             required: ['relationships', 'type']
         }
     },
-    required: ['data']
+    required: ['data'],
+    deprecated: true
 } as const;
 
 export const GameCenterChallengeVersionSchema = {
@@ -26358,6 +26438,43 @@ export const GameCenterChallengeVersionSchema = {
         }
     },
     required: ['id', 'type']
+} as const;
+
+export const GameCenterChallengeVersionInlineCreateSchema = {
+    type: 'object',
+    properties: {
+        type: {
+            type: 'string',
+            enum: ['gameCenterChallengeVersions']
+        },
+        id: {
+            type: 'string'
+        },
+        relationships: {
+            type: 'object',
+            properties: {
+                challenge: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['gameCenterChallenges']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                }
+            }
+        }
+    },
+    required: ['type']
 } as const;
 
 export const GameCenterChallengeVersionsResponseSchema = {
@@ -26610,7 +26727,8 @@ export const GameCenterChallengeSchema = {
                             },
                             required: ['id', 'type']
                         }
-                    }
+                    },
+                    deprecated: true
                 },
                 leaderboardV2: {
                     type: 'object',
@@ -26802,6 +26920,27 @@ export const GameCenterChallengeCreateRequestSchema = {
                                 }
                             }
                         },
+                        versions: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'array',
+                                    items: {
+                                        type: 'object',
+                                        properties: {
+                                            type: {
+                                                type: 'string',
+                                                enum: ['gameCenterChallengeVersions']
+                                            },
+                                            id: {
+                                                type: 'string'
+                                            }
+                                        },
+                                        required: ['id', 'type']
+                                    }
+                                }
+                            }
+                        },
                         leaderboard: {
                             type: 'object',
                             properties: {
@@ -26818,7 +26957,8 @@ export const GameCenterChallengeCreateRequestSchema = {
                                     },
                                     required: ['id', 'type']
                                 }
-                            }
+                            },
+                            deprecated: true
                         },
                         leaderboardV2: {
                             type: 'object',
@@ -26842,6 +26982,12 @@ export const GameCenterChallengeCreateRequestSchema = {
                 }
             },
             required: ['attributes', 'type']
+        },
+        included: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/GameCenterChallengeVersionInlineCreate'
+            }
         }
     },
     required: ['data']
@@ -26897,7 +27043,8 @@ export const GameCenterChallengeUpdateRequestSchema = {
                                     },
                                     required: ['id', 'type']
                                 }
-                            }
+                            },
+                            deprecated: true
                         },
                         leaderboardV2: {
                             type: 'object',
@@ -27043,7 +27190,8 @@ export const GameCenterDetailSchema = {
                                 required: ['id', 'type']
                             }
                         }
-                    }
+                    },
+                    deprecated: true
                 },
                 gameCenterLeaderboardsV2: {
                     type: 'object',
@@ -27097,7 +27245,8 @@ export const GameCenterDetailSchema = {
                                 required: ['id', 'type']
                             }
                         }
-                    }
+                    },
+                    deprecated: true
                 },
                 gameCenterLeaderboardSetsV2: {
                     type: 'object',
@@ -27151,7 +27300,8 @@ export const GameCenterDetailSchema = {
                                 required: ['id', 'type']
                             }
                         }
-                    }
+                    },
+                    deprecated: true
                 },
                 gameCenterAchievementsV2: {
                     type: 'object',
@@ -27250,7 +27400,8 @@ export const GameCenterDetailSchema = {
                             },
                             required: ['id', 'type']
                         }
-                    }
+                    },
+                    deprecated: true
                 },
                 defaultLeaderboardV2: {
                     type: 'object',
@@ -27286,7 +27437,8 @@ export const GameCenterDetailSchema = {
                             },
                             required: ['id', 'type']
                         }
-                    }
+                    },
+                    deprecated: true
                 },
                 defaultGroupLeaderboardV2: {
                     type: 'object',
@@ -27331,7 +27483,8 @@ export const GameCenterDetailSchema = {
                                 required: ['id', 'type']
                             }
                         }
-                    }
+                    },
+                    deprecated: true
                 },
                 activityReleases: {
                     type: 'object',
@@ -27358,7 +27511,8 @@ export const GameCenterDetailSchema = {
                                 required: ['id', 'type']
                             }
                         }
-                    }
+                    },
+                    deprecated: true
                 },
                 challengeReleases: {
                     type: 'object',
@@ -27385,7 +27539,8 @@ export const GameCenterDetailSchema = {
                                 required: ['id', 'type']
                             }
                         }
-                    }
+                    },
+                    deprecated: true
                 },
                 leaderboardReleases: {
                     type: 'object',
@@ -27412,7 +27567,8 @@ export const GameCenterDetailSchema = {
                                 required: ['id', 'type']
                             }
                         }
-                    }
+                    },
+                    deprecated: true
                 },
                 leaderboardSetReleases: {
                     type: 'object',
@@ -27439,7 +27595,8 @@ export const GameCenterDetailSchema = {
                                 required: ['id', 'type']
                             }
                         }
-                    }
+                    },
+                    deprecated: true
                 },
                 challengesMinimumPlatformVersions: {
                     type: 'object',
@@ -27761,7 +27918,8 @@ export const GameCenterDetailUpdateRequestSchema = {
                                     },
                                     required: ['id', 'type']
                                 }
-                            }
+                            },
+                            deprecated: true
                         },
                         defaultLeaderboardV2: {
                             type: 'object',
@@ -27797,7 +27955,8 @@ export const GameCenterDetailUpdateRequestSchema = {
                                     },
                                     required: ['id', 'type']
                                 }
-                            }
+                            },
+                            deprecated: true
                         },
                         defaultGroupLeaderboardV2: {
                             type: 'object',
@@ -28024,7 +28183,8 @@ export const GameCenterGroupSchema = {
                                 required: ['id', 'type']
                             }
                         }
-                    }
+                    },
+                    deprecated: true
                 },
                 gameCenterLeaderboardsV2: {
                     type: 'object',
@@ -28078,7 +28238,8 @@ export const GameCenterGroupSchema = {
                                 required: ['id', 'type']
                             }
                         }
-                    }
+                    },
+                    deprecated: true
                 },
                 gameCenterLeaderboardSetsV2: {
                     type: 'object',
@@ -28132,7 +28293,8 @@ export const GameCenterGroupSchema = {
                                 required: ['id', 'type']
                             }
                         }
-                    }
+                    },
+                    deprecated: true
                 },
                 gameCenterAchievementsV2: {
                     type: 'object',
@@ -28427,6 +28589,9 @@ export const GameCenterLeaderboardEntrySubmissionSchema = {
                 },
                 vendorIdentifier: {
                     type: 'string'
+                },
+                preReleased: {
+                    type: 'boolean'
                 }
             }
         },
@@ -28494,6 +28659,10 @@ export const GameCenterLeaderboardEntrySubmissionCreateRequestSchema = {
                         },
                         vendorIdentifier: {
                             type: 'string'
+                        },
+                        preReleased: {
+                            type: 'boolean',
+                            nullable: true
                         }
                     },
                     required: ['vendorIdentifier', 'score', 'bundleId', 'scopedPlayerId']
@@ -28566,7 +28735,8 @@ export const GameCenterLeaderboardImageSchema = {
             '$ref': '#/components/schemas/ResourceLinks'
         }
     },
-    required: ['id', 'type']
+    required: ['id', 'type'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardImageResponseSchema = {
@@ -28586,7 +28756,8 @@ export const GameCenterLeaderboardImageResponseSchema = {
             '$ref': '#/components/schemas/DocumentLinks'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardImageCreateRequestSchema = {
@@ -28641,7 +28812,8 @@ export const GameCenterLeaderboardImageCreateRequestSchema = {
             required: ['relationships', 'attributes', 'type']
         }
     },
-    required: ['data']
+    required: ['data'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardImageUpdateRequestSchema = {
@@ -28671,7 +28843,8 @@ export const GameCenterLeaderboardImageUpdateRequestSchema = {
             required: ['id', 'type']
         }
     },
-    required: ['data']
+    required: ['data'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardImageV2Schema = {
@@ -28925,7 +29098,8 @@ export const GameCenterLeaderboardLocalizationSchema = {
             '$ref': '#/components/schemas/ResourceLinks'
         }
     },
-    required: ['id', 'type']
+    required: ['id', 'type'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardLocalizationsResponseSchema = {
@@ -28965,7 +29139,8 @@ export const GameCenterLeaderboardLocalizationsResponseSchema = {
             '$ref': '#/components/schemas/PagingInformation'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardLocalizationResponseSchema = {
@@ -28999,7 +29174,8 @@ export const GameCenterLeaderboardLocalizationResponseSchema = {
             '$ref': '#/components/schemas/DocumentLinks'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardLocalizationCreateRequestSchema = {
@@ -29070,7 +29246,8 @@ export const GameCenterLeaderboardLocalizationCreateRequestSchema = {
             required: ['relationships', 'attributes', 'type']
         }
     },
-    required: ['data']
+    required: ['data'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardLocalizationUpdateRequestSchema = {
@@ -29116,7 +29293,8 @@ export const GameCenterLeaderboardLocalizationUpdateRequestSchema = {
             required: ['id', 'type']
         }
     },
-    required: ['data']
+    required: ['data'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardLocalizationV2Schema = {
@@ -29459,7 +29637,8 @@ export const GameCenterLeaderboardReleaseSchema = {
             '$ref': '#/components/schemas/ResourceLinks'
         }
     },
-    required: ['id', 'type']
+    required: ['id', 'type'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardReleasesResponseSchema = {
@@ -29499,7 +29678,8 @@ export const GameCenterLeaderboardReleasesResponseSchema = {
             '$ref': '#/components/schemas/PagingInformation'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardReleaseResponseSchema = {
@@ -29533,7 +29713,8 @@ export const GameCenterLeaderboardReleaseResponseSchema = {
             '$ref': '#/components/schemas/DocumentLinks'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardReleaseCreateRequestSchema = {
@@ -29595,7 +29776,8 @@ export const GameCenterLeaderboardReleaseCreateRequestSchema = {
             required: ['relationships', 'type']
         }
     },
-    required: ['data']
+    required: ['data'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardSetImageSchema = {
@@ -29659,7 +29841,8 @@ export const GameCenterLeaderboardSetImageSchema = {
             '$ref': '#/components/schemas/ResourceLinks'
         }
     },
-    required: ['id', 'type']
+    required: ['id', 'type'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardSetImageResponseSchema = {
@@ -29679,7 +29862,8 @@ export const GameCenterLeaderboardSetImageResponseSchema = {
             '$ref': '#/components/schemas/DocumentLinks'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardSetImageCreateRequestSchema = {
@@ -29734,7 +29918,8 @@ export const GameCenterLeaderboardSetImageCreateRequestSchema = {
             required: ['relationships', 'attributes', 'type']
         }
     },
-    required: ['data']
+    required: ['data'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardSetImageUpdateRequestSchema = {
@@ -29764,7 +29949,8 @@ export const GameCenterLeaderboardSetImageUpdateRequestSchema = {
             required: ['id', 'type']
         }
     },
-    required: ['data']
+    required: ['data'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardSetImageV2Schema = {
@@ -30006,7 +30192,8 @@ export const GameCenterLeaderboardSetLocalizationSchema = {
             '$ref': '#/components/schemas/ResourceLinks'
         }
     },
-    required: ['id', 'type']
+    required: ['id', 'type'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardSetLocalizationsResponseSchema = {
@@ -30046,7 +30233,8 @@ export const GameCenterLeaderboardSetLocalizationsResponseSchema = {
             '$ref': '#/components/schemas/PagingInformation'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardSetLocalizationResponseSchema = {
@@ -30080,7 +30268,8 @@ export const GameCenterLeaderboardSetLocalizationResponseSchema = {
             '$ref': '#/components/schemas/DocumentLinks'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardSetLocalizationCreateRequestSchema = {
@@ -30135,7 +30324,8 @@ export const GameCenterLeaderboardSetLocalizationCreateRequestSchema = {
             required: ['relationships', 'attributes', 'type']
         }
     },
-    required: ['data']
+    required: ['data'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardSetLocalizationUpdateRequestSchema = {
@@ -30165,7 +30355,8 @@ export const GameCenterLeaderboardSetLocalizationUpdateRequestSchema = {
             required: ['id', 'type']
         }
     },
-    required: ['data']
+    required: ['data'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardSetLocalizationV2Schema = {
@@ -30719,7 +30910,8 @@ export const GameCenterLeaderboardSetReleaseSchema = {
             '$ref': '#/components/schemas/ResourceLinks'
         }
     },
-    required: ['id', 'type']
+    required: ['id', 'type'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardSetReleasesResponseSchema = {
@@ -30759,7 +30951,8 @@ export const GameCenterLeaderboardSetReleasesResponseSchema = {
             '$ref': '#/components/schemas/PagingInformation'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardSetReleaseResponseSchema = {
@@ -30793,7 +30986,8 @@ export const GameCenterLeaderboardSetReleaseResponseSchema = {
             '$ref': '#/components/schemas/DocumentLinks'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardSetReleaseCreateRequestSchema = {
@@ -30855,7 +31049,8 @@ export const GameCenterLeaderboardSetReleaseCreateRequestSchema = {
             required: ['relationships', 'type']
         }
     },
-    required: ['data']
+    required: ['data'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardSetVersionV2Schema = {
@@ -31626,7 +31821,8 @@ export const GameCenterLeaderboardSetSchema = {
             '$ref': '#/components/schemas/ResourceLinks'
         }
     },
-    required: ['id', 'type']
+    required: ['id', 'type'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardSetsResponseSchema = {
@@ -31682,7 +31878,8 @@ export const GameCenterLeaderboardSetsResponseSchema = {
             '$ref': '#/components/schemas/PagingInformation'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardSetResponseSchema = {
@@ -31732,7 +31929,8 @@ export const GameCenterLeaderboardSetResponseSchema = {
             '$ref': '#/components/schemas/DocumentLinks'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardSetCreateRequestSchema = {
@@ -31824,7 +32022,8 @@ export const GameCenterLeaderboardSetCreateRequestSchema = {
             required: ['attributes', 'type']
         }
     },
-    required: ['data']
+    required: ['data'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardSetUpdateRequestSchema = {
@@ -31854,7 +32053,8 @@ export const GameCenterLeaderboardSetUpdateRequestSchema = {
             required: ['id', 'type']
         }
     },
-    required: ['data']
+    required: ['data'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardVersionV2Schema = {
@@ -32339,7 +32539,8 @@ export const GameCenterLeaderboardSchema = {
             '$ref': '#/components/schemas/ResourceLinks'
         }
     },
-    required: ['id', 'type']
+    required: ['id', 'type'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardsResponseSchema = {
@@ -32403,7 +32604,8 @@ export const GameCenterLeaderboardsResponseSchema = {
             '$ref': '#/components/schemas/PagingInformation'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardResponseSchema = {
@@ -32461,7 +32663,8 @@ export const GameCenterLeaderboardResponseSchema = {
             '$ref': '#/components/schemas/DocumentLinks'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardCreateRequestSchema = {
@@ -32597,7 +32800,8 @@ export const GameCenterLeaderboardCreateRequestSchema = {
             required: ['attributes', 'type']
         }
     },
-    required: ['data']
+    required: ['data'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardUpdateRequestSchema = {
@@ -32678,7 +32882,8 @@ export const GameCenterLeaderboardUpdateRequestSchema = {
             required: ['id', 'type']
         }
     },
-    required: ['data']
+    required: ['data'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardV2Schema = {
@@ -34452,6 +34657,9 @@ export const GameCenterPlayerAchievementSubmissionSchema = {
                 },
                 vendorIdentifier: {
                     type: 'string'
+                },
+                preReleased: {
+                    type: 'boolean'
                 }
             }
         },
@@ -34513,6 +34721,10 @@ export const GameCenterPlayerAchievementSubmissionCreateRequestSchema = {
                         },
                         vendorIdentifier: {
                             type: 'string'
+                        },
+                        preReleased: {
+                            type: 'boolean',
+                            nullable: true
                         }
                     },
                     required: ['vendorIdentifier', 'percentageAchieved', 'bundleId', 'scopedPlayerId']
@@ -48977,44 +49189,6 @@ export const AppStoreVersionLocalizationSearchKeywordsLinkagesRequestSchema = {
     required: ['data']
 } as const;
 
-export const AgeRatingDeclarationWithoutIncludesResponseSchema = {
-    type: 'object',
-    title: 'AgeRatingDeclarationWithoutIncludesResponse',
-    properties: {
-        data: {
-            '$ref': '#/components/schemas/AgeRatingDeclaration'
-        },
-        links: {
-            '$ref': '#/components/schemas/DocumentLinks'
-        }
-    },
-    required: ['data', 'links']
-} as const;
-
-export const AppStoreVersionAgeRatingDeclarationLinkageResponseSchema = {
-    type: 'object',
-    properties: {
-        data: {
-            type: 'object',
-            properties: {
-                type: {
-                    type: 'string',
-                    enum: ['ageRatingDeclarations']
-                },
-                id: {
-                    type: 'string'
-                }
-            },
-            required: ['id', 'type']
-        },
-        links: {
-            '$ref': '#/components/schemas/DocumentLinks'
-        }
-    },
-    required: ['data', 'links'],
-    deprecated: true
-} as const;
-
 export const AppStoreVersionAlternativeDistributionPackageLinkageResponseSchema = {
     type: 'object',
     properties: {
@@ -52541,7 +52715,8 @@ export const GameCenterAchievementLocalizationGameCenterAchievementLinkageRespon
             '$ref': '#/components/schemas/DocumentLinks'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterAchievementLocalizationGameCenterAchievementImageLinkageResponseSchema = {
@@ -52564,7 +52739,8 @@ export const GameCenterAchievementLocalizationGameCenterAchievementImageLinkageR
             '$ref': '#/components/schemas/DocumentLinks'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterAchievementVersionV2LocalizationsLinkagesResponseSchema = {
@@ -52662,7 +52838,8 @@ export const GameCenterAchievementActivityLinkageRequestSchema = {
             required: ['id', 'type']
         }
     },
-    required: ['data']
+    required: ['data'],
+    deprecated: true
 } as const;
 
 export const GameCenterAchievementGroupAchievementLinkageResponseSchema = {
@@ -52736,7 +52913,8 @@ export const GameCenterAchievementLocalizationsLinkagesResponseSchema = {
             '$ref': '#/components/schemas/PagingInformation'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterAchievementReleasesLinkagesResponseSchema = {
@@ -52765,7 +52943,8 @@ export const GameCenterAchievementReleasesLinkagesResponseSchema = {
             '$ref': '#/components/schemas/PagingInformation'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterActivityAchievementsLinkagesRequestSchema = {
@@ -52788,7 +52967,8 @@ export const GameCenterActivityAchievementsLinkagesRequestSchema = {
             }
         }
     },
-    required: ['data']
+    required: ['data'],
+    deprecated: true
 } as const;
 
 export const GameCenterActivityAchievementsV2LinkagesRequestSchema = {
@@ -52834,7 +53014,8 @@ export const GameCenterActivityLeaderboardsLinkagesRequestSchema = {
             }
         }
     },
-    required: ['data']
+    required: ['data'],
+    deprecated: true
 } as const;
 
 export const GameCenterActivityLeaderboardsV2LinkagesRequestSchema = {
@@ -53131,7 +53312,8 @@ export const GameCenterChallengeLeaderboardLinkageRequestSchema = {
             required: ['id', 'type']
         }
     },
-    required: ['data']
+    required: ['data'],
+    deprecated: true
 } as const;
 
 export const GameCenterChallengeLeaderboardV2LinkageRequestSchema = {
@@ -53209,7 +53391,8 @@ export const GameCenterDetailAchievementReleasesLinkagesResponseSchema = {
             '$ref': '#/components/schemas/PagingInformation'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterDetailActivityReleasesLinkagesResponseSchema = {
@@ -53238,7 +53421,8 @@ export const GameCenterDetailActivityReleasesLinkagesResponseSchema = {
             '$ref': '#/components/schemas/PagingInformation'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterDetailChallengeReleasesLinkagesResponseSchema = {
@@ -53267,7 +53451,8 @@ export const GameCenterDetailChallengeReleasesLinkagesResponseSchema = {
             '$ref': '#/components/schemas/PagingInformation'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterDetailChallengesMinimumPlatformVersionsLinkagesRequestSchema = {
@@ -53319,7 +53504,8 @@ export const GameCenterDetailGameCenterAchievementsLinkagesResponseSchema = {
             '$ref': '#/components/schemas/PagingInformation'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterDetailGameCenterAchievementsLinkagesRequestSchema = {
@@ -53342,7 +53528,8 @@ export const GameCenterDetailGameCenterAchievementsLinkagesRequestSchema = {
             }
         }
     },
-    required: ['data']
+    required: ['data'],
+    deprecated: true
 } as const;
 
 export const GameCenterDetailGameCenterAchievementsV2LinkagesResponseSchema = {
@@ -53533,7 +53720,8 @@ export const GameCenterDetailGameCenterLeaderboardSetsLinkagesResponseSchema = {
             '$ref': '#/components/schemas/PagingInformation'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterDetailGameCenterLeaderboardSetsLinkagesRequestSchema = {
@@ -53556,7 +53744,8 @@ export const GameCenterDetailGameCenterLeaderboardSetsLinkagesRequestSchema = {
             }
         }
     },
-    required: ['data']
+    required: ['data'],
+    deprecated: true
 } as const;
 
 export const GameCenterDetailGameCenterLeaderboardSetsV2LinkagesResponseSchema = {
@@ -53637,7 +53826,8 @@ export const GameCenterDetailGameCenterLeaderboardsLinkagesResponseSchema = {
             '$ref': '#/components/schemas/PagingInformation'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterDetailGameCenterLeaderboardsLinkagesRequestSchema = {
@@ -53660,7 +53850,8 @@ export const GameCenterDetailGameCenterLeaderboardsLinkagesRequestSchema = {
             }
         }
     },
-    required: ['data']
+    required: ['data'],
+    deprecated: true
 } as const;
 
 export const GameCenterDetailGameCenterLeaderboardsV2LinkagesResponseSchema = {
@@ -53741,7 +53932,8 @@ export const GameCenterDetailLeaderboardReleasesLinkagesResponseSchema = {
             '$ref': '#/components/schemas/PagingInformation'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterDetailLeaderboardSetReleasesLinkagesResponseSchema = {
@@ -53770,7 +53962,8 @@ export const GameCenterDetailLeaderboardSetReleasesLinkagesResponseSchema = {
             '$ref': '#/components/schemas/PagingInformation'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterEnabledVersionCompatibleVersionsLinkagesResponseSchema = {
@@ -53853,7 +54046,8 @@ export const GameCenterGroupGameCenterAchievementsLinkagesResponseSchema = {
             '$ref': '#/components/schemas/PagingInformation'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterGroupGameCenterAchievementsLinkagesRequestSchema = {
@@ -53876,7 +54070,8 @@ export const GameCenterGroupGameCenterAchievementsLinkagesRequestSchema = {
             }
         }
     },
-    required: ['data']
+    required: ['data'],
+    deprecated: true
 } as const;
 
 export const GameCenterGroupGameCenterAchievementsV2LinkagesResponseSchema = {
@@ -54044,7 +54239,8 @@ export const GameCenterGroupGameCenterLeaderboardSetsLinkagesResponseSchema = {
             '$ref': '#/components/schemas/PagingInformation'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterGroupGameCenterLeaderboardSetsLinkagesRequestSchema = {
@@ -54067,7 +54263,8 @@ export const GameCenterGroupGameCenterLeaderboardSetsLinkagesRequestSchema = {
             }
         }
     },
-    required: ['data']
+    required: ['data'],
+    deprecated: true
 } as const;
 
 export const GameCenterGroupGameCenterLeaderboardSetsV2LinkagesResponseSchema = {
@@ -54148,7 +54345,8 @@ export const GameCenterGroupGameCenterLeaderboardsLinkagesResponseSchema = {
             '$ref': '#/components/schemas/PagingInformation'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterGroupGameCenterLeaderboardsLinkagesRequestSchema = {
@@ -54171,7 +54369,8 @@ export const GameCenterGroupGameCenterLeaderboardsLinkagesRequestSchema = {
             }
         }
     },
-    required: ['data']
+    required: ['data'],
+    deprecated: true
 } as const;
 
 export const GameCenterGroupGameCenterLeaderboardsV2LinkagesResponseSchema = {
@@ -54246,7 +54445,8 @@ export const GameCenterLeaderboardLocalizationGameCenterLeaderboardImageLinkageR
             '$ref': '#/components/schemas/DocumentLinks'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardLocalizationV2ImageLinkageResponseSchema = {
@@ -54292,7 +54492,8 @@ export const GameCenterLeaderboardSetLocalizationGameCenterLeaderboardSetImageLi
             '$ref': '#/components/schemas/DocumentLinks'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardSetLocalizationV2ImageLinkageResponseSchema = {
@@ -54338,7 +54539,8 @@ export const GameCenterLeaderboardSetMemberLocalizationGameCenterLeaderboardLink
             '$ref': '#/components/schemas/DocumentLinks'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardSetMemberLocalizationGameCenterLeaderboardSetLinkageResponseSchema = {
@@ -54361,7 +54563,8 @@ export const GameCenterLeaderboardSetMemberLocalizationGameCenterLeaderboardSetL
             '$ref': '#/components/schemas/DocumentLinks'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardSetVersionV2LocalizationsLinkagesResponseSchema = {
@@ -54500,7 +54703,8 @@ export const GameCenterLeaderboardSetGameCenterLeaderboardsLinkagesResponseSchem
             '$ref': '#/components/schemas/PagingInformation'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardSetGameCenterLeaderboardsLinkagesRequestSchema = {
@@ -54523,7 +54727,8 @@ export const GameCenterLeaderboardSetGameCenterLeaderboardsLinkagesRequestSchema
             }
         }
     },
-    required: ['data']
+    required: ['data'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardSetGroupLeaderboardSetLinkageResponseSchema = {
@@ -54597,7 +54802,8 @@ export const GameCenterLeaderboardSetLocalizationsLinkagesResponseSchema = {
             '$ref': '#/components/schemas/PagingInformation'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardSetReleasesLinkagesResponseSchema = {
@@ -54626,7 +54832,8 @@ export const GameCenterLeaderboardSetReleasesLinkagesResponseSchema = {
             '$ref': '#/components/schemas/PagingInformation'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardVersionV2LocalizationsLinkagesResponseSchema = {
@@ -54675,7 +54882,8 @@ export const GameCenterLeaderboardActivityLinkageRequestSchema = {
             required: ['id', 'type']
         }
     },
-    required: ['data']
+    required: ['data'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardChallengeLinkageRequestSchema = {
@@ -54695,7 +54903,8 @@ export const GameCenterLeaderboardChallengeLinkageRequestSchema = {
             required: ['id', 'type']
         }
     },
-    required: ['data']
+    required: ['data'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardGroupLeaderboardLinkageResponseSchema = {
@@ -54769,7 +54978,8 @@ export const GameCenterLeaderboardLocalizationsLinkagesResponseSchema = {
             '$ref': '#/components/schemas/PagingInformation'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardReleasesLinkagesResponseSchema = {
@@ -54798,7 +55008,8 @@ export const GameCenterLeaderboardReleasesLinkagesResponseSchema = {
             '$ref': '#/components/schemas/PagingInformation'
         }
     },
-    required: ['data', 'links']
+    required: ['data', 'links'],
+    deprecated: true
 } as const;
 
 export const GameCenterLeaderboardV2ActivityLinkageRequestSchema = {
@@ -56548,27 +56759,30 @@ export const AppsBetaTesterUsagesV1MetricResponseSchema = {
                 type: 'object',
                 properties: {
                     dataPoints: {
-                        type: 'object',
-                        properties: {
-                            start: {
-                                type: 'string',
-                                format: 'date-time'
-                            },
-                            end: {
-                                type: 'string',
-                                format: 'date-time'
-                            },
-                            values: {
-                                type: 'object',
-                                properties: {
-                                    crashCount: {
-                                        type: 'integer'
-                                    },
-                                    sessionCount: {
-                                        type: 'integer'
-                                    },
-                                    feedbackCount: {
-                                        type: 'integer'
+                        type: 'array',
+                        items: {
+                            type: 'object',
+                            properties: {
+                                start: {
+                                    type: 'string',
+                                    format: 'date-time'
+                                },
+                                end: {
+                                    type: 'string',
+                                    format: 'date-time'
+                                },
+                                values: {
+                                    type: 'object',
+                                    properties: {
+                                        crashCount: {
+                                            type: 'integer'
+                                        },
+                                        sessionCount: {
+                                            type: 'integer'
+                                        },
+                                        feedbackCount: {
+                                            type: 'integer'
+                                        }
                                     }
                                 }
                             }
@@ -56628,39 +56842,42 @@ export const BetaPublicLinkUsagesV1MetricResponseSchema = {
                 type: 'object',
                 properties: {
                     dataPoints: {
-                        type: 'object',
-                        properties: {
-                            start: {
-                                type: 'string',
-                                format: 'date-time'
-                            },
-                            end: {
-                                type: 'string',
-                                format: 'date-time'
-                            },
-                            values: {
-                                type: 'object',
-                                properties: {
-                                    viewCount: {
-                                        type: 'integer'
-                                    },
-                                    acceptedCount: {
-                                        type: 'integer'
-                                    },
-                                    didNotAcceptCount: {
-                                        type: 'integer'
-                                    },
-                                    didNotMeetCriteriaCount: {
-                                        type: 'integer'
-                                    },
-                                    notRelevantRatio: {
-                                        type: 'number'
-                                    },
-                                    notClearRatio: {
-                                        type: 'number'
-                                    },
-                                    notInterestingRatio: {
-                                        type: 'number'
+                        type: 'array',
+                        items: {
+                            type: 'object',
+                            properties: {
+                                start: {
+                                    type: 'string',
+                                    format: 'date-time'
+                                },
+                                end: {
+                                    type: 'string',
+                                    format: 'date-time'
+                                },
+                                values: {
+                                    type: 'object',
+                                    properties: {
+                                        viewCount: {
+                                            type: 'integer'
+                                        },
+                                        acceptedCount: {
+                                            type: 'integer'
+                                        },
+                                        didNotAcceptCount: {
+                                            type: 'integer'
+                                        },
+                                        didNotMeetCriteriaCount: {
+                                            type: 'integer'
+                                        },
+                                        notRelevantRatio: {
+                                            type: 'number'
+                                        },
+                                        notClearRatio: {
+                                            type: 'number'
+                                        },
+                                        notInterestingRatio: {
+                                            type: 'number'
+                                        }
                                     }
                                 }
                             }
@@ -56688,27 +56905,30 @@ export const BetaTesterUsagesV1MetricResponseSchema = {
                 type: 'object',
                 properties: {
                     dataPoints: {
-                        type: 'object',
-                        properties: {
-                            start: {
-                                type: 'string',
-                                format: 'date-time'
-                            },
-                            end: {
-                                type: 'string',
-                                format: 'date-time'
-                            },
-                            values: {
-                                type: 'object',
-                                properties: {
-                                    crashCount: {
-                                        type: 'integer'
-                                    },
-                                    sessionCount: {
-                                        type: 'integer'
-                                    },
-                                    feedbackCount: {
-                                        type: 'integer'
+                        type: 'array',
+                        items: {
+                            type: 'object',
+                            properties: {
+                                start: {
+                                    type: 'string',
+                                    format: 'date-time'
+                                },
+                                end: {
+                                    type: 'string',
+                                    format: 'date-time'
+                                },
+                                values: {
+                                    type: 'object',
+                                    properties: {
+                                        crashCount: {
+                                            type: 'integer'
+                                        },
+                                        sessionCount: {
+                                            type: 'integer'
+                                        },
+                                        feedbackCount: {
+                                            type: 'integer'
+                                        }
                                     }
                                 }
                             }
@@ -56762,33 +56982,36 @@ export const BetaBuildUsagesV1MetricResponseSchema = {
                 type: 'object',
                 properties: {
                     dataPoints: {
-                        type: 'object',
-                        properties: {
-                            start: {
-                                type: 'string',
-                                format: 'date-time'
-                            },
-                            end: {
-                                type: 'string',
-                                format: 'date-time'
-                            },
-                            values: {
-                                type: 'object',
-                                properties: {
-                                    crashCount: {
-                                        type: 'integer'
-                                    },
-                                    installCount: {
-                                        type: 'integer'
-                                    },
-                                    sessionCount: {
-                                        type: 'integer'
-                                    },
-                                    feedbackCount: {
-                                        type: 'integer'
-                                    },
-                                    inviteCount: {
-                                        type: 'integer'
+                        type: 'array',
+                        items: {
+                            type: 'object',
+                            properties: {
+                                start: {
+                                    type: 'string',
+                                    format: 'date-time'
+                                },
+                                end: {
+                                    type: 'string',
+                                    format: 'date-time'
+                                },
+                                values: {
+                                    type: 'object',
+                                    properties: {
+                                        crashCount: {
+                                            type: 'integer'
+                                        },
+                                        installCount: {
+                                            type: 'integer'
+                                        },
+                                        sessionCount: {
+                                            type: 'integer'
+                                        },
+                                        feedbackCount: {
+                                            type: 'integer'
+                                        },
+                                        inviteCount: {
+                                            type: 'integer'
+                                        }
                                     }
                                 }
                             }
@@ -56816,30 +57039,33 @@ export const GameCenterMatchmakingAppRequestsV1MetricResponseSchema = {
                 type: 'object',
                 properties: {
                     dataPoints: {
-                        type: 'object',
-                        properties: {
-                            start: {
-                                type: 'string',
-                                format: 'date-time'
-                            },
-                            end: {
-                                type: 'string',
-                                format: 'date-time'
-                            },
-                            values: {
-                                type: 'object',
-                                properties: {
-                                    count: {
-                                        type: 'integer'
-                                    },
-                                    averageSecondsInQueue: {
-                                        type: 'number'
-                                    },
-                                    p50SecondsInQueue: {
-                                        type: 'number'
-                                    },
-                                    p95SecondsInQueue: {
-                                        type: 'number'
+                        type: 'array',
+                        items: {
+                            type: 'object',
+                            properties: {
+                                start: {
+                                    type: 'string',
+                                    format: 'date-time'
+                                },
+                                end: {
+                                    type: 'string',
+                                    format: 'date-time'
+                                },
+                                values: {
+                                    type: 'object',
+                                    properties: {
+                                        count: {
+                                            type: 'integer'
+                                        },
+                                        averageSecondsInQueue: {
+                                            type: 'number'
+                                        },
+                                        p50SecondsInQueue: {
+                                            type: 'number'
+                                        },
+                                        p95SecondsInQueue: {
+                                            type: 'number'
+                                        }
                                     }
                                 }
                             }
@@ -56894,30 +57120,33 @@ export const GameCenterMatchmakingQueueSizesV1MetricResponseSchema = {
                 type: 'object',
                 properties: {
                     dataPoints: {
-                        type: 'object',
-                        properties: {
-                            start: {
-                                type: 'string',
-                                format: 'date-time'
-                            },
-                            end: {
-                                type: 'string',
-                                format: 'date-time'
-                            },
-                            values: {
-                                type: 'object',
-                                properties: {
-                                    count: {
-                                        type: 'integer'
-                                    },
-                                    averageNumberOfRequests: {
-                                        type: 'number'
-                                    },
-                                    p50NumberOfRequests: {
-                                        type: 'number'
-                                    },
-                                    p95NumberOfRequests: {
-                                        type: 'number'
+                        type: 'array',
+                        items: {
+                            type: 'object',
+                            properties: {
+                                start: {
+                                    type: 'string',
+                                    format: 'date-time'
+                                },
+                                end: {
+                                    type: 'string',
+                                    format: 'date-time'
+                                },
+                                values: {
+                                    type: 'object',
+                                    properties: {
+                                        count: {
+                                            type: 'integer'
+                                        },
+                                        averageNumberOfRequests: {
+                                            type: 'number'
+                                        },
+                                        p50NumberOfRequests: {
+                                            type: 'number'
+                                        },
+                                        p95NumberOfRequests: {
+                                            type: 'number'
+                                        }
                                     }
                                 }
                             }
@@ -56949,30 +57178,33 @@ export const GameCenterMatchmakingQueueRequestsV1MetricResponseSchema = {
                 type: 'object',
                 properties: {
                     dataPoints: {
-                        type: 'object',
-                        properties: {
-                            start: {
-                                type: 'string',
-                                format: 'date-time'
-                            },
-                            end: {
-                                type: 'string',
-                                format: 'date-time'
-                            },
-                            values: {
-                                type: 'object',
-                                properties: {
-                                    count: {
-                                        type: 'integer'
-                                    },
-                                    averageSecondsInQueue: {
-                                        type: 'number'
-                                    },
-                                    p50SecondsInQueue: {
-                                        type: 'number'
-                                    },
-                                    p95SecondsInQueue: {
-                                        type: 'number'
+                        type: 'array',
+                        items: {
+                            type: 'object',
+                            properties: {
+                                start: {
+                                    type: 'string',
+                                    format: 'date-time'
+                                },
+                                end: {
+                                    type: 'string',
+                                    format: 'date-time'
+                                },
+                                values: {
+                                    type: 'object',
+                                    properties: {
+                                        count: {
+                                            type: 'integer'
+                                        },
+                                        averageSecondsInQueue: {
+                                            type: 'number'
+                                        },
+                                        p50SecondsInQueue: {
+                                            type: 'number'
+                                        },
+                                        p95SecondsInQueue: {
+                                            type: 'number'
+                                        }
                                     }
                                 }
                             }
@@ -57048,30 +57280,33 @@ export const GameCenterMatchmakingSessionsV1MetricResponseSchema = {
                 type: 'object',
                 properties: {
                     dataPoints: {
-                        type: 'object',
-                        properties: {
-                            start: {
-                                type: 'string',
-                                format: 'date-time'
-                            },
-                            end: {
-                                type: 'string',
-                                format: 'date-time'
-                            },
-                            values: {
-                                type: 'object',
-                                properties: {
-                                    count: {
-                                        type: 'integer'
-                                    },
-                                    averagePlayerCount: {
-                                        type: 'number'
-                                    },
-                                    p50PlayerCount: {
-                                        type: 'number'
-                                    },
-                                    p95PlayerCount: {
-                                        type: 'number'
+                        type: 'array',
+                        items: {
+                            type: 'object',
+                            properties: {
+                                start: {
+                                    type: 'string',
+                                    format: 'date-time'
+                                },
+                                end: {
+                                    type: 'string',
+                                    format: 'date-time'
+                                },
+                                values: {
+                                    type: 'object',
+                                    properties: {
+                                        count: {
+                                            type: 'integer'
+                                        },
+                                        averagePlayerCount: {
+                                            type: 'number'
+                                        },
+                                        p50PlayerCount: {
+                                            type: 'number'
+                                        },
+                                        p95PlayerCount: {
+                                            type: 'number'
+                                        }
                                     }
                                 }
                             }
@@ -57103,21 +57338,24 @@ export const GameCenterMatchmakingBooleanRuleResultsV1MetricResponseSchema = {
                 type: 'object',
                 properties: {
                     dataPoints: {
-                        type: 'object',
-                        properties: {
-                            start: {
-                                type: 'string',
-                                format: 'date-time'
-                            },
-                            end: {
-                                type: 'string',
-                                format: 'date-time'
-                            },
-                            values: {
-                                type: 'object',
-                                properties: {
-                                    count: {
-                                        type: 'integer'
+                        type: 'array',
+                        items: {
+                            type: 'object',
+                            properties: {
+                                start: {
+                                    type: 'string',
+                                    format: 'date-time'
+                                },
+                                end: {
+                                    type: 'string',
+                                    format: 'date-time'
+                                },
+                                values: {
+                                    type: 'object',
+                                    properties: {
+                                        count: {
+                                            type: 'integer'
+                                        }
                                     }
                                 }
                             }
@@ -57192,30 +57430,33 @@ export const GameCenterMatchmakingNumberRuleResultsV1MetricResponseSchema = {
                 type: 'object',
                 properties: {
                     dataPoints: {
-                        type: 'object',
-                        properties: {
-                            start: {
-                                type: 'string',
-                                format: 'date-time'
-                            },
-                            end: {
-                                type: 'string',
-                                format: 'date-time'
-                            },
-                            values: {
-                                type: 'object',
-                                properties: {
-                                    count: {
-                                        type: 'integer'
-                                    },
-                                    averageResult: {
-                                        type: 'number'
-                                    },
-                                    p50Result: {
-                                        type: 'number'
-                                    },
-                                    p95Result: {
-                                        type: 'number'
+                        type: 'array',
+                        items: {
+                            type: 'object',
+                            properties: {
+                                start: {
+                                    type: 'string',
+                                    format: 'date-time'
+                                },
+                                end: {
+                                    type: 'string',
+                                    format: 'date-time'
+                                },
+                                values: {
+                                    type: 'object',
+                                    properties: {
+                                        count: {
+                                            type: 'integer'
+                                        },
+                                        averageResult: {
+                                            type: 'number'
+                                        },
+                                        p50Result: {
+                                            type: 'number'
+                                        },
+                                        p95Result: {
+                                            type: 'number'
+                                        }
                                     }
                                 }
                             }
@@ -57273,21 +57514,24 @@ export const GameCenterMatchmakingRuleErrorsV1MetricResponseSchema = {
                 type: 'object',
                 properties: {
                     dataPoints: {
-                        type: 'object',
-                        properties: {
-                            start: {
-                                type: 'string',
-                                format: 'date-time'
-                            },
-                            end: {
-                                type: 'string',
-                                format: 'date-time'
-                            },
-                            values: {
-                                type: 'object',
-                                properties: {
-                                    count: {
-                                        type: 'integer'
+                        type: 'array',
+                        items: {
+                            type: 'object',
+                            properties: {
+                                start: {
+                                    type: 'string',
+                                    format: 'date-time'
+                                },
+                                end: {
+                                    type: 'string',
+                                    format: 'date-time'
+                                },
+                                values: {
+                                    type: 'object',
+                                    properties: {
+                                        count: {
+                                            type: 'integer'
+                                        }
                                     }
                                 }
                             }
@@ -57690,7 +57934,7 @@ export const BuildAudienceTypeSchema = {
 
 export const BuildBundleTypeSchema = {
     type: 'string',
-    enum: ['APP', 'APP_CLIP']
+    enum: ['APP', 'APP_CLIP', 'WATCH_APP']
 } as const;
 
 export const BuildUploadStateSchema = {
