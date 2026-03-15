@@ -4276,16 +4276,6 @@ export type AppStoreVersion = {
                 id: string;
             };
         };
-        /**
-         * @deprecated
-         */
-        ageRatingDeclaration?: {
-            links?: RelationshipLinks;
-            data?: {
-                type: 'ageRatingDeclarations';
-                id: string;
-            };
-        };
         appStoreVersionLocalizations?: {
             links?: RelationshipLinks;
             meta?: PagingInformation;
@@ -4379,8 +4369,6 @@ export type AppStoreVersion = {
 export type AppStoreVersionsResponse = {
     data: Array<AppStoreVersion>;
     included?: Array<({
-        type: 'ageRatingDeclarations';
-    } & AgeRatingDeclaration) | ({
         type: 'alternativeDistributionPackages';
     } & AlternativeDistributionPackage) | ({
         type: 'appClipDefaultExperiences';
@@ -4413,8 +4401,6 @@ export type AppStoreVersionsResponse = {
 export type AppStoreVersionResponse = {
     data: AppStoreVersion;
     included?: Array<({
-        type: 'ageRatingDeclarations';
-    } & AgeRatingDeclaration) | ({
         type: 'alternativeDistributionPackages';
     } & AlternativeDistributionPackage) | ({
         type: 'appClipDefaultExperiences';
@@ -5275,6 +5261,7 @@ export type BackgroundAsset = {
         archived?: boolean;
         assetPackIdentifier?: string;
         createdDate?: string;
+        usedBytes?: number;
     };
     relationships?: {
         app?: {
@@ -6569,6 +6556,7 @@ export type BuildBundle = {
         };
         baDownloadAllowance?: number;
         baMaxInstallSize?: number;
+        minimumOsVersion?: string;
     };
     relationships?: {
         appClipDomainCacheStatus?: {
@@ -8281,6 +8269,7 @@ export type EndUserLicenseAgreementUpdateRequest = {
 
 /**
  * GameCenterAchievementImage
+ * @deprecated
  */
 export type GameCenterAchievementImage = {
     type: 'gameCenterAchievementImages';
@@ -8305,6 +8294,7 @@ export type GameCenterAchievementImage = {
 
 /**
  * GameCenterAchievementImageResponse
+ * @deprecated
  */
 export type GameCenterAchievementImageResponse = {
     data: GameCenterAchievementImage;
@@ -8314,6 +8304,7 @@ export type GameCenterAchievementImageResponse = {
 
 /**
  * GameCenterAchievementImageCreateRequest
+ * @deprecated
  */
 export type GameCenterAchievementImageCreateRequest = {
     data: {
@@ -8335,6 +8326,7 @@ export type GameCenterAchievementImageCreateRequest = {
 
 /**
  * GameCenterAchievementImageUpdateRequest
+ * @deprecated
  */
 export type GameCenterAchievementImageUpdateRequest = {
     data: {
@@ -8510,6 +8502,7 @@ export type GameCenterAchievementLocalizationV2UpdateRequest = {
 
 /**
  * GameCenterAchievementLocalization
+ * @deprecated
  */
 export type GameCenterAchievementLocalization = {
     type: 'gameCenterAchievementLocalizations';
@@ -8541,6 +8534,7 @@ export type GameCenterAchievementLocalization = {
 
 /**
  * GameCenterAchievementLocalizationsResponse
+ * @deprecated
  */
 export type GameCenterAchievementLocalizationsResponse = {
     data: Array<GameCenterAchievementLocalization>;
@@ -8555,6 +8549,7 @@ export type GameCenterAchievementLocalizationsResponse = {
 
 /**
  * GameCenterAchievementLocalizationResponse
+ * @deprecated
  */
 export type GameCenterAchievementLocalizationResponse = {
     data: GameCenterAchievementLocalization;
@@ -8568,6 +8563,7 @@ export type GameCenterAchievementLocalizationResponse = {
 
 /**
  * GameCenterAchievementLocalizationCreateRequest
+ * @deprecated
  */
 export type GameCenterAchievementLocalizationCreateRequest = {
     data: {
@@ -8591,6 +8587,7 @@ export type GameCenterAchievementLocalizationCreateRequest = {
 
 /**
  * GameCenterAchievementLocalizationUpdateRequest
+ * @deprecated
  */
 export type GameCenterAchievementLocalizationUpdateRequest = {
     data: {
@@ -8606,6 +8603,7 @@ export type GameCenterAchievementLocalizationUpdateRequest = {
 
 /**
  * GameCenterAchievementRelease
+ * @deprecated
  */
 export type GameCenterAchievementRelease = {
     type: 'gameCenterAchievementReleases';
@@ -8632,6 +8630,7 @@ export type GameCenterAchievementRelease = {
 
 /**
  * GameCenterAchievementReleasesResponse
+ * @deprecated
  */
 export type GameCenterAchievementReleasesResponse = {
     data: Array<GameCenterAchievementRelease>;
@@ -8646,6 +8645,7 @@ export type GameCenterAchievementReleasesResponse = {
 
 /**
  * GameCenterAchievementReleaseResponse
+ * @deprecated
  */
 export type GameCenterAchievementReleaseResponse = {
     data: GameCenterAchievementRelease;
@@ -8659,6 +8659,7 @@ export type GameCenterAchievementReleaseResponse = {
 
 /**
  * GameCenterAchievementReleaseCreateRequest
+ * @deprecated
  */
 export type GameCenterAchievementReleaseCreateRequest = {
     data: {
@@ -8906,6 +8907,7 @@ export type GameCenterAchievementV2UpdateRequest = {
 
 /**
  * GameCenterAchievement
+ * @deprecated
  */
 export type GameCenterAchievement = {
     type: 'gameCenterAchievements';
@@ -8971,6 +8973,7 @@ export type GameCenterAchievement = {
 
 /**
  * GameCenterAchievementsResponse
+ * @deprecated
  */
 export type GameCenterAchievementsResponse = {
     data: Array<GameCenterAchievement>;
@@ -8993,6 +8996,7 @@ export type GameCenterAchievementsResponse = {
 
 /**
  * GameCenterAchievementResponse
+ * @deprecated
  */
 export type GameCenterAchievementResponse = {
     data: GameCenterAchievement;
@@ -9014,6 +9018,7 @@ export type GameCenterAchievementResponse = {
 
 /**
  * GameCenterAchievementCreateRequest
+ * @deprecated
  */
 export type GameCenterAchievementCreateRequest = {
     data: {
@@ -9045,6 +9050,7 @@ export type GameCenterAchievementCreateRequest = {
 
 /**
  * GameCenterAchievementUpdateRequest
+ * @deprecated
  */
 export type GameCenterAchievementUpdateRequest = {
     data: {
@@ -9090,6 +9096,9 @@ export type GameCenterActivity = {
                 id: string;
             };
         };
+        /**
+         * @deprecated
+         */
         achievements?: {
             links?: RelationshipLinks;
             meta?: PagingInformation;
@@ -9106,6 +9115,9 @@ export type GameCenterActivity = {
                 id: string;
             }>;
         };
+        /**
+         * @deprecated
+         */
         leaderboards?: {
             links?: RelationshipLinks;
             meta?: PagingInformation;
@@ -9201,8 +9213,15 @@ export type GameCenterActivityCreateRequest = {
                     id: string;
                 };
             };
+            versions?: {
+                data?: Array<{
+                    type: 'gameCenterActivityVersions';
+                    id: string;
+                }>;
+            };
         };
     };
+    included?: Array<GameCenterActivityVersionInlineCreate>;
 };
 
 /**
@@ -9382,6 +9401,7 @@ export type GameCenterActivityLocalizationUpdateRequest = {
 
 /**
  * GameCenterActivityVersionRelease
+ * @deprecated
  */
 export type GameCenterActivityVersionRelease = {
     type: 'gameCenterActivityVersionReleases';
@@ -9399,6 +9419,7 @@ export type GameCenterActivityVersionRelease = {
 
 /**
  * GameCenterActivityVersionReleasesResponse
+ * @deprecated
  */
 export type GameCenterActivityVersionReleasesResponse = {
     data: Array<GameCenterActivityVersionRelease>;
@@ -9409,6 +9430,7 @@ export type GameCenterActivityVersionReleasesResponse = {
 
 /**
  * GameCenterActivityVersionReleaseResponse
+ * @deprecated
  */
 export type GameCenterActivityVersionReleaseResponse = {
     data: GameCenterActivityVersionRelease;
@@ -9418,6 +9440,7 @@ export type GameCenterActivityVersionReleaseResponse = {
 
 /**
  * GameCenterActivityVersionReleaseCreateRequest
+ * @deprecated
  */
 export type GameCenterActivityVersionReleaseCreateRequest = {
     data: {
@@ -9481,6 +9504,22 @@ export type GameCenterActivityVersion = {
         };
     };
     links?: ResourceLinks;
+};
+
+export type GameCenterActivityVersionInlineCreate = {
+    type: 'gameCenterActivityVersions';
+    id?: string;
+    attributes?: {
+        fallbackUrl?: string | null;
+    };
+    relationships?: {
+        activity?: {
+            data?: {
+                type: 'gameCenterActivities';
+                id: string;
+            };
+        };
+    };
 };
 
 /**
@@ -9795,6 +9834,7 @@ export type GameCenterChallengeLocalizationUpdateRequest = {
 
 /**
  * GameCenterChallengeVersionRelease
+ * @deprecated
  */
 export type GameCenterChallengeVersionRelease = {
     type: 'gameCenterChallengeVersionReleases';
@@ -9812,6 +9852,7 @@ export type GameCenterChallengeVersionRelease = {
 
 /**
  * GameCenterChallengeVersionReleasesResponse
+ * @deprecated
  */
 export type GameCenterChallengeVersionReleasesResponse = {
     data: Array<GameCenterChallengeVersionRelease>;
@@ -9822,6 +9863,7 @@ export type GameCenterChallengeVersionReleasesResponse = {
 
 /**
  * GameCenterChallengeVersionReleaseResponse
+ * @deprecated
  */
 export type GameCenterChallengeVersionReleaseResponse = {
     data: GameCenterChallengeVersionRelease;
@@ -9831,6 +9873,7 @@ export type GameCenterChallengeVersionReleaseResponse = {
 
 /**
  * GameCenterChallengeVersionReleaseCreateRequest
+ * @deprecated
  */
 export type GameCenterChallengeVersionReleaseCreateRequest = {
     data: {
@@ -9893,6 +9936,19 @@ export type GameCenterChallengeVersion = {
         };
     };
     links?: ResourceLinks;
+};
+
+export type GameCenterChallengeVersionInlineCreate = {
+    type: 'gameCenterChallengeVersions';
+    id?: string;
+    relationships?: {
+        challenge?: {
+            data?: {
+                type: 'gameCenterChallenges';
+                id: string;
+            };
+        };
+    };
 };
 
 /**
@@ -9981,6 +10037,9 @@ export type GameCenterChallenge = {
                 id: string;
             }>;
         };
+        /**
+         * @deprecated
+         */
         leaderboard?: {
             links?: RelationshipLinks;
             data?: {
@@ -10059,6 +10118,15 @@ export type GameCenterChallengeCreateRequest = {
                     id: string;
                 };
             };
+            versions?: {
+                data?: Array<{
+                    type: 'gameCenterChallengeVersions';
+                    id: string;
+                }>;
+            };
+            /**
+             * @deprecated
+             */
             leaderboard?: {
                 data?: {
                     type: 'gameCenterLeaderboards';
@@ -10073,6 +10141,7 @@ export type GameCenterChallengeCreateRequest = {
             };
         };
     };
+    included?: Array<GameCenterChallengeVersionInlineCreate>;
 };
 
 /**
@@ -10088,6 +10157,9 @@ export type GameCenterChallengeUpdateRequest = {
             repeatable?: boolean | null;
         };
         relationships?: {
+            /**
+             * @deprecated
+             */
             leaderboard?: {
                 data?: {
                     type: 'gameCenterLeaderboards';
@@ -10139,6 +10211,9 @@ export type GameCenterDetail = {
                 id: string;
             };
         };
+        /**
+         * @deprecated
+         */
         gameCenterLeaderboards?: {
             links?: RelationshipLinks;
             meta?: PagingInformation;
@@ -10155,6 +10230,9 @@ export type GameCenterDetail = {
                 id: string;
             }>;
         };
+        /**
+         * @deprecated
+         */
         gameCenterLeaderboardSets?: {
             links?: RelationshipLinks;
             meta?: PagingInformation;
@@ -10171,6 +10249,9 @@ export type GameCenterDetail = {
                 id: string;
             }>;
         };
+        /**
+         * @deprecated
+         */
         gameCenterAchievements?: {
             links?: RelationshipLinks;
             meta?: PagingInformation;
@@ -10203,6 +10284,9 @@ export type GameCenterDetail = {
                 id: string;
             }>;
         };
+        /**
+         * @deprecated
+         */
         defaultLeaderboard?: {
             data?: {
                 type: 'gameCenterLeaderboards';
@@ -10215,6 +10299,9 @@ export type GameCenterDetail = {
                 id: string;
             };
         };
+        /**
+         * @deprecated
+         */
         defaultGroupLeaderboard?: {
             data?: {
                 type: 'gameCenterLeaderboards';
@@ -10227,6 +10314,9 @@ export type GameCenterDetail = {
                 id: string;
             };
         };
+        /**
+         * @deprecated
+         */
         achievementReleases?: {
             links?: RelationshipLinks;
             meta?: PagingInformation;
@@ -10235,6 +10325,9 @@ export type GameCenterDetail = {
                 id: string;
             }>;
         };
+        /**
+         * @deprecated
+         */
         activityReleases?: {
             links?: RelationshipLinks;
             meta?: PagingInformation;
@@ -10243,6 +10336,9 @@ export type GameCenterDetail = {
                 id: string;
             }>;
         };
+        /**
+         * @deprecated
+         */
         challengeReleases?: {
             links?: RelationshipLinks;
             meta?: PagingInformation;
@@ -10251,6 +10347,9 @@ export type GameCenterDetail = {
                 id: string;
             }>;
         };
+        /**
+         * @deprecated
+         */
         leaderboardReleases?: {
             links?: RelationshipLinks;
             meta?: PagingInformation;
@@ -10259,6 +10358,9 @@ export type GameCenterDetail = {
                 id: string;
             }>;
         };
+        /**
+         * @deprecated
+         */
         leaderboardSetReleases?: {
             links?: RelationshipLinks;
             meta?: PagingInformation;
@@ -10397,6 +10499,9 @@ export type GameCenterDetailUpdateRequest = {
                     id: string;
                 };
             };
+            /**
+             * @deprecated
+             */
             defaultLeaderboard?: {
                 data?: {
                     type: 'gameCenterLeaderboards';
@@ -10409,6 +10514,9 @@ export type GameCenterDetailUpdateRequest = {
                     id: string;
                 };
             };
+            /**
+             * @deprecated
+             */
             defaultGroupLeaderboard?: {
                 data?: {
                     type: 'gameCenterLeaderboards';
@@ -10489,6 +10597,9 @@ export type GameCenterGroup = {
                 id: string;
             }>;
         };
+        /**
+         * @deprecated
+         */
         gameCenterLeaderboards?: {
             links?: RelationshipLinks;
             meta?: PagingInformation;
@@ -10505,6 +10616,9 @@ export type GameCenterGroup = {
                 id: string;
             }>;
         };
+        /**
+         * @deprecated
+         */
         gameCenterLeaderboardSets?: {
             links?: RelationshipLinks;
             meta?: PagingInformation;
@@ -10521,6 +10635,9 @@ export type GameCenterGroup = {
                 id: string;
             }>;
         };
+        /**
+         * @deprecated
+         */
         gameCenterAchievements?: {
             links?: RelationshipLinks;
             meta?: PagingInformation;
@@ -10639,6 +10756,7 @@ export type GameCenterLeaderboardEntrySubmission = {
         score?: string;
         submittedDate?: string;
         vendorIdentifier?: string;
+        preReleased?: boolean;
     };
     links?: ResourceLinks;
 };
@@ -10665,12 +10783,14 @@ export type GameCenterLeaderboardEntrySubmissionCreateRequest = {
             score: string;
             submittedDate?: string | null;
             vendorIdentifier: string;
+            preReleased?: boolean | null;
         };
     };
 };
 
 /**
  * GameCenterLeaderboardImage
+ * @deprecated
  */
 export type GameCenterLeaderboardImage = {
     type: 'gameCenterLeaderboardImages';
@@ -10695,6 +10815,7 @@ export type GameCenterLeaderboardImage = {
 
 /**
  * GameCenterLeaderboardImageResponse
+ * @deprecated
  */
 export type GameCenterLeaderboardImageResponse = {
     data: GameCenterLeaderboardImage;
@@ -10704,6 +10825,7 @@ export type GameCenterLeaderboardImageResponse = {
 
 /**
  * GameCenterLeaderboardImageCreateRequest
+ * @deprecated
  */
 export type GameCenterLeaderboardImageCreateRequest = {
     data: {
@@ -10725,6 +10847,7 @@ export type GameCenterLeaderboardImageCreateRequest = {
 
 /**
  * GameCenterLeaderboardImageUpdateRequest
+ * @deprecated
  */
 export type GameCenterLeaderboardImageUpdateRequest = {
     data: {
@@ -10805,6 +10928,7 @@ export type GameCenterLeaderboardImageV2UpdateRequest = {
 
 /**
  * GameCenterLeaderboardLocalization
+ * @deprecated
  */
 export type GameCenterLeaderboardLocalization = {
     type: 'gameCenterLeaderboardLocalizations';
@@ -10837,6 +10961,7 @@ export type GameCenterLeaderboardLocalization = {
 
 /**
  * GameCenterLeaderboardLocalizationsResponse
+ * @deprecated
  */
 export type GameCenterLeaderboardLocalizationsResponse = {
     data: Array<GameCenterLeaderboardLocalization>;
@@ -10851,6 +10976,7 @@ export type GameCenterLeaderboardLocalizationsResponse = {
 
 /**
  * GameCenterLeaderboardLocalizationResponse
+ * @deprecated
  */
 export type GameCenterLeaderboardLocalizationResponse = {
     data: GameCenterLeaderboardLocalization;
@@ -10864,6 +10990,7 @@ export type GameCenterLeaderboardLocalizationResponse = {
 
 /**
  * GameCenterLeaderboardLocalizationCreateRequest
+ * @deprecated
  */
 export type GameCenterLeaderboardLocalizationCreateRequest = {
     data: {
@@ -10889,6 +11016,7 @@ export type GameCenterLeaderboardLocalizationCreateRequest = {
 
 /**
  * GameCenterLeaderboardLocalizationUpdateRequest
+ * @deprecated
  */
 export type GameCenterLeaderboardLocalizationUpdateRequest = {
     data: {
@@ -11007,6 +11135,7 @@ export type GameCenterLeaderboardLocalizationV2UpdateRequest = {
 
 /**
  * GameCenterLeaderboardRelease
+ * @deprecated
  */
 export type GameCenterLeaderboardRelease = {
     type: 'gameCenterLeaderboardReleases';
@@ -11033,6 +11162,7 @@ export type GameCenterLeaderboardRelease = {
 
 /**
  * GameCenterLeaderboardReleasesResponse
+ * @deprecated
  */
 export type GameCenterLeaderboardReleasesResponse = {
     data: Array<GameCenterLeaderboardRelease>;
@@ -11047,6 +11177,7 @@ export type GameCenterLeaderboardReleasesResponse = {
 
 /**
  * GameCenterLeaderboardReleaseResponse
+ * @deprecated
  */
 export type GameCenterLeaderboardReleaseResponse = {
     data: GameCenterLeaderboardRelease;
@@ -11060,6 +11191,7 @@ export type GameCenterLeaderboardReleaseResponse = {
 
 /**
  * GameCenterLeaderboardReleaseCreateRequest
+ * @deprecated
  */
 export type GameCenterLeaderboardReleaseCreateRequest = {
     data: {
@@ -11083,6 +11215,7 @@ export type GameCenterLeaderboardReleaseCreateRequest = {
 
 /**
  * GameCenterLeaderboardSetImage
+ * @deprecated
  */
 export type GameCenterLeaderboardSetImage = {
     type: 'gameCenterLeaderboardSetImages';
@@ -11107,6 +11240,7 @@ export type GameCenterLeaderboardSetImage = {
 
 /**
  * GameCenterLeaderboardSetImageResponse
+ * @deprecated
  */
 export type GameCenterLeaderboardSetImageResponse = {
     data: GameCenterLeaderboardSetImage;
@@ -11116,6 +11250,7 @@ export type GameCenterLeaderboardSetImageResponse = {
 
 /**
  * GameCenterLeaderboardSetImageCreateRequest
+ * @deprecated
  */
 export type GameCenterLeaderboardSetImageCreateRequest = {
     data: {
@@ -11137,6 +11272,7 @@ export type GameCenterLeaderboardSetImageCreateRequest = {
 
 /**
  * GameCenterLeaderboardSetImageUpdateRequest
+ * @deprecated
  */
 export type GameCenterLeaderboardSetImageUpdateRequest = {
     data: {
@@ -11217,6 +11353,7 @@ export type GameCenterLeaderboardSetImageV2UpdateRequest = {
 
 /**
  * GameCenterLeaderboardSetLocalization
+ * @deprecated
  */
 export type GameCenterLeaderboardSetLocalization = {
     type: 'gameCenterLeaderboardSetLocalizations';
@@ -11245,6 +11382,7 @@ export type GameCenterLeaderboardSetLocalization = {
 
 /**
  * GameCenterLeaderboardSetLocalizationsResponse
+ * @deprecated
  */
 export type GameCenterLeaderboardSetLocalizationsResponse = {
     data: Array<GameCenterLeaderboardSetLocalization>;
@@ -11259,6 +11397,7 @@ export type GameCenterLeaderboardSetLocalizationsResponse = {
 
 /**
  * GameCenterLeaderboardSetLocalizationResponse
+ * @deprecated
  */
 export type GameCenterLeaderboardSetLocalizationResponse = {
     data: GameCenterLeaderboardSetLocalization;
@@ -11272,6 +11411,7 @@ export type GameCenterLeaderboardSetLocalizationResponse = {
 
 /**
  * GameCenterLeaderboardSetLocalizationCreateRequest
+ * @deprecated
  */
 export type GameCenterLeaderboardSetLocalizationCreateRequest = {
     data: {
@@ -11293,6 +11433,7 @@ export type GameCenterLeaderboardSetLocalizationCreateRequest = {
 
 /**
  * GameCenterLeaderboardSetLocalizationUpdateRequest
+ * @deprecated
  */
 export type GameCenterLeaderboardSetLocalizationUpdateRequest = {
     data: {
@@ -11491,6 +11632,7 @@ export type GameCenterLeaderboardSetMemberLocalizationUpdateRequest = {
 
 /**
  * GameCenterLeaderboardSetRelease
+ * @deprecated
  */
 export type GameCenterLeaderboardSetRelease = {
     type: 'gameCenterLeaderboardSetReleases';
@@ -11517,6 +11659,7 @@ export type GameCenterLeaderboardSetRelease = {
 
 /**
  * GameCenterLeaderboardSetReleasesResponse
+ * @deprecated
  */
 export type GameCenterLeaderboardSetReleasesResponse = {
     data: Array<GameCenterLeaderboardSetRelease>;
@@ -11531,6 +11674,7 @@ export type GameCenterLeaderboardSetReleasesResponse = {
 
 /**
  * GameCenterLeaderboardSetReleaseResponse
+ * @deprecated
  */
 export type GameCenterLeaderboardSetReleaseResponse = {
     data: GameCenterLeaderboardSetRelease;
@@ -11544,6 +11688,7 @@ export type GameCenterLeaderboardSetReleaseResponse = {
 
 /**
  * GameCenterLeaderboardSetReleaseCreateRequest
+ * @deprecated
  */
 export type GameCenterLeaderboardSetReleaseCreateRequest = {
     data: {
@@ -11784,6 +11929,7 @@ export type GameCenterLeaderboardSetV2UpdateRequest = {
 
 /**
  * GameCenterLeaderboardSet
+ * @deprecated
  */
 export type GameCenterLeaderboardSet = {
     type: 'gameCenterLeaderboardSets';
@@ -11845,6 +11991,7 @@ export type GameCenterLeaderboardSet = {
 
 /**
  * GameCenterLeaderboardSetsResponse
+ * @deprecated
  */
 export type GameCenterLeaderboardSetsResponse = {
     data: Array<GameCenterLeaderboardSet>;
@@ -11867,6 +12014,7 @@ export type GameCenterLeaderboardSetsResponse = {
 
 /**
  * GameCenterLeaderboardSetResponse
+ * @deprecated
  */
 export type GameCenterLeaderboardSetResponse = {
     data: GameCenterLeaderboardSet;
@@ -11888,6 +12036,7 @@ export type GameCenterLeaderboardSetResponse = {
 
 /**
  * GameCenterLeaderboardSetCreateRequest
+ * @deprecated
  */
 export type GameCenterLeaderboardSetCreateRequest = {
     data: {
@@ -11921,6 +12070,7 @@ export type GameCenterLeaderboardSetCreateRequest = {
 
 /**
  * GameCenterLeaderboardSetUpdateRequest
+ * @deprecated
  */
 export type GameCenterLeaderboardSetUpdateRequest = {
     data: {
@@ -12020,6 +12170,7 @@ export type GameCenterLeaderboardVersionV2CreateRequest = {
 
 /**
  * GameCenterLeaderboard
+ * @deprecated
  */
 export type GameCenterLeaderboard = {
     type: 'gameCenterLeaderboards';
@@ -12105,6 +12256,7 @@ export type GameCenterLeaderboard = {
 
 /**
  * GameCenterLeaderboardsResponse
+ * @deprecated
  */
 export type GameCenterLeaderboardsResponse = {
     data: Array<GameCenterLeaderboard>;
@@ -12131,6 +12283,7 @@ export type GameCenterLeaderboardsResponse = {
 
 /**
  * GameCenterLeaderboardResponse
+ * @deprecated
  */
 export type GameCenterLeaderboardResponse = {
     data: GameCenterLeaderboard;
@@ -12156,6 +12309,7 @@ export type GameCenterLeaderboardResponse = {
 
 /**
  * GameCenterLeaderboardCreateRequest
+ * @deprecated
  */
 export type GameCenterLeaderboardCreateRequest = {
     data: {
@@ -12199,6 +12353,7 @@ export type GameCenterLeaderboardCreateRequest = {
 
 /**
  * GameCenterLeaderboardUpdateRequest
+ * @deprecated
  */
 export type GameCenterLeaderboardUpdateRequest = {
     data: {
@@ -12862,6 +13017,7 @@ export type GameCenterPlayerAchievementSubmission = {
         scopedPlayerId?: string;
         submittedDate?: string;
         vendorIdentifier?: string;
+        preReleased?: boolean;
     };
     links?: ResourceLinks;
 };
@@ -12887,6 +13043,7 @@ export type GameCenterPlayerAchievementSubmissionCreateRequest = {
             scopedPlayerId: string;
             submittedDate?: string | null;
             vendorIdentifier: string;
+            preReleased?: boolean | null;
         };
     };
 };
@@ -18214,25 +18371,6 @@ export type AppStoreVersionLocalizationSearchKeywordsLinkagesRequest = {
     }>;
 };
 
-/**
- * AgeRatingDeclarationWithoutIncludesResponse
- */
-export type AgeRatingDeclarationWithoutIncludesResponse = {
-    data: AgeRatingDeclaration;
-    links: DocumentLinks;
-};
-
-/**
- * @deprecated
- */
-export type AppStoreVersionAgeRatingDeclarationLinkageResponse = {
-    data: {
-        type: 'ageRatingDeclarations';
-        id: string;
-    };
-    links: DocumentLinks;
-};
-
 export type AppStoreVersionAlternativeDistributionPackageLinkageResponse = {
     data: {
         type: 'alternativeDistributionPackages';
@@ -19430,6 +19568,9 @@ export type GameCenterAchievementLocalizationV2ImageLinkageResponse = {
     links: DocumentLinks;
 };
 
+/**
+ * @deprecated
+ */
 export type GameCenterAchievementLocalizationGameCenterAchievementLinkageResponse = {
     data: {
         type: 'gameCenterAchievements';
@@ -19438,6 +19579,9 @@ export type GameCenterAchievementLocalizationGameCenterAchievementLinkageRespons
     links: DocumentLinks;
 };
 
+/**
+ * @deprecated
+ */
 export type GameCenterAchievementLocalizationGameCenterAchievementImageLinkageResponse = {
     data: {
         type: 'gameCenterAchievementImages';
@@ -19471,6 +19615,9 @@ export type GameCenterAchievementV2VersionsLinkagesResponse = {
     meta?: PagingInformation;
 };
 
+/**
+ * @deprecated
+ */
 export type GameCenterAchievementActivityLinkageRequest = {
     data: {
         type: 'gameCenterActivities';
@@ -19499,6 +19646,9 @@ export type GameCenterAchievementGroupAchievementLinkageRequest = {
     };
 };
 
+/**
+ * @deprecated
+ */
 export type GameCenterAchievementLocalizationsLinkagesResponse = {
     data: Array<{
         type: 'gameCenterAchievementLocalizations';
@@ -19508,6 +19658,9 @@ export type GameCenterAchievementLocalizationsLinkagesResponse = {
     meta?: PagingInformation;
 };
 
+/**
+ * @deprecated
+ */
 export type GameCenterAchievementReleasesLinkagesResponse = {
     data: Array<{
         type: 'gameCenterAchievementReleases';
@@ -19517,6 +19670,9 @@ export type GameCenterAchievementReleasesLinkagesResponse = {
     meta?: PagingInformation;
 };
 
+/**
+ * @deprecated
+ */
 export type GameCenterActivityAchievementsLinkagesRequest = {
     data: Array<{
         type: 'gameCenterAchievements';
@@ -19531,6 +19687,9 @@ export type GameCenterActivityAchievementsV2LinkagesRequest = {
     }>;
 };
 
+/**
+ * @deprecated
+ */
 export type GameCenterActivityLeaderboardsLinkagesRequest = {
     data: Array<{
         type: 'gameCenterLeaderboards';
@@ -19628,6 +19787,9 @@ export type GameCenterChallengeVersionLocalizationsLinkagesResponse = {
     meta?: PagingInformation;
 };
 
+/**
+ * @deprecated
+ */
 export type GameCenterChallengeLeaderboardLinkageRequest = {
     data: {
         type: 'gameCenterLeaderboards';
@@ -19651,6 +19813,9 @@ export type GameCenterChallengeVersionsLinkagesResponse = {
     meta?: PagingInformation;
 };
 
+/**
+ * @deprecated
+ */
 export type GameCenterDetailAchievementReleasesLinkagesResponse = {
     data: Array<{
         type: 'gameCenterAchievementReleases';
@@ -19660,6 +19825,9 @@ export type GameCenterDetailAchievementReleasesLinkagesResponse = {
     meta?: PagingInformation;
 };
 
+/**
+ * @deprecated
+ */
 export type GameCenterDetailActivityReleasesLinkagesResponse = {
     data: Array<{
         type: 'gameCenterActivityVersionReleases';
@@ -19669,6 +19837,9 @@ export type GameCenterDetailActivityReleasesLinkagesResponse = {
     meta?: PagingInformation;
 };
 
+/**
+ * @deprecated
+ */
 export type GameCenterDetailChallengeReleasesLinkagesResponse = {
     data: Array<{
         type: 'gameCenterChallengeVersionReleases';
@@ -19685,6 +19856,9 @@ export type GameCenterDetailChallengesMinimumPlatformVersionsLinkagesRequest = {
     }>;
 };
 
+/**
+ * @deprecated
+ */
 export type GameCenterDetailGameCenterAchievementsLinkagesResponse = {
     data: Array<{
         type: 'gameCenterAchievements';
@@ -19694,6 +19868,9 @@ export type GameCenterDetailGameCenterAchievementsLinkagesResponse = {
     meta?: PagingInformation;
 };
 
+/**
+ * @deprecated
+ */
 export type GameCenterDetailGameCenterAchievementsLinkagesRequest = {
     data: Array<{
         type: 'gameCenterAchievements';
@@ -19752,6 +19929,9 @@ export type GameCenterDetailGameCenterGroupLinkageResponse = {
     links: DocumentLinks;
 };
 
+/**
+ * @deprecated
+ */
 export type GameCenterDetailGameCenterLeaderboardSetsLinkagesResponse = {
     data: Array<{
         type: 'gameCenterLeaderboardSets';
@@ -19761,6 +19941,9 @@ export type GameCenterDetailGameCenterLeaderboardSetsLinkagesResponse = {
     meta?: PagingInformation;
 };
 
+/**
+ * @deprecated
+ */
 export type GameCenterDetailGameCenterLeaderboardSetsLinkagesRequest = {
     data: Array<{
         type: 'gameCenterLeaderboardSets';
@@ -19784,6 +19967,9 @@ export type GameCenterDetailGameCenterLeaderboardSetsV2LinkagesRequest = {
     }>;
 };
 
+/**
+ * @deprecated
+ */
 export type GameCenterDetailGameCenterLeaderboardsLinkagesResponse = {
     data: Array<{
         type: 'gameCenterLeaderboards';
@@ -19793,6 +19979,9 @@ export type GameCenterDetailGameCenterLeaderboardsLinkagesResponse = {
     meta?: PagingInformation;
 };
 
+/**
+ * @deprecated
+ */
 export type GameCenterDetailGameCenterLeaderboardsLinkagesRequest = {
     data: Array<{
         type: 'gameCenterLeaderboards';
@@ -19816,6 +20005,9 @@ export type GameCenterDetailGameCenterLeaderboardsV2LinkagesRequest = {
     }>;
 };
 
+/**
+ * @deprecated
+ */
 export type GameCenterDetailLeaderboardReleasesLinkagesResponse = {
     data: Array<{
         type: 'gameCenterLeaderboardReleases';
@@ -19825,6 +20017,9 @@ export type GameCenterDetailLeaderboardReleasesLinkagesResponse = {
     meta?: PagingInformation;
 };
 
+/**
+ * @deprecated
+ */
 export type GameCenterDetailLeaderboardSetReleasesLinkagesResponse = {
     data: Array<{
         type: 'gameCenterLeaderboardSetReleases';
@@ -19856,6 +20051,9 @@ export type GameCenterEnabledVersionCompatibleVersionsLinkagesRequest = {
     }>;
 };
 
+/**
+ * @deprecated
+ */
 export type GameCenterGroupGameCenterAchievementsLinkagesResponse = {
     data: Array<{
         type: 'gameCenterAchievements';
@@ -19865,6 +20063,9 @@ export type GameCenterGroupGameCenterAchievementsLinkagesResponse = {
     meta?: PagingInformation;
 };
 
+/**
+ * @deprecated
+ */
 export type GameCenterGroupGameCenterAchievementsLinkagesRequest = {
     data: Array<{
         type: 'gameCenterAchievements';
@@ -19915,6 +20116,9 @@ export type GameCenterGroupGameCenterDetailsLinkagesResponse = {
     meta?: PagingInformation;
 };
 
+/**
+ * @deprecated
+ */
 export type GameCenterGroupGameCenterLeaderboardSetsLinkagesResponse = {
     data: Array<{
         type: 'gameCenterLeaderboardSets';
@@ -19924,6 +20128,9 @@ export type GameCenterGroupGameCenterLeaderboardSetsLinkagesResponse = {
     meta?: PagingInformation;
 };
 
+/**
+ * @deprecated
+ */
 export type GameCenterGroupGameCenterLeaderboardSetsLinkagesRequest = {
     data: Array<{
         type: 'gameCenterLeaderboardSets';
@@ -19947,6 +20154,9 @@ export type GameCenterGroupGameCenterLeaderboardSetsV2LinkagesRequest = {
     }>;
 };
 
+/**
+ * @deprecated
+ */
 export type GameCenterGroupGameCenterLeaderboardsLinkagesResponse = {
     data: Array<{
         type: 'gameCenterLeaderboards';
@@ -19956,6 +20166,9 @@ export type GameCenterGroupGameCenterLeaderboardsLinkagesResponse = {
     meta?: PagingInformation;
 };
 
+/**
+ * @deprecated
+ */
 export type GameCenterGroupGameCenterLeaderboardsLinkagesRequest = {
     data: Array<{
         type: 'gameCenterLeaderboards';
@@ -19979,6 +20192,9 @@ export type GameCenterGroupGameCenterLeaderboardsV2LinkagesRequest = {
     }>;
 };
 
+/**
+ * @deprecated
+ */
 export type GameCenterLeaderboardLocalizationGameCenterLeaderboardImageLinkageResponse = {
     data: {
         type: 'gameCenterLeaderboardImages';
@@ -19995,6 +20211,9 @@ export type GameCenterLeaderboardLocalizationV2ImageLinkageResponse = {
     links: DocumentLinks;
 };
 
+/**
+ * @deprecated
+ */
 export type GameCenterLeaderboardSetLocalizationGameCenterLeaderboardSetImageLinkageResponse = {
     data: {
         type: 'gameCenterLeaderboardSetImages';
@@ -20011,6 +20230,9 @@ export type GameCenterLeaderboardSetLocalizationV2ImageLinkageResponse = {
     links: DocumentLinks;
 };
 
+/**
+ * @deprecated
+ */
 export type GameCenterLeaderboardSetMemberLocalizationGameCenterLeaderboardLinkageResponse = {
     data: {
         type: 'gameCenterLeaderboards';
@@ -20019,6 +20241,9 @@ export type GameCenterLeaderboardSetMemberLocalizationGameCenterLeaderboardLinka
     links: DocumentLinks;
 };
 
+/**
+ * @deprecated
+ */
 export type GameCenterLeaderboardSetMemberLocalizationGameCenterLeaderboardSetLinkageResponse = {
     data: {
         type: 'gameCenterLeaderboardSets';
@@ -20061,6 +20286,9 @@ export type GameCenterLeaderboardSetV2VersionsLinkagesResponse = {
     meta?: PagingInformation;
 };
 
+/**
+ * @deprecated
+ */
 export type GameCenterLeaderboardSetGameCenterLeaderboardsLinkagesResponse = {
     data: Array<{
         type: 'gameCenterLeaderboards';
@@ -20070,6 +20298,9 @@ export type GameCenterLeaderboardSetGameCenterLeaderboardsLinkagesResponse = {
     meta?: PagingInformation;
 };
 
+/**
+ * @deprecated
+ */
 export type GameCenterLeaderboardSetGameCenterLeaderboardsLinkagesRequest = {
     data: Array<{
         type: 'gameCenterLeaderboards';
@@ -20098,6 +20329,9 @@ export type GameCenterLeaderboardSetGroupLeaderboardSetLinkageRequest = {
     };
 };
 
+/**
+ * @deprecated
+ */
 export type GameCenterLeaderboardSetLocalizationsLinkagesResponse = {
     data: Array<{
         type: 'gameCenterLeaderboardSetLocalizations';
@@ -20107,6 +20341,9 @@ export type GameCenterLeaderboardSetLocalizationsLinkagesResponse = {
     meta?: PagingInformation;
 };
 
+/**
+ * @deprecated
+ */
 export type GameCenterLeaderboardSetReleasesLinkagesResponse = {
     data: Array<{
         type: 'gameCenterLeaderboardSetReleases';
@@ -20125,6 +20362,9 @@ export type GameCenterLeaderboardVersionV2LocalizationsLinkagesResponse = {
     meta?: PagingInformation;
 };
 
+/**
+ * @deprecated
+ */
 export type GameCenterLeaderboardActivityLinkageRequest = {
     data: {
         type: 'gameCenterActivities';
@@ -20132,6 +20372,9 @@ export type GameCenterLeaderboardActivityLinkageRequest = {
     };
 };
 
+/**
+ * @deprecated
+ */
 export type GameCenterLeaderboardChallengeLinkageRequest = {
     data: {
         type: 'gameCenterChallenges';
@@ -20160,6 +20403,9 @@ export type GameCenterLeaderboardGroupLeaderboardLinkageRequest = {
     };
 };
 
+/**
+ * @deprecated
+ */
 export type GameCenterLeaderboardLocalizationsLinkagesResponse = {
     data: Array<{
         type: 'gameCenterLeaderboardLocalizations';
@@ -20169,6 +20415,9 @@ export type GameCenterLeaderboardLocalizationsLinkagesResponse = {
     meta?: PagingInformation;
 };
 
+/**
+ * @deprecated
+ */
 export type GameCenterLeaderboardReleasesLinkagesResponse = {
     data: Array<{
         type: 'gameCenterLeaderboardReleases';
@@ -20741,7 +20990,7 @@ export type WinBackOfferPricesLinkagesResponse = {
 
 export type AppsBetaTesterUsagesV1MetricResponse = {
     data: Array<{
-        dataPoints?: {
+        dataPoints?: Array<{
             start?: string;
             end?: string;
             values?: {
@@ -20749,7 +20998,7 @@ export type AppsBetaTesterUsagesV1MetricResponse = {
                 sessionCount?: number;
                 feedbackCount?: number;
             };
-        };
+        }>;
         dimensions?: {
             betaTesters?: {
                 links?: {
@@ -20767,7 +21016,7 @@ export type AppsBetaTesterUsagesV1MetricResponse = {
 
 export type BetaPublicLinkUsagesV1MetricResponse = {
     data: Array<{
-        dataPoints?: {
+        dataPoints?: Array<{
             start?: string;
             end?: string;
             values?: {
@@ -20779,7 +21028,7 @@ export type BetaPublicLinkUsagesV1MetricResponse = {
                 notClearRatio?: number;
                 notInterestingRatio?: number;
             };
-        };
+        }>;
     }>;
     links: PagedDocumentLinks;
     meta?: PagingInformation;
@@ -20787,7 +21036,7 @@ export type BetaPublicLinkUsagesV1MetricResponse = {
 
 export type BetaTesterUsagesV1MetricResponse = {
     data: Array<{
-        dataPoints?: {
+        dataPoints?: Array<{
             start?: string;
             end?: string;
             values?: {
@@ -20795,7 +21044,7 @@ export type BetaTesterUsagesV1MetricResponse = {
                 sessionCount?: number;
                 feedbackCount?: number;
             };
-        };
+        }>;
         dimensions?: {
             apps?: {
                 links?: {
@@ -20812,7 +21061,7 @@ export type BetaTesterUsagesV1MetricResponse = {
 
 export type BetaBuildUsagesV1MetricResponse = {
     data: Array<{
-        dataPoints?: {
+        dataPoints?: Array<{
             start?: string;
             end?: string;
             values?: {
@@ -20822,7 +21071,7 @@ export type BetaBuildUsagesV1MetricResponse = {
                 feedbackCount?: number;
                 inviteCount?: number;
             };
-        };
+        }>;
     }>;
     links: PagedDocumentLinks;
     meta?: PagingInformation;
@@ -20830,7 +21079,7 @@ export type BetaBuildUsagesV1MetricResponse = {
 
 export type GameCenterMatchmakingAppRequestsV1MetricResponse = {
     data: Array<{
-        dataPoints?: {
+        dataPoints?: Array<{
             start?: string;
             end?: string;
             values?: {
@@ -20839,7 +21088,7 @@ export type GameCenterMatchmakingAppRequestsV1MetricResponse = {
                 p50SecondsInQueue?: number;
                 p95SecondsInQueue?: number;
             };
-        };
+        }>;
         dimensions?: {
             result?: {
                 links?: {
@@ -20856,7 +21105,7 @@ export type GameCenterMatchmakingAppRequestsV1MetricResponse = {
 
 export type GameCenterMatchmakingQueueSizesV1MetricResponse = {
     data: Array<{
-        dataPoints?: {
+        dataPoints?: Array<{
             start?: string;
             end?: string;
             values?: {
@@ -20865,7 +21114,7 @@ export type GameCenterMatchmakingQueueSizesV1MetricResponse = {
                 p50NumberOfRequests?: number;
                 p95NumberOfRequests?: number;
             };
-        };
+        }>;
         granularity?: 'P1D' | 'PT1H' | 'PT15M';
     }>;
     links: PagedDocumentLinks;
@@ -20874,7 +21123,7 @@ export type GameCenterMatchmakingQueueSizesV1MetricResponse = {
 
 export type GameCenterMatchmakingQueueRequestsV1MetricResponse = {
     data: Array<{
-        dataPoints?: {
+        dataPoints?: Array<{
             start?: string;
             end?: string;
             values?: {
@@ -20883,7 +21132,7 @@ export type GameCenterMatchmakingQueueRequestsV1MetricResponse = {
                 p50SecondsInQueue?: number;
                 p95SecondsInQueue?: number;
             };
-        };
+        }>;
         dimensions?: {
             result?: {
                 links?: {
@@ -20907,7 +21156,7 @@ export type GameCenterMatchmakingQueueRequestsV1MetricResponse = {
 
 export type GameCenterMatchmakingSessionsV1MetricResponse = {
     data: Array<{
-        dataPoints?: {
+        dataPoints?: Array<{
             start?: string;
             end?: string;
             values?: {
@@ -20916,7 +21165,7 @@ export type GameCenterMatchmakingSessionsV1MetricResponse = {
                 p50PlayerCount?: number;
                 p95PlayerCount?: number;
             };
-        };
+        }>;
         granularity?: 'P1D' | 'PT1H' | 'PT15M';
     }>;
     links: PagedDocumentLinks;
@@ -20925,13 +21174,13 @@ export type GameCenterMatchmakingSessionsV1MetricResponse = {
 
 export type GameCenterMatchmakingBooleanRuleResultsV1MetricResponse = {
     data: Array<{
-        dataPoints?: {
+        dataPoints?: Array<{
             start?: string;
             end?: string;
             values?: {
                 count?: number;
             };
-        };
+        }>;
         dimensions?: {
             result?: {
                 links?: {
@@ -20955,7 +21204,7 @@ export type GameCenterMatchmakingBooleanRuleResultsV1MetricResponse = {
 
 export type GameCenterMatchmakingNumberRuleResultsV1MetricResponse = {
     data: Array<{
-        dataPoints?: {
+        dataPoints?: Array<{
             start?: string;
             end?: string;
             values?: {
@@ -20964,7 +21213,7 @@ export type GameCenterMatchmakingNumberRuleResultsV1MetricResponse = {
                 p50Result?: number;
                 p95Result?: number;
             };
-        };
+        }>;
         dimensions?: {
             gameCenterMatchmakingQueue?: {
                 links?: {
@@ -20982,13 +21231,13 @@ export type GameCenterMatchmakingNumberRuleResultsV1MetricResponse = {
 
 export type GameCenterMatchmakingRuleErrorsV1MetricResponse = {
     data: Array<{
-        dataPoints?: {
+        dataPoints?: Array<{
             start?: string;
             end?: string;
             values?: {
                 count?: number;
             };
-        };
+        }>;
         dimensions?: {
             gameCenterMatchmakingQueue?: {
                 links?: {
@@ -21288,7 +21537,8 @@ export enum BuildAudienceType {
 
 export enum BuildBundleType {
     APP = 'APP',
-    APP_CLIP = 'APP_CLIP'
+    APP_CLIP = 'APP_CLIP',
+    WATCH_APP = 'WATCH_APP'
 }
 
 export enum BuildUploadState {
@@ -22334,10 +22584,6 @@ export type AccessibilityDeclarationsDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -22744,10 +22990,6 @@ export type AlternativeDistributionDomainsDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -22942,10 +23184,6 @@ export type AlternativeDistributionKeysDeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -23427,10 +23665,6 @@ export type AnalyticsReportRequestsDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -23689,10 +23923,6 @@ export type AndroidToIosAppMappingDetailsDeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -24608,10 +24838,6 @@ export type AppClipDefaultExperienceLocalizationsDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -24822,10 +25048,6 @@ export type AppClipDefaultExperiencesDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -24858,7 +25080,7 @@ export type AppClipDefaultExperiencesGetInstanceData = {
         /**
          * the fields to include for returned resources of type appStoreVersions
          */
-        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'ageRatingDeclaration' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
+        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
         /**
          * the fields to include for returned resources of type appClipDefaultExperienceLocalizations
          */
@@ -25047,10 +25269,6 @@ export type AppClipHeaderImagesDeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -25320,10 +25538,6 @@ export type AppCustomProductPageLocalizationsDeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -25718,10 +25932,6 @@ export type AppCustomProductPagesDeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -26285,10 +26495,6 @@ export type AppEventLocalizationsDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -26511,10 +26717,6 @@ export type AppEventScreenshotsDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -26721,10 +26923,6 @@ export type AppEventVideoClipsDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -26930,10 +27128,6 @@ export type AppEventsDeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -27148,10 +27342,6 @@ export type AppInfoLocalizationsDeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -27487,10 +27677,6 @@ export type AppPreviewSetsDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -27647,10 +27833,6 @@ export type AppPreviewsDeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -28032,10 +28214,6 @@ export type AppScreenshotSetsDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -28192,10 +28370,6 @@ export type AppScreenshotsDeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -28402,10 +28576,6 @@ export type AppStoreReviewAttachmentsDeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -28781,10 +28951,6 @@ export type AppStoreVersionExperimentTreatmentLocalizationsDeleteInstanceErrors 
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -28949,10 +29115,6 @@ export type AppStoreVersionExperimentTreatmentsDeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -29167,10 +29329,6 @@ export type AppStoreVersionExperimentsV2DeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -29390,10 +29548,6 @@ export type AppStoreVersionExperimentsDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -29607,10 +29761,6 @@ export type AppStoreVersionLocalizationsDeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -29838,10 +29988,6 @@ export type AppStoreVersionPhasedReleasesDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -30041,10 +30187,6 @@ export type AppStoreVersionSubmissionsDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -30139,10 +30281,6 @@ export type AppStoreVersionsDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -30171,12 +30309,7 @@ export type AppStoreVersionsGetInstanceData = {
         /**
          * the fields to include for returned resources of type appStoreVersions
          */
-        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'ageRatingDeclaration' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
-        /**
-         * the fields to include for returned resources of type ageRatingDeclarations
-         * @deprecated
-         */
-        'fields[ageRatingDeclarations]'?: Array<'advertising' | 'alcoholTobaccoOrDrugUseOrReferences' | 'contests' | 'gambling' | 'gamblingSimulated' | 'gunsOrOtherWeapons' | 'healthOrWellnessTopics' | 'kidsAgeBand' | 'lootBox' | 'medicalOrTreatmentInformation' | 'messagingAndChat' | 'parentalControls' | 'profanityOrCrudeHumor' | 'ageAssurance' | 'sexualContentGraphicAndNudity' | 'sexualContentOrNudity' | 'horrorOrFearThemes' | 'matureOrSuggestiveThemes' | 'unrestrictedWebAccess' | 'userGeneratedContent' | 'violenceCartoonOrFantasy' | 'violenceRealisticProlongedGraphicOrSadistic' | 'violenceRealistic' | 'ageRatingOverride' | 'ageRatingOverrideV2' | 'koreaAgeRatingOverride' | 'developerAgeRatingInfoUrl'>;
+        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
         /**
          * the fields to include for returned resources of type appStoreVersionLocalizations
          */
@@ -30221,7 +30354,7 @@ export type AppStoreVersionsGetInstanceData = {
         /**
          * comma-separated list of relationships to include
          */
-        include?: Array<'app' | 'ageRatingDeclaration' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionPackage'>;
+        include?: Array<'app' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionPackage'>;
         /**
          * maximum number of related appStoreVersionExperiments returned (when they are included)
          * @deprecated
@@ -30460,7 +30593,7 @@ export type AppsGetCollectionData = {
         /**
          * the fields to include for returned resources of type appStoreVersions
          */
-        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'ageRatingDeclaration' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
+        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
         /**
          * the fields to include for returned resources of type preReleaseVersions
          */
@@ -30682,7 +30815,7 @@ export type AppsGetInstanceData = {
         /**
          * the fields to include for returned resources of type appStoreVersions
          */
-        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'ageRatingDeclaration' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
+        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
         /**
          * the fields to include for returned resources of type preReleaseVersions
          */
@@ -31417,7 +31550,7 @@ export type BackgroundAssetsGetInstanceData = {
         /**
          * the fields to include for returned resources of type backgroundAssets
          */
-        'fields[backgroundAssets]'?: Array<'archived' | 'assetPackIdentifier' | 'createdDate' | 'app' | 'versions' | 'appStoreVersion' | 'internalBetaVersion' | 'externalBetaVersion'>;
+        'fields[backgroundAssets]'?: Array<'archived' | 'assetPackIdentifier' | 'createdDate' | 'usedBytes' | 'app' | 'versions' | 'appStoreVersion' | 'internalBetaVersion' | 'externalBetaVersion'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -31595,10 +31728,6 @@ export type BetaAppClipInvocationLocalizationsDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -31749,10 +31878,6 @@ export type BetaAppClipInvocationsDeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -32025,10 +32150,6 @@ export type BetaAppLocalizationsDeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -32645,10 +32766,6 @@ export type BetaBuildLocalizationsDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -32862,10 +32979,6 @@ export type BetaFeedbackCrashSubmissionsDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -32966,10 +33079,6 @@ export type BetaFeedbackScreenshotSubmissionsDeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -33229,10 +33338,6 @@ export type BetaGroupsDeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -33638,10 +33743,6 @@ export type BetaRecruitmentCriteriaDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -33996,10 +34097,6 @@ export type BetaTestersDeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -34560,10 +34657,6 @@ export type BuildUploadsDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -34734,7 +34827,7 @@ export type BuildsGetCollectionData = {
         /**
          * the fields to include for returned resources of type appStoreVersions
          */
-        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'ageRatingDeclaration' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
+        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
         /**
          * the fields to include for returned resources of type buildIcons
          */
@@ -34845,7 +34938,7 @@ export type BuildsGetInstanceData = {
         /**
          * the fields to include for returned resources of type appStoreVersions
          */
-        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'ageRatingDeclaration' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
+        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
         /**
          * the fields to include for returned resources of type buildIcons
          */
@@ -35046,10 +35139,6 @@ export type BundleIdCapabilitiesDeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -35295,10 +35384,6 @@ export type BundleIdsDeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -35599,10 +35684,6 @@ export type CertificatesDeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -36229,10 +36310,6 @@ export type CiProductsDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -36444,10 +36521,6 @@ export type CiWorkflowsDeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -36779,10 +36852,6 @@ export type CustomerReviewResponsesDeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -37266,10 +37335,6 @@ export type EndUserLicenseAgreementsDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -37538,10 +37603,6 @@ export type GameCenterAchievementImagesDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -37748,10 +37809,6 @@ export type GameCenterAchievementImagesV2DeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -37957,10 +38014,6 @@ export type GameCenterAchievementLocalizationsV2DeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -38172,10 +38225,6 @@ export type GameCenterAchievementLocalizationsDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -38207,10 +38256,12 @@ export type GameCenterAchievementLocalizationsGetInstanceData = {
         'fields[gameCenterAchievementLocalizations]'?: Array<'locale' | 'name' | 'beforeEarnedDescription' | 'afterEarnedDescription' | 'gameCenterAchievement' | 'gameCenterAchievementImage'>;
         /**
          * the fields to include for returned resources of type gameCenterAchievements
+         * @deprecated
          */
         'fields[gameCenterAchievements]'?: Array<'referenceName' | 'vendorIdentifier' | 'points' | 'showBeforeEarned' | 'repeatable' | 'archived' | 'activityProperties' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupAchievement' | 'localizations' | 'releases' | 'activity'>;
         /**
          * the fields to include for returned resources of type gameCenterAchievementImages
+         * @deprecated
          */
         'fields[gameCenterAchievementImages]'?: Array<'fileSize' | 'fileName' | 'imageAsset' | 'uploadOperations' | 'assetDeliveryState' | 'gameCenterAchievementLocalization'>;
         /**
@@ -38389,10 +38440,6 @@ export type GameCenterAchievementReleasesDeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -38654,10 +38701,6 @@ export type GameCenterAchievementsV2DeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -38872,10 +38915,6 @@ export type GameCenterAchievementsDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -38907,10 +38946,12 @@ export type GameCenterAchievementsGetInstanceData = {
         'fields[gameCenterAchievements]'?: Array<'referenceName' | 'vendorIdentifier' | 'points' | 'showBeforeEarned' | 'repeatable' | 'archived' | 'activityProperties' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupAchievement' | 'localizations' | 'releases' | 'activity'>;
         /**
          * the fields to include for returned resources of type gameCenterAchievementLocalizations
+         * @deprecated
          */
         'fields[gameCenterAchievementLocalizations]'?: Array<'locale' | 'name' | 'beforeEarnedDescription' | 'afterEarnedDescription' | 'gameCenterAchievement' | 'gameCenterAchievementImage'>;
         /**
          * the fields to include for returned resources of type gameCenterAchievementReleases
+         * @deprecated
          */
         'fields[gameCenterAchievementReleases]'?: Array<'live' | 'gameCenterDetail' | 'gameCenterAchievement'>;
         /**
@@ -38919,10 +38960,12 @@ export type GameCenterAchievementsGetInstanceData = {
         include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'groupAchievement' | 'localizations' | 'releases' | 'activity'>;
         /**
          * maximum number of related localizations returned (when they are included)
+         * @deprecated
          */
         'limit[localizations]'?: number;
         /**
          * maximum number of related releases returned (when they are included)
+         * @deprecated
          */
         'limit[releases]'?: number;
     };
@@ -39098,10 +39141,6 @@ export type GameCenterActivitiesDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -39141,6 +39180,7 @@ export type GameCenterActivitiesGetInstanceData = {
         include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'achievementsV2' | 'leaderboards' | 'leaderboardsV2' | 'versions'>;
         /**
          * maximum number of related achievements returned (when they are included)
+         * @deprecated
          */
         'limit[achievements]'?: number;
         /**
@@ -39149,6 +39189,7 @@ export type GameCenterActivitiesGetInstanceData = {
         'limit[achievementsV2]'?: number;
         /**
          * maximum number of related leaderboards returned (when they are included)
+         * @deprecated
          */
         'limit[leaderboards]'?: number;
         /**
@@ -39331,10 +39372,6 @@ export type GameCenterActivityImagesDeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -39537,10 +39574,6 @@ export type GameCenterActivityLocalizationsDeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -39752,10 +39785,6 @@ export type GameCenterActivityVersionReleasesDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -39906,6 +39935,7 @@ export type GameCenterActivityVersionsGetInstanceData = {
         'limit[localizations]'?: number;
         /**
          * maximum number of related releases returned (when they are included)
+         * @deprecated
          */
         'limit[releases]'?: number;
     };
@@ -40067,7 +40097,7 @@ export type GameCenterAppVersionsGetInstanceData = {
         /**
          * the fields to include for returned resources of type appStoreVersions
          */
-        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'ageRatingDeclaration' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
+        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -40248,10 +40278,6 @@ export type GameCenterChallengeImagesDeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -40454,10 +40480,6 @@ export type GameCenterChallengeLocalizationsDeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -40669,10 +40691,6 @@ export type GameCenterChallengeVersionReleasesDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -40823,6 +40841,7 @@ export type GameCenterChallengeVersionsGetInstanceData = {
         'limit[localizations]'?: number;
         /**
          * maximum number of related releases returned (when they are included)
+         * @deprecated
          */
         'limit[releases]'?: number;
     };
@@ -40940,10 +40959,6 @@ export type GameCenterChallengesDeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -41172,22 +41187,27 @@ export type GameCenterDetailsGetInstanceData = {
         'fields[gameCenterChallenges]'?: Array<'referenceName' | 'vendorIdentifier' | 'archived' | 'challengeType' | 'repeatable' | 'gameCenterDetail' | 'gameCenterGroup' | 'versions' | 'leaderboard' | 'leaderboardV2'>;
         /**
          * the fields to include for returned resources of type gameCenterAchievementReleases
+         * @deprecated
          */
         'fields[gameCenterAchievementReleases]'?: Array<'live' | 'gameCenterDetail' | 'gameCenterAchievement'>;
         /**
          * the fields to include for returned resources of type gameCenterActivityVersionReleases
+         * @deprecated
          */
         'fields[gameCenterActivityVersionReleases]'?: Array<'version'>;
         /**
          * the fields to include for returned resources of type gameCenterChallengeVersionReleases
+         * @deprecated
          */
         'fields[gameCenterChallengeVersionReleases]'?: Array<'version'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardReleases
+         * @deprecated
          */
         'fields[gameCenterLeaderboardReleases]'?: Array<'live' | 'gameCenterDetail' | 'gameCenterLeaderboard'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardSetReleases
+         * @deprecated
          */
         'fields[gameCenterLeaderboardSetReleases]'?: Array<'live' | 'gameCenterDetail' | 'gameCenterLeaderboardSet'>;
         /**
@@ -41196,14 +41216,17 @@ export type GameCenterDetailsGetInstanceData = {
         include?: Array<'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
         /**
          * maximum number of related achievementReleases returned (when they are included)
+         * @deprecated
          */
         'limit[achievementReleases]'?: number;
         /**
          * maximum number of related activityReleases returned (when they are included)
+         * @deprecated
          */
         'limit[activityReleases]'?: number;
         /**
          * maximum number of related challengeReleases returned (when they are included)
+         * @deprecated
          */
         'limit[challengeReleases]'?: number;
         /**
@@ -41212,6 +41235,7 @@ export type GameCenterDetailsGetInstanceData = {
         'limit[challengesMinimumPlatformVersions]'?: number;
         /**
          * maximum number of related gameCenterAchievements returned (when they are included)
+         * @deprecated
          */
         'limit[gameCenterAchievements]'?: number;
         /**
@@ -41232,6 +41256,7 @@ export type GameCenterDetailsGetInstanceData = {
         'limit[gameCenterChallenges]'?: number;
         /**
          * maximum number of related gameCenterLeaderboardSets returned (when they are included)
+         * @deprecated
          */
         'limit[gameCenterLeaderboardSets]'?: number;
         /**
@@ -41240,6 +41265,7 @@ export type GameCenterDetailsGetInstanceData = {
         'limit[gameCenterLeaderboardSetsV2]'?: number;
         /**
          * maximum number of related gameCenterLeaderboards returned (when they are included)
+         * @deprecated
          */
         'limit[gameCenterLeaderboards]'?: number;
         /**
@@ -41248,10 +41274,12 @@ export type GameCenterDetailsGetInstanceData = {
         'limit[gameCenterLeaderboardsV2]'?: number;
         /**
          * maximum number of related leaderboardReleases returned (when they are included)
+         * @deprecated
          */
         'limit[leaderboardReleases]'?: number;
         /**
          * maximum number of related leaderboardSetReleases returned (when they are included)
+         * @deprecated
          */
         'limit[leaderboardSetReleases]'?: number;
     };
@@ -41395,6 +41423,7 @@ export type GameCenterGroupsGetCollectionData = {
         include?: Array<'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
         /**
          * maximum number of related gameCenterAchievements returned (when they are included)
+         * @deprecated
          */
         'limit[gameCenterAchievements]'?: number;
         /**
@@ -41415,6 +41444,7 @@ export type GameCenterGroupsGetCollectionData = {
         'limit[gameCenterDetails]'?: number;
         /**
          * maximum number of related gameCenterLeaderboardSets returned (when they are included)
+         * @deprecated
          */
         'limit[gameCenterLeaderboardSets]'?: number;
         /**
@@ -41423,6 +41453,7 @@ export type GameCenterGroupsGetCollectionData = {
         'limit[gameCenterLeaderboardSetsV2]'?: number;
         /**
          * maximum number of related gameCenterLeaderboards returned (when they are included)
+         * @deprecated
          */
         'limit[gameCenterLeaderboards]'?: number;
         /**
@@ -41541,10 +41572,6 @@ export type GameCenterGroupsDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -41604,6 +41631,7 @@ export type GameCenterGroupsGetInstanceData = {
         include?: Array<'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
         /**
          * maximum number of related gameCenterAchievements returned (when they are included)
+         * @deprecated
          */
         'limit[gameCenterAchievements]'?: number;
         /**
@@ -41624,6 +41652,7 @@ export type GameCenterGroupsGetInstanceData = {
         'limit[gameCenterDetails]'?: number;
         /**
          * maximum number of related gameCenterLeaderboardSets returned (when they are included)
+         * @deprecated
          */
         'limit[gameCenterLeaderboardSets]'?: number;
         /**
@@ -41632,6 +41661,7 @@ export type GameCenterGroupsGetInstanceData = {
         'limit[gameCenterLeaderboardSetsV2]'?: number;
         /**
          * maximum number of related gameCenterLeaderboards returned (when they are included)
+         * @deprecated
          */
         'limit[gameCenterLeaderboards]'?: number;
         /**
@@ -41859,10 +41889,6 @@ export type GameCenterLeaderboardImagesDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -42068,10 +42094,6 @@ export type GameCenterLeaderboardImagesV2DeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -42279,10 +42301,6 @@ export type GameCenterLeaderboardLocalizationsDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -42314,6 +42332,7 @@ export type GameCenterLeaderboardLocalizationsGetInstanceData = {
         'fields[gameCenterLeaderboardLocalizations]'?: Array<'locale' | 'name' | 'formatterOverride' | 'formatterSuffix' | 'formatterSuffixSingular' | 'description' | 'gameCenterLeaderboard' | 'gameCenterLeaderboardImage'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardImages
+         * @deprecated
          */
         'fields[gameCenterLeaderboardImages]'?: Array<'fileSize' | 'fileName' | 'imageAsset' | 'uploadOperations' | 'assetDeliveryState' | 'gameCenterLeaderboardLocalization'>;
         /**
@@ -42492,10 +42511,6 @@ export type GameCenterLeaderboardLocalizationsV2DeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -42707,10 +42722,6 @@ export type GameCenterLeaderboardReleasesDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -42859,10 +42870,6 @@ export type GameCenterLeaderboardSetImagesDeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -43070,10 +43077,6 @@ export type GameCenterLeaderboardSetImagesV2DeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -43280,10 +43283,6 @@ export type GameCenterLeaderboardSetLocalizationsDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -43315,6 +43314,7 @@ export type GameCenterLeaderboardSetLocalizationsGetInstanceData = {
         'fields[gameCenterLeaderboardSetLocalizations]'?: Array<'locale' | 'name' | 'gameCenterLeaderboardSet' | 'gameCenterLeaderboardSetImage'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardSetImages
+         * @deprecated
          */
         'fields[gameCenterLeaderboardSetImages]'?: Array<'fileSize' | 'fileName' | 'imageAsset' | 'uploadOperations' | 'assetDeliveryState' | 'gameCenterLeaderboardSetLocalization'>;
         /**
@@ -43494,10 +43494,6 @@ export type GameCenterLeaderboardSetLocalizationsV2DeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -43636,10 +43632,12 @@ export type GameCenterLeaderboardSetMemberLocalizationsGetCollectionData = {
     query: {
         /**
          * filter by id(s) of related 'gameCenterLeaderboardSet'
+         * @deprecated
          */
         'filter[gameCenterLeaderboardSet]': Array<string>;
         /**
          * filter by id(s) of related 'gameCenterLeaderboard'
+         * @deprecated
          */
         'filter[gameCenterLeaderboard]': Array<string>;
         /**
@@ -43648,10 +43646,12 @@ export type GameCenterLeaderboardSetMemberLocalizationsGetCollectionData = {
         'fields[gameCenterLeaderboardSetMemberLocalizations]'?: Array<'name' | 'locale' | 'gameCenterLeaderboardSet' | 'gameCenterLeaderboard'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardSets
+         * @deprecated
          */
         'fields[gameCenterLeaderboardSets]'?: Array<'referenceName' | 'vendorIdentifier' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboardSet' | 'localizations' | 'gameCenterLeaderboards' | 'releases'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboards
+         * @deprecated
          */
         'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge'>;
         /**
@@ -43773,10 +43773,6 @@ export type GameCenterLeaderboardSetMemberLocalizationsDeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -43928,10 +43924,6 @@ export type GameCenterLeaderboardSetReleasesDeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -44193,10 +44185,6 @@ export type GameCenterLeaderboardSetsV2DeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -44419,10 +44407,6 @@ export type GameCenterLeaderboardSetsDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -44454,14 +44438,17 @@ export type GameCenterLeaderboardSetsGetInstanceData = {
         'fields[gameCenterLeaderboardSets]'?: Array<'referenceName' | 'vendorIdentifier' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboardSet' | 'localizations' | 'gameCenterLeaderboards' | 'releases'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardSetLocalizations
+         * @deprecated
          */
         'fields[gameCenterLeaderboardSetLocalizations]'?: Array<'locale' | 'name' | 'gameCenterLeaderboardSet' | 'gameCenterLeaderboardSetImage'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboards
+         * @deprecated
          */
         'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardSetReleases
+         * @deprecated
          */
         'fields[gameCenterLeaderboardSetReleases]'?: Array<'live' | 'gameCenterDetail' | 'gameCenterLeaderboardSet'>;
         /**
@@ -44470,14 +44457,17 @@ export type GameCenterLeaderboardSetsGetInstanceData = {
         include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboardSet' | 'localizations' | 'gameCenterLeaderboards' | 'releases'>;
         /**
          * maximum number of related gameCenterLeaderboards returned (when they are included)
+         * @deprecated
          */
         'limit[gameCenterLeaderboards]'?: number;
         /**
          * maximum number of related localizations returned (when they are included)
+         * @deprecated
          */
         'limit[localizations]'?: number;
         /**
          * maximum number of related releases returned (when they are included)
+         * @deprecated
          */
         'limit[releases]'?: number;
     };
@@ -44764,10 +44754,6 @@ export type GameCenterLeaderboardsDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -44799,10 +44785,12 @@ export type GameCenterLeaderboardsGetInstanceData = {
         'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardLocalizations
+         * @deprecated
          */
         'fields[gameCenterLeaderboardLocalizations]'?: Array<'locale' | 'name' | 'formatterOverride' | 'formatterSuffix' | 'formatterSuffixSingular' | 'description' | 'gameCenterLeaderboard' | 'gameCenterLeaderboardImage'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardReleases
+         * @deprecated
          */
         'fields[gameCenterLeaderboardReleases]'?: Array<'live' | 'gameCenterDetail' | 'gameCenterLeaderboard'>;
         /**
@@ -44811,14 +44799,17 @@ export type GameCenterLeaderboardsGetInstanceData = {
         include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge'>;
         /**
          * maximum number of related gameCenterLeaderboardSets returned (when they are included)
+         * @deprecated
          */
         'limit[gameCenterLeaderboardSets]'?: number;
         /**
          * maximum number of related localizations returned (when they are included)
+         * @deprecated
          */
         'limit[localizations]'?: number;
         /**
          * maximum number of related releases returned (when they are included)
+         * @deprecated
          */
         'limit[releases]'?: number;
     };
@@ -44993,10 +44984,6 @@ export type GameCenterLeaderboardsV2DeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -45265,10 +45252,6 @@ export type GameCenterMatchmakingQueuesDeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -45598,10 +45581,6 @@ export type GameCenterMatchmakingRuleSetsDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -45832,10 +45811,6 @@ export type GameCenterMatchmakingRulesDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -45986,10 +45961,6 @@ export type GameCenterMatchmakingTeamsDeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -46189,10 +46160,6 @@ export type InAppPurchaseAppStoreReviewScreenshotsDeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -46566,10 +46533,6 @@ export type InAppPurchaseImagesDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -46775,10 +46738,6 @@ export type InAppPurchaseLocalizationsDeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -47716,10 +47675,6 @@ export type InAppPurchasesV2DeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -47978,10 +47933,6 @@ export type MarketplaceSearchDetailsDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -48178,10 +48129,6 @@ export type MarketplaceWebhooksDeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -48404,10 +48351,6 @@ export type MerchantIdsDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -48557,9 +48500,17 @@ export type NominationsGetCollectionData = {
          */
         'filter[state]': Array<'DRAFT' | 'SUBMITTED' | 'ARCHIVED'>;
         /**
+         * filter by attribute 'hasInAppEvents'
+         */
+        'filter[hasInAppEvents]'?: Array<string>;
+        /**
          * filter by id(s) of related 'relatedApps'
          */
         'filter[relatedApps]'?: Array<string>;
+        /**
+         * filter by existence or non-existence of related 'inAppEvents'
+         */
+        'exists[inAppEvents]'?: boolean;
         /**
          * comma-separated list of sort expressions; resources will be sorted as specified
          */
@@ -48699,10 +48650,6 @@ export type NominationsDeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -48995,10 +48942,6 @@ export type PassTypeIdsDeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -49469,10 +49412,6 @@ export type ProfilesDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -49641,10 +49580,6 @@ export type PromotedPurchasesDeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -49851,10 +49786,6 @@ export type ReviewSubmissionItemsDeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -50244,10 +50175,6 @@ export type RoutingAppCoveragesDeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -50984,10 +50911,6 @@ export type SubscriptionAppStoreReviewScreenshotsDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -51413,10 +51336,6 @@ export type SubscriptionGroupLocalizationsDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -51671,10 +51590,6 @@ export type SubscriptionGroupsDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -51897,10 +51812,6 @@ export type SubscriptionImagesDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -52107,10 +52018,6 @@ export type SubscriptionIntroductoryOffersDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -52261,10 +52168,6 @@ export type SubscriptionLocalizationsDeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -53031,10 +52934,6 @@ export type SubscriptionPricesDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -53128,10 +53027,6 @@ export type SubscriptionPromotionalOffersDeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -53394,10 +53289,6 @@ export type SubscriptionsDeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -53850,10 +53741,6 @@ export type UserInvitationsDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -54036,10 +53923,6 @@ export type UsersDeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -54351,10 +54234,6 @@ export type WebhooksDeleteInstanceErrors = {
      */
     404: ErrorResponse;
     /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
-    /**
      * Rate limit exceeded error
      */
     429: ErrorResponse;
@@ -54560,10 +54439,6 @@ export type WinBackOffersDeleteInstanceErrors = {
      * Not found error
      */
     404: ErrorResponse;
-    /**
-     * Request entity error(s)
-     */
-    409: ErrorResponse;
     /**
      * Rate limit exceeded error
      */
@@ -56141,15 +56016,11 @@ export type AppClipDefaultExperiencesReleaseWithAppStoreVersionGetToOneRelatedDa
         /**
          * the fields to include for returned resources of type appStoreVersions
          */
-        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'ageRatingDeclaration' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
+        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
         /**
          * the fields to include for returned resources of type apps
          */
         'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
-        /**
-         * the fields to include for returned resources of type ageRatingDeclarations
-         */
-        'fields[ageRatingDeclarations]'?: Array<'advertising' | 'alcoholTobaccoOrDrugUseOrReferences' | 'contests' | 'gambling' | 'gamblingSimulated' | 'gunsOrOtherWeapons' | 'healthOrWellnessTopics' | 'kidsAgeBand' | 'lootBox' | 'medicalOrTreatmentInformation' | 'messagingAndChat' | 'parentalControls' | 'profanityOrCrudeHumor' | 'ageAssurance' | 'sexualContentGraphicAndNudity' | 'sexualContentOrNudity' | 'horrorOrFearThemes' | 'matureOrSuggestiveThemes' | 'unrestrictedWebAccess' | 'userGeneratedContent' | 'violenceCartoonOrFantasy' | 'violenceRealisticProlongedGraphicOrSadistic' | 'violenceRealistic' | 'ageRatingOverride' | 'ageRatingOverrideV2' | 'koreaAgeRatingOverride' | 'developerAgeRatingInfoUrl'>;
         /**
          * the fields to include for returned resources of type appStoreVersionLocalizations
          */
@@ -56193,7 +56064,7 @@ export type AppClipDefaultExperiencesReleaseWithAppStoreVersionGetToOneRelatedDa
         /**
          * comma-separated list of relationships to include
          */
-        include?: Array<'app' | 'ageRatingDeclaration' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionPackage'>;
+        include?: Array<'app' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionPackage'>;
         /**
          * maximum number of related appStoreVersionLocalizations returned (when they are included)
          */
@@ -56458,7 +56329,7 @@ export type AppClipsAppClipDefaultExperiencesGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type appStoreVersions
          */
-        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'ageRatingDeclaration' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
+        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
         /**
          * the fields to include for returned resources of type appClipDefaultExperienceLocalizations
          */
@@ -60946,103 +60817,6 @@ export type AppStoreVersionLocalizationsSearchKeywordsGetToManyRelatedResponses 
 
 export type AppStoreVersionLocalizationsSearchKeywordsGetToManyRelatedResponse = AppStoreVersionLocalizationsSearchKeywordsGetToManyRelatedResponses[keyof AppStoreVersionLocalizationsSearchKeywordsGetToManyRelatedResponses];
 
-export type AppStoreVersionsAgeRatingDeclarationGetToOneRelationshipData = {
-    body?: never;
-    path: {
-        /**
-         * the id of the requested resource
-         */
-        id: string;
-    };
-    query?: never;
-    url: '/v1/appStoreVersions/{id}/relationships/ageRatingDeclaration';
-};
-
-export type AppStoreVersionsAgeRatingDeclarationGetToOneRelationshipErrors = {
-    /**
-     * Parameter error(s)
-     */
-    400: ErrorResponse;
-    /**
-     * Unauthorized error(s)
-     */
-    401: ErrorResponse;
-    /**
-     * Forbidden error
-     */
-    403: ErrorResponse;
-    /**
-     * Not found error
-     */
-    404: ErrorResponse;
-    /**
-     * Rate limit exceeded error
-     */
-    429: ErrorResponse;
-};
-
-export type AppStoreVersionsAgeRatingDeclarationGetToOneRelationshipError = AppStoreVersionsAgeRatingDeclarationGetToOneRelationshipErrors[keyof AppStoreVersionsAgeRatingDeclarationGetToOneRelationshipErrors];
-
-export type AppStoreVersionsAgeRatingDeclarationGetToOneRelationshipResponses = {
-    /**
-     * Related linkage
-     */
-    200: AppStoreVersionAgeRatingDeclarationLinkageResponse;
-};
-
-export type AppStoreVersionsAgeRatingDeclarationGetToOneRelationshipResponse = AppStoreVersionsAgeRatingDeclarationGetToOneRelationshipResponses[keyof AppStoreVersionsAgeRatingDeclarationGetToOneRelationshipResponses];
-
-export type AppStoreVersionsAgeRatingDeclarationGetToOneRelatedData = {
-    body?: never;
-    path: {
-        /**
-         * the id of the requested resource
-         */
-        id: string;
-    };
-    query?: {
-        /**
-         * the fields to include for returned resources of type ageRatingDeclarations
-         */
-        'fields[ageRatingDeclarations]'?: Array<'advertising' | 'alcoholTobaccoOrDrugUseOrReferences' | 'contests' | 'gambling' | 'gamblingSimulated' | 'gunsOrOtherWeapons' | 'healthOrWellnessTopics' | 'kidsAgeBand' | 'lootBox' | 'medicalOrTreatmentInformation' | 'messagingAndChat' | 'parentalControls' | 'profanityOrCrudeHumor' | 'ageAssurance' | 'sexualContentGraphicAndNudity' | 'sexualContentOrNudity' | 'horrorOrFearThemes' | 'matureOrSuggestiveThemes' | 'unrestrictedWebAccess' | 'userGeneratedContent' | 'violenceCartoonOrFantasy' | 'violenceRealisticProlongedGraphicOrSadistic' | 'violenceRealistic' | 'ageRatingOverride' | 'ageRatingOverrideV2' | 'koreaAgeRatingOverride' | 'developerAgeRatingInfoUrl'>;
-    };
-    url: '/v1/appStoreVersions/{id}/ageRatingDeclaration';
-};
-
-export type AppStoreVersionsAgeRatingDeclarationGetToOneRelatedErrors = {
-    /**
-     * Parameter error(s)
-     */
-    400: ErrorResponse;
-    /**
-     * Unauthorized error(s)
-     */
-    401: ErrorResponse;
-    /**
-     * Forbidden error
-     */
-    403: ErrorResponse;
-    /**
-     * Not found error
-     */
-    404: ErrorResponse;
-    /**
-     * Rate limit exceeded error
-     */
-    429: ErrorResponse;
-};
-
-export type AppStoreVersionsAgeRatingDeclarationGetToOneRelatedError = AppStoreVersionsAgeRatingDeclarationGetToOneRelatedErrors[keyof AppStoreVersionsAgeRatingDeclarationGetToOneRelatedErrors];
-
-export type AppStoreVersionsAgeRatingDeclarationGetToOneRelatedResponses = {
-    /**
-     * Single AgeRatingDeclaration with get
-     */
-    200: AgeRatingDeclarationWithoutIncludesResponse;
-};
-
-export type AppStoreVersionsAgeRatingDeclarationGetToOneRelatedResponse = AppStoreVersionsAgeRatingDeclarationGetToOneRelatedResponses[keyof AppStoreVersionsAgeRatingDeclarationGetToOneRelatedResponses];
-
 export type AppStoreVersionsAlternativeDistributionPackageGetToOneRelationshipData = {
     body?: never;
     path: {
@@ -61271,7 +61045,7 @@ export type AppStoreVersionsAppClipDefaultExperienceGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type appStoreVersions
          */
-        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'ageRatingDeclaration' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
+        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
         /**
          * the fields to include for returned resources of type appClipDefaultExperienceLocalizations
          */
@@ -61388,7 +61162,7 @@ export type AppStoreVersionsAppStoreReviewDetailGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type appStoreVersions
          */
-        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'ageRatingDeclaration' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
+        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
         /**
          * the fields to include for returned resources of type appStoreReviewAttachments
          */
@@ -61510,7 +61284,7 @@ export type AppStoreVersionsAppStoreVersionExperimentsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type appStoreVersions
          */
-        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'ageRatingDeclaration' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
+        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
         /**
          * the fields to include for returned resources of type appStoreVersionExperimentTreatments
          */
@@ -61640,7 +61414,7 @@ export type AppStoreVersionsAppStoreVersionExperimentsV2GetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type appStoreVersions
          */
-        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'ageRatingDeclaration' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
+        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
         /**
          * the fields to include for returned resources of type appStoreVersionExperimentTreatments
          */
@@ -61770,7 +61544,7 @@ export type AppStoreVersionsAppStoreVersionLocalizationsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type appStoreVersions
          */
-        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'ageRatingDeclaration' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
+        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
         /**
          * the fields to include for returned resources of type appScreenshotSets
          */
@@ -62000,7 +61774,7 @@ export type AppStoreVersionsAppStoreVersionSubmissionGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type appStoreVersions
          */
-        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'ageRatingDeclaration' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
+        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -62385,7 +62159,7 @@ export type AppStoreVersionsGameCenterAppVersionGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type appStoreVersions
          */
-        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'ageRatingDeclaration' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
+        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -62494,7 +62268,7 @@ export type AppStoreVersionsRoutingAppCoverageGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type appStoreVersions
          */
-        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'ageRatingDeclaration' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
+        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -64152,7 +63926,7 @@ export type AppsAppStoreVersionExperimentsV2GetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type appStoreVersions
          */
-        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'ageRatingDeclaration' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
+        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
         /**
          * the fields to include for returned resources of type appStoreVersionExperimentTreatments
          */
@@ -64295,15 +64069,11 @@ export type AppsAppStoreVersionsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type appStoreVersions
          */
-        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'ageRatingDeclaration' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
+        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
         /**
          * the fields to include for returned resources of type apps
          */
         'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
-        /**
-         * the fields to include for returned resources of type ageRatingDeclarations
-         */
-        'fields[ageRatingDeclarations]'?: Array<'advertising' | 'alcoholTobaccoOrDrugUseOrReferences' | 'contests' | 'gambling' | 'gamblingSimulated' | 'gunsOrOtherWeapons' | 'healthOrWellnessTopics' | 'kidsAgeBand' | 'lootBox' | 'medicalOrTreatmentInformation' | 'messagingAndChat' | 'parentalControls' | 'profanityOrCrudeHumor' | 'ageAssurance' | 'sexualContentGraphicAndNudity' | 'sexualContentOrNudity' | 'horrorOrFearThemes' | 'matureOrSuggestiveThemes' | 'unrestrictedWebAccess' | 'userGeneratedContent' | 'violenceCartoonOrFantasy' | 'violenceRealisticProlongedGraphicOrSadistic' | 'violenceRealistic' | 'ageRatingOverride' | 'ageRatingOverrideV2' | 'koreaAgeRatingOverride' | 'developerAgeRatingInfoUrl'>;
         /**
          * the fields to include for returned resources of type appStoreVersionLocalizations
          */
@@ -64351,7 +64121,7 @@ export type AppsAppStoreVersionsGetToManyRelatedData = {
         /**
          * comma-separated list of relationships to include
          */
-        include?: Array<'app' | 'ageRatingDeclaration' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionPackage'>;
+        include?: Array<'app' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionPackage'>;
         /**
          * maximum number of related appStoreVersionLocalizations returned (when they are included)
          */
@@ -64598,9 +64368,17 @@ export type AppsBackgroundAssetsGetToManyRelatedData = {
          */
         'filter[assetPackIdentifier]'?: Array<string>;
         /**
+         * filter by attribute 'versions.platforms'
+         */
+        'filter[versions.platforms]'?: Array<'IOS' | 'MAC_OS' | 'TV_OS' | 'VISION_OS'>;
+        /**
+         * comma-separated list of sort expressions; resources will be sorted as specified
+         */
+        sort?: Array<'assetPackIdentifier' | '-assetPackIdentifier' | 'createdDate' | '-createdDate'>;
+        /**
          * the fields to include for returned resources of type backgroundAssets
          */
-        'fields[backgroundAssets]'?: Array<'archived' | 'assetPackIdentifier' | 'createdDate' | 'app' | 'versions' | 'appStoreVersion' | 'internalBetaVersion' | 'externalBetaVersion'>;
+        'fields[backgroundAssets]'?: Array<'archived' | 'assetPackIdentifier' | 'createdDate' | 'usedBytes' | 'app' | 'versions' | 'appStoreVersion' | 'internalBetaVersion' | 'externalBetaVersion'>;
         /**
          * the fields to include for returned resources of type apps
          */
@@ -66191,7 +65969,7 @@ export type AppsGameCenterDetailGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type appStoreVersions
          */
-        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'ageRatingDeclaration' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
+        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -66202,6 +65980,7 @@ export type AppsGameCenterDetailGetToOneRelatedData = {
         'limit[gameCenterAppVersions]'?: number;
         /**
          * maximum number of related gameCenterLeaderboards returned (when they are included)
+         * @deprecated
          */
         'limit[gameCenterLeaderboards]'?: number;
         /**
@@ -66210,6 +65989,7 @@ export type AppsGameCenterDetailGetToOneRelatedData = {
         'limit[gameCenterLeaderboardsV2]'?: number;
         /**
          * maximum number of related gameCenterLeaderboardSets returned (when they are included)
+         * @deprecated
          */
         'limit[gameCenterLeaderboardSets]'?: number;
         /**
@@ -66218,6 +65998,7 @@ export type AppsGameCenterDetailGetToOneRelatedData = {
         'limit[gameCenterLeaderboardSetsV2]'?: number;
         /**
          * maximum number of related gameCenterAchievements returned (when they are included)
+         * @deprecated
          */
         'limit[gameCenterAchievements]'?: number;
         /**
@@ -66234,22 +66015,27 @@ export type AppsGameCenterDetailGetToOneRelatedData = {
         'limit[gameCenterChallenges]'?: number;
         /**
          * maximum number of related achievementReleases returned (when they are included)
+         * @deprecated
          */
         'limit[achievementReleases]'?: number;
         /**
          * maximum number of related activityReleases returned (when they are included)
+         * @deprecated
          */
         'limit[activityReleases]'?: number;
         /**
          * maximum number of related challengeReleases returned (when they are included)
+         * @deprecated
          */
         'limit[challengeReleases]'?: number;
         /**
          * maximum number of related leaderboardReleases returned (when they are included)
+         * @deprecated
          */
         'limit[leaderboardReleases]'?: number;
         /**
          * maximum number of related leaderboardSetReleases returned (when they are included)
+         * @deprecated
          */
         'limit[leaderboardSetReleases]'?: number;
         /**
@@ -67249,7 +67035,7 @@ export type AppsReviewSubmissionsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type appStoreVersions
          */
-        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'ageRatingDeclaration' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
+        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
         /**
          * the fields to include for returned resources of type actors
          */
@@ -67934,6 +67720,10 @@ export type BackgroundAssetsVersionsGetToManyRelatedData = {
     };
     query?: {
         /**
+         * filter by attribute 'platforms'
+         */
+        'filter[platforms]'?: Array<'IOS' | 'MAC_OS' | 'TV_OS' | 'VISION_OS'>;
+        /**
          * filter by attribute 'state'
          */
         'filter[state]'?: Array<'AWAITING_UPLOAD' | 'PROCESSING' | 'FAILED' | 'COMPLETE'>;
@@ -67964,7 +67754,7 @@ export type BackgroundAssetsVersionsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type backgroundAssets
          */
-        'fields[backgroundAssets]'?: Array<'archived' | 'assetPackIdentifier' | 'createdDate' | 'app' | 'versions' | 'appStoreVersion' | 'internalBetaVersion' | 'externalBetaVersion'>;
+        'fields[backgroundAssets]'?: Array<'archived' | 'assetPackIdentifier' | 'createdDate' | 'usedBytes' | 'app' | 'versions' | 'appStoreVersion' | 'internalBetaVersion' | 'externalBetaVersion'>;
         /**
          * the fields to include for returned resources of type backgroundAssetVersionInternalBetaReleases
          */
@@ -70005,7 +69795,7 @@ export type BuildBetaDetailsBuildGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type appStoreVersions
          */
-        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'ageRatingDeclaration' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
+        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
         /**
          * the fields to include for returned resources of type buildIcons
          */
@@ -70013,7 +69803,7 @@ export type BuildBetaDetailsBuildGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type buildBundles
          */
-        'fields[buildBundles]'?: Array<'bundleId' | 'bundleType' | 'sdkBuild' | 'platformBuild' | 'fileName' | 'hasSirikit' | 'hasOnDemandResources' | 'hasPrerenderedIcon' | 'usesLocationServices' | 'isIosBuildMacAppStoreCompatible' | 'includesSymbols' | 'dSYMUrl' | 'supportedArchitectures' | 'requiredCapabilities' | 'deviceProtocols' | 'locales' | 'entitlements' | 'baDownloadAllowance' | 'baMaxInstallSize' | 'appClipDomainCacheStatus' | 'appClipDomainDebugStatus' | 'betaAppClipInvocations' | 'buildBundleFileSizes'>;
+        'fields[buildBundles]'?: Array<'bundleId' | 'bundleType' | 'sdkBuild' | 'platformBuild' | 'fileName' | 'hasSirikit' | 'hasOnDemandResources' | 'hasPrerenderedIcon' | 'usesLocationServices' | 'isIosBuildMacAppStoreCompatible' | 'includesSymbols' | 'dSYMUrl' | 'supportedArchitectures' | 'requiredCapabilities' | 'deviceProtocols' | 'locales' | 'entitlements' | 'baDownloadAllowance' | 'baMaxInstallSize' | 'minimumOsVersion' | 'appClipDomainCacheStatus' | 'appClipDomainDebugStatus' | 'betaAppClipInvocations' | 'buildBundleFileSizes'>;
         /**
          * the fields to include for returned resources of type buildUploads
          */
@@ -70909,15 +70699,11 @@ export type BuildsAppStoreVersionGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type appStoreVersions
          */
-        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'ageRatingDeclaration' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
+        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
         /**
          * the fields to include for returned resources of type apps
          */
         'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
-        /**
-         * the fields to include for returned resources of type ageRatingDeclarations
-         */
-        'fields[ageRatingDeclarations]'?: Array<'advertising' | 'alcoholTobaccoOrDrugUseOrReferences' | 'contests' | 'gambling' | 'gamblingSimulated' | 'gunsOrOtherWeapons' | 'healthOrWellnessTopics' | 'kidsAgeBand' | 'lootBox' | 'medicalOrTreatmentInformation' | 'messagingAndChat' | 'parentalControls' | 'profanityOrCrudeHumor' | 'ageAssurance' | 'sexualContentGraphicAndNudity' | 'sexualContentOrNudity' | 'horrorOrFearThemes' | 'matureOrSuggestiveThemes' | 'unrestrictedWebAccess' | 'userGeneratedContent' | 'violenceCartoonOrFantasy' | 'violenceRealisticProlongedGraphicOrSadistic' | 'violenceRealistic' | 'ageRatingOverride' | 'ageRatingOverrideV2' | 'koreaAgeRatingOverride' | 'developerAgeRatingInfoUrl'>;
         /**
          * the fields to include for returned resources of type appStoreVersionLocalizations
          */
@@ -70961,7 +70747,7 @@ export type BuildsAppStoreVersionGetToOneRelatedData = {
         /**
          * comma-separated list of relationships to include
          */
-        include?: Array<'app' | 'ageRatingDeclaration' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionPackage'>;
+        include?: Array<'app' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionPackage'>;
         /**
          * maximum number of related appStoreVersionLocalizations returned (when they are included)
          */
@@ -73145,7 +72931,7 @@ export type CiBuildRunsBuildsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type appStoreVersions
          */
-        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'ageRatingDeclaration' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
+        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
         /**
          * the fields to include for returned resources of type buildIcons
          */
@@ -73153,7 +72939,7 @@ export type CiBuildRunsBuildsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type buildBundles
          */
-        'fields[buildBundles]'?: Array<'bundleId' | 'bundleType' | 'sdkBuild' | 'platformBuild' | 'fileName' | 'hasSirikit' | 'hasOnDemandResources' | 'hasPrerenderedIcon' | 'usesLocationServices' | 'isIosBuildMacAppStoreCompatible' | 'includesSymbols' | 'dSYMUrl' | 'supportedArchitectures' | 'requiredCapabilities' | 'deviceProtocols' | 'locales' | 'entitlements' | 'baDownloadAllowance' | 'baMaxInstallSize' | 'appClipDomainCacheStatus' | 'appClipDomainDebugStatus' | 'betaAppClipInvocations' | 'buildBundleFileSizes'>;
+        'fields[buildBundles]'?: Array<'bundleId' | 'bundleType' | 'sdkBuild' | 'platformBuild' | 'fileName' | 'hasSirikit' | 'hasOnDemandResources' | 'hasPrerenderedIcon' | 'usesLocationServices' | 'isIosBuildMacAppStoreCompatible' | 'includesSymbols' | 'dSYMUrl' | 'supportedArchitectures' | 'requiredCapabilities' | 'deviceProtocols' | 'locales' | 'entitlements' | 'baDownloadAllowance' | 'baMaxInstallSize' | 'minimumOsVersion' | 'appClipDomainCacheStatus' | 'appClipDomainDebugStatus' | 'betaAppClipInvocations' | 'buildBundleFileSizes'>;
         /**
          * the fields to include for returned resources of type buildUploads
          */
@@ -73542,7 +73328,7 @@ export type CiProductsAppGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type appStoreVersions
          */
-        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'ageRatingDeclaration' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
+        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
         /**
          * the fields to include for returned resources of type preReleaseVersions
          */
@@ -74946,10 +74732,12 @@ export type GameCenterAchievementLocalizationsGameCenterAchievementGetToOneRelat
         include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'groupAchievement' | 'localizations' | 'releases' | 'activity'>;
         /**
          * maximum number of related localizations returned (when they are included)
+         * @deprecated
          */
         'limit[localizations]'?: number;
         /**
          * maximum number of related releases returned (when they are included)
+         * @deprecated
          */
         'limit[releases]'?: number;
     };
@@ -75579,10 +75367,12 @@ export type GameCenterAchievementsGroupAchievementGetToOneRelatedData = {
         include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'groupAchievement' | 'localizations' | 'releases' | 'activity'>;
         /**
          * maximum number of related localizations returned (when they are included)
+         * @deprecated
          */
         'limit[localizations]'?: number;
         /**
          * maximum number of related releases returned (when they are included)
+         * @deprecated
          */
         'limit[releases]'?: number;
     };
@@ -76385,6 +76175,7 @@ export type GameCenterActivitiesVersionsGetToManyRelatedData = {
         'limit[localizations]'?: number;
         /**
          * maximum number of related releases returned (when they are included)
+         * @deprecated
          */
         'limit[releases]'?: number;
     };
@@ -76795,15 +76586,11 @@ export type GameCenterAppVersionsAppStoreVersionGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type appStoreVersions
          */
-        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'ageRatingDeclaration' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
+        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
         /**
          * the fields to include for returned resources of type apps
          */
         'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
-        /**
-         * the fields to include for returned resources of type ageRatingDeclarations
-         */
-        'fields[ageRatingDeclarations]'?: Array<'advertising' | 'alcoholTobaccoOrDrugUseOrReferences' | 'contests' | 'gambling' | 'gamblingSimulated' | 'gunsOrOtherWeapons' | 'healthOrWellnessTopics' | 'kidsAgeBand' | 'lootBox' | 'medicalOrTreatmentInformation' | 'messagingAndChat' | 'parentalControls' | 'profanityOrCrudeHumor' | 'ageAssurance' | 'sexualContentGraphicAndNudity' | 'sexualContentOrNudity' | 'horrorOrFearThemes' | 'matureOrSuggestiveThemes' | 'unrestrictedWebAccess' | 'userGeneratedContent' | 'violenceCartoonOrFantasy' | 'violenceRealisticProlongedGraphicOrSadistic' | 'violenceRealistic' | 'ageRatingOverride' | 'ageRatingOverrideV2' | 'koreaAgeRatingOverride' | 'developerAgeRatingInfoUrl'>;
         /**
          * the fields to include for returned resources of type appStoreVersionLocalizations
          */
@@ -76847,7 +76634,7 @@ export type GameCenterAppVersionsAppStoreVersionGetToOneRelatedData = {
         /**
          * comma-separated list of relationships to include
          */
-        include?: Array<'app' | 'ageRatingDeclaration' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionPackage'>;
+        include?: Array<'app' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionPackage'>;
         /**
          * maximum number of related appStoreVersionLocalizations returned (when they are included)
          */
@@ -77076,7 +76863,7 @@ export type GameCenterAppVersionsCompatibilityVersionsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type appStoreVersions
          */
-        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'ageRatingDeclaration' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
+        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
         /**
          * maximum resources per page
          */
@@ -77639,6 +77426,7 @@ export type GameCenterChallengesVersionsGetToManyRelatedData = {
         'limit[localizations]'?: number;
         /**
          * maximum number of related releases returned (when they are included)
+         * @deprecated
          */
         'limit[releases]'?: number;
     };
@@ -77745,6 +77533,7 @@ export type GameCenterDetailsAchievementReleasesGetToManyRelatedData = {
         'filter[live]'?: Array<string>;
         /**
          * filter by id(s) of related 'gameCenterAchievement'
+         * @deprecated
          */
         'filter[gameCenterAchievement]'?: Array<string>;
         /**
@@ -78245,10 +78034,12 @@ export type GameCenterDetailsGameCenterAchievementsGetToManyRelatedData = {
         include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'groupAchievement' | 'localizations' | 'releases' | 'activity'>;
         /**
          * maximum number of related localizations returned (when they are included)
+         * @deprecated
          */
         'limit[localizations]'?: number;
         /**
          * maximum number of related releases returned (when they are included)
+         * @deprecated
          */
         'limit[releases]'?: number;
     };
@@ -78578,6 +78369,7 @@ export type GameCenterDetailsGameCenterActivitiesGetToManyRelatedData = {
         include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'achievementsV2' | 'leaderboards' | 'leaderboardsV2' | 'versions'>;
         /**
          * maximum number of related achievements returned (when they are included)
+         * @deprecated
          */
         'limit[achievements]'?: number;
         /**
@@ -78586,6 +78378,7 @@ export type GameCenterDetailsGameCenterActivitiesGetToManyRelatedData = {
         'limit[achievementsV2]'?: number;
         /**
          * maximum number of related leaderboards returned (when they are included)
+         * @deprecated
          */
         'limit[leaderboards]'?: number;
         /**
@@ -78705,7 +78498,7 @@ export type GameCenterDetailsGameCenterAppVersionsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type appStoreVersions
          */
-        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'ageRatingDeclaration' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
+        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
         /**
          * maximum resources per page
          */
@@ -78991,6 +78784,7 @@ export type GameCenterDetailsGameCenterGroupGetToOneRelatedData = {
         'limit[gameCenterDetails]'?: number;
         /**
          * maximum number of related gameCenterLeaderboards returned (when they are included)
+         * @deprecated
          */
         'limit[gameCenterLeaderboards]'?: number;
         /**
@@ -78999,6 +78793,7 @@ export type GameCenterDetailsGameCenterGroupGetToOneRelatedData = {
         'limit[gameCenterLeaderboardsV2]'?: number;
         /**
          * maximum number of related gameCenterLeaderboardSets returned (when they are included)
+         * @deprecated
          */
         'limit[gameCenterLeaderboardSets]'?: number;
         /**
@@ -79007,6 +78802,7 @@ export type GameCenterDetailsGameCenterGroupGetToOneRelatedData = {
         'limit[gameCenterLeaderboardSetsV2]'?: number;
         /**
          * maximum number of related gameCenterAchievements returned (when they are included)
+         * @deprecated
          */
         'limit[gameCenterAchievements]'?: number;
         /**
@@ -79214,14 +79010,17 @@ export type GameCenterDetailsGameCenterLeaderboardSetsGetToManyRelatedData = {
         include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboardSet' | 'localizations' | 'gameCenterLeaderboards' | 'releases'>;
         /**
          * maximum number of related localizations returned (when they are included)
+         * @deprecated
          */
         'limit[localizations]'?: number;
         /**
          * maximum number of related gameCenterLeaderboards returned (when they are included)
+         * @deprecated
          */
         'limit[gameCenterLeaderboards]'?: number;
         /**
          * maximum number of related releases returned (when they are included)
+         * @deprecated
          */
         'limit[releases]'?: number;
     };
@@ -79624,14 +79423,17 @@ export type GameCenterDetailsGameCenterLeaderboardsGetToManyRelatedData = {
         include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge'>;
         /**
          * maximum number of related gameCenterLeaderboardSets returned (when they are included)
+         * @deprecated
          */
         'limit[gameCenterLeaderboardSets]'?: number;
         /**
          * maximum number of related localizations returned (when they are included)
+         * @deprecated
          */
         'limit[localizations]'?: number;
         /**
          * maximum number of related releases returned (when they are included)
+         * @deprecated
          */
         'limit[releases]'?: number;
     };
@@ -79945,6 +79747,7 @@ export type GameCenterDetailsLeaderboardReleasesGetToManyRelatedData = {
         'filter[live]'?: Array<string>;
         /**
          * filter by id(s) of related 'gameCenterLeaderboard'
+         * @deprecated
          */
         'filter[gameCenterLeaderboard]'?: Array<string>;
         /**
@@ -80071,6 +79874,7 @@ export type GameCenterDetailsLeaderboardSetReleasesGetToManyRelatedData = {
         'filter[live]'?: Array<string>;
         /**
          * filter by id(s) of related 'gameCenterLeaderboardSet'
+         * @deprecated
          */
         'filter[gameCenterLeaderboardSet]'?: Array<string>;
         /**
@@ -80588,10 +80392,12 @@ export type GameCenterGroupsGameCenterAchievementsGetToManyRelatedData = {
         include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'groupAchievement' | 'localizations' | 'releases' | 'activity'>;
         /**
          * maximum number of related localizations returned (when they are included)
+         * @deprecated
          */
         'limit[localizations]'?: number;
         /**
          * maximum number of related releases returned (when they are included)
+         * @deprecated
          */
         'limit[releases]'?: number;
     };
@@ -80921,6 +80727,7 @@ export type GameCenterGroupsGameCenterActivitiesGetToManyRelatedData = {
         include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'achievementsV2' | 'leaderboards' | 'leaderboardsV2' | 'versions'>;
         /**
          * maximum number of related achievements returned (when they are included)
+         * @deprecated
          */
         'limit[achievements]'?: number;
         /**
@@ -80929,6 +80736,7 @@ export type GameCenterGroupsGameCenterActivitiesGetToManyRelatedData = {
         'limit[achievementsV2]'?: number;
         /**
          * maximum number of related leaderboards returned (when they are included)
+         * @deprecated
          */
         'limit[leaderboards]'?: number;
         /**
@@ -81242,7 +81050,7 @@ export type GameCenterGroupsGameCenterDetailsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type appStoreVersions
          */
-        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'ageRatingDeclaration' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
+        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
         /**
          * maximum resources per page
          */
@@ -81257,6 +81065,7 @@ export type GameCenterGroupsGameCenterDetailsGetToManyRelatedData = {
         'limit[gameCenterAppVersions]'?: number;
         /**
          * maximum number of related gameCenterLeaderboards returned (when they are included)
+         * @deprecated
          */
         'limit[gameCenterLeaderboards]'?: number;
         /**
@@ -81265,6 +81074,7 @@ export type GameCenterGroupsGameCenterDetailsGetToManyRelatedData = {
         'limit[gameCenterLeaderboardsV2]'?: number;
         /**
          * maximum number of related gameCenterLeaderboardSets returned (when they are included)
+         * @deprecated
          */
         'limit[gameCenterLeaderboardSets]'?: number;
         /**
@@ -81273,6 +81083,7 @@ export type GameCenterGroupsGameCenterDetailsGetToManyRelatedData = {
         'limit[gameCenterLeaderboardSetsV2]'?: number;
         /**
          * maximum number of related gameCenterAchievements returned (when they are included)
+         * @deprecated
          */
         'limit[gameCenterAchievements]'?: number;
         /**
@@ -81289,22 +81100,27 @@ export type GameCenterGroupsGameCenterDetailsGetToManyRelatedData = {
         'limit[gameCenterChallenges]'?: number;
         /**
          * maximum number of related achievementReleases returned (when they are included)
+         * @deprecated
          */
         'limit[achievementReleases]'?: number;
         /**
          * maximum number of related activityReleases returned (when they are included)
+         * @deprecated
          */
         'limit[activityReleases]'?: number;
         /**
          * maximum number of related challengeReleases returned (when they are included)
+         * @deprecated
          */
         'limit[challengeReleases]'?: number;
         /**
          * maximum number of related leaderboardReleases returned (when they are included)
+         * @deprecated
          */
         'limit[leaderboardReleases]'?: number;
         /**
          * maximum number of related leaderboardSetReleases returned (when they are included)
+         * @deprecated
          */
         'limit[leaderboardSetReleases]'?: number;
         /**
@@ -81504,14 +81320,17 @@ export type GameCenterGroupsGameCenterLeaderboardSetsGetToManyRelatedData = {
         include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboardSet' | 'localizations' | 'gameCenterLeaderboards' | 'releases'>;
         /**
          * maximum number of related localizations returned (when they are included)
+         * @deprecated
          */
         'limit[localizations]'?: number;
         /**
          * maximum number of related gameCenterLeaderboards returned (when they are included)
+         * @deprecated
          */
         'limit[gameCenterLeaderboards]'?: number;
         /**
          * maximum number of related releases returned (when they are included)
+         * @deprecated
          */
         'limit[releases]'?: number;
     };
@@ -81914,14 +81733,17 @@ export type GameCenterGroupsGameCenterLeaderboardsGetToManyRelatedData = {
         include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge'>;
         /**
          * maximum number of related gameCenterLeaderboardSets returned (when they are included)
+         * @deprecated
          */
         'limit[gameCenterLeaderboardSets]'?: number;
         /**
          * maximum number of related localizations returned (when they are included)
+         * @deprecated
          */
         'limit[localizations]'?: number;
         /**
          * maximum number of related releases returned (when they are included)
+         * @deprecated
          */
         'limit[releases]'?: number;
     };
@@ -82682,14 +82504,17 @@ export type GameCenterLeaderboardSetMemberLocalizationsGameCenterLeaderboardGetT
         include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge'>;
         /**
          * maximum number of related gameCenterLeaderboardSets returned (when they are included)
+         * @deprecated
          */
         'limit[gameCenterLeaderboardSets]'?: number;
         /**
          * maximum number of related localizations returned (when they are included)
+         * @deprecated
          */
         'limit[localizations]'?: number;
         /**
          * maximum number of related releases returned (when they are included)
+         * @deprecated
          */
         'limit[releases]'?: number;
     };
@@ -82815,14 +82640,17 @@ export type GameCenterLeaderboardSetMemberLocalizationsGameCenterLeaderboardSetG
         include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboardSet' | 'localizations' | 'gameCenterLeaderboards' | 'releases'>;
         /**
          * maximum number of related localizations returned (when they are included)
+         * @deprecated
          */
         'limit[localizations]'?: number;
         /**
          * maximum number of related gameCenterLeaderboards returned (when they are included)
+         * @deprecated
          */
         'limit[gameCenterLeaderboards]'?: number;
         /**
          * maximum number of related releases returned (when they are included)
+         * @deprecated
          */
         'limit[releases]'?: number;
     };
@@ -83689,14 +83517,17 @@ export type GameCenterLeaderboardSetsGameCenterLeaderboardsGetToManyRelatedData 
         include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge'>;
         /**
          * maximum number of related gameCenterLeaderboardSets returned (when they are included)
+         * @deprecated
          */
         'limit[gameCenterLeaderboardSets]'?: number;
         /**
          * maximum number of related localizations returned (when they are included)
+         * @deprecated
          */
         'limit[localizations]'?: number;
         /**
          * maximum number of related releases returned (when they are included)
+         * @deprecated
          */
         'limit[releases]'?: number;
     };
@@ -83875,14 +83706,17 @@ export type GameCenterLeaderboardSetsGroupLeaderboardSetGetToOneRelatedData = {
         include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboardSet' | 'localizations' | 'gameCenterLeaderboards' | 'releases'>;
         /**
          * maximum number of related localizations returned (when they are included)
+         * @deprecated
          */
         'limit[localizations]'?: number;
         /**
          * maximum number of related gameCenterLeaderboards returned (when they are included)
+         * @deprecated
          */
         'limit[gameCenterLeaderboards]'?: number;
         /**
          * maximum number of related releases returned (when they are included)
+         * @deprecated
          */
         'limit[releases]'?: number;
     };
@@ -84537,14 +84371,17 @@ export type GameCenterLeaderboardsGroupLeaderboardGetToOneRelatedData = {
         include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge'>;
         /**
          * maximum number of related gameCenterLeaderboardSets returned (when they are included)
+         * @deprecated
          */
         'limit[gameCenterLeaderboardSets]'?: number;
         /**
          * maximum number of related localizations returned (when they are included)
+         * @deprecated
          */
         'limit[localizations]'?: number;
         /**
          * maximum number of related releases returned (when they are included)
+         * @deprecated
          */
         'limit[releases]'?: number;
     };
@@ -88224,7 +88061,7 @@ export type ReviewSubmissionsItemsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type appStoreVersions
          */
-        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'ageRatingDeclaration' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
+        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
         /**
          * the fields to include for returned resources of type appCustomProductPageVersions
          */
