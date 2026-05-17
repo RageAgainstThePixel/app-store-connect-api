@@ -8487,6 +8487,44 @@ export const AppPriceV2InlineCreateSchema = {
         },
         id: {
             type: 'string'
+        },
+        attributes: {
+            type: 'object',
+            properties: {
+                startDate: {
+                    type: 'string',
+                    format: 'date',
+                    nullable: true
+                },
+                endDate: {
+                    type: 'string',
+                    format: 'date',
+                    nullable: true
+                }
+            }
+        },
+        relationships: {
+            type: 'object',
+            properties: {
+                appPricePoint: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['appPricePoints']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                }
+            }
         }
     },
     required: ['type']
@@ -21426,6 +21464,24 @@ export const CustomerReviewSchema = {
                             required: ['id', 'type']
                         }
                     }
+                },
+                reviewTerritory: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['territories']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
                 }
             }
         },
@@ -21449,7 +21505,21 @@ export const CustomerReviewsResponseSchema = {
         included: {
             type: 'array',
             items: {
-                '$ref': '#/components/schemas/CustomerReviewResponseV1'
+                oneOf: [
+                    {
+                        '$ref': '#/components/schemas/CustomerReviewResponseV1'
+                    },
+                    {
+                        '$ref': '#/components/schemas/Territory'
+                    }
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        territories: '#/components/schemas/Territory',
+                        customerReviewResponses: '#/components/schemas/CustomerReviewResponseV1'
+                    }
+                }
             }
         },
         links: {
@@ -21472,7 +21542,21 @@ export const CustomerReviewResponseSchema = {
         included: {
             type: 'array',
             items: {
-                '$ref': '#/components/schemas/CustomerReviewResponseV1'
+                oneOf: [
+                    {
+                        '$ref': '#/components/schemas/CustomerReviewResponseV1'
+                    },
+                    {
+                        '$ref': '#/components/schemas/Territory'
+                    }
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        territories: '#/components/schemas/Territory',
+                        customerReviewResponses: '#/components/schemas/CustomerReviewResponseV1'
+                    }
+                }
             }
         },
         links: {
@@ -34515,11 +34599,10 @@ export const GameCenterMatchmakingTestPlayerPropertyInlineCreateSchema = {
                     },
                     nullable: true
                 }
-            },
-            required: ['playerId']
+            }
         }
     },
-    required: ['attributes', 'type']
+    required: ['type']
 } as const;
 
 export const GameCenterMatchmakingTestRequestSchema = {
@@ -34589,8 +34672,7 @@ export const GameCenterMatchmakingTestRequestInlineCreateSchema = {
                 appVersion: {
                     type: 'string'
                 }
-            },
-            required: ['requestName', 'appVersion', 'secondsInQueue', 'bundleId', 'platform']
+            }
         },
         relationships: {
             type: 'object',
@@ -34619,7 +34701,7 @@ export const GameCenterMatchmakingTestRequestInlineCreateSchema = {
             }
         }
     },
-    required: ['attributes', 'type']
+    required: ['type']
 } as const;
 
 export const GameCenterPlayerAchievementSubmissionSchema = {
@@ -46192,7 +46274,7 @@ export const TerritoryAvailabilitySchema = {
                     type: 'array',
                     items: {
                         type: 'string',
-                        enum: ['AVAILABLE', 'AVAILABLE_FOR_PREORDER_ON_DATE', 'PROCESSING_TO_NOT_AVAILABLE', 'PROCESSING_TO_AVAILABLE', 'PROCESSING_TO_PRE_ORDER', 'AVAILABLE_FOR_SALE_UNRELEASED_APP', 'PREORDER_ON_UNRELEASED_APP', 'AVAILABLE_FOR_PREORDER', 'MISSING_RATING', 'CANNOT_SELL_RESTRICTED_RATING', 'BRAZIL_REQUIRED_TAX_ID', 'MISSING_GRN', 'UNVERIFIED_GRN', 'ICP_NUMBER_INVALID', 'ICP_NUMBER_MISSING', 'TRADER_STATUS_NOT_PROVIDED', 'TRADER_STATUS_VERIFICATION_FAILED', 'TRADER_STATUS_VERIFICATION_STATUS_MISSING', 'CANNOT_SELL_SEVENTEEN_PLUS_APPS', 'CANNOT_SELL_SEXUALLY_EXPLICIT', 'CANNOT_SELL_NON_IOS_GAMES', 'CANNOT_SELL_SEVENTEEN_PLUS_GAMES', 'CANNOT_SELL_CASINO', 'CANNOT_SELL_CASINO_WITHOUT_GRAC', 'CANNOT_SELL_CASINO_WITHOUT_AGE_VERIFICATION', 'CANNOT_SELL_ADULT_ONLY', 'CANNOT_SELL_GAMBLING_CONTESTS', 'CANNOT_SELL_GAMBLING', 'CANNOT_SELL_CONTESTS', 'CANNOT_SELL_NINETEEN_PLUS_WITHOUT_GRAC', 'CANNOT_SELL', 'CANNOT_SELL_FREQUENT_INTENSE_GAMBLING', 'CANNOT_SELL_FREQUENT_INTENSE_ALCOHOL_TOBACCO_DRUGS', 'CANNOT_SELL_FREQUENT_INTENSE_VIOLENCE', 'CANNOT_SELL_FREQUENT_INTENSE_SEXUAL_CONTENT_NUDITY', 'CANNOT_SELL_INFREQUENT_MILD_ALCOHOL_TOBACCO_DRUGS', 'CANNOT_SELL_INFREQUENT_MILD_SEXUAL_CONTENT_NUDITY', 'CANNOT_SELL_FREQUENT_INTENSE', 'CANNOT_SELL_FREQUENT_INTENSE_WITHOUT_GRAC', 'CANNOT_SELL_FREQUENT_GAMBLING', 'CANNOT_SELL_FREQUENT_ALCOHOL_TOBACCO_DRUGS', 'CANNOT_SELL_FREQUENT_VIOLENCE', 'CANNOT_SELL_FREQUENT_SEXUAL_CONTENT_NUDITY', 'CANNOT_SELL_INFREQUENT_ALCOHOL_TOBACCO_DRUGS', 'CANNOT_SELL_INFREQUENT_SEXUAL_CONTENT_NUDITY', 'CANNOT_SELL_FREQUENT', 'CANNOT_SELL_FREQUENT_WITHOUT_GRAC']
+                        enum: ['AVAILABLE', 'AVAILABLE_FOR_PREORDER_ON_DATE', 'PROCESSING_TO_NOT_AVAILABLE', 'PROCESSING_TO_AVAILABLE', 'PROCESSING_TO_PRE_ORDER', 'AVAILABLE_FOR_SALE_UNRELEASED_APP', 'PREORDER_ON_UNRELEASED_APP', 'AVAILABLE_FOR_PREORDER', 'MISSING_RATING', 'CANNOT_SELL_RESTRICTED_RATING', 'BRAZIL_REQUIRED_TAX_ID', 'BRAZIL_GAMBLING_NOT_VERIFIED', 'MISSING_GRN', 'UNVERIFIED_GRN', 'ICP_NUMBER_INVALID', 'ICP_NUMBER_MISSING', 'TRADER_STATUS_NOT_PROVIDED', 'TRADER_STATUS_VERIFICATION_FAILED', 'TRADER_STATUS_VERIFICATION_STATUS_MISSING', 'CANNOT_SELL_SEVENTEEN_PLUS_APPS', 'CANNOT_SELL_SEXUALLY_EXPLICIT', 'CANNOT_SELL_NON_IOS_GAMES', 'CANNOT_SELL_SEVENTEEN_PLUS_GAMES', 'CANNOT_SELL_CASINO', 'CANNOT_SELL_CASINO_WITHOUT_GRAC', 'CANNOT_SELL_CASINO_WITHOUT_AGE_VERIFICATION', 'CANNOT_SELL_ADULT_ONLY', 'CANNOT_SELL_GAMBLING_CONTESTS', 'CANNOT_SELL_GAMBLING', 'CANNOT_SELL_CONTESTS', 'CANNOT_SELL_NINETEEN_PLUS_WITHOUT_GRAC', 'CANNOT_SELL', 'CANNOT_SELL_FREQUENT_INTENSE_GAMBLING', 'CANNOT_SELL_FREQUENT_INTENSE_ALCOHOL_TOBACCO_DRUGS', 'CANNOT_SELL_FREQUENT_INTENSE_VIOLENCE', 'CANNOT_SELL_FREQUENT_INTENSE_SEXUAL_CONTENT_NUDITY', 'CANNOT_SELL_INFREQUENT_MILD_ALCOHOL_TOBACCO_DRUGS', 'CANNOT_SELL_INFREQUENT_MILD_SEXUAL_CONTENT_NUDITY', 'CANNOT_SELL_FREQUENT_INTENSE', 'CANNOT_SELL_FREQUENT_INTENSE_WITHOUT_GRAC', 'CANNOT_SELL_FREQUENT_GAMBLING', 'CANNOT_SELL_FREQUENT_ALCOHOL_TOBACCO_DRUGS', 'CANNOT_SELL_FREQUENT_VIOLENCE', 'CANNOT_SELL_FREQUENT_SEXUAL_CONTENT_NUDITY', 'CANNOT_SELL_INFREQUENT_ALCOHOL_TOBACCO_DRUGS', 'CANNOT_SELL_INFREQUENT_SEXUAL_CONTENT_NUDITY', 'CANNOT_SELL_FREQUENT', 'CANNOT_SELL_FREQUENT_WITHOUT_GRAC']
                     }
                 }
             }
@@ -46236,6 +46318,47 @@ export const TerritoryAvailabilityInlineCreateSchema = {
         },
         id: {
             type: 'string'
+        },
+        attributes: {
+            type: 'object',
+            properties: {
+                available: {
+                    type: 'boolean',
+                    nullable: true
+                },
+                releaseDate: {
+                    type: 'string',
+                    format: 'date',
+                    nullable: true
+                },
+                preOrderEnabled: {
+                    type: 'boolean',
+                    nullable: true
+                }
+            }
+        },
+        relationships: {
+            type: 'object',
+            properties: {
+                territory: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: ['territories']
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['id', 'type']
+                        }
+                    }
+                }
+            }
         }
     },
     required: ['type']
