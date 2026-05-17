@@ -3175,6 +3175,18 @@ export type AppPriceV2 = {
 export type AppPriceV2InlineCreate = {
     type: 'appPrices';
     id?: string;
+    attributes?: {
+        startDate?: string | null;
+        endDate?: string | null;
+    };
+    relationships?: {
+        appPricePoint?: {
+            data?: {
+                type: 'appPricePoints';
+                id: string;
+            };
+        };
+    };
 };
 
 /**
@@ -8021,6 +8033,12 @@ export type CustomerReview = {
                 id: string;
             };
         };
+        reviewTerritory?: {
+            data?: {
+                type: 'territories';
+                id: string;
+            };
+        };
     };
     links?: ResourceLinks;
 };
@@ -8030,7 +8048,11 @@ export type CustomerReview = {
  */
 export type CustomerReviewsResponse = {
     data: Array<CustomerReview>;
-    included?: Array<CustomerReviewResponseV1>;
+    included?: Array<({
+        type: 'customerReviewResponses';
+    } & CustomerReviewResponseV1) | ({
+        type: 'territories';
+    } & Territory)>;
     links: PagedDocumentLinks;
     meta?: PagingInformation;
 };
@@ -8040,7 +8062,11 @@ export type CustomerReviewsResponse = {
  */
 export type CustomerReviewResponse = {
     data: CustomerReview;
-    included?: Array<CustomerReviewResponseV1>;
+    included?: Array<({
+        type: 'customerReviewResponses';
+    } & CustomerReviewResponseV1) | ({
+        type: 'territories';
+    } & Territory)>;
     links: DocumentLinks;
 };
 
@@ -12964,8 +12990,8 @@ export type GameCenterMatchmakingTestPlayerProperty = {
 export type GameCenterMatchmakingTestPlayerPropertyInlineCreate = {
     type: 'gameCenterMatchmakingTestPlayerProperties';
     id?: string;
-    attributes: {
-        playerId: string;
+    attributes?: {
+        playerId?: string;
         properties?: Array<Property> | null;
     };
 };
@@ -12982,17 +13008,17 @@ export type GameCenterMatchmakingTestRequest = {
 export type GameCenterMatchmakingTestRequestInlineCreate = {
     type: 'gameCenterMatchmakingTestRequests';
     id?: string;
-    attributes: {
-        requestName: string;
-        secondsInQueue: number;
+    attributes?: {
+        requestName?: string;
+        secondsInQueue?: number;
         locale?: 'AR-SA' | 'CA-ES' | 'CS-CZ' | 'DA-DK' | 'DE-DE' | 'EL-GR' | 'EN-AU' | 'EN-GB' | 'EN-US' | 'EN-KY' | 'ES-ES' | 'ES-MX' | 'FI-FI' | 'FR-CA' | 'FR-FR' | 'HI-IN' | 'HR-HR' | 'HU-HU' | 'ID-ID' | 'IT-IT' | 'IW-IL' | 'JA-JP' | 'KO-KR' | 'MS-MY' | 'NL-NL' | 'NO-NO' | 'PL-PL' | 'PT-BR' | 'PT-PT' | 'RO-RO' | 'RU-RU' | 'SK-SK' | 'SV-SE' | 'TH-TH' | 'TR-TR' | 'UK-UA' | 'ZH-CN' | 'ZH-TW' | 'ZH-HK';
         location?: Location;
         minPlayers?: number | null;
         maxPlayers?: number | null;
         playerCount?: number | null;
-        bundleId: string;
-        platform: Platform;
-        appVersion: string;
+        bundleId?: string;
+        platform?: Platform;
+        appVersion?: string;
     };
     relationships?: {
         matchmakingPlayerProperties?: {
@@ -17322,7 +17348,7 @@ export type TerritoryAvailability = {
         releaseDate?: string;
         preOrderEnabled?: boolean;
         preOrderPublishDate?: string;
-        contentStatuses?: Array<'AVAILABLE' | 'AVAILABLE_FOR_PREORDER_ON_DATE' | 'PROCESSING_TO_NOT_AVAILABLE' | 'PROCESSING_TO_AVAILABLE' | 'PROCESSING_TO_PRE_ORDER' | 'AVAILABLE_FOR_SALE_UNRELEASED_APP' | 'PREORDER_ON_UNRELEASED_APP' | 'AVAILABLE_FOR_PREORDER' | 'MISSING_RATING' | 'CANNOT_SELL_RESTRICTED_RATING' | 'BRAZIL_REQUIRED_TAX_ID' | 'MISSING_GRN' | 'UNVERIFIED_GRN' | 'ICP_NUMBER_INVALID' | 'ICP_NUMBER_MISSING' | 'TRADER_STATUS_NOT_PROVIDED' | 'TRADER_STATUS_VERIFICATION_FAILED' | 'TRADER_STATUS_VERIFICATION_STATUS_MISSING' | 'CANNOT_SELL_SEVENTEEN_PLUS_APPS' | 'CANNOT_SELL_SEXUALLY_EXPLICIT' | 'CANNOT_SELL_NON_IOS_GAMES' | 'CANNOT_SELL_SEVENTEEN_PLUS_GAMES' | 'CANNOT_SELL_CASINO' | 'CANNOT_SELL_CASINO_WITHOUT_GRAC' | 'CANNOT_SELL_CASINO_WITHOUT_AGE_VERIFICATION' | 'CANNOT_SELL_ADULT_ONLY' | 'CANNOT_SELL_GAMBLING_CONTESTS' | 'CANNOT_SELL_GAMBLING' | 'CANNOT_SELL_CONTESTS' | 'CANNOT_SELL_NINETEEN_PLUS_WITHOUT_GRAC' | 'CANNOT_SELL' | 'CANNOT_SELL_FREQUENT_INTENSE_GAMBLING' | 'CANNOT_SELL_FREQUENT_INTENSE_ALCOHOL_TOBACCO_DRUGS' | 'CANNOT_SELL_FREQUENT_INTENSE_VIOLENCE' | 'CANNOT_SELL_FREQUENT_INTENSE_SEXUAL_CONTENT_NUDITY' | 'CANNOT_SELL_INFREQUENT_MILD_ALCOHOL_TOBACCO_DRUGS' | 'CANNOT_SELL_INFREQUENT_MILD_SEXUAL_CONTENT_NUDITY' | 'CANNOT_SELL_FREQUENT_INTENSE' | 'CANNOT_SELL_FREQUENT_INTENSE_WITHOUT_GRAC' | 'CANNOT_SELL_FREQUENT_GAMBLING' | 'CANNOT_SELL_FREQUENT_ALCOHOL_TOBACCO_DRUGS' | 'CANNOT_SELL_FREQUENT_VIOLENCE' | 'CANNOT_SELL_FREQUENT_SEXUAL_CONTENT_NUDITY' | 'CANNOT_SELL_INFREQUENT_ALCOHOL_TOBACCO_DRUGS' | 'CANNOT_SELL_INFREQUENT_SEXUAL_CONTENT_NUDITY' | 'CANNOT_SELL_FREQUENT' | 'CANNOT_SELL_FREQUENT_WITHOUT_GRAC'>;
+        contentStatuses?: Array<'AVAILABLE' | 'AVAILABLE_FOR_PREORDER_ON_DATE' | 'PROCESSING_TO_NOT_AVAILABLE' | 'PROCESSING_TO_AVAILABLE' | 'PROCESSING_TO_PRE_ORDER' | 'AVAILABLE_FOR_SALE_UNRELEASED_APP' | 'PREORDER_ON_UNRELEASED_APP' | 'AVAILABLE_FOR_PREORDER' | 'MISSING_RATING' | 'CANNOT_SELL_RESTRICTED_RATING' | 'BRAZIL_REQUIRED_TAX_ID' | 'BRAZIL_GAMBLING_NOT_VERIFIED' | 'MISSING_GRN' | 'UNVERIFIED_GRN' | 'ICP_NUMBER_INVALID' | 'ICP_NUMBER_MISSING' | 'TRADER_STATUS_NOT_PROVIDED' | 'TRADER_STATUS_VERIFICATION_FAILED' | 'TRADER_STATUS_VERIFICATION_STATUS_MISSING' | 'CANNOT_SELL_SEVENTEEN_PLUS_APPS' | 'CANNOT_SELL_SEXUALLY_EXPLICIT' | 'CANNOT_SELL_NON_IOS_GAMES' | 'CANNOT_SELL_SEVENTEEN_PLUS_GAMES' | 'CANNOT_SELL_CASINO' | 'CANNOT_SELL_CASINO_WITHOUT_GRAC' | 'CANNOT_SELL_CASINO_WITHOUT_AGE_VERIFICATION' | 'CANNOT_SELL_ADULT_ONLY' | 'CANNOT_SELL_GAMBLING_CONTESTS' | 'CANNOT_SELL_GAMBLING' | 'CANNOT_SELL_CONTESTS' | 'CANNOT_SELL_NINETEEN_PLUS_WITHOUT_GRAC' | 'CANNOT_SELL' | 'CANNOT_SELL_FREQUENT_INTENSE_GAMBLING' | 'CANNOT_SELL_FREQUENT_INTENSE_ALCOHOL_TOBACCO_DRUGS' | 'CANNOT_SELL_FREQUENT_INTENSE_VIOLENCE' | 'CANNOT_SELL_FREQUENT_INTENSE_SEXUAL_CONTENT_NUDITY' | 'CANNOT_SELL_INFREQUENT_MILD_ALCOHOL_TOBACCO_DRUGS' | 'CANNOT_SELL_INFREQUENT_MILD_SEXUAL_CONTENT_NUDITY' | 'CANNOT_SELL_FREQUENT_INTENSE' | 'CANNOT_SELL_FREQUENT_INTENSE_WITHOUT_GRAC' | 'CANNOT_SELL_FREQUENT_GAMBLING' | 'CANNOT_SELL_FREQUENT_ALCOHOL_TOBACCO_DRUGS' | 'CANNOT_SELL_FREQUENT_VIOLENCE' | 'CANNOT_SELL_FREQUENT_SEXUAL_CONTENT_NUDITY' | 'CANNOT_SELL_INFREQUENT_ALCOHOL_TOBACCO_DRUGS' | 'CANNOT_SELL_INFREQUENT_SEXUAL_CONTENT_NUDITY' | 'CANNOT_SELL_FREQUENT' | 'CANNOT_SELL_FREQUENT_WITHOUT_GRAC'>;
     };
     relationships?: {
         territory?: {
@@ -17338,6 +17364,19 @@ export type TerritoryAvailability = {
 export type TerritoryAvailabilityInlineCreate = {
     type: 'territoryAvailabilities';
     id?: string;
+    attributes?: {
+        available?: boolean | null;
+        releaseDate?: string | null;
+        preOrderEnabled?: boolean | null;
+    };
+    relationships?: {
+        territory?: {
+            data?: {
+                type: 'territories';
+                id: string;
+            };
+        };
+    };
 };
 
 /**
@@ -23376,6 +23415,10 @@ export type AlternativeDistributionPackageVersionsGetInstanceData = {
          */
         'fields[alternativeDistributionPackageDeltas]'?: Array<'url' | 'urlExpirationDate' | 'alternativeDistributionKeyBlob' | 'fileChecksum'>;
         /**
+         * the fields to include for returned resources of type alternativeDistributionPackages
+         */
+        'fields[alternativeDistributionPackages]'?: Array<'sourceFileChecksum' | 'versions'>;
+        /**
          * comma-separated list of relationships to include
          */
         include?: Array<'variants' | 'deltas' | 'alternativeDistributionPackage'>;
@@ -24498,6 +24541,18 @@ export type AppClipAdvancedExperiencesGetInstanceData = {
          */
         'fields[appClipAdvancedExperiences]'?: Array<'link' | 'version' | 'status' | 'action' | 'isPoweredBy' | 'place' | 'placeStatus' | 'businessCategory' | 'defaultLanguage' | 'appClip' | 'headerImage' | 'localizations'>;
         /**
+         * the fields to include for returned resources of type appClips
+         */
+        'fields[appClips]'?: Array<'bundleId' | 'app' | 'appClipDefaultExperiences' | 'appClipAdvancedExperiences'>;
+        /**
+         * the fields to include for returned resources of type appClipAdvancedExperienceImages
+         */
+        'fields[appClipAdvancedExperienceImages]'?: Array<'fileSize' | 'fileName' | 'sourceFileChecksum' | 'imageAsset' | 'uploadOperations' | 'assetDeliveryState'>;
+        /**
+         * the fields to include for returned resources of type appClipAdvancedExperienceLocalizations
+         */
+        'fields[appClipAdvancedExperienceLocalizations]'?: Array<'language' | 'title' | 'subtitle'>;
+        /**
          * comma-separated list of relationships to include
          */
         include?: Array<'appClip' | 'headerImage' | 'localizations'>;
@@ -24661,6 +24716,10 @@ export type AppClipAppStoreReviewDetailsGetInstanceData = {
          * the fields to include for returned resources of type appClipAppStoreReviewDetails
          */
         'fields[appClipAppStoreReviewDetails]'?: Array<'invocationUrls' | 'appClipDefaultExperience'>;
+        /**
+         * the fields to include for returned resources of type appClipDefaultExperiences
+         */
+        'fields[appClipDefaultExperiences]'?: Array<'action' | 'appClip' | 'releaseWithAppStoreVersion' | 'appClipDefaultExperienceLocalizations' | 'appClipAppStoreReviewDetail'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -24867,6 +24926,10 @@ export type AppClipDefaultExperienceLocalizationsGetInstanceData = {
          * the fields to include for returned resources of type appClipDefaultExperienceLocalizations
          */
         'fields[appClipDefaultExperienceLocalizations]'?: Array<'locale' | 'subtitle' | 'appClipDefaultExperience' | 'appClipHeaderImage'>;
+        /**
+         * the fields to include for returned resources of type appClipDefaultExperiences
+         */
+        'fields[appClipDefaultExperiences]'?: Array<'action' | 'appClip' | 'releaseWithAppStoreVersion' | 'appClipDefaultExperienceLocalizations' | 'appClipAppStoreReviewDetail'>;
         /**
          * the fields to include for returned resources of type appClipHeaderImages
          */
@@ -25077,6 +25140,10 @@ export type AppClipDefaultExperiencesGetInstanceData = {
          * the fields to include for returned resources of type appClipDefaultExperiences
          */
         'fields[appClipDefaultExperiences]'?: Array<'action' | 'appClip' | 'releaseWithAppStoreVersion' | 'appClipDefaultExperienceLocalizations' | 'appClipAppStoreReviewDetail'>;
+        /**
+         * the fields to include for returned resources of type appClips
+         */
+        'fields[appClips]'?: Array<'bundleId' | 'app' | 'appClipDefaultExperiences' | 'appClipAdvancedExperiences'>;
         /**
          * the fields to include for returned resources of type appStoreVersions
          */
@@ -25300,6 +25367,10 @@ export type AppClipHeaderImagesGetInstanceData = {
          */
         'fields[appClipHeaderImages]'?: Array<'fileSize' | 'fileName' | 'sourceFileChecksum' | 'imageAsset' | 'uploadOperations' | 'assetDeliveryState' | 'appClipDefaultExperienceLocalization'>;
         /**
+         * the fields to include for returned resources of type appClipDefaultExperienceLocalizations
+         */
+        'fields[appClipDefaultExperienceLocalizations]'?: Array<'locale' | 'subtitle' | 'appClipDefaultExperience' | 'appClipHeaderImage'>;
+        /**
          * comma-separated list of relationships to include
          */
         include?: Array<'appClipDefaultExperienceLocalization'>;
@@ -25411,6 +25482,10 @@ export type AppClipsGetInstanceData = {
          * the fields to include for returned resources of type appClips
          */
         'fields[appClips]'?: Array<'bundleId' | 'app' | 'appClipDefaultExperiences' | 'appClipAdvancedExperiences'>;
+        /**
+         * the fields to include for returned resources of type apps
+         */
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type appClipDefaultExperiences
          */
@@ -25568,6 +25643,10 @@ export type AppCustomProductPageLocalizationsGetInstanceData = {
          * the fields to include for returned resources of type appCustomProductPageLocalizations
          */
         'fields[appCustomProductPageLocalizations]'?: Array<'locale' | 'promotionalText' | 'appCustomProductPageVersion' | 'appScreenshotSets' | 'appPreviewSets' | 'searchKeywords'>;
+        /**
+         * the fields to include for returned resources of type appCustomProductPageVersions
+         */
+        'fields[appCustomProductPageVersions]'?: Array<'version' | 'state' | 'deepLink' | 'appCustomProductPage' | 'appCustomProductPageLocalizations'>;
         /**
          * the fields to include for returned resources of type appScreenshotSets
          */
@@ -25748,6 +25827,10 @@ export type AppCustomProductPageVersionsGetInstanceData = {
          * the fields to include for returned resources of type appCustomProductPageVersions
          */
         'fields[appCustomProductPageVersions]'?: Array<'version' | 'state' | 'deepLink' | 'appCustomProductPage' | 'appCustomProductPageLocalizations'>;
+        /**
+         * the fields to include for returned resources of type appCustomProductPages
+         */
+        'fields[appCustomProductPages]'?: Array<'name' | 'url' | 'visible' | 'app' | 'appCustomProductPageVersions'>;
         /**
          * the fields to include for returned resources of type appCustomProductPageLocalizations
          */
@@ -25962,6 +26045,10 @@ export type AppCustomProductPagesGetInstanceData = {
          * the fields to include for returned resources of type appCustomProductPages
          */
         'fields[appCustomProductPages]'?: Array<'name' | 'url' | 'visible' | 'app' | 'appCustomProductPageVersions'>;
+        /**
+         * the fields to include for returned resources of type apps
+         */
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type appCustomProductPageVersions
          */
@@ -26252,6 +26339,11 @@ export type AppEncryptionDeclarationsGetCollectionData = {
          */
         'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
+         * the fields to include for returned resources of type builds
+         * @deprecated
+         */
+        'fields[builds]'?: Array<'version' | 'uploadedDate' | 'expirationDate' | 'expired' | 'minOsVersion' | 'lsMinimumSystemVersion' | 'computedMinMacOsVersion' | 'computedMinVisionOsVersion' | 'iconAssetToken' | 'processingState' | 'buildAudienceType' | 'usesNonExemptEncryption' | 'preReleaseVersion' | 'individualTesters' | 'betaGroups' | 'betaBuildLocalizations' | 'appEncryptionDeclaration' | 'betaAppReviewSubmission' | 'app' | 'buildBetaDetail' | 'appStoreVersion' | 'icons' | 'buildBundles' | 'buildUpload' | 'perfPowerMetrics' | 'diagnosticSignatures'>;
+        /**
          * the fields to include for returned resources of type appEncryptionDeclarationDocuments
          */
         'fields[appEncryptionDeclarationDocuments]'?: Array<'fileSize' | 'fileName' | 'assetToken' | 'downloadUrl' | 'sourceFileChecksum' | 'uploadOperations' | 'assetDeliveryState'>;
@@ -26367,6 +26459,11 @@ export type AppEncryptionDeclarationsGetInstanceData = {
          * @deprecated
          */
         'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        /**
+         * the fields to include for returned resources of type builds
+         * @deprecated
+         */
+        'fields[builds]'?: Array<'version' | 'uploadedDate' | 'expirationDate' | 'expired' | 'minOsVersion' | 'lsMinimumSystemVersion' | 'computedMinMacOsVersion' | 'computedMinVisionOsVersion' | 'iconAssetToken' | 'processingState' | 'buildAudienceType' | 'usesNonExemptEncryption' | 'preReleaseVersion' | 'individualTesters' | 'betaGroups' | 'betaBuildLocalizations' | 'appEncryptionDeclaration' | 'betaAppReviewSubmission' | 'app' | 'buildBetaDetail' | 'appStoreVersion' | 'icons' | 'buildBundles' | 'buildUpload' | 'perfPowerMetrics' | 'diagnosticSignatures'>;
         /**
          * the fields to include for returned resources of type appEncryptionDeclarationDocuments
          */
@@ -26524,6 +26621,10 @@ export type AppEventLocalizationsGetInstanceData = {
          * the fields to include for returned resources of type appEventLocalizations
          */
         'fields[appEventLocalizations]'?: Array<'locale' | 'name' | 'shortDescription' | 'longDescription' | 'appEvent' | 'appEventScreenshots' | 'appEventVideoClips'>;
+        /**
+         * the fields to include for returned resources of type appEvents
+         */
+        'fields[appEvents]'?: Array<'referenceName' | 'badge' | 'eventState' | 'deepLink' | 'purchaseRequirement' | 'primaryLocale' | 'priority' | 'purpose' | 'territorySchedules' | 'archivedTerritorySchedules' | 'localizations'>;
         /**
          * the fields to include for returned resources of type appEventScreenshots
          */
@@ -26747,6 +26848,10 @@ export type AppEventScreenshotsGetInstanceData = {
          */
         'fields[appEventScreenshots]'?: Array<'fileSize' | 'fileName' | 'imageAsset' | 'assetToken' | 'uploadOperations' | 'assetDeliveryState' | 'appEventAssetType' | 'appEventLocalization'>;
         /**
+         * the fields to include for returned resources of type appEventLocalizations
+         */
+        'fields[appEventLocalizations]'?: Array<'locale' | 'name' | 'shortDescription' | 'longDescription' | 'appEvent' | 'appEventScreenshots' | 'appEventVideoClips'>;
+        /**
          * comma-separated list of relationships to include
          */
         include?: Array<'appEventLocalization'>;
@@ -26952,6 +27057,10 @@ export type AppEventVideoClipsGetInstanceData = {
          * the fields to include for returned resources of type appEventVideoClips
          */
         'fields[appEventVideoClips]'?: Array<'fileSize' | 'fileName' | 'previewFrameTimeCode' | 'videoUrl' | 'previewFrameImage' | 'previewImage' | 'uploadOperations' | 'assetDeliveryState' | 'videoDeliveryState' | 'appEventAssetType' | 'appEventLocalization'>;
+        /**
+         * the fields to include for returned resources of type appEventLocalizations
+         */
+        'fields[appEventLocalizations]'?: Array<'locale' | 'name' | 'shortDescription' | 'longDescription' | 'appEvent' | 'appEventScreenshots' | 'appEventVideoClips'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -27373,6 +27482,10 @@ export type AppInfoLocalizationsGetInstanceData = {
          */
         'fields[appInfoLocalizations]'?: Array<'locale' | 'name' | 'subtitle' | 'privacyPolicyUrl' | 'privacyChoicesUrl' | 'privacyPolicyText' | 'appInfo'>;
         /**
+         * the fields to include for returned resources of type appInfos
+         */
+        'fields[appInfos]'?: Array<'appStoreState' | 'state' | 'appStoreAgeRating' | 'australiaAgeRating' | 'brazilAgeRating' | 'brazilAgeRatingV2' | 'franceAgeRating' | 'koreaAgeRating' | 'kidsAgeBand' | 'app' | 'ageRatingDeclaration' | 'appInfoLocalizations' | 'primaryCategory' | 'primarySubcategoryOne' | 'primarySubcategoryTwo' | 'secondaryCategory' | 'secondarySubcategoryOne' | 'secondarySubcategoryTwo' | 'territoryAgeRatings'>;
+        /**
          * comma-separated list of relationships to include
          */
         include?: Array<'appInfo'>;
@@ -27484,6 +27597,10 @@ export type AppInfosGetInstanceData = {
          * the fields to include for returned resources of type appInfos
          */
         'fields[appInfos]'?: Array<'appStoreState' | 'state' | 'appStoreAgeRating' | 'australiaAgeRating' | 'brazilAgeRating' | 'brazilAgeRatingV2' | 'franceAgeRating' | 'koreaAgeRating' | 'kidsAgeBand' | 'app' | 'ageRatingDeclaration' | 'appInfoLocalizations' | 'primaryCategory' | 'primarySubcategoryOne' | 'primarySubcategoryTwo' | 'secondaryCategory' | 'secondarySubcategoryOne' | 'secondarySubcategoryTwo' | 'territoryAgeRatings'>;
+        /**
+         * the fields to include for returned resources of type apps
+         */
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type ageRatingDeclarations
          */
@@ -27707,6 +27824,18 @@ export type AppPreviewSetsGetInstanceData = {
          */
         'fields[appPreviewSets]'?: Array<'previewType' | 'appStoreVersionLocalization' | 'appCustomProductPageLocalization' | 'appStoreVersionExperimentTreatmentLocalization' | 'appPreviews'>;
         /**
+         * the fields to include for returned resources of type appStoreVersionLocalizations
+         */
+        'fields[appStoreVersionLocalizations]'?: Array<'description' | 'locale' | 'keywords' | 'marketingUrl' | 'promotionalText' | 'supportUrl' | 'whatsNew' | 'appStoreVersion' | 'appScreenshotSets' | 'appPreviewSets' | 'searchKeywords'>;
+        /**
+         * the fields to include for returned resources of type appCustomProductPageLocalizations
+         */
+        'fields[appCustomProductPageLocalizations]'?: Array<'locale' | 'promotionalText' | 'appCustomProductPageVersion' | 'appScreenshotSets' | 'appPreviewSets' | 'searchKeywords'>;
+        /**
+         * the fields to include for returned resources of type appStoreVersionExperimentTreatmentLocalizations
+         */
+        'fields[appStoreVersionExperimentTreatmentLocalizations]'?: Array<'locale' | 'appStoreVersionExperimentTreatment' | 'appScreenshotSets' | 'appPreviewSets'>;
+        /**
          * the fields to include for returned resources of type appPreviews
          */
         'fields[appPreviews]'?: Array<'fileSize' | 'fileName' | 'sourceFileChecksum' | 'previewFrameTimeCode' | 'mimeType' | 'videoUrl' | 'previewFrameImage' | 'previewImage' | 'uploadOperations' | 'assetDeliveryState' | 'videoDeliveryState' | 'appPreviewSet'>;
@@ -27864,6 +27993,10 @@ export type AppPreviewsGetInstanceData = {
          */
         'fields[appPreviews]'?: Array<'fileSize' | 'fileName' | 'sourceFileChecksum' | 'previewFrameTimeCode' | 'mimeType' | 'videoUrl' | 'previewFrameImage' | 'previewImage' | 'uploadOperations' | 'assetDeliveryState' | 'videoDeliveryState' | 'appPreviewSet'>;
         /**
+         * the fields to include for returned resources of type appPreviewSets
+         */
+        'fields[appPreviewSets]'?: Array<'previewType' | 'appStoreVersionLocalization' | 'appCustomProductPageLocalization' | 'appStoreVersionExperimentTreatmentLocalization' | 'appPreviews'>;
+        /**
          * comma-separated list of relationships to include
          */
         include?: Array<'appPreviewSet'>;
@@ -27976,6 +28109,14 @@ export type AppPricePointsV3GetInstanceData = {
          */
         'fields[appPricePoints]'?: Array<'customerPrice' | 'proceeds' | 'app' | 'equalizations' | 'territory'>;
         /**
+         * the fields to include for returned resources of type apps
+         */
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        /**
+         * the fields to include for returned resources of type territories
+         */
+        'fields[territories]'?: Array<'currency'>;
+        /**
          * comma-separated list of relationships to include
          */
         include?: Array<'app' | 'territory'>;
@@ -28078,6 +28219,10 @@ export type AppPriceSchedulesGetInstanceData = {
          * the fields to include for returned resources of type appPriceSchedules
          */
         'fields[appPriceSchedules]'?: Array<'app' | 'baseTerritory' | 'manualPrices' | 'automaticPrices'>;
+        /**
+         * the fields to include for returned resources of type apps
+         */
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type territories
          */
@@ -28244,6 +28389,18 @@ export type AppScreenshotSetsGetInstanceData = {
          */
         'fields[appScreenshotSets]'?: Array<'screenshotDisplayType' | 'appStoreVersionLocalization' | 'appCustomProductPageLocalization' | 'appStoreVersionExperimentTreatmentLocalization' | 'appScreenshots'>;
         /**
+         * the fields to include for returned resources of type appStoreVersionLocalizations
+         */
+        'fields[appStoreVersionLocalizations]'?: Array<'description' | 'locale' | 'keywords' | 'marketingUrl' | 'promotionalText' | 'supportUrl' | 'whatsNew' | 'appStoreVersion' | 'appScreenshotSets' | 'appPreviewSets' | 'searchKeywords'>;
+        /**
+         * the fields to include for returned resources of type appCustomProductPageLocalizations
+         */
+        'fields[appCustomProductPageLocalizations]'?: Array<'locale' | 'promotionalText' | 'appCustomProductPageVersion' | 'appScreenshotSets' | 'appPreviewSets' | 'searchKeywords'>;
+        /**
+         * the fields to include for returned resources of type appStoreVersionExperimentTreatmentLocalizations
+         */
+        'fields[appStoreVersionExperimentTreatmentLocalizations]'?: Array<'locale' | 'appStoreVersionExperimentTreatment' | 'appScreenshotSets' | 'appPreviewSets'>;
+        /**
          * the fields to include for returned resources of type appScreenshots
          */
         'fields[appScreenshots]'?: Array<'fileSize' | 'fileName' | 'sourceFileChecksum' | 'imageAsset' | 'assetToken' | 'assetType' | 'uploadOperations' | 'assetDeliveryState' | 'appScreenshotSet'>;
@@ -28400,6 +28557,10 @@ export type AppScreenshotsGetInstanceData = {
          * the fields to include for returned resources of type appScreenshots
          */
         'fields[appScreenshots]'?: Array<'fileSize' | 'fileName' | 'sourceFileChecksum' | 'imageAsset' | 'assetToken' | 'assetType' | 'uploadOperations' | 'assetDeliveryState' | 'appScreenshotSet'>;
+        /**
+         * the fields to include for returned resources of type appScreenshotSets
+         */
+        'fields[appScreenshotSets]'?: Array<'screenshotDisplayType' | 'appStoreVersionLocalization' | 'appCustomProductPageLocalization' | 'appStoreVersionExperimentTreatmentLocalization' | 'appScreenshots'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -28607,6 +28768,10 @@ export type AppStoreReviewAttachmentsGetInstanceData = {
          */
         'fields[appStoreReviewAttachments]'?: Array<'fileSize' | 'fileName' | 'sourceFileChecksum' | 'uploadOperations' | 'assetDeliveryState' | 'appStoreReviewDetail'>;
         /**
+         * the fields to include for returned resources of type appStoreReviewDetails
+         */
+        'fields[appStoreReviewDetails]'?: Array<'contactFirstName' | 'contactLastName' | 'contactPhone' | 'contactEmail' | 'demoAccountName' | 'demoAccountPassword' | 'demoAccountRequired' | 'notes' | 'appStoreVersion' | 'appStoreReviewAttachments'>;
+        /**
          * comma-separated list of relationships to include
          */
         include?: Array<'appStoreReviewDetail'>;
@@ -28766,6 +28931,10 @@ export type AppStoreReviewDetailsGetInstanceData = {
          * the fields to include for returned resources of type appStoreReviewDetails
          */
         'fields[appStoreReviewDetails]'?: Array<'contactFirstName' | 'contactLastName' | 'contactPhone' | 'contactEmail' | 'demoAccountName' | 'demoAccountPassword' | 'demoAccountRequired' | 'notes' | 'appStoreVersion' | 'appStoreReviewAttachments'>;
+        /**
+         * the fields to include for returned resources of type appStoreVersions
+         */
+        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
         /**
          * the fields to include for returned resources of type appStoreReviewAttachments
          */
@@ -28981,6 +29150,10 @@ export type AppStoreVersionExperimentTreatmentLocalizationsGetInstanceData = {
          */
         'fields[appStoreVersionExperimentTreatmentLocalizations]'?: Array<'locale' | 'appStoreVersionExperimentTreatment' | 'appScreenshotSets' | 'appPreviewSets'>;
         /**
+         * the fields to include for returned resources of type appStoreVersionExperimentTreatments
+         */
+        'fields[appStoreVersionExperimentTreatments]'?: Array<'name' | 'appIcon' | 'appIconName' | 'promotedDate' | 'appStoreVersionExperiment' | 'appStoreVersionExperimentV2' | 'appStoreVersionExperimentTreatmentLocalizations'>;
+        /**
          * the fields to include for returned resources of type appScreenshotSets
          */
         'fields[appScreenshotSets]'?: Array<'screenshotDisplayType' | 'appStoreVersionLocalization' | 'appCustomProductPageLocalization' | 'appStoreVersionExperimentTreatmentLocalization' | 'appScreenshots'>;
@@ -29145,6 +29318,10 @@ export type AppStoreVersionExperimentTreatmentsGetInstanceData = {
          * the fields to include for returned resources of type appStoreVersionExperimentTreatments
          */
         'fields[appStoreVersionExperimentTreatments]'?: Array<'name' | 'appIcon' | 'appIconName' | 'promotedDate' | 'appStoreVersionExperiment' | 'appStoreVersionExperimentV2' | 'appStoreVersionExperimentTreatmentLocalizations'>;
+        /**
+         * the fields to include for returned resources of type appStoreVersionExperiments
+         */
+        'fields[appStoreVersionExperiments]'?: Array<'name' | 'trafficProportion' | 'state' | 'reviewRequired' | 'startDate' | 'endDate' | 'appStoreVersion' | 'appStoreVersionExperimentTreatments' | 'platform' | 'app' | 'latestControlVersion' | 'controlVersions'>;
         /**
          * the fields to include for returned resources of type appStoreVersionExperimentTreatmentLocalizations
          */
@@ -29359,6 +29536,14 @@ export type AppStoreVersionExperimentsV2GetInstanceData = {
          * the fields to include for returned resources of type appStoreVersionExperiments
          */
         'fields[appStoreVersionExperiments]'?: Array<'name' | 'platform' | 'trafficProportion' | 'state' | 'reviewRequired' | 'startDate' | 'endDate' | 'app' | 'latestControlVersion' | 'controlVersions' | 'appStoreVersionExperimentTreatments'>;
+        /**
+         * the fields to include for returned resources of type apps
+         */
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        /**
+         * the fields to include for returned resources of type appStoreVersions
+         */
+        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
         /**
          * the fields to include for returned resources of type appStoreVersionExperimentTreatments
          */
@@ -29578,6 +29763,10 @@ export type AppStoreVersionExperimentsGetInstanceData = {
          */
         'fields[appStoreVersionExperiments]'?: Array<'name' | 'trafficProportion' | 'state' | 'reviewRequired' | 'startDate' | 'endDate' | 'appStoreVersion' | 'appStoreVersionExperimentTreatments'>;
         /**
+         * the fields to include for returned resources of type appStoreVersions
+         */
+        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
+        /**
          * the fields to include for returned resources of type appStoreVersionExperimentTreatments
          */
         'fields[appStoreVersionExperimentTreatments]'?: Array<'name' | 'appIcon' | 'appIconName' | 'promotedDate' | 'appStoreVersionExperiment' | 'appStoreVersionExperimentV2' | 'appStoreVersionExperimentTreatmentLocalizations'>;
@@ -29791,6 +29980,10 @@ export type AppStoreVersionLocalizationsGetInstanceData = {
          * the fields to include for returned resources of type appStoreVersionLocalizations
          */
         'fields[appStoreVersionLocalizations]'?: Array<'description' | 'locale' | 'keywords' | 'marketingUrl' | 'promotionalText' | 'supportUrl' | 'whatsNew' | 'appStoreVersion' | 'appScreenshotSets' | 'appPreviewSets' | 'searchKeywords'>;
+        /**
+         * the fields to include for returned resources of type appStoreVersions
+         */
+        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
         /**
          * the fields to include for returned resources of type appScreenshotSets
          */
@@ -30311,6 +30504,10 @@ export type AppStoreVersionsGetInstanceData = {
          */
         'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
         /**
+         * the fields to include for returned resources of type apps
+         */
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        /**
          * the fields to include for returned resources of type appStoreVersionLocalizations
          */
         'fields[appStoreVersionLocalizations]'?: Array<'description' | 'locale' | 'keywords' | 'marketingUrl' | 'promotionalText' | 'supportUrl' | 'whatsNew' | 'appStoreVersion' | 'appScreenshotSets' | 'appPreviewSets' | 'searchKeywords'>;
@@ -30583,6 +30780,10 @@ export type AppsGetCollectionData = {
          */
         'fields[appEncryptionDeclarations]'?: Array<'appDescription' | 'createdDate' | 'usesEncryption' | 'exempt' | 'containsProprietaryCryptography' | 'containsThirdPartyCryptography' | 'availableOnFrenchStore' | 'platform' | 'uploadedDate' | 'documentUrl' | 'documentName' | 'documentType' | 'appEncryptionDeclarationState' | 'codeValue' | 'app' | 'builds' | 'appEncryptionDeclarationDocument'>;
         /**
+         * the fields to include for returned resources of type buildIcons
+         */
+        'fields[buildIcons]'?: Array<'iconAsset' | 'iconType' | 'masked' | 'name'>;
+        /**
          * the fields to include for returned resources of type ciProducts
          */
         'fields[ciProducts]'?: Array<'name' | 'createdDate' | 'productType' | 'app' | 'bundleId' | 'workflows' | 'primaryRepositories' | 'additionalRepositories' | 'buildRuns'>;
@@ -30804,6 +31005,10 @@ export type AppsGetInstanceData = {
          * the fields to include for returned resources of type appEncryptionDeclarations
          */
         'fields[appEncryptionDeclarations]'?: Array<'appDescription' | 'createdDate' | 'usesEncryption' | 'exempt' | 'containsProprietaryCryptography' | 'containsThirdPartyCryptography' | 'availableOnFrenchStore' | 'platform' | 'uploadedDate' | 'documentUrl' | 'documentName' | 'documentType' | 'appEncryptionDeclarationState' | 'codeValue' | 'app' | 'builds' | 'appEncryptionDeclarationDocument'>;
+        /**
+         * the fields to include for returned resources of type buildIcons
+         */
+        'fields[buildIcons]'?: Array<'iconAsset' | 'iconType' | 'masked' | 'name'>;
         /**
          * the fields to include for returned resources of type ciProducts
          */
@@ -31236,6 +31441,10 @@ export type BackgroundAssetVersionAppStoreReleasesGetInstanceData = {
          */
         'fields[backgroundAssetVersionAppStoreReleases]'?: Array<'state' | 'backgroundAssetVersion'>;
         /**
+         * the fields to include for returned resources of type backgroundAssetVersions
+         */
+        'fields[backgroundAssetVersions]'?: Array<'createdDate' | 'platforms' | 'state' | 'stateDetails' | 'version' | 'backgroundAsset' | 'internalBetaRelease' | 'externalBetaRelease' | 'appStoreRelease' | 'assetFile' | 'manifestFile' | 'backgroundAssetUploadFiles'>;
+        /**
          * comma-separated list of relationships to include
          */
         include?: Array<'backgroundAssetVersion'>;
@@ -31291,6 +31500,10 @@ export type BackgroundAssetVersionExternalBetaReleasesGetInstanceData = {
          */
         'fields[backgroundAssetVersionExternalBetaReleases]'?: Array<'state' | 'backgroundAssetVersion'>;
         /**
+         * the fields to include for returned resources of type backgroundAssetVersions
+         */
+        'fields[backgroundAssetVersions]'?: Array<'createdDate' | 'platforms' | 'state' | 'stateDetails' | 'version' | 'backgroundAsset' | 'internalBetaRelease' | 'externalBetaRelease' | 'appStoreRelease' | 'assetFile' | 'manifestFile' | 'backgroundAssetUploadFiles'>;
+        /**
          * comma-separated list of relationships to include
          */
         include?: Array<'backgroundAssetVersion'>;
@@ -31345,6 +31558,10 @@ export type BackgroundAssetVersionInternalBetaReleasesGetInstanceData = {
          * the fields to include for returned resources of type backgroundAssetVersionInternalBetaReleases
          */
         'fields[backgroundAssetVersionInternalBetaReleases]'?: Array<'state' | 'backgroundAssetVersion'>;
+        /**
+         * the fields to include for returned resources of type backgroundAssetVersions
+         */
+        'fields[backgroundAssetVersions]'?: Array<'createdDate' | 'platforms' | 'state' | 'stateDetails' | 'version' | 'backgroundAsset' | 'internalBetaRelease' | 'externalBetaRelease' | 'appStoreRelease' | 'assetFile' | 'manifestFile' | 'backgroundAssetUploadFiles'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -31449,6 +31666,26 @@ export type BackgroundAssetVersionsGetInstanceData = {
          */
         'fields[backgroundAssetVersions]'?: Array<'createdDate' | 'platforms' | 'state' | 'stateDetails' | 'version' | 'backgroundAsset' | 'internalBetaRelease' | 'externalBetaRelease' | 'appStoreRelease' | 'assetFile' | 'manifestFile' | 'backgroundAssetUploadFiles'>;
         /**
+         * the fields to include for returned resources of type backgroundAssets
+         */
+        'fields[backgroundAssets]'?: Array<'archived' | 'assetPackIdentifier' | 'createdDate' | 'usedBytes' | 'app' | 'versions' | 'appStoreVersion' | 'internalBetaVersion' | 'externalBetaVersion'>;
+        /**
+         * the fields to include for returned resources of type backgroundAssetVersionInternalBetaReleases
+         */
+        'fields[backgroundAssetVersionInternalBetaReleases]'?: Array<'state' | 'backgroundAssetVersion'>;
+        /**
+         * the fields to include for returned resources of type backgroundAssetVersionExternalBetaReleases
+         */
+        'fields[backgroundAssetVersionExternalBetaReleases]'?: Array<'state' | 'backgroundAssetVersion'>;
+        /**
+         * the fields to include for returned resources of type backgroundAssetVersionAppStoreReleases
+         */
+        'fields[backgroundAssetVersionAppStoreReleases]'?: Array<'state' | 'backgroundAssetVersion'>;
+        /**
+         * the fields to include for returned resources of type backgroundAssetUploadFiles
+         */
+        'fields[backgroundAssetUploadFiles]'?: Array<'assetDeliveryState' | 'assetToken' | 'assetType' | 'fileName' | 'fileSize' | 'sourceFileChecksum' | 'sourceFileChecksums' | 'uploadOperations'>;
+        /**
          * comma-separated list of relationships to include
          */
         include?: Array<'backgroundAsset' | 'internalBetaRelease' | 'externalBetaRelease' | 'appStoreRelease' | 'assetFile' | 'manifestFile'>;
@@ -31551,6 +31788,14 @@ export type BackgroundAssetsGetInstanceData = {
          * the fields to include for returned resources of type backgroundAssets
          */
         'fields[backgroundAssets]'?: Array<'archived' | 'assetPackIdentifier' | 'createdDate' | 'usedBytes' | 'app' | 'versions' | 'appStoreVersion' | 'internalBetaVersion' | 'externalBetaVersion'>;
+        /**
+         * the fields to include for returned resources of type apps
+         */
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        /**
+         * the fields to include for returned resources of type backgroundAssetVersions
+         */
+        'fields[backgroundAssetVersions]'?: Array<'createdDate' | 'platforms' | 'state' | 'stateDetails' | 'version' | 'backgroundAsset' | 'internalBetaRelease' | 'externalBetaRelease' | 'appStoreRelease' | 'assetFile' | 'manifestFile' | 'backgroundAssetUploadFiles'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -31908,6 +32153,10 @@ export type BetaAppClipInvocationsGetInstanceData = {
          * the fields to include for returned resources of type betaAppClipInvocations
          */
         'fields[betaAppClipInvocations]'?: Array<'url' | 'betaAppClipInvocationLocalizations'>;
+        /**
+         * the fields to include for returned resources of type betaAppClipInvocationLocalizations
+         */
+        'fields[betaAppClipInvocationLocalizations]'?: Array<'title' | 'locale'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -33009,6 +33258,14 @@ export type BetaFeedbackCrashSubmissionsGetInstanceData = {
          */
         'fields[betaFeedbackCrashSubmissions]'?: Array<'createdDate' | 'comment' | 'email' | 'deviceModel' | 'osVersion' | 'locale' | 'timeZone' | 'architecture' | 'connectionType' | 'pairedAppleWatch' | 'appUptimeInMilliseconds' | 'diskBytesAvailable' | 'diskBytesTotal' | 'batteryPercentage' | 'screenWidthInPoints' | 'screenHeightInPoints' | 'appPlatform' | 'devicePlatform' | 'deviceFamily' | 'buildBundleId' | 'crashLog' | 'build' | 'tester'>;
         /**
+         * the fields to include for returned resources of type builds
+         */
+        'fields[builds]'?: Array<'version' | 'uploadedDate' | 'expirationDate' | 'expired' | 'minOsVersion' | 'lsMinimumSystemVersion' | 'computedMinMacOsVersion' | 'computedMinVisionOsVersion' | 'iconAssetToken' | 'processingState' | 'buildAudienceType' | 'usesNonExemptEncryption' | 'preReleaseVersion' | 'individualTesters' | 'betaGroups' | 'betaBuildLocalizations' | 'appEncryptionDeclaration' | 'betaAppReviewSubmission' | 'app' | 'buildBetaDetail' | 'appStoreVersion' | 'icons' | 'buildBundles' | 'buildUpload' | 'perfPowerMetrics' | 'diagnosticSignatures'>;
+        /**
+         * the fields to include for returned resources of type betaTesters
+         */
+        'fields[betaTesters]'?: Array<'firstName' | 'lastName' | 'email' | 'inviteType' | 'state' | 'appDevices' | 'apps' | 'betaGroups' | 'builds'>;
+        /**
          * comma-separated list of relationships to include
          */
         include?: Array<'build' | 'tester'>;
@@ -33109,6 +33366,14 @@ export type BetaFeedbackScreenshotSubmissionsGetInstanceData = {
          * the fields to include for returned resources of type betaFeedbackScreenshotSubmissions
          */
         'fields[betaFeedbackScreenshotSubmissions]'?: Array<'createdDate' | 'comment' | 'email' | 'deviceModel' | 'osVersion' | 'locale' | 'timeZone' | 'architecture' | 'connectionType' | 'pairedAppleWatch' | 'appUptimeInMilliseconds' | 'diskBytesAvailable' | 'diskBytesTotal' | 'batteryPercentage' | 'screenWidthInPoints' | 'screenHeightInPoints' | 'appPlatform' | 'devicePlatform' | 'deviceFamily' | 'buildBundleId' | 'screenshots' | 'build' | 'tester'>;
+        /**
+         * the fields to include for returned resources of type builds
+         */
+        'fields[builds]'?: Array<'version' | 'uploadedDate' | 'expirationDate' | 'expired' | 'minOsVersion' | 'lsMinimumSystemVersion' | 'computedMinMacOsVersion' | 'computedMinVisionOsVersion' | 'iconAssetToken' | 'processingState' | 'buildAudienceType' | 'usesNonExemptEncryption' | 'preReleaseVersion' | 'individualTesters' | 'betaGroups' | 'betaBuildLocalizations' | 'appEncryptionDeclaration' | 'betaAppReviewSubmission' | 'app' | 'buildBetaDetail' | 'appStoreVersion' | 'icons' | 'buildBundles' | 'buildUpload' | 'perfPowerMetrics' | 'diagnosticSignatures'>;
+        /**
+         * the fields to include for returned resources of type betaTesters
+         */
+        'fields[betaTesters]'?: Array<'firstName' | 'lastName' | 'email' | 'inviteType' | 'state' | 'appDevices' | 'apps' | 'betaGroups' | 'builds'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -34687,6 +34952,14 @@ export type BuildUploadsGetInstanceData = {
          */
         'fields[buildUploads]'?: Array<'cfBundleShortVersionString' | 'cfBundleVersion' | 'createdDate' | 'state' | 'platform' | 'uploadedDate' | 'build' | 'assetFile' | 'assetDescriptionFile' | 'assetSpiFile' | 'buildUploadFiles'>;
         /**
+         * the fields to include for returned resources of type builds
+         */
+        'fields[builds]'?: Array<'version' | 'uploadedDate' | 'expirationDate' | 'expired' | 'minOsVersion' | 'lsMinimumSystemVersion' | 'computedMinMacOsVersion' | 'computedMinVisionOsVersion' | 'iconAssetToken' | 'processingState' | 'buildAudienceType' | 'usesNonExemptEncryption' | 'preReleaseVersion' | 'individualTesters' | 'betaGroups' | 'betaBuildLocalizations' | 'appEncryptionDeclaration' | 'betaAppReviewSubmission' | 'app' | 'buildBetaDetail' | 'appStoreVersion' | 'icons' | 'buildBundles' | 'buildUpload' | 'perfPowerMetrics' | 'diagnosticSignatures'>;
+        /**
+         * the fields to include for returned resources of type buildUploadFiles
+         */
+        'fields[buildUploadFiles]'?: Array<'assetDeliveryState' | 'assetToken' | 'assetType' | 'fileName' | 'fileSize' | 'sourceFileChecksums' | 'uploadOperations' | 'uti'>;
+        /**
          * comma-separated list of relationships to include
          */
         include?: Array<'build' | 'assetFile' | 'assetDescriptionFile' | 'assetSpiFile'>;
@@ -34805,6 +35078,10 @@ export type BuildsGetCollectionData = {
          */
         'fields[betaTesters]'?: Array<'firstName' | 'lastName' | 'email' | 'inviteType' | 'state' | 'appDevices' | 'apps' | 'betaGroups' | 'builds'>;
         /**
+         * the fields to include for returned resources of type betaGroups
+         */
+        'fields[betaGroups]'?: Array<'name' | 'createdDate' | 'isInternalGroup' | 'hasAccessToAllBuilds' | 'publicLinkEnabled' | 'publicLinkId' | 'publicLinkLimitEnabled' | 'publicLinkLimit' | 'publicLink' | 'feedbackEnabled' | 'iosBuildsAvailableForAppleSiliconMac' | 'iosBuildsAvailableForAppleVision' | 'app' | 'builds' | 'betaTesters' | 'betaRecruitmentCriteria' | 'betaRecruitmentCriterionCompatibleBuildCheck'>;
+        /**
          * the fields to include for returned resources of type betaBuildLocalizations
          */
         'fields[betaBuildLocalizations]'?: Array<'whatsNew' | 'locale' | 'build'>;
@@ -34832,6 +35109,14 @@ export type BuildsGetCollectionData = {
          * the fields to include for returned resources of type buildIcons
          */
         'fields[buildIcons]'?: Array<'iconAsset' | 'iconType' | 'masked' | 'name'>;
+        /**
+         * the fields to include for returned resources of type buildBundles
+         */
+        'fields[buildBundles]'?: Array<'bundleId' | 'bundleType' | 'sdkBuild' | 'platformBuild' | 'fileName' | 'hasSirikit' | 'hasOnDemandResources' | 'hasPrerenderedIcon' | 'usesLocationServices' | 'isIosBuildMacAppStoreCompatible' | 'includesSymbols' | 'dSYMUrl' | 'supportedArchitectures' | 'requiredCapabilities' | 'deviceProtocols' | 'locales' | 'entitlements' | 'baDownloadAllowance' | 'baMaxInstallSize' | 'minimumOsVersion' | 'appClipDomainCacheStatus' | 'appClipDomainDebugStatus' | 'betaAppClipInvocations' | 'buildBundleFileSizes'>;
+        /**
+         * the fields to include for returned resources of type buildUploads
+         */
+        'fields[buildUploads]'?: Array<'cfBundleShortVersionString' | 'cfBundleVersion' | 'createdDate' | 'state' | 'platform' | 'uploadedDate' | 'build' | 'assetFile' | 'assetDescriptionFile' | 'assetSpiFile' | 'buildUploadFiles'>;
         /**
          * maximum resources per page
          */
@@ -34916,6 +35201,10 @@ export type BuildsGetInstanceData = {
          */
         'fields[betaTesters]'?: Array<'firstName' | 'lastName' | 'email' | 'inviteType' | 'state' | 'appDevices' | 'apps' | 'betaGroups' | 'builds'>;
         /**
+         * the fields to include for returned resources of type betaGroups
+         */
+        'fields[betaGroups]'?: Array<'name' | 'createdDate' | 'isInternalGroup' | 'hasAccessToAllBuilds' | 'publicLinkEnabled' | 'publicLinkId' | 'publicLinkLimitEnabled' | 'publicLinkLimit' | 'publicLink' | 'feedbackEnabled' | 'iosBuildsAvailableForAppleSiliconMac' | 'iosBuildsAvailableForAppleVision' | 'app' | 'builds' | 'betaTesters' | 'betaRecruitmentCriteria' | 'betaRecruitmentCriterionCompatibleBuildCheck'>;
+        /**
          * the fields to include for returned resources of type betaBuildLocalizations
          */
         'fields[betaBuildLocalizations]'?: Array<'whatsNew' | 'locale' | 'build'>;
@@ -34943,6 +35232,14 @@ export type BuildsGetInstanceData = {
          * the fields to include for returned resources of type buildIcons
          */
         'fields[buildIcons]'?: Array<'iconAsset' | 'iconType' | 'masked' | 'name'>;
+        /**
+         * the fields to include for returned resources of type buildBundles
+         */
+        'fields[buildBundles]'?: Array<'bundleId' | 'bundleType' | 'sdkBuild' | 'platformBuild' | 'fileName' | 'hasSirikit' | 'hasOnDemandResources' | 'hasPrerenderedIcon' | 'usesLocationServices' | 'isIosBuildMacAppStoreCompatible' | 'includesSymbols' | 'dSYMUrl' | 'supportedArchitectures' | 'requiredCapabilities' | 'deviceProtocols' | 'locales' | 'entitlements' | 'baDownloadAllowance' | 'baMaxInstallSize' | 'minimumOsVersion' | 'appClipDomainCacheStatus' | 'appClipDomainDebugStatus' | 'betaAppClipInvocations' | 'buildBundleFileSizes'>;
+        /**
+         * the fields to include for returned resources of type buildUploads
+         */
+        'fields[buildUploads]'?: Array<'cfBundleShortVersionString' | 'cfBundleVersion' | 'createdDate' | 'state' | 'platform' | 'uploadedDate' | 'build' | 'assetFile' | 'assetDescriptionFile' | 'assetSpiFile' | 'buildUploadFiles'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -35993,6 +36290,22 @@ export type CiBuildRunsGetInstanceData = {
          */
         'fields[builds]'?: Array<'version' | 'uploadedDate' | 'expirationDate' | 'expired' | 'minOsVersion' | 'lsMinimumSystemVersion' | 'computedMinMacOsVersion' | 'computedMinVisionOsVersion' | 'iconAssetToken' | 'processingState' | 'buildAudienceType' | 'usesNonExemptEncryption' | 'preReleaseVersion' | 'individualTesters' | 'betaGroups' | 'betaBuildLocalizations' | 'appEncryptionDeclaration' | 'betaAppReviewSubmission' | 'app' | 'buildBetaDetail' | 'appStoreVersion' | 'icons' | 'buildBundles' | 'buildUpload' | 'perfPowerMetrics' | 'diagnosticSignatures'>;
         /**
+         * the fields to include for returned resources of type ciWorkflows
+         */
+        'fields[ciWorkflows]'?: Array<'name' | 'description' | 'branchStartCondition' | 'tagStartCondition' | 'pullRequestStartCondition' | 'scheduledStartCondition' | 'manualBranchStartCondition' | 'manualTagStartCondition' | 'manualPullRequestStartCondition' | 'actions' | 'isEnabled' | 'isLockedForEditing' | 'clean' | 'containerFilePath' | 'lastModifiedDate' | 'product' | 'repository' | 'xcodeVersion' | 'macOsVersion' | 'buildRuns'>;
+        /**
+         * the fields to include for returned resources of type ciProducts
+         */
+        'fields[ciProducts]'?: Array<'name' | 'createdDate' | 'productType' | 'app' | 'bundleId' | 'workflows' | 'primaryRepositories' | 'additionalRepositories' | 'buildRuns'>;
+        /**
+         * the fields to include for returned resources of type scmGitReferences
+         */
+        'fields[scmGitReferences]'?: Array<'name' | 'canonicalName' | 'isDeleted' | 'kind' | 'repository'>;
+        /**
+         * the fields to include for returned resources of type scmPullRequests
+         */
+        'fields[scmPullRequests]'?: Array<'title' | 'number' | 'webUrl' | 'sourceRepositoryOwner' | 'sourceRepositoryName' | 'sourceBranchName' | 'destinationRepositoryOwner' | 'destinationRepositoryName' | 'destinationBranchName' | 'isClosed' | 'isCrossRepository' | 'repository'>;
+        /**
          * comma-separated list of relationships to include
          */
         include?: Array<'builds' | 'workflow' | 'product' | 'sourceBranchOrTag' | 'destinationBranch' | 'pullRequest'>;
@@ -36231,6 +36544,10 @@ export type CiProductsGetCollectionData = {
          */
         'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
+         * the fields to include for returned resources of type bundleIds
+         */
+        'fields[bundleIds]'?: Array<'name' | 'platform' | 'identifier' | 'seedId' | 'profiles' | 'bundleIdCapabilities' | 'app'>;
+        /**
          * the fields to include for returned resources of type scmRepositories
          */
         'fields[scmRepositories]'?: Array<'lastAccessedDate' | 'httpCloneUrl' | 'sshCloneUrl' | 'ownerName' | 'repositoryName' | 'scmProvider' | 'defaultBranch' | 'gitReferences' | 'pullRequests'>;
@@ -36343,6 +36660,10 @@ export type CiProductsGetInstanceData = {
          * the fields to include for returned resources of type apps
          */
         'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        /**
+         * the fields to include for returned resources of type bundleIds
+         */
+        'fields[bundleIds]'?: Array<'name' | 'platform' | 'identifier' | 'seedId' | 'profiles' | 'bundleIdCapabilities' | 'app'>;
         /**
          * the fields to include for returned resources of type scmRepositories
          */
@@ -36552,9 +36873,21 @@ export type CiWorkflowsGetInstanceData = {
          */
         'fields[ciWorkflows]'?: Array<'name' | 'description' | 'branchStartCondition' | 'tagStartCondition' | 'pullRequestStartCondition' | 'scheduledStartCondition' | 'manualBranchStartCondition' | 'manualTagStartCondition' | 'manualPullRequestStartCondition' | 'actions' | 'isEnabled' | 'isLockedForEditing' | 'clean' | 'containerFilePath' | 'lastModifiedDate' | 'product' | 'repository' | 'xcodeVersion' | 'macOsVersion' | 'buildRuns'>;
         /**
+         * the fields to include for returned resources of type ciProducts
+         */
+        'fields[ciProducts]'?: Array<'name' | 'createdDate' | 'productType' | 'app' | 'bundleId' | 'workflows' | 'primaryRepositories' | 'additionalRepositories' | 'buildRuns'>;
+        /**
          * the fields to include for returned resources of type scmRepositories
          */
         'fields[scmRepositories]'?: Array<'lastAccessedDate' | 'httpCloneUrl' | 'sshCloneUrl' | 'ownerName' | 'repositoryName' | 'scmProvider' | 'defaultBranch' | 'gitReferences' | 'pullRequests'>;
+        /**
+         * the fields to include for returned resources of type ciXcodeVersions
+         */
+        'fields[ciXcodeVersions]'?: Array<'version' | 'name' | 'testDestinations' | 'macOsVersions'>;
+        /**
+         * the fields to include for returned resources of type ciMacOsVersions
+         */
+        'fields[ciMacOsVersions]'?: Array<'version' | 'name' | 'xcodeVersions'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -36883,6 +37216,10 @@ export type CustomerReviewResponsesGetInstanceData = {
          */
         'fields[customerReviewResponses]'?: Array<'responseBody' | 'lastModifiedDate' | 'state' | 'review'>;
         /**
+         * the fields to include for returned resources of type customerReviews
+         */
+        'fields[customerReviews]'?: Array<'rating' | 'title' | 'body' | 'reviewerNickname' | 'createdDate' | 'territory' | 'response' | 'reviewTerritory'>;
+        /**
          * comma-separated list of relationships to include
          */
         include?: Array<'review'>;
@@ -36936,15 +37273,19 @@ export type CustomerReviewsGetInstanceData = {
         /**
          * the fields to include for returned resources of type customerReviews
          */
-        'fields[customerReviews]'?: Array<'rating' | 'title' | 'body' | 'reviewerNickname' | 'createdDate' | 'territory' | 'response'>;
+        'fields[customerReviews]'?: Array<'rating' | 'title' | 'body' | 'reviewerNickname' | 'createdDate' | 'territory' | 'response' | 'reviewTerritory'>;
         /**
          * the fields to include for returned resources of type customerReviewResponses
          */
         'fields[customerReviewResponses]'?: Array<'responseBody' | 'lastModifiedDate' | 'state' | 'review'>;
         /**
+         * the fields to include for returned resources of type territories
+         */
+        'fields[territories]'?: Array<'currency'>;
+        /**
          * comma-separated list of relationships to include
          */
-        include?: Array<'response'>;
+        include?: Array<'response' | 'reviewTerritory'>;
     };
     url: '/v1/customerReviews/{id}';
 };
@@ -37365,6 +37706,10 @@ export type EndUserLicenseAgreementsGetInstanceData = {
          */
         'fields[endUserLicenseAgreements]'?: Array<'agreementText' | 'app' | 'territories'>;
         /**
+         * the fields to include for returned resources of type apps
+         */
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        /**
          * the fields to include for returned resources of type territories
          */
         'fields[territories]'?: Array<'currency'>;
@@ -37633,6 +37978,11 @@ export type GameCenterAchievementImagesGetInstanceData = {
          */
         'fields[gameCenterAchievementImages]'?: Array<'fileSize' | 'fileName' | 'imageAsset' | 'uploadOperations' | 'assetDeliveryState' | 'gameCenterAchievementLocalization'>;
         /**
+         * the fields to include for returned resources of type gameCenterAchievementLocalizations
+         * @deprecated
+         */
+        'fields[gameCenterAchievementLocalizations]'?: Array<'locale' | 'name' | 'beforeEarnedDescription' | 'afterEarnedDescription' | 'gameCenterAchievement' | 'gameCenterAchievementImage'>;
+        /**
          * comma-separated list of relationships to include
          */
         include?: Array<'gameCenterAchievementLocalization'>;
@@ -37839,6 +38189,10 @@ export type GameCenterAchievementImagesV2GetInstanceData = {
          */
         'fields[gameCenterAchievementImages]'?: Array<'fileSize' | 'fileName' | 'imageAsset' | 'uploadOperations' | 'assetDeliveryState' | 'localization'>;
         /**
+         * the fields to include for returned resources of type gameCenterAchievementLocalizations
+         */
+        'fields[gameCenterAchievementLocalizations]'?: Array<'locale' | 'name' | 'beforeEarnedDescription' | 'afterEarnedDescription' | 'version' | 'image'>;
+        /**
          * comma-separated list of relationships to include
          */
         include?: Array<'localization'>;
@@ -38044,6 +38398,10 @@ export type GameCenterAchievementLocalizationsV2GetInstanceData = {
          * the fields to include for returned resources of type gameCenterAchievementLocalizations
          */
         'fields[gameCenterAchievementLocalizations]'?: Array<'locale' | 'name' | 'beforeEarnedDescription' | 'afterEarnedDescription' | 'version' | 'image'>;
+        /**
+         * the fields to include for returned resources of type gameCenterAchievementVersions
+         */
+        'fields[gameCenterAchievementVersions]'?: Array<'version' | 'state' | 'achievement' | 'localizations'>;
         /**
          * the fields to include for returned resources of type gameCenterAchievementImages
          */
@@ -38471,6 +38829,15 @@ export type GameCenterAchievementReleasesGetInstanceData = {
          */
         'fields[gameCenterAchievementReleases]'?: Array<'live' | 'gameCenterDetail' | 'gameCenterAchievement'>;
         /**
+         * the fields to include for returned resources of type gameCenterDetails
+         */
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterAchievements
+         * @deprecated
+         */
+        'fields[gameCenterAchievements]'?: Array<'referenceName' | 'vendorIdentifier' | 'points' | 'showBeforeEarned' | 'repeatable' | 'archived' | 'activityProperties' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupAchievement' | 'localizations' | 'releases' | 'activity'>;
+        /**
          * comma-separated list of relationships to include
          */
         include?: Array<'gameCenterDetail' | 'gameCenterAchievement'>;
@@ -38573,6 +38940,10 @@ export type GameCenterAchievementVersionsV2GetInstanceData = {
          * the fields to include for returned resources of type gameCenterAchievementVersions
          */
         'fields[gameCenterAchievementVersions]'?: Array<'version' | 'state' | 'achievement' | 'localizations'>;
+        /**
+         * the fields to include for returned resources of type gameCenterAchievements
+         */
+        'fields[gameCenterAchievements]'?: Array<'referenceName' | 'vendorIdentifier' | 'points' | 'showBeforeEarned' | 'repeatable' | 'archived' | 'activityProperties' | 'gameCenterDetail' | 'gameCenterGroup' | 'activity' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterAchievementLocalizations
          */
@@ -38730,6 +39101,18 @@ export type GameCenterAchievementsV2GetInstanceData = {
          * the fields to include for returned resources of type gameCenterAchievements
          */
         'fields[gameCenterAchievements]'?: Array<'referenceName' | 'vendorIdentifier' | 'points' | 'showBeforeEarned' | 'repeatable' | 'archived' | 'activityProperties' | 'gameCenterDetail' | 'gameCenterGroup' | 'activity' | 'versions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterDetails
+         */
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterGroups
+         */
+        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
+        /**
+         * the fields to include for returned resources of type gameCenterActivities
+         */
+        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'achievementsV2' | 'leaderboards' | 'leaderboardsV2' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterAchievementVersions
          */
@@ -38945,6 +39328,14 @@ export type GameCenterAchievementsGetInstanceData = {
          */
         'fields[gameCenterAchievements]'?: Array<'referenceName' | 'vendorIdentifier' | 'points' | 'showBeforeEarned' | 'repeatable' | 'archived' | 'activityProperties' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupAchievement' | 'localizations' | 'releases' | 'activity'>;
         /**
+         * the fields to include for returned resources of type gameCenterDetails
+         */
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterGroups
+         */
+        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
+        /**
          * the fields to include for returned resources of type gameCenterAchievementLocalizations
          * @deprecated
          */
@@ -38954,6 +39345,10 @@ export type GameCenterAchievementsGetInstanceData = {
          * @deprecated
          */
         'fields[gameCenterAchievementReleases]'?: Array<'live' | 'gameCenterDetail' | 'gameCenterAchievement'>;
+        /**
+         * the fields to include for returned resources of type gameCenterActivities
+         */
+        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'achievementsV2' | 'leaderboards' | 'leaderboardsV2' | 'versions'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -39170,6 +39565,22 @@ export type GameCenterActivitiesGetInstanceData = {
          * the fields to include for returned resources of type gameCenterActivities
          */
         'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'achievementsV2' | 'leaderboards' | 'leaderboardsV2' | 'versions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterDetails
+         */
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterGroups
+         */
+        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
+        /**
+         * the fields to include for returned resources of type gameCenterAchievements
+         */
+        'fields[gameCenterAchievements]'?: Array<'referenceName' | 'vendorIdentifier' | 'points' | 'showBeforeEarned' | 'repeatable' | 'archived' | 'activityProperties' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupAchievement' | 'localizations' | 'releases' | 'activity' | 'versions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboards
+         */
+        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterActivityVersions
          */
@@ -39605,6 +40016,10 @@ export type GameCenterActivityLocalizationsGetInstanceData = {
          */
         'fields[gameCenterActivityLocalizations]'?: Array<'locale' | 'name' | 'description' | 'version' | 'image'>;
         /**
+         * the fields to include for returned resources of type gameCenterActivityVersions
+         */
+        'fields[gameCenterActivityVersions]'?: Array<'version' | 'state' | 'fallbackUrl' | 'activity' | 'localizations' | 'defaultImage' | 'releases'>;
+        /**
          * the fields to include for returned resources of type gameCenterActivityImages
          */
         'fields[gameCenterActivityImages]'?: Array<'fileSize' | 'fileName' | 'imageAsset' | 'uploadOperations' | 'assetDeliveryState'>;
@@ -39815,6 +40230,10 @@ export type GameCenterActivityVersionReleasesGetInstanceData = {
          */
         'fields[gameCenterActivityVersionReleases]'?: Array<'version'>;
         /**
+         * the fields to include for returned resources of type gameCenterActivityVersions
+         */
+        'fields[gameCenterActivityVersions]'?: Array<'version' | 'state' | 'fallbackUrl' | 'activity' | 'localizations' | 'defaultImage' | 'releases'>;
+        /**
          * comma-separated list of relationships to include
          */
         include?: Array<'version'>;
@@ -39918,6 +40337,10 @@ export type GameCenterActivityVersionsGetInstanceData = {
          */
         'fields[gameCenterActivityVersions]'?: Array<'version' | 'state' | 'fallbackUrl' | 'activity' | 'localizations' | 'defaultImage' | 'releases'>;
         /**
+         * the fields to include for returned resources of type gameCenterActivities
+         */
+        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'achievementsV2' | 'leaderboards' | 'leaderboardsV2' | 'versions'>;
+        /**
          * the fields to include for returned resources of type gameCenterActivityLocalizations
          */
         'fields[gameCenterActivityLocalizations]'?: Array<'locale' | 'name' | 'description' | 'version' | 'image'>;
@@ -39925,6 +40348,11 @@ export type GameCenterActivityVersionsGetInstanceData = {
          * the fields to include for returned resources of type gameCenterActivityImages
          */
         'fields[gameCenterActivityImages]'?: Array<'fileSize' | 'fileName' | 'imageAsset' | 'uploadOperations' | 'assetDeliveryState'>;
+        /**
+         * the fields to include for returned resources of type gameCenterActivityVersionReleases
+         * @deprecated
+         */
+        'fields[gameCenterActivityVersionReleases]'?: Array<'version'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -40511,6 +40939,10 @@ export type GameCenterChallengeLocalizationsGetInstanceData = {
          */
         'fields[gameCenterChallengeLocalizations]'?: Array<'locale' | 'name' | 'description' | 'version' | 'image'>;
         /**
+         * the fields to include for returned resources of type gameCenterChallengeVersions
+         */
+        'fields[gameCenterChallengeVersions]'?: Array<'version' | 'state' | 'challenge' | 'localizations' | 'releases' | 'defaultImage'>;
+        /**
          * the fields to include for returned resources of type gameCenterChallengeImages
          */
         'fields[gameCenterChallengeImages]'?: Array<'fileSize' | 'fileName' | 'imageAsset' | 'uploadOperations' | 'assetDeliveryState'>;
@@ -40721,6 +41153,10 @@ export type GameCenterChallengeVersionReleasesGetInstanceData = {
          */
         'fields[gameCenterChallengeVersionReleases]'?: Array<'version'>;
         /**
+         * the fields to include for returned resources of type gameCenterChallengeVersions
+         */
+        'fields[gameCenterChallengeVersions]'?: Array<'version' | 'state' | 'challenge' | 'localizations' | 'releases' | 'defaultImage'>;
+        /**
          * comma-separated list of relationships to include
          */
         include?: Array<'version'>;
@@ -40824,9 +41260,18 @@ export type GameCenterChallengeVersionsGetInstanceData = {
          */
         'fields[gameCenterChallengeVersions]'?: Array<'version' | 'state' | 'challenge' | 'localizations' | 'releases' | 'defaultImage'>;
         /**
+         * the fields to include for returned resources of type gameCenterChallenges
+         */
+        'fields[gameCenterChallenges]'?: Array<'referenceName' | 'vendorIdentifier' | 'archived' | 'challengeType' | 'repeatable' | 'gameCenterDetail' | 'gameCenterGroup' | 'versions' | 'leaderboard' | 'leaderboardV2'>;
+        /**
          * the fields to include for returned resources of type gameCenterChallengeLocalizations
          */
         'fields[gameCenterChallengeLocalizations]'?: Array<'locale' | 'name' | 'description' | 'version' | 'image'>;
+        /**
+         * the fields to include for returned resources of type gameCenterChallengeVersionReleases
+         * @deprecated
+         */
+        'fields[gameCenterChallengeVersionReleases]'?: Array<'version'>;
         /**
          * the fields to include for returned resources of type gameCenterChallengeImages
          */
@@ -40990,9 +41435,21 @@ export type GameCenterChallengesGetInstanceData = {
          */
         'fields[gameCenterChallenges]'?: Array<'referenceName' | 'vendorIdentifier' | 'archived' | 'challengeType' | 'repeatable' | 'gameCenterDetail' | 'gameCenterGroup' | 'versions' | 'leaderboard' | 'leaderboardV2'>;
         /**
+         * the fields to include for returned resources of type gameCenterDetails
+         */
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterGroups
+         */
+        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
+        /**
          * the fields to include for returned resources of type gameCenterChallengeVersions
          */
         'fields[gameCenterChallengeVersions]'?: Array<'version' | 'state' | 'challenge' | 'localizations' | 'releases' | 'defaultImage'>;
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboards
+         */
+        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge' | 'versions'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -41158,6 +41615,10 @@ export type GameCenterDetailsGetInstanceData = {
          */
         'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
         /**
+         * the fields to include for returned resources of type apps
+         */
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        /**
          * the fields to include for returned resources of type gameCenterAppVersions
          */
         'fields[gameCenterAppVersions]'?: Array<'enabled' | 'compatibilityVersions' | 'appStoreVersion'>;
@@ -41210,6 +41671,10 @@ export type GameCenterDetailsGetInstanceData = {
          * @deprecated
          */
         'fields[gameCenterLeaderboardSetReleases]'?: Array<'live' | 'gameCenterDetail' | 'gameCenterLeaderboardSet'>;
+        /**
+         * the fields to include for returned resources of type appStoreVersions
+         */
+        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -41919,6 +42384,11 @@ export type GameCenterLeaderboardImagesGetInstanceData = {
          */
         'fields[gameCenterLeaderboardImages]'?: Array<'fileSize' | 'fileName' | 'imageAsset' | 'uploadOperations' | 'assetDeliveryState' | 'gameCenterLeaderboardLocalization'>;
         /**
+         * the fields to include for returned resources of type gameCenterLeaderboardLocalizations
+         * @deprecated
+         */
+        'fields[gameCenterLeaderboardLocalizations]'?: Array<'locale' | 'name' | 'formatterOverride' | 'formatterSuffix' | 'formatterSuffixSingular' | 'description' | 'gameCenterLeaderboard' | 'gameCenterLeaderboardImage'>;
+        /**
          * comma-separated list of relationships to include
          */
         include?: Array<'gameCenterLeaderboardLocalization'>;
@@ -42125,6 +42595,10 @@ export type GameCenterLeaderboardImagesV2GetInstanceData = {
          */
         'fields[gameCenterLeaderboardImages]'?: Array<'fileSize' | 'fileName' | 'imageAsset' | 'uploadOperations' | 'assetDeliveryState' | 'localization'>;
         /**
+         * the fields to include for returned resources of type gameCenterLeaderboardLocalizations
+         */
+        'fields[gameCenterLeaderboardLocalizations]'?: Array<'locale' | 'name' | 'formatterOverride' | 'formatterSuffix' | 'formatterSuffixSingular' | 'description' | 'version' | 'image'>;
+        /**
          * comma-separated list of relationships to include
          */
         include?: Array<'localization'>;
@@ -42330,6 +42804,11 @@ export type GameCenterLeaderboardLocalizationsGetInstanceData = {
          * the fields to include for returned resources of type gameCenterLeaderboardLocalizations
          */
         'fields[gameCenterLeaderboardLocalizations]'?: Array<'locale' | 'name' | 'formatterOverride' | 'formatterSuffix' | 'formatterSuffixSingular' | 'description' | 'gameCenterLeaderboard' | 'gameCenterLeaderboardImage'>;
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboards
+         * @deprecated
+         */
+        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardImages
          * @deprecated
@@ -42542,6 +43021,10 @@ export type GameCenterLeaderboardLocalizationsV2GetInstanceData = {
          */
         'fields[gameCenterLeaderboardLocalizations]'?: Array<'locale' | 'name' | 'formatterOverride' | 'formatterSuffix' | 'formatterSuffixSingular' | 'description' | 'version' | 'image'>;
         /**
+         * the fields to include for returned resources of type gameCenterLeaderboardVersions
+         */
+        'fields[gameCenterLeaderboardVersions]'?: Array<'version' | 'state' | 'leaderboard' | 'localizations'>;
+        /**
          * the fields to include for returned resources of type gameCenterLeaderboardImages
          */
         'fields[gameCenterLeaderboardImages]'?: Array<'fileSize' | 'fileName' | 'imageAsset' | 'uploadOperations' | 'assetDeliveryState' | 'localization'>;
@@ -42752,6 +43235,15 @@ export type GameCenterLeaderboardReleasesGetInstanceData = {
          */
         'fields[gameCenterLeaderboardReleases]'?: Array<'live' | 'gameCenterDetail' | 'gameCenterLeaderboard'>;
         /**
+         * the fields to include for returned resources of type gameCenterDetails
+         */
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboards
+         * @deprecated
+         */
+        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge'>;
+        /**
          * comma-separated list of relationships to include
          */
         include?: Array<'gameCenterDetail' | 'gameCenterLeaderboard'>;
@@ -42900,6 +43392,11 @@ export type GameCenterLeaderboardSetImagesGetInstanceData = {
          * the fields to include for returned resources of type gameCenterLeaderboardSetImages
          */
         'fields[gameCenterLeaderboardSetImages]'?: Array<'fileSize' | 'fileName' | 'imageAsset' | 'uploadOperations' | 'assetDeliveryState' | 'gameCenterLeaderboardSetLocalization'>;
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboardSetLocalizations
+         * @deprecated
+         */
+        'fields[gameCenterLeaderboardSetLocalizations]'?: Array<'locale' | 'name' | 'gameCenterLeaderboardSet' | 'gameCenterLeaderboardSetImage'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -43107,6 +43604,10 @@ export type GameCenterLeaderboardSetImagesV2GetInstanceData = {
          */
         'fields[gameCenterLeaderboardSetImages]'?: Array<'fileSize' | 'fileName' | 'imageAsset' | 'uploadOperations' | 'assetDeliveryState' | 'localization'>;
         /**
+         * the fields to include for returned resources of type gameCenterLeaderboardSetLocalizations
+         */
+        'fields[gameCenterLeaderboardSetLocalizations]'?: Array<'locale' | 'name' | 'version' | 'image'>;
+        /**
          * comma-separated list of relationships to include
          */
         include?: Array<'localization'>;
@@ -43312,6 +43813,11 @@ export type GameCenterLeaderboardSetLocalizationsGetInstanceData = {
          * the fields to include for returned resources of type gameCenterLeaderboardSetLocalizations
          */
         'fields[gameCenterLeaderboardSetLocalizations]'?: Array<'locale' | 'name' | 'gameCenterLeaderboardSet' | 'gameCenterLeaderboardSetImage'>;
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboardSets
+         * @deprecated
+         */
+        'fields[gameCenterLeaderboardSets]'?: Array<'referenceName' | 'vendorIdentifier' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboardSet' | 'localizations' | 'gameCenterLeaderboards' | 'releases'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardSetImages
          * @deprecated
@@ -43523,6 +44029,10 @@ export type GameCenterLeaderboardSetLocalizationsV2GetInstanceData = {
          * the fields to include for returned resources of type gameCenterLeaderboardSetLocalizations
          */
         'fields[gameCenterLeaderboardSetLocalizations]'?: Array<'locale' | 'name' | 'version' | 'image'>;
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboardSetVersions
+         */
+        'fields[gameCenterLeaderboardSetVersions]'?: Array<'version' | 'state' | 'leaderboardSet' | 'localizations'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardSetImages
          */
@@ -43955,6 +44465,15 @@ export type GameCenterLeaderboardSetReleasesGetInstanceData = {
          */
         'fields[gameCenterLeaderboardSetReleases]'?: Array<'live' | 'gameCenterDetail' | 'gameCenterLeaderboardSet'>;
         /**
+         * the fields to include for returned resources of type gameCenterDetails
+         */
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboardSets
+         * @deprecated
+         */
+        'fields[gameCenterLeaderboardSets]'?: Array<'referenceName' | 'vendorIdentifier' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboardSet' | 'localizations' | 'gameCenterLeaderboards' | 'releases'>;
+        /**
          * comma-separated list of relationships to include
          */
         include?: Array<'gameCenterDetail' | 'gameCenterLeaderboardSet'>;
@@ -44057,6 +44576,10 @@ export type GameCenterLeaderboardSetVersionsV2GetInstanceData = {
          * the fields to include for returned resources of type gameCenterLeaderboardSetVersions
          */
         'fields[gameCenterLeaderboardSetVersions]'?: Array<'version' | 'state' | 'leaderboardSet' | 'localizations'>;
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboardSets
+         */
+        'fields[gameCenterLeaderboardSets]'?: Array<'referenceName' | 'vendorIdentifier' | 'gameCenterDetail' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardSetLocalizations
          */
@@ -44214,6 +44737,14 @@ export type GameCenterLeaderboardSetsV2GetInstanceData = {
          * the fields to include for returned resources of type gameCenterLeaderboardSets
          */
         'fields[gameCenterLeaderboardSets]'?: Array<'referenceName' | 'vendorIdentifier' | 'gameCenterDetail' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'versions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterDetails
+         */
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterGroups
+         */
+        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboards
          */
@@ -44437,6 +44968,14 @@ export type GameCenterLeaderboardSetsGetInstanceData = {
          */
         'fields[gameCenterLeaderboardSets]'?: Array<'referenceName' | 'vendorIdentifier' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboardSet' | 'localizations' | 'gameCenterLeaderboards' | 'releases'>;
         /**
+         * the fields to include for returned resources of type gameCenterDetails
+         */
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterGroups
+         */
+        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
+        /**
          * the fields to include for returned resources of type gameCenterLeaderboardSetLocalizations
          * @deprecated
          */
@@ -44627,6 +45166,10 @@ export type GameCenterLeaderboardVersionsV2GetInstanceData = {
          */
         'fields[gameCenterLeaderboardVersions]'?: Array<'version' | 'state' | 'leaderboard' | 'localizations'>;
         /**
+         * the fields to include for returned resources of type gameCenterLeaderboards
+         */
+        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'gameCenterLeaderboardSets' | 'activity' | 'challenge' | 'versions'>;
+        /**
          * the fields to include for returned resources of type gameCenterLeaderboardLocalizations
          */
         'fields[gameCenterLeaderboardLocalizations]'?: Array<'locale' | 'name' | 'formatterOverride' | 'formatterSuffix' | 'formatterSuffixSingular' | 'description' | 'version' | 'image'>;
@@ -44784,6 +45327,19 @@ export type GameCenterLeaderboardsGetInstanceData = {
          */
         'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge'>;
         /**
+         * the fields to include for returned resources of type gameCenterDetails
+         */
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterGroups
+         */
+        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboardSets
+         * @deprecated
+         */
+        'fields[gameCenterLeaderboardSets]'?: Array<'referenceName' | 'vendorIdentifier' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboardSet' | 'localizations' | 'gameCenterLeaderboards' | 'releases'>;
+        /**
          * the fields to include for returned resources of type gameCenterLeaderboardLocalizations
          * @deprecated
          */
@@ -44793,6 +45349,14 @@ export type GameCenterLeaderboardsGetInstanceData = {
          * @deprecated
          */
         'fields[gameCenterLeaderboardReleases]'?: Array<'live' | 'gameCenterDetail' | 'gameCenterLeaderboard'>;
+        /**
+         * the fields to include for returned resources of type gameCenterActivities
+         */
+        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'achievementsV2' | 'leaderboards' | 'leaderboardsV2' | 'versions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterChallenges
+         */
+        'fields[gameCenterChallenges]'?: Array<'referenceName' | 'vendorIdentifier' | 'archived' | 'challengeType' | 'repeatable' | 'gameCenterDetail' | 'gameCenterGroup' | 'versions' | 'leaderboard' | 'leaderboardV2'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -45015,6 +45579,26 @@ export type GameCenterLeaderboardsV2GetInstanceData = {
          */
         'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'gameCenterLeaderboardSets' | 'activity' | 'challenge' | 'versions'>;
         /**
+         * the fields to include for returned resources of type gameCenterDetails
+         */
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterGroups
+         */
+        'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
+        /**
+         * the fields to include for returned resources of type gameCenterLeaderboardSets
+         */
+        'fields[gameCenterLeaderboardSets]'?: Array<'referenceName' | 'vendorIdentifier' | 'gameCenterDetail' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'versions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterActivities
+         */
+        'fields[gameCenterActivities]'?: Array<'referenceName' | 'vendorIdentifier' | 'playStyle' | 'minimumPlayersCount' | 'maximumPlayersCount' | 'supportsPartyCode' | 'archived' | 'properties' | 'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'achievementsV2' | 'leaderboards' | 'leaderboardsV2' | 'versions'>;
+        /**
+         * the fields to include for returned resources of type gameCenterChallenges
+         */
+        'fields[gameCenterChallenges]'?: Array<'referenceName' | 'vendorIdentifier' | 'archived' | 'challengeType' | 'repeatable' | 'gameCenterDetail' | 'gameCenterGroup' | 'versions' | 'leaderboard' | 'leaderboardV2'>;
+        /**
          * the fields to include for returned resources of type gameCenterLeaderboardVersions
          */
         'fields[gameCenterLeaderboardVersions]'?: Array<'version' | 'state' | 'leaderboard' | 'localizations'>;
@@ -45133,6 +45717,10 @@ export type GameCenterMatchmakingQueuesGetCollectionData = {
          * the fields to include for returned resources of type gameCenterMatchmakingQueues
          */
         'fields[gameCenterMatchmakingQueues]'?: Array<'referenceName' | 'classicMatchmakingBundleIds' | 'ruleSet' | 'experimentRuleSet'>;
+        /**
+         * the fields to include for returned resources of type gameCenterMatchmakingRuleSets
+         */
+        'fields[gameCenterMatchmakingRuleSets]'?: Array<'referenceName' | 'ruleLanguageVersion' | 'minPlayers' | 'maxPlayers' | 'teams' | 'rules' | 'matchmakingQueues'>;
         /**
          * maximum resources per page
          */
@@ -45282,6 +45870,10 @@ export type GameCenterMatchmakingQueuesGetInstanceData = {
          * the fields to include for returned resources of type gameCenterMatchmakingQueues
          */
         'fields[gameCenterMatchmakingQueues]'?: Array<'referenceName' | 'classicMatchmakingBundleIds' | 'ruleSet' | 'experimentRuleSet'>;
+        /**
+         * the fields to include for returned resources of type gameCenterMatchmakingRuleSets
+         */
+        'fields[gameCenterMatchmakingRuleSets]'?: Array<'referenceName' | 'ruleLanguageVersion' | 'minPlayers' | 'maxPlayers' | 'teams' | 'rules' | 'matchmakingQueues'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -46191,6 +46783,10 @@ export type InAppPurchaseAppStoreReviewScreenshotsGetInstanceData = {
          */
         'fields[inAppPurchaseAppStoreReviewScreenshots]'?: Array<'fileSize' | 'fileName' | 'sourceFileChecksum' | 'imageAsset' | 'assetToken' | 'assetType' | 'uploadOperations' | 'assetDeliveryState' | 'inAppPurchaseV2'>;
         /**
+         * the fields to include for returned resources of type inAppPurchases
+         */
+        'fields[inAppPurchases]'?: Array<'name' | 'productId' | 'inAppPurchaseType' | 'state' | 'reviewNote' | 'familySharable' | 'contentHosting' | 'inAppPurchaseLocalizations' | 'pricePoints' | 'content' | 'appStoreReviewScreenshot' | 'promotedPurchase' | 'iapPriceSchedule' | 'inAppPurchaseAvailability' | 'images' | 'offerCodes'>;
+        /**
          * comma-separated list of relationships to include
          */
         include?: Array<'inAppPurchaseV2'>;
@@ -46414,6 +47010,10 @@ export type InAppPurchaseContentsGetInstanceData = {
          */
         'fields[inAppPurchaseContents]'?: Array<'fileName' | 'fileSize' | 'url' | 'lastModifiedDate' | 'inAppPurchaseV2'>;
         /**
+         * the fields to include for returned resources of type inAppPurchases
+         */
+        'fields[inAppPurchases]'?: Array<'name' | 'productId' | 'inAppPurchaseType' | 'state' | 'reviewNote' | 'familySharable' | 'contentHosting' | 'inAppPurchaseLocalizations' | 'pricePoints' | 'content' | 'appStoreReviewScreenshot' | 'promotedPurchase' | 'iapPriceSchedule' | 'inAppPurchaseAvailability' | 'images' | 'offerCodes'>;
+        /**
          * comma-separated list of relationships to include
          */
         include?: Array<'inAppPurchaseV2'>;
@@ -46562,6 +47162,10 @@ export type InAppPurchaseImagesGetInstanceData = {
          * the fields to include for returned resources of type inAppPurchaseImages
          */
         'fields[inAppPurchaseImages]'?: Array<'fileSize' | 'fileName' | 'sourceFileChecksum' | 'assetToken' | 'imageAsset' | 'uploadOperations' | 'state' | 'inAppPurchase'>;
+        /**
+         * the fields to include for returned resources of type inAppPurchases
+         */
+        'fields[inAppPurchases]'?: Array<'name' | 'productId' | 'inAppPurchaseType' | 'state' | 'reviewNote' | 'familySharable' | 'contentHosting' | 'inAppPurchaseLocalizations' | 'pricePoints' | 'content' | 'appStoreReviewScreenshot' | 'promotedPurchase' | 'iapPriceSchedule' | 'inAppPurchaseAvailability' | 'images' | 'offerCodes'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -46769,6 +47373,10 @@ export type InAppPurchaseLocalizationsGetInstanceData = {
          */
         'fields[inAppPurchaseLocalizations]'?: Array<'name' | 'locale' | 'description' | 'state' | 'inAppPurchaseV2'>;
         /**
+         * the fields to include for returned resources of type inAppPurchases
+         */
+        'fields[inAppPurchases]'?: Array<'name' | 'productId' | 'inAppPurchaseType' | 'state' | 'reviewNote' | 'familySharable' | 'contentHosting' | 'inAppPurchaseLocalizations' | 'pricePoints' | 'content' | 'appStoreReviewScreenshot' | 'promotedPurchase' | 'iapPriceSchedule' | 'inAppPurchaseAvailability' | 'images' | 'offerCodes'>;
+        /**
          * comma-separated list of relationships to include
          */
         include?: Array<'inAppPurchaseV2'>;
@@ -46929,6 +47537,10 @@ export type InAppPurchaseOfferCodeCustomCodesGetInstanceData = {
          */
         'fields[inAppPurchaseOfferCodeCustomCodes]'?: Array<'customCode' | 'numberOfCodes' | 'createdDate' | 'expirationDate' | 'active' | 'createdByActor' | 'deactivatedByActor'>;
         /**
+         * the fields to include for returned resources of type actors
+         */
+        'fields[actors]'?: Array<'actorType' | 'userFirstName' | 'userLastName' | 'userEmail' | 'apiKeyId'>;
+        /**
          * comma-separated list of relationships to include
          */
         include?: Array<'createdByActor' | 'deactivatedByActor'>;
@@ -47088,6 +47700,10 @@ export type InAppPurchaseOfferCodeOneTimeUseCodesGetInstanceData = {
          * the fields to include for returned resources of type inAppPurchaseOfferCodeOneTimeUseCodes
          */
         'fields[inAppPurchaseOfferCodeOneTimeUseCodes]'?: Array<'numberOfCodes' | 'createdDate' | 'expirationDate' | 'active' | 'environment' | 'values' | 'createdByActor' | 'deactivatedByActor'>;
+        /**
+         * the fields to include for returned resources of type actors
+         */
+        'fields[actors]'?: Array<'actorType' | 'userFirstName' | 'userLastName' | 'userEmail' | 'apiKeyId'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -47551,6 +48167,10 @@ export type InAppPurchasesGetInstanceData = {
          * the fields to include for returned resources of type inAppPurchases
          */
         'fields[inAppPurchases]'?: Array<'referenceName' | 'productId' | 'inAppPurchaseType' | 'state' | 'apps'>;
+        /**
+         * the fields to include for returned resources of type apps
+         */
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -48508,10 +49128,6 @@ export type NominationsGetCollectionData = {
          */
         'filter[relatedApps]'?: Array<string>;
         /**
-         * filter by existence or non-existence of related 'inAppEvents'
-         */
-        'exists[inAppEvents]'?: boolean;
-        /**
          * comma-separated list of sort expressions; resources will be sorted as specified
          */
         sort?: Array<'lastModifiedDate' | '-lastModifiedDate' | 'publishStartDate' | '-publishStartDate' | 'publishEndDate' | '-publishEndDate' | 'name' | '-name' | 'type' | '-type'>;
@@ -48519,6 +49135,22 @@ export type NominationsGetCollectionData = {
          * the fields to include for returned resources of type nominations
          */
         'fields[nominations]'?: Array<'name' | 'type' | 'description' | 'createdDate' | 'lastModifiedDate' | 'submittedDate' | 'state' | 'publishStartDate' | 'publishEndDate' | 'deviceFamilies' | 'locales' | 'supplementalMaterialsUris' | 'hasInAppEvents' | 'launchInSelectMarketsFirst' | 'notes' | 'preOrderEnabled' | 'relatedApps' | 'createdByActor' | 'lastModifiedByActor' | 'submittedByActor' | 'inAppEvents' | 'supportedTerritories'>;
+        /**
+         * the fields to include for returned resources of type apps
+         */
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        /**
+         * the fields to include for returned resources of type actors
+         */
+        'fields[actors]'?: Array<'actorType' | 'userFirstName' | 'userLastName' | 'userEmail' | 'apiKeyId'>;
+        /**
+         * the fields to include for returned resources of type appEvents
+         */
+        'fields[appEvents]'?: Array<'referenceName' | 'badge' | 'eventState' | 'deepLink' | 'purchaseRequirement' | 'primaryLocale' | 'priority' | 'purpose' | 'territorySchedules' | 'archivedTerritorySchedules' | 'localizations'>;
+        /**
+         * the fields to include for returned resources of type territories
+         */
+        'fields[territories]'?: Array<'currency'>;
         /**
          * maximum resources per page
          */
@@ -48680,6 +49312,22 @@ export type NominationsGetInstanceData = {
          * the fields to include for returned resources of type nominations
          */
         'fields[nominations]'?: Array<'name' | 'type' | 'description' | 'createdDate' | 'lastModifiedDate' | 'submittedDate' | 'state' | 'publishStartDate' | 'publishEndDate' | 'deviceFamilies' | 'locales' | 'supplementalMaterialsUris' | 'hasInAppEvents' | 'launchInSelectMarketsFirst' | 'notes' | 'preOrderEnabled' | 'relatedApps' | 'createdByActor' | 'lastModifiedByActor' | 'submittedByActor' | 'inAppEvents' | 'supportedTerritories'>;
+        /**
+         * the fields to include for returned resources of type apps
+         */
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        /**
+         * the fields to include for returned resources of type actors
+         */
+        'fields[actors]'?: Array<'actorType' | 'userFirstName' | 'userLastName' | 'userEmail' | 'apiKeyId'>;
+        /**
+         * the fields to include for returned resources of type appEvents
+         */
+        'fields[appEvents]'?: Array<'referenceName' | 'badge' | 'eventState' | 'deepLink' | 'purchaseRequirement' | 'primaryLocale' | 'priority' | 'purpose' | 'territorySchedules' | 'archivedTerritorySchedules' | 'localizations'>;
+        /**
+         * the fields to include for returned resources of type territories
+         */
+        'fields[territories]'?: Array<'currency'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -49611,6 +50259,14 @@ export type PromotedPurchasesGetInstanceData = {
          */
         'fields[promotedPurchases]'?: Array<'visibleForAllUsers' | 'enabled' | 'state' | 'inAppPurchaseV2' | 'subscription'>;
         /**
+         * the fields to include for returned resources of type inAppPurchases
+         */
+        'fields[inAppPurchases]'?: Array<'name' | 'productId' | 'inAppPurchaseType' | 'state' | 'reviewNote' | 'familySharable' | 'contentHosting' | 'inAppPurchaseLocalizations' | 'pricePoints' | 'content' | 'appStoreReviewScreenshot' | 'promotedPurchase' | 'iapPriceSchedule' | 'inAppPurchaseAvailability' | 'images' | 'offerCodes'>;
+        /**
+         * the fields to include for returned resources of type subscriptions
+         */
+        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images'>;
+        /**
          * comma-separated list of relationships to include
          */
         include?: Array<'inAppPurchaseV2' | 'subscription'>;
@@ -49881,9 +50537,21 @@ export type ReviewSubmissionsGetCollectionData = {
          */
         'fields[reviewSubmissions]'?: Array<'platform' | 'submittedDate' | 'state' | 'app' | 'items' | 'appStoreVersionForReview' | 'submittedByActor' | 'lastUpdatedByActor'>;
         /**
+         * the fields to include for returned resources of type apps
+         */
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        /**
          * the fields to include for returned resources of type reviewSubmissionItems
          */
         'fields[reviewSubmissionItems]'?: Array<'state' | 'appStoreVersion' | 'appCustomProductPageVersion' | 'appStoreVersionExperiment' | 'appStoreVersionExperimentV2' | 'appEvent' | 'backgroundAssetVersion' | 'gameCenterAchievementVersion' | 'gameCenterActivityVersion' | 'gameCenterChallengeVersion' | 'gameCenterLeaderboardSetVersion' | 'gameCenterLeaderboardVersion'>;
+        /**
+         * the fields to include for returned resources of type appStoreVersions
+         */
+        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
+        /**
+         * the fields to include for returned resources of type actors
+         */
+        'fields[actors]'?: Array<'actorType' | 'userFirstName' | 'userLastName' | 'userEmail' | 'apiKeyId'>;
         /**
          * maximum resources per page
          */
@@ -49992,9 +50660,21 @@ export type ReviewSubmissionsGetInstanceData = {
          */
         'fields[reviewSubmissions]'?: Array<'platform' | 'submittedDate' | 'state' | 'app' | 'items' | 'appStoreVersionForReview' | 'submittedByActor' | 'lastUpdatedByActor'>;
         /**
+         * the fields to include for returned resources of type apps
+         */
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        /**
          * the fields to include for returned resources of type reviewSubmissionItems
          */
         'fields[reviewSubmissionItems]'?: Array<'state' | 'appStoreVersion' | 'appCustomProductPageVersion' | 'appStoreVersionExperiment' | 'appStoreVersionExperimentV2' | 'appEvent' | 'backgroundAssetVersion' | 'gameCenterAchievementVersion' | 'gameCenterActivityVersion' | 'gameCenterChallengeVersion' | 'gameCenterLeaderboardSetVersion' | 'gameCenterLeaderboardVersion'>;
+        /**
+         * the fields to include for returned resources of type appStoreVersions
+         */
+        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
+        /**
+         * the fields to include for returned resources of type actors
+         */
+        'fields[actors]'?: Array<'actorType' | 'userFirstName' | 'userLastName' | 'userEmail' | 'apiKeyId'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -50205,6 +50885,10 @@ export type RoutingAppCoveragesGetInstanceData = {
          * the fields to include for returned resources of type routingAppCoverages
          */
         'fields[routingAppCoverages]'?: Array<'fileSize' | 'fileName' | 'sourceFileChecksum' | 'uploadOperations' | 'assetDeliveryState' | 'appStoreVersion'>;
+        /**
+         * the fields to include for returned resources of type appStoreVersions
+         */
+        'fields[appStoreVersions]'?: Array<'platform' | 'versionString' | 'appStoreState' | 'appVersionState' | 'copyright' | 'reviewType' | 'releaseType' | 'earliestReleaseDate' | 'usesIdfa' | 'downloadable' | 'createdDate' | 'app' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'customerReviews' | 'alternativeDistributionPackage'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -50531,6 +51215,10 @@ export type ScmGitReferencesGetInstanceData = {
          */
         'fields[scmGitReferences]'?: Array<'name' | 'canonicalName' | 'isDeleted' | 'kind' | 'repository'>;
         /**
+         * the fields to include for returned resources of type scmRepositories
+         */
+        'fields[scmRepositories]'?: Array<'lastAccessedDate' | 'httpCloneUrl' | 'sshCloneUrl' | 'ownerName' | 'repositoryName' | 'scmProvider' | 'defaultBranch' | 'gitReferences' | 'pullRequests'>;
+        /**
          * comma-separated list of relationships to include
          */
         include?: Array<'repository'>;
@@ -50683,6 +51371,10 @@ export type ScmPullRequestsGetInstanceData = {
          */
         'fields[scmPullRequests]'?: Array<'title' | 'number' | 'webUrl' | 'sourceRepositoryOwner' | 'sourceRepositoryName' | 'sourceBranchName' | 'destinationRepositoryOwner' | 'destinationRepositoryName' | 'destinationBranchName' | 'isClosed' | 'isCrossRepository' | 'repository'>;
         /**
+         * the fields to include for returned resources of type scmRepositories
+         */
+        'fields[scmRepositories]'?: Array<'lastAccessedDate' | 'httpCloneUrl' | 'sshCloneUrl' | 'ownerName' | 'repositoryName' | 'scmProvider' | 'defaultBranch' | 'gitReferences' | 'pullRequests'>;
+        /**
          * comma-separated list of relationships to include
          */
         include?: Array<'repository'>;
@@ -50736,6 +51428,14 @@ export type ScmRepositoriesGetCollectionData = {
          * the fields to include for returned resources of type scmRepositories
          */
         'fields[scmRepositories]'?: Array<'lastAccessedDate' | 'httpCloneUrl' | 'sshCloneUrl' | 'ownerName' | 'repositoryName' | 'scmProvider' | 'defaultBranch' | 'gitReferences' | 'pullRequests'>;
+        /**
+         * the fields to include for returned resources of type scmProviders
+         */
+        'fields[scmProviders]'?: Array<'scmProviderType' | 'url' | 'repositories'>;
+        /**
+         * the fields to include for returned resources of type scmGitReferences
+         */
+        'fields[scmGitReferences]'?: Array<'name' | 'canonicalName' | 'isDeleted' | 'kind' | 'repository'>;
         /**
          * maximum resources per page
          */
@@ -50791,6 +51491,14 @@ export type ScmRepositoriesGetInstanceData = {
          * the fields to include for returned resources of type scmRepositories
          */
         'fields[scmRepositories]'?: Array<'lastAccessedDate' | 'httpCloneUrl' | 'sshCloneUrl' | 'ownerName' | 'repositoryName' | 'scmProvider' | 'defaultBranch' | 'gitReferences' | 'pullRequests'>;
+        /**
+         * the fields to include for returned resources of type scmProviders
+         */
+        'fields[scmProviders]'?: Array<'scmProviderType' | 'url' | 'repositories'>;
+        /**
+         * the fields to include for returned resources of type scmGitReferences
+         */
+        'fields[scmGitReferences]'?: Array<'name' | 'canonicalName' | 'isDeleted' | 'kind' | 'repository'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -50940,6 +51648,10 @@ export type SubscriptionAppStoreReviewScreenshotsGetInstanceData = {
          * the fields to include for returned resources of type subscriptionAppStoreReviewScreenshots
          */
         'fields[subscriptionAppStoreReviewScreenshots]'?: Array<'fileSize' | 'fileName' | 'sourceFileChecksum' | 'imageAsset' | 'assetToken' | 'assetType' | 'uploadOperations' | 'assetDeliveryState' | 'subscription'>;
+        /**
+         * the fields to include for returned resources of type subscriptions
+         */
+        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -51365,6 +52077,10 @@ export type SubscriptionGroupLocalizationsGetInstanceData = {
          * the fields to include for returned resources of type subscriptionGroupLocalizations
          */
         'fields[subscriptionGroupLocalizations]'?: Array<'name' | 'customAppName' | 'locale' | 'state' | 'subscriptionGroup'>;
+        /**
+         * the fields to include for returned resources of type subscriptionGroups
+         */
+        'fields[subscriptionGroups]'?: Array<'referenceName' | 'subscriptions' | 'subscriptionGroupLocalizations'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -51842,6 +52558,10 @@ export type SubscriptionImagesGetInstanceData = {
          */
         'fields[subscriptionImages]'?: Array<'fileSize' | 'fileName' | 'sourceFileChecksum' | 'assetToken' | 'imageAsset' | 'uploadOperations' | 'state' | 'subscription'>;
         /**
+         * the fields to include for returned resources of type subscriptions
+         */
+        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images'>;
+        /**
          * comma-separated list of relationships to include
          */
         include?: Array<'subscription'>;
@@ -52199,6 +52919,10 @@ export type SubscriptionLocalizationsGetInstanceData = {
          */
         'fields[subscriptionLocalizations]'?: Array<'name' | 'locale' | 'description' | 'state' | 'subscription'>;
         /**
+         * the fields to include for returned resources of type subscriptions
+         */
+        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images'>;
+        /**
          * comma-separated list of relationships to include
          */
         include?: Array<'subscription'>;
@@ -52358,6 +53082,10 @@ export type SubscriptionOfferCodeCustomCodesGetInstanceData = {
          * the fields to include for returned resources of type subscriptionOfferCodeCustomCodes
          */
         'fields[subscriptionOfferCodeCustomCodes]'?: Array<'customCode' | 'numberOfCodes' | 'createdDate' | 'expirationDate' | 'active' | 'offerCode'>;
+        /**
+         * the fields to include for returned resources of type subscriptionOfferCodes
+         */
+        'fields[subscriptionOfferCodes]'?: Array<'name' | 'customerEligibilities' | 'offerEligibility' | 'duration' | 'offerMode' | 'numberOfPeriods' | 'totalNumberOfCodes' | 'productionCodeCount' | 'sandboxCodeCount' | 'active' | 'autoRenewEnabled' | 'subscription' | 'oneTimeUseCodes' | 'customCodes' | 'prices'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -52519,6 +53247,10 @@ export type SubscriptionOfferCodeOneTimeUseCodesGetInstanceData = {
          */
         'fields[subscriptionOfferCodeOneTimeUseCodes]'?: Array<'numberOfCodes' | 'createdDate' | 'expirationDate' | 'active' | 'environment' | 'offerCode' | 'values'>;
         /**
+         * the fields to include for returned resources of type subscriptionOfferCodes
+         */
+        'fields[subscriptionOfferCodes]'?: Array<'name' | 'customerEligibilities' | 'offerEligibility' | 'duration' | 'offerMode' | 'numberOfPeriods' | 'totalNumberOfCodes' | 'productionCodeCount' | 'sandboxCodeCount' | 'active' | 'autoRenewEnabled' | 'subscription' | 'oneTimeUseCodes' | 'customCodes' | 'prices'>;
+        /**
          * comma-separated list of relationships to include
          */
         include?: Array<'offerCode'>;
@@ -52679,6 +53411,10 @@ export type SubscriptionOfferCodesGetInstanceData = {
          */
         'fields[subscriptionOfferCodes]'?: Array<'name' | 'customerEligibilities' | 'offerEligibility' | 'duration' | 'offerMode' | 'numberOfPeriods' | 'totalNumberOfCodes' | 'productionCodeCount' | 'sandboxCodeCount' | 'active' | 'autoRenewEnabled' | 'subscription' | 'oneTimeUseCodes' | 'customCodes' | 'prices'>;
         /**
+         * the fields to include for returned resources of type subscriptions
+         */
+        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images'>;
+        /**
          * the fields to include for returned resources of type subscriptionOfferCodeOneTimeUseCodes
          */
         'fields[subscriptionOfferCodeOneTimeUseCodes]'?: Array<'numberOfCodes' | 'createdDate' | 'expirationDate' | 'active' | 'environment' | 'offerCode' | 'values'>;
@@ -52814,6 +53550,10 @@ export type SubscriptionPricePointsGetInstanceData = {
          * the fields to include for returned resources of type subscriptionPricePoints
          */
         'fields[subscriptionPricePoints]'?: Array<'customerPrice' | 'proceeds' | 'proceedsYear2' | 'territory' | 'equalizations'>;
+        /**
+         * the fields to include for returned resources of type territories
+         */
+        'fields[territories]'?: Array<'currency'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -53057,6 +53797,10 @@ export type SubscriptionPromotionalOffersGetInstanceData = {
          * the fields to include for returned resources of type subscriptionPromotionalOffers
          */
         'fields[subscriptionPromotionalOffers]'?: Array<'duration' | 'name' | 'numberOfPeriods' | 'offerCode' | 'offerMode' | 'subscription' | 'prices'>;
+        /**
+         * the fields to include for returned resources of type subscriptions
+         */
+        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images'>;
         /**
          * the fields to include for returned resources of type subscriptionPromotionalOfferPrices
          */
@@ -53327,6 +54071,10 @@ export type SubscriptionsGetInstanceData = {
          * the fields to include for returned resources of type subscriptionAppStoreReviewScreenshots
          */
         'fields[subscriptionAppStoreReviewScreenshots]'?: Array<'fileSize' | 'fileName' | 'sourceFileChecksum' | 'imageAsset' | 'assetToken' | 'assetType' | 'uploadOperations' | 'assetDeliveryState' | 'subscription'>;
+        /**
+         * the fields to include for returned resources of type subscriptionGroups
+         */
+        'fields[subscriptionGroups]'?: Array<'referenceName' | 'subscriptions' | 'subscriptionGroupLocalizations'>;
         /**
          * the fields to include for returned resources of type subscriptionIntroductoryOffers
          */
@@ -54263,6 +55011,10 @@ export type WebhooksGetInstanceData = {
          * the fields to include for returned resources of type webhooks
          */
         'fields[webhooks]'?: Array<'enabled' | 'eventTypes' | 'name' | 'url' | 'app' | 'deliveries'>;
+        /**
+         * the fields to include for returned resources of type apps
+         */
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -55968,6 +56720,10 @@ export type AppClipDefaultExperiencesReleaseWithAppStoreVersionUpdateToOneRelati
 
 export type AppClipDefaultExperiencesReleaseWithAppStoreVersionUpdateToOneRelationshipErrors = {
     /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
      * Unauthorized error(s)
      */
     401: ErrorResponse;
@@ -56689,6 +57445,10 @@ export type AppCustomProductPageLocalizationsSearchKeywordsDeleteToManyRelations
 
 export type AppCustomProductPageLocalizationsSearchKeywordsDeleteToManyRelationshipErrors = {
     /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
      * Unauthorized error(s)
      */
     401: ErrorResponse;
@@ -56792,6 +57552,10 @@ export type AppCustomProductPageLocalizationsSearchKeywordsCreateToManyRelations
 };
 
 export type AppCustomProductPageLocalizationsSearchKeywordsCreateToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
     /**
      * Unauthorized error(s)
      */
@@ -57370,6 +58134,10 @@ export type AppEncryptionDeclarationsBuildsCreateToManyRelationshipData = {
 };
 
 export type AppEncryptionDeclarationsBuildsCreateToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
     /**
      * Unauthorized error(s)
      */
@@ -58792,6 +59560,10 @@ export type AppPreviewSetsAppPreviewsReplaceToManyRelationshipData = {
 
 export type AppPreviewSetsAppPreviewsReplaceToManyRelationshipErrors = {
     /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
      * Unauthorized error(s)
      */
     401: ErrorResponse;
@@ -59437,6 +60209,10 @@ export type AppScreenshotSetsAppScreenshotsReplaceToManyRelationshipData = {
 };
 
 export type AppScreenshotSetsAppScreenshotsReplaceToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
     /**
      * Unauthorized error(s)
      */
@@ -60614,6 +61390,10 @@ export type AppStoreVersionLocalizationsSearchKeywordsDeleteToManyRelationshipDa
 
 export type AppStoreVersionLocalizationsSearchKeywordsDeleteToManyRelationshipErrors = {
     /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
      * Unauthorized error(s)
      */
     401: ErrorResponse;
@@ -60717,6 +61497,10 @@ export type AppStoreVersionLocalizationsSearchKeywordsCreateToManyRelationshipDa
 };
 
 export type AppStoreVersionLocalizationsSearchKeywordsCreateToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
     /**
      * Unauthorized error(s)
      */
@@ -60988,6 +61772,10 @@ export type AppStoreVersionsAppClipDefaultExperienceUpdateToOneRelationshipData 
 };
 
 export type AppStoreVersionsAppClipDefaultExperienceUpdateToOneRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
     /**
      * Unauthorized error(s)
      */
@@ -61880,6 +62668,10 @@ export type AppStoreVersionsBuildUpdateToOneRelationshipData = {
 
 export type AppStoreVersionsBuildUpdateToOneRelationshipErrors = {
     /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
      * Unauthorized error(s)
      */
     401: ErrorResponse;
@@ -62036,6 +62828,10 @@ export type AppStoreVersionsCustomerReviewsGetToManyRelatedData = {
          */
         'filter[rating]'?: Array<string>;
         /**
+         * filter by id(s) of related 'reviewTerritory'
+         */
+        'filter[reviewTerritory]'?: Array<string>;
+        /**
          * filter by publishedResponse
          */
         'exists[publishedResponse]'?: boolean;
@@ -62046,11 +62842,15 @@ export type AppStoreVersionsCustomerReviewsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type customerReviews
          */
-        'fields[customerReviews]'?: Array<'rating' | 'title' | 'body' | 'reviewerNickname' | 'createdDate' | 'territory' | 'response'>;
+        'fields[customerReviews]'?: Array<'rating' | 'title' | 'body' | 'reviewerNickname' | 'createdDate' | 'territory' | 'response' | 'reviewTerritory'>;
         /**
          * the fields to include for returned resources of type customerReviewResponses
          */
         'fields[customerReviewResponses]'?: Array<'responseBody' | 'lastModifiedDate' | 'state' | 'review'>;
+        /**
+         * the fields to include for returned resources of type territories
+         */
+        'fields[territories]'?: Array<'currency'>;
         /**
          * maximum resources per page
          */
@@ -62058,7 +62858,7 @@ export type AppStoreVersionsCustomerReviewsGetToManyRelatedData = {
         /**
          * comma-separated list of relationships to include
          */
-        include?: Array<'response'>;
+        include?: Array<'response' | 'reviewTerritory'>;
     };
     url: '/v1/appStoreVersions/{id}/customerReviews';
 };
@@ -65156,6 +65956,10 @@ export type AppsBetaTestersDeleteToManyRelationshipData = {
 
 export type AppsBetaTestersDeleteToManyRelationshipErrors = {
     /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
      * Unauthorized error(s)
      */
     401: ErrorResponse;
@@ -65697,6 +66501,10 @@ export type AppsCustomerReviewsGetToManyRelatedData = {
          */
         'filter[rating]'?: Array<string>;
         /**
+         * filter by id(s) of related 'reviewTerritory'
+         */
+        'filter[reviewTerritory]'?: Array<string>;
+        /**
          * filter by publishedResponse
          */
         'exists[publishedResponse]'?: boolean;
@@ -65707,11 +66515,15 @@ export type AppsCustomerReviewsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type customerReviews
          */
-        'fields[customerReviews]'?: Array<'rating' | 'title' | 'body' | 'reviewerNickname' | 'createdDate' | 'territory' | 'response'>;
+        'fields[customerReviews]'?: Array<'rating' | 'title' | 'body' | 'reviewerNickname' | 'createdDate' | 'territory' | 'response' | 'reviewTerritory'>;
         /**
          * the fields to include for returned resources of type customerReviewResponses
          */
         'fields[customerReviewResponses]'?: Array<'responseBody' | 'lastModifiedDate' | 'state' | 'review'>;
+        /**
+         * the fields to include for returned resources of type territories
+         */
+        'fields[territories]'?: Array<'currency'>;
         /**
          * maximum resources per page
          */
@@ -65719,7 +66531,7 @@ export type AppsCustomerReviewsGetToManyRelatedData = {
         /**
          * comma-separated list of relationships to include
          */
-        include?: Array<'response'>;
+        include?: Array<'response' | 'reviewTerritory'>;
     };
     url: '/v1/apps/{id}/customerReviews';
 };
@@ -66848,6 +67660,10 @@ export type AppsPromotedPurchasesReplaceToManyRelationshipData = {
 };
 
 export type AppsPromotedPurchasesReplaceToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
     /**
      * Unauthorized error(s)
      */
@@ -68610,6 +69426,10 @@ export type BetaGroupsBetaTestersDeleteToManyRelationshipData = {
 
 export type BetaGroupsBetaTestersDeleteToManyRelationshipErrors = {
     /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
      * Unauthorized error(s)
      */
     401: ErrorResponse;
@@ -68713,6 +69533,10 @@ export type BetaGroupsBetaTestersCreateToManyRelationshipData = {
 };
 
 export type BetaGroupsBetaTestersCreateToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
     /**
      * Unauthorized error(s)
      */
@@ -68822,6 +69646,10 @@ export type BetaGroupsBuildsDeleteToManyRelationshipData = {
 
 export type BetaGroupsBuildsDeleteToManyRelationshipErrors = {
     /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
      * Unauthorized error(s)
      */
     401: ErrorResponse;
@@ -68925,6 +69753,10 @@ export type BetaGroupsBuildsCreateToManyRelationshipData = {
 };
 
 export type BetaGroupsBuildsCreateToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
     /**
      * Unauthorized error(s)
      */
@@ -69131,6 +69963,10 @@ export type BetaTestersAppsDeleteToManyRelationshipData = {
 
 export type BetaTestersAppsDeleteToManyRelationshipErrors = {
     /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
      * Unauthorized error(s)
      */
     401: ErrorResponse;
@@ -69294,6 +70130,10 @@ export type BetaTestersBetaGroupsDeleteToManyRelationshipData = {
 
 export type BetaTestersBetaGroupsDeleteToManyRelationshipErrors = {
     /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
      * Unauthorized error(s)
      */
     401: ErrorResponse;
@@ -69397,6 +70237,10 @@ export type BetaTestersBetaGroupsCreateToManyRelationshipData = {
 };
 
 export type BetaTestersBetaGroupsCreateToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
     /**
      * Unauthorized error(s)
      */
@@ -69506,6 +70350,10 @@ export type BetaTestersBuildsDeleteToManyRelationshipData = {
 
 export type BetaTestersBuildsDeleteToManyRelationshipErrors = {
     /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
      * Unauthorized error(s)
      */
     401: ErrorResponse;
@@ -69609,6 +70457,10 @@ export type BetaTestersBuildsCreateToManyRelationshipData = {
 };
 
 export type BetaTestersBuildsCreateToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
     /**
      * Unauthorized error(s)
      */
@@ -70554,6 +71406,10 @@ export type BuildsAppEncryptionDeclarationUpdateToOneRelationshipData = {
 
 export type BuildsAppEncryptionDeclarationUpdateToOneRelationshipErrors = {
     /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
      * Unauthorized error(s)
      */
     401: ErrorResponse;
@@ -71019,6 +71875,10 @@ export type BuildsBetaGroupsDeleteToManyRelationshipData = {
 
 export type BuildsBetaGroupsDeleteToManyRelationshipErrors = {
     /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
      * Unauthorized error(s)
      */
     401: ErrorResponse;
@@ -71071,6 +71931,10 @@ export type BuildsBetaGroupsCreateToManyRelationshipData = {
 };
 
 export type BuildsBetaGroupsCreateToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
     /**
      * Unauthorized error(s)
      */
@@ -71446,6 +72310,10 @@ export type BuildsIndividualTestersDeleteToManyRelationshipData = {
 
 export type BuildsIndividualTestersDeleteToManyRelationshipErrors = {
     /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
      * Unauthorized error(s)
      */
     401: ErrorResponse;
@@ -71549,6 +72417,10 @@ export type BuildsIndividualTestersCreateToManyRelationshipData = {
 };
 
 export type BuildsIndividualTestersCreateToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
     /**
      * Unauthorized error(s)
      */
@@ -74342,7 +75214,7 @@ export type CustomerReviewsResponseGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type customerReviews
          */
-        'fields[customerReviews]'?: Array<'rating' | 'title' | 'body' | 'reviewerNickname' | 'createdDate' | 'territory' | 'response'>;
+        'fields[customerReviews]'?: Array<'rating' | 'title' | 'body' | 'reviewerNickname' | 'createdDate' | 'territory' | 'response' | 'reviewTerritory'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -75018,6 +75890,10 @@ export type GameCenterAchievementsV2ActivityUpdateToOneRelationshipData = {
 
 export type GameCenterAchievementsV2ActivityUpdateToOneRelationshipErrors = {
     /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
      * Unauthorized error(s)
      */
     401: ErrorResponse;
@@ -75193,6 +76069,10 @@ export type GameCenterAchievementsActivityUpdateToOneRelationshipData = {
 
 export type GameCenterAchievementsActivityUpdateToOneRelationshipErrors = {
     /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
      * Unauthorized error(s)
      */
     401: ErrorResponse;
@@ -75291,6 +76171,10 @@ export type GameCenterAchievementsGroupAchievementUpdateToOneRelationshipData = 
 };
 
 export type GameCenterAchievementsGroupAchievementUpdateToOneRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
     /**
      * Unauthorized error(s)
      */
@@ -75674,6 +76558,10 @@ export type GameCenterActivitiesAchievementsDeleteToManyRelationshipData = {
 
 export type GameCenterActivitiesAchievementsDeleteToManyRelationshipErrors = {
     /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
      * Unauthorized error(s)
      */
     401: ErrorResponse;
@@ -75726,6 +76614,10 @@ export type GameCenterActivitiesAchievementsCreateToManyRelationshipData = {
 };
 
 export type GameCenterActivitiesAchievementsCreateToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
     /**
      * Unauthorized error(s)
      */
@@ -75780,6 +76672,10 @@ export type GameCenterActivitiesAchievementsV2DeleteToManyRelationshipData = {
 
 export type GameCenterActivitiesAchievementsV2DeleteToManyRelationshipErrors = {
     /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
      * Unauthorized error(s)
      */
     401: ErrorResponse;
@@ -75832,6 +76728,10 @@ export type GameCenterActivitiesAchievementsV2CreateToManyRelationshipData = {
 };
 
 export type GameCenterActivitiesAchievementsV2CreateToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
     /**
      * Unauthorized error(s)
      */
@@ -75886,6 +76786,10 @@ export type GameCenterActivitiesLeaderboardsDeleteToManyRelationshipData = {
 
 export type GameCenterActivitiesLeaderboardsDeleteToManyRelationshipErrors = {
     /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
      * Unauthorized error(s)
      */
     401: ErrorResponse;
@@ -75938,6 +76842,10 @@ export type GameCenterActivitiesLeaderboardsCreateToManyRelationshipData = {
 };
 
 export type GameCenterActivitiesLeaderboardsCreateToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
     /**
      * Unauthorized error(s)
      */
@@ -75992,6 +76900,10 @@ export type GameCenterActivitiesLeaderboardsV2DeleteToManyRelationshipData = {
 
 export type GameCenterActivitiesLeaderboardsV2DeleteToManyRelationshipErrors = {
     /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
      * Unauthorized error(s)
      */
     401: ErrorResponse;
@@ -76044,6 +76956,10 @@ export type GameCenterActivitiesLeaderboardsV2CreateToManyRelationshipData = {
 };
 
 export type GameCenterActivitiesLeaderboardsV2CreateToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
     /**
      * Unauthorized error(s)
      */
@@ -76703,6 +77619,10 @@ export type GameCenterAppVersionsCompatibilityVersionsDeleteToManyRelationshipDa
 
 export type GameCenterAppVersionsCompatibilityVersionsDeleteToManyRelationshipErrors = {
     /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
      * Unauthorized error(s)
      */
     401: ErrorResponse;
@@ -76806,6 +77726,10 @@ export type GameCenterAppVersionsCompatibilityVersionsCreateToManyRelationshipDa
 };
 
 export type GameCenterAppVersionsCompatibilityVersionsCreateToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
     /**
      * Unauthorized error(s)
      */
@@ -77243,6 +78167,10 @@ export type GameCenterChallengesLeaderboardUpdateToOneRelationshipData = {
 
 export type GameCenterChallengesLeaderboardUpdateToOneRelationshipErrors = {
     /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
      * Unauthorized error(s)
      */
     401: ErrorResponse;
@@ -77295,6 +78223,10 @@ export type GameCenterChallengesLeaderboardV2UpdateToOneRelationshipData = {
 };
 
 export type GameCenterChallengesLeaderboardV2UpdateToOneRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
     /**
      * Unauthorized error(s)
      */
@@ -77839,6 +78771,10 @@ export type GameCenterDetailsChallengesMinimumPlatformVersionsReplaceToManyRelat
 
 export type GameCenterDetailsChallengesMinimumPlatformVersionsReplaceToManyRelationshipErrors = {
     /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
      * Unauthorized error(s)
      */
     401: ErrorResponse;
@@ -77942,6 +78878,10 @@ export type GameCenterDetailsGameCenterAchievementsReplaceToManyRelationshipData
 };
 
 export type GameCenterDetailsGameCenterAchievementsReplaceToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
     /**
      * Unauthorized error(s)
      */
@@ -78147,6 +79087,10 @@ export type GameCenterDetailsGameCenterAchievementsV2ReplaceToManyRelationshipDa
 };
 
 export type GameCenterDetailsGameCenterAchievementsV2ReplaceToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
     /**
      * Unauthorized error(s)
      */
@@ -78923,6 +79867,10 @@ export type GameCenterDetailsGameCenterLeaderboardSetsReplaceToManyRelationshipD
 
 export type GameCenterDetailsGameCenterLeaderboardSetsReplaceToManyRelationshipErrors = {
     /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
      * Unauthorized error(s)
      */
     401: ErrorResponse;
@@ -79129,6 +80077,10 @@ export type GameCenterDetailsGameCenterLeaderboardSetsV2ReplaceToManyRelationshi
 
 export type GameCenterDetailsGameCenterLeaderboardSetsV2ReplaceToManyRelationshipErrors = {
     /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
      * Unauthorized error(s)
      */
     401: ErrorResponse;
@@ -79323,6 +80275,10 @@ export type GameCenterDetailsGameCenterLeaderboardsReplaceToManyRelationshipData
 };
 
 export type GameCenterDetailsGameCenterLeaderboardsReplaceToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
     /**
      * Unauthorized error(s)
      */
@@ -79541,6 +80497,10 @@ export type GameCenterDetailsGameCenterLeaderboardsV2ReplaceToManyRelationshipDa
 };
 
 export type GameCenterDetailsGameCenterLeaderboardsV2ReplaceToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
     /**
      * Unauthorized error(s)
      */
@@ -79952,6 +80912,10 @@ export type GameCenterEnabledVersionsCompatibleVersionsDeleteToManyRelationshipD
 
 export type GameCenterEnabledVersionsCompatibleVersionsDeleteToManyRelationshipErrors = {
     /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
      * Unauthorized error(s)
      */
     401: ErrorResponse;
@@ -80056,6 +81020,10 @@ export type GameCenterEnabledVersionsCompatibleVersionsReplaceToManyRelationship
 
 export type GameCenterEnabledVersionsCompatibleVersionsReplaceToManyRelationshipErrors = {
     /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
      * Unauthorized error(s)
      */
     401: ErrorResponse;
@@ -80108,6 +81076,10 @@ export type GameCenterEnabledVersionsCompatibleVersionsCreateToManyRelationshipD
 };
 
 export type GameCenterEnabledVersionsCompatibleVersionsCreateToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
     /**
      * Unauthorized error(s)
      */
@@ -80300,6 +81272,10 @@ export type GameCenterGroupsGameCenterAchievementsReplaceToManyRelationshipData 
 };
 
 export type GameCenterGroupsGameCenterAchievementsReplaceToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
     /**
      * Unauthorized error(s)
      */
@@ -80505,6 +81481,10 @@ export type GameCenterGroupsGameCenterAchievementsV2ReplaceToManyRelationshipDat
 };
 
 export type GameCenterGroupsGameCenterAchievementsV2ReplaceToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
     /**
      * Unauthorized error(s)
      */
@@ -81233,6 +82213,10 @@ export type GameCenterGroupsGameCenterLeaderboardSetsReplaceToManyRelationshipDa
 
 export type GameCenterGroupsGameCenterLeaderboardSetsReplaceToManyRelationshipErrors = {
     /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
      * Unauthorized error(s)
      */
     401: ErrorResponse;
@@ -81439,6 +82423,10 @@ export type GameCenterGroupsGameCenterLeaderboardSetsV2ReplaceToManyRelationship
 
 export type GameCenterGroupsGameCenterLeaderboardSetsV2ReplaceToManyRelationshipErrors = {
     /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
      * Unauthorized error(s)
      */
     401: ErrorResponse;
@@ -81633,6 +82621,10 @@ export type GameCenterGroupsGameCenterLeaderboardsReplaceToManyRelationshipData 
 };
 
 export type GameCenterGroupsGameCenterLeaderboardsReplaceToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
     /**
      * Unauthorized error(s)
      */
@@ -81851,6 +82843,10 @@ export type GameCenterGroupsGameCenterLeaderboardsV2ReplaceToManyRelationshipDat
 };
 
 export type GameCenterGroupsGameCenterLeaderboardsV2ReplaceToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
     /**
      * Unauthorized error(s)
      */
@@ -82826,6 +83822,10 @@ export type GameCenterLeaderboardSetsV2GameCenterLeaderboardsDeleteToManyRelatio
 
 export type GameCenterLeaderboardSetsV2GameCenterLeaderboardsDeleteToManyRelationshipErrors = {
     /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
      * Unauthorized error(s)
      */
     401: ErrorResponse;
@@ -82930,6 +83930,10 @@ export type GameCenterLeaderboardSetsV2GameCenterLeaderboardsReplaceToManyRelati
 
 export type GameCenterLeaderboardSetsV2GameCenterLeaderboardsReplaceToManyRelationshipErrors = {
     /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
      * Unauthorized error(s)
      */
     401: ErrorResponse;
@@ -82982,6 +83986,10 @@ export type GameCenterLeaderboardSetsV2GameCenterLeaderboardsCreateToManyRelatio
 };
 
 export type GameCenterLeaderboardSetsV2GameCenterLeaderboardsCreateToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
     /**
      * Unauthorized error(s)
      */
@@ -83261,6 +84269,10 @@ export type GameCenterLeaderboardSetsGameCenterLeaderboardsDeleteToManyRelations
 
 export type GameCenterLeaderboardSetsGameCenterLeaderboardsDeleteToManyRelationshipErrors = {
     /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
      * Unauthorized error(s)
      */
     401: ErrorResponse;
@@ -83365,6 +84377,10 @@ export type GameCenterLeaderboardSetsGameCenterLeaderboardsReplaceToManyRelation
 
 export type GameCenterLeaderboardSetsGameCenterLeaderboardsReplaceToManyRelationshipErrors = {
     /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
      * Unauthorized error(s)
      */
     401: ErrorResponse;
@@ -83417,6 +84433,10 @@ export type GameCenterLeaderboardSetsGameCenterLeaderboardsCreateToManyRelations
 };
 
 export type GameCenterLeaderboardSetsGameCenterLeaderboardsCreateToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
     /**
      * Unauthorized error(s)
      */
@@ -83630,6 +84650,10 @@ export type GameCenterLeaderboardSetsGroupLeaderboardSetUpdateToOneRelationshipD
 };
 
 export type GameCenterLeaderboardSetsGroupLeaderboardSetUpdateToOneRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
     /**
      * Unauthorized error(s)
      */
@@ -84136,6 +85160,10 @@ export type GameCenterLeaderboardsActivityUpdateToOneRelationshipData = {
 
 export type GameCenterLeaderboardsActivityUpdateToOneRelationshipErrors = {
     /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
      * Unauthorized error(s)
      */
     401: ErrorResponse;
@@ -84188,6 +85216,10 @@ export type GameCenterLeaderboardsChallengeUpdateToOneRelationshipData = {
 };
 
 export type GameCenterLeaderboardsChallengeUpdateToOneRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
     /**
      * Unauthorized error(s)
      */
@@ -84287,6 +85319,10 @@ export type GameCenterLeaderboardsGroupLeaderboardUpdateToOneRelationshipData = 
 };
 
 export type GameCenterLeaderboardsGroupLeaderboardUpdateToOneRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
     /**
      * Unauthorized error(s)
      */
@@ -84683,6 +85719,10 @@ export type GameCenterLeaderboardsV2ActivityUpdateToOneRelationshipData = {
 
 export type GameCenterLeaderboardsV2ActivityUpdateToOneRelationshipErrors = {
     /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
      * Unauthorized error(s)
      */
     401: ErrorResponse;
@@ -84735,6 +85775,10 @@ export type GameCenterLeaderboardsV2ChallengeUpdateToOneRelationshipData = {
 };
 
 export type GameCenterLeaderboardsV2ChallengeUpdateToOneRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
     /**
      * Unauthorized error(s)
      */
@@ -89788,6 +90832,10 @@ export type SubscriptionsIntroductoryOffersDeleteToManyRelationshipData = {
 
 export type SubscriptionsIntroductoryOffersDeleteToManyRelationshipErrors = {
     /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
      * Unauthorized error(s)
      */
     401: ErrorResponse;
@@ -90226,6 +91274,10 @@ export type SubscriptionsPricesDeleteToManyRelationshipData = {
 };
 
 export type SubscriptionsPricesDeleteToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
     /**
      * Unauthorized error(s)
      */
@@ -91088,6 +92140,10 @@ export type UsersVisibleAppsDeleteToManyRelationshipData = {
 
 export type UsersVisibleAppsDeleteToManyRelationshipErrors = {
     /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
      * Unauthorized error(s)
      */
     401: ErrorResponse;
@@ -91192,6 +92248,10 @@ export type UsersVisibleAppsReplaceToManyRelationshipData = {
 
 export type UsersVisibleAppsReplaceToManyRelationshipErrors = {
     /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
      * Unauthorized error(s)
      */
     401: ErrorResponse;
@@ -91244,6 +92304,10 @@ export type UsersVisibleAppsCreateToManyRelationshipData = {
 };
 
 export type UsersVisibleAppsCreateToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
     /**
      * Unauthorized error(s)
      */
