@@ -12,10 +12,10 @@ jobs:
       VERSION: ''
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: '20.x'
           registry-url: 'https://registry.npmjs.org'
@@ -35,7 +35,7 @@ jobs:
           git add .
           git commit -m "chore: release v${{ steps.generate.outputs.version }}"
           git push origin "release/v${{ steps.generate.outputs.version }}"
-      - uses: actions/github-script@v8
+      - uses: actions/github-script@v9
         if: steps.generate.outputs.version != ''
         with:
           script: |
