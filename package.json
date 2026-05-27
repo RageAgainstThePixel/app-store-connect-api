@@ -34,7 +34,7 @@
     "generate": "npx @hey-api/openapi-ts -f ./openapi-ts.config.ts && tsc"
   },
   "devDependencies": {
-    "@hey-api/openapi-ts": "0.84.4",
+    "@hey-api/openapi-ts": "^0.97.3",
     "@types/jest": "29.5.14",
     "@types/node": "22.18.8",
     "jest": "29.7.0",
