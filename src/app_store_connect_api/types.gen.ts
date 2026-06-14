@@ -2634,7 +2634,6 @@ export type AppInfo = {
          * @deprecated
          */
         koreaAgeRating?: 'ALL' | 'TWELVE' | 'FIFTEEN' | 'NINETEEN' | 'NOT_APPLICABLE';
-        kidsAgeBand?: KidsAgeBand;
     };
     relationships?: {
         app?: {
@@ -3873,6 +3872,7 @@ export type AppStoreVersionExperimentV2UpdateRequest = {
 
 /**
  * AppStoreVersionExperiment
+ *
  * @deprecated
  */
 export type AppStoreVersionExperiment = {
@@ -3907,6 +3907,7 @@ export type AppStoreVersionExperiment = {
 
 /**
  * AppStoreVersionExperimentsResponse
+ *
  * @deprecated
  */
 export type AppStoreVersionExperimentsResponse = {
@@ -3922,6 +3923,7 @@ export type AppStoreVersionExperimentsResponse = {
 
 /**
  * AppStoreVersionExperimentResponse
+ *
  * @deprecated
  */
 export type AppStoreVersionExperimentResponse = {
@@ -3936,6 +3938,7 @@ export type AppStoreVersionExperimentResponse = {
 
 /**
  * AppStoreVersionExperimentCreateRequest
+ *
  * @deprecated
  */
 export type AppStoreVersionExperimentCreateRequest = {
@@ -3958,6 +3961,7 @@ export type AppStoreVersionExperimentCreateRequest = {
 
 /**
  * AppStoreVersionExperimentUpdateRequest
+ *
  * @deprecated
  */
 export type AppStoreVersionExperimentUpdateRequest = {
@@ -4233,6 +4237,7 @@ export type AppStoreVersionReleaseRequestCreateRequest = {
 
 /**
  * AppStoreVersionSubmission
+ *
  * @deprecated
  */
 export type AppStoreVersionSubmission = {
@@ -4251,6 +4256,7 @@ export type AppStoreVersionSubmission = {
 
 /**
  * AppStoreVersionSubmissionResponse
+ *
  * @deprecated
  */
 export type AppStoreVersionSubmissionResponse = {
@@ -5162,6 +5168,7 @@ export type BackgroundAssetVersion = {
             infos?: Array<StateDetail>;
         };
         version?: string;
+        locale?: string;
     };
     relationships?: {
         backgroundAsset?: {
@@ -8295,6 +8302,7 @@ export type EndUserLicenseAgreementUpdateRequest = {
 
 /**
  * GameCenterAchievementImage
+ *
  * @deprecated
  */
 export type GameCenterAchievementImage = {
@@ -8320,6 +8328,7 @@ export type GameCenterAchievementImage = {
 
 /**
  * GameCenterAchievementImageResponse
+ *
  * @deprecated
  */
 export type GameCenterAchievementImageResponse = {
@@ -8330,6 +8339,7 @@ export type GameCenterAchievementImageResponse = {
 
 /**
  * GameCenterAchievementImageCreateRequest
+ *
  * @deprecated
  */
 export type GameCenterAchievementImageCreateRequest = {
@@ -8352,6 +8362,7 @@ export type GameCenterAchievementImageCreateRequest = {
 
 /**
  * GameCenterAchievementImageUpdateRequest
+ *
  * @deprecated
  */
 export type GameCenterAchievementImageUpdateRequest = {
@@ -8528,6 +8539,7 @@ export type GameCenterAchievementLocalizationV2UpdateRequest = {
 
 /**
  * GameCenterAchievementLocalization
+ *
  * @deprecated
  */
 export type GameCenterAchievementLocalization = {
@@ -8560,6 +8572,7 @@ export type GameCenterAchievementLocalization = {
 
 /**
  * GameCenterAchievementLocalizationsResponse
+ *
  * @deprecated
  */
 export type GameCenterAchievementLocalizationsResponse = {
@@ -8575,6 +8588,7 @@ export type GameCenterAchievementLocalizationsResponse = {
 
 /**
  * GameCenterAchievementLocalizationResponse
+ *
  * @deprecated
  */
 export type GameCenterAchievementLocalizationResponse = {
@@ -8589,6 +8603,7 @@ export type GameCenterAchievementLocalizationResponse = {
 
 /**
  * GameCenterAchievementLocalizationCreateRequest
+ *
  * @deprecated
  */
 export type GameCenterAchievementLocalizationCreateRequest = {
@@ -8613,6 +8628,7 @@ export type GameCenterAchievementLocalizationCreateRequest = {
 
 /**
  * GameCenterAchievementLocalizationUpdateRequest
+ *
  * @deprecated
  */
 export type GameCenterAchievementLocalizationUpdateRequest = {
@@ -8629,6 +8645,7 @@ export type GameCenterAchievementLocalizationUpdateRequest = {
 
 /**
  * GameCenterAchievementRelease
+ *
  * @deprecated
  */
 export type GameCenterAchievementRelease = {
@@ -8656,6 +8673,7 @@ export type GameCenterAchievementRelease = {
 
 /**
  * GameCenterAchievementReleasesResponse
+ *
  * @deprecated
  */
 export type GameCenterAchievementReleasesResponse = {
@@ -8671,6 +8689,7 @@ export type GameCenterAchievementReleasesResponse = {
 
 /**
  * GameCenterAchievementReleaseResponse
+ *
  * @deprecated
  */
 export type GameCenterAchievementReleaseResponse = {
@@ -8685,6 +8704,7 @@ export type GameCenterAchievementReleaseResponse = {
 
 /**
  * GameCenterAchievementReleaseCreateRequest
+ *
  * @deprecated
  */
 export type GameCenterAchievementReleaseCreateRequest = {
@@ -8933,6 +8953,7 @@ export type GameCenterAchievementV2UpdateRequest = {
 
 /**
  * GameCenterAchievement
+ *
  * @deprecated
  */
 export type GameCenterAchievement = {
@@ -8999,6 +9020,7 @@ export type GameCenterAchievement = {
 
 /**
  * GameCenterAchievementsResponse
+ *
  * @deprecated
  */
 export type GameCenterAchievementsResponse = {
@@ -9022,6 +9044,7 @@ export type GameCenterAchievementsResponse = {
 
 /**
  * GameCenterAchievementResponse
+ *
  * @deprecated
  */
 export type GameCenterAchievementResponse = {
@@ -9044,6 +9067,7 @@ export type GameCenterAchievementResponse = {
 
 /**
  * GameCenterAchievementCreateRequest
+ *
  * @deprecated
  */
 export type GameCenterAchievementCreateRequest = {
@@ -9076,6 +9100,7 @@ export type GameCenterAchievementCreateRequest = {
 
 /**
  * GameCenterAchievementUpdateRequest
+ *
  * @deprecated
  */
 export type GameCenterAchievementUpdateRequest = {
@@ -9427,6 +9452,7 @@ export type GameCenterActivityLocalizationUpdateRequest = {
 
 /**
  * GameCenterActivityVersionRelease
+ *
  * @deprecated
  */
 export type GameCenterActivityVersionRelease = {
@@ -9445,6 +9471,7 @@ export type GameCenterActivityVersionRelease = {
 
 /**
  * GameCenterActivityVersionReleasesResponse
+ *
  * @deprecated
  */
 export type GameCenterActivityVersionReleasesResponse = {
@@ -9456,6 +9483,7 @@ export type GameCenterActivityVersionReleasesResponse = {
 
 /**
  * GameCenterActivityVersionReleaseResponse
+ *
  * @deprecated
  */
 export type GameCenterActivityVersionReleaseResponse = {
@@ -9466,6 +9494,7 @@ export type GameCenterActivityVersionReleaseResponse = {
 
 /**
  * GameCenterActivityVersionReleaseCreateRequest
+ *
  * @deprecated
  */
 export type GameCenterActivityVersionReleaseCreateRequest = {
@@ -9860,6 +9889,7 @@ export type GameCenterChallengeLocalizationUpdateRequest = {
 
 /**
  * GameCenterChallengeVersionRelease
+ *
  * @deprecated
  */
 export type GameCenterChallengeVersionRelease = {
@@ -9878,6 +9908,7 @@ export type GameCenterChallengeVersionRelease = {
 
 /**
  * GameCenterChallengeVersionReleasesResponse
+ *
  * @deprecated
  */
 export type GameCenterChallengeVersionReleasesResponse = {
@@ -9889,6 +9920,7 @@ export type GameCenterChallengeVersionReleasesResponse = {
 
 /**
  * GameCenterChallengeVersionReleaseResponse
+ *
  * @deprecated
  */
 export type GameCenterChallengeVersionReleaseResponse = {
@@ -9899,6 +9931,7 @@ export type GameCenterChallengeVersionReleaseResponse = {
 
 /**
  * GameCenterChallengeVersionReleaseCreateRequest
+ *
  * @deprecated
  */
 export type GameCenterChallengeVersionReleaseCreateRequest = {
@@ -10561,6 +10594,7 @@ export type GameCenterDetailUpdateRequest = {
 
 /**
  * GameCenterEnabledVersion
+ *
  * @deprecated
  */
 export type GameCenterEnabledVersion = {
@@ -10592,6 +10626,7 @@ export type GameCenterEnabledVersion = {
 
 /**
  * GameCenterEnabledVersionsResponse
+ *
  * @deprecated
  */
 export type GameCenterEnabledVersionsResponse = {
@@ -10816,6 +10851,7 @@ export type GameCenterLeaderboardEntrySubmissionCreateRequest = {
 
 /**
  * GameCenterLeaderboardImage
+ *
  * @deprecated
  */
 export type GameCenterLeaderboardImage = {
@@ -10841,6 +10877,7 @@ export type GameCenterLeaderboardImage = {
 
 /**
  * GameCenterLeaderboardImageResponse
+ *
  * @deprecated
  */
 export type GameCenterLeaderboardImageResponse = {
@@ -10851,6 +10888,7 @@ export type GameCenterLeaderboardImageResponse = {
 
 /**
  * GameCenterLeaderboardImageCreateRequest
+ *
  * @deprecated
  */
 export type GameCenterLeaderboardImageCreateRequest = {
@@ -10873,6 +10911,7 @@ export type GameCenterLeaderboardImageCreateRequest = {
 
 /**
  * GameCenterLeaderboardImageUpdateRequest
+ *
  * @deprecated
  */
 export type GameCenterLeaderboardImageUpdateRequest = {
@@ -10954,6 +10993,7 @@ export type GameCenterLeaderboardImageV2UpdateRequest = {
 
 /**
  * GameCenterLeaderboardLocalization
+ *
  * @deprecated
  */
 export type GameCenterLeaderboardLocalization = {
@@ -10987,6 +11027,7 @@ export type GameCenterLeaderboardLocalization = {
 
 /**
  * GameCenterLeaderboardLocalizationsResponse
+ *
  * @deprecated
  */
 export type GameCenterLeaderboardLocalizationsResponse = {
@@ -11002,6 +11043,7 @@ export type GameCenterLeaderboardLocalizationsResponse = {
 
 /**
  * GameCenterLeaderboardLocalizationResponse
+ *
  * @deprecated
  */
 export type GameCenterLeaderboardLocalizationResponse = {
@@ -11016,6 +11058,7 @@ export type GameCenterLeaderboardLocalizationResponse = {
 
 /**
  * GameCenterLeaderboardLocalizationCreateRequest
+ *
  * @deprecated
  */
 export type GameCenterLeaderboardLocalizationCreateRequest = {
@@ -11042,6 +11085,7 @@ export type GameCenterLeaderboardLocalizationCreateRequest = {
 
 /**
  * GameCenterLeaderboardLocalizationUpdateRequest
+ *
  * @deprecated
  */
 export type GameCenterLeaderboardLocalizationUpdateRequest = {
@@ -11161,6 +11205,7 @@ export type GameCenterLeaderboardLocalizationV2UpdateRequest = {
 
 /**
  * GameCenterLeaderboardRelease
+ *
  * @deprecated
  */
 export type GameCenterLeaderboardRelease = {
@@ -11188,6 +11233,7 @@ export type GameCenterLeaderboardRelease = {
 
 /**
  * GameCenterLeaderboardReleasesResponse
+ *
  * @deprecated
  */
 export type GameCenterLeaderboardReleasesResponse = {
@@ -11203,6 +11249,7 @@ export type GameCenterLeaderboardReleasesResponse = {
 
 /**
  * GameCenterLeaderboardReleaseResponse
+ *
  * @deprecated
  */
 export type GameCenterLeaderboardReleaseResponse = {
@@ -11217,6 +11264,7 @@ export type GameCenterLeaderboardReleaseResponse = {
 
 /**
  * GameCenterLeaderboardReleaseCreateRequest
+ *
  * @deprecated
  */
 export type GameCenterLeaderboardReleaseCreateRequest = {
@@ -11241,6 +11289,7 @@ export type GameCenterLeaderboardReleaseCreateRequest = {
 
 /**
  * GameCenterLeaderboardSetImage
+ *
  * @deprecated
  */
 export type GameCenterLeaderboardSetImage = {
@@ -11266,6 +11315,7 @@ export type GameCenterLeaderboardSetImage = {
 
 /**
  * GameCenterLeaderboardSetImageResponse
+ *
  * @deprecated
  */
 export type GameCenterLeaderboardSetImageResponse = {
@@ -11276,6 +11326,7 @@ export type GameCenterLeaderboardSetImageResponse = {
 
 /**
  * GameCenterLeaderboardSetImageCreateRequest
+ *
  * @deprecated
  */
 export type GameCenterLeaderboardSetImageCreateRequest = {
@@ -11298,6 +11349,7 @@ export type GameCenterLeaderboardSetImageCreateRequest = {
 
 /**
  * GameCenterLeaderboardSetImageUpdateRequest
+ *
  * @deprecated
  */
 export type GameCenterLeaderboardSetImageUpdateRequest = {
@@ -11379,6 +11431,7 @@ export type GameCenterLeaderboardSetImageV2UpdateRequest = {
 
 /**
  * GameCenterLeaderboardSetLocalization
+ *
  * @deprecated
  */
 export type GameCenterLeaderboardSetLocalization = {
@@ -11408,6 +11461,7 @@ export type GameCenterLeaderboardSetLocalization = {
 
 /**
  * GameCenterLeaderboardSetLocalizationsResponse
+ *
  * @deprecated
  */
 export type GameCenterLeaderboardSetLocalizationsResponse = {
@@ -11423,6 +11477,7 @@ export type GameCenterLeaderboardSetLocalizationsResponse = {
 
 /**
  * GameCenterLeaderboardSetLocalizationResponse
+ *
  * @deprecated
  */
 export type GameCenterLeaderboardSetLocalizationResponse = {
@@ -11437,6 +11492,7 @@ export type GameCenterLeaderboardSetLocalizationResponse = {
 
 /**
  * GameCenterLeaderboardSetLocalizationCreateRequest
+ *
  * @deprecated
  */
 export type GameCenterLeaderboardSetLocalizationCreateRequest = {
@@ -11459,6 +11515,7 @@ export type GameCenterLeaderboardSetLocalizationCreateRequest = {
 
 /**
  * GameCenterLeaderboardSetLocalizationUpdateRequest
+ *
  * @deprecated
  */
 export type GameCenterLeaderboardSetLocalizationUpdateRequest = {
@@ -11658,6 +11715,7 @@ export type GameCenterLeaderboardSetMemberLocalizationUpdateRequest = {
 
 /**
  * GameCenterLeaderboardSetRelease
+ *
  * @deprecated
  */
 export type GameCenterLeaderboardSetRelease = {
@@ -11685,6 +11743,7 @@ export type GameCenterLeaderboardSetRelease = {
 
 /**
  * GameCenterLeaderboardSetReleasesResponse
+ *
  * @deprecated
  */
 export type GameCenterLeaderboardSetReleasesResponse = {
@@ -11700,6 +11759,7 @@ export type GameCenterLeaderboardSetReleasesResponse = {
 
 /**
  * GameCenterLeaderboardSetReleaseResponse
+ *
  * @deprecated
  */
 export type GameCenterLeaderboardSetReleaseResponse = {
@@ -11714,6 +11774,7 @@ export type GameCenterLeaderboardSetReleaseResponse = {
 
 /**
  * GameCenterLeaderboardSetReleaseCreateRequest
+ *
  * @deprecated
  */
 export type GameCenterLeaderboardSetReleaseCreateRequest = {
@@ -11955,6 +12016,7 @@ export type GameCenterLeaderboardSetV2UpdateRequest = {
 
 /**
  * GameCenterLeaderboardSet
+ *
  * @deprecated
  */
 export type GameCenterLeaderboardSet = {
@@ -12017,6 +12079,7 @@ export type GameCenterLeaderboardSet = {
 
 /**
  * GameCenterLeaderboardSetsResponse
+ *
  * @deprecated
  */
 export type GameCenterLeaderboardSetsResponse = {
@@ -12040,6 +12103,7 @@ export type GameCenterLeaderboardSetsResponse = {
 
 /**
  * GameCenterLeaderboardSetResponse
+ *
  * @deprecated
  */
 export type GameCenterLeaderboardSetResponse = {
@@ -12062,6 +12126,7 @@ export type GameCenterLeaderboardSetResponse = {
 
 /**
  * GameCenterLeaderboardSetCreateRequest
+ *
  * @deprecated
  */
 export type GameCenterLeaderboardSetCreateRequest = {
@@ -12096,6 +12161,7 @@ export type GameCenterLeaderboardSetCreateRequest = {
 
 /**
  * GameCenterLeaderboardSetUpdateRequest
+ *
  * @deprecated
  */
 export type GameCenterLeaderboardSetUpdateRequest = {
@@ -12196,6 +12262,7 @@ export type GameCenterLeaderboardVersionV2CreateRequest = {
 
 /**
  * GameCenterLeaderboard
+ *
  * @deprecated
  */
 export type GameCenterLeaderboard = {
@@ -12282,6 +12349,7 @@ export type GameCenterLeaderboard = {
 
 /**
  * GameCenterLeaderboardsResponse
+ *
  * @deprecated
  */
 export type GameCenterLeaderboardsResponse = {
@@ -12309,6 +12377,7 @@ export type GameCenterLeaderboardsResponse = {
 
 /**
  * GameCenterLeaderboardResponse
+ *
  * @deprecated
  */
 export type GameCenterLeaderboardResponse = {
@@ -12335,6 +12404,7 @@ export type GameCenterLeaderboardResponse = {
 
 /**
  * GameCenterLeaderboardCreateRequest
+ *
  * @deprecated
  */
 export type GameCenterLeaderboardCreateRequest = {
@@ -12379,6 +12449,7 @@ export type GameCenterLeaderboardCreateRequest = {
 
 /**
  * GameCenterLeaderboardUpdateRequest
+ *
  * @deprecated
  */
 export type GameCenterLeaderboardUpdateRequest = {
@@ -13963,6 +14034,7 @@ export type InAppPurchaseSubmissionCreateRequest = {
 
 /**
  * InAppPurchase
+ *
  * @deprecated
  */
 export type InAppPurchase = {
@@ -13988,6 +14060,7 @@ export type InAppPurchase = {
 
 /**
  * InAppPurchasesResponse
+ *
  * @deprecated
  */
 export type InAppPurchasesResponse = {
@@ -13999,6 +14072,7 @@ export type InAppPurchasesResponse = {
 
 /**
  * InAppPurchaseResponse
+ *
  * @deprecated
  */
 export type InAppPurchaseResponse = {
@@ -14243,6 +14317,7 @@ export type MarketplaceSearchDetailUpdateRequest = {
 
 /**
  * MarketplaceWebhook
+ *
  * @deprecated
  */
 export type MarketplaceWebhook = {
@@ -14256,6 +14331,7 @@ export type MarketplaceWebhook = {
 
 /**
  * MarketplaceWebhooksResponse
+ *
  * @deprecated
  */
 export type MarketplaceWebhooksResponse = {
@@ -14266,6 +14342,7 @@ export type MarketplaceWebhooksResponse = {
 
 /**
  * MarketplaceWebhookResponse
+ *
  * @deprecated
  */
 export type MarketplaceWebhookResponse = {
@@ -14275,6 +14352,7 @@ export type MarketplaceWebhookResponse = {
 
 /**
  * MarketplaceWebhookCreateRequest
+ *
  * @deprecated
  */
 export type MarketplaceWebhookCreateRequest = {
@@ -14289,6 +14367,7 @@ export type MarketplaceWebhookCreateRequest = {
 
 /**
  * MarketplaceWebhookUpdateRequest
+ *
  * @deprecated
  */
 export type MarketplaceWebhookUpdateRequest = {
@@ -14639,7 +14718,7 @@ export type PerfPowerMetric = {
     id: string;
     attributes?: {
         platform?: 'IOS';
-        metricType?: 'DISK' | 'HANG' | 'BATTERY' | 'LAUNCH' | 'MEMORY' | 'ANIMATION' | 'TERMINATION';
+        metricType?: 'DISK' | 'HANG' | 'BATTERY' | 'LAUNCH' | 'MEMORY' | 'ANIMATION' | 'TERMINATION' | 'STORAGE';
         deviceType?: string;
     };
     links?: ResourceLinks;
@@ -15680,6 +15759,8 @@ export type SubscriptionAppStoreReviewScreenshotUpdateRequest = {
 
 /**
  * SubscriptionAvailability
+ *
+ * @deprecated
  */
 export type SubscriptionAvailability = {
     type: 'subscriptionAvailabilities';
@@ -15702,6 +15783,8 @@ export type SubscriptionAvailability = {
 
 /**
  * SubscriptionAvailabilityResponse
+ *
+ * @deprecated
  */
 export type SubscriptionAvailabilityResponse = {
     data: SubscriptionAvailability;
@@ -15711,6 +15794,8 @@ export type SubscriptionAvailabilityResponse = {
 
 /**
  * SubscriptionAvailabilityCreateRequest
+ *
+ * @deprecated
  */
 export type SubscriptionAvailabilityCreateRequest = {
     data: {
@@ -16068,6 +16153,7 @@ export type SubscriptionIntroductoryOffer = {
         duration?: SubscriptionOfferDuration;
         offerMode?: SubscriptionOfferMode;
         numberOfPeriods?: number;
+        targetSubscriptionPlanType?: SubscriptionPlanType;
     };
     relationships?: {
         subscription?: {
@@ -16101,6 +16187,7 @@ export type SubscriptionIntroductoryOfferInlineCreate = {
         duration: SubscriptionOfferDuration;
         offerMode: SubscriptionOfferMode;
         numberOfPeriods: number;
+        targetSubscriptionPlanType?: SubscriptionPlanType;
     };
     relationships?: {
         subscription?: {
@@ -16167,6 +16254,7 @@ export type SubscriptionIntroductoryOfferCreateRequest = {
             duration: SubscriptionOfferDuration;
             offerMode: SubscriptionOfferMode;
             numberOfPeriods: number;
+            targetSubscriptionPlanType?: SubscriptionPlanType;
         };
         relationships: {
             subscription: {
@@ -16525,6 +16613,7 @@ export type SubscriptionOfferCode = {
         sandboxCodeCount?: number;
         active?: boolean;
         autoRenewEnabled?: boolean;
+        targetSubscriptionPlanType?: SubscriptionPlanType;
     };
     relationships?: {
         subscription?: {
@@ -16610,6 +16699,7 @@ export type SubscriptionOfferCodeCreateRequest = {
             offerMode: SubscriptionOfferMode;
             numberOfPeriods: number;
             autoRenewEnabled?: boolean | null;
+            targetSubscriptionPlanType?: SubscriptionPlanType;
         };
         relationships: {
             subscription: {
@@ -16638,6 +16728,96 @@ export type SubscriptionOfferCodeUpdateRequest = {
         id: string;
         attributes?: {
             active?: boolean | null;
+        };
+    };
+};
+
+/**
+ * SubscriptionPlanAvailability
+ */
+export type SubscriptionPlanAvailability = {
+    type: 'subscriptionPlanAvailabilities';
+    id: string;
+    attributes?: {
+        availableInNewTerritories?: boolean;
+        planType?: SubscriptionPlanType;
+    };
+    relationships?: {
+        availableTerritories?: {
+            links?: RelationshipLinks;
+            meta?: PagingInformation;
+            data?: Array<{
+                type: 'territories';
+                id: string;
+            }>;
+        };
+    };
+    links?: ResourceLinks;
+};
+
+/**
+ * SubscriptionPlanAvailabilitiesResponse
+ */
+export type SubscriptionPlanAvailabilitiesResponse = {
+    data: Array<SubscriptionPlanAvailability>;
+    included?: Array<Territory>;
+    links: PagedDocumentLinks;
+    meta?: PagingInformation;
+};
+
+/**
+ * SubscriptionPlanAvailabilityResponse
+ */
+export type SubscriptionPlanAvailabilityResponse = {
+    data: SubscriptionPlanAvailability;
+    included?: Array<Territory>;
+    links: DocumentLinks;
+};
+
+/**
+ * SubscriptionPlanAvailabilityCreateRequest
+ */
+export type SubscriptionPlanAvailabilityCreateRequest = {
+    data: {
+        type: 'subscriptionPlanAvailabilities';
+        attributes: {
+            availableInNewTerritories?: boolean | null;
+            planType: SubscriptionPlanType;
+        };
+        relationships: {
+            availableTerritories: {
+                data: Array<{
+                    type: 'territories';
+                    id: string;
+                }>;
+            };
+            subscription: {
+                data: {
+                    type: 'subscriptions';
+                    id: string;
+                };
+            };
+        };
+    };
+};
+
+/**
+ * SubscriptionPlanAvailabilityUpdateRequest
+ */
+export type SubscriptionPlanAvailabilityUpdateRequest = {
+    data: {
+        type: 'subscriptionPlanAvailabilities';
+        id: string;
+        attributes?: {
+            availableInNewTerritories?: boolean | null;
+        };
+        relationships?: {
+            availableTerritories?: {
+                data?: Array<{
+                    type: 'territories';
+                    id: string;
+                }>;
+            };
         };
     };
 };
@@ -16700,6 +16880,7 @@ export type SubscriptionPrice = {
     attributes?: {
         startDate?: string;
         preserved?: boolean;
+        planType?: SubscriptionPlanType;
     };
     relationships?: {
         territory?: {
@@ -16724,6 +16905,7 @@ export type SubscriptionPriceInlineCreate = {
     attributes?: {
         startDate?: string | null;
         preserveCurrentPrice?: boolean | null;
+        planType?: SubscriptionPlanType;
     };
     relationships?: {
         subscription?: {
@@ -16783,6 +16965,7 @@ export type SubscriptionPriceCreateRequest = {
         attributes?: {
             startDate?: string | null;
             preserveCurrentPrice?: boolean | null;
+            planType?: SubscriptionPlanType;
         };
         relationships: {
             subscription: {
@@ -16875,6 +17058,7 @@ export type SubscriptionPromotionalOffer = {
         numberOfPeriods?: number;
         offerCode?: string;
         offerMode?: SubscriptionOfferMode;
+        targetSubscriptionPlanType?: SubscriptionPlanType;
     };
     relationships?: {
         subscription?: {
@@ -16904,6 +17088,7 @@ export type SubscriptionPromotionalOfferInlineCreate = {
         numberOfPeriods: number;
         offerCode: string;
         offerMode: SubscriptionOfferMode;
+        targetSubscriptionPlanType?: SubscriptionPlanType;
     };
     relationships?: {
         subscription?: {
@@ -16960,6 +17145,7 @@ export type SubscriptionPromotionalOfferCreateRequest = {
             numberOfPeriods: number;
             offerCode: string;
             offerMode: SubscriptionOfferMode;
+            targetSubscriptionPlanType?: SubscriptionPlanType;
         };
         relationships: {
             subscription: {
@@ -17120,6 +17306,9 @@ export type Subscription = {
                 id: string;
             };
         };
+        /**
+         * @deprecated
+         */
         subscriptionAvailability?: {
             links?: RelationshipLinks;
             data?: {
@@ -17140,6 +17329,14 @@ export type Subscription = {
             meta?: PagingInformation;
             data?: Array<{
                 type: 'subscriptionImages';
+                id: string;
+            }>;
+        };
+        planAvailabilities?: {
+            links?: RelationshipLinks;
+            meta?: PagingInformation;
+            data?: Array<{
+                type: 'subscriptionPlanAvailabilities';
                 id: string;
             }>;
         };
@@ -17169,6 +17366,8 @@ export type SubscriptionsResponse = {
     } & SubscriptionLocalization) | ({
         type: 'subscriptionOfferCodes';
     } & SubscriptionOfferCode) | ({
+        type: 'subscriptionPlanAvailabilities';
+    } & SubscriptionPlanAvailability) | ({
         type: 'subscriptionPrices';
     } & SubscriptionPrice) | ({
         type: 'subscriptionPromotionalOffers';
@@ -17201,6 +17400,8 @@ export type SubscriptionResponse = {
     } & SubscriptionLocalization) | ({
         type: 'subscriptionOfferCodes';
     } & SubscriptionOfferCode) | ({
+        type: 'subscriptionPlanAvailabilities';
+    } & SubscriptionPlanAvailability) | ({
         type: 'subscriptionPrices';
     } & SubscriptionPrice) | ({
         type: 'subscriptionPromotionalOffers';
@@ -17817,6 +18018,7 @@ export type WinBackOffer = {
         endDate?: string;
         priority?: 'HIGH' | 'NORMAL';
         promotionIntent?: 'NOT_PROMOTED' | 'USE_AUTO_GENERATED_ASSETS';
+        targetSubscriptionPlanType?: SubscriptionPlanType;
     };
     relationships?: {
         prices?: {
@@ -17869,6 +18071,7 @@ export type WinBackOfferCreateRequest = {
             endDate?: string | null;
             priority: 'HIGH' | 'NORMAL';
             promotionIntent?: 'NOT_PROMOTED' | 'USE_AUTO_GENERATED_ASSETS';
+            targetSubscriptionPlanType?: SubscriptionPlanType;
         };
         relationships: {
             subscription: {
@@ -20794,6 +20997,9 @@ export type ScmRepositoryPullRequestsLinkagesResponse = {
     meta?: PagingInformation;
 };
 
+/**
+ * @deprecated
+ */
 export type SubscriptionAvailabilityAvailableTerritoriesLinkagesResponse = {
     data: Array<{
         type: 'territories';
@@ -20856,6 +21062,22 @@ export type SubscriptionOfferCodePricesLinkagesResponse = {
     meta?: PagingInformation;
 };
 
+export type SubscriptionPlanAvailabilityAvailableTerritoriesLinkagesResponse = {
+    data: Array<{
+        type: 'territories';
+        id: string;
+    }>;
+    links: PagedDocumentLinks;
+    meta?: PagingInformation;
+};
+
+export type SubscriptionPlanAvailabilityAvailableTerritoriesLinkagesRequest = {
+    data: Array<{
+        type: 'territories';
+        id: string;
+    }>;
+};
+
 export type SubscriptionPricePointEqualizationsLinkagesResponse = {
     data: Array<{
         type: 'subscriptionPricePoints';
@@ -20916,6 +21138,15 @@ export type SubscriptionOfferCodesLinkagesResponse = {
     meta?: PagingInformation;
 };
 
+export type SubscriptionPlanAvailabilitiesLinkagesResponse = {
+    data: Array<{
+        type: 'subscriptionPlanAvailabilities';
+        id: string;
+    }>;
+    links: PagedDocumentLinks;
+    meta?: PagingInformation;
+};
+
 export type SubscriptionPricePointsLinkagesResponse = {
     data: Array<{
         type: 'subscriptionPricePoints';
@@ -20958,6 +21189,9 @@ export type SubscriptionPromotionalOffersLinkagesResponse = {
     meta?: PagingInformation;
 };
 
+/**
+ * @deprecated
+ */
 export type SubscriptionSubscriptionAvailabilityLinkageResponse = {
     data: {
         type: 'subscriptionAvailabilities';
@@ -21439,6 +21673,7 @@ export type AppMediaVideoState = {
 export enum AppStoreAgeRating {
     L = 'L',
     ALL = 'ALL',
+    ZERO_ZERO = 'ZERO_ZERO',
     ONE_PLUS = 'ONE_PLUS',
     TWO_PLUS = 'TWO_PLUS',
     THREE_PLUS = 'THREE_PLUS',
@@ -22028,7 +22263,8 @@ export enum MetricCategory {
     DISK = 'DISK',
     BATTERY = 'BATTERY',
     TERMINATION = 'TERMINATION',
-    ANIMATION = 'ANIMATION'
+    ANIMATION = 'ANIMATION',
+    STORAGE = 'STORAGE'
 }
 
 export type MetricsInsight = {
@@ -22181,6 +22417,11 @@ export enum SubscriptionOfferMode {
     PAY_AS_YOU_GO = 'PAY_AS_YOU_GO',
     PAY_UP_FRONT = 'PAY_UP_FRONT',
     FREE_TRIAL = 'FREE_TRIAL'
+}
+
+export enum SubscriptionPlanType {
+    MONTHLY = 'MONTHLY',
+    UPFRONT = 'UPFRONT'
 }
 
 export enum SubscriptionStatusUrlVersion {
@@ -26318,6 +26559,7 @@ export type AppEncryptionDeclarationsGetCollectionData = {
     query?: {
         /**
          * filter by attribute 'platform'
+         *
          * @deprecated
          */
         'filter[platform]'?: Array<'IOS' | 'MAC_OS' | 'TV_OS' | 'VISION_OS'>;
@@ -26335,11 +26577,13 @@ export type AppEncryptionDeclarationsGetCollectionData = {
         'fields[appEncryptionDeclarations]'?: Array<'appDescription' | 'createdDate' | 'usesEncryption' | 'exempt' | 'containsProprietaryCryptography' | 'containsThirdPartyCryptography' | 'availableOnFrenchStore' | 'platform' | 'uploadedDate' | 'documentUrl' | 'documentName' | 'documentType' | 'appEncryptionDeclarationState' | 'codeValue' | 'app' | 'builds' | 'appEncryptionDeclarationDocument'>;
         /**
          * the fields to include for returned resources of type apps
+         *
          * @deprecated
          */
         'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type builds
+         *
          * @deprecated
          */
         'fields[builds]'?: Array<'version' | 'uploadedDate' | 'expirationDate' | 'expired' | 'minOsVersion' | 'lsMinimumSystemVersion' | 'computedMinMacOsVersion' | 'computedMinVisionOsVersion' | 'iconAssetToken' | 'processingState' | 'buildAudienceType' | 'usesNonExemptEncryption' | 'preReleaseVersion' | 'individualTesters' | 'betaGroups' | 'betaBuildLocalizations' | 'appEncryptionDeclaration' | 'betaAppReviewSubmission' | 'app' | 'buildBetaDetail' | 'appStoreVersion' | 'icons' | 'buildBundles' | 'buildUpload' | 'perfPowerMetrics' | 'diagnosticSignatures'>;
@@ -26456,11 +26700,13 @@ export type AppEncryptionDeclarationsGetInstanceData = {
         'fields[appEncryptionDeclarations]'?: Array<'appDescription' | 'createdDate' | 'usesEncryption' | 'exempt' | 'containsProprietaryCryptography' | 'containsThirdPartyCryptography' | 'availableOnFrenchStore' | 'platform' | 'uploadedDate' | 'documentUrl' | 'documentName' | 'documentType' | 'appEncryptionDeclarationState' | 'codeValue' | 'app' | 'builds' | 'appEncryptionDeclarationDocument'>;
         /**
          * the fields to include for returned resources of type apps
+         *
          * @deprecated
          */
         'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type builds
+         *
          * @deprecated
          */
         'fields[builds]'?: Array<'version' | 'uploadedDate' | 'expirationDate' | 'expired' | 'minOsVersion' | 'lsMinimumSystemVersion' | 'computedMinMacOsVersion' | 'computedMinVisionOsVersion' | 'iconAssetToken' | 'processingState' | 'buildAudienceType' | 'usesNonExemptEncryption' | 'preReleaseVersion' | 'individualTesters' | 'betaGroups' | 'betaBuildLocalizations' | 'appEncryptionDeclaration' | 'betaAppReviewSubmission' | 'app' | 'buildBetaDetail' | 'appStoreVersion' | 'icons' | 'buildBundles' | 'buildUpload' | 'perfPowerMetrics' | 'diagnosticSignatures'>;
@@ -27484,7 +27730,7 @@ export type AppInfoLocalizationsGetInstanceData = {
         /**
          * the fields to include for returned resources of type appInfos
          */
-        'fields[appInfos]'?: Array<'appStoreState' | 'state' | 'appStoreAgeRating' | 'australiaAgeRating' | 'brazilAgeRating' | 'brazilAgeRatingV2' | 'franceAgeRating' | 'koreaAgeRating' | 'kidsAgeBand' | 'app' | 'ageRatingDeclaration' | 'appInfoLocalizations' | 'primaryCategory' | 'primarySubcategoryOne' | 'primarySubcategoryTwo' | 'secondaryCategory' | 'secondarySubcategoryOne' | 'secondarySubcategoryTwo' | 'territoryAgeRatings'>;
+        'fields[appInfos]'?: Array<'appStoreState' | 'state' | 'appStoreAgeRating' | 'australiaAgeRating' | 'brazilAgeRating' | 'brazilAgeRatingV2' | 'franceAgeRating' | 'koreaAgeRating' | 'app' | 'ageRatingDeclaration' | 'appInfoLocalizations' | 'primaryCategory' | 'primarySubcategoryOne' | 'primarySubcategoryTwo' | 'secondaryCategory' | 'secondarySubcategoryOne' | 'secondarySubcategoryTwo' | 'territoryAgeRatings'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -27596,7 +27842,7 @@ export type AppInfosGetInstanceData = {
         /**
          * the fields to include for returned resources of type appInfos
          */
-        'fields[appInfos]'?: Array<'appStoreState' | 'state' | 'appStoreAgeRating' | 'australiaAgeRating' | 'brazilAgeRating' | 'brazilAgeRatingV2' | 'franceAgeRating' | 'koreaAgeRating' | 'kidsAgeBand' | 'app' | 'ageRatingDeclaration' | 'appInfoLocalizations' | 'primaryCategory' | 'primarySubcategoryOne' | 'primarySubcategoryTwo' | 'secondaryCategory' | 'secondarySubcategoryOne' | 'secondarySubcategoryTwo' | 'territoryAgeRatings'>;
+        'fields[appInfos]'?: Array<'appStoreState' | 'state' | 'appStoreAgeRating' | 'australiaAgeRating' | 'brazilAgeRating' | 'brazilAgeRatingV2' | 'franceAgeRating' | 'koreaAgeRating' | 'app' | 'ageRatingDeclaration' | 'appInfoLocalizations' | 'primaryCategory' | 'primarySubcategoryOne' | 'primarySubcategoryTwo' | 'secondaryCategory' | 'secondarySubcategoryOne' | 'secondarySubcategoryTwo' | 'territoryAgeRatings'>;
         /**
          * the fields to include for returned resources of type apps
          */
@@ -30533,6 +30779,7 @@ export type AppStoreVersionsGetInstanceData = {
         'fields[appStoreReviewDetails]'?: Array<'contactFirstName' | 'contactLastName' | 'contactPhone' | 'contactEmail' | 'demoAccountName' | 'demoAccountPassword' | 'demoAccountRequired' | 'notes' | 'appStoreVersion' | 'appStoreReviewAttachments'>;
         /**
          * the fields to include for returned resources of type appStoreVersionSubmissions
+         *
          * @deprecated
          */
         'fields[appStoreVersionSubmissions]'?: Array<'appStoreVersion'>;
@@ -30554,6 +30801,7 @@ export type AppStoreVersionsGetInstanceData = {
         include?: Array<'app' | 'appStoreVersionLocalizations' | 'build' | 'appStoreVersionPhasedRelease' | 'gameCenterAppVersion' | 'routingAppCoverage' | 'appStoreReviewDetail' | 'appStoreVersionSubmission' | 'appClipDefaultExperience' | 'appStoreVersionExperiments' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionPackage'>;
         /**
          * maximum number of related appStoreVersionExperiments returned (when they are included)
+         *
          * @deprecated
          */
         'limit[appStoreVersionExperiments]'?: number;
@@ -30735,6 +30983,7 @@ export type AppsGetCollectionData = {
         'filter[sku]'?: Array<string>;
         /**
          * filter by attribute 'appStoreVersions.appStoreState'
+         *
          * @deprecated
          */
         'filter[appStoreVersions.appStoreState]'?: Array<'ACCEPTED' | 'DEVELOPER_REMOVED_FROM_SALE' | 'DEVELOPER_REJECTED' | 'IN_REVIEW' | 'INVALID_BINARY' | 'METADATA_REJECTED' | 'PENDING_APPLE_RELEASE' | 'PENDING_CONTRACT' | 'PENDING_DEVELOPER_RELEASE' | 'PREPARE_FOR_SUBMISSION' | 'PREORDER_READY_FOR_SALE' | 'PROCESSING_FOR_APP_STORE' | 'READY_FOR_REVIEW' | 'READY_FOR_SALE' | 'REJECTED' | 'REMOVED_FROM_SALE' | 'WAITING_FOR_EXPORT_COMPLIANCE' | 'WAITING_FOR_REVIEW' | 'REPLACED_WITH_NEW_VERSION' | 'NOT_APPLICABLE'>;
@@ -30764,6 +31013,7 @@ export type AppsGetCollectionData = {
         'filter[id]'?: Array<string>;
         /**
          * filter by existence or non-existence of related 'gameCenterEnabledVersions'
+         *
          * @deprecated
          */
         'exists[gameCenterEnabledVersions]'?: boolean;
@@ -30818,7 +31068,7 @@ export type AppsGetCollectionData = {
         /**
          * the fields to include for returned resources of type appInfos
          */
-        'fields[appInfos]'?: Array<'appStoreState' | 'state' | 'appStoreAgeRating' | 'australiaAgeRating' | 'brazilAgeRating' | 'brazilAgeRatingV2' | 'franceAgeRating' | 'koreaAgeRating' | 'kidsAgeBand' | 'app' | 'ageRatingDeclaration' | 'appInfoLocalizations' | 'primaryCategory' | 'primarySubcategoryOne' | 'primarySubcategoryTwo' | 'secondaryCategory' | 'secondarySubcategoryOne' | 'secondarySubcategoryTwo' | 'territoryAgeRatings'>;
+        'fields[appInfos]'?: Array<'appStoreState' | 'state' | 'appStoreAgeRating' | 'australiaAgeRating' | 'brazilAgeRating' | 'brazilAgeRatingV2' | 'franceAgeRating' | 'koreaAgeRating' | 'app' | 'ageRatingDeclaration' | 'appInfoLocalizations' | 'primaryCategory' | 'primarySubcategoryOne' | 'primarySubcategoryTwo' | 'secondaryCategory' | 'secondarySubcategoryOne' | 'secondarySubcategoryTwo' | 'territoryAgeRatings'>;
         /**
          * the fields to include for returned resources of type appClips
          */
@@ -30837,6 +31087,7 @@ export type AppsGetCollectionData = {
         'fields[subscriptionGroups]'?: Array<'referenceName' | 'subscriptions' | 'subscriptionGroupLocalizations'>;
         /**
          * the fields to include for returned resources of type gameCenterEnabledVersions
+         *
          * @deprecated
          */
         'fields[gameCenterEnabledVersions]'?: Array<'platform' | 'versionString' | 'iconAsset' | 'compatibleVersions' | 'app'>;
@@ -30926,11 +31177,13 @@ export type AppsGetCollectionData = {
         'limit[builds]'?: number;
         /**
          * maximum number of related gameCenterEnabledVersions returned (when they are included)
+         *
          * @deprecated
          */
         'limit[gameCenterEnabledVersions]'?: number;
         /**
          * maximum number of related inAppPurchases returned (when they are included)
+         *
          * @deprecated
          */
         'limit[inAppPurchases]'?: number;
@@ -31044,7 +31297,7 @@ export type AppsGetInstanceData = {
         /**
          * the fields to include for returned resources of type appInfos
          */
-        'fields[appInfos]'?: Array<'appStoreState' | 'state' | 'appStoreAgeRating' | 'australiaAgeRating' | 'brazilAgeRating' | 'brazilAgeRatingV2' | 'franceAgeRating' | 'koreaAgeRating' | 'kidsAgeBand' | 'app' | 'ageRatingDeclaration' | 'appInfoLocalizations' | 'primaryCategory' | 'primarySubcategoryOne' | 'primarySubcategoryTwo' | 'secondaryCategory' | 'secondarySubcategoryOne' | 'secondarySubcategoryTwo' | 'territoryAgeRatings'>;
+        'fields[appInfos]'?: Array<'appStoreState' | 'state' | 'appStoreAgeRating' | 'australiaAgeRating' | 'brazilAgeRating' | 'brazilAgeRatingV2' | 'franceAgeRating' | 'koreaAgeRating' | 'app' | 'ageRatingDeclaration' | 'appInfoLocalizations' | 'primaryCategory' | 'primarySubcategoryOne' | 'primarySubcategoryTwo' | 'secondaryCategory' | 'secondarySubcategoryOne' | 'secondarySubcategoryTwo' | 'territoryAgeRatings'>;
         /**
          * the fields to include for returned resources of type appClips
          */
@@ -31063,6 +31316,7 @@ export type AppsGetInstanceData = {
         'fields[subscriptionGroups]'?: Array<'referenceName' | 'subscriptions' | 'subscriptionGroupLocalizations'>;
         /**
          * the fields to include for returned resources of type gameCenterEnabledVersions
+         *
          * @deprecated
          */
         'fields[gameCenterEnabledVersions]'?: Array<'platform' | 'versionString' | 'iconAsset' | 'compatibleVersions' | 'app'>;
@@ -31148,11 +31402,13 @@ export type AppsGetInstanceData = {
         'limit[builds]'?: number;
         /**
          * maximum number of related gameCenterEnabledVersions returned (when they are included)
+         *
          * @deprecated
          */
         'limit[gameCenterEnabledVersions]'?: number;
         /**
          * maximum number of related inAppPurchases returned (when they are included)
+         *
          * @deprecated
          */
         'limit[inAppPurchases]'?: number;
@@ -31443,7 +31699,7 @@ export type BackgroundAssetVersionAppStoreReleasesGetInstanceData = {
         /**
          * the fields to include for returned resources of type backgroundAssetVersions
          */
-        'fields[backgroundAssetVersions]'?: Array<'createdDate' | 'platforms' | 'state' | 'stateDetails' | 'version' | 'backgroundAsset' | 'internalBetaRelease' | 'externalBetaRelease' | 'appStoreRelease' | 'assetFile' | 'manifestFile' | 'backgroundAssetUploadFiles'>;
+        'fields[backgroundAssetVersions]'?: Array<'createdDate' | 'platforms' | 'state' | 'stateDetails' | 'version' | 'locale' | 'backgroundAsset' | 'internalBetaRelease' | 'externalBetaRelease' | 'appStoreRelease' | 'assetFile' | 'manifestFile' | 'backgroundAssetUploadFiles'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -31502,7 +31758,7 @@ export type BackgroundAssetVersionExternalBetaReleasesGetInstanceData = {
         /**
          * the fields to include for returned resources of type backgroundAssetVersions
          */
-        'fields[backgroundAssetVersions]'?: Array<'createdDate' | 'platforms' | 'state' | 'stateDetails' | 'version' | 'backgroundAsset' | 'internalBetaRelease' | 'externalBetaRelease' | 'appStoreRelease' | 'assetFile' | 'manifestFile' | 'backgroundAssetUploadFiles'>;
+        'fields[backgroundAssetVersions]'?: Array<'createdDate' | 'platforms' | 'state' | 'stateDetails' | 'version' | 'locale' | 'backgroundAsset' | 'internalBetaRelease' | 'externalBetaRelease' | 'appStoreRelease' | 'assetFile' | 'manifestFile' | 'backgroundAssetUploadFiles'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -31561,7 +31817,7 @@ export type BackgroundAssetVersionInternalBetaReleasesGetInstanceData = {
         /**
          * the fields to include for returned resources of type backgroundAssetVersions
          */
-        'fields[backgroundAssetVersions]'?: Array<'createdDate' | 'platforms' | 'state' | 'stateDetails' | 'version' | 'backgroundAsset' | 'internalBetaRelease' | 'externalBetaRelease' | 'appStoreRelease' | 'assetFile' | 'manifestFile' | 'backgroundAssetUploadFiles'>;
+        'fields[backgroundAssetVersions]'?: Array<'createdDate' | 'platforms' | 'state' | 'stateDetails' | 'version' | 'locale' | 'backgroundAsset' | 'internalBetaRelease' | 'externalBetaRelease' | 'appStoreRelease' | 'assetFile' | 'manifestFile' | 'backgroundAssetUploadFiles'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -31664,7 +31920,7 @@ export type BackgroundAssetVersionsGetInstanceData = {
         /**
          * the fields to include for returned resources of type backgroundAssetVersions
          */
-        'fields[backgroundAssetVersions]'?: Array<'createdDate' | 'platforms' | 'state' | 'stateDetails' | 'version' | 'backgroundAsset' | 'internalBetaRelease' | 'externalBetaRelease' | 'appStoreRelease' | 'assetFile' | 'manifestFile' | 'backgroundAssetUploadFiles'>;
+        'fields[backgroundAssetVersions]'?: Array<'createdDate' | 'platforms' | 'state' | 'stateDetails' | 'version' | 'locale' | 'backgroundAsset' | 'internalBetaRelease' | 'externalBetaRelease' | 'appStoreRelease' | 'assetFile' | 'manifestFile' | 'backgroundAssetUploadFiles'>;
         /**
          * the fields to include for returned resources of type backgroundAssets
          */
@@ -31795,7 +32051,7 @@ export type BackgroundAssetsGetInstanceData = {
         /**
          * the fields to include for returned resources of type backgroundAssetVersions
          */
-        'fields[backgroundAssetVersions]'?: Array<'createdDate' | 'platforms' | 'state' | 'stateDetails' | 'version' | 'backgroundAsset' | 'internalBetaRelease' | 'externalBetaRelease' | 'appStoreRelease' | 'assetFile' | 'manifestFile' | 'backgroundAssetUploadFiles'>;
+        'fields[backgroundAssetVersions]'?: Array<'createdDate' | 'platforms' | 'state' | 'stateDetails' | 'version' | 'locale' | 'backgroundAsset' | 'internalBetaRelease' | 'externalBetaRelease' | 'appStoreRelease' | 'assetFile' | 'manifestFile' | 'backgroundAssetUploadFiles'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -37979,6 +38235,7 @@ export type GameCenterAchievementImagesGetInstanceData = {
         'fields[gameCenterAchievementImages]'?: Array<'fileSize' | 'fileName' | 'imageAsset' | 'uploadOperations' | 'assetDeliveryState' | 'gameCenterAchievementLocalization'>;
         /**
          * the fields to include for returned resources of type gameCenterAchievementLocalizations
+         *
          * @deprecated
          */
         'fields[gameCenterAchievementLocalizations]'?: Array<'locale' | 'name' | 'beforeEarnedDescription' | 'afterEarnedDescription' | 'gameCenterAchievement' | 'gameCenterAchievementImage'>;
@@ -38614,11 +38871,13 @@ export type GameCenterAchievementLocalizationsGetInstanceData = {
         'fields[gameCenterAchievementLocalizations]'?: Array<'locale' | 'name' | 'beforeEarnedDescription' | 'afterEarnedDescription' | 'gameCenterAchievement' | 'gameCenterAchievementImage'>;
         /**
          * the fields to include for returned resources of type gameCenterAchievements
+         *
          * @deprecated
          */
         'fields[gameCenterAchievements]'?: Array<'referenceName' | 'vendorIdentifier' | 'points' | 'showBeforeEarned' | 'repeatable' | 'archived' | 'activityProperties' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupAchievement' | 'localizations' | 'releases' | 'activity'>;
         /**
          * the fields to include for returned resources of type gameCenterAchievementImages
+         *
          * @deprecated
          */
         'fields[gameCenterAchievementImages]'?: Array<'fileSize' | 'fileName' | 'imageAsset' | 'uploadOperations' | 'assetDeliveryState' | 'gameCenterAchievementLocalization'>;
@@ -38834,6 +39093,7 @@ export type GameCenterAchievementReleasesGetInstanceData = {
         'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterAchievements
+         *
          * @deprecated
          */
         'fields[gameCenterAchievements]'?: Array<'referenceName' | 'vendorIdentifier' | 'points' | 'showBeforeEarned' | 'repeatable' | 'archived' | 'activityProperties' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupAchievement' | 'localizations' | 'releases' | 'activity'>;
@@ -39337,11 +39597,13 @@ export type GameCenterAchievementsGetInstanceData = {
         'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
         /**
          * the fields to include for returned resources of type gameCenterAchievementLocalizations
+         *
          * @deprecated
          */
         'fields[gameCenterAchievementLocalizations]'?: Array<'locale' | 'name' | 'beforeEarnedDescription' | 'afterEarnedDescription' | 'gameCenterAchievement' | 'gameCenterAchievementImage'>;
         /**
          * the fields to include for returned resources of type gameCenterAchievementReleases
+         *
          * @deprecated
          */
         'fields[gameCenterAchievementReleases]'?: Array<'live' | 'gameCenterDetail' | 'gameCenterAchievement'>;
@@ -39355,11 +39617,13 @@ export type GameCenterAchievementsGetInstanceData = {
         include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'groupAchievement' | 'localizations' | 'releases' | 'activity'>;
         /**
          * maximum number of related localizations returned (when they are included)
+         *
          * @deprecated
          */
         'limit[localizations]'?: number;
         /**
          * maximum number of related releases returned (when they are included)
+         *
          * @deprecated
          */
         'limit[releases]'?: number;
@@ -39591,6 +39855,7 @@ export type GameCenterActivitiesGetInstanceData = {
         include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'achievementsV2' | 'leaderboards' | 'leaderboardsV2' | 'versions'>;
         /**
          * maximum number of related achievements returned (when they are included)
+         *
          * @deprecated
          */
         'limit[achievements]'?: number;
@@ -39600,6 +39865,7 @@ export type GameCenterActivitiesGetInstanceData = {
         'limit[achievementsV2]'?: number;
         /**
          * maximum number of related leaderboards returned (when they are included)
+         *
          * @deprecated
          */
         'limit[leaderboards]'?: number;
@@ -40350,6 +40616,7 @@ export type GameCenterActivityVersionsGetInstanceData = {
         'fields[gameCenterActivityImages]'?: Array<'fileSize' | 'fileName' | 'imageAsset' | 'uploadOperations' | 'assetDeliveryState'>;
         /**
          * the fields to include for returned resources of type gameCenterActivityVersionReleases
+         *
          * @deprecated
          */
         'fields[gameCenterActivityVersionReleases]'?: Array<'version'>;
@@ -40363,6 +40630,7 @@ export type GameCenterActivityVersionsGetInstanceData = {
         'limit[localizations]'?: number;
         /**
          * maximum number of related releases returned (when they are included)
+         *
          * @deprecated
          */
         'limit[releases]'?: number;
@@ -41269,6 +41537,7 @@ export type GameCenterChallengeVersionsGetInstanceData = {
         'fields[gameCenterChallengeLocalizations]'?: Array<'locale' | 'name' | 'description' | 'version' | 'image'>;
         /**
          * the fields to include for returned resources of type gameCenterChallengeVersionReleases
+         *
          * @deprecated
          */
         'fields[gameCenterChallengeVersionReleases]'?: Array<'version'>;
@@ -41286,6 +41555,7 @@ export type GameCenterChallengeVersionsGetInstanceData = {
         'limit[localizations]'?: number;
         /**
          * maximum number of related releases returned (when they are included)
+         *
          * @deprecated
          */
         'limit[releases]'?: number;
@@ -41648,26 +41918,31 @@ export type GameCenterDetailsGetInstanceData = {
         'fields[gameCenterChallenges]'?: Array<'referenceName' | 'vendorIdentifier' | 'archived' | 'challengeType' | 'repeatable' | 'gameCenterDetail' | 'gameCenterGroup' | 'versions' | 'leaderboard' | 'leaderboardV2'>;
         /**
          * the fields to include for returned resources of type gameCenterAchievementReleases
+         *
          * @deprecated
          */
         'fields[gameCenterAchievementReleases]'?: Array<'live' | 'gameCenterDetail' | 'gameCenterAchievement'>;
         /**
          * the fields to include for returned resources of type gameCenterActivityVersionReleases
+         *
          * @deprecated
          */
         'fields[gameCenterActivityVersionReleases]'?: Array<'version'>;
         /**
          * the fields to include for returned resources of type gameCenterChallengeVersionReleases
+         *
          * @deprecated
          */
         'fields[gameCenterChallengeVersionReleases]'?: Array<'version'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardReleases
+         *
          * @deprecated
          */
         'fields[gameCenterLeaderboardReleases]'?: Array<'live' | 'gameCenterDetail' | 'gameCenterLeaderboard'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardSetReleases
+         *
          * @deprecated
          */
         'fields[gameCenterLeaderboardSetReleases]'?: Array<'live' | 'gameCenterDetail' | 'gameCenterLeaderboardSet'>;
@@ -41681,16 +41956,19 @@ export type GameCenterDetailsGetInstanceData = {
         include?: Array<'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
         /**
          * maximum number of related achievementReleases returned (when they are included)
+         *
          * @deprecated
          */
         'limit[achievementReleases]'?: number;
         /**
          * maximum number of related activityReleases returned (when they are included)
+         *
          * @deprecated
          */
         'limit[activityReleases]'?: number;
         /**
          * maximum number of related challengeReleases returned (when they are included)
+         *
          * @deprecated
          */
         'limit[challengeReleases]'?: number;
@@ -41700,6 +41978,7 @@ export type GameCenterDetailsGetInstanceData = {
         'limit[challengesMinimumPlatformVersions]'?: number;
         /**
          * maximum number of related gameCenterAchievements returned (when they are included)
+         *
          * @deprecated
          */
         'limit[gameCenterAchievements]'?: number;
@@ -41721,6 +42000,7 @@ export type GameCenterDetailsGetInstanceData = {
         'limit[gameCenterChallenges]'?: number;
         /**
          * maximum number of related gameCenterLeaderboardSets returned (when they are included)
+         *
          * @deprecated
          */
         'limit[gameCenterLeaderboardSets]'?: number;
@@ -41730,6 +42010,7 @@ export type GameCenterDetailsGetInstanceData = {
         'limit[gameCenterLeaderboardSetsV2]'?: number;
         /**
          * maximum number of related gameCenterLeaderboards returned (when they are included)
+         *
          * @deprecated
          */
         'limit[gameCenterLeaderboards]'?: number;
@@ -41739,11 +42020,13 @@ export type GameCenterDetailsGetInstanceData = {
         'limit[gameCenterLeaderboardsV2]'?: number;
         /**
          * maximum number of related leaderboardReleases returned (when they are included)
+         *
          * @deprecated
          */
         'limit[leaderboardReleases]'?: number;
         /**
          * maximum number of related leaderboardSetReleases returned (when they are included)
+         *
          * @deprecated
          */
         'limit[leaderboardSetReleases]'?: number;
@@ -41888,6 +42171,7 @@ export type GameCenterGroupsGetCollectionData = {
         include?: Array<'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
         /**
          * maximum number of related gameCenterAchievements returned (when they are included)
+         *
          * @deprecated
          */
         'limit[gameCenterAchievements]'?: number;
@@ -41909,6 +42193,7 @@ export type GameCenterGroupsGetCollectionData = {
         'limit[gameCenterDetails]'?: number;
         /**
          * maximum number of related gameCenterLeaderboardSets returned (when they are included)
+         *
          * @deprecated
          */
         'limit[gameCenterLeaderboardSets]'?: number;
@@ -41918,6 +42203,7 @@ export type GameCenterGroupsGetCollectionData = {
         'limit[gameCenterLeaderboardSetsV2]'?: number;
         /**
          * maximum number of related gameCenterLeaderboards returned (when they are included)
+         *
          * @deprecated
          */
         'limit[gameCenterLeaderboards]'?: number;
@@ -42096,6 +42382,7 @@ export type GameCenterGroupsGetInstanceData = {
         include?: Array<'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
         /**
          * maximum number of related gameCenterAchievements returned (when they are included)
+         *
          * @deprecated
          */
         'limit[gameCenterAchievements]'?: number;
@@ -42117,6 +42404,7 @@ export type GameCenterGroupsGetInstanceData = {
         'limit[gameCenterDetails]'?: number;
         /**
          * maximum number of related gameCenterLeaderboardSets returned (when they are included)
+         *
          * @deprecated
          */
         'limit[gameCenterLeaderboardSets]'?: number;
@@ -42126,6 +42414,7 @@ export type GameCenterGroupsGetInstanceData = {
         'limit[gameCenterLeaderboardSetsV2]'?: number;
         /**
          * maximum number of related gameCenterLeaderboards returned (when they are included)
+         *
          * @deprecated
          */
         'limit[gameCenterLeaderboards]'?: number;
@@ -42385,6 +42674,7 @@ export type GameCenterLeaderboardImagesGetInstanceData = {
         'fields[gameCenterLeaderboardImages]'?: Array<'fileSize' | 'fileName' | 'imageAsset' | 'uploadOperations' | 'assetDeliveryState' | 'gameCenterLeaderboardLocalization'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardLocalizations
+         *
          * @deprecated
          */
         'fields[gameCenterLeaderboardLocalizations]'?: Array<'locale' | 'name' | 'formatterOverride' | 'formatterSuffix' | 'formatterSuffixSingular' | 'description' | 'gameCenterLeaderboard' | 'gameCenterLeaderboardImage'>;
@@ -42806,11 +43096,13 @@ export type GameCenterLeaderboardLocalizationsGetInstanceData = {
         'fields[gameCenterLeaderboardLocalizations]'?: Array<'locale' | 'name' | 'formatterOverride' | 'formatterSuffix' | 'formatterSuffixSingular' | 'description' | 'gameCenterLeaderboard' | 'gameCenterLeaderboardImage'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboards
+         *
          * @deprecated
          */
         'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardImages
+         *
          * @deprecated
          */
         'fields[gameCenterLeaderboardImages]'?: Array<'fileSize' | 'fileName' | 'imageAsset' | 'uploadOperations' | 'assetDeliveryState' | 'gameCenterLeaderboardLocalization'>;
@@ -43240,6 +43532,7 @@ export type GameCenterLeaderboardReleasesGetInstanceData = {
         'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboards
+         *
          * @deprecated
          */
         'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge'>;
@@ -43394,6 +43687,7 @@ export type GameCenterLeaderboardSetImagesGetInstanceData = {
         'fields[gameCenterLeaderboardSetImages]'?: Array<'fileSize' | 'fileName' | 'imageAsset' | 'uploadOperations' | 'assetDeliveryState' | 'gameCenterLeaderboardSetLocalization'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardSetLocalizations
+         *
          * @deprecated
          */
         'fields[gameCenterLeaderboardSetLocalizations]'?: Array<'locale' | 'name' | 'gameCenterLeaderboardSet' | 'gameCenterLeaderboardSetImage'>;
@@ -43815,11 +44109,13 @@ export type GameCenterLeaderboardSetLocalizationsGetInstanceData = {
         'fields[gameCenterLeaderboardSetLocalizations]'?: Array<'locale' | 'name' | 'gameCenterLeaderboardSet' | 'gameCenterLeaderboardSetImage'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardSets
+         *
          * @deprecated
          */
         'fields[gameCenterLeaderboardSets]'?: Array<'referenceName' | 'vendorIdentifier' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboardSet' | 'localizations' | 'gameCenterLeaderboards' | 'releases'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardSetImages
+         *
          * @deprecated
          */
         'fields[gameCenterLeaderboardSetImages]'?: Array<'fileSize' | 'fileName' | 'imageAsset' | 'uploadOperations' | 'assetDeliveryState' | 'gameCenterLeaderboardSetLocalization'>;
@@ -44142,11 +44438,13 @@ export type GameCenterLeaderboardSetMemberLocalizationsGetCollectionData = {
     query: {
         /**
          * filter by id(s) of related 'gameCenterLeaderboardSet'
+         *
          * @deprecated
          */
         'filter[gameCenterLeaderboardSet]': Array<string>;
         /**
          * filter by id(s) of related 'gameCenterLeaderboard'
+         *
          * @deprecated
          */
         'filter[gameCenterLeaderboard]': Array<string>;
@@ -44156,11 +44454,13 @@ export type GameCenterLeaderboardSetMemberLocalizationsGetCollectionData = {
         'fields[gameCenterLeaderboardSetMemberLocalizations]'?: Array<'name' | 'locale' | 'gameCenterLeaderboardSet' | 'gameCenterLeaderboard'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardSets
+         *
          * @deprecated
          */
         'fields[gameCenterLeaderboardSets]'?: Array<'referenceName' | 'vendorIdentifier' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboardSet' | 'localizations' | 'gameCenterLeaderboards' | 'releases'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboards
+         *
          * @deprecated
          */
         'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge'>;
@@ -44470,6 +44770,7 @@ export type GameCenterLeaderboardSetReleasesGetInstanceData = {
         'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardSets
+         *
          * @deprecated
          */
         'fields[gameCenterLeaderboardSets]'?: Array<'referenceName' | 'vendorIdentifier' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboardSet' | 'localizations' | 'gameCenterLeaderboards' | 'releases'>;
@@ -44977,16 +45278,19 @@ export type GameCenterLeaderboardSetsGetInstanceData = {
         'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardSetLocalizations
+         *
          * @deprecated
          */
         'fields[gameCenterLeaderboardSetLocalizations]'?: Array<'locale' | 'name' | 'gameCenterLeaderboardSet' | 'gameCenterLeaderboardSetImage'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboards
+         *
          * @deprecated
          */
         'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardSetReleases
+         *
          * @deprecated
          */
         'fields[gameCenterLeaderboardSetReleases]'?: Array<'live' | 'gameCenterDetail' | 'gameCenterLeaderboardSet'>;
@@ -44996,16 +45300,19 @@ export type GameCenterLeaderboardSetsGetInstanceData = {
         include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboardSet' | 'localizations' | 'gameCenterLeaderboards' | 'releases'>;
         /**
          * maximum number of related gameCenterLeaderboards returned (when they are included)
+         *
          * @deprecated
          */
         'limit[gameCenterLeaderboards]'?: number;
         /**
          * maximum number of related localizations returned (when they are included)
+         *
          * @deprecated
          */
         'limit[localizations]'?: number;
         /**
          * maximum number of related releases returned (when they are included)
+         *
          * @deprecated
          */
         'limit[releases]'?: number;
@@ -45336,16 +45643,19 @@ export type GameCenterLeaderboardsGetInstanceData = {
         'fields[gameCenterGroups]'?: Array<'referenceName' | 'gameCenterDetails' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardSets
+         *
          * @deprecated
          */
         'fields[gameCenterLeaderboardSets]'?: Array<'referenceName' | 'vendorIdentifier' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboardSet' | 'localizations' | 'gameCenterLeaderboards' | 'releases'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardLocalizations
+         *
          * @deprecated
          */
         'fields[gameCenterLeaderboardLocalizations]'?: Array<'locale' | 'name' | 'formatterOverride' | 'formatterSuffix' | 'formatterSuffixSingular' | 'description' | 'gameCenterLeaderboard' | 'gameCenterLeaderboardImage'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardReleases
+         *
          * @deprecated
          */
         'fields[gameCenterLeaderboardReleases]'?: Array<'live' | 'gameCenterDetail' | 'gameCenterLeaderboard'>;
@@ -45363,16 +45673,19 @@ export type GameCenterLeaderboardsGetInstanceData = {
         include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge'>;
         /**
          * maximum number of related gameCenterLeaderboardSets returned (when they are included)
+         *
          * @deprecated
          */
         'limit[gameCenterLeaderboardSets]'?: number;
         /**
          * maximum number of related localizations returned (when they are included)
+         *
          * @deprecated
          */
         'limit[localizations]'?: number;
         /**
          * maximum number of related releases returned (when they are included)
+         *
          * @deprecated
          */
         'limit[releases]'?: number;
@@ -50265,7 +50578,7 @@ export type PromotedPurchasesGetInstanceData = {
         /**
          * the fields to include for returned resources of type subscriptions
          */
-        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images'>;
+        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -51651,7 +51964,7 @@ export type SubscriptionAppStoreReviewScreenshotsGetInstanceData = {
         /**
          * the fields to include for returned resources of type subscriptions
          */
-        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images'>;
+        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -52338,7 +52651,7 @@ export type SubscriptionGroupsGetInstanceData = {
         /**
          * the fields to include for returned resources of type subscriptions
          */
-        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images'>;
+        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities'>;
         /**
          * the fields to include for returned resources of type subscriptionGroupLocalizations
          */
@@ -52560,7 +52873,7 @@ export type SubscriptionImagesGetInstanceData = {
         /**
          * the fields to include for returned resources of type subscriptions
          */
-        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images'>;
+        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -52921,7 +53234,7 @@ export type SubscriptionLocalizationsGetInstanceData = {
         /**
          * the fields to include for returned resources of type subscriptions
          */
-        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images'>;
+        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -53085,7 +53398,7 @@ export type SubscriptionOfferCodeCustomCodesGetInstanceData = {
         /**
          * the fields to include for returned resources of type subscriptionOfferCodes
          */
-        'fields[subscriptionOfferCodes]'?: Array<'name' | 'customerEligibilities' | 'offerEligibility' | 'duration' | 'offerMode' | 'numberOfPeriods' | 'totalNumberOfCodes' | 'productionCodeCount' | 'sandboxCodeCount' | 'active' | 'autoRenewEnabled' | 'subscription' | 'oneTimeUseCodes' | 'customCodes' | 'prices'>;
+        'fields[subscriptionOfferCodes]'?: Array<'name' | 'customerEligibilities' | 'offerEligibility' | 'duration' | 'offerMode' | 'numberOfPeriods' | 'totalNumberOfCodes' | 'productionCodeCount' | 'sandboxCodeCount' | 'active' | 'autoRenewEnabled' | 'targetSubscriptionPlanType' | 'subscription' | 'oneTimeUseCodes' | 'customCodes' | 'prices'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -53249,7 +53562,7 @@ export type SubscriptionOfferCodeOneTimeUseCodesGetInstanceData = {
         /**
          * the fields to include for returned resources of type subscriptionOfferCodes
          */
-        'fields[subscriptionOfferCodes]'?: Array<'name' | 'customerEligibilities' | 'offerEligibility' | 'duration' | 'offerMode' | 'numberOfPeriods' | 'totalNumberOfCodes' | 'productionCodeCount' | 'sandboxCodeCount' | 'active' | 'autoRenewEnabled' | 'subscription' | 'oneTimeUseCodes' | 'customCodes' | 'prices'>;
+        'fields[subscriptionOfferCodes]'?: Array<'name' | 'customerEligibilities' | 'offerEligibility' | 'duration' | 'offerMode' | 'numberOfPeriods' | 'totalNumberOfCodes' | 'productionCodeCount' | 'sandboxCodeCount' | 'active' | 'autoRenewEnabled' | 'targetSubscriptionPlanType' | 'subscription' | 'oneTimeUseCodes' | 'customCodes' | 'prices'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -53409,11 +53722,11 @@ export type SubscriptionOfferCodesGetInstanceData = {
         /**
          * the fields to include for returned resources of type subscriptionOfferCodes
          */
-        'fields[subscriptionOfferCodes]'?: Array<'name' | 'customerEligibilities' | 'offerEligibility' | 'duration' | 'offerMode' | 'numberOfPeriods' | 'totalNumberOfCodes' | 'productionCodeCount' | 'sandboxCodeCount' | 'active' | 'autoRenewEnabled' | 'subscription' | 'oneTimeUseCodes' | 'customCodes' | 'prices'>;
+        'fields[subscriptionOfferCodes]'?: Array<'name' | 'customerEligibilities' | 'offerEligibility' | 'duration' | 'offerMode' | 'numberOfPeriods' | 'totalNumberOfCodes' | 'productionCodeCount' | 'sandboxCodeCount' | 'active' | 'autoRenewEnabled' | 'targetSubscriptionPlanType' | 'subscription' | 'oneTimeUseCodes' | 'customCodes' | 'prices'>;
         /**
          * the fields to include for returned resources of type subscriptions
          */
-        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images'>;
+        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities'>;
         /**
          * the fields to include for returned resources of type subscriptionOfferCodeOneTimeUseCodes
          */
@@ -53536,6 +53849,174 @@ export type SubscriptionOfferCodesUpdateInstanceResponses = {
 };
 
 export type SubscriptionOfferCodesUpdateInstanceResponse = SubscriptionOfferCodesUpdateInstanceResponses[keyof SubscriptionOfferCodesUpdateInstanceResponses];
+
+export type SubscriptionPlanAvailabilitiesCreateInstanceData = {
+    /**
+     * SubscriptionPlanAvailability representation
+     */
+    body: SubscriptionPlanAvailabilityCreateRequest;
+    path?: never;
+    query?: never;
+    url: '/v1/subscriptionPlanAvailabilities';
+};
+
+export type SubscriptionPlanAvailabilitiesCreateInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type SubscriptionPlanAvailabilitiesCreateInstanceError = SubscriptionPlanAvailabilitiesCreateInstanceErrors[keyof SubscriptionPlanAvailabilitiesCreateInstanceErrors];
+
+export type SubscriptionPlanAvailabilitiesCreateInstanceResponses = {
+    /**
+     * Single SubscriptionPlanAvailability
+     */
+    201: SubscriptionPlanAvailabilityResponse;
+};
+
+export type SubscriptionPlanAvailabilitiesCreateInstanceResponse = SubscriptionPlanAvailabilitiesCreateInstanceResponses[keyof SubscriptionPlanAvailabilitiesCreateInstanceResponses];
+
+export type SubscriptionPlanAvailabilitiesGetInstanceData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * the fields to include for returned resources of type subscriptionPlanAvailabilities
+         */
+        'fields[subscriptionPlanAvailabilities]'?: Array<'availableInNewTerritories' | 'planType' | 'availableTerritories'>;
+        /**
+         * the fields to include for returned resources of type territories
+         */
+        'fields[territories]'?: Array<'currency'>;
+        /**
+         * comma-separated list of relationships to include
+         */
+        include?: Array<'availableTerritories'>;
+        /**
+         * maximum number of related availableTerritories returned (when they are included)
+         */
+        'limit[availableTerritories]'?: number;
+    };
+    url: '/v1/subscriptionPlanAvailabilities/{id}';
+};
+
+export type SubscriptionPlanAvailabilitiesGetInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type SubscriptionPlanAvailabilitiesGetInstanceError = SubscriptionPlanAvailabilitiesGetInstanceErrors[keyof SubscriptionPlanAvailabilitiesGetInstanceErrors];
+
+export type SubscriptionPlanAvailabilitiesGetInstanceResponses = {
+    /**
+     * Single SubscriptionPlanAvailability
+     */
+    200: SubscriptionPlanAvailabilityResponse;
+};
+
+export type SubscriptionPlanAvailabilitiesGetInstanceResponse = SubscriptionPlanAvailabilitiesGetInstanceResponses[keyof SubscriptionPlanAvailabilitiesGetInstanceResponses];
+
+export type SubscriptionPlanAvailabilitiesUpdateInstanceData = {
+    /**
+     * SubscriptionPlanAvailability representation
+     */
+    body: SubscriptionPlanAvailabilityUpdateRequest;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v1/subscriptionPlanAvailabilities/{id}';
+};
+
+export type SubscriptionPlanAvailabilitiesUpdateInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type SubscriptionPlanAvailabilitiesUpdateInstanceError = SubscriptionPlanAvailabilitiesUpdateInstanceErrors[keyof SubscriptionPlanAvailabilitiesUpdateInstanceErrors];
+
+export type SubscriptionPlanAvailabilitiesUpdateInstanceResponses = {
+    /**
+     * Single SubscriptionPlanAvailability
+     */
+    200: SubscriptionPlanAvailabilityResponse;
+};
+
+export type SubscriptionPlanAvailabilitiesUpdateInstanceResponse = SubscriptionPlanAvailabilitiesUpdateInstanceResponses[keyof SubscriptionPlanAvailabilitiesUpdateInstanceResponses];
 
 export type SubscriptionPricePointsGetInstanceData = {
     body?: never;
@@ -53796,11 +54277,11 @@ export type SubscriptionPromotionalOffersGetInstanceData = {
         /**
          * the fields to include for returned resources of type subscriptionPromotionalOffers
          */
-        'fields[subscriptionPromotionalOffers]'?: Array<'duration' | 'name' | 'numberOfPeriods' | 'offerCode' | 'offerMode' | 'subscription' | 'prices'>;
+        'fields[subscriptionPromotionalOffers]'?: Array<'duration' | 'name' | 'numberOfPeriods' | 'offerCode' | 'offerMode' | 'targetSubscriptionPlanType' | 'subscription' | 'prices'>;
         /**
          * the fields to include for returned resources of type subscriptions
          */
-        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images'>;
+        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities'>;
         /**
          * the fields to include for returned resources of type subscriptionPromotionalOfferPrices
          */
@@ -54062,7 +54543,7 @@ export type SubscriptionsGetInstanceData = {
         /**
          * the fields to include for returned resources of type subscriptions
          */
-        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images'>;
+        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities'>;
         /**
          * the fields to include for returned resources of type subscriptionLocalizations
          */
@@ -54078,39 +54559,45 @@ export type SubscriptionsGetInstanceData = {
         /**
          * the fields to include for returned resources of type subscriptionIntroductoryOffers
          */
-        'fields[subscriptionIntroductoryOffers]'?: Array<'startDate' | 'endDate' | 'duration' | 'offerMode' | 'numberOfPeriods' | 'subscription' | 'territory' | 'subscriptionPricePoint'>;
+        'fields[subscriptionIntroductoryOffers]'?: Array<'startDate' | 'endDate' | 'duration' | 'offerMode' | 'numberOfPeriods' | 'targetSubscriptionPlanType' | 'subscription' | 'territory' | 'subscriptionPricePoint'>;
         /**
          * the fields to include for returned resources of type subscriptionPromotionalOffers
          */
-        'fields[subscriptionPromotionalOffers]'?: Array<'duration' | 'name' | 'numberOfPeriods' | 'offerCode' | 'offerMode' | 'subscription' | 'prices'>;
+        'fields[subscriptionPromotionalOffers]'?: Array<'duration' | 'name' | 'numberOfPeriods' | 'offerCode' | 'offerMode' | 'targetSubscriptionPlanType' | 'subscription' | 'prices'>;
         /**
          * the fields to include for returned resources of type subscriptionOfferCodes
          */
-        'fields[subscriptionOfferCodes]'?: Array<'name' | 'customerEligibilities' | 'offerEligibility' | 'duration' | 'offerMode' | 'numberOfPeriods' | 'totalNumberOfCodes' | 'productionCodeCount' | 'sandboxCodeCount' | 'active' | 'autoRenewEnabled' | 'subscription' | 'oneTimeUseCodes' | 'customCodes' | 'prices'>;
+        'fields[subscriptionOfferCodes]'?: Array<'name' | 'customerEligibilities' | 'offerEligibility' | 'duration' | 'offerMode' | 'numberOfPeriods' | 'totalNumberOfCodes' | 'productionCodeCount' | 'sandboxCodeCount' | 'active' | 'autoRenewEnabled' | 'targetSubscriptionPlanType' | 'subscription' | 'oneTimeUseCodes' | 'customCodes' | 'prices'>;
         /**
          * the fields to include for returned resources of type subscriptionPrices
          */
-        'fields[subscriptionPrices]'?: Array<'startDate' | 'preserved' | 'territory' | 'subscriptionPricePoint'>;
+        'fields[subscriptionPrices]'?: Array<'startDate' | 'preserved' | 'planType' | 'territory' | 'subscriptionPricePoint'>;
         /**
          * the fields to include for returned resources of type promotedPurchases
          */
         'fields[promotedPurchases]'?: Array<'visibleForAllUsers' | 'enabled' | 'state' | 'inAppPurchaseV2' | 'subscription'>;
         /**
          * the fields to include for returned resources of type subscriptionAvailabilities
+         *
+         * @deprecated
          */
         'fields[subscriptionAvailabilities]'?: Array<'availableInNewTerritories' | 'availableTerritories'>;
         /**
          * the fields to include for returned resources of type winBackOffers
          */
-        'fields[winBackOffers]'?: Array<'referenceName' | 'offerId' | 'duration' | 'offerMode' | 'periodCount' | 'customerEligibilityPaidSubscriptionDurationInMonths' | 'customerEligibilityTimeSinceLastSubscribedInMonths' | 'customerEligibilityWaitBetweenOffersInMonths' | 'startDate' | 'endDate' | 'priority' | 'promotionIntent' | 'prices'>;
+        'fields[winBackOffers]'?: Array<'referenceName' | 'offerId' | 'duration' | 'offerMode' | 'periodCount' | 'customerEligibilityPaidSubscriptionDurationInMonths' | 'customerEligibilityTimeSinceLastSubscribedInMonths' | 'customerEligibilityWaitBetweenOffersInMonths' | 'startDate' | 'endDate' | 'priority' | 'promotionIntent' | 'targetSubscriptionPlanType' | 'prices'>;
         /**
          * the fields to include for returned resources of type subscriptionImages
          */
         'fields[subscriptionImages]'?: Array<'fileSize' | 'fileName' | 'sourceFileChecksum' | 'assetToken' | 'imageAsset' | 'uploadOperations' | 'state' | 'subscription'>;
         /**
+         * the fields to include for returned resources of type subscriptionPlanAvailabilities
+         */
+        'fields[subscriptionPlanAvailabilities]'?: Array<'availableInNewTerritories' | 'planType' | 'availableTerritories'>;
+        /**
          * comma-separated list of relationships to include
          */
-        include?: Array<'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images'>;
+        include?: Array<'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities'>;
         /**
          * maximum number of related images returned (when they are included)
          */
@@ -54123,6 +54610,10 @@ export type SubscriptionsGetInstanceData = {
          * maximum number of related offerCodes returned (when they are included)
          */
         'limit[offerCodes]'?: number;
+        /**
+         * maximum number of related planAvailabilities returned (when they are included)
+         */
+        'limit[planAvailabilities]'?: number;
         /**
          * maximum number of related prices returned (when they are included)
          */
@@ -55220,7 +55711,7 @@ export type WinBackOffersGetInstanceData = {
         /**
          * the fields to include for returned resources of type winBackOffers
          */
-        'fields[winBackOffers]'?: Array<'referenceName' | 'offerId' | 'duration' | 'offerMode' | 'periodCount' | 'customerEligibilityPaidSubscriptionDurationInMonths' | 'customerEligibilityTimeSinceLastSubscribedInMonths' | 'customerEligibilityWaitBetweenOffersInMonths' | 'startDate' | 'endDate' | 'priority' | 'promotionIntent' | 'prices'>;
+        'fields[winBackOffers]'?: Array<'referenceName' | 'offerId' | 'duration' | 'offerMode' | 'periodCount' | 'customerEligibilityPaidSubscriptionDurationInMonths' | 'customerEligibilityTimeSinceLastSubscribedInMonths' | 'customerEligibilityWaitBetweenOffersInMonths' | 'startDate' | 'endDate' | 'priority' | 'promotionIntent' | 'targetSubscriptionPlanType' | 'prices'>;
         /**
          * the fields to include for returned resources of type winBackOfferPrices
          */
@@ -56827,6 +57318,7 @@ export type AppClipDefaultExperiencesReleaseWithAppStoreVersionGetToOneRelatedDa
         'limit[appStoreVersionLocalizations]'?: number;
         /**
          * maximum number of related appStoreVersionExperiments returned (when they are included)
+         *
          * @deprecated
          */
         'limit[appStoreVersionExperiments]'?: number;
@@ -57613,7 +58105,7 @@ export type AppCustomProductPageLocalizationsSearchKeywordsGetToManyRelatedData 
         /**
          * the fields to include for returned resources of type appKeywords
          */
-        'fields[appKeywords]'?: Array<unknown>;
+        'fields[appKeywords]'?: Array<never>;
         /**
          * maximum resources per page
          */
@@ -57739,7 +58231,7 @@ export type AppCustomProductPageVersionsAppCustomProductPageLocalizationsGetToMa
         /**
          * the fields to include for returned resources of type appKeywords
          */
-        'fields[appKeywords]'?: Array<unknown>;
+        'fields[appKeywords]'?: Array<never>;
         /**
          * maximum resources per page
          */
@@ -58701,7 +59193,7 @@ export type AppInfosAppInfoLocalizationsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type appInfos
          */
-        'fields[appInfos]'?: Array<'appStoreState' | 'state' | 'appStoreAgeRating' | 'australiaAgeRating' | 'brazilAgeRating' | 'brazilAgeRatingV2' | 'franceAgeRating' | 'koreaAgeRating' | 'kidsAgeBand' | 'app' | 'ageRatingDeclaration' | 'appInfoLocalizations' | 'primaryCategory' | 'primarySubcategoryOne' | 'primarySubcategoryTwo' | 'secondaryCategory' | 'secondarySubcategoryOne' | 'secondarySubcategoryTwo' | 'territoryAgeRatings'>;
+        'fields[appInfos]'?: Array<'appStoreState' | 'state' | 'appStoreAgeRating' | 'australiaAgeRating' | 'brazilAgeRating' | 'brazilAgeRatingV2' | 'franceAgeRating' | 'koreaAgeRating' | 'app' | 'ageRatingDeclaration' | 'appInfoLocalizations' | 'primaryCategory' | 'primarySubcategoryOne' | 'primarySubcategoryTwo' | 'secondaryCategory' | 'secondarySubcategoryOne' | 'secondarySubcategoryTwo' | 'territoryAgeRatings'>;
         /**
          * maximum resources per page
          */
@@ -61558,7 +62050,7 @@ export type AppStoreVersionLocalizationsSearchKeywordsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type appKeywords
          */
-        'fields[appKeywords]'?: Array<unknown>;
+        'fields[appKeywords]'?: Array<never>;
         /**
          * maximum resources per page
          */
@@ -62344,7 +62836,7 @@ export type AppStoreVersionsAppStoreVersionLocalizationsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type appKeywords
          */
-        'fields[appKeywords]'?: Array<unknown>;
+        'fields[appKeywords]'?: Array<never>;
         /**
          * maximum resources per page
          */
@@ -64079,6 +64571,7 @@ export type AppsAppEncryptionDeclarationsGetToManyRelatedData = {
     query?: {
         /**
          * filter by attribute 'platform'
+         *
          * @deprecated
          */
         'filter[platform]'?: Array<'IOS' | 'MAC_OS' | 'TV_OS' | 'VISION_OS'>;
@@ -64341,7 +64834,7 @@ export type AppsAppInfosGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type appInfos
          */
-        'fields[appInfos]'?: Array<'appStoreState' | 'state' | 'appStoreAgeRating' | 'australiaAgeRating' | 'brazilAgeRating' | 'brazilAgeRatingV2' | 'franceAgeRating' | 'koreaAgeRating' | 'kidsAgeBand' | 'app' | 'ageRatingDeclaration' | 'appInfoLocalizations' | 'primaryCategory' | 'primarySubcategoryOne' | 'primarySubcategoryTwo' | 'secondaryCategory' | 'secondarySubcategoryOne' | 'secondarySubcategoryTwo' | 'territoryAgeRatings'>;
+        'fields[appInfos]'?: Array<'appStoreState' | 'state' | 'appStoreAgeRating' | 'australiaAgeRating' | 'brazilAgeRating' | 'brazilAgeRatingV2' | 'franceAgeRating' | 'koreaAgeRating' | 'app' | 'ageRatingDeclaration' | 'appInfoLocalizations' | 'primaryCategory' | 'primarySubcategoryOne' | 'primarySubcategoryTwo' | 'secondaryCategory' | 'secondarySubcategoryOne' | 'secondarySubcategoryTwo' | 'territoryAgeRatings'>;
         /**
          * the fields to include for returned resources of type apps
          */
@@ -64855,6 +65348,7 @@ export type AppsAppStoreVersionsGetToManyRelatedData = {
         'filter[versionString]'?: Array<string>;
         /**
          * filter by attribute 'appStoreState'
+         *
          * @deprecated
          */
         'filter[appStoreState]'?: Array<'ACCEPTED' | 'DEVELOPER_REMOVED_FROM_SALE' | 'DEVELOPER_REJECTED' | 'IN_REVIEW' | 'INVALID_BINARY' | 'METADATA_REJECTED' | 'PENDING_APPLE_RELEASE' | 'PENDING_CONTRACT' | 'PENDING_DEVELOPER_RELEASE' | 'PREPARE_FOR_SUBMISSION' | 'PREORDER_READY_FOR_SALE' | 'PROCESSING_FOR_APP_STORE' | 'READY_FOR_REVIEW' | 'READY_FOR_SALE' | 'REJECTED' | 'REMOVED_FROM_SALE' | 'WAITING_FOR_EXPORT_COMPLIANCE' | 'WAITING_FOR_REVIEW' | 'REPLACED_WITH_NEW_VERSION' | 'NOT_APPLICABLE'>;
@@ -64928,6 +65422,7 @@ export type AppsAppStoreVersionsGetToManyRelatedData = {
         'limit[appStoreVersionLocalizations]'?: number;
         /**
          * maximum number of related appStoreVersionExperiments returned (when they are included)
+         *
          * @deprecated
          */
         'limit[appStoreVersionExperiments]'?: number;
@@ -65168,6 +65663,10 @@ export type AppsBackgroundAssetsGetToManyRelatedData = {
          */
         'filter[assetPackIdentifier]'?: Array<string>;
         /**
+         * filter by attribute 'versions.locale'
+         */
+        'filter[versions.locale]'?: Array<string>;
+        /**
          * filter by attribute 'versions.platforms'
          */
         'filter[versions.platforms]'?: Array<'IOS' | 'MAC_OS' | 'TV_OS' | 'VISION_OS'>;
@@ -65186,7 +65685,7 @@ export type AppsBackgroundAssetsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type backgroundAssetVersions
          */
-        'fields[backgroundAssetVersions]'?: Array<'createdDate' | 'platforms' | 'state' | 'stateDetails' | 'version' | 'backgroundAsset' | 'internalBetaRelease' | 'externalBetaRelease' | 'appStoreRelease' | 'assetFile' | 'manifestFile' | 'backgroundAssetUploadFiles'>;
+        'fields[backgroundAssetVersions]'?: Array<'createdDate' | 'platforms' | 'state' | 'stateDetails' | 'version' | 'locale' | 'backgroundAsset' | 'internalBetaRelease' | 'externalBetaRelease' | 'appStoreRelease' | 'assetFile' | 'manifestFile' | 'backgroundAssetUploadFiles'>;
         /**
          * maximum resources per page
          */
@@ -66792,6 +67291,7 @@ export type AppsGameCenterDetailGetToOneRelatedData = {
         'limit[gameCenterAppVersions]'?: number;
         /**
          * maximum number of related gameCenterLeaderboards returned (when they are included)
+         *
          * @deprecated
          */
         'limit[gameCenterLeaderboards]'?: number;
@@ -66801,6 +67301,7 @@ export type AppsGameCenterDetailGetToOneRelatedData = {
         'limit[gameCenterLeaderboardsV2]'?: number;
         /**
          * maximum number of related gameCenterLeaderboardSets returned (when they are included)
+         *
          * @deprecated
          */
         'limit[gameCenterLeaderboardSets]'?: number;
@@ -66810,6 +67311,7 @@ export type AppsGameCenterDetailGetToOneRelatedData = {
         'limit[gameCenterLeaderboardSetsV2]'?: number;
         /**
          * maximum number of related gameCenterAchievements returned (when they are included)
+         *
          * @deprecated
          */
         'limit[gameCenterAchievements]'?: number;
@@ -66827,26 +67329,31 @@ export type AppsGameCenterDetailGetToOneRelatedData = {
         'limit[gameCenterChallenges]'?: number;
         /**
          * maximum number of related achievementReleases returned (when they are included)
+         *
          * @deprecated
          */
         'limit[achievementReleases]'?: number;
         /**
          * maximum number of related activityReleases returned (when they are included)
+         *
          * @deprecated
          */
         'limit[activityReleases]'?: number;
         /**
          * maximum number of related challengeReleases returned (when they are included)
+         *
          * @deprecated
          */
         'limit[challengeReleases]'?: number;
         /**
          * maximum number of related leaderboardReleases returned (when they are included)
+         *
          * @deprecated
          */
         'limit[leaderboardReleases]'?: number;
         /**
          * maximum number of related leaderboardSetReleases returned (when they are included)
+         *
          * @deprecated
          */
         'limit[leaderboardSetReleases]'?: number;
@@ -66986,6 +67493,7 @@ export type AppsGameCenterEnabledVersionsGetToManyRelatedData = {
         include?: Array<'compatibleVersions' | 'app'>;
         /**
          * maximum number of related compatibleVersions returned (when they are included)
+         *
          * @deprecated
          */
         'limit[compatibleVersions]'?: number;
@@ -67444,7 +67952,7 @@ export type AppsPerfPowerMetricsGetToManyRelatedData = {
         /**
          * filter by attribute 'metricType'
          */
-        'filter[metricType]'?: Array<'DISK' | 'HANG' | 'BATTERY' | 'LAUNCH' | 'MEMORY' | 'ANIMATION' | 'TERMINATION'>;
+        'filter[metricType]'?: Array<'DISK' | 'HANG' | 'BATTERY' | 'LAUNCH' | 'MEMORY' | 'ANIMATION' | 'TERMINATION' | 'STORAGE'>;
         /**
          * filter by attribute 'deviceType'
          */
@@ -67721,7 +68229,7 @@ export type AppsPromotedPurchasesGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type subscriptions
          */
-        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images'>;
+        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities'>;
         /**
          * maximum resources per page
          */
@@ -67977,7 +68485,7 @@ export type AppsSearchKeywordsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type appKeywords
          */
-        'fields[appKeywords]'?: Array<unknown>;
+        'fields[appKeywords]'?: Array<never>;
         /**
          * maximum resources per page
          */
@@ -68196,7 +68704,7 @@ export type AppsSubscriptionGroupsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type subscriptions
          */
-        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images'>;
+        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities'>;
         /**
          * the fields to include for returned resources of type subscriptionGroupLocalizations
          */
@@ -68536,6 +69044,10 @@ export type BackgroundAssetsVersionsGetToManyRelatedData = {
     };
     query?: {
         /**
+         * filter by attribute 'locale'
+         */
+        'filter[locale]'?: Array<string>;
+        /**
          * filter by attribute 'platforms'
          */
         'filter[platforms]'?: Array<'IOS' | 'MAC_OS' | 'TV_OS' | 'VISION_OS'>;
@@ -68566,7 +69078,7 @@ export type BackgroundAssetsVersionsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type backgroundAssetVersions
          */
-        'fields[backgroundAssetVersions]'?: Array<'createdDate' | 'platforms' | 'state' | 'stateDetails' | 'version' | 'backgroundAsset' | 'internalBetaRelease' | 'externalBetaRelease' | 'appStoreRelease' | 'assetFile' | 'manifestFile' | 'backgroundAssetUploadFiles'>;
+        'fields[backgroundAssetVersions]'?: Array<'createdDate' | 'platforms' | 'state' | 'stateDetails' | 'version' | 'locale' | 'backgroundAsset' | 'internalBetaRelease' | 'externalBetaRelease' | 'appStoreRelease' | 'assetFile' | 'manifestFile' | 'backgroundAssetUploadFiles'>;
         /**
          * the fields to include for returned resources of type backgroundAssets
          */
@@ -71610,6 +72122,7 @@ export type BuildsAppStoreVersionGetToOneRelatedData = {
         'limit[appStoreVersionLocalizations]'?: number;
         /**
          * maximum number of related appStoreVersionExperiments returned (when they are included)
+         *
          * @deprecated
          */
         'limit[appStoreVersionExperiments]'?: number;
@@ -72529,7 +73042,7 @@ export type BuildsPerfPowerMetricsGetToManyRelatedData = {
         /**
          * filter by attribute 'metricType'
          */
-        'filter[metricType]'?: Array<'DISK' | 'HANG' | 'BATTERY' | 'LAUNCH' | 'MEMORY' | 'ANIMATION' | 'TERMINATION'>;
+        'filter[metricType]'?: Array<'DISK' | 'HANG' | 'BATTERY' | 'LAUNCH' | 'MEMORY' | 'ANIMATION' | 'TERMINATION' | 'STORAGE'>;
         /**
          * filter by attribute 'deviceType'
          */
@@ -74224,7 +74737,7 @@ export type CiProductsAppGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type appInfos
          */
-        'fields[appInfos]'?: Array<'appStoreState' | 'state' | 'appStoreAgeRating' | 'australiaAgeRating' | 'brazilAgeRating' | 'brazilAgeRatingV2' | 'franceAgeRating' | 'koreaAgeRating' | 'kidsAgeBand' | 'app' | 'ageRatingDeclaration' | 'appInfoLocalizations' | 'primaryCategory' | 'primarySubcategoryOne' | 'primarySubcategoryTwo' | 'secondaryCategory' | 'secondarySubcategoryOne' | 'secondarySubcategoryTwo' | 'territoryAgeRatings'>;
+        'fields[appInfos]'?: Array<'appStoreState' | 'state' | 'appStoreAgeRating' | 'australiaAgeRating' | 'brazilAgeRating' | 'brazilAgeRatingV2' | 'franceAgeRating' | 'koreaAgeRating' | 'app' | 'ageRatingDeclaration' | 'appInfoLocalizations' | 'primaryCategory' | 'primarySubcategoryOne' | 'primarySubcategoryTwo' | 'secondaryCategory' | 'secondarySubcategoryOne' | 'secondarySubcategoryTwo' | 'territoryAgeRatings'>;
         /**
          * the fields to include for returned resources of type appClips
          */
@@ -74315,6 +74828,7 @@ export type CiProductsAppGetToOneRelatedData = {
         'limit[appClips]'?: number;
         /**
          * maximum number of related inAppPurchases returned (when they are included)
+         *
          * @deprecated
          */
         'limit[inAppPurchases]'?: number;
@@ -74324,6 +74838,7 @@ export type CiProductsAppGetToOneRelatedData = {
         'limit[subscriptionGroups]'?: number;
         /**
          * maximum number of related gameCenterEnabledVersions returned (when they are included)
+         *
          * @deprecated
          */
         'limit[gameCenterEnabledVersions]'?: number;
@@ -75604,11 +76119,13 @@ export type GameCenterAchievementLocalizationsGameCenterAchievementGetToOneRelat
         include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'groupAchievement' | 'localizations' | 'releases' | 'activity'>;
         /**
          * maximum number of related localizations returned (when they are included)
+         *
          * @deprecated
          */
         'limit[localizations]'?: number;
         /**
          * maximum number of related releases returned (when they are included)
+         *
          * @deprecated
          */
         'limit[releases]'?: number;
@@ -76251,11 +76768,13 @@ export type GameCenterAchievementsGroupAchievementGetToOneRelatedData = {
         include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'groupAchievement' | 'localizations' | 'releases' | 'activity'>;
         /**
          * maximum number of related localizations returned (when they are included)
+         *
          * @deprecated
          */
         'limit[localizations]'?: number;
         /**
          * maximum number of related releases returned (when they are included)
+         *
          * @deprecated
          */
         'limit[releases]'?: number;
@@ -77091,6 +77610,7 @@ export type GameCenterActivitiesVersionsGetToManyRelatedData = {
         'limit[localizations]'?: number;
         /**
          * maximum number of related releases returned (when they are included)
+         *
          * @deprecated
          */
         'limit[releases]'?: number;
@@ -77557,6 +78077,7 @@ export type GameCenterAppVersionsAppStoreVersionGetToOneRelatedData = {
         'limit[appStoreVersionLocalizations]'?: number;
         /**
          * maximum number of related appStoreVersionExperiments returned (when they are included)
+         *
          * @deprecated
          */
         'limit[appStoreVersionExperiments]'?: number;
@@ -78358,6 +78879,7 @@ export type GameCenterChallengesVersionsGetToManyRelatedData = {
         'limit[localizations]'?: number;
         /**
          * maximum number of related releases returned (when they are included)
+         *
          * @deprecated
          */
         'limit[releases]'?: number;
@@ -78465,6 +78987,7 @@ export type GameCenterDetailsAchievementReleasesGetToManyRelatedData = {
         'filter[live]'?: Array<string>;
         /**
          * filter by id(s) of related 'gameCenterAchievement'
+         *
          * @deprecated
          */
         'filter[gameCenterAchievement]'?: Array<string>;
@@ -78974,11 +79497,13 @@ export type GameCenterDetailsGameCenterAchievementsGetToManyRelatedData = {
         include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'groupAchievement' | 'localizations' | 'releases' | 'activity'>;
         /**
          * maximum number of related localizations returned (when they are included)
+         *
          * @deprecated
          */
         'limit[localizations]'?: number;
         /**
          * maximum number of related releases returned (when they are included)
+         *
          * @deprecated
          */
         'limit[releases]'?: number;
@@ -79313,6 +79838,7 @@ export type GameCenterDetailsGameCenterActivitiesGetToManyRelatedData = {
         include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'achievementsV2' | 'leaderboards' | 'leaderboardsV2' | 'versions'>;
         /**
          * maximum number of related achievements returned (when they are included)
+         *
          * @deprecated
          */
         'limit[achievements]'?: number;
@@ -79322,6 +79848,7 @@ export type GameCenterDetailsGameCenterActivitiesGetToManyRelatedData = {
         'limit[achievementsV2]'?: number;
         /**
          * maximum number of related leaderboards returned (when they are included)
+         *
          * @deprecated
          */
         'limit[leaderboards]'?: number;
@@ -79728,6 +80255,7 @@ export type GameCenterDetailsGameCenterGroupGetToOneRelatedData = {
         'limit[gameCenterDetails]'?: number;
         /**
          * maximum number of related gameCenterLeaderboards returned (when they are included)
+         *
          * @deprecated
          */
         'limit[gameCenterLeaderboards]'?: number;
@@ -79737,6 +80265,7 @@ export type GameCenterDetailsGameCenterGroupGetToOneRelatedData = {
         'limit[gameCenterLeaderboardsV2]'?: number;
         /**
          * maximum number of related gameCenterLeaderboardSets returned (when they are included)
+         *
          * @deprecated
          */
         'limit[gameCenterLeaderboardSets]'?: number;
@@ -79746,6 +80275,7 @@ export type GameCenterDetailsGameCenterGroupGetToOneRelatedData = {
         'limit[gameCenterLeaderboardSetsV2]'?: number;
         /**
          * maximum number of related gameCenterAchievements returned (when they are included)
+         *
          * @deprecated
          */
         'limit[gameCenterAchievements]'?: number;
@@ -79958,16 +80488,19 @@ export type GameCenterDetailsGameCenterLeaderboardSetsGetToManyRelatedData = {
         include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboardSet' | 'localizations' | 'gameCenterLeaderboards' | 'releases'>;
         /**
          * maximum number of related localizations returned (when they are included)
+         *
          * @deprecated
          */
         'limit[localizations]'?: number;
         /**
          * maximum number of related gameCenterLeaderboards returned (when they are included)
+         *
          * @deprecated
          */
         'limit[gameCenterLeaderboards]'?: number;
         /**
          * maximum number of related releases returned (when they are included)
+         *
          * @deprecated
          */
         'limit[releases]'?: number;
@@ -80379,16 +80912,19 @@ export type GameCenterDetailsGameCenterLeaderboardsGetToManyRelatedData = {
         include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge'>;
         /**
          * maximum number of related gameCenterLeaderboardSets returned (when they are included)
+         *
          * @deprecated
          */
         'limit[gameCenterLeaderboardSets]'?: number;
         /**
          * maximum number of related localizations returned (when they are included)
+         *
          * @deprecated
          */
         'limit[localizations]'?: number;
         /**
          * maximum number of related releases returned (when they are included)
+         *
          * @deprecated
          */
         'limit[releases]'?: number;
@@ -80707,6 +81243,7 @@ export type GameCenterDetailsLeaderboardReleasesGetToManyRelatedData = {
         'filter[live]'?: Array<string>;
         /**
          * filter by id(s) of related 'gameCenterLeaderboard'
+         *
          * @deprecated
          */
         'filter[gameCenterLeaderboard]'?: Array<string>;
@@ -80834,6 +81371,7 @@ export type GameCenterDetailsLeaderboardSetReleasesGetToManyRelatedData = {
         'filter[live]'?: Array<string>;
         /**
          * filter by id(s) of related 'gameCenterLeaderboardSet'
+         *
          * @deprecated
          */
         'filter[gameCenterLeaderboardSet]'?: Array<string>;
@@ -81164,6 +81702,7 @@ export type GameCenterEnabledVersionsCompatibleVersionsGetToManyRelatedData = {
         include?: Array<'compatibleVersions' | 'app'>;
         /**
          * maximum number of related compatibleVersions returned (when they are included)
+         *
          * @deprecated
          */
         'limit[compatibleVersions]'?: number;
@@ -81368,11 +81907,13 @@ export type GameCenterGroupsGameCenterAchievementsGetToManyRelatedData = {
         include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'groupAchievement' | 'localizations' | 'releases' | 'activity'>;
         /**
          * maximum number of related localizations returned (when they are included)
+         *
          * @deprecated
          */
         'limit[localizations]'?: number;
         /**
          * maximum number of related releases returned (when they are included)
+         *
          * @deprecated
          */
         'limit[releases]'?: number;
@@ -81707,6 +82248,7 @@ export type GameCenterGroupsGameCenterActivitiesGetToManyRelatedData = {
         include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'achievements' | 'achievementsV2' | 'leaderboards' | 'leaderboardsV2' | 'versions'>;
         /**
          * maximum number of related achievements returned (when they are included)
+         *
          * @deprecated
          */
         'limit[achievements]'?: number;
@@ -81716,6 +82258,7 @@ export type GameCenterGroupsGameCenterActivitiesGetToManyRelatedData = {
         'limit[achievementsV2]'?: number;
         /**
          * maximum number of related leaderboards returned (when they are included)
+         *
          * @deprecated
          */
         'limit[leaderboards]'?: number;
@@ -82045,6 +82588,7 @@ export type GameCenterGroupsGameCenterDetailsGetToManyRelatedData = {
         'limit[gameCenterAppVersions]'?: number;
         /**
          * maximum number of related gameCenterLeaderboards returned (when they are included)
+         *
          * @deprecated
          */
         'limit[gameCenterLeaderboards]'?: number;
@@ -82054,6 +82598,7 @@ export type GameCenterGroupsGameCenterDetailsGetToManyRelatedData = {
         'limit[gameCenterLeaderboardsV2]'?: number;
         /**
          * maximum number of related gameCenterLeaderboardSets returned (when they are included)
+         *
          * @deprecated
          */
         'limit[gameCenterLeaderboardSets]'?: number;
@@ -82063,6 +82608,7 @@ export type GameCenterGroupsGameCenterDetailsGetToManyRelatedData = {
         'limit[gameCenterLeaderboardSetsV2]'?: number;
         /**
          * maximum number of related gameCenterAchievements returned (when they are included)
+         *
          * @deprecated
          */
         'limit[gameCenterAchievements]'?: number;
@@ -82080,26 +82626,31 @@ export type GameCenterGroupsGameCenterDetailsGetToManyRelatedData = {
         'limit[gameCenterChallenges]'?: number;
         /**
          * maximum number of related achievementReleases returned (when they are included)
+         *
          * @deprecated
          */
         'limit[achievementReleases]'?: number;
         /**
          * maximum number of related activityReleases returned (when they are included)
+         *
          * @deprecated
          */
         'limit[activityReleases]'?: number;
         /**
          * maximum number of related challengeReleases returned (when they are included)
+         *
          * @deprecated
          */
         'limit[challengeReleases]'?: number;
         /**
          * maximum number of related leaderboardReleases returned (when they are included)
+         *
          * @deprecated
          */
         'limit[leaderboardReleases]'?: number;
         /**
          * maximum number of related leaderboardSetReleases returned (when they are included)
+         *
          * @deprecated
          */
         'limit[leaderboardSetReleases]'?: number;
@@ -82304,16 +82855,19 @@ export type GameCenterGroupsGameCenterLeaderboardSetsGetToManyRelatedData = {
         include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboardSet' | 'localizations' | 'gameCenterLeaderboards' | 'releases'>;
         /**
          * maximum number of related localizations returned (when they are included)
+         *
          * @deprecated
          */
         'limit[localizations]'?: number;
         /**
          * maximum number of related gameCenterLeaderboards returned (when they are included)
+         *
          * @deprecated
          */
         'limit[gameCenterLeaderboards]'?: number;
         /**
          * maximum number of related releases returned (when they are included)
+         *
          * @deprecated
          */
         'limit[releases]'?: number;
@@ -82725,16 +83279,19 @@ export type GameCenterGroupsGameCenterLeaderboardsGetToManyRelatedData = {
         include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge'>;
         /**
          * maximum number of related gameCenterLeaderboardSets returned (when they are included)
+         *
          * @deprecated
          */
         'limit[gameCenterLeaderboardSets]'?: number;
         /**
          * maximum number of related localizations returned (when they are included)
+         *
          * @deprecated
          */
         'limit[localizations]'?: number;
         /**
          * maximum number of related releases returned (when they are included)
+         *
          * @deprecated
          */
         'limit[releases]'?: number;
@@ -83500,16 +84057,19 @@ export type GameCenterLeaderboardSetMemberLocalizationsGameCenterLeaderboardGetT
         include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge'>;
         /**
          * maximum number of related gameCenterLeaderboardSets returned (when they are included)
+         *
          * @deprecated
          */
         'limit[gameCenterLeaderboardSets]'?: number;
         /**
          * maximum number of related localizations returned (when they are included)
+         *
          * @deprecated
          */
         'limit[localizations]'?: number;
         /**
          * maximum number of related releases returned (when they are included)
+         *
          * @deprecated
          */
         'limit[releases]'?: number;
@@ -83636,16 +84196,19 @@ export type GameCenterLeaderboardSetMemberLocalizationsGameCenterLeaderboardSetG
         include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboardSet' | 'localizations' | 'gameCenterLeaderboards' | 'releases'>;
         /**
          * maximum number of related localizations returned (when they are included)
+         *
          * @deprecated
          */
         'limit[localizations]'?: number;
         /**
          * maximum number of related gameCenterLeaderboards returned (when they are included)
+         *
          * @deprecated
          */
         'limit[gameCenterLeaderboards]'?: number;
         /**
          * maximum number of related releases returned (when they are included)
+         *
          * @deprecated
          */
         'limit[releases]'?: number;
@@ -84537,16 +85100,19 @@ export type GameCenterLeaderboardSetsGameCenterLeaderboardsGetToManyRelatedData 
         include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge'>;
         /**
          * maximum number of related gameCenterLeaderboardSets returned (when they are included)
+         *
          * @deprecated
          */
         'limit[gameCenterLeaderboardSets]'?: number;
         /**
          * maximum number of related localizations returned (when they are included)
+         *
          * @deprecated
          */
         'limit[localizations]'?: number;
         /**
          * maximum number of related releases returned (when they are included)
+         *
          * @deprecated
          */
         'limit[releases]'?: number;
@@ -84730,16 +85296,19 @@ export type GameCenterLeaderboardSetsGroupLeaderboardSetGetToOneRelatedData = {
         include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboardSet' | 'localizations' | 'gameCenterLeaderboards' | 'releases'>;
         /**
          * maximum number of related localizations returned (when they are included)
+         *
          * @deprecated
          */
         'limit[localizations]'?: number;
         /**
          * maximum number of related gameCenterLeaderboards returned (when they are included)
+         *
          * @deprecated
          */
         'limit[gameCenterLeaderboards]'?: number;
         /**
          * maximum number of related releases returned (when they are included)
+         *
          * @deprecated
          */
         'limit[releases]'?: number;
@@ -85407,16 +85976,19 @@ export type GameCenterLeaderboardsGroupLeaderboardGetToOneRelatedData = {
         include?: Array<'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge'>;
         /**
          * maximum number of related gameCenterLeaderboardSets returned (when they are included)
+         *
          * @deprecated
          */
         'limit[gameCenterLeaderboardSets]'?: number;
         /**
          * maximum number of related localizations returned (when they are included)
+         *
          * @deprecated
          */
         'limit[localizations]'?: number;
         /**
          * maximum number of related releases returned (when they are included)
+         *
          * @deprecated
          */
         'limit[releases]'?: number;
@@ -88215,7 +88787,7 @@ export type InAppPurchasesV2PromotedPurchaseGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type subscriptions
          */
-        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images'>;
+        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -89121,7 +89693,7 @@ export type ReviewSubmissionsItemsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type backgroundAssetVersions
          */
-        'fields[backgroundAssetVersions]'?: Array<'createdDate' | 'platforms' | 'state' | 'stateDetails' | 'version' | 'backgroundAsset' | 'internalBetaRelease' | 'externalBetaRelease' | 'appStoreRelease' | 'assetFile' | 'manifestFile' | 'backgroundAssetUploadFiles'>;
+        'fields[backgroundAssetVersions]'?: Array<'createdDate' | 'platforms' | 'state' | 'stateDetails' | 'version' | 'locale' | 'backgroundAsset' | 'internalBetaRelease' | 'externalBetaRelease' | 'appStoreRelease' | 'assetFile' | 'manifestFile' | 'backgroundAssetUploadFiles'>;
         /**
          * the fields to include for returned resources of type gameCenterAchievementVersions
          */
@@ -89837,7 +90409,7 @@ export type SubscriptionGroupsSubscriptionsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type subscriptions
          */
-        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images'>;
+        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities'>;
         /**
          * the fields to include for returned resources of type subscriptionLocalizations
          */
@@ -89853,19 +90425,19 @@ export type SubscriptionGroupsSubscriptionsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type subscriptionIntroductoryOffers
          */
-        'fields[subscriptionIntroductoryOffers]'?: Array<'startDate' | 'endDate' | 'duration' | 'offerMode' | 'numberOfPeriods' | 'subscription' | 'territory' | 'subscriptionPricePoint'>;
+        'fields[subscriptionIntroductoryOffers]'?: Array<'startDate' | 'endDate' | 'duration' | 'offerMode' | 'numberOfPeriods' | 'targetSubscriptionPlanType' | 'subscription' | 'territory' | 'subscriptionPricePoint'>;
         /**
          * the fields to include for returned resources of type subscriptionPromotionalOffers
          */
-        'fields[subscriptionPromotionalOffers]'?: Array<'duration' | 'name' | 'numberOfPeriods' | 'offerCode' | 'offerMode' | 'subscription' | 'prices'>;
+        'fields[subscriptionPromotionalOffers]'?: Array<'duration' | 'name' | 'numberOfPeriods' | 'offerCode' | 'offerMode' | 'targetSubscriptionPlanType' | 'subscription' | 'prices'>;
         /**
          * the fields to include for returned resources of type subscriptionOfferCodes
          */
-        'fields[subscriptionOfferCodes]'?: Array<'name' | 'customerEligibilities' | 'offerEligibility' | 'duration' | 'offerMode' | 'numberOfPeriods' | 'totalNumberOfCodes' | 'productionCodeCount' | 'sandboxCodeCount' | 'active' | 'autoRenewEnabled' | 'subscription' | 'oneTimeUseCodes' | 'customCodes' | 'prices'>;
+        'fields[subscriptionOfferCodes]'?: Array<'name' | 'customerEligibilities' | 'offerEligibility' | 'duration' | 'offerMode' | 'numberOfPeriods' | 'totalNumberOfCodes' | 'productionCodeCount' | 'sandboxCodeCount' | 'active' | 'autoRenewEnabled' | 'targetSubscriptionPlanType' | 'subscription' | 'oneTimeUseCodes' | 'customCodes' | 'prices'>;
         /**
          * the fields to include for returned resources of type subscriptionPrices
          */
-        'fields[subscriptionPrices]'?: Array<'startDate' | 'preserved' | 'territory' | 'subscriptionPricePoint'>;
+        'fields[subscriptionPrices]'?: Array<'startDate' | 'preserved' | 'planType' | 'territory' | 'subscriptionPricePoint'>;
         /**
          * the fields to include for returned resources of type promotedPurchases
          */
@@ -89877,11 +90449,15 @@ export type SubscriptionGroupsSubscriptionsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type winBackOffers
          */
-        'fields[winBackOffers]'?: Array<'referenceName' | 'offerId' | 'duration' | 'offerMode' | 'periodCount' | 'customerEligibilityPaidSubscriptionDurationInMonths' | 'customerEligibilityTimeSinceLastSubscribedInMonths' | 'customerEligibilityWaitBetweenOffersInMonths' | 'startDate' | 'endDate' | 'priority' | 'promotionIntent' | 'prices'>;
+        'fields[winBackOffers]'?: Array<'referenceName' | 'offerId' | 'duration' | 'offerMode' | 'periodCount' | 'customerEligibilityPaidSubscriptionDurationInMonths' | 'customerEligibilityTimeSinceLastSubscribedInMonths' | 'customerEligibilityWaitBetweenOffersInMonths' | 'startDate' | 'endDate' | 'priority' | 'promotionIntent' | 'targetSubscriptionPlanType' | 'prices'>;
         /**
          * the fields to include for returned resources of type subscriptionImages
          */
         'fields[subscriptionImages]'?: Array<'fileSize' | 'fileName' | 'sourceFileChecksum' | 'assetToken' | 'imageAsset' | 'uploadOperations' | 'state' | 'subscription'>;
+        /**
+         * the fields to include for returned resources of type subscriptionPlanAvailabilities
+         */
+        'fields[subscriptionPlanAvailabilities]'?: Array<'availableInNewTerritories' | 'planType' | 'availableTerritories'>;
         /**
          * maximum resources per page
          */
@@ -89889,7 +90465,7 @@ export type SubscriptionGroupsSubscriptionsGetToManyRelatedData = {
         /**
          * comma-separated list of relationships to include
          */
-        include?: Array<'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images'>;
+        include?: Array<'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities'>;
         /**
          * maximum number of related subscriptionLocalizations returned (when they are included)
          */
@@ -89918,6 +90494,10 @@ export type SubscriptionGroupsSubscriptionsGetToManyRelatedData = {
          * maximum number of related images returned (when they are included)
          */
         'limit[images]'?: number;
+        /**
+         * maximum number of related planAvailabilities returned (when they are included)
+         */
+        'limit[planAvailabilities]'?: number;
     };
     url: '/v1/subscriptionGroups/{id}/subscriptions';
 };
@@ -90069,7 +90649,7 @@ export type SubscriptionOfferCodesCustomCodesGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type subscriptionOfferCodes
          */
-        'fields[subscriptionOfferCodes]'?: Array<'name' | 'customerEligibilities' | 'offerEligibility' | 'duration' | 'offerMode' | 'numberOfPeriods' | 'totalNumberOfCodes' | 'productionCodeCount' | 'sandboxCodeCount' | 'active' | 'autoRenewEnabled' | 'subscription' | 'oneTimeUseCodes' | 'customCodes' | 'prices'>;
+        'fields[subscriptionOfferCodes]'?: Array<'name' | 'customerEligibilities' | 'offerEligibility' | 'duration' | 'offerMode' | 'numberOfPeriods' | 'totalNumberOfCodes' | 'productionCodeCount' | 'sandboxCodeCount' | 'active' | 'autoRenewEnabled' | 'targetSubscriptionPlanType' | 'subscription' | 'oneTimeUseCodes' | 'customCodes' | 'prices'>;
         /**
          * maximum resources per page
          */
@@ -90183,7 +90763,7 @@ export type SubscriptionOfferCodesOneTimeUseCodesGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type subscriptionOfferCodes
          */
-        'fields[subscriptionOfferCodes]'?: Array<'name' | 'customerEligibilities' | 'offerEligibility' | 'duration' | 'offerMode' | 'numberOfPeriods' | 'totalNumberOfCodes' | 'productionCodeCount' | 'sandboxCodeCount' | 'active' | 'autoRenewEnabled' | 'subscription' | 'oneTimeUseCodes' | 'customCodes' | 'prices'>;
+        'fields[subscriptionOfferCodes]'?: Array<'name' | 'customerEligibilities' | 'offerEligibility' | 'duration' | 'offerMode' | 'numberOfPeriods' | 'totalNumberOfCodes' | 'productionCodeCount' | 'sandboxCodeCount' | 'active' | 'autoRenewEnabled' | 'targetSubscriptionPlanType' | 'subscription' | 'oneTimeUseCodes' | 'customCodes' | 'prices'>;
         /**
          * maximum resources per page
          */
@@ -90351,6 +90931,169 @@ export type SubscriptionOfferCodesPricesGetToManyRelatedResponses = {
 };
 
 export type SubscriptionOfferCodesPricesGetToManyRelatedResponse = SubscriptionOfferCodesPricesGetToManyRelatedResponses[keyof SubscriptionOfferCodesPricesGetToManyRelatedResponses];
+
+export type SubscriptionPlanAvailabilitiesAvailableTerritoriesGetToManyRelationshipData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+    };
+    url: '/v1/subscriptionPlanAvailabilities/{id}/relationships/availableTerritories';
+};
+
+export type SubscriptionPlanAvailabilitiesAvailableTerritoriesGetToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type SubscriptionPlanAvailabilitiesAvailableTerritoriesGetToManyRelationshipError = SubscriptionPlanAvailabilitiesAvailableTerritoriesGetToManyRelationshipErrors[keyof SubscriptionPlanAvailabilitiesAvailableTerritoriesGetToManyRelationshipErrors];
+
+export type SubscriptionPlanAvailabilitiesAvailableTerritoriesGetToManyRelationshipResponses = {
+    /**
+     * List of related linkages
+     */
+    200: SubscriptionPlanAvailabilityAvailableTerritoriesLinkagesResponse;
+};
+
+export type SubscriptionPlanAvailabilitiesAvailableTerritoriesGetToManyRelationshipResponse = SubscriptionPlanAvailabilitiesAvailableTerritoriesGetToManyRelationshipResponses[keyof SubscriptionPlanAvailabilitiesAvailableTerritoriesGetToManyRelationshipResponses];
+
+export type SubscriptionPlanAvailabilitiesAvailableTerritoriesReplaceToManyRelationshipData = {
+    /**
+     * List of related linkages
+     */
+    body: SubscriptionPlanAvailabilityAvailableTerritoriesLinkagesRequest;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v1/subscriptionPlanAvailabilities/{id}/relationships/availableTerritories';
+};
+
+export type SubscriptionPlanAvailabilitiesAvailableTerritoriesReplaceToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type SubscriptionPlanAvailabilitiesAvailableTerritoriesReplaceToManyRelationshipError = SubscriptionPlanAvailabilitiesAvailableTerritoriesReplaceToManyRelationshipErrors[keyof SubscriptionPlanAvailabilitiesAvailableTerritoriesReplaceToManyRelationshipErrors];
+
+export type SubscriptionPlanAvailabilitiesAvailableTerritoriesReplaceToManyRelationshipResponses = {
+    /**
+     * Success (no content)
+     */
+    204: void;
+};
+
+export type SubscriptionPlanAvailabilitiesAvailableTerritoriesReplaceToManyRelationshipResponse = SubscriptionPlanAvailabilitiesAvailableTerritoriesReplaceToManyRelationshipResponses[keyof SubscriptionPlanAvailabilitiesAvailableTerritoriesReplaceToManyRelationshipResponses];
+
+export type SubscriptionPlanAvailabilitiesAvailableTerritoriesGetToManyRelatedData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * the fields to include for returned resources of type territories
+         */
+        'fields[territories]'?: Array<'currency'>;
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+    };
+    url: '/v1/subscriptionPlanAvailabilities/{id}/availableTerritories';
+};
+
+export type SubscriptionPlanAvailabilitiesAvailableTerritoriesGetToManyRelatedErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type SubscriptionPlanAvailabilitiesAvailableTerritoriesGetToManyRelatedError = SubscriptionPlanAvailabilitiesAvailableTerritoriesGetToManyRelatedErrors[keyof SubscriptionPlanAvailabilitiesAvailableTerritoriesGetToManyRelatedErrors];
+
+export type SubscriptionPlanAvailabilitiesAvailableTerritoriesGetToManyRelatedResponses = {
+    /**
+     * List of Territories
+     */
+    200: TerritoriesResponse;
+};
+
+export type SubscriptionPlanAvailabilitiesAvailableTerritoriesGetToManyRelatedResponse = SubscriptionPlanAvailabilitiesAvailableTerritoriesGetToManyRelatedResponses[keyof SubscriptionPlanAvailabilitiesAvailableTerritoriesGetToManyRelatedResponses];
 
 export type SubscriptionPricePointsEqualizationsGetToManyRelationshipData = {
     body?: never;
@@ -90658,7 +91401,7 @@ export type SubscriptionsAppStoreReviewScreenshotGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type subscriptions
          */
-        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images'>;
+        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -90768,7 +91511,7 @@ export type SubscriptionsImagesGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type subscriptions
          */
-        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images'>;
+        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities'>;
         /**
          * maximum resources per page
          */
@@ -90939,11 +91682,11 @@ export type SubscriptionsIntroductoryOffersGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type subscriptionIntroductoryOffers
          */
-        'fields[subscriptionIntroductoryOffers]'?: Array<'startDate' | 'endDate' | 'duration' | 'offerMode' | 'numberOfPeriods' | 'subscription' | 'territory' | 'subscriptionPricePoint'>;
+        'fields[subscriptionIntroductoryOffers]'?: Array<'startDate' | 'endDate' | 'duration' | 'offerMode' | 'numberOfPeriods' | 'targetSubscriptionPlanType' | 'subscription' | 'territory' | 'subscriptionPricePoint'>;
         /**
          * the fields to include for returned resources of type subscriptions
          */
-        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images'>;
+        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities'>;
         /**
          * the fields to include for returned resources of type territories
          */
@@ -91065,11 +91808,11 @@ export type SubscriptionsOfferCodesGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type subscriptionOfferCodes
          */
-        'fields[subscriptionOfferCodes]'?: Array<'name' | 'customerEligibilities' | 'offerEligibility' | 'duration' | 'offerMode' | 'numberOfPeriods' | 'totalNumberOfCodes' | 'productionCodeCount' | 'sandboxCodeCount' | 'active' | 'autoRenewEnabled' | 'subscription' | 'oneTimeUseCodes' | 'customCodes' | 'prices'>;
+        'fields[subscriptionOfferCodes]'?: Array<'name' | 'customerEligibilities' | 'offerEligibility' | 'duration' | 'offerMode' | 'numberOfPeriods' | 'totalNumberOfCodes' | 'productionCodeCount' | 'sandboxCodeCount' | 'active' | 'autoRenewEnabled' | 'targetSubscriptionPlanType' | 'subscription' | 'oneTimeUseCodes' | 'customCodes' | 'prices'>;
         /**
          * the fields to include for returned resources of type subscriptions
          */
-        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images'>;
+        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities'>;
         /**
          * the fields to include for returned resources of type subscriptionOfferCodeOneTimeUseCodes
          */
@@ -91139,6 +91882,124 @@ export type SubscriptionsOfferCodesGetToManyRelatedResponses = {
 };
 
 export type SubscriptionsOfferCodesGetToManyRelatedResponse = SubscriptionsOfferCodesGetToManyRelatedResponses[keyof SubscriptionsOfferCodesGetToManyRelatedResponses];
+
+export type SubscriptionsPlanAvailabilitiesGetToManyRelationshipData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+    };
+    url: '/v1/subscriptions/{id}/relationships/planAvailabilities';
+};
+
+export type SubscriptionsPlanAvailabilitiesGetToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type SubscriptionsPlanAvailabilitiesGetToManyRelationshipError = SubscriptionsPlanAvailabilitiesGetToManyRelationshipErrors[keyof SubscriptionsPlanAvailabilitiesGetToManyRelationshipErrors];
+
+export type SubscriptionsPlanAvailabilitiesGetToManyRelationshipResponses = {
+    /**
+     * List of related linkages
+     */
+    200: SubscriptionPlanAvailabilitiesLinkagesResponse;
+};
+
+export type SubscriptionsPlanAvailabilitiesGetToManyRelationshipResponse = SubscriptionsPlanAvailabilitiesGetToManyRelationshipResponses[keyof SubscriptionsPlanAvailabilitiesGetToManyRelationshipResponses];
+
+export type SubscriptionsPlanAvailabilitiesGetToManyRelatedData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * the fields to include for returned resources of type subscriptionPlanAvailabilities
+         */
+        'fields[subscriptionPlanAvailabilities]'?: Array<'availableInNewTerritories' | 'planType' | 'availableTerritories'>;
+        /**
+         * the fields to include for returned resources of type territories
+         */
+        'fields[territories]'?: Array<'currency'>;
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+        /**
+         * comma-separated list of relationships to include
+         */
+        include?: Array<'availableTerritories'>;
+        /**
+         * maximum number of related availableTerritories returned (when they are included)
+         */
+        'limit[availableTerritories]'?: number;
+    };
+    url: '/v1/subscriptions/{id}/planAvailabilities';
+};
+
+export type SubscriptionsPlanAvailabilitiesGetToManyRelatedErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type SubscriptionsPlanAvailabilitiesGetToManyRelatedError = SubscriptionsPlanAvailabilitiesGetToManyRelatedErrors[keyof SubscriptionsPlanAvailabilitiesGetToManyRelatedErrors];
+
+export type SubscriptionsPlanAvailabilitiesGetToManyRelatedResponses = {
+    /**
+     * List of SubscriptionPlanAvailabilities
+     */
+    200: SubscriptionPlanAvailabilitiesResponse;
+};
+
+export type SubscriptionsPlanAvailabilitiesGetToManyRelatedResponse = SubscriptionsPlanAvailabilitiesGetToManyRelatedResponses[keyof SubscriptionsPlanAvailabilitiesGetToManyRelatedResponses];
 
 export type SubscriptionsPricePointsGetToManyRelationshipData = {
     body?: never;
@@ -91376,6 +92237,10 @@ export type SubscriptionsPricesGetToManyRelatedData = {
     };
     query?: {
         /**
+         * filter by attribute 'planType'
+         */
+        'filter[planType]'?: Array<'MONTHLY' | 'UPFRONT'>;
+        /**
          * filter by id(s) of related 'subscriptionPricePoint'
          */
         'filter[subscriptionPricePoint]'?: Array<string>;
@@ -91386,7 +92251,7 @@ export type SubscriptionsPricesGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type subscriptionPrices
          */
-        'fields[subscriptionPrices]'?: Array<'startDate' | 'preserved' | 'territory' | 'subscriptionPricePoint'>;
+        'fields[subscriptionPrices]'?: Array<'startDate' | 'preserved' | 'planType' | 'territory' | 'subscriptionPricePoint'>;
         /**
          * the fields to include for returned resources of type territories
          */
@@ -91507,7 +92372,7 @@ export type SubscriptionsPromotedPurchaseGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type subscriptions
          */
-        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images'>;
+        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -91617,11 +92482,11 @@ export type SubscriptionsPromotionalOffersGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type subscriptionPromotionalOffers
          */
-        'fields[subscriptionPromotionalOffers]'?: Array<'duration' | 'name' | 'numberOfPeriods' | 'offerCode' | 'offerMode' | 'subscription' | 'prices'>;
+        'fields[subscriptionPromotionalOffers]'?: Array<'duration' | 'name' | 'numberOfPeriods' | 'offerCode' | 'offerMode' | 'targetSubscriptionPlanType' | 'subscription' | 'prices'>;
         /**
          * the fields to include for returned resources of type subscriptions
          */
-        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images'>;
+        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities'>;
         /**
          * the fields to include for returned resources of type subscriptionPromotionalOfferPrices
          */
@@ -91852,7 +92717,7 @@ export type SubscriptionsSubscriptionLocalizationsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type subscriptions
          */
-        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images'>;
+        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities'>;
         /**
          * maximum resources per page
          */
@@ -91962,7 +92827,7 @@ export type SubscriptionsWinBackOffersGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type winBackOffers
          */
-        'fields[winBackOffers]'?: Array<'referenceName' | 'offerId' | 'duration' | 'offerMode' | 'periodCount' | 'customerEligibilityPaidSubscriptionDurationInMonths' | 'customerEligibilityTimeSinceLastSubscribedInMonths' | 'customerEligibilityWaitBetweenOffersInMonths' | 'startDate' | 'endDate' | 'priority' | 'promotionIntent' | 'prices'>;
+        'fields[winBackOffers]'?: Array<'referenceName' | 'offerId' | 'duration' | 'offerMode' | 'periodCount' | 'customerEligibilityPaidSubscriptionDurationInMonths' | 'customerEligibilityTimeSinceLastSubscribedInMonths' | 'customerEligibilityWaitBetweenOffersInMonths' | 'startDate' | 'endDate' | 'priority' | 'promotionIntent' | 'targetSubscriptionPlanType' | 'prices'>;
         /**
          * the fields to include for returned resources of type winBackOfferPrices
          */
