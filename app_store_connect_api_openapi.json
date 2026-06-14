@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "App Store Connect API",
-    "version": "4.3.1",
+    "version": "4.4",
     "x-platforms": {
       "app_store_connect_api": "App Store Connect API"
     }
@@ -10225,7 +10225,6 @@
                   "brazilAgeRatingV2",
                   "franceAgeRating",
                   "koreaAgeRating",
-                  "kidsAgeBand",
                   "app",
                   "ageRatingDeclaration",
                   "appInfoLocalizations",
@@ -10521,7 +10520,6 @@
                   "brazilAgeRatingV2",
                   "franceAgeRating",
                   "koreaAgeRating",
-                  "kidsAgeBand",
                   "app",
                   "ageRatingDeclaration",
                   "appInfoLocalizations",
@@ -18103,7 +18101,6 @@
                   "brazilAgeRatingV2",
                   "franceAgeRating",
                   "koreaAgeRating",
-                  "kidsAgeBand",
                   "app",
                   "ageRatingDeclaration",
                   "appInfoLocalizations",
@@ -19112,7 +19109,6 @@
                   "brazilAgeRatingV2",
                   "franceAgeRating",
                   "koreaAgeRating",
-                  "kidsAgeBand",
                   "app",
                   "ageRatingDeclaration",
                   "appInfoLocalizations",
@@ -20195,6 +20191,7 @@
                   "state",
                   "stateDetails",
                   "version",
+                  "locale",
                   "backgroundAsset",
                   "internalBetaRelease",
                   "externalBetaRelease",
@@ -20342,6 +20339,7 @@
                   "state",
                   "stateDetails",
                   "version",
+                  "locale",
                   "backgroundAsset",
                   "internalBetaRelease",
                   "externalBetaRelease",
@@ -20489,6 +20487,7 @@
                   "state",
                   "stateDetails",
                   "version",
+                  "locale",
                   "backgroundAsset",
                   "internalBetaRelease",
                   "externalBetaRelease",
@@ -20709,6 +20708,7 @@
                   "state",
                   "stateDetails",
                   "version",
+                  "locale",
                   "backgroundAsset",
                   "internalBetaRelease",
                   "externalBetaRelease",
@@ -21133,6 +21133,7 @@
                   "state",
                   "stateDetails",
                   "version",
+                  "locale",
                   "backgroundAsset",
                   "internalBetaRelease",
                   "externalBetaRelease",
@@ -63436,7 +63437,8 @@
                   "promotedPurchase",
                   "subscriptionAvailability",
                   "winBackOffers",
-                  "images"
+                  "images",
+                  "planAvailabilities"
                 ]
               }
             },
@@ -66662,7 +66664,8 @@
                   "promotedPurchase",
                   "subscriptionAvailability",
                   "winBackOffers",
-                  "images"
+                  "images",
+                  "planAvailabilities"
                 ]
               }
             },
@@ -66930,6 +66933,7 @@
           "SubscriptionAvailabilities"
         ],
         "operationId": "subscriptionAvailabilities_createInstance",
+        "deprecated": true,
         "requestBody": {
           "description": "SubscriptionAvailability representation",
           "content": {
@@ -67021,6 +67025,7 @@
           "SubscriptionAvailabilities"
         ],
         "operationId": "subscriptionAvailabilities_getInstance",
+        "deprecated": true,
         "parameters": [
           {
             "name": "fields[subscriptionAvailabilities]",
@@ -67992,7 +67997,8 @@
                   "promotedPurchase",
                   "subscriptionAvailability",
                   "winBackOffers",
-                  "images"
+                  "images",
+                  "planAvailabilities"
                 ]
               }
             },
@@ -68447,7 +68453,8 @@
                   "promotedPurchase",
                   "subscriptionAvailability",
                   "winBackOffers",
-                  "images"
+                  "images",
+                  "planAvailabilities"
                 ]
               }
             },
@@ -69120,7 +69127,8 @@
                   "promotedPurchase",
                   "subscriptionAvailability",
                   "winBackOffers",
-                  "images"
+                  "images",
+                  "planAvailabilities"
                 ]
               }
             },
@@ -69522,6 +69530,7 @@
                   "sandboxCodeCount",
                   "active",
                   "autoRenewEnabled",
+                  "targetSubscriptionPlanType",
                   "subscription",
                   "oneTimeUseCodes",
                   "customCodes",
@@ -69867,6 +69876,7 @@
                   "sandboxCodeCount",
                   "active",
                   "autoRenewEnabled",
+                  "targetSubscriptionPlanType",
                   "subscription",
                   "oneTimeUseCodes",
                   "customCodes",
@@ -70189,6 +70199,7 @@
                   "sandboxCodeCount",
                   "active",
                   "autoRenewEnabled",
+                  "targetSubscriptionPlanType",
                   "subscription",
                   "oneTimeUseCodes",
                   "customCodes",
@@ -70227,7 +70238,8 @@
                   "promotedPurchase",
                   "subscriptionAvailability",
                   "winBackOffers",
-                  "images"
+                  "images",
+                  "planAvailabilities"
                 ]
               }
             },
@@ -70488,6 +70500,344 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SubscriptionOfferCodeResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit exceeded error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/subscriptionPlanAvailabilities": {
+      "post": {
+        "tags": [
+          "SubscriptionPlanAvailabilities"
+        ],
+        "operationId": "subscriptionPlanAvailabilities_createInstance",
+        "requestBody": {
+          "description": "SubscriptionPlanAvailability representation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubscriptionPlanAvailabilityCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Single SubscriptionPlanAvailability",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubscriptionPlanAvailabilityResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit exceeded error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/subscriptionPlanAvailabilities/{id}": {
+      "get": {
+        "tags": [
+          "SubscriptionPlanAvailabilities"
+        ],
+        "operationId": "subscriptionPlanAvailabilities_getInstance",
+        "parameters": [
+          {
+            "name": "fields[subscriptionPlanAvailabilities]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type subscriptionPlanAvailabilities",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "availableInNewTerritories",
+                  "planType",
+                  "availableTerritories"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "fields[territories]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type territories",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "currency"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "comma-separated list of relationships to include",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "availableTerritories"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "limit[availableTerritories]",
+            "in": "query",
+            "description": "maximum number of related availableTerritories returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form",
+            "required": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Single SubscriptionPlanAvailability",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubscriptionPlanAvailabilityResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit exceeded error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "SubscriptionPlanAvailabilities"
+        ],
+        "operationId": "subscriptionPlanAvailabilities_updateInstance",
+        "requestBody": {
+          "description": "SubscriptionPlanAvailability representation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubscriptionPlanAvailabilityUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Single SubscriptionPlanAvailability",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubscriptionPlanAvailabilityResponse"
                 }
               }
             }
@@ -70944,6 +71294,7 @@
                   "numberOfPeriods",
                   "offerCode",
                   "offerMode",
+                  "targetSubscriptionPlanType",
                   "subscription",
                   "prices"
                 ]
@@ -70980,7 +71331,8 @@
                   "promotedPurchase",
                   "subscriptionAvailability",
                   "winBackOffers",
-                  "images"
+                  "images",
+                  "planAvailabilities"
                 ]
               }
             },
@@ -71488,7 +71840,8 @@
                   "promotedPurchase",
                   "subscriptionAvailability",
                   "winBackOffers",
-                  "images"
+                  "images",
+                  "planAvailabilities"
                 ]
               }
             },
@@ -71575,6 +71928,7 @@
                   "duration",
                   "offerMode",
                   "numberOfPeriods",
+                  "targetSubscriptionPlanType",
                   "subscription",
                   "territory",
                   "subscriptionPricePoint"
@@ -71599,6 +71953,7 @@
                   "numberOfPeriods",
                   "offerCode",
                   "offerMode",
+                  "targetSubscriptionPlanType",
                   "subscription",
                   "prices"
                 ]
@@ -71628,6 +71983,7 @@
                   "sandboxCodeCount",
                   "active",
                   "autoRenewEnabled",
+                  "targetSubscriptionPlanType",
                   "subscription",
                   "oneTimeUseCodes",
                   "customCodes",
@@ -71650,6 +72006,7 @@
                 "enum": [
                   "startDate",
                   "preserved",
+                  "planType",
                   "territory",
                   "subscriptionPricePoint"
                 ]
@@ -71696,7 +72053,8 @@
             },
             "style": "form",
             "explode": false,
-            "required": false
+            "required": false,
+            "deprecated": true
           },
           {
             "name": "fields[winBackOffers]",
@@ -71719,6 +72077,7 @@
                   "endDate",
                   "priority",
                   "promotionIntent",
+                  "targetSubscriptionPlanType",
                   "prices"
                 ]
               }
@@ -71752,6 +72111,25 @@
             "required": false
           },
           {
+            "name": "fields[subscriptionPlanAvailabilities]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type subscriptionPlanAvailabilities",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "availableInNewTerritories",
+                  "planType",
+                  "availableTerritories"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
             "name": "include",
             "in": "query",
             "description": "comma-separated list of relationships to include",
@@ -71770,7 +72148,8 @@
                   "promotedPurchase",
                   "subscriptionAvailability",
                   "winBackOffers",
-                  "images"
+                  "images",
+                  "planAvailabilities"
                 ]
               }
             },
@@ -71804,6 +72183,17 @@
             "name": "limit[offerCodes]",
             "in": "query",
             "description": "maximum number of related offerCodes returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form",
+            "required": false
+          },
+          {
+            "name": "limit[planAvailabilities]",
+            "in": "query",
+            "description": "maximum number of related planAvailabilities returned (when they are included)",
             "schema": {
               "type": "integer",
               "maximum": 50
@@ -74306,6 +74696,7 @@
                   "endDate",
                   "priority",
                   "promotionIntent",
+                  "targetSubscriptionPlanType",
                   "prices"
                 ]
               }
@@ -82286,7 +82677,6 @@
                   "brazilAgeRatingV2",
                   "franceAgeRating",
                   "koreaAgeRating",
-                  "kidsAgeBand",
                   "app",
                   "ageRatingDeclaration",
                   "appInfoLocalizations",
@@ -95490,7 +95880,6 @@
                   "brazilAgeRatingV2",
                   "franceAgeRating",
                   "koreaAgeRating",
-                  "kidsAgeBand",
                   "app",
                   "ageRatingDeclaration",
                   "appInfoLocalizations",
@@ -97950,6 +98339,19 @@
             "explode": false
           },
           {
+            "name": "filter[versions.locale]",
+            "in": "query",
+            "description": "filter by attribute 'versions.locale'",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
             "name": "filter[versions.platforms]",
             "in": "query",
             "description": "filter by attribute 'versions.platforms'",
@@ -98095,6 +98497,7 @@
                   "state",
                   "stateDetails",
                   "version",
+                  "locale",
                   "backgroundAsset",
                   "internalBetaRelease",
                   "externalBetaRelease",
@@ -104112,7 +104515,8 @@
                   "LAUNCH",
                   "MEMORY",
                   "ANIMATION",
-                  "TERMINATION"
+                  "TERMINATION",
+                  "STORAGE"
                 ]
               }
             },
@@ -104687,7 +105091,8 @@
                   "promotedPurchase",
                   "subscriptionAvailability",
                   "winBackOffers",
-                  "images"
+                  "images",
+                  "planAvailabilities"
                 ]
               }
             },
@@ -105851,7 +106256,8 @@
                   "promotedPurchase",
                   "subscriptionAvailability",
                   "winBackOffers",
-                  "images"
+                  "images",
+                  "planAvailabilities"
                 ]
               }
             },
@@ -106610,6 +107016,19 @@
         "operationId": "backgroundAssets_versions_getToManyRelated",
         "parameters": [
           {
+            "name": "filter[locale]",
+            "in": "query",
+            "description": "filter by attribute 'locale'",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
             "name": "filter[platforms]",
             "in": "query",
             "description": "filter by attribute 'platforms'",
@@ -106754,6 +107173,7 @@
                   "state",
                   "stateDetails",
                   "version",
+                  "locale",
                   "backgroundAsset",
                   "internalBetaRelease",
                   "externalBetaRelease",
@@ -115331,7 +115751,8 @@
                   "LAUNCH",
                   "MEMORY",
                   "ANIMATION",
-                  "TERMINATION"
+                  "TERMINATION",
+                  "STORAGE"
                 ]
               }
             },
@@ -119632,7 +120053,6 @@
                   "brazilAgeRatingV2",
                   "franceAgeRating",
                   "koreaAgeRating",
-                  "kidsAgeBand",
                   "app",
                   "ageRatingDeclaration",
                   "appInfoLocalizations",
@@ -153102,7 +153522,8 @@
                   "promotedPurchase",
                   "subscriptionAvailability",
                   "winBackOffers",
-                  "images"
+                  "images",
+                  "planAvailabilities"
                 ]
               }
             },
@@ -155216,6 +155637,7 @@
                   "state",
                   "stateDetails",
                   "version",
+                  "locale",
                   "backgroundAsset",
                   "internalBetaRelease",
                   "externalBetaRelease",
@@ -156231,6 +156653,7 @@
           "SubscriptionAvailabilities"
         ],
         "operationId": "subscriptionAvailabilities_availableTerritories_getToManyRelationship",
+        "deprecated": true,
         "parameters": [
           {
             "name": "limit",
@@ -156325,6 +156748,7 @@
           "SubscriptionAvailabilities"
         ],
         "operationId": "subscriptionAvailabilities_availableTerritories_getToManyRelated",
+        "deprecated": true,
         "parameters": [
           {
             "name": "fields[territories]",
@@ -156867,7 +157291,8 @@
                   "promotedPurchase",
                   "subscriptionAvailability",
                   "winBackOffers",
-                  "images"
+                  "images",
+                  "planAvailabilities"
                 ]
               }
             },
@@ -156950,6 +157375,7 @@
                   "duration",
                   "offerMode",
                   "numberOfPeriods",
+                  "targetSubscriptionPlanType",
                   "subscription",
                   "territory",
                   "subscriptionPricePoint"
@@ -156973,6 +157399,7 @@
                   "numberOfPeriods",
                   "offerCode",
                   "offerMode",
+                  "targetSubscriptionPlanType",
                   "subscription",
                   "prices"
                 ]
@@ -157001,6 +157428,7 @@
                   "sandboxCodeCount",
                   "active",
                   "autoRenewEnabled",
+                  "targetSubscriptionPlanType",
                   "subscription",
                   "oneTimeUseCodes",
                   "customCodes",
@@ -157022,6 +157450,7 @@
                 "enum": [
                   "startDate",
                   "preserved",
+                  "planType",
                   "territory",
                   "subscriptionPricePoint"
                 ]
@@ -157088,6 +157517,7 @@
                   "endDate",
                   "priority",
                   "promotionIntent",
+                  "targetSubscriptionPlanType",
                   "prices"
                 ]
               }
@@ -157112,6 +157542,24 @@
                   "uploadOperations",
                   "state",
                   "subscription"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[subscriptionPlanAvailabilities]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type subscriptionPlanAvailabilities",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "availableInNewTerritories",
+                  "planType",
+                  "availableTerritories"
                 ]
               }
             },
@@ -157147,7 +157595,8 @@
                   "promotedPurchase",
                   "subscriptionAvailability",
                   "winBackOffers",
-                  "images"
+                  "images",
+                  "planAvailabilities"
                 ]
               }
             },
@@ -157218,6 +157667,16 @@
             "name": "limit[images]",
             "in": "query",
             "description": "maximum number of related images returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form"
+          },
+          {
+            "name": "limit[planAvailabilities]",
+            "in": "query",
+            "description": "maximum number of related planAvailabilities returned (when they are included)",
             "schema": {
               "type": "integer",
               "maximum": 50
@@ -157526,6 +157985,7 @@
                   "sandboxCodeCount",
                   "active",
                   "autoRenewEnabled",
+                  "targetSubscriptionPlanType",
                   "subscription",
                   "oneTimeUseCodes",
                   "customCodes",
@@ -157782,6 +158242,7 @@
                   "sandboxCodeCount",
                   "active",
                   "autoRenewEnabled",
+                  "targetSubscriptionPlanType",
                   "subscription",
                   "oneTimeUseCodes",
                   "customCodes",
@@ -158137,6 +158598,302 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SubscriptionOfferCodePricesResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit exceeded error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/subscriptionPlanAvailabilities/{id}/relationships/availableTerritories": {
+      "get": {
+        "tags": [
+          "SubscriptionPlanAvailabilities"
+        ],
+        "operationId": "subscriptionPlanAvailabilities_availableTerritories_getToManyRelationship",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum resources per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "List of related linkages",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubscriptionPlanAvailabilityAvailableTerritoriesLinkagesResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit exceeded error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "SubscriptionPlanAvailabilities"
+        ],
+        "operationId": "subscriptionPlanAvailabilities_availableTerritories_replaceToManyRelationship",
+        "requestBody": {
+          "description": "List of related linkages",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubscriptionPlanAvailabilityAvailableTerritoriesLinkagesRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Success (no content)"
+          },
+          "429": {
+            "description": "Rate limit exceeded error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/subscriptionPlanAvailabilities/{id}/availableTerritories": {
+      "get": {
+        "tags": [
+          "SubscriptionPlanAvailabilities"
+        ],
+        "operationId": "subscriptionPlanAvailabilities_availableTerritories_getToManyRelated",
+        "parameters": [
+          {
+            "name": "fields[territories]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type territories",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "currency"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum resources per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "List of Territories",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TerritoriesResponse"
                 }
               }
             }
@@ -158849,7 +159606,8 @@
                   "promotedPurchase",
                   "subscriptionAvailability",
                   "winBackOffers",
-                  "images"
+                  "images",
+                  "planAvailabilities"
                 ]
               }
             },
@@ -159100,7 +159858,8 @@
                   "promotedPurchase",
                   "subscriptionAvailability",
                   "winBackOffers",
-                  "images"
+                  "images",
+                  "planAvailabilities"
                 ]
               }
             },
@@ -159430,6 +160189,7 @@
                   "duration",
                   "offerMode",
                   "numberOfPeriods",
+                  "targetSubscriptionPlanType",
                   "subscription",
                   "territory",
                   "subscriptionPricePoint"
@@ -159466,7 +160226,8 @@
                   "promotedPurchase",
                   "subscriptionAvailability",
                   "winBackOffers",
-                  "images"
+                  "images",
+                  "planAvailabilities"
                 ]
               }
             },
@@ -159748,6 +160509,7 @@
                   "sandboxCodeCount",
                   "active",
                   "autoRenewEnabled",
+                  "targetSubscriptionPlanType",
                   "subscription",
                   "oneTimeUseCodes",
                   "customCodes",
@@ -159785,7 +160547,8 @@
                   "promotedPurchase",
                   "subscriptionAvailability",
                   "winBackOffers",
-                  "images"
+                  "images",
+                  "planAvailabilities"
                 ]
               }
             },
@@ -159959,6 +160722,254 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SubscriptionOfferCodesResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit exceeded error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/subscriptions/{id}/relationships/planAvailabilities": {
+      "get": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "subscriptions_planAvailabilities_getToManyRelationship",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum resources per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "List of related linkages",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubscriptionPlanAvailabilitiesLinkagesResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit exceeded error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/subscriptions/{id}/planAvailabilities": {
+      "get": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "subscriptions_planAvailabilities_getToManyRelated",
+        "parameters": [
+          {
+            "name": "fields[subscriptionPlanAvailabilities]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type subscriptionPlanAvailabilities",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "availableInNewTerritories",
+                  "planType",
+                  "availableTerritories"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[territories]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type territories",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "currency"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum resources per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "comma-separated list of relationships to include",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "availableTerritories"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "limit[availableTerritories]",
+            "in": "query",
+            "description": "maximum number of related availableTerritories returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "List of SubscriptionPlanAvailabilities",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubscriptionPlanAvailabilitiesResponse"
                 }
               }
             }
@@ -160440,6 +161451,23 @@
         "operationId": "subscriptions_prices_getToManyRelated",
         "parameters": [
           {
+            "name": "filter[planType]",
+            "in": "query",
+            "description": "filter by attribute 'planType'",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "MONTHLY",
+                  "UPFRONT"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
             "name": "filter[subscriptionPricePoint]",
             "in": "query",
             "description": "filter by id(s) of related 'subscriptionPricePoint'",
@@ -160476,6 +161504,7 @@
                 "enum": [
                   "startDate",
                   "preserved",
+                  "planType",
                   "territory",
                   "subscriptionPricePoint"
                 ]
@@ -160792,7 +161821,8 @@
                   "promotedPurchase",
                   "subscriptionAvailability",
                   "winBackOffers",
-                  "images"
+                  "images",
+                  "planAvailabilities"
                 ]
               }
             },
@@ -161021,6 +162051,7 @@
                   "numberOfPeriods",
                   "offerCode",
                   "offerMode",
+                  "targetSubscriptionPlanType",
                   "subscription",
                   "prices"
                 ]
@@ -161056,7 +162087,8 @@
                   "promotedPurchase",
                   "subscriptionAvailability",
                   "winBackOffers",
-                  "images"
+                  "images",
+                  "planAvailabilities"
                 ]
               }
             },
@@ -161200,6 +162232,7 @@
           "Subscriptions"
         ],
         "operationId": "subscriptions_subscriptionAvailability_getToOneRelationship",
+        "deprecated": true,
         "parameters": [],
         "responses": {
           "400": {
@@ -161283,6 +162316,7 @@
           "Subscriptions"
         ],
         "operationId": "subscriptions_subscriptionAvailability_getToOneRelated",
+        "deprecated": true,
         "parameters": [
           {
             "name": "fields[subscriptionAvailabilities]",
@@ -161568,7 +162602,8 @@
                   "promotedPurchase",
                   "subscriptionAvailability",
                   "winBackOffers",
-                  "images"
+                  "images",
+                  "planAvailabilities"
                 ]
               }
             },
@@ -161800,6 +162835,7 @@
                   "endDate",
                   "priority",
                   "promotionIntent",
+                  "targetSubscriptionPlanType",
                   "prices"
                 ]
               }
@@ -174329,10 +175365,6 @@
                   "NINETEEN",
                   "NOT_APPLICABLE"
                 ]
-              },
-              "kidsAgeBand": {
-                "deprecated": true,
-                "$ref": "#/components/schemas/KidsAgeBand"
               }
             }
           },
@@ -182317,6 +183349,9 @@
                 }
               },
               "version": {
+                "type": "string"
+              },
+              "locale": {
                 "type": "string"
               }
             }
@@ -212047,7 +213082,8 @@
                   "LAUNCH",
                   "MEMORY",
                   "ANIMATION",
-                  "TERMINATION"
+                  "TERMINATION",
+                  "STORAGE"
                 ]
               },
               "deviceType": {
@@ -215403,7 +216439,8 @@
         "required": [
           "id",
           "type"
-        ]
+        ],
+        "deprecated": true
       },
       "SubscriptionAvailabilityResponse": {
         "type": "object",
@@ -215425,7 +216462,8 @@
         "required": [
           "data",
           "links"
-        ]
+        ],
+        "deprecated": true
       },
       "SubscriptionAvailabilityCreateRequest": {
         "type": "object",
@@ -215525,7 +216563,8 @@
         },
         "required": [
           "data"
-        ]
+        ],
+        "deprecated": true
       },
       "SubscriptionGracePeriod": {
         "type": "object",
@@ -216542,6 +217581,9 @@
               },
               "numberOfPeriods": {
                 "type": "integer"
+              },
+              "targetSubscriptionPlanType": {
+                "$ref": "#/components/schemas/SubscriptionPlanType"
               }
             }
           },
@@ -216661,6 +217703,10 @@
               },
               "numberOfPeriods": {
                 "type": "integer"
+              },
+              "targetSubscriptionPlanType": {
+                "nullable": true,
+                "$ref": "#/components/schemas/SubscriptionPlanType"
               }
             },
             "required": [
@@ -216869,6 +217915,10 @@
                   },
                   "numberOfPeriods": {
                     "type": "integer"
+                  },
+                  "targetSubscriptionPlanType": {
+                    "nullable": true,
+                    "$ref": "#/components/schemas/SubscriptionPlanType"
                   }
                 },
                 "required": [
@@ -217991,6 +219041,9 @@
               },
               "autoRenewEnabled": {
                 "type": "boolean"
+              },
+              "targetSubscriptionPlanType": {
+                "$ref": "#/components/schemas/SubscriptionPlanType"
               }
             }
           },
@@ -218261,6 +219314,10 @@
                   "autoRenewEnabled": {
                     "type": "boolean",
                     "nullable": true
+                  },
+                  "targetSubscriptionPlanType": {
+                    "nullable": true,
+                    "$ref": "#/components/schemas/SubscriptionPlanType"
                   }
                 },
                 "required": [
@@ -218376,6 +219433,297 @@
                   "active": {
                     "type": "boolean",
                     "nullable": true
+                  }
+                }
+              }
+            },
+            "required": [
+              "id",
+              "type"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "SubscriptionPlanAvailability": {
+        "type": "object",
+        "title": "SubscriptionPlanAvailability",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "subscriptionPlanAvailabilities"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "attributes": {
+            "type": "object",
+            "properties": {
+              "availableInNewTerritories": {
+                "type": "boolean"
+              },
+              "planType": {
+                "$ref": "#/components/schemas/SubscriptionPlanType"
+              }
+            }
+          },
+          "relationships": {
+            "type": "object",
+            "properties": {
+              "availableTerritories": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "$ref": "#/components/schemas/RelationshipLinks"
+                  },
+                  "meta": {
+                    "$ref": "#/components/schemas/PagingInformation"
+                  },
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "territories"
+                          ]
+                        },
+                        "id": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "type"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ]
+      },
+      "SubscriptionPlanAvailabilitiesResponse": {
+        "type": "object",
+        "title": "SubscriptionPlanAvailabilitiesResponse",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SubscriptionPlanAvailability"
+            }
+          },
+          "included": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Territory"
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/PagedDocumentLinks"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/PagingInformation"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "SubscriptionPlanAvailabilityResponse": {
+        "type": "object",
+        "title": "SubscriptionPlanAvailabilityResponse",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/SubscriptionPlanAvailability"
+          },
+          "included": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Territory"
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/DocumentLinks"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "SubscriptionPlanAvailabilityCreateRequest": {
+        "type": "object",
+        "title": "SubscriptionPlanAvailabilityCreateRequest",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "subscriptionPlanAvailabilities"
+                ]
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "availableInNewTerritories": {
+                    "type": "boolean",
+                    "nullable": true
+                  },
+                  "planType": {
+                    "$ref": "#/components/schemas/SubscriptionPlanType"
+                  }
+                },
+                "required": [
+                  "planType"
+                ]
+              },
+              "relationships": {
+                "type": "object",
+                "properties": {
+                  "availableTerritories": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "territories"
+                              ]
+                            },
+                            "id": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "type"
+                          ]
+                        }
+                      }
+                    },
+                    "required": [
+                      "data"
+                    ]
+                  },
+                  "subscription": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "enum": [
+                              "subscriptions"
+                            ]
+                          },
+                          "id": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "type"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "data"
+                    ]
+                  }
+                },
+                "required": [
+                  "availableTerritories",
+                  "subscription"
+                ]
+              }
+            },
+            "required": [
+              "relationships",
+              "attributes",
+              "type"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "SubscriptionPlanAvailabilityUpdateRequest": {
+        "type": "object",
+        "title": "SubscriptionPlanAvailabilityUpdateRequest",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "subscriptionPlanAvailabilities"
+                ]
+              },
+              "id": {
+                "type": "string"
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "availableInNewTerritories": {
+                    "type": "boolean",
+                    "nullable": true
+                  }
+                }
+              },
+              "relationships": {
+                "type": "object",
+                "properties": {
+                  "availableTerritories": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "territories"
+                              ]
+                            },
+                            "id": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "type"
+                          ]
+                        }
+                      }
+                    }
                   }
                 }
               }
@@ -218551,6 +219899,9 @@
               },
               "preserved": {
                 "type": "boolean"
+              },
+              "planType": {
+                "$ref": "#/components/schemas/SubscriptionPlanType"
               }
             }
           },
@@ -218637,6 +219988,10 @@
               "preserveCurrentPrice": {
                 "type": "boolean",
                 "nullable": true
+              },
+              "planType": {
+                "nullable": true,
+                "$ref": "#/components/schemas/SubscriptionPlanType"
               }
             }
           },
@@ -218821,6 +220176,10 @@
                   "preserveCurrentPrice": {
                     "type": "boolean",
                     "nullable": true
+                  },
+                  "planType": {
+                    "nullable": true,
+                    "$ref": "#/components/schemas/SubscriptionPlanType"
                   }
                 }
               },
@@ -219132,6 +220491,9 @@
               },
               "offerMode": {
                 "$ref": "#/components/schemas/SubscriptionOfferMode"
+              },
+              "targetSubscriptionPlanType": {
+                "$ref": "#/components/schemas/SubscriptionPlanType"
               }
             }
           },
@@ -219233,6 +220595,10 @@
               },
               "offerMode": {
                 "$ref": "#/components/schemas/SubscriptionOfferMode"
+              },
+              "targetSubscriptionPlanType": {
+                "nullable": true,
+                "$ref": "#/components/schemas/SubscriptionPlanType"
               }
             },
             "required": [
@@ -219411,6 +220777,10 @@
                   },
                   "offerMode": {
                     "$ref": "#/components/schemas/SubscriptionOfferMode"
+                  },
+                  "targetSubscriptionPlanType": {
+                    "nullable": true,
+                    "$ref": "#/components/schemas/SubscriptionPlanType"
                   }
                 },
                 "required": [
@@ -220026,7 +221396,8 @@
                       "type"
                     ]
                   }
-                }
+                },
+                "deprecated": true
               },
               "winBackOffers": {
                 "type": "object",
@@ -220091,6 +221462,38 @@
                     }
                   }
                 }
+              },
+              "planAvailabilities": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "$ref": "#/components/schemas/RelationshipLinks"
+                  },
+                  "meta": {
+                    "$ref": "#/components/schemas/PagingInformation"
+                  },
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "subscriptionPlanAvailabilities"
+                          ]
+                        },
+                        "id": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "type"
+                      ]
+                    }
+                  }
+                }
               }
             }
           },
@@ -220142,6 +221545,9 @@
                   "$ref": "#/components/schemas/SubscriptionOfferCode"
                 },
                 {
+                  "$ref": "#/components/schemas/SubscriptionPlanAvailability"
+                },
+                {
                   "$ref": "#/components/schemas/SubscriptionPrice"
                 },
                 {
@@ -220164,6 +221570,7 @@
                   "subscriptionOfferCodes": "#/components/schemas/SubscriptionOfferCode",
                   "subscriptionPromotionalOffers": "#/components/schemas/SubscriptionPromotionalOffer",
                   "subscriptionLocalizations": "#/components/schemas/SubscriptionLocalization",
+                  "subscriptionPlanAvailabilities": "#/components/schemas/SubscriptionPlanAvailability",
                   "subscriptionAvailabilities": "#/components/schemas/SubscriptionAvailability"
                 }
               }
@@ -220217,6 +221624,9 @@
                   "$ref": "#/components/schemas/SubscriptionOfferCode"
                 },
                 {
+                  "$ref": "#/components/schemas/SubscriptionPlanAvailability"
+                },
+                {
                   "$ref": "#/components/schemas/SubscriptionPrice"
                 },
                 {
@@ -220239,6 +221649,7 @@
                   "subscriptionOfferCodes": "#/components/schemas/SubscriptionOfferCode",
                   "subscriptionPromotionalOffers": "#/components/schemas/SubscriptionPromotionalOffer",
                   "subscriptionLocalizations": "#/components/schemas/SubscriptionLocalization",
+                  "subscriptionPlanAvailabilities": "#/components/schemas/SubscriptionPlanAvailability",
                   "subscriptionAvailabilities": "#/components/schemas/SubscriptionAvailability"
                 }
               }
@@ -222216,6 +223627,9 @@
                   "NOT_PROMOTED",
                   "USE_AUTO_GENERATED_ASSETS"
                 ]
+              },
+              "targetSubscriptionPlanType": {
+                "$ref": "#/components/schemas/SubscriptionPlanType"
               }
             }
           },
@@ -222379,6 +223793,10 @@
                       "NOT_PROMOTED",
                       "USE_AUTO_GENERATED_ASSETS"
                     ]
+                  },
+                  "targetSubscriptionPlanType": {
+                    "nullable": true,
+                    "$ref": "#/components/schemas/SubscriptionPlanType"
                   }
                 },
                 "required": [
@@ -233022,7 +234440,8 @@
         "required": [
           "data",
           "links"
-        ]
+        ],
+        "deprecated": true
       },
       "SubscriptionGroupSubscriptionGroupLocalizationsLinkagesResponse": {
         "type": "object",
@@ -233232,6 +234651,71 @@
         "required": [
           "data",
           "links"
+        ]
+      },
+      "SubscriptionPlanAvailabilityAvailableTerritoriesLinkagesResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "territories"
+                  ]
+                },
+                "id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "type"
+              ]
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/PagedDocumentLinks"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/PagingInformation"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "SubscriptionPlanAvailabilityAvailableTerritoriesLinkagesRequest": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "territories"
+                  ]
+                },
+                "id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "type"
+              ]
+            }
+          }
+        },
+        "required": [
+          "data"
         ]
       },
       "SubscriptionPricePointEqualizationsLinkagesResponse": {
@@ -233473,6 +234957,42 @@
           "links"
         ]
       },
+      "SubscriptionPlanAvailabilitiesLinkagesResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "subscriptionPlanAvailabilities"
+                  ]
+                },
+                "id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "type"
+              ]
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/PagedDocumentLinks"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/PagingInformation"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
       "SubscriptionPricePointsLinkagesResponse": {
         "type": "object",
         "properties": {
@@ -233668,7 +235188,8 @@
         "required": [
           "data",
           "links"
-        ]
+        ],
+        "deprecated": true
       },
       "SubscriptionSubscriptionLocalizationsLinkagesResponse": {
         "type": "object",
@@ -235148,6 +236669,7 @@
         "enum": [
           "L",
           "ALL",
+          "ZERO_ZERO",
           "ONE_PLUS",
           "TWO_PLUS",
           "THREE_PLUS",
@@ -236217,7 +237739,8 @@
           "DISK",
           "BATTERY",
           "TERMINATION",
-          "ANIMATION"
+          "ANIMATION",
+          "STORAGE"
         ]
       },
       "MetricsInsight": {
@@ -236462,6 +237985,13 @@
           "PAY_AS_YOU_GO",
           "PAY_UP_FRONT",
           "FREE_TRIAL"
+        ]
+      },
+      "SubscriptionPlanType": {
+        "type": "string",
+        "enum": [
+          "MONTHLY",
+          "UPFRONT"
         ]
       },
       "SubscriptionStatusUrlVersion": {
