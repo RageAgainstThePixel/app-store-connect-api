@@ -495,6 +495,12 @@ export const AgeRatingDeclarationSchema = {
                         'FREQUENT'
                     ]
                 },
+                socialMedia: {
+                    type: 'boolean'
+                },
+                socialMediaAgeRestricted: {
+                    type: 'boolean'
+                },
                 horrorOrFearThemes: {
                     type: 'string',
                     enum: [
@@ -753,6 +759,14 @@ export const AgeRatingDeclarationUpdateRequestSchema = {
                                 'INFREQUENT',
                                 'FREQUENT'
                             ]
+                        },
+                        socialMedia: {
+                            type: 'boolean',
+                            nullable: true
+                        },
+                        socialMediaAgeRestricted: {
+                            type: 'boolean',
+                            nullable: true
                         },
                         horrorOrFearThemes: {
                             type: 'string',
@@ -8793,6 +8807,10 @@ export const AppInfoSchema = {
                         'NINETEEN',
                         'NOT_APPLICABLE'
                     ]
+                },
+                kidsAgeBand: {
+                    deprecated: true,
+                    $ref: '#/components/schemas/KidsAgeBand'
                 }
             }
         },
@@ -42721,6 +42739,207 @@ export const InAppPurchaseImageUpdateRequestSchema = {
     ]
 } as const;
 
+export const InAppPurchaseImageV2Schema = {
+    type: 'object',
+    title: 'InAppPurchaseImageV2',
+    properties: {
+        type: {
+            type: 'string',
+            enum: [
+                'inAppPurchaseImages'
+            ]
+        },
+        id: {
+            type: 'string'
+        },
+        attributes: {
+            type: 'object',
+            properties: {
+                fileSize: {
+                    type: 'integer'
+                },
+                fileName: {
+                    type: 'string'
+                },
+                assetToken: {
+                    type: 'string'
+                },
+                imageAsset: {
+                    $ref: '#/components/schemas/ImageAsset'
+                },
+                uploadOperations: {
+                    type: 'array',
+                    items: {
+                        $ref: '#/components/schemas/UploadOperation'
+                    }
+                },
+                assetDeliveryState: {
+                    $ref: '#/components/schemas/AppMediaAssetState'
+                }
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: [
+        'id',
+        'type'
+    ]
+} as const;
+
+export const InAppPurchaseImagesV2ResponseSchema = {
+    type: 'object',
+    title: 'InAppPurchaseImagesV2Response',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                $ref: '#/components/schemas/InAppPurchaseImageV2'
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            $ref: '#/components/schemas/PagingInformation'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
+export const InAppPurchaseImageV2ResponseSchema = {
+    type: 'object',
+    title: 'InAppPurchaseImageV2Response',
+    properties: {
+        data: {
+            $ref: '#/components/schemas/InAppPurchaseImageV2'
+        },
+        links: {
+            $ref: '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
+export const InAppPurchaseImageV2CreateRequestSchema = {
+    type: 'object',
+    title: 'InAppPurchaseImageV2CreateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: [
+                        'inAppPurchaseImages'
+                    ]
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        fileSize: {
+                            type: 'integer'
+                        },
+                        fileName: {
+                            type: 'string'
+                        }
+                    },
+                    required: [
+                        'fileName',
+                        'fileSize'
+                    ]
+                },
+                relationships: {
+                    type: 'object',
+                    properties: {
+                        version: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: [
+                                                'inAppPurchaseVersions'
+                                            ]
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: [
+                                        'id',
+                                        'type'
+                                    ]
+                                }
+                            },
+                            required: [
+                                'data'
+                            ]
+                        }
+                    },
+                    required: [
+                        'version'
+                    ]
+                }
+            },
+            required: [
+                'relationships',
+                'attributes',
+                'type'
+            ]
+        }
+    },
+    required: [
+        'data'
+    ]
+} as const;
+
+export const InAppPurchaseImageV2UpdateRequestSchema = {
+    type: 'object',
+    title: 'InAppPurchaseImageV2UpdateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: [
+                        'inAppPurchaseImages'
+                    ]
+                },
+                id: {
+                    type: 'string'
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        uploaded: {
+                            type: 'boolean',
+                            nullable: true
+                        }
+                    }
+                }
+            },
+            required: [
+                'id',
+                'type'
+            ]
+        }
+    },
+    required: [
+        'data'
+    ]
+} as const;
+
 export const InAppPurchaseLocalizationSchema = {
     type: 'object',
     title: 'InAppPurchaseLocalization',
@@ -42929,6 +43148,243 @@ export const InAppPurchaseLocalizationCreateRequestSchema = {
 export const InAppPurchaseLocalizationUpdateRequestSchema = {
     type: 'object',
     title: 'InAppPurchaseLocalizationUpdateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: [
+                        'inAppPurchaseLocalizations'
+                    ]
+                },
+                id: {
+                    type: 'string'
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        name: {
+                            type: 'string',
+                            nullable: true
+                        },
+                        description: {
+                            type: 'string',
+                            nullable: true
+                        }
+                    }
+                }
+            },
+            required: [
+                'id',
+                'type'
+            ]
+        }
+    },
+    required: [
+        'data'
+    ]
+} as const;
+
+export const InAppPurchaseLocalizationV2Schema = {
+    type: 'object',
+    title: 'InAppPurchaseLocalizationV2',
+    properties: {
+        type: {
+            type: 'string',
+            enum: [
+                'inAppPurchaseLocalizations'
+            ]
+        },
+        id: {
+            type: 'string'
+        },
+        attributes: {
+            type: 'object',
+            properties: {
+                name: {
+                    type: 'string'
+                },
+                locale: {
+                    type: 'string'
+                },
+                description: {
+                    type: 'string'
+                }
+            }
+        },
+        relationships: {
+            type: 'object',
+            properties: {
+                version: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: [
+                                        'inAppPurchaseVersions'
+                                    ]
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: [
+                                'id',
+                                'type'
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: [
+        'id',
+        'type'
+    ]
+} as const;
+
+export const InAppPurchaseLocalizationsV2ResponseSchema = {
+    type: 'object',
+    title: 'InAppPurchaseLocalizationsV2Response',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                $ref: '#/components/schemas/InAppPurchaseLocalizationV2'
+            }
+        },
+        included: {
+            type: 'array',
+            items: {
+                $ref: '#/components/schemas/InAppPurchaseVersion'
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            $ref: '#/components/schemas/PagingInformation'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
+export const InAppPurchaseLocalizationV2ResponseSchema = {
+    type: 'object',
+    title: 'InAppPurchaseLocalizationV2Response',
+    properties: {
+        data: {
+            $ref: '#/components/schemas/InAppPurchaseLocalizationV2'
+        },
+        included: {
+            type: 'array',
+            items: {
+                $ref: '#/components/schemas/InAppPurchaseVersion'
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
+export const InAppPurchaseLocalizationV2CreateRequestSchema = {
+    type: 'object',
+    title: 'InAppPurchaseLocalizationV2CreateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: [
+                        'inAppPurchaseLocalizations'
+                    ]
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        name: {
+                            type: 'string'
+                        },
+                        locale: {
+                            type: 'string'
+                        },
+                        description: {
+                            type: 'string',
+                            nullable: true
+                        }
+                    },
+                    required: [
+                        'name',
+                        'locale'
+                    ]
+                },
+                relationships: {
+                    type: 'object',
+                    properties: {
+                        version: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: [
+                                                'inAppPurchaseVersions'
+                                            ]
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: [
+                                        'id',
+                                        'type'
+                                    ]
+                                }
+                            },
+                            required: [
+                                'data'
+                            ]
+                        }
+                    },
+                    required: [
+                        'version'
+                    ]
+                }
+            },
+            required: [
+                'relationships',
+                'attributes',
+                'type'
+            ]
+        }
+    },
+    required: [
+        'data'
+    ]
+} as const;
+
+export const InAppPurchaseLocalizationV2UpdateRequestSchema = {
+    type: 'object',
+    title: 'InAppPurchaseLocalizationV2UpdateRequest',
     properties: {
         data: {
             type: 'object',
@@ -44843,6 +45299,316 @@ export const InAppPurchaseSubmissionCreateRequestSchema = {
     ]
 } as const;
 
+export const InAppPurchaseVersionSchema = {
+    type: 'object',
+    title: 'InAppPurchaseVersion',
+    properties: {
+        type: {
+            type: 'string',
+            enum: [
+                'inAppPurchaseVersions'
+            ]
+        },
+        id: {
+            type: 'string'
+        },
+        attributes: {
+            type: 'object',
+            properties: {
+                version: {
+                    type: 'integer'
+                },
+                state: {
+                    type: 'string',
+                    enum: [
+                        'PREPARE_FOR_SUBMISSION',
+                        'READY_FOR_REVIEW',
+                        'WAITING_FOR_REVIEW',
+                        'IN_REVIEW',
+                        'ACCEPTED',
+                        'APPROVED',
+                        'REPLACED_WITH_NEW_VERSION',
+                        'REJECTED',
+                        'DEVELOPER_REJECTED'
+                    ]
+                }
+            }
+        },
+        relationships: {
+            type: 'object',
+            properties: {
+                inAppPurchase: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: [
+                                        'inAppPurchases'
+                                    ]
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: [
+                                'id',
+                                'type'
+                            ]
+                        }
+                    }
+                },
+                image: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            $ref: '#/components/schemas/RelationshipLinks'
+                        },
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: [
+                                        'inAppPurchaseImages'
+                                    ]
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: [
+                                'id',
+                                'type'
+                            ]
+                        }
+                    }
+                },
+                images: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            $ref: '#/components/schemas/RelationshipLinks'
+                        },
+                        meta: {
+                            $ref: '#/components/schemas/PagingInformation'
+                        },
+                        data: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    type: {
+                                        type: 'string',
+                                        enum: [
+                                            'inAppPurchaseImages'
+                                        ]
+                                    },
+                                    id: {
+                                        type: 'string'
+                                    }
+                                },
+                                required: [
+                                    'id',
+                                    'type'
+                                ]
+                            }
+                        }
+                    }
+                },
+                localizations: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            $ref: '#/components/schemas/RelationshipLinks'
+                        },
+                        meta: {
+                            $ref: '#/components/schemas/PagingInformation'
+                        },
+                        data: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    type: {
+                                        type: 'string',
+                                        enum: [
+                                            'inAppPurchaseLocalizations'
+                                        ]
+                                    },
+                                    id: {
+                                        type: 'string'
+                                    }
+                                },
+                                required: [
+                                    'id',
+                                    'type'
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: [
+        'id',
+        'type'
+    ]
+} as const;
+
+export const InAppPurchaseVersionsResponseSchema = {
+    type: 'object',
+    title: 'InAppPurchaseVersionsResponse',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                $ref: '#/components/schemas/InAppPurchaseVersion'
+            }
+        },
+        included: {
+            type: 'array',
+            items: {
+                oneOf: [
+                    {
+                        $ref: '#/components/schemas/InAppPurchaseImageV2'
+                    },
+                    {
+                        $ref: '#/components/schemas/InAppPurchaseLocalizationV2'
+                    },
+                    {
+                        $ref: '#/components/schemas/InAppPurchaseV2'
+                    }
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        inAppPurchaseImages: '#/components/schemas/InAppPurchaseImageV2',
+                        inAppPurchases: '#/components/schemas/InAppPurchaseV2',
+                        inAppPurchaseLocalizations: '#/components/schemas/InAppPurchaseLocalizationV2'
+                    }
+                }
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            $ref: '#/components/schemas/PagingInformation'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
+export const InAppPurchaseVersionResponseSchema = {
+    type: 'object',
+    title: 'InAppPurchaseVersionResponse',
+    properties: {
+        data: {
+            $ref: '#/components/schemas/InAppPurchaseVersion'
+        },
+        included: {
+            type: 'array',
+            items: {
+                oneOf: [
+                    {
+                        $ref: '#/components/schemas/InAppPurchaseImageV2'
+                    },
+                    {
+                        $ref: '#/components/schemas/InAppPurchaseLocalizationV2'
+                    },
+                    {
+                        $ref: '#/components/schemas/InAppPurchaseV2'
+                    }
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        inAppPurchaseImages: '#/components/schemas/InAppPurchaseImageV2',
+                        inAppPurchases: '#/components/schemas/InAppPurchaseV2',
+                        inAppPurchaseLocalizations: '#/components/schemas/InAppPurchaseLocalizationV2'
+                    }
+                }
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
+export const InAppPurchaseVersionCreateRequestSchema = {
+    type: 'object',
+    title: 'InAppPurchaseVersionCreateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: [
+                        'inAppPurchaseVersions'
+                    ]
+                },
+                relationships: {
+                    type: 'object',
+                    properties: {
+                        inAppPurchase: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: [
+                                                'inAppPurchases'
+                                            ]
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: [
+                                        'id',
+                                        'type'
+                                    ]
+                                }
+                            },
+                            required: [
+                                'data'
+                            ]
+                        }
+                    },
+                    required: [
+                        'inAppPurchase'
+                    ]
+                }
+            },
+            required: [
+                'relationships',
+                'type'
+            ]
+        }
+    },
+    required: [
+        'data'
+    ]
+} as const;
+
 export const InAppPurchaseSchema = {
     type: 'object',
     title: 'InAppPurchase',
@@ -45299,6 +46065,38 @@ export const InAppPurchaseV2Schema = {
                             }
                         }
                     }
+                },
+                versions: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            $ref: '#/components/schemas/RelationshipLinks'
+                        },
+                        meta: {
+                            $ref: '#/components/schemas/PagingInformation'
+                        },
+                        data: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    type: {
+                                        type: 'string',
+                                        enum: [
+                                            'inAppPurchaseVersions'
+                                        ]
+                                    },
+                                    id: {
+                                        type: 'string'
+                                    }
+                                },
+                                required: [
+                                    'id',
+                                    'type'
+                                ]
+                            }
+                        }
+                    }
                 }
             }
         },
@@ -45351,6 +46149,9 @@ export const InAppPurchasesV2ResponseSchema = {
                         $ref: '#/components/schemas/InAppPurchasePriceSchedule'
                     },
                     {
+                        $ref: '#/components/schemas/InAppPurchaseVersion'
+                    },
+                    {
                         $ref: '#/components/schemas/PromotedPurchase'
                     }
                 ],
@@ -45364,6 +46165,7 @@ export const InAppPurchasesV2ResponseSchema = {
                         promotedPurchases: '#/components/schemas/PromotedPurchase',
                         inAppPurchaseImages: '#/components/schemas/InAppPurchaseImage',
                         inAppPurchaseAvailabilities: '#/components/schemas/InAppPurchaseAvailability',
+                        inAppPurchaseVersions: '#/components/schemas/InAppPurchaseVersion',
                         inAppPurchasePricePoints: '#/components/schemas/InAppPurchasePricePoint',
                         inAppPurchaseLocalizations: '#/components/schemas/InAppPurchaseLocalization'
                     }
@@ -45419,6 +46221,9 @@ export const InAppPurchaseV2ResponseSchema = {
                         $ref: '#/components/schemas/InAppPurchasePriceSchedule'
                     },
                     {
+                        $ref: '#/components/schemas/InAppPurchaseVersion'
+                    },
+                    {
                         $ref: '#/components/schemas/PromotedPurchase'
                     }
                 ],
@@ -45432,6 +46237,7 @@ export const InAppPurchaseV2ResponseSchema = {
                         promotedPurchases: '#/components/schemas/PromotedPurchase',
                         inAppPurchaseImages: '#/components/schemas/InAppPurchaseImage',
                         inAppPurchaseAvailabilities: '#/components/schemas/InAppPurchaseAvailability',
+                        inAppPurchaseVersions: '#/components/schemas/InAppPurchaseVersion',
                         inAppPurchasePricePoints: '#/components/schemas/InAppPurchasePricePoint',
                         inAppPurchaseLocalizations: '#/components/schemas/InAppPurchaseLocalization'
                     }
@@ -48287,6 +49093,75 @@ export const ReviewSubmissionItemSchema = {
                             ]
                         }
                     }
+                },
+                inAppPurchaseVersion: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: [
+                                        'inAppPurchaseVersions'
+                                    ]
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: [
+                                'id',
+                                'type'
+                            ]
+                        }
+                    }
+                },
+                subscriptionVersion: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: [
+                                        'subscriptionVersions'
+                                    ]
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: [
+                                'id',
+                                'type'
+                            ]
+                        }
+                    }
+                },
+                subscriptionGroupVersion: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: [
+                                        'subscriptionGroupVersions'
+                                    ]
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: [
+                                'id',
+                                'type'
+                            ]
+                        }
+                    }
                 }
             }
         },
@@ -48343,6 +49218,15 @@ export const ReviewSubmissionItemsResponseSchema = {
                     },
                     {
                         $ref: '#/components/schemas/GameCenterLeaderboardVersionV2'
+                    },
+                    {
+                        $ref: '#/components/schemas/InAppPurchaseVersion'
+                    },
+                    {
+                        $ref: '#/components/schemas/SubscriptionGroupVersion'
+                    },
+                    {
+                        $ref: '#/components/schemas/SubscriptionVersion'
                     }
                 ],
                 discriminator: {
@@ -48350,11 +49234,14 @@ export const ReviewSubmissionItemsResponseSchema = {
                     mapping: {
                         appEvents: '#/components/schemas/AppEvent',
                         gameCenterAchievementVersions: '#/components/schemas/GameCenterAchievementVersionV2',
-                        gameCenterChallengeVersions: '#/components/schemas/GameCenterChallengeVersion',
-                        appStoreVersions: '#/components/schemas/AppStoreVersion',
                         appStoreVersionExperiments: '#/components/schemas/AppStoreVersionExperiment',
-                        backgroundAssetVersions: '#/components/schemas/BackgroundAssetVersion',
                         gameCenterActivityVersions: '#/components/schemas/GameCenterActivityVersion',
+                        inAppPurchaseVersions: '#/components/schemas/InAppPurchaseVersion',
+                        subscriptionVersions: '#/components/schemas/SubscriptionVersion',
+                        gameCenterChallengeVersions: '#/components/schemas/GameCenterChallengeVersion',
+                        subscriptionGroupVersions: '#/components/schemas/SubscriptionGroupVersion',
+                        appStoreVersions: '#/components/schemas/AppStoreVersion',
+                        backgroundAssetVersions: '#/components/schemas/BackgroundAssetVersion',
                         gameCenterLeaderboardSetVersions: '#/components/schemas/GameCenterLeaderboardSetVersionV2',
                         appCustomProductPageVersions: '#/components/schemas/AppCustomProductPageVersion',
                         gameCenterLeaderboardVersions: '#/components/schemas/GameCenterLeaderboardVersionV2'
@@ -48415,6 +49302,15 @@ export const ReviewSubmissionItemResponseSchema = {
                     },
                     {
                         $ref: '#/components/schemas/GameCenterLeaderboardVersionV2'
+                    },
+                    {
+                        $ref: '#/components/schemas/InAppPurchaseVersion'
+                    },
+                    {
+                        $ref: '#/components/schemas/SubscriptionGroupVersion'
+                    },
+                    {
+                        $ref: '#/components/schemas/SubscriptionVersion'
                     }
                 ],
                 discriminator: {
@@ -48422,11 +49318,14 @@ export const ReviewSubmissionItemResponseSchema = {
                     mapping: {
                         appEvents: '#/components/schemas/AppEvent',
                         gameCenterAchievementVersions: '#/components/schemas/GameCenterAchievementVersionV2',
-                        gameCenterChallengeVersions: '#/components/schemas/GameCenterChallengeVersion',
-                        appStoreVersions: '#/components/schemas/AppStoreVersion',
                         appStoreVersionExperiments: '#/components/schemas/AppStoreVersionExperiment',
-                        backgroundAssetVersions: '#/components/schemas/BackgroundAssetVersion',
                         gameCenterActivityVersions: '#/components/schemas/GameCenterActivityVersion',
+                        inAppPurchaseVersions: '#/components/schemas/InAppPurchaseVersion',
+                        subscriptionVersions: '#/components/schemas/SubscriptionVersion',
+                        gameCenterChallengeVersions: '#/components/schemas/GameCenterChallengeVersion',
+                        subscriptionGroupVersions: '#/components/schemas/SubscriptionGroupVersion',
+                        appStoreVersions: '#/components/schemas/AppStoreVersion',
+                        backgroundAssetVersions: '#/components/schemas/BackgroundAssetVersion',
                         gameCenterLeaderboardSetVersions: '#/components/schemas/GameCenterLeaderboardSetVersionV2',
                         appCustomProductPageVersions: '#/components/schemas/AppCustomProductPageVersion',
                         gameCenterLeaderboardVersions: '#/components/schemas/GameCenterLeaderboardVersionV2'
@@ -48726,6 +49625,75 @@ export const ReviewSubmissionItemCreateRequestSchema = {
                                             type: 'string',
                                             enum: [
                                                 'gameCenterLeaderboardVersions'
+                                            ]
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: [
+                                        'id',
+                                        'type'
+                                    ]
+                                }
+                            }
+                        },
+                        inAppPurchaseVersion: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: [
+                                                'inAppPurchaseVersions'
+                                            ]
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: [
+                                        'id',
+                                        'type'
+                                    ]
+                                }
+                            }
+                        },
+                        subscriptionVersion: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: [
+                                                'subscriptionVersions'
+                                            ]
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: [
+                                        'id',
+                                        'type'
+                                    ]
+                                }
+                            }
+                        },
+                        subscriptionGroupVersion: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: [
+                                                'subscriptionGroupVersions'
                                             ]
                                         },
                                         id: {
@@ -50719,6 +51687,243 @@ export const SubscriptionGracePeriodUpdateRequestSchema = {
     ]
 } as const;
 
+export const SubscriptionGroupLocalizationV2Schema = {
+    type: 'object',
+    title: 'SubscriptionGroupLocalizationV2',
+    properties: {
+        type: {
+            type: 'string',
+            enum: [
+                'subscriptionGroupLocalizations'
+            ]
+        },
+        id: {
+            type: 'string'
+        },
+        attributes: {
+            type: 'object',
+            properties: {
+                name: {
+                    type: 'string'
+                },
+                customAppName: {
+                    type: 'string'
+                },
+                locale: {
+                    type: 'string'
+                }
+            }
+        },
+        relationships: {
+            type: 'object',
+            properties: {
+                version: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: [
+                                        'subscriptionGroupVersions'
+                                    ]
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: [
+                                'id',
+                                'type'
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: [
+        'id',
+        'type'
+    ]
+} as const;
+
+export const SubscriptionGroupLocalizationsV2ResponseSchema = {
+    type: 'object',
+    title: 'SubscriptionGroupLocalizationsV2Response',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                $ref: '#/components/schemas/SubscriptionGroupLocalizationV2'
+            }
+        },
+        included: {
+            type: 'array',
+            items: {
+                $ref: '#/components/schemas/SubscriptionGroupVersion'
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            $ref: '#/components/schemas/PagingInformation'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
+export const SubscriptionGroupLocalizationV2ResponseSchema = {
+    type: 'object',
+    title: 'SubscriptionGroupLocalizationV2Response',
+    properties: {
+        data: {
+            $ref: '#/components/schemas/SubscriptionGroupLocalizationV2'
+        },
+        included: {
+            type: 'array',
+            items: {
+                $ref: '#/components/schemas/SubscriptionGroupVersion'
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
+export const SubscriptionGroupLocalizationV2CreateRequestSchema = {
+    type: 'object',
+    title: 'SubscriptionGroupLocalizationV2CreateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: [
+                        'subscriptionGroupLocalizations'
+                    ]
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        name: {
+                            type: 'string'
+                        },
+                        customAppName: {
+                            type: 'string',
+                            nullable: true
+                        },
+                        locale: {
+                            type: 'string'
+                        }
+                    },
+                    required: [
+                        'name',
+                        'locale'
+                    ]
+                },
+                relationships: {
+                    type: 'object',
+                    properties: {
+                        version: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: [
+                                                'subscriptionGroupVersions'
+                                            ]
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: [
+                                        'id',
+                                        'type'
+                                    ]
+                                }
+                            },
+                            required: [
+                                'data'
+                            ]
+                        }
+                    },
+                    required: [
+                        'version'
+                    ]
+                }
+            },
+            required: [
+                'relationships',
+                'attributes',
+                'type'
+            ]
+        }
+    },
+    required: [
+        'data'
+    ]
+} as const;
+
+export const SubscriptionGroupLocalizationV2UpdateRequestSchema = {
+    type: 'object',
+    title: 'SubscriptionGroupLocalizationV2UpdateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: [
+                        'subscriptionGroupLocalizations'
+                    ]
+                },
+                id: {
+                    type: 'string'
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        name: {
+                            type: 'string',
+                            nullable: true
+                        },
+                        customAppName: {
+                            type: 'string',
+                            nullable: true
+                        }
+                    }
+                }
+            },
+            required: [
+                'id',
+                'type'
+            ]
+        }
+    },
+    required: [
+        'data'
+    ]
+} as const;
+
 export const SubscriptionGroupLocalizationSchema = {
     type: 'object',
     title: 'SubscriptionGroupLocalization',
@@ -51064,6 +52269,250 @@ export const SubscriptionGroupSubmissionCreateRequestSchema = {
     ]
 } as const;
 
+export const SubscriptionGroupVersionSchema = {
+    type: 'object',
+    title: 'SubscriptionGroupVersion',
+    properties: {
+        type: {
+            type: 'string',
+            enum: [
+                'subscriptionGroupVersions'
+            ]
+        },
+        id: {
+            type: 'string'
+        },
+        attributes: {
+            type: 'object',
+            properties: {
+                version: {
+                    type: 'integer'
+                },
+                state: {
+                    type: 'string',
+                    enum: [
+                        'PREPARE_FOR_SUBMISSION',
+                        'READY_FOR_REVIEW',
+                        'WAITING_FOR_REVIEW',
+                        'IN_REVIEW',
+                        'ACCEPTED',
+                        'APPROVED',
+                        'REPLACED_WITH_NEW_VERSION',
+                        'REJECTED',
+                        'DEVELOPER_REJECTED'
+                    ]
+                }
+            }
+        },
+        relationships: {
+            type: 'object',
+            properties: {
+                subscriptionGroup: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: [
+                                        'subscriptionGroups'
+                                    ]
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: [
+                                'id',
+                                'type'
+                            ]
+                        }
+                    }
+                },
+                localizations: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            $ref: '#/components/schemas/RelationshipLinks'
+                        },
+                        meta: {
+                            $ref: '#/components/schemas/PagingInformation'
+                        },
+                        data: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    type: {
+                                        type: 'string',
+                                        enum: [
+                                            'subscriptionGroupLocalizations'
+                                        ]
+                                    },
+                                    id: {
+                                        type: 'string'
+                                    }
+                                },
+                                required: [
+                                    'id',
+                                    'type'
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: [
+        'id',
+        'type'
+    ]
+} as const;
+
+export const SubscriptionGroupVersionsResponseSchema = {
+    type: 'object',
+    title: 'SubscriptionGroupVersionsResponse',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                $ref: '#/components/schemas/SubscriptionGroupVersion'
+            }
+        },
+        included: {
+            type: 'array',
+            items: {
+                oneOf: [
+                    {
+                        $ref: '#/components/schemas/SubscriptionGroupLocalizationV2'
+                    },
+                    {
+                        $ref: '#/components/schemas/SubscriptionGroup'
+                    }
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        subscriptionGroups: '#/components/schemas/SubscriptionGroup',
+                        subscriptionGroupLocalizations: '#/components/schemas/SubscriptionGroupLocalizationV2'
+                    }
+                }
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            $ref: '#/components/schemas/PagingInformation'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
+export const SubscriptionGroupVersionResponseSchema = {
+    type: 'object',
+    title: 'SubscriptionGroupVersionResponse',
+    properties: {
+        data: {
+            $ref: '#/components/schemas/SubscriptionGroupVersion'
+        },
+        included: {
+            type: 'array',
+            items: {
+                oneOf: [
+                    {
+                        $ref: '#/components/schemas/SubscriptionGroupLocalizationV2'
+                    },
+                    {
+                        $ref: '#/components/schemas/SubscriptionGroup'
+                    }
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        subscriptionGroups: '#/components/schemas/SubscriptionGroup',
+                        subscriptionGroupLocalizations: '#/components/schemas/SubscriptionGroupLocalizationV2'
+                    }
+                }
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
+export const SubscriptionGroupVersionCreateRequestSchema = {
+    type: 'object',
+    title: 'SubscriptionGroupVersionCreateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: [
+                        'subscriptionGroupVersions'
+                    ]
+                },
+                relationships: {
+                    type: 'object',
+                    properties: {
+                        subscriptionGroup: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: [
+                                                'subscriptionGroups'
+                                            ]
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: [
+                                        'id',
+                                        'type'
+                                    ]
+                                }
+                            },
+                            required: [
+                                'data'
+                            ]
+                        }
+                    },
+                    required: [
+                        'subscriptionGroup'
+                    ]
+                }
+            },
+            required: [
+                'relationships',
+                'type'
+            ]
+        }
+    },
+    required: [
+        'data'
+    ]
+} as const;
+
 export const SubscriptionGroupSchema = {
     type: 'object',
     title: 'SubscriptionGroup',
@@ -51151,6 +52600,38 @@ export const SubscriptionGroupSchema = {
                             }
                         }
                     }
+                },
+                versions: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            $ref: '#/components/schemas/RelationshipLinks'
+                        },
+                        meta: {
+                            $ref: '#/components/schemas/PagingInformation'
+                        },
+                        data: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    type: {
+                                        type: 'string',
+                                        enum: [
+                                            'subscriptionGroupVersions'
+                                        ]
+                                    },
+                                    id: {
+                                        type: 'string'
+                                    }
+                                },
+                                required: [
+                                    'id',
+                                    'type'
+                                ]
+                            }
+                        }
+                    }
                 }
             }
         },
@@ -51182,6 +52663,9 @@ export const SubscriptionGroupsResponseSchema = {
                         $ref: '#/components/schemas/SubscriptionGroupLocalization'
                     },
                     {
+                        $ref: '#/components/schemas/SubscriptionGroupVersion'
+                    },
+                    {
                         $ref: '#/components/schemas/Subscription'
                     }
                 ],
@@ -51189,6 +52673,7 @@ export const SubscriptionGroupsResponseSchema = {
                     propertyName: 'type',
                     mapping: {
                         subscriptions: '#/components/schemas/Subscription',
+                        subscriptionGroupVersions: '#/components/schemas/SubscriptionGroupVersion',
                         subscriptionGroupLocalizations: '#/components/schemas/SubscriptionGroupLocalization'
                     }
                 }
@@ -51222,6 +52707,9 @@ export const SubscriptionGroupResponseSchema = {
                         $ref: '#/components/schemas/SubscriptionGroupLocalization'
                     },
                     {
+                        $ref: '#/components/schemas/SubscriptionGroupVersion'
+                    },
+                    {
                         $ref: '#/components/schemas/Subscription'
                     }
                 ],
@@ -51229,6 +52717,7 @@ export const SubscriptionGroupResponseSchema = {
                     propertyName: 'type',
                     mapping: {
                         subscriptions: '#/components/schemas/Subscription',
+                        subscriptionGroupVersions: '#/components/schemas/SubscriptionGroupVersion',
                         subscriptionGroupLocalizations: '#/components/schemas/SubscriptionGroupLocalization'
                     }
                 }
@@ -51591,6 +53080,207 @@ export const SubscriptionImageUpdateRequestSchema = {
                             type: 'string',
                             nullable: true
                         },
+                        uploaded: {
+                            type: 'boolean',
+                            nullable: true
+                        }
+                    }
+                }
+            },
+            required: [
+                'id',
+                'type'
+            ]
+        }
+    },
+    required: [
+        'data'
+    ]
+} as const;
+
+export const SubscriptionImageV2Schema = {
+    type: 'object',
+    title: 'SubscriptionImageV2',
+    properties: {
+        type: {
+            type: 'string',
+            enum: [
+                'subscriptionImages'
+            ]
+        },
+        id: {
+            type: 'string'
+        },
+        attributes: {
+            type: 'object',
+            properties: {
+                fileSize: {
+                    type: 'integer'
+                },
+                fileName: {
+                    type: 'string'
+                },
+                assetToken: {
+                    type: 'string'
+                },
+                imageAsset: {
+                    $ref: '#/components/schemas/ImageAsset'
+                },
+                uploadOperations: {
+                    type: 'array',
+                    items: {
+                        $ref: '#/components/schemas/UploadOperation'
+                    }
+                },
+                assetDeliveryState: {
+                    $ref: '#/components/schemas/AppMediaAssetState'
+                }
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: [
+        'id',
+        'type'
+    ]
+} as const;
+
+export const SubscriptionImagesV2ResponseSchema = {
+    type: 'object',
+    title: 'SubscriptionImagesV2Response',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                $ref: '#/components/schemas/SubscriptionImageV2'
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            $ref: '#/components/schemas/PagingInformation'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
+export const SubscriptionImageV2ResponseSchema = {
+    type: 'object',
+    title: 'SubscriptionImageV2Response',
+    properties: {
+        data: {
+            $ref: '#/components/schemas/SubscriptionImageV2'
+        },
+        links: {
+            $ref: '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
+export const SubscriptionImageV2CreateRequestSchema = {
+    type: 'object',
+    title: 'SubscriptionImageV2CreateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: [
+                        'subscriptionImages'
+                    ]
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        fileSize: {
+                            type: 'integer'
+                        },
+                        fileName: {
+                            type: 'string'
+                        }
+                    },
+                    required: [
+                        'fileName',
+                        'fileSize'
+                    ]
+                },
+                relationships: {
+                    type: 'object',
+                    properties: {
+                        version: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: [
+                                                'subscriptionVersions'
+                                            ]
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: [
+                                        'id',
+                                        'type'
+                                    ]
+                                }
+                            },
+                            required: [
+                                'data'
+                            ]
+                        }
+                    },
+                    required: [
+                        'version'
+                    ]
+                }
+            },
+            required: [
+                'relationships',
+                'attributes',
+                'type'
+            ]
+        }
+    },
+    required: [
+        'data'
+    ]
+} as const;
+
+export const SubscriptionImageV2UpdateRequestSchema = {
+    type: 'object',
+    title: 'SubscriptionImageV2UpdateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: [
+                        'subscriptionImages'
+                    ]
+                },
+                id: {
+                    type: 'string'
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
                         uploaded: {
                             type: 'boolean',
                             nullable: true
@@ -52112,6 +53802,243 @@ export const SubscriptionIntroductoryOfferUpdateRequestSchema = {
                         endDate: {
                             type: 'string',
                             format: 'date',
+                            nullable: true
+                        }
+                    }
+                }
+            },
+            required: [
+                'id',
+                'type'
+            ]
+        }
+    },
+    required: [
+        'data'
+    ]
+} as const;
+
+export const SubscriptionLocalizationV2Schema = {
+    type: 'object',
+    title: 'SubscriptionLocalizationV2',
+    properties: {
+        type: {
+            type: 'string',
+            enum: [
+                'subscriptionLocalizations'
+            ]
+        },
+        id: {
+            type: 'string'
+        },
+        attributes: {
+            type: 'object',
+            properties: {
+                name: {
+                    type: 'string'
+                },
+                locale: {
+                    type: 'string'
+                },
+                description: {
+                    type: 'string'
+                }
+            }
+        },
+        relationships: {
+            type: 'object',
+            properties: {
+                version: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: [
+                                        'subscriptionVersions'
+                                    ]
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: [
+                                'id',
+                                'type'
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: [
+        'id',
+        'type'
+    ]
+} as const;
+
+export const SubscriptionLocalizationsV2ResponseSchema = {
+    type: 'object',
+    title: 'SubscriptionLocalizationsV2Response',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                $ref: '#/components/schemas/SubscriptionLocalizationV2'
+            }
+        },
+        included: {
+            type: 'array',
+            items: {
+                $ref: '#/components/schemas/SubscriptionVersion'
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            $ref: '#/components/schemas/PagingInformation'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
+export const SubscriptionLocalizationV2ResponseSchema = {
+    type: 'object',
+    title: 'SubscriptionLocalizationV2Response',
+    properties: {
+        data: {
+            $ref: '#/components/schemas/SubscriptionLocalizationV2'
+        },
+        included: {
+            type: 'array',
+            items: {
+                $ref: '#/components/schemas/SubscriptionVersion'
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
+export const SubscriptionLocalizationV2CreateRequestSchema = {
+    type: 'object',
+    title: 'SubscriptionLocalizationV2CreateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: [
+                        'subscriptionLocalizations'
+                    ]
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        name: {
+                            type: 'string'
+                        },
+                        locale: {
+                            type: 'string'
+                        },
+                        description: {
+                            type: 'string',
+                            nullable: true
+                        }
+                    },
+                    required: [
+                        'name',
+                        'locale'
+                    ]
+                },
+                relationships: {
+                    type: 'object',
+                    properties: {
+                        version: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: [
+                                                'subscriptionVersions'
+                                            ]
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: [
+                                        'id',
+                                        'type'
+                                    ]
+                                }
+                            },
+                            required: [
+                                'data'
+                            ]
+                        }
+                    },
+                    required: [
+                        'version'
+                    ]
+                }
+            },
+            required: [
+                'relationships',
+                'attributes',
+                'type'
+            ]
+        }
+    },
+    required: [
+        'data'
+    ]
+} as const;
+
+export const SubscriptionLocalizationV2UpdateRequestSchema = {
+    type: 'object',
+    title: 'SubscriptionLocalizationV2UpdateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: [
+                        'subscriptionLocalizations'
+                    ]
+                },
+                id: {
+                    type: 'string'
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        name: {
+                            type: 'string',
+                            nullable: true
+                        },
+                        description: {
+                            type: 'string',
                             nullable: true
                         }
                     }
@@ -53893,6 +55820,14 @@ export const SubscriptionPricePointSchema = {
                             $ref: '#/components/schemas/RelationshipLinks'
                         }
                     }
+                },
+                adjustedEqualizations: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            $ref: '#/components/schemas/RelationshipLinks'
+                        }
+                    }
                 }
             }
         },
@@ -55183,6 +57118,316 @@ export const SubscriptionSubmissionCreateRequestSchema = {
     ]
 } as const;
 
+export const SubscriptionVersionSchema = {
+    type: 'object',
+    title: 'SubscriptionVersion',
+    properties: {
+        type: {
+            type: 'string',
+            enum: [
+                'subscriptionVersions'
+            ]
+        },
+        id: {
+            type: 'string'
+        },
+        attributes: {
+            type: 'object',
+            properties: {
+                version: {
+                    type: 'integer'
+                },
+                state: {
+                    type: 'string',
+                    enum: [
+                        'PREPARE_FOR_SUBMISSION',
+                        'READY_FOR_REVIEW',
+                        'WAITING_FOR_REVIEW',
+                        'IN_REVIEW',
+                        'ACCEPTED',
+                        'APPROVED',
+                        'REPLACED_WITH_NEW_VERSION',
+                        'REJECTED',
+                        'DEVELOPER_REJECTED'
+                    ]
+                }
+            }
+        },
+        relationships: {
+            type: 'object',
+            properties: {
+                subscription: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: [
+                                        'subscriptions'
+                                    ]
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: [
+                                'id',
+                                'type'
+                            ]
+                        }
+                    }
+                },
+                image: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            $ref: '#/components/schemas/RelationshipLinks'
+                        },
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: [
+                                        'subscriptionImages'
+                                    ]
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: [
+                                'id',
+                                'type'
+                            ]
+                        }
+                    }
+                },
+                images: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            $ref: '#/components/schemas/RelationshipLinks'
+                        },
+                        meta: {
+                            $ref: '#/components/schemas/PagingInformation'
+                        },
+                        data: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    type: {
+                                        type: 'string',
+                                        enum: [
+                                            'subscriptionImages'
+                                        ]
+                                    },
+                                    id: {
+                                        type: 'string'
+                                    }
+                                },
+                                required: [
+                                    'id',
+                                    'type'
+                                ]
+                            }
+                        }
+                    }
+                },
+                localizations: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            $ref: '#/components/schemas/RelationshipLinks'
+                        },
+                        meta: {
+                            $ref: '#/components/schemas/PagingInformation'
+                        },
+                        data: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    type: {
+                                        type: 'string',
+                                        enum: [
+                                            'subscriptionLocalizations'
+                                        ]
+                                    },
+                                    id: {
+                                        type: 'string'
+                                    }
+                                },
+                                required: [
+                                    'id',
+                                    'type'
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: [
+        'id',
+        'type'
+    ]
+} as const;
+
+export const SubscriptionVersionsResponseSchema = {
+    type: 'object',
+    title: 'SubscriptionVersionsResponse',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                $ref: '#/components/schemas/SubscriptionVersion'
+            }
+        },
+        included: {
+            type: 'array',
+            items: {
+                oneOf: [
+                    {
+                        $ref: '#/components/schemas/SubscriptionImageV2'
+                    },
+                    {
+                        $ref: '#/components/schemas/SubscriptionLocalizationV2'
+                    },
+                    {
+                        $ref: '#/components/schemas/Subscription'
+                    }
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        subscriptions: '#/components/schemas/Subscription',
+                        subscriptionImages: '#/components/schemas/SubscriptionImageV2',
+                        subscriptionLocalizations: '#/components/schemas/SubscriptionLocalizationV2'
+                    }
+                }
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            $ref: '#/components/schemas/PagingInformation'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
+export const SubscriptionVersionResponseSchema = {
+    type: 'object',
+    title: 'SubscriptionVersionResponse',
+    properties: {
+        data: {
+            $ref: '#/components/schemas/SubscriptionVersion'
+        },
+        included: {
+            type: 'array',
+            items: {
+                oneOf: [
+                    {
+                        $ref: '#/components/schemas/SubscriptionImageV2'
+                    },
+                    {
+                        $ref: '#/components/schemas/SubscriptionLocalizationV2'
+                    },
+                    {
+                        $ref: '#/components/schemas/Subscription'
+                    }
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        subscriptions: '#/components/schemas/Subscription',
+                        subscriptionImages: '#/components/schemas/SubscriptionImageV2',
+                        subscriptionLocalizations: '#/components/schemas/SubscriptionLocalizationV2'
+                    }
+                }
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
+export const SubscriptionVersionCreateRequestSchema = {
+    type: 'object',
+    title: 'SubscriptionVersionCreateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: [
+                        'subscriptionVersions'
+                    ]
+                },
+                relationships: {
+                    type: 'object',
+                    properties: {
+                        subscription: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: [
+                                                'subscriptions'
+                                            ]
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: [
+                                        'id',
+                                        'type'
+                                    ]
+                                }
+                            },
+                            required: [
+                                'data'
+                            ]
+                        }
+                    },
+                    required: [
+                        'subscription'
+                    ]
+                }
+            },
+            required: [
+                'relationships',
+                'type'
+            ]
+        }
+    },
+    required: [
+        'data'
+    ]
+} as const;
+
 export const SubscriptionSchema = {
     type: 'object',
     title: 'Subscription',
@@ -55610,6 +57855,38 @@ export const SubscriptionSchema = {
                             }
                         }
                     }
+                },
+                versions: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            $ref: '#/components/schemas/RelationshipLinks'
+                        },
+                        meta: {
+                            $ref: '#/components/schemas/PagingInformation'
+                        },
+                        data: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    type: {
+                                        type: 'string',
+                                        enum: [
+                                            'subscriptionVersions'
+                                        ]
+                                    },
+                                    id: {
+                                        type: 'string'
+                                    }
+                                },
+                                required: [
+                                    'id',
+                                    'type'
+                                ]
+                            }
+                        }
+                    }
                 }
             }
         },
@@ -55671,6 +57948,9 @@ export const SubscriptionsResponseSchema = {
                         $ref: '#/components/schemas/SubscriptionPromotionalOffer'
                     },
                     {
+                        $ref: '#/components/schemas/SubscriptionVersion'
+                    },
+                    {
                         $ref: '#/components/schemas/WinBackOffer'
                     }
                 ],
@@ -55678,16 +57958,17 @@ export const SubscriptionsResponseSchema = {
                     propertyName: 'type',
                     mapping: {
                         subscriptionAppStoreReviewScreenshots: '#/components/schemas/SubscriptionAppStoreReviewScreenshot',
+                        winBackOffers: '#/components/schemas/WinBackOffer',
+                        subscriptionOfferCodes: '#/components/schemas/SubscriptionOfferCode',
+                        subscriptionPlanAvailabilities: '#/components/schemas/SubscriptionPlanAvailability',
+                        subscriptionVersions: '#/components/schemas/SubscriptionVersion',
                         promotedPurchases: '#/components/schemas/PromotedPurchase',
                         subscriptionGroups: '#/components/schemas/SubscriptionGroup',
                         subscriptionImages: '#/components/schemas/SubscriptionImage',
                         subscriptionPrices: '#/components/schemas/SubscriptionPrice',
-                        winBackOffers: '#/components/schemas/WinBackOffer',
                         subscriptionIntroductoryOffers: '#/components/schemas/SubscriptionIntroductoryOffer',
-                        subscriptionOfferCodes: '#/components/schemas/SubscriptionOfferCode',
                         subscriptionPromotionalOffers: '#/components/schemas/SubscriptionPromotionalOffer',
                         subscriptionLocalizations: '#/components/schemas/SubscriptionLocalization',
-                        subscriptionPlanAvailabilities: '#/components/schemas/SubscriptionPlanAvailability',
                         subscriptionAvailabilities: '#/components/schemas/SubscriptionAvailability'
                     }
                 }
@@ -55751,6 +58032,9 @@ export const SubscriptionResponseSchema = {
                         $ref: '#/components/schemas/SubscriptionPromotionalOffer'
                     },
                     {
+                        $ref: '#/components/schemas/SubscriptionVersion'
+                    },
+                    {
                         $ref: '#/components/schemas/WinBackOffer'
                     }
                 ],
@@ -55758,16 +58042,17 @@ export const SubscriptionResponseSchema = {
                     propertyName: 'type',
                     mapping: {
                         subscriptionAppStoreReviewScreenshots: '#/components/schemas/SubscriptionAppStoreReviewScreenshot',
+                        winBackOffers: '#/components/schemas/WinBackOffer',
+                        subscriptionOfferCodes: '#/components/schemas/SubscriptionOfferCode',
+                        subscriptionPlanAvailabilities: '#/components/schemas/SubscriptionPlanAvailability',
+                        subscriptionVersions: '#/components/schemas/SubscriptionVersion',
                         promotedPurchases: '#/components/schemas/PromotedPurchase',
                         subscriptionGroups: '#/components/schemas/SubscriptionGroup',
                         subscriptionImages: '#/components/schemas/SubscriptionImage',
                         subscriptionPrices: '#/components/schemas/SubscriptionPrice',
-                        winBackOffers: '#/components/schemas/WinBackOffer',
                         subscriptionIntroductoryOffers: '#/components/schemas/SubscriptionIntroductoryOffer',
-                        subscriptionOfferCodes: '#/components/schemas/SubscriptionOfferCode',
                         subscriptionPromotionalOffers: '#/components/schemas/SubscriptionPromotionalOffer',
                         subscriptionLocalizations: '#/components/schemas/SubscriptionLocalization',
-                        subscriptionPlanAvailabilities: '#/components/schemas/SubscriptionPlanAvailability',
                         subscriptionAvailabilities: '#/components/schemas/SubscriptionAvailability'
                     }
                 }
@@ -68131,6 +70416,111 @@ export const InAppPurchasePriceScheduleManualPricesLinkagesResponseSchema = {
     ]
 } as const;
 
+export const InAppPurchaseVersionImageLinkageResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: [
+                        'inAppPurchaseImages'
+                    ]
+                },
+                id: {
+                    type: 'string'
+                }
+            },
+            required: [
+                'id',
+                'type'
+            ]
+        },
+        links: {
+            $ref: '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
+export const InAppPurchaseVersionImagesLinkagesResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: [
+                            'inAppPurchaseImages'
+                        ]
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: [
+                    'id',
+                    'type'
+                ]
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            $ref: '#/components/schemas/PagingInformation'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
+export const InAppPurchaseVersionLocalizationsLinkagesResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: [
+                            'inAppPurchaseLocalizations'
+                        ]
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: [
+                    'id',
+                    'type'
+                ]
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            $ref: '#/components/schemas/PagingInformation'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
 export const InAppPurchaseV2AppStoreReviewScreenshotLinkageResponseSchema = {
     type: 'object',
     properties: {
@@ -68426,6 +70816,43 @@ export const InAppPurchaseV2PromotedPurchaseLinkageResponseSchema = {
         },
         links: {
             $ref: '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
+export const InAppPurchaseV2VersionsLinkagesResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: [
+                            'inAppPurchaseVersions'
+                        ]
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: [
+                    'id',
+                    'type'
+                ]
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            $ref: '#/components/schemas/PagingInformation'
         }
     },
     required: [
@@ -68930,6 +71357,43 @@ export const SubscriptionAvailabilityAvailableTerritoriesLinkagesResponseSchema 
     deprecated: true
 } as const;
 
+export const SubscriptionGroupVersionLocalizationsLinkagesResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: [
+                            'subscriptionGroupLocalizations'
+                        ]
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: [
+                    'id',
+                    'type'
+                ]
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            $ref: '#/components/schemas/PagingInformation'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
 export const SubscriptionGroupSubscriptionGroupLocalizationsLinkagesResponseSchema = {
     type: 'object',
     properties: {
@@ -68979,6 +71443,43 @@ export const SubscriptionGroupSubscriptionsLinkagesResponseSchema = {
                         type: 'string',
                         enum: [
                             'subscriptions'
+                        ]
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: [
+                    'id',
+                    'type'
+                ]
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            $ref: '#/components/schemas/PagingInformation'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
+export const SubscriptionGroupVersionsLinkagesResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: [
+                            'subscriptionGroupVersions'
                         ]
                     },
                     id: {
@@ -69262,6 +71763,111 @@ export const SubscriptionPromotionalOfferPricesLinkagesResponseSchema = {
                         type: 'string',
                         enum: [
                             'subscriptionPromotionalOfferPrices'
+                        ]
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: [
+                    'id',
+                    'type'
+                ]
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            $ref: '#/components/schemas/PagingInformation'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
+export const SubscriptionVersionImageLinkageResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: [
+                        'subscriptionImages'
+                    ]
+                },
+                id: {
+                    type: 'string'
+                }
+            },
+            required: [
+                'id',
+                'type'
+            ]
+        },
+        links: {
+            $ref: '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
+export const SubscriptionVersionImagesLinkagesResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: [
+                            'subscriptionImages'
+                        ]
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: [
+                    'id',
+                    'type'
+                ]
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            $ref: '#/components/schemas/PagingInformation'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
+export const SubscriptionVersionLocalizationsLinkagesResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: [
+                            'subscriptionLocalizations'
                         ]
                     },
                     id: {
@@ -69712,6 +72318,43 @@ export const SubscriptionSubscriptionLocalizationsLinkagesResponseSchema = {
                         type: 'string',
                         enum: [
                             'subscriptionLocalizations'
+                        ]
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: [
+                    'id',
+                    'type'
+                ]
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            $ref: '#/components/schemas/PagingInformation'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
+export const SubscriptionVersionsLinkagesResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: [
+                            'subscriptionVersions'
                         ]
                     },
                     id: {
