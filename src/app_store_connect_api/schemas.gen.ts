@@ -584,9 +584,14 @@ export const AgeRatingDeclarationSchema = {
                     type: 'string',
                     enum: [
                         'NONE',
+                        'ALL',
+                        'TWELVE_PLUS',
                         'FIFTEEN_PLUS',
                         'NINETEEN_PLUS'
                     ]
+                },
+                gracRatingClassificationNumber: {
+                    type: 'string'
                 },
                 developerAgeRatingInfoUrl: {
                     type: 'string',
@@ -861,9 +866,15 @@ export const AgeRatingDeclarationUpdateRequestSchema = {
                             nullable: true,
                             enum: [
                                 'NONE',
+                                'ALL',
+                                'TWELVE_PLUS',
                                 'FIFTEEN_PLUS',
                                 'NINETEEN_PLUS'
                             ]
+                        },
+                        gracRatingClassificationNumber: {
+                            type: 'string',
+                            nullable: true
                         },
                         developerAgeRatingInfoUrl: {
                             type: 'string',
@@ -8807,10 +8818,6 @@ export const AppInfoSchema = {
                         'NINETEEN',
                         'NOT_APPLICABLE'
                     ]
-                },
-                kidsAgeBand: {
-                    deprecated: true,
-                    $ref: '#/components/schemas/KidsAgeBand'
                 }
             }
         },
@@ -15640,6 +15647,14 @@ export const AppSchema = {
                                     'type'
                                 ]
                             }
+                        }
+                    }
+                },
+                performanceOverviews: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            $ref: '#/components/schemas/RelationshipLinks'
                         }
                     }
                 },
@@ -32774,6 +32789,124 @@ export const GameCenterChallengeUpdateRequestSchema = {
     ]
 } as const;
 
+export const GameCenterDetailPlayerSchema = {
+    type: 'object',
+    title: 'GameCenterDetailPlayer',
+    properties: {
+        type: {
+            type: 'string',
+            enum: [
+                'gameCenterDetailPlayers'
+            ]
+        },
+        id: {
+            type: 'string'
+        },
+        attributes: {
+            type: 'object',
+            properties: {
+                nickname: {
+                    type: 'string'
+                },
+                blocked: {
+                    type: 'boolean'
+                },
+                bundleId: {
+                    type: 'string'
+                }
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: [
+        'id',
+        'type'
+    ]
+} as const;
+
+export const GameCenterDetailPlayersResponseSchema = {
+    type: 'object',
+    title: 'GameCenterDetailPlayersResponse',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                $ref: '#/components/schemas/GameCenterDetailPlayer'
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            $ref: '#/components/schemas/PagingInformation'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
+export const GameCenterDetailPlayerResponseSchema = {
+    type: 'object',
+    title: 'GameCenterDetailPlayerResponse',
+    properties: {
+        data: {
+            $ref: '#/components/schemas/GameCenterDetailPlayer'
+        },
+        links: {
+            $ref: '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
+export const GameCenterDetailPlayerUpdateRequestSchema = {
+    type: 'object',
+    title: 'GameCenterDetailPlayerUpdateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: [
+                        'gameCenterDetailPlayers'
+                    ]
+                },
+                id: {
+                    type: 'string'
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        blocked: {
+                            type: 'boolean',
+                            nullable: true
+                        },
+                        bundleId: {
+                            type: 'string',
+                            nullable: true
+                        }
+                    }
+                }
+            },
+            required: [
+                'id',
+                'type'
+            ]
+        }
+    },
+    required: [
+        'data'
+    ]
+} as const;
+
 export const GameCenterDetailSchema = {
     type: 'object',
     title: 'GameCenterDetail',
@@ -33400,6 +33533,14 @@ export const GameCenterDetailSchema = {
                         }
                     },
                     deprecated: true
+                },
+                blockedPlayers: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            $ref: '#/components/schemas/RelationshipLinks'
+                        }
+                    }
                 },
                 challengesMinimumPlatformVersions: {
                     type: 'object',
@@ -39854,6 +39995,14 @@ export const GameCenterLeaderboardV2Schema = {
                         }
                     }
                 },
+                gameCenterScoreModerations: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            $ref: '#/components/schemas/RelationshipLinks'
+                        }
+                    }
+                },
                 activity: {
                     type: 'object',
                     properties: {
@@ -41966,6 +42115,179 @@ export const GameCenterPlayerAchievementSubmissionCreateRequestSchema = {
             },
             required: [
                 'attributes',
+                'type'
+            ]
+        }
+    },
+    required: [
+        'data'
+    ]
+} as const;
+
+export const GameCenterScoreModerationSchema = {
+    type: 'object',
+    title: 'GameCenterScoreModeration',
+    properties: {
+        type: {
+            type: 'string',
+            enum: [
+                'gameCenterScoreModerations'
+            ]
+        },
+        id: {
+            type: 'string'
+        },
+        attributes: {
+            type: 'object',
+            properties: {
+                rank: {
+                    type: 'string',
+                    format: 'number'
+                },
+                score: {
+                    type: 'string',
+                    format: 'number'
+                },
+                submittedDate: {
+                    type: 'string',
+                    format: 'date-time'
+                },
+                blocked: {
+                    type: 'boolean'
+                },
+                preReleased: {
+                    type: 'boolean'
+                },
+                context: {
+                    type: 'string',
+                    format: 'number'
+                },
+                challengeIds: {
+                    type: 'array',
+                    items: {
+                        type: 'string'
+                    }
+                }
+            }
+        },
+        relationships: {
+            type: 'object',
+            properties: {
+                player: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: [
+                                        'gameCenterDetailPlayers'
+                                    ]
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: [
+                                'id',
+                                'type'
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: [
+        'id',
+        'type'
+    ]
+} as const;
+
+export const GameCenterScoreModerationsResponseSchema = {
+    type: 'object',
+    title: 'GameCenterScoreModerationsResponse',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                $ref: '#/components/schemas/GameCenterScoreModeration'
+            }
+        },
+        included: {
+            type: 'array',
+            items: {
+                $ref: '#/components/schemas/GameCenterDetailPlayer'
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            $ref: '#/components/schemas/PagingInformation'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
+export const GameCenterScoreModerationResponseSchema = {
+    type: 'object',
+    title: 'GameCenterScoreModerationResponse',
+    properties: {
+        data: {
+            $ref: '#/components/schemas/GameCenterScoreModeration'
+        },
+        included: {
+            type: 'array',
+            items: {
+                $ref: '#/components/schemas/GameCenterDetailPlayer'
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
+export const GameCenterScoreModerationUpdateRequestSchema = {
+    type: 'object',
+    title: 'GameCenterScoreModerationUpdateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: [
+                        'gameCenterScoreModerations'
+                    ]
+                },
+                id: {
+                    type: 'string'
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        blocked: {
+                            type: 'boolean',
+                            nullable: true
+                        }
+                    }
+                }
+            },
+            required: [
+                'id',
                 'type'
             ]
         }
@@ -47878,6 +48200,37 @@ export const PerfPowerMetricSchema = {
                         'STORAGE'
                     ]
                 },
+                deviceType: {
+                    type: 'string'
+                }
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: [
+        'id',
+        'type'
+    ]
+} as const;
+
+export const PerformanceOverviewSchema = {
+    type: 'object',
+    title: 'PerformanceOverview',
+    properties: {
+        type: {
+            type: 'string',
+            enum: [
+                'performanceOverviews'
+            ]
+        },
+        id: {
+            type: 'string'
+        },
+        attributes: {
+            type: 'object',
+            properties: {
                 deviceType: {
                     type: 'string'
                 }
@@ -57484,6 +57837,24 @@ export const SubscriptionSchema = {
                 },
                 groupLevel: {
                     type: 'integer'
+                },
+                multiSeatStatus: {
+                    type: 'string',
+                    enum: [
+                        'ENABLED',
+                        'DISABLED'
+                    ]
+                },
+                marketSettings: {
+                    type: 'array',
+                    items: {
+                        type: 'string',
+                        enum: [
+                            'APPLE_SCHOOL',
+                            'APP_STORE',
+                            'APPLE_BUSINESS'
+                        ]
+                    }
                 }
             }
         },
@@ -58212,6 +58583,26 @@ export const SubscriptionUpdateRequestSchema = {
                         },
                         groupLevel: {
                             type: 'integer',
+                            nullable: true
+                        },
+                        multiSeatStatus: {
+                            type: 'string',
+                            nullable: true,
+                            enum: [
+                                'ENABLED',
+                                'DISABLED'
+                            ]
+                        },
+                        marketSettings: {
+                            type: 'array',
+                            items: {
+                                type: 'string',
+                                enum: [
+                                    'APPLE_SCHOOL',
+                                    'APP_STORE',
+                                    'APPLE_BUSINESS'
+                                ]
+                            },
                             nullable: true
                         }
                     }
@@ -64217,6 +64608,43 @@ export const AppPerfPowerMetricsLinkagesResponseSchema = {
     ]
 } as const;
 
+export const AppPerformanceOverviewsLinkagesResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: [
+                            'performanceOverviews'
+                        ]
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: [
+                    'id',
+                    'type'
+                ]
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            $ref: '#/components/schemas/PagingInformation'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
 export const PreReleaseVersionsWithoutIncludesResponseSchema = {
     type: 'object',
     title: 'PreReleaseVersionsWithoutIncludesResponse',
@@ -67846,6 +68274,43 @@ export const GameCenterDetailActivityReleasesLinkagesResponseSchema = {
     deprecated: true
 } as const;
 
+export const GameCenterDetailBlockedPlayersLinkagesResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: [
+                            'gameCenterDetailPlayers'
+                        ]
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: [
+                    'id',
+                    'type'
+                ]
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            $ref: '#/components/schemas/PagingInformation'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
 export const GameCenterDetailChallengeReleasesLinkagesResponseSchema = {
     type: 'object',
     properties: {
@@ -69944,6 +70409,43 @@ export const GameCenterLeaderboardV2ChallengeLinkageRequestSchema = {
     },
     required: [
         'data'
+    ]
+} as const;
+
+export const GameCenterLeaderboardV2GameCenterScoreModerationsLinkagesResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: [
+                            'gameCenterScoreModerations'
+                        ]
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: [
+                    'id',
+                    'type'
+                ]
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            $ref: '#/components/schemas/PagingInformation'
+        }
+    },
+    required: [
+        'data',
+        'links'
     ]
 } as const;
 
@@ -75059,6 +75561,52 @@ export const OfferCodeEnvironmentSchema = {
     ]
 } as const;
 
+export const PerformanceSignatureSchema = {
+    type: 'object',
+    properties: {
+        signatureId: {
+            type: 'string'
+        },
+        signature: {
+            type: 'string'
+        },
+        count: {
+            type: 'integer'
+        },
+        weight: {
+            type: 'number'
+        },
+        sourceFile: {
+            type: 'string'
+        },
+        lineNumber: {
+            type: 'integer'
+        },
+        trendInfo: {
+            $ref: '#/components/schemas/DiagnosticInsightDirection'
+        },
+        metricsSummary: {
+            type: 'object',
+            properties: {
+                referenceVersions: {
+                    type: 'array',
+                    items: {
+                        type: 'object',
+                        properties: {
+                            version: {
+                                type: 'string'
+                            },
+                            value: {
+                                type: 'number'
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+} as const;
+
 export const PhasedReleaseStateSchema = {
     type: 'string',
     enum: [
@@ -75829,6 +76377,181 @@ export const xcodeMetricsSchema = {
                     }
                 }
             }
+        }
+    }
+} as const;
+
+export const xcodeOverviewSchema = {
+    type: 'object',
+    properties: {
+        version: {
+            type: 'string'
+        },
+        appMetadata: {
+            type: 'object',
+            properties: {
+                bundleId: {
+                    type: 'string'
+                },
+                appId: {
+                    type: 'string'
+                },
+                latestVersion: {
+                    type: 'string'
+                },
+                platform: {
+                    type: 'string'
+                }
+            }
+        },
+        insights: {
+            type: 'object',
+            properties: {
+                regressions: {
+                    type: 'array',
+                    items: {
+                        $ref: '#/components/schemas/MetricsInsight'
+                    }
+                },
+                trendingUp: {
+                    type: 'array',
+                    items: {
+                        $ref: '#/components/schemas/MetricsInsight'
+                    }
+                }
+            }
+        },
+        categories: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    identifier: {
+                        type: 'string'
+                    },
+                    displayName: {
+                        type: 'string'
+                    },
+                    sections: {
+                        type: 'array',
+                        items: {
+                            type: 'object',
+                            properties: {
+                                identifier: {
+                                    type: 'string'
+                                },
+                                displayName: {
+                                    type: 'string'
+                                },
+                                relevanceScore: {
+                                    type: 'number'
+                                },
+                                sortOrder: {
+                                    type: 'integer'
+                                },
+                                unit: {
+                                    type: 'object',
+                                    properties: {
+                                        identifier: {
+                                            type: 'string'
+                                        },
+                                        displayName: {
+                                            type: 'string'
+                                        }
+                                    }
+                                },
+                                datasets: {
+                                    type: 'array',
+                                    items: {
+                                        type: 'object',
+                                        properties: {
+                                            filterCriteria: {
+                                                type: 'object',
+                                                properties: {
+                                                    percentile: {
+                                                        type: 'string'
+                                                    },
+                                                    device: {
+                                                        type: 'string'
+                                                    },
+                                                    deviceMarketingName: {
+                                                        type: 'string'
+                                                    }
+                                                }
+                                            },
+                                            points: {
+                                                type: 'array',
+                                                items: {
+                                                    type: 'object',
+                                                    properties: {
+                                                        version: {
+                                                            type: 'string'
+                                                        },
+                                                        value: {
+                                                            type: 'number'
+                                                        },
+                                                        errorMargin: {
+                                                            type: 'number'
+                                                        },
+                                                        percentageBreakdown: {
+                                                            type: 'object',
+                                                            properties: {
+                                                                value: {
+                                                                    type: 'number'
+                                                                },
+                                                                subSystemLabel: {
+                                                                    type: 'string'
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            recommendedMetricGoal: {
+                                                type: 'object',
+                                                properties: {
+                                                    value: {
+                                                        type: 'number'
+                                                    },
+                                                    detail: {
+                                                        type: 'string'
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        signatures: {
+            type: 'object',
+            properties: {
+                topHangPoint: {
+                    type: 'array',
+                    items: {
+                        $ref: '#/components/schemas/PerformanceSignature'
+                    }
+                },
+                topLaunchPoint: {
+                    type: 'array',
+                    items: {
+                        $ref: '#/components/schemas/PerformanceSignature'
+                    }
+                },
+                topDiskWritePoint: {
+                    type: 'array',
+                    items: {
+                        $ref: '#/components/schemas/PerformanceSignature'
+                    }
+                }
+            }
+        },
+        telemetryIdentifier: {
+            type: 'string'
         }
     }
 } as const;

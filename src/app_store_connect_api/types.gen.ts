@@ -164,7 +164,8 @@ export type AgeRatingDeclaration = {
          */
         ageRatingOverride?: 'NONE' | 'NINE_PLUS' | 'THIRTEEN_PLUS' | 'SIXTEEN_PLUS' | 'SEVENTEEN_PLUS' | 'UNRATED';
         ageRatingOverrideV2?: 'NONE' | 'NINE_PLUS' | 'THIRTEEN_PLUS' | 'SIXTEEN_PLUS' | 'EIGHTEEN_PLUS' | 'UNRATED';
-        koreaAgeRatingOverride?: 'NONE' | 'FIFTEEN_PLUS' | 'NINETEEN_PLUS';
+        koreaAgeRatingOverride?: 'NONE' | 'ALL' | 'TWELVE_PLUS' | 'FIFTEEN_PLUS' | 'NINETEEN_PLUS';
+        gracRatingClassificationNumber?: string;
         developerAgeRatingInfoUrl?: string;
     };
     links?: ResourceLinks;
@@ -216,7 +217,8 @@ export type AgeRatingDeclarationUpdateRequest = {
              */
             ageRatingOverride?: 'NONE' | 'NINE_PLUS' | 'THIRTEEN_PLUS' | 'SIXTEEN_PLUS' | 'SEVENTEEN_PLUS' | 'UNRATED';
             ageRatingOverrideV2?: 'NONE' | 'NINE_PLUS' | 'THIRTEEN_PLUS' | 'SIXTEEN_PLUS' | 'EIGHTEEN_PLUS' | 'UNRATED';
-            koreaAgeRatingOverride?: 'NONE' | 'FIFTEEN_PLUS' | 'NINETEEN_PLUS';
+            koreaAgeRatingOverride?: 'NONE' | 'ALL' | 'TWELVE_PLUS' | 'FIFTEEN_PLUS' | 'NINETEEN_PLUS';
+            gracRatingClassificationNumber?: string | null;
             developerAgeRatingInfoUrl?: string | null;
         };
     };
@@ -2638,7 +2640,6 @@ export type AppInfo = {
          * @deprecated
          */
         koreaAgeRating?: 'ALL' | 'TWELVE' | 'FIFTEEN' | 'NINETEEN' | 'NOT_APPLICABLE';
-        kidsAgeBand?: KidsAgeBand;
     };
     relationships?: {
         app?: {
@@ -4744,6 +4745,9 @@ export type App = {
                 type: 'gameCenterEnabledVersions';
                 id: string;
             }>;
+        };
+        performanceOverviews?: {
+            links?: RelationshipLinks;
         };
         perfPowerMetrics?: {
             links?: RelationshipLinks;
@@ -10241,6 +10245,51 @@ export type GameCenterChallengeUpdateRequest = {
 };
 
 /**
+ * GameCenterDetailPlayer
+ */
+export type GameCenterDetailPlayer = {
+    type: 'gameCenterDetailPlayers';
+    id: string;
+    attributes?: {
+        nickname?: string;
+        blocked?: boolean;
+        bundleId?: string;
+    };
+    links?: ResourceLinks;
+};
+
+/**
+ * GameCenterDetailPlayersResponse
+ */
+export type GameCenterDetailPlayersResponse = {
+    data: Array<GameCenterDetailPlayer>;
+    links: PagedDocumentLinks;
+    meta?: PagingInformation;
+};
+
+/**
+ * GameCenterDetailPlayerResponse
+ */
+export type GameCenterDetailPlayerResponse = {
+    data: GameCenterDetailPlayer;
+    links: DocumentLinks;
+};
+
+/**
+ * GameCenterDetailPlayerUpdateRequest
+ */
+export type GameCenterDetailPlayerUpdateRequest = {
+    data: {
+        type: 'gameCenterDetailPlayers';
+        id: string;
+        attributes?: {
+            blocked?: boolean | null;
+            bundleId?: string | null;
+        };
+    };
+};
+
+/**
  * GameCenterDetail
  */
 export type GameCenterDetail = {
@@ -10432,6 +10481,9 @@ export type GameCenterDetail = {
                 type: 'gameCenterLeaderboardSetReleases';
                 id: string;
             }>;
+        };
+        blockedPlayers?: {
+            links?: RelationshipLinks;
         };
         challengesMinimumPlatformVersions?: {
             links?: RelationshipLinks;
@@ -12519,6 +12571,9 @@ export type GameCenterLeaderboardV2 = {
                 id: string;
             }>;
         };
+        gameCenterScoreModerations?: {
+            links?: RelationshipLinks;
+        };
         activity?: {
             links?: RelationshipLinks;
             data?: {
@@ -13146,6 +13201,64 @@ export type GameCenterPlayerAchievementSubmissionCreateRequest = {
             submittedDate?: string | null;
             vendorIdentifier: string;
             preReleased?: boolean | null;
+        };
+    };
+};
+
+/**
+ * GameCenterScoreModeration
+ */
+export type GameCenterScoreModeration = {
+    type: 'gameCenterScoreModerations';
+    id: string;
+    attributes?: {
+        rank?: string;
+        score?: string;
+        submittedDate?: string;
+        blocked?: boolean;
+        preReleased?: boolean;
+        context?: string;
+        challengeIds?: Array<string>;
+    };
+    relationships?: {
+        player?: {
+            data?: {
+                type: 'gameCenterDetailPlayers';
+                id: string;
+            };
+        };
+    };
+    links?: ResourceLinks;
+};
+
+/**
+ * GameCenterScoreModerationsResponse
+ */
+export type GameCenterScoreModerationsResponse = {
+    data: Array<GameCenterScoreModeration>;
+    included?: Array<GameCenterDetailPlayer>;
+    links: PagedDocumentLinks;
+    meta?: PagingInformation;
+};
+
+/**
+ * GameCenterScoreModerationResponse
+ */
+export type GameCenterScoreModerationResponse = {
+    data: GameCenterScoreModeration;
+    included?: Array<GameCenterDetailPlayer>;
+    links: DocumentLinks;
+};
+
+/**
+ * GameCenterScoreModerationUpdateRequest
+ */
+export type GameCenterScoreModerationUpdateRequest = {
+    data: {
+        type: 'gameCenterScoreModerations';
+        id: string;
+        attributes?: {
+            blocked?: boolean | null;
         };
     };
 };
@@ -14973,6 +15086,18 @@ export type PerfPowerMetric = {
     attributes?: {
         platform?: 'IOS';
         metricType?: 'DISK' | 'HANG' | 'BATTERY' | 'LAUNCH' | 'MEMORY' | 'ANIMATION' | 'TERMINATION' | 'STORAGE';
+        deviceType?: string;
+    };
+    links?: ResourceLinks;
+};
+
+/**
+ * PerformanceOverview
+ */
+export type PerformanceOverview = {
+    type: 'performanceOverviews';
+    id: string;
+    attributes?: {
         deviceType?: string;
     };
     links?: ResourceLinks;
@@ -17945,6 +18070,8 @@ export type Subscription = {
         subscriptionPeriod?: 'ONE_WEEK' | 'ONE_MONTH' | 'TWO_MONTHS' | 'THREE_MONTHS' | 'SIX_MONTHS' | 'ONE_YEAR';
         reviewNote?: string;
         groupLevel?: number;
+        multiSeatStatus?: 'ENABLED' | 'DISABLED';
+        marketSettings?: Array<'APPLE_SCHOOL' | 'APP_STORE' | 'APPLE_BUSINESS'>;
     };
     relationships?: {
         subscriptionLocalizations?: {
@@ -18165,6 +18292,8 @@ export type SubscriptionUpdateRequest = {
             subscriptionPeriod?: 'ONE_WEEK' | 'ONE_MONTH' | 'TWO_MONTHS' | 'THREE_MONTHS' | 'SIX_MONTHS' | 'ONE_YEAR';
             reviewNote?: string | null;
             groupLevel?: number | null;
+            multiSeatStatus?: 'ENABLED' | 'DISABLED';
+            marketSettings?: Array<'APPLE_SCHOOL' | 'APP_STORE' | 'APPLE_BUSINESS'> | null;
         };
         relationships?: {
             introductoryOffers?: {
@@ -19826,6 +19955,15 @@ export type AppPerfPowerMetricsLinkagesResponse = {
     meta?: PagingInformation;
 };
 
+export type AppPerformanceOverviewsLinkagesResponse = {
+    data: Array<{
+        type: 'performanceOverviews';
+        id: string;
+    }>;
+    links: PagedDocumentLinks;
+    meta?: PagingInformation;
+};
+
 /**
  * PreReleaseVersionsWithoutIncludesResponse
  */
@@ -20795,6 +20933,15 @@ export type GameCenterDetailActivityReleasesLinkagesResponse = {
     meta?: PagingInformation;
 };
 
+export type GameCenterDetailBlockedPlayersLinkagesResponse = {
+    data: Array<{
+        type: 'gameCenterDetailPlayers';
+        id: string;
+    }>;
+    links: PagedDocumentLinks;
+    meta?: PagingInformation;
+};
+
 /**
  * @deprecated
  */
@@ -21397,6 +21544,15 @@ export type GameCenterLeaderboardV2ChallengeLinkageRequest = {
         type: 'gameCenterChallenges';
         id: string;
     };
+};
+
+export type GameCenterLeaderboardV2GameCenterScoreModerationsLinkagesResponse = {
+    data: Array<{
+        type: 'gameCenterScoreModerations';
+        id: string;
+    }>;
+    links: PagedDocumentLinks;
+    meta?: PagingInformation;
 };
 
 export type GameCenterLeaderboardV2VersionsLinkagesResponse = {
@@ -23095,6 +23251,22 @@ export enum OfferCodeEnvironment {
     SANDBOX = 'SANDBOX'
 }
 
+export type PerformanceSignature = {
+    signatureId?: string;
+    signature?: string;
+    count?: number;
+    weight?: number;
+    sourceFile?: string;
+    lineNumber?: number;
+    trendInfo?: DiagnosticInsightDirection;
+    metricsSummary?: {
+        referenceVersions?: Array<{
+            version?: string;
+            value?: number;
+        }>;
+    };
+};
+
 export enum PhasedReleaseState {
     INACTIVE = 'INACTIVE',
     ACTIVE = 'ACTIVE',
@@ -23588,6 +23760,60 @@ export type XcodeMetrics = {
             }>;
         }>;
     }>;
+};
+
+export type XcodeOverview = {
+    version?: string;
+    appMetadata?: {
+        bundleId?: string;
+        appId?: string;
+        latestVersion?: string;
+        platform?: string;
+    };
+    insights?: {
+        regressions?: Array<MetricsInsight>;
+        trendingUp?: Array<MetricsInsight>;
+    };
+    categories?: Array<{
+        identifier?: string;
+        displayName?: string;
+        sections?: Array<{
+            identifier?: string;
+            displayName?: string;
+            relevanceScore?: number;
+            sortOrder?: number;
+            unit?: {
+                identifier?: string;
+                displayName?: string;
+            };
+            datasets?: Array<{
+                filterCriteria?: {
+                    percentile?: string;
+                    device?: string;
+                    deviceMarketingName?: string;
+                };
+                points?: Array<{
+                    version?: string;
+                    value?: number;
+                    errorMargin?: number;
+                    percentageBreakdown?: {
+                        value?: number;
+                        subSystemLabel?: string;
+                    };
+                }>;
+                recommendedMetricGoal?: {
+                    value?: number;
+                    detail?: string;
+                };
+            }>;
+        }>;
+    }>;
+    signatures?: {
+        topHangPoint?: Array<PerformanceSignature>;
+        topLaunchPoint?: Array<PerformanceSignature>;
+        topDiskWritePoint?: Array<PerformanceSignature>;
+    };
+    telemetryIdentifier?: string;
 };
 
 export type AccessibilityDeclarationsCreateInstanceData = {
@@ -26530,7 +26756,7 @@ export type AppClipsGetInstanceData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type appClipDefaultExperiences
          */
@@ -27093,7 +27319,7 @@ export type AppCustomProductPagesGetInstanceData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type appCustomProductPageVersions
          */
@@ -27384,7 +27610,7 @@ export type AppEncryptionDeclarationsGetCollectionData = {
          *
          * @deprecated
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type builds
          *
@@ -27507,7 +27733,7 @@ export type AppEncryptionDeclarationsGetInstanceData = {
          *
          * @deprecated
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type builds
          *
@@ -28534,7 +28760,7 @@ export type AppInfoLocalizationsGetInstanceData = {
         /**
          * the fields to include for returned resources of type appInfos
          */
-        'fields[appInfos]'?: Array<'appStoreState' | 'state' | 'appStoreAgeRating' | 'australiaAgeRating' | 'brazilAgeRating' | 'brazilAgeRatingV2' | 'franceAgeRating' | 'koreaAgeRating' | 'kidsAgeBand' | 'app' | 'ageRatingDeclaration' | 'appInfoLocalizations' | 'primaryCategory' | 'primarySubcategoryOne' | 'primarySubcategoryTwo' | 'secondaryCategory' | 'secondarySubcategoryOne' | 'secondarySubcategoryTwo' | 'territoryAgeRatings'>;
+        'fields[appInfos]'?: Array<'appStoreState' | 'state' | 'appStoreAgeRating' | 'australiaAgeRating' | 'brazilAgeRating' | 'brazilAgeRatingV2' | 'franceAgeRating' | 'koreaAgeRating' | 'app' | 'ageRatingDeclaration' | 'appInfoLocalizations' | 'primaryCategory' | 'primarySubcategoryOne' | 'primarySubcategoryTwo' | 'secondaryCategory' | 'secondarySubcategoryOne' | 'secondarySubcategoryTwo' | 'territoryAgeRatings'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -28646,15 +28872,15 @@ export type AppInfosGetInstanceData = {
         /**
          * the fields to include for returned resources of type appInfos
          */
-        'fields[appInfos]'?: Array<'appStoreState' | 'state' | 'appStoreAgeRating' | 'australiaAgeRating' | 'brazilAgeRating' | 'brazilAgeRatingV2' | 'franceAgeRating' | 'koreaAgeRating' | 'kidsAgeBand' | 'app' | 'ageRatingDeclaration' | 'appInfoLocalizations' | 'primaryCategory' | 'primarySubcategoryOne' | 'primarySubcategoryTwo' | 'secondaryCategory' | 'secondarySubcategoryOne' | 'secondarySubcategoryTwo' | 'territoryAgeRatings'>;
+        'fields[appInfos]'?: Array<'appStoreState' | 'state' | 'appStoreAgeRating' | 'australiaAgeRating' | 'brazilAgeRating' | 'brazilAgeRatingV2' | 'franceAgeRating' | 'koreaAgeRating' | 'app' | 'ageRatingDeclaration' | 'appInfoLocalizations' | 'primaryCategory' | 'primarySubcategoryOne' | 'primarySubcategoryTwo' | 'secondaryCategory' | 'secondarySubcategoryOne' | 'secondarySubcategoryTwo' | 'territoryAgeRatings'>;
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type ageRatingDeclarations
          */
-        'fields[ageRatingDeclarations]'?: Array<'advertising' | 'alcoholTobaccoOrDrugUseOrReferences' | 'contests' | 'gambling' | 'gamblingSimulated' | 'gunsOrOtherWeapons' | 'healthOrWellnessTopics' | 'kidsAgeBand' | 'lootBox' | 'medicalOrTreatmentInformation' | 'messagingAndChat' | 'parentalControls' | 'profanityOrCrudeHumor' | 'ageAssurance' | 'sexualContentGraphicAndNudity' | 'sexualContentOrNudity' | 'socialMedia' | 'socialMediaAgeRestricted' | 'horrorOrFearThemes' | 'matureOrSuggestiveThemes' | 'unrestrictedWebAccess' | 'userGeneratedContent' | 'violenceCartoonOrFantasy' | 'violenceRealisticProlongedGraphicOrSadistic' | 'violenceRealistic' | 'ageRatingOverride' | 'ageRatingOverrideV2' | 'koreaAgeRatingOverride' | 'developerAgeRatingInfoUrl'>;
+        'fields[ageRatingDeclarations]'?: Array<'advertising' | 'alcoholTobaccoOrDrugUseOrReferences' | 'contests' | 'gambling' | 'gamblingSimulated' | 'gunsOrOtherWeapons' | 'healthOrWellnessTopics' | 'kidsAgeBand' | 'lootBox' | 'medicalOrTreatmentInformation' | 'messagingAndChat' | 'parentalControls' | 'profanityOrCrudeHumor' | 'ageAssurance' | 'sexualContentGraphicAndNudity' | 'sexualContentOrNudity' | 'socialMedia' | 'socialMediaAgeRestricted' | 'horrorOrFearThemes' | 'matureOrSuggestiveThemes' | 'unrestrictedWebAccess' | 'userGeneratedContent' | 'violenceCartoonOrFantasy' | 'violenceRealisticProlongedGraphicOrSadistic' | 'violenceRealistic' | 'ageRatingOverride' | 'ageRatingOverrideV2' | 'koreaAgeRatingOverride' | 'gracRatingClassificationNumber' | 'developerAgeRatingInfoUrl'>;
         /**
          * the fields to include for returned resources of type appInfoLocalizations
          */
@@ -29161,7 +29387,7 @@ export type AppPricePointsV3GetInstanceData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type territories
          */
@@ -29272,7 +29498,7 @@ export type AppPriceSchedulesGetInstanceData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type territories
          */
@@ -30589,7 +30815,7 @@ export type AppStoreVersionExperimentsV2GetInstanceData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type appStoreVersions
          */
@@ -31556,7 +31782,7 @@ export type AppStoreVersionsGetInstanceData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type appStoreVersionLocalizations
          */
@@ -31828,7 +32054,7 @@ export type AppsGetCollectionData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type appEncryptionDeclarations
          */
@@ -31872,7 +32098,7 @@ export type AppsGetCollectionData = {
         /**
          * the fields to include for returned resources of type appInfos
          */
-        'fields[appInfos]'?: Array<'appStoreState' | 'state' | 'appStoreAgeRating' | 'australiaAgeRating' | 'brazilAgeRating' | 'brazilAgeRatingV2' | 'franceAgeRating' | 'koreaAgeRating' | 'kidsAgeBand' | 'app' | 'ageRatingDeclaration' | 'appInfoLocalizations' | 'primaryCategory' | 'primarySubcategoryOne' | 'primarySubcategoryTwo' | 'secondaryCategory' | 'secondarySubcategoryOne' | 'secondarySubcategoryTwo' | 'territoryAgeRatings'>;
+        'fields[appInfos]'?: Array<'appStoreState' | 'state' | 'appStoreAgeRating' | 'australiaAgeRating' | 'brazilAgeRating' | 'brazilAgeRatingV2' | 'franceAgeRating' | 'koreaAgeRating' | 'app' | 'ageRatingDeclaration' | 'appInfoLocalizations' | 'primaryCategory' | 'primarySubcategoryOne' | 'primarySubcategoryTwo' | 'secondaryCategory' | 'secondarySubcategoryOne' | 'secondarySubcategoryTwo' | 'territoryAgeRatings'>;
         /**
          * the fields to include for returned resources of type appClips
          */
@@ -31918,7 +32144,7 @@ export type AppsGetCollectionData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type appStoreVersionExperiments
          */
@@ -32057,7 +32283,7 @@ export type AppsGetInstanceData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type appEncryptionDeclarations
          */
@@ -32101,7 +32327,7 @@ export type AppsGetInstanceData = {
         /**
          * the fields to include for returned resources of type appInfos
          */
-        'fields[appInfos]'?: Array<'appStoreState' | 'state' | 'appStoreAgeRating' | 'australiaAgeRating' | 'brazilAgeRating' | 'brazilAgeRatingV2' | 'franceAgeRating' | 'koreaAgeRating' | 'kidsAgeBand' | 'app' | 'ageRatingDeclaration' | 'appInfoLocalizations' | 'primaryCategory' | 'primarySubcategoryOne' | 'primarySubcategoryTwo' | 'secondaryCategory' | 'secondarySubcategoryOne' | 'secondarySubcategoryTwo' | 'territoryAgeRatings'>;
+        'fields[appInfos]'?: Array<'appStoreState' | 'state' | 'appStoreAgeRating' | 'australiaAgeRating' | 'brazilAgeRating' | 'brazilAgeRatingV2' | 'franceAgeRating' | 'koreaAgeRating' | 'app' | 'ageRatingDeclaration' | 'appInfoLocalizations' | 'primaryCategory' | 'primarySubcategoryOne' | 'primarySubcategoryTwo' | 'secondaryCategory' | 'secondarySubcategoryOne' | 'secondarySubcategoryTwo' | 'territoryAgeRatings'>;
         /**
          * the fields to include for returned resources of type appClips
          */
@@ -32147,7 +32373,7 @@ export type AppsGetInstanceData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type appStoreVersionExperiments
          */
@@ -32851,7 +33077,7 @@ export type BackgroundAssetsGetInstanceData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type backgroundAssetVersions
          */
@@ -33339,7 +33565,7 @@ export type BetaAppLocalizationsGetCollectionData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * maximum resources per page
          */
@@ -33492,7 +33718,7 @@ export type BetaAppLocalizationsGetInstanceData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -33607,7 +33833,7 @@ export type BetaAppReviewDetailsGetCollectionData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * maximum resources per page
          */
@@ -33666,7 +33892,7 @@ export type BetaAppReviewDetailsGetInstanceData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -34523,7 +34749,7 @@ export type BetaGroupsGetCollectionData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type builds
          */
@@ -34696,7 +34922,7 @@ export type BetaGroupsGetInstanceData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type builds
          */
@@ -34831,7 +35057,7 @@ export type BetaLicenseAgreementsGetCollectionData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * maximum resources per page
          */
@@ -34890,7 +35116,7 @@ export type BetaLicenseAgreementsGetInstanceData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -35282,7 +35508,7 @@ export type BetaTestersGetCollectionData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type betaGroups
          */
@@ -35459,7 +35685,7 @@ export type BetaTestersGetInstanceData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type betaGroups
          */
@@ -36156,7 +36382,7 @@ export type BuildsGetCollectionData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type buildBetaDetails
          */
@@ -36279,7 +36505,7 @@ export type BuildsGetInstanceData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type buildBetaDetails
          */
@@ -36613,7 +36839,7 @@ export type BundleIdsGetCollectionData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * maximum resources per page
          */
@@ -36782,7 +37008,7 @@ export type BundleIdsGetInstanceData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -37602,7 +37828,7 @@ export type CiProductsGetCollectionData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type bundleIds
          */
@@ -37719,7 +37945,7 @@ export type CiProductsGetInstanceData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type bundleIds
          */
@@ -38768,7 +38994,7 @@ export type EndUserLicenseAgreementsGetInstanceData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type territories
          */
@@ -39894,7 +40120,7 @@ export type GameCenterAchievementReleasesGetInstanceData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterAchievements
          *
@@ -40168,7 +40394,7 @@ export type GameCenterAchievementsV2GetInstanceData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
@@ -40394,7 +40620,7 @@ export type GameCenterAchievementsGetInstanceData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
@@ -40636,7 +40862,7 @@ export type GameCenterActivitiesGetInstanceData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
@@ -40648,7 +40874,7 @@ export type GameCenterActivitiesGetInstanceData = {
         /**
          * the fields to include for returned resources of type gameCenterLeaderboards
          */
-        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge' | 'versions'>;
+        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge' | 'gameCenterScoreModerations' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterActivityVersions
          */
@@ -42511,7 +42737,7 @@ export type GameCenterChallengesGetInstanceData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
@@ -42523,7 +42749,7 @@ export type GameCenterChallengesGetInstanceData = {
         /**
          * the fields to include for returned resources of type gameCenterLeaderboards
          */
-        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge' | 'versions'>;
+        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge' | 'gameCenterScoreModerations' | 'versions'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -42627,6 +42853,63 @@ export type GameCenterChallengesUpdateInstanceResponses = {
 
 export type GameCenterChallengesUpdateInstanceResponse = GameCenterChallengesUpdateInstanceResponses[keyof GameCenterChallengesUpdateInstanceResponses];
 
+export type GameCenterDetailPlayersUpdateInstanceData = {
+    /**
+     * GameCenterDetailPlayer representation
+     */
+    body: GameCenterDetailPlayerUpdateRequest;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v1/gameCenterDetailPlayers/{id}';
+};
+
+export type GameCenterDetailPlayersUpdateInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterDetailPlayersUpdateInstanceError = GameCenterDetailPlayersUpdateInstanceErrors[keyof GameCenterDetailPlayersUpdateInstanceErrors];
+
+export type GameCenterDetailPlayersUpdateInstanceResponses = {
+    /**
+     * Single GameCenterDetailPlayer
+     */
+    200: GameCenterDetailPlayerResponse;
+};
+
+export type GameCenterDetailPlayersUpdateInstanceResponse = GameCenterDetailPlayersUpdateInstanceResponses[keyof GameCenterDetailPlayersUpdateInstanceResponses];
+
 export type GameCenterDetailsCreateInstanceData = {
     /**
      * GameCenterDetail representation
@@ -42687,11 +42970,11 @@ export type GameCenterDetailsGetInstanceData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type gameCenterAppVersions
          */
@@ -42703,7 +42986,7 @@ export type GameCenterDetailsGetInstanceData = {
         /**
          * the fields to include for returned resources of type gameCenterLeaderboards
          */
-        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge' | 'versions'>;
+        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge' | 'gameCenterScoreModerations' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardSets
          */
@@ -42944,11 +43227,11 @@ export type GameCenterGroupsGetCollectionData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboards
          */
-        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge' | 'versions'>;
+        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge' | 'gameCenterScoreModerations' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardSets
          */
@@ -43159,11 +43442,11 @@ export type GameCenterGroupsGetInstanceData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboards
          */
-        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge' | 'versions'>;
+        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge' | 'gameCenterScoreModerations' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardSets
          */
@@ -44333,7 +44616,7 @@ export type GameCenterLeaderboardReleasesGetInstanceData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboards
          *
@@ -45571,7 +45854,7 @@ export type GameCenterLeaderboardSetReleasesGetInstanceData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardSets
          *
@@ -45845,7 +46128,7 @@ export type GameCenterLeaderboardSetsV2GetInstanceData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
@@ -45853,7 +46136,7 @@ export type GameCenterLeaderboardSetsV2GetInstanceData = {
         /**
          * the fields to include for returned resources of type gameCenterLeaderboards
          */
-        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'gameCenterLeaderboardSets' | 'activity' | 'challenge' | 'versions'>;
+        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'gameCenterLeaderboardSets' | 'gameCenterScoreModerations' | 'activity' | 'challenge' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardSetVersions
          */
@@ -46075,7 +46358,7 @@ export type GameCenterLeaderboardSetsGetInstanceData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
@@ -46279,7 +46562,7 @@ export type GameCenterLeaderboardVersionsV2GetInstanceData = {
         /**
          * the fields to include for returned resources of type gameCenterLeaderboards
          */
-        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'gameCenterLeaderboardSets' | 'activity' | 'challenge' | 'versions'>;
+        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'gameCenterLeaderboardSets' | 'gameCenterScoreModerations' | 'activity' | 'challenge' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardLocalizations
          */
@@ -46440,7 +46723,7 @@ export type GameCenterLeaderboardsGetInstanceData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
@@ -46694,11 +46977,11 @@ export type GameCenterLeaderboardsV2GetInstanceData = {
         /**
          * the fields to include for returned resources of type gameCenterLeaderboards
          */
-        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'gameCenterLeaderboardSets' | 'activity' | 'challenge' | 'versions'>;
+        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'gameCenterLeaderboardSets' | 'gameCenterScoreModerations' | 'activity' | 'challenge' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
@@ -47791,6 +48074,63 @@ export type GameCenterPlayerAchievementSubmissionsCreateInstanceResponses = {
 };
 
 export type GameCenterPlayerAchievementSubmissionsCreateInstanceResponse = GameCenterPlayerAchievementSubmissionsCreateInstanceResponses[keyof GameCenterPlayerAchievementSubmissionsCreateInstanceResponses];
+
+export type GameCenterScoreModerationsUpdateInstanceData = {
+    /**
+     * GameCenterScoreModeration representation
+     */
+    body: GameCenterScoreModerationUpdateRequest;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/v1/gameCenterScoreModerations/{id}';
+};
+
+export type GameCenterScoreModerationsUpdateInstanceErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Request entity error(s)
+     */
+    409: ErrorResponse;
+    /**
+     * Unprocessable request entity error(s)
+     */
+    422: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterScoreModerationsUpdateInstanceError = GameCenterScoreModerationsUpdateInstanceErrors[keyof GameCenterScoreModerationsUpdateInstanceErrors];
+
+export type GameCenterScoreModerationsUpdateInstanceResponses = {
+    /**
+     * Single GameCenterScoreModeration
+     */
+    200: GameCenterScoreModerationResponse;
+};
+
+export type GameCenterScoreModerationsUpdateInstanceResponse = GameCenterScoreModerationsUpdateInstanceResponses[keyof GameCenterScoreModerationsUpdateInstanceResponses];
 
 export type InAppPurchaseAppStoreReviewScreenshotsCreateInstanceData = {
     /**
@@ -49822,7 +50162,7 @@ export type InAppPurchasesGetInstanceData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -50798,7 +51138,7 @@ export type NominationsGetCollectionData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type actors
          */
@@ -50975,7 +51315,7 @@ export type NominationsGetInstanceData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type actors
          */
@@ -51438,7 +51778,7 @@ export type PreReleaseVersionsGetCollectionData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * maximum resources per page
          */
@@ -51505,7 +51845,7 @@ export type PreReleaseVersionsGetInstanceData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -51925,7 +52265,7 @@ export type PromotedPurchasesGetInstanceData = {
         /**
          * the fields to include for returned resources of type subscriptions
          */
-        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities' | 'versions'>;
+        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'multiSeatStatus' | 'marketSettings' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities' | 'versions'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -52199,7 +52539,7 @@ export type ReviewSubmissionsGetCollectionData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type reviewSubmissionItems
          */
@@ -52322,7 +52662,7 @@ export type ReviewSubmissionsGetInstanceData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type reviewSubmissionItems
          */
@@ -53311,7 +53651,7 @@ export type SubscriptionAppStoreReviewScreenshotsGetInstanceData = {
         /**
          * the fields to include for returned resources of type subscriptions
          */
-        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities' | 'versions'>;
+        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'multiSeatStatus' | 'marketSettings' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities' | 'versions'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -54323,7 +54663,7 @@ export type SubscriptionGroupsGetInstanceData = {
         /**
          * the fields to include for returned resources of type subscriptions
          */
-        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities' | 'versions'>;
+        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'multiSeatStatus' | 'marketSettings' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities' | 'versions'>;
         /**
          * the fields to include for returned resources of type subscriptionGroupLocalizations
          */
@@ -54553,7 +54893,7 @@ export type SubscriptionImagesGetInstanceData = {
         /**
          * the fields to include for returned resources of type subscriptions
          */
-        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities' | 'versions'>;
+        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'multiSeatStatus' | 'marketSettings' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities' | 'versions'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -55326,7 +55666,7 @@ export type SubscriptionLocalizationsGetInstanceData = {
         /**
          * the fields to include for returned resources of type subscriptions
          */
-        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities' | 'versions'>;
+        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'multiSeatStatus' | 'marketSettings' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities' | 'versions'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -55818,7 +56158,7 @@ export type SubscriptionOfferCodesGetInstanceData = {
         /**
          * the fields to include for returned resources of type subscriptions
          */
-        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities' | 'versions'>;
+        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'multiSeatStatus' | 'marketSettings' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities' | 'versions'>;
         /**
          * the fields to include for returned resources of type subscriptionOfferCodeOneTimeUseCodes
          */
@@ -56373,7 +56713,7 @@ export type SubscriptionPromotionalOffersGetInstanceData = {
         /**
          * the fields to include for returned resources of type subscriptions
          */
-        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities' | 'versions'>;
+        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'multiSeatStatus' | 'marketSettings' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities' | 'versions'>;
         /**
          * the fields to include for returned resources of type subscriptionPromotionalOfferPrices
          */
@@ -56593,7 +56933,7 @@ export type SubscriptionVersionsGetInstanceData = {
         /**
          * the fields to include for returned resources of type subscriptions
          */
-        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities' | 'versions'>;
+        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'multiSeatStatus' | 'marketSettings' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities' | 'versions'>;
         /**
          * the fields to include for returned resources of type subscriptionImages
          */
@@ -56758,7 +57098,7 @@ export type SubscriptionsGetInstanceData = {
         /**
          * the fields to include for returned resources of type subscriptions
          */
-        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities' | 'versions'>;
+        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'multiSeatStatus' | 'marketSettings' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities' | 'versions'>;
         /**
          * the fields to include for returned resources of type subscriptionLocalizations
          */
@@ -57078,7 +57418,7 @@ export type UserInvitationsGetCollectionData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * maximum resources per page
          */
@@ -57235,7 +57575,7 @@ export type UserInvitationsGetInstanceData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -57309,7 +57649,7 @@ export type UsersGetCollectionData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * maximum resources per page
          */
@@ -57418,7 +57758,7 @@ export type UsersGetInstanceData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -57728,7 +58068,7 @@ export type WebhooksGetInstanceData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -59490,7 +59830,7 @@ export type AppClipDefaultExperiencesReleaseWithAppStoreVersionGetToOneRelatedDa
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type appStoreVersionLocalizations
          */
@@ -60697,7 +61037,7 @@ export type AppEncryptionDeclarationsAppGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
     };
     url: '/v1/appEncryptionDeclarations/{id}/app';
 };
@@ -61306,7 +61646,7 @@ export type AppInfosAgeRatingDeclarationGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type ageRatingDeclarations
          */
-        'fields[ageRatingDeclarations]'?: Array<'advertising' | 'alcoholTobaccoOrDrugUseOrReferences' | 'contests' | 'gambling' | 'gamblingSimulated' | 'gunsOrOtherWeapons' | 'healthOrWellnessTopics' | 'kidsAgeBand' | 'lootBox' | 'medicalOrTreatmentInformation' | 'messagingAndChat' | 'parentalControls' | 'profanityOrCrudeHumor' | 'ageAssurance' | 'sexualContentGraphicAndNudity' | 'sexualContentOrNudity' | 'socialMedia' | 'socialMediaAgeRestricted' | 'horrorOrFearThemes' | 'matureOrSuggestiveThemes' | 'unrestrictedWebAccess' | 'userGeneratedContent' | 'violenceCartoonOrFantasy' | 'violenceRealisticProlongedGraphicOrSadistic' | 'violenceRealistic' | 'ageRatingOverride' | 'ageRatingOverrideV2' | 'koreaAgeRatingOverride' | 'developerAgeRatingInfoUrl'>;
+        'fields[ageRatingDeclarations]'?: Array<'advertising' | 'alcoholTobaccoOrDrugUseOrReferences' | 'contests' | 'gambling' | 'gamblingSimulated' | 'gunsOrOtherWeapons' | 'healthOrWellnessTopics' | 'kidsAgeBand' | 'lootBox' | 'medicalOrTreatmentInformation' | 'messagingAndChat' | 'parentalControls' | 'profanityOrCrudeHumor' | 'ageAssurance' | 'sexualContentGraphicAndNudity' | 'sexualContentOrNudity' | 'socialMedia' | 'socialMediaAgeRestricted' | 'horrorOrFearThemes' | 'matureOrSuggestiveThemes' | 'unrestrictedWebAccess' | 'userGeneratedContent' | 'violenceCartoonOrFantasy' | 'violenceRealisticProlongedGraphicOrSadistic' | 'violenceRealistic' | 'ageRatingOverride' | 'ageRatingOverrideV2' | 'koreaAgeRatingOverride' | 'gracRatingClassificationNumber' | 'developerAgeRatingInfoUrl'>;
     };
     url: '/v1/appInfos/{id}/ageRatingDeclaration';
 };
@@ -61416,7 +61756,7 @@ export type AppInfosAppInfoLocalizationsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type appInfos
          */
-        'fields[appInfos]'?: Array<'appStoreState' | 'state' | 'appStoreAgeRating' | 'australiaAgeRating' | 'brazilAgeRating' | 'brazilAgeRatingV2' | 'franceAgeRating' | 'koreaAgeRating' | 'kidsAgeBand' | 'app' | 'ageRatingDeclaration' | 'appInfoLocalizations' | 'primaryCategory' | 'primarySubcategoryOne' | 'primarySubcategoryTwo' | 'secondaryCategory' | 'secondarySubcategoryOne' | 'secondarySubcategoryTwo' | 'territoryAgeRatings'>;
+        'fields[appInfos]'?: Array<'appStoreState' | 'state' | 'appStoreAgeRating' | 'australiaAgeRating' | 'brazilAgeRating' | 'brazilAgeRatingV2' | 'franceAgeRating' | 'koreaAgeRating' | 'app' | 'ageRatingDeclaration' | 'appInfoLocalizations' | 'primaryCategory' | 'primarySubcategoryOne' | 'primarySubcategoryTwo' | 'secondaryCategory' | 'secondarySubcategoryOne' | 'secondarySubcategoryTwo' | 'territoryAgeRatings'>;
         /**
          * maximum resources per page
          */
@@ -62449,7 +62789,7 @@ export type AppPricePointsV3EqualizationsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type territories
          */
@@ -64913,7 +65253,7 @@ export type AppStoreVersionsAppStoreVersionExperimentsV2GetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type appStoreVersions
          */
@@ -66551,7 +66891,7 @@ export type AppsAppClipsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type appClipDefaultExperiences
          */
@@ -66677,7 +67017,7 @@ export type AppsAppCustomProductPagesGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type appCustomProductPageVersions
          */
@@ -66809,7 +67149,7 @@ export type AppsAppEncryptionDeclarationsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type builds
          */
@@ -67057,15 +67397,15 @@ export type AppsAppInfosGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type appInfos
          */
-        'fields[appInfos]'?: Array<'appStoreState' | 'state' | 'appStoreAgeRating' | 'australiaAgeRating' | 'brazilAgeRating' | 'brazilAgeRatingV2' | 'franceAgeRating' | 'koreaAgeRating' | 'kidsAgeBand' | 'app' | 'ageRatingDeclaration' | 'appInfoLocalizations' | 'primaryCategory' | 'primarySubcategoryOne' | 'primarySubcategoryTwo' | 'secondaryCategory' | 'secondarySubcategoryOne' | 'secondarySubcategoryTwo' | 'territoryAgeRatings'>;
+        'fields[appInfos]'?: Array<'appStoreState' | 'state' | 'appStoreAgeRating' | 'australiaAgeRating' | 'brazilAgeRating' | 'brazilAgeRatingV2' | 'franceAgeRating' | 'koreaAgeRating' | 'app' | 'ageRatingDeclaration' | 'appInfoLocalizations' | 'primaryCategory' | 'primarySubcategoryOne' | 'primarySubcategoryTwo' | 'secondaryCategory' | 'secondarySubcategoryOne' | 'secondarySubcategoryTwo' | 'territoryAgeRatings'>;
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type ageRatingDeclarations
          */
-        'fields[ageRatingDeclarations]'?: Array<'advertising' | 'alcoholTobaccoOrDrugUseOrReferences' | 'contests' | 'gambling' | 'gamblingSimulated' | 'gunsOrOtherWeapons' | 'healthOrWellnessTopics' | 'kidsAgeBand' | 'lootBox' | 'medicalOrTreatmentInformation' | 'messagingAndChat' | 'parentalControls' | 'profanityOrCrudeHumor' | 'ageAssurance' | 'sexualContentGraphicAndNudity' | 'sexualContentOrNudity' | 'socialMedia' | 'socialMediaAgeRestricted' | 'horrorOrFearThemes' | 'matureOrSuggestiveThemes' | 'unrestrictedWebAccess' | 'userGeneratedContent' | 'violenceCartoonOrFantasy' | 'violenceRealisticProlongedGraphicOrSadistic' | 'violenceRealistic' | 'ageRatingOverride' | 'ageRatingOverrideV2' | 'koreaAgeRatingOverride' | 'developerAgeRatingInfoUrl'>;
+        'fields[ageRatingDeclarations]'?: Array<'advertising' | 'alcoholTobaccoOrDrugUseOrReferences' | 'contests' | 'gambling' | 'gamblingSimulated' | 'gunsOrOtherWeapons' | 'healthOrWellnessTopics' | 'kidsAgeBand' | 'lootBox' | 'medicalOrTreatmentInformation' | 'messagingAndChat' | 'parentalControls' | 'profanityOrCrudeHumor' | 'ageAssurance' | 'sexualContentGraphicAndNudity' | 'sexualContentOrNudity' | 'socialMedia' | 'socialMediaAgeRestricted' | 'horrorOrFearThemes' | 'matureOrSuggestiveThemes' | 'unrestrictedWebAccess' | 'userGeneratedContent' | 'violenceCartoonOrFantasy' | 'violenceRealisticProlongedGraphicOrSadistic' | 'violenceRealistic' | 'ageRatingOverride' | 'ageRatingOverrideV2' | 'koreaAgeRatingOverride' | 'gracRatingClassificationNumber' | 'developerAgeRatingInfoUrl'>;
         /**
          * the fields to include for returned resources of type appInfoLocalizations
          */
@@ -67195,7 +67535,7 @@ export type AppsAppPricePointsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type territories
          */
@@ -67308,7 +67648,7 @@ export type AppsAppPriceScheduleGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type territories
          */
@@ -67438,7 +67778,7 @@ export type AppsAppStoreVersionExperimentsV2GetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type appStoreVersions
          */
@@ -67590,7 +67930,7 @@ export type AppsAppStoreVersionsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type appStoreVersionLocalizations
          */
@@ -67904,7 +68244,7 @@ export type AppsBackgroundAssetsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type backgroundAssetVersions
          */
@@ -69028,7 +69368,7 @@ export type AppsCiProductGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type bundleIds
          */
@@ -69447,11 +69787,11 @@ export type AppsGameCenterDetailGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type gameCenterAppVersions
          */
@@ -69463,7 +69803,7 @@ export type AppsGameCenterDetailGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterLeaderboards
          */
-        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge' | 'versions'>;
+        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge' | 'gameCenterScoreModerations' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardSets
          */
@@ -69705,7 +70045,7 @@ export type AppsGameCenterEnabledVersionsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * maximum resources per page
          */
@@ -69837,7 +70177,7 @@ export type AppsInAppPurchasesGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * maximum resources per page
          */
@@ -70226,6 +70566,57 @@ export type AppsPerfPowerMetricsGetToManyRelatedResponses = {
 
 export type AppsPerfPowerMetricsGetToManyRelatedResponse = AppsPerfPowerMetricsGetToManyRelatedResponses[keyof AppsPerfPowerMetricsGetToManyRelatedResponses];
 
+export type AppsPerformanceOverviewsGetToManyRelatedData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * filter by attribute 'deviceType'
+         */
+        'filter[deviceType]'?: Array<string>;
+    };
+    url: '/v1/apps/{id}/performanceOverviews';
+};
+
+export type AppsPerformanceOverviewsGetToManyRelatedErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type AppsPerformanceOverviewsGetToManyRelatedError = AppsPerformanceOverviewsGetToManyRelatedErrors[keyof AppsPerformanceOverviewsGetToManyRelatedErrors];
+
+export type AppsPerformanceOverviewsGetToManyRelatedResponses = {
+    /**
+     * List of PerformanceOverviews
+     */
+    200: XcodeOverview;
+};
+
+export type AppsPerformanceOverviewsGetToManyRelatedResponse = AppsPerformanceOverviewsGetToManyRelatedResponses[keyof AppsPerformanceOverviewsGetToManyRelatedResponses];
+
 export type AppsPreReleaseVersionsGetToManyRelationshipData = {
     body?: never;
     path: {
@@ -70460,7 +70851,7 @@ export type AppsPromotedPurchasesGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type subscriptions
          */
-        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities' | 'versions'>;
+        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'multiSeatStatus' | 'marketSettings' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities' | 'versions'>;
         /**
          * maximum resources per page
          */
@@ -70582,7 +70973,7 @@ export type AppsReviewSubmissionsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type reviewSubmissionItems
          */
@@ -70935,7 +71326,7 @@ export type AppsSubscriptionGroupsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type subscriptions
          */
-        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities' | 'versions'>;
+        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'multiSeatStatus' | 'marketSettings' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities' | 'versions'>;
         /**
          * the fields to include for returned resources of type subscriptionGroupLocalizations
          */
@@ -71069,7 +71460,7 @@ export type AppsWebhooksGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * maximum resources per page
          */
@@ -71442,7 +71833,7 @@ export type BetaAppLocalizationsAppGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
     };
     url: '/v1/betaAppLocalizations/{id}/app';
 };
@@ -71539,7 +71930,7 @@ export type BetaAppReviewDetailsAppGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
     };
     url: '/v1/betaAppReviewDetails/{id}/app';
 };
@@ -71927,7 +72318,7 @@ export type BetaGroupsAppGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
     };
     url: '/v1/betaGroups/{id}/app';
 };
@@ -72658,7 +73049,7 @@ export type BetaLicenseAgreementsAppGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
     };
     url: '/v1/betaLicenseAgreements/{id}/app';
 };
@@ -72821,7 +73212,7 @@ export type BetaTestersAppsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * maximum resources per page
          */
@@ -73390,7 +73781,7 @@ export type BuildBetaDetailsBuildGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type buildBetaDetails
          */
@@ -74055,7 +74446,7 @@ export type BuildsAppGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
     };
     url: '/v1/builds/{id}/app';
 };
@@ -74310,7 +74701,7 @@ export type BuildsAppStoreVersionGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type appStoreVersionLocalizations
          */
@@ -75479,7 +75870,7 @@ export type BundleIdsAppGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
     };
     url: '/v1/bundleIds/{id}/app';
 };
@@ -76547,7 +76938,7 @@ export type CiBuildRunsBuildsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type buildBetaDetails
          */
@@ -76932,7 +77323,7 @@ export type CiProductsAppGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type appEncryptionDeclarations
          */
@@ -76976,7 +77367,7 @@ export type CiProductsAppGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type appInfos
          */
-        'fields[appInfos]'?: Array<'appStoreState' | 'state' | 'appStoreAgeRating' | 'australiaAgeRating' | 'brazilAgeRating' | 'brazilAgeRatingV2' | 'franceAgeRating' | 'koreaAgeRating' | 'kidsAgeBand' | 'app' | 'ageRatingDeclaration' | 'appInfoLocalizations' | 'primaryCategory' | 'primarySubcategoryOne' | 'primarySubcategoryTwo' | 'secondaryCategory' | 'secondarySubcategoryOne' | 'secondarySubcategoryTwo' | 'territoryAgeRatings'>;
+        'fields[appInfos]'?: Array<'appStoreState' | 'state' | 'appStoreAgeRating' | 'australiaAgeRating' | 'brazilAgeRating' | 'brazilAgeRatingV2' | 'franceAgeRating' | 'koreaAgeRating' | 'app' | 'ageRatingDeclaration' | 'appInfoLocalizations' | 'primaryCategory' | 'primarySubcategoryOne' | 'primarySubcategoryTwo' | 'secondaryCategory' | 'secondarySubcategoryOne' | 'secondarySubcategoryTwo' | 'territoryAgeRatings'>;
         /**
          * the fields to include for returned resources of type appClips
          */
@@ -77020,7 +77411,7 @@ export type CiProductsAppGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type appStoreVersionExperiments
          */
@@ -78335,7 +78726,7 @@ export type GameCenterAchievementLocalizationsGameCenterAchievementGetToOneRelat
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
@@ -78984,7 +79375,7 @@ export type GameCenterAchievementsGroupAchievementGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
@@ -79248,7 +79639,7 @@ export type GameCenterAchievementsReleasesGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterAchievements
          */
@@ -80265,7 +80656,7 @@ export type GameCenterAppVersionsAppStoreVersionGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type appStoreVersionLocalizations
          */
@@ -81237,7 +81628,7 @@ export type GameCenterDetailsAchievementReleasesGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterAchievements
          */
@@ -81401,6 +81792,112 @@ export type GameCenterDetailsActivityReleasesGetToManyRelatedResponses = {
 };
 
 export type GameCenterDetailsActivityReleasesGetToManyRelatedResponse = GameCenterDetailsActivityReleasesGetToManyRelatedResponses[keyof GameCenterDetailsActivityReleasesGetToManyRelatedResponses];
+
+export type GameCenterDetailsBlockedPlayersGetToManyRelationshipData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+    };
+    url: '/v1/gameCenterDetails/{id}/relationships/blockedPlayers';
+};
+
+export type GameCenterDetailsBlockedPlayersGetToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterDetailsBlockedPlayersGetToManyRelationshipError = GameCenterDetailsBlockedPlayersGetToManyRelationshipErrors[keyof GameCenterDetailsBlockedPlayersGetToManyRelationshipErrors];
+
+export type GameCenterDetailsBlockedPlayersGetToManyRelationshipResponses = {
+    /**
+     * List of related linkages
+     */
+    200: GameCenterDetailBlockedPlayersLinkagesResponse;
+};
+
+export type GameCenterDetailsBlockedPlayersGetToManyRelationshipResponse = GameCenterDetailsBlockedPlayersGetToManyRelationshipResponses[keyof GameCenterDetailsBlockedPlayersGetToManyRelationshipResponses];
+
+export type GameCenterDetailsBlockedPlayersGetToManyRelatedData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * the fields to include for returned resources of type gameCenterDetailPlayers
+         */
+        'fields[gameCenterDetailPlayers]'?: Array<'nickname' | 'blocked' | 'bundleId'>;
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+    };
+    url: '/v1/gameCenterDetails/{id}/blockedPlayers';
+};
+
+export type GameCenterDetailsBlockedPlayersGetToManyRelatedErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterDetailsBlockedPlayersGetToManyRelatedError = GameCenterDetailsBlockedPlayersGetToManyRelatedErrors[keyof GameCenterDetailsBlockedPlayersGetToManyRelatedErrors];
+
+export type GameCenterDetailsBlockedPlayersGetToManyRelatedResponses = {
+    /**
+     * List of GameCenterDetailPlayers
+     */
+    200: GameCenterDetailPlayersResponse;
+};
+
+export type GameCenterDetailsBlockedPlayersGetToManyRelatedResponse = GameCenterDetailsBlockedPlayersGetToManyRelatedResponses[keyof GameCenterDetailsBlockedPlayersGetToManyRelatedResponses];
 
 export type GameCenterDetailsChallengeReleasesGetToManyRelationshipData = {
     body?: never;
@@ -81709,7 +82206,7 @@ export type GameCenterDetailsGameCenterAchievementsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
@@ -81920,7 +82417,7 @@ export type GameCenterDetailsGameCenterAchievementsV2GetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
@@ -82050,7 +82547,7 @@ export type GameCenterDetailsGameCenterActivitiesGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
@@ -82062,7 +82559,7 @@ export type GameCenterDetailsGameCenterActivitiesGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterLeaderboards
          */
-        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge' | 'versions'>;
+        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge' | 'gameCenterScoreModerations' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterActivityVersions
          */
@@ -82338,7 +82835,7 @@ export type GameCenterDetailsGameCenterChallengesGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
@@ -82350,7 +82847,7 @@ export type GameCenterDetailsGameCenterChallengesGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterLeaderboards
          */
-        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge' | 'versions'>;
+        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge' | 'gameCenterScoreModerations' | 'versions'>;
         /**
          * maximum resources per page
          */
@@ -82463,11 +82960,11 @@ export type GameCenterDetailsGameCenterGroupGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboards
          */
-        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge' | 'versions'>;
+        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge' | 'gameCenterScoreModerations' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardSets
          */
@@ -82700,7 +83197,7 @@ export type GameCenterDetailsGameCenterLeaderboardSetsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
@@ -82913,7 +83410,7 @@ export type GameCenterDetailsGameCenterLeaderboardSetsV2GetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
@@ -82921,7 +83418,7 @@ export type GameCenterDetailsGameCenterLeaderboardSetsV2GetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterLeaderboards
          */
-        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'gameCenterLeaderboardSets' | 'activity' | 'challenge' | 'versions'>;
+        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'gameCenterLeaderboardSets' | 'gameCenterScoreModerations' | 'activity' | 'challenge' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardSetVersions
          */
@@ -83116,7 +83613,7 @@ export type GameCenterDetailsGameCenterLeaderboardsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
@@ -83337,11 +83834,11 @@ export type GameCenterDetailsGameCenterLeaderboardsV2GetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterLeaderboards
          */
-        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'gameCenterLeaderboardSets' | 'activity' | 'challenge' | 'versions'>;
+        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'gameCenterLeaderboardSets' | 'gameCenterScoreModerations' | 'activity' | 'challenge' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
@@ -83493,7 +83990,7 @@ export type GameCenterDetailsLeaderboardReleasesGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboards
          */
@@ -83621,7 +84118,7 @@ export type GameCenterDetailsLeaderboardSetReleasesGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardSets
          */
@@ -83930,7 +84427,7 @@ export type GameCenterEnabledVersionsCompatibleVersionsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * maximum resources per page
          */
@@ -84119,7 +84616,7 @@ export type GameCenterGroupsGameCenterAchievementsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
@@ -84330,7 +84827,7 @@ export type GameCenterGroupsGameCenterAchievementsV2GetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
@@ -84460,7 +84957,7 @@ export type GameCenterGroupsGameCenterActivitiesGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
@@ -84472,7 +84969,7 @@ export type GameCenterGroupsGameCenterActivitiesGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterLeaderboards
          */
-        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge' | 'versions'>;
+        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge' | 'gameCenterScoreModerations' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterActivityVersions
          */
@@ -84626,7 +85123,7 @@ export type GameCenterGroupsGameCenterChallengesGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
@@ -84638,7 +85135,7 @@ export type GameCenterGroupsGameCenterChallengesGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterLeaderboards
          */
-        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge' | 'versions'>;
+        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge' | 'gameCenterScoreModerations' | 'versions'>;
         /**
          * maximum resources per page
          */
@@ -84756,11 +85253,11 @@ export type GameCenterGroupsGameCenterDetailsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * the fields to include for returned resources of type gameCenterAppVersions
          */
@@ -84772,7 +85269,7 @@ export type GameCenterGroupsGameCenterDetailsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterLeaderboards
          */
-        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge' | 'versions'>;
+        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'groupLeaderboard' | 'gameCenterLeaderboardSets' | 'localizations' | 'releases' | 'activity' | 'challenge' | 'gameCenterScoreModerations' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardSets
          */
@@ -85067,7 +85564,7 @@ export type GameCenterGroupsGameCenterLeaderboardSetsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
@@ -85280,7 +85777,7 @@ export type GameCenterGroupsGameCenterLeaderboardSetsV2GetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
@@ -85288,7 +85785,7 @@ export type GameCenterGroupsGameCenterLeaderboardSetsV2GetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterLeaderboards
          */
-        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'gameCenterLeaderboardSets' | 'activity' | 'challenge' | 'versions'>;
+        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'gameCenterLeaderboardSets' | 'gameCenterScoreModerations' | 'activity' | 'challenge' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardSetVersions
          */
@@ -85483,7 +85980,7 @@ export type GameCenterGroupsGameCenterLeaderboardsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
@@ -85704,11 +86201,11 @@ export type GameCenterGroupsGameCenterLeaderboardsV2GetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterLeaderboards
          */
-        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'gameCenterLeaderboardSets' | 'activity' | 'challenge' | 'versions'>;
+        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'gameCenterLeaderboardSets' | 'gameCenterScoreModerations' | 'activity' | 'challenge' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
@@ -86265,7 +86762,7 @@ export type GameCenterLeaderboardSetMemberLocalizationsGameCenterLeaderboardGetT
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
@@ -86412,7 +86909,7 @@ export type GameCenterLeaderboardSetMemberLocalizationsGameCenterLeaderboardSetG
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
@@ -86853,11 +87350,11 @@ export type GameCenterLeaderboardSetsV2GameCenterLeaderboardsGetToManyRelatedDat
         /**
          * the fields to include for returned resources of type gameCenterLeaderboards
          */
-        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'gameCenterLeaderboardSets' | 'activity' | 'challenge' | 'versions'>;
+        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'gameCenterLeaderboardSets' | 'gameCenterScoreModerations' | 'activity' | 'challenge' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
@@ -87304,7 +87801,7 @@ export type GameCenterLeaderboardSetsGameCenterLeaderboardsGetToManyRelatedData 
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
@@ -87512,7 +88009,7 @@ export type GameCenterLeaderboardSetsGroupLeaderboardSetGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
@@ -87782,7 +88279,7 @@ export type GameCenterLeaderboardSetsReleasesGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardSets
          */
@@ -88184,7 +88681,7 @@ export type GameCenterLeaderboardsGroupLeaderboardGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterGroups
          */
@@ -88462,7 +88959,7 @@ export type GameCenterLeaderboardsReleasesGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterDetails
          */
-        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'challengesMinimumPlatformVersions'>;
+        'fields[gameCenterDetails]'?: Array<'arcadeEnabled' | 'challengeEnabled' | 'app' | 'gameCenterAppVersions' | 'gameCenterGroup' | 'gameCenterLeaderboards' | 'gameCenterLeaderboardsV2' | 'gameCenterLeaderboardSets' | 'gameCenterLeaderboardSetsV2' | 'gameCenterAchievements' | 'gameCenterAchievementsV2' | 'gameCenterActivities' | 'gameCenterChallenges' | 'defaultLeaderboard' | 'defaultLeaderboardV2' | 'defaultGroupLeaderboard' | 'defaultGroupLeaderboardV2' | 'achievementReleases' | 'activityReleases' | 'challengeReleases' | 'leaderboardReleases' | 'leaderboardSetReleases' | 'blockedPlayers' | 'challengesMinimumPlatformVersions'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboards
          */
@@ -88627,6 +89124,124 @@ export type GameCenterLeaderboardsV2ChallengeUpdateToOneRelationshipResponses = 
 
 export type GameCenterLeaderboardsV2ChallengeUpdateToOneRelationshipResponse = GameCenterLeaderboardsV2ChallengeUpdateToOneRelationshipResponses[keyof GameCenterLeaderboardsV2ChallengeUpdateToOneRelationshipResponses];
 
+export type GameCenterLeaderboardsV2GameCenterScoreModerationsGetToManyRelationshipData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+    };
+    url: '/v2/gameCenterLeaderboards/{id}/relationships/gameCenterScoreModerations';
+};
+
+export type GameCenterLeaderboardsV2GameCenterScoreModerationsGetToManyRelationshipErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardsV2GameCenterScoreModerationsGetToManyRelationshipError = GameCenterLeaderboardsV2GameCenterScoreModerationsGetToManyRelationshipErrors[keyof GameCenterLeaderboardsV2GameCenterScoreModerationsGetToManyRelationshipErrors];
+
+export type GameCenterLeaderboardsV2GameCenterScoreModerationsGetToManyRelationshipResponses = {
+    /**
+     * List of related linkages
+     */
+    200: GameCenterLeaderboardV2GameCenterScoreModerationsLinkagesResponse;
+};
+
+export type GameCenterLeaderboardsV2GameCenterScoreModerationsGetToManyRelationshipResponse = GameCenterLeaderboardsV2GameCenterScoreModerationsGetToManyRelationshipResponses[keyof GameCenterLeaderboardsV2GameCenterScoreModerationsGetToManyRelationshipResponses];
+
+export type GameCenterLeaderboardsV2GameCenterScoreModerationsGetToManyRelatedData = {
+    body?: never;
+    path: {
+        /**
+         * the id of the requested resource
+         */
+        id: string;
+    };
+    query?: {
+        /**
+         * filter by attribute 'blocked'
+         */
+        'exists[blocked]'?: boolean;
+        /**
+         * the fields to include for returned resources of type gameCenterScoreModerations
+         */
+        'fields[gameCenterScoreModerations]'?: Array<'rank' | 'score' | 'submittedDate' | 'blocked' | 'preReleased' | 'context' | 'challengeIds' | 'player'>;
+        /**
+         * the fields to include for returned resources of type gameCenterDetailPlayers
+         */
+        'fields[gameCenterDetailPlayers]'?: Array<'nickname' | 'blocked' | 'bundleId'>;
+        /**
+         * maximum resources per page
+         */
+        limit?: number;
+        /**
+         * comma-separated list of relationships to include
+         */
+        include?: Array<'player'>;
+    };
+    url: '/v2/gameCenterLeaderboards/{id}/gameCenterScoreModerations';
+};
+
+export type GameCenterLeaderboardsV2GameCenterScoreModerationsGetToManyRelatedErrors = {
+    /**
+     * Parameter error(s)
+     */
+    400: ErrorResponse;
+    /**
+     * Unauthorized error(s)
+     */
+    401: ErrorResponse;
+    /**
+     * Forbidden error
+     */
+    403: ErrorResponse;
+    /**
+     * Not found error
+     */
+    404: ErrorResponse;
+    /**
+     * Rate limit exceeded error
+     */
+    429: ErrorResponse;
+};
+
+export type GameCenterLeaderboardsV2GameCenterScoreModerationsGetToManyRelatedError = GameCenterLeaderboardsV2GameCenterScoreModerationsGetToManyRelatedErrors[keyof GameCenterLeaderboardsV2GameCenterScoreModerationsGetToManyRelatedErrors];
+
+export type GameCenterLeaderboardsV2GameCenterScoreModerationsGetToManyRelatedResponses = {
+    /**
+     * List of GameCenterScoreModerations
+     */
+    200: GameCenterScoreModerationsResponse;
+};
+
+export type GameCenterLeaderboardsV2GameCenterScoreModerationsGetToManyRelatedResponse = GameCenterLeaderboardsV2GameCenterScoreModerationsGetToManyRelatedResponses[keyof GameCenterLeaderboardsV2GameCenterScoreModerationsGetToManyRelatedResponses];
+
 export type GameCenterLeaderboardsV2VersionsGetToManyRelationshipData = {
     body?: never;
     path: {
@@ -88694,7 +89309,7 @@ export type GameCenterLeaderboardsV2VersionsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type gameCenterLeaderboards
          */
-        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'gameCenterLeaderboardSets' | 'activity' | 'challenge' | 'versions'>;
+        'fields[gameCenterLeaderboards]'?: Array<'defaultFormatter' | 'referenceName' | 'vendorIdentifier' | 'submissionType' | 'scoreSortType' | 'scoreRangeStart' | 'scoreRangeEnd' | 'recurrenceStartDate' | 'recurrenceDuration' | 'recurrenceRule' | 'archived' | 'activityProperties' | 'visibility' | 'gameCenterDetail' | 'gameCenterGroup' | 'gameCenterLeaderboardSets' | 'gameCenterScoreModerations' | 'activity' | 'challenge' | 'versions'>;
         /**
          * the fields to include for returned resources of type gameCenterLeaderboardLocalizations
          */
@@ -91343,7 +91958,7 @@ export type InAppPurchasesV2PromotedPurchaseGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type subscriptions
          */
-        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities' | 'versions'>;
+        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'multiSeatStatus' | 'marketSettings' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities' | 'versions'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -91846,7 +92461,7 @@ export type PreReleaseVersionsAppGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
     };
     url: '/v1/preReleaseVersions/{id}/app';
 };
@@ -93225,7 +93840,7 @@ export type SubscriptionGroupsSubscriptionsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type subscriptions
          */
-        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities' | 'versions'>;
+        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'multiSeatStatus' | 'marketSettings' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities' | 'versions'>;
         /**
          * the fields to include for returned resources of type subscriptionLocalizations
          */
@@ -94053,7 +94668,7 @@ export type SubscriptionPricePointsAdjustedEqualizationsGetToManyRelatedData = {
          */
         id: string;
     };
-    query?: {
+    query: {
         /**
          * filter by id(s) of related 'territory'
          */
@@ -94069,7 +94684,7 @@ export type SubscriptionPricePointsAdjustedEqualizationsGetToManyRelatedData = {
         /**
          * filter by planType
          */
-        'filter[planType]'?: Array<string>;
+        'filter[planType]': Array<string>;
         /**
          * the fields to include for returned resources of type subscriptionPricePoints
          */
@@ -94755,7 +95370,7 @@ export type SubscriptionsAppStoreReviewScreenshotGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type subscriptions
          */
-        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities' | 'versions'>;
+        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'multiSeatStatus' | 'marketSettings' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities' | 'versions'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -94865,7 +95480,7 @@ export type SubscriptionsImagesGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type subscriptions
          */
-        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities' | 'versions'>;
+        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'multiSeatStatus' | 'marketSettings' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities' | 'versions'>;
         /**
          * maximum resources per page
          */
@@ -95040,7 +95655,7 @@ export type SubscriptionsIntroductoryOffersGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type subscriptions
          */
-        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities' | 'versions'>;
+        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'multiSeatStatus' | 'marketSettings' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities' | 'versions'>;
         /**
          * the fields to include for returned resources of type territories
          */
@@ -95166,7 +95781,7 @@ export type SubscriptionsOfferCodesGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type subscriptions
          */
-        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities' | 'versions'>;
+        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'multiSeatStatus' | 'marketSettings' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities' | 'versions'>;
         /**
          * the fields to include for returned resources of type subscriptionOfferCodeOneTimeUseCodes
          */
@@ -95734,7 +96349,7 @@ export type SubscriptionsPromotedPurchaseGetToOneRelatedData = {
         /**
          * the fields to include for returned resources of type subscriptions
          */
-        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities' | 'versions'>;
+        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'multiSeatStatus' | 'marketSettings' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities' | 'versions'>;
         /**
          * comma-separated list of relationships to include
          */
@@ -95848,7 +96463,7 @@ export type SubscriptionsPromotionalOffersGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type subscriptions
          */
-        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities' | 'versions'>;
+        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'multiSeatStatus' | 'marketSettings' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities' | 'versions'>;
         /**
          * the fields to include for returned resources of type subscriptionPromotionalOfferPrices
          */
@@ -96079,7 +96694,7 @@ export type SubscriptionsSubscriptionLocalizationsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type subscriptions
          */
-        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities' | 'versions'>;
+        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'multiSeatStatus' | 'marketSettings' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities' | 'versions'>;
         /**
          * maximum resources per page
          */
@@ -96197,7 +96812,7 @@ export type SubscriptionsVersionsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type subscriptions
          */
-        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities' | 'versions'>;
+        'fields[subscriptions]'?: Array<'name' | 'productId' | 'familySharable' | 'state' | 'subscriptionPeriod' | 'reviewNote' | 'groupLevel' | 'multiSeatStatus' | 'marketSettings' | 'subscriptionLocalizations' | 'appStoreReviewScreenshot' | 'group' | 'introductoryOffers' | 'promotionalOffers' | 'offerCodes' | 'prices' | 'pricePoints' | 'promotedPurchase' | 'subscriptionAvailability' | 'winBackOffers' | 'images' | 'planAvailabilities' | 'versions'>;
         /**
          * the fields to include for returned resources of type subscriptionImages
          */
@@ -96441,7 +97056,7 @@ export type UserInvitationsVisibleAppsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * maximum resources per page
          */
@@ -96718,7 +97333,7 @@ export type UsersVisibleAppsGetToManyRelatedData = {
         /**
          * the fields to include for returned resources of type apps
          */
-        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
+        'fields[apps]'?: Array<'accessibilityUrl' | 'name' | 'bundleId' | 'sku' | 'primaryLocale' | 'isOrEverWasMadeForKids' | 'subscriptionStatusUrl' | 'subscriptionStatusUrlVersion' | 'subscriptionStatusUrlForSandbox' | 'subscriptionStatusUrlVersionForSandbox' | 'contentRightsDeclaration' | 'streamlinedPurchasingEnabled' | 'accessibilityDeclarations' | 'appEncryptionDeclarations' | 'appStoreIcon' | 'ciProduct' | 'betaTesters' | 'betaGroups' | 'appStoreVersions' | 'appTags' | 'preReleaseVersions' | 'betaAppLocalizations' | 'builds' | 'betaLicenseAgreement' | 'betaAppReviewDetail' | 'appInfos' | 'appClips' | 'appPricePoints' | 'endUserLicenseAgreement' | 'appPriceSchedule' | 'appAvailabilityV2' | 'inAppPurchases' | 'subscriptionGroups' | 'gameCenterEnabledVersions' | 'performanceOverviews' | 'perfPowerMetrics' | 'appCustomProductPages' | 'inAppPurchasesV2' | 'promotedPurchases' | 'appEvents' | 'reviewSubmissions' | 'subscriptionGracePeriod' | 'customerReviews' | 'customerReviewSummarizations' | 'gameCenterDetail' | 'appStoreVersionExperimentsV2' | 'alternativeDistributionKey' | 'analyticsReportRequests' | 'marketplaceSearchDetail' | 'buildUploads' | 'backgroundAssets' | 'betaFeedbackScreenshotSubmissions' | 'betaFeedbackCrashSubmissions' | 'searchKeywords' | 'webhooks' | 'androidToIosAppMappingDetails'>;
         /**
          * maximum resources per page
          */
