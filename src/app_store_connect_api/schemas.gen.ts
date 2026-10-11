@@ -2357,6 +2357,2491 @@ export const AndroidToIosAppMappingDetailUpdateRequestSchema = {
     ]
 } as const;
 
+export const AppAssetLibrarySchema = {
+    type: 'object',
+    title: 'AppAssetLibrary',
+    properties: {
+        type: {
+            type: 'string',
+            enum: [
+                'appAssetLibraries'
+            ]
+        },
+        id: {
+            type: 'string'
+        },
+        relationships: {
+            type: 'object',
+            properties: {
+                images: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            $ref: '#/components/schemas/RelationshipLinks'
+                        }
+                    }
+                },
+                videos: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            $ref: '#/components/schemas/RelationshipLinks'
+                        }
+                    }
+                }
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: [
+        'id',
+        'type'
+    ]
+} as const;
+
+export const AppAssetLibraryResponseSchema = {
+    type: 'object',
+    title: 'AppAssetLibraryResponse',
+    properties: {
+        data: {
+            $ref: '#/components/schemas/AppAssetLibrary'
+        },
+        links: {
+            $ref: '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
+export const AppAssetLibraryImageSchema = {
+    type: 'object',
+    title: 'AppAssetLibraryImage',
+    properties: {
+        type: {
+            type: 'string',
+            enum: [
+                'appAssetLibraryImages'
+            ]
+        },
+        id: {
+            type: 'string'
+        },
+        attributes: {
+            oneOf: [
+                {
+                    $ref: '#/components/schemas/AppAssetLibraryImageAwaitingUploadAttributes'
+                },
+                {
+                    $ref: '#/components/schemas/AppAssetLibraryImageUploadCompleteAttributes'
+                },
+                {
+                    $ref: '#/components/schemas/AppAssetLibraryImageFailedAttributes'
+                },
+                {
+                    $ref: '#/components/schemas/AppAssetLibraryImageCommonAttributes'
+                },
+                {
+                    $ref: '#/components/schemas/AppAssetLibraryImageCommonAttributes'
+                },
+                {
+                    $ref: '#/components/schemas/AppAssetLibraryImageReadyForReviewAttributes'
+                },
+                {
+                    $ref: '#/components/schemas/AppAssetLibraryImageWaitingForReviewAttributes'
+                },
+                {
+                    $ref: '#/components/schemas/AppAssetLibraryImageInReviewAttributes'
+                },
+                {
+                    $ref: '#/components/schemas/AppAssetLibraryImageAcceptedAttributes'
+                },
+                {
+                    $ref: '#/components/schemas/AppAssetLibraryImageApprovedAttributes'
+                },
+                {
+                    $ref: '#/components/schemas/AppAssetLibraryImageRejectedAttributes'
+                },
+                {
+                    $ref: '#/components/schemas/AppAssetLibraryImageArchivedAttributes'
+                }
+            ],
+            discriminator: {
+                propertyName: 'state',
+                mapping: {
+                    UPLOAD_COMPLETE: '#/components/schemas/AppAssetLibraryImageUploadCompleteAttributes',
+                    COMPLETE: '#/components/schemas/AppAssetLibraryImageCommonAttributes',
+                    IN_REVIEW: '#/components/schemas/AppAssetLibraryImageInReviewAttributes',
+                    ACCEPTED: '#/components/schemas/AppAssetLibraryImageAcceptedAttributes',
+                    FAILED: '#/components/schemas/AppAssetLibraryImageFailedAttributes',
+                    AWAITING_UPLOAD: '#/components/schemas/AppAssetLibraryImageAwaitingUploadAttributes',
+                    PREPARE_FOR_SUBMISSION: '#/components/schemas/AppAssetLibraryImageCommonAttributes',
+                    READY_FOR_REVIEW: '#/components/schemas/AppAssetLibraryImageReadyForReviewAttributes',
+                    ARCHIVED: '#/components/schemas/AppAssetLibraryImageArchivedAttributes',
+                    APPROVED: '#/components/schemas/AppAssetLibraryImageApprovedAttributes',
+                    WAITING_FOR_REVIEW: '#/components/schemas/AppAssetLibraryImageWaitingForReviewAttributes',
+                    REJECTED: '#/components/schemas/AppAssetLibraryImageRejectedAttributes'
+                }
+            }
+        },
+        relationships: {
+            type: 'object',
+            properties: {
+                placements: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            $ref: '#/components/schemas/RelationshipLinks'
+                        },
+                        meta: {
+                            $ref: '#/components/schemas/PagingInformation'
+                        },
+                        data: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    type: {
+                                        type: 'string',
+                                        enum: [
+                                            'appAssetLibraryPlacements'
+                                        ]
+                                    },
+                                    id: {
+                                        type: 'string'
+                                    }
+                                },
+                                required: [
+                                    'id',
+                                    'type'
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: [
+        'id',
+        'type'
+    ]
+} as const;
+
+export const AppAssetLibraryImageCommonAttributesSchema = {
+    type: 'object',
+    title: 'AppAssetLibraryImageCommonAttributes',
+    properties: {
+        category: {
+            $ref: '#/components/schemas/AppAssetLibraryAssetCategory'
+        },
+        createdDate: {
+            type: 'string',
+            format: 'date-time'
+        },
+        lastModifiedDate: {
+            type: 'string',
+            format: 'date-time'
+        },
+        fileName: {
+            type: 'string'
+        },
+        fileSize: {
+            type: 'integer',
+            format: 'int64',
+            maximum: 9007199254740991,
+            minimum: 1
+        },
+        imageAsset: {
+            $ref: '#/components/schemas/ImageAsset'
+        },
+        referenceName: {
+            type: 'string'
+        },
+        specId: {
+            type: 'string'
+        },
+        state: {
+            $ref: '#/components/schemas/AppAssetLibraryAssetState'
+        },
+        stateDetails: {
+            type: 'array',
+            items: {
+                $ref: '#/components/schemas/StateDetail'
+            }
+        }
+    },
+    required: [
+        'state'
+    ]
+} as const;
+
+export const AppAssetLibraryImageAcceptedAttributesSchema = {
+    title: 'AppAssetLibraryImageAcceptedAttributes',
+    allOf: [
+        {
+            $ref: '#/components/schemas/AppAssetLibraryImageCommonAttributes'
+        },
+        {
+            type: 'object'
+        }
+    ]
+} as const;
+
+export const AppAssetLibraryImageApprovedAttributesSchema = {
+    title: 'AppAssetLibraryImageApprovedAttributes',
+    allOf: [
+        {
+            $ref: '#/components/schemas/AppAssetLibraryImageCommonAttributes'
+        },
+        {
+            type: 'object'
+        }
+    ]
+} as const;
+
+export const AppAssetLibraryImageArchivedAttributesSchema = {
+    title: 'AppAssetLibraryImageArchivedAttributes',
+    allOf: [
+        {
+            $ref: '#/components/schemas/AppAssetLibraryImageCommonAttributes'
+        },
+        {
+            type: 'object'
+        }
+    ]
+} as const;
+
+export const AppAssetLibraryImageAwaitingUploadAttributesSchema = {
+    title: 'AppAssetLibraryImageAwaitingUploadAttributes',
+    allOf: [
+        {
+            $ref: '#/components/schemas/AppAssetLibraryImageCommonAttributes'
+        },
+        {
+            type: 'object',
+            properties: {
+                uploadOperations: {
+                    type: 'array',
+                    items: {
+                        $ref: '#/components/schemas/UploadOperation'
+                    }
+                }
+            }
+        }
+    ]
+} as const;
+
+export const AppAssetLibraryImageFailedAttributesSchema = {
+    title: 'AppAssetLibraryImageFailedAttributes',
+    allOf: [
+        {
+            $ref: '#/components/schemas/AppAssetLibraryImageCommonAttributes'
+        },
+        {
+            type: 'object',
+            properties: {
+                uploadOperations: {
+                    type: 'array',
+                    items: {
+                        $ref: '#/components/schemas/UploadOperation'
+                    }
+                }
+            }
+        }
+    ]
+} as const;
+
+export const AppAssetLibraryImageInReviewAttributesSchema = {
+    title: 'AppAssetLibraryImageInReviewAttributes',
+    allOf: [
+        {
+            $ref: '#/components/schemas/AppAssetLibraryImageCommonAttributes'
+        },
+        {
+            type: 'object'
+        }
+    ]
+} as const;
+
+export const AppAssetLibraryImageReadyForReviewAttributesSchema = {
+    title: 'AppAssetLibraryImageReadyForReviewAttributes',
+    allOf: [
+        {
+            $ref: '#/components/schemas/AppAssetLibraryImageCommonAttributes'
+        },
+        {
+            type: 'object'
+        }
+    ]
+} as const;
+
+export const AppAssetLibraryImageRejectedAttributesSchema = {
+    title: 'AppAssetLibraryImageRejectedAttributes',
+    allOf: [
+        {
+            $ref: '#/components/schemas/AppAssetLibraryImageCommonAttributes'
+        },
+        {
+            type: 'object'
+        }
+    ]
+} as const;
+
+export const AppAssetLibraryImageUploadCompleteAttributesSchema = {
+    title: 'AppAssetLibraryImageUploadCompleteAttributes',
+    allOf: [
+        {
+            $ref: '#/components/schemas/AppAssetLibraryImageCommonAttributes'
+        },
+        {
+            type: 'object',
+            properties: {
+                uploadOperations: {
+                    type: 'array',
+                    items: {
+                        $ref: '#/components/schemas/UploadOperation'
+                    }
+                }
+            }
+        }
+    ]
+} as const;
+
+export const AppAssetLibraryImageWaitingForReviewAttributesSchema = {
+    title: 'AppAssetLibraryImageWaitingForReviewAttributes',
+    allOf: [
+        {
+            $ref: '#/components/schemas/AppAssetLibraryImageCommonAttributes'
+        },
+        {
+            type: 'object'
+        }
+    ]
+} as const;
+
+export const AppAssetLibraryImagesResponseSchema = {
+    type: 'object',
+    title: 'AppAssetLibraryImagesResponse',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                $ref: '#/components/schemas/AppAssetLibraryImage'
+            }
+        },
+        included: {
+            type: 'array',
+            items: {
+                $ref: '#/components/schemas/AppAssetLibraryPlacement'
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            $ref: '#/components/schemas/PagingInformation'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
+export const AppAssetLibraryImageResponseSchema = {
+    type: 'object',
+    title: 'AppAssetLibraryImageResponse',
+    properties: {
+        data: {
+            $ref: '#/components/schemas/AppAssetLibraryImage'
+        },
+        included: {
+            type: 'array',
+            items: {
+                $ref: '#/components/schemas/AppAssetLibraryPlacement'
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
+export const AppAssetLibraryImageCreateRequestSchema = {
+    type: 'object',
+    title: 'AppAssetLibraryImageCreateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: [
+                        'appAssetLibraryImages'
+                    ]
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        category: {
+                            $ref: '#/components/schemas/AppAssetLibraryAssetCategory'
+                        },
+                        fileName: {
+                            type: 'string'
+                        },
+                        fileSize: {
+                            type: 'integer',
+                            format: 'int64',
+                            maximum: 9007199254740991,
+                            minimum: 1
+                        },
+                        referenceName: {
+                            type: 'string',
+                            nullable: true
+                        }
+                    },
+                    required: [
+                        'fileName',
+                        'fileSize',
+                        'category'
+                    ]
+                },
+                relationships: {
+                    type: 'object',
+                    properties: {
+                        assetLibrary: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: [
+                                                'appAssetLibraries'
+                                            ]
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: [
+                                        'id',
+                                        'type'
+                                    ]
+                                }
+                            },
+                            required: [
+                                'data'
+                            ]
+                        },
+                        placements: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'array',
+                                    items: {
+                                        type: 'object',
+                                        properties: {
+                                            type: {
+                                                type: 'string',
+                                                enum: [
+                                                    'appAssetLibraryPlacements'
+                                                ]
+                                            },
+                                            id: {
+                                                type: 'string'
+                                            }
+                                        },
+                                        required: [
+                                            'id',
+                                            'type'
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    required: [
+                        'assetLibrary'
+                    ]
+                }
+            },
+            required: [
+                'relationships',
+                'attributes',
+                'type'
+            ]
+        }
+    },
+    required: [
+        'data'
+    ]
+} as const;
+
+export const AppAssetLibraryImageUpdateRequestSchema = {
+    type: 'object',
+    title: 'AppAssetLibraryImageUpdateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: [
+                        'appAssetLibraryImages'
+                    ]
+                },
+                id: {
+                    type: 'string'
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        archived: {
+                            type: 'boolean',
+                            nullable: true
+                        },
+                        referenceName: {
+                            type: 'string',
+                            nullable: true
+                        },
+                        uploaded: {
+                            type: 'boolean',
+                            nullable: true
+                        }
+                    }
+                }
+            },
+            required: [
+                'id',
+                'type'
+            ]
+        }
+    },
+    required: [
+        'data'
+    ]
+} as const;
+
+export const AppAssetLibraryPlacementOrderingRequestSchema = {
+    type: 'object',
+    title: 'AppAssetLibraryPlacementOrderingRequest',
+    properties: {
+        type: {
+            type: 'string',
+            enum: [
+                'appAssetLibraryPlacementOrderingRequests'
+            ]
+        },
+        id: {
+            type: 'string'
+        },
+        relationships: {
+            type: 'object',
+            properties: {
+                orderedPlacements: {
+                    type: 'object',
+                    properties: {
+                        meta: {
+                            $ref: '#/components/schemas/PagingInformation'
+                        },
+                        data: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    type: {
+                                        type: 'string',
+                                        enum: [
+                                            'appAssetLibraryPlacements'
+                                        ]
+                                    },
+                                    id: {
+                                        type: 'string'
+                                    }
+                                },
+                                required: [
+                                    'id',
+                                    'type'
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: [
+        'id',
+        'type'
+    ]
+} as const;
+
+export const AppAssetLibraryPlacementOrderingRequestResponseSchema = {
+    type: 'object',
+    title: 'AppAssetLibraryPlacementOrderingRequestResponse',
+    properties: {
+        data: {
+            $ref: '#/components/schemas/AppAssetLibraryPlacementOrderingRequest'
+        },
+        included: {
+            type: 'array',
+            items: {
+                $ref: '#/components/schemas/AppAssetLibraryPlacement'
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
+export const AppAssetLibraryPlacementOrderingRequestCreateRequestSchema = {
+    type: 'object',
+    title: 'AppAssetLibraryPlacementOrderingRequestCreateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: [
+                        'appAssetLibraryPlacementOrderingRequests'
+                    ]
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        placementGroup: {
+                            type: 'string',
+                            nullable: true
+                        }
+                    }
+                },
+                relationships: {
+                    type: 'object',
+                    properties: {
+                        orderedPlacements: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'array',
+                                    items: {
+                                        type: 'object',
+                                        properties: {
+                                            type: {
+                                                type: 'string',
+                                                enum: [
+                                                    'appAssetLibraryPlacements'
+                                                ]
+                                            },
+                                            id: {
+                                                type: 'string'
+                                            }
+                                        },
+                                        required: [
+                                            'id',
+                                            'type'
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        appStoreVersionLocalization: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: [
+                                                'appStoreVersionLocalizations'
+                                            ]
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: [
+                                        'id',
+                                        'type'
+                                    ]
+                                }
+                            }
+                        },
+                        appCustomProductPageLocalization: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: [
+                                                'appCustomProductPageLocalizations'
+                                            ]
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: [
+                                        'id',
+                                        'type'
+                                    ]
+                                }
+                            }
+                        },
+                        appStoreVersionExperimentTreatmentLocalization: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: [
+                                                'appStoreVersionExperimentTreatmentLocalizations'
+                                            ]
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: [
+                                        'id',
+                                        'type'
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            anyOf: [
+                {
+                    type: 'object',
+                    properties: {
+                        attributes: {
+                            type: 'object',
+                            required: [
+                                'placementGroup'
+                            ]
+                        },
+                        relationships: {
+                            type: 'object',
+                            required: [
+                                'orderedPlacements',
+                                'appStoreVersionLocalization'
+                            ]
+                        }
+                    },
+                    required: [
+                        'relationships',
+                        'attributes'
+                    ]
+                },
+                {
+                    type: 'object',
+                    properties: {
+                        attributes: {
+                            type: 'object',
+                            required: [
+                                'placementGroup'
+                            ]
+                        },
+                        relationships: {
+                            type: 'object',
+                            required: [
+                                'orderedPlacements',
+                                'appCustomProductPageLocalization'
+                            ]
+                        }
+                    },
+                    required: [
+                        'relationships',
+                        'attributes'
+                    ]
+                },
+                {
+                    type: 'object',
+                    properties: {
+                        attributes: {
+                            type: 'object',
+                            required: [
+                                'placementGroup'
+                            ]
+                        },
+                        relationships: {
+                            type: 'object',
+                            required: [
+                                'orderedPlacements',
+                                'appStoreVersionExperimentTreatmentLocalization'
+                            ]
+                        }
+                    },
+                    required: [
+                        'relationships',
+                        'attributes'
+                    ]
+                }
+            ],
+            required: [
+                'type'
+            ]
+        }
+    },
+    required: [
+        'data'
+    ]
+} as const;
+
+export const AppAssetLibraryPlacementSchema = {
+    type: 'object',
+    title: 'AppAssetLibraryPlacement',
+    properties: {
+        type: {
+            type: 'string',
+            enum: [
+                'appAssetLibraryPlacements'
+            ]
+        },
+        id: {
+            type: 'string'
+        },
+        attributes: {
+            type: 'object',
+            properties: {
+                mediaType: {
+                    $ref: '#/components/schemas/AppAssetLibraryMediaType'
+                },
+                placementType: {
+                    $ref: '#/components/schemas/AppAssetLibraryPlacementType'
+                },
+                placementGroup: {
+                    type: 'string'
+                },
+                createdDate: {
+                    type: 'string',
+                    format: 'date-time'
+                },
+                lastModifiedDate: {
+                    type: 'string',
+                    format: 'date-time'
+                },
+                state: {
+                    $ref: '#/components/schemas/AppAssetLibraryPlacementState'
+                },
+                stateDetails: {
+                    type: 'array',
+                    items: {
+                        $ref: '#/components/schemas/StateDetail'
+                    }
+                }
+            }
+        },
+        relationships: {
+            oneOf: [
+                {
+                    $ref: '#/components/schemas/AppAssetLibraryPlacementImageRelationships'
+                },
+                {
+                    $ref: '#/components/schemas/AppAssetLibraryPlacementVideoRelationships'
+                }
+            ],
+            discriminator: {
+                propertyName: 'mediaType',
+                mapping: {
+                    IMAGE: '#/components/schemas/AppAssetLibraryPlacementImageRelationships',
+                    VIDEO: '#/components/schemas/AppAssetLibraryPlacementVideoRelationships'
+                }
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: [
+        'id',
+        'type'
+    ]
+} as const;
+
+export const AppAssetLibraryPlacementCommonRelationshipsSchema = {
+    type: 'object',
+    title: 'AppAssetLibraryPlacementCommonRelationships',
+    properties: {
+        appEventLocalization: {
+            type: 'object',
+            properties: {
+                data: {
+                    type: 'object',
+                    properties: {
+                        type: {
+                            type: 'string',
+                            enum: [
+                                'appEventLocalizations'
+                            ]
+                        },
+                        id: {
+                            type: 'string'
+                        }
+                    },
+                    required: [
+                        'id',
+                        'type'
+                    ]
+                }
+            }
+        },
+        appStoreVersionLocalization: {
+            type: 'object',
+            properties: {
+                data: {
+                    type: 'object',
+                    properties: {
+                        type: {
+                            type: 'string',
+                            enum: [
+                                'appStoreVersionLocalizations'
+                            ]
+                        },
+                        id: {
+                            type: 'string'
+                        }
+                    },
+                    required: [
+                        'id',
+                        'type'
+                    ]
+                }
+            }
+        },
+        appCustomProductPageLocalization: {
+            type: 'object',
+            properties: {
+                data: {
+                    type: 'object',
+                    properties: {
+                        type: {
+                            type: 'string',
+                            enum: [
+                                'appCustomProductPageLocalizations'
+                            ]
+                        },
+                        id: {
+                            type: 'string'
+                        }
+                    },
+                    required: [
+                        'id',
+                        'type'
+                    ]
+                }
+            }
+        },
+        appStoreVersionExperimentTreatmentLocalization: {
+            type: 'object',
+            properties: {
+                data: {
+                    type: 'object',
+                    properties: {
+                        type: {
+                            type: 'string',
+                            enum: [
+                                'appStoreVersionExperimentTreatmentLocalizations'
+                            ]
+                        },
+                        id: {
+                            type: 'string'
+                        }
+                    },
+                    required: [
+                        'id',
+                        'type'
+                    ]
+                }
+            }
+        }
+    }
+} as const;
+
+export const AppAssetLibraryPlacementCommonAttributesSchema = {
+    type: 'object',
+    title: 'AppAssetLibraryPlacementCommonAttributes',
+    properties: {
+        mediaType: {
+            $ref: '#/components/schemas/AppAssetLibraryMediaType'
+        },
+        placementType: {
+            $ref: '#/components/schemas/AppAssetLibraryPlacementType'
+        },
+        placementGroup: {
+            type: 'string'
+        },
+        createdDate: {
+            type: 'string',
+            format: 'date-time'
+        },
+        lastModifiedDate: {
+            type: 'string',
+            format: 'date-time'
+        },
+        state: {
+            $ref: '#/components/schemas/AppAssetLibraryPlacementState'
+        },
+        stateDetails: {
+            type: 'array',
+            items: {
+                $ref: '#/components/schemas/StateDetail'
+            }
+        }
+    }
+} as const;
+
+export const AppAssetLibraryPlacementVideoAttributesSchema = {
+    title: 'AppAssetLibraryPlacementVideoAttributes',
+    allOf: [
+        {
+            $ref: '#/components/schemas/AppAssetLibraryPlacementCommonAttributes'
+        },
+        {
+            type: 'object'
+        }
+    ]
+} as const;
+
+export const AppAssetLibraryPlacementImageRelationshipsSchema = {
+    title: 'AppAssetLibraryPlacementImageRelationships',
+    allOf: [
+        {
+            $ref: '#/components/schemas/AppAssetLibraryPlacementCommonRelationships'
+        },
+        {
+            type: 'object',
+            properties: {
+                image: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: [
+                                        'appAssetLibraryImages'
+                                    ]
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: [
+                                'id',
+                                'type'
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    ]
+} as const;
+
+export const AppAssetLibraryPlacementVideoRelationshipsSchema = {
+    title: 'AppAssetLibraryPlacementVideoRelationships',
+    allOf: [
+        {
+            $ref: '#/components/schemas/AppAssetLibraryPlacementCommonRelationships'
+        },
+        {
+            type: 'object',
+            properties: {
+                video: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: [
+                                        'appAssetLibraryVideos'
+                                    ]
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: [
+                                'id',
+                                'type'
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    ]
+} as const;
+
+export const AppAssetLibraryPlacementsResponseSchema = {
+    type: 'object',
+    title: 'AppAssetLibraryPlacementsResponse',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                $ref: '#/components/schemas/AppAssetLibraryPlacement'
+            }
+        },
+        included: {
+            type: 'array',
+            items: {
+                oneOf: [
+                    {
+                        $ref: '#/components/schemas/AppAssetLibraryImage'
+                    },
+                    {
+                        $ref: '#/components/schemas/AppAssetLibraryVideo'
+                    },
+                    {
+                        $ref: '#/components/schemas/AppCustomProductPageLocalization'
+                    },
+                    {
+                        $ref: '#/components/schemas/AppEventLocalization'
+                    },
+                    {
+                        $ref: '#/components/schemas/AppStoreVersionExperimentTreatmentLocalization'
+                    },
+                    {
+                        $ref: '#/components/schemas/AppStoreVersionLocalization'
+                    }
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        appStoreVersionLocalizations: '#/components/schemas/AppStoreVersionLocalization',
+                        appAssetLibraryImages: '#/components/schemas/AppAssetLibraryImage',
+                        appCustomProductPageLocalizations: '#/components/schemas/AppCustomProductPageLocalization',
+                        appStoreVersionExperimentTreatmentLocalizations: '#/components/schemas/AppStoreVersionExperimentTreatmentLocalization',
+                        appAssetLibraryVideos: '#/components/schemas/AppAssetLibraryVideo',
+                        appEventLocalizations: '#/components/schemas/AppEventLocalization'
+                    }
+                }
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            $ref: '#/components/schemas/PagingInformation'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
+export const AppAssetLibraryPlacementResponseSchema = {
+    type: 'object',
+    title: 'AppAssetLibraryPlacementResponse',
+    properties: {
+        data: {
+            $ref: '#/components/schemas/AppAssetLibraryPlacement'
+        },
+        included: {
+            type: 'array',
+            items: {
+                oneOf: [
+                    {
+                        $ref: '#/components/schemas/AppAssetLibraryImage'
+                    },
+                    {
+                        $ref: '#/components/schemas/AppAssetLibraryVideo'
+                    },
+                    {
+                        $ref: '#/components/schemas/AppCustomProductPageLocalization'
+                    },
+                    {
+                        $ref: '#/components/schemas/AppEventLocalization'
+                    },
+                    {
+                        $ref: '#/components/schemas/AppStoreVersionExperimentTreatmentLocalization'
+                    },
+                    {
+                        $ref: '#/components/schemas/AppStoreVersionLocalization'
+                    }
+                ],
+                discriminator: {
+                    propertyName: 'type',
+                    mapping: {
+                        appStoreVersionLocalizations: '#/components/schemas/AppStoreVersionLocalization',
+                        appAssetLibraryImages: '#/components/schemas/AppAssetLibraryImage',
+                        appCustomProductPageLocalizations: '#/components/schemas/AppCustomProductPageLocalization',
+                        appStoreVersionExperimentTreatmentLocalizations: '#/components/schemas/AppStoreVersionExperimentTreatmentLocalization',
+                        appAssetLibraryVideos: '#/components/schemas/AppAssetLibraryVideo',
+                        appEventLocalizations: '#/components/schemas/AppEventLocalization'
+                    }
+                }
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
+export const AppAssetLibraryPlacementCreateRequestSchema = {
+    type: 'object',
+    title: 'AppAssetLibraryPlacementCreateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: [
+                        'appAssetLibraryPlacements'
+                    ]
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        placementType: {
+                            nullable: true,
+                            $ref: '#/components/schemas/AppAssetLibraryPlacementType'
+                        },
+                        placementGroup: {
+                            type: 'string',
+                            nullable: true
+                        }
+                    }
+                },
+                relationships: {
+                    type: 'object',
+                    properties: {
+                        image: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: [
+                                                'appAssetLibraryImages'
+                                            ]
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: [
+                                        'id',
+                                        'type'
+                                    ]
+                                }
+                            }
+                        },
+                        video: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: [
+                                                'appAssetLibraryVideos'
+                                            ]
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: [
+                                        'id',
+                                        'type'
+                                    ]
+                                }
+                            }
+                        },
+                        appEventLocalization: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: [
+                                                'appEventLocalizations'
+                                            ]
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: [
+                                        'id',
+                                        'type'
+                                    ]
+                                }
+                            }
+                        },
+                        appStoreVersionLocalization: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: [
+                                                'appStoreVersionLocalizations'
+                                            ]
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: [
+                                        'id',
+                                        'type'
+                                    ]
+                                }
+                            }
+                        },
+                        appCustomProductPageLocalization: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: [
+                                                'appCustomProductPageLocalizations'
+                                            ]
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: [
+                                        'id',
+                                        'type'
+                                    ]
+                                }
+                            }
+                        },
+                        appStoreVersionExperimentTreatmentLocalization: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: [
+                                                'appStoreVersionExperimentTreatmentLocalizations'
+                                            ]
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: [
+                                        'id',
+                                        'type'
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            anyOf: [
+                {
+                    type: 'object',
+                    properties: {
+                        attributes: {
+                            type: 'object',
+                            required: [
+                                'placementType'
+                            ]
+                        },
+                        relationships: {
+                            type: 'object',
+                            required: [
+                                'image',
+                                'appEventLocalization'
+                            ]
+                        }
+                    },
+                    required: [
+                        'relationships',
+                        'attributes'
+                    ]
+                },
+                {
+                    type: 'object',
+                    properties: {
+                        attributes: {
+                            type: 'object',
+                            required: [
+                                'placementType'
+                            ]
+                        },
+                        relationships: {
+                            type: 'object',
+                            required: [
+                                'image',
+                                'appStoreVersionLocalization'
+                            ]
+                        }
+                    },
+                    required: [
+                        'relationships',
+                        'attributes'
+                    ]
+                },
+                {
+                    type: 'object',
+                    properties: {
+                        attributes: {
+                            type: 'object',
+                            required: [
+                                'placementType'
+                            ]
+                        },
+                        relationships: {
+                            type: 'object',
+                            required: [
+                                'image',
+                                'appCustomProductPageLocalization'
+                            ]
+                        }
+                    },
+                    required: [
+                        'relationships',
+                        'attributes'
+                    ]
+                },
+                {
+                    type: 'object',
+                    properties: {
+                        attributes: {
+                            type: 'object',
+                            required: [
+                                'placementType'
+                            ]
+                        },
+                        relationships: {
+                            type: 'object',
+                            required: [
+                                'image',
+                                'appStoreVersionExperimentTreatmentLocalization'
+                            ]
+                        }
+                    },
+                    required: [
+                        'relationships',
+                        'attributes'
+                    ]
+                },
+                {
+                    type: 'object',
+                    properties: {
+                        attributes: {
+                            type: 'object',
+                            required: [
+                                'placementType'
+                            ]
+                        },
+                        relationships: {
+                            type: 'object',
+                            required: [
+                                'appEventLocalization',
+                                'video'
+                            ]
+                        }
+                    },
+                    required: [
+                        'relationships',
+                        'attributes'
+                    ]
+                },
+                {
+                    type: 'object',
+                    properties: {
+                        attributes: {
+                            type: 'object',
+                            required: [
+                                'placementType'
+                            ]
+                        },
+                        relationships: {
+                            type: 'object',
+                            required: [
+                                'video',
+                                'appStoreVersionLocalization'
+                            ]
+                        }
+                    },
+                    required: [
+                        'relationships',
+                        'attributes'
+                    ]
+                },
+                {
+                    type: 'object',
+                    properties: {
+                        attributes: {
+                            type: 'object',
+                            required: [
+                                'placementType'
+                            ]
+                        },
+                        relationships: {
+                            type: 'object',
+                            required: [
+                                'appCustomProductPageLocalization',
+                                'video'
+                            ]
+                        }
+                    },
+                    required: [
+                        'relationships',
+                        'attributes'
+                    ]
+                },
+                {
+                    type: 'object',
+                    properties: {
+                        attributes: {
+                            type: 'object',
+                            required: [
+                                'placementType'
+                            ]
+                        },
+                        relationships: {
+                            type: 'object',
+                            required: [
+                                'appStoreVersionExperimentTreatmentLocalization',
+                                'video'
+                            ]
+                        }
+                    },
+                    required: [
+                        'relationships',
+                        'attributes'
+                    ]
+                }
+            ],
+            required: [
+                'type'
+            ]
+        }
+    },
+    required: [
+        'data'
+    ]
+} as const;
+
+export const AppAssetLibraryRefDatumSchema = {
+    type: 'object',
+    title: 'AppAssetLibraryRefDatum',
+    properties: {
+        type: {
+            type: 'string',
+            enum: [
+                'appAssetLibraryRefData'
+            ]
+        },
+        id: {
+            type: 'string'
+        },
+        attributes: {
+            type: 'object',
+            properties: {
+                features: {
+                    type: 'array',
+                    items: {
+                        type: 'object',
+                        properties: {
+                            featureId: {
+                                $ref: '#/components/schemas/AppAssetLibraryFeature'
+                            },
+                            placementPolicies: {
+                                type: 'array',
+                                items: {
+                                    type: 'object',
+                                    properties: {
+                                        placementType: {
+                                            $ref: '#/components/schemas/AppAssetLibraryPlacementType'
+                                        },
+                                        groupLimits: {
+                                            type: 'array',
+                                            items: {
+                                                type: 'object',
+                                                properties: {
+                                                    groupIds: {
+                                                        type: 'array',
+                                                        items: {
+                                                            type: 'string'
+                                                        }
+                                                    },
+                                                    maxCount: {
+                                                        type: 'integer'
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                placementProfileGroups: {
+                    type: 'array',
+                    items: {
+                        type: 'object',
+                        properties: {
+                            placementProfileGroupId: {
+                                type: 'string'
+                            },
+                            platform: {
+                                $ref: '#/components/schemas/AppAssetLibraryPlacementPlatform'
+                            },
+                            displayClassId: {
+                                $ref: '#/components/schemas/AppAssetLibraryDisplayClass'
+                            }
+                        }
+                    }
+                },
+                imageSpecs: {
+                    type: 'array',
+                    items: {
+                        type: 'object',
+                        properties: {
+                            specId: {
+                                type: 'string'
+                            },
+                            shortName: {
+                                type: 'string'
+                            },
+                            dimensions: {
+                                type: 'object',
+                                properties: {
+                                    minWidth: {
+                                        type: 'integer'
+                                    },
+                                    maxWidth: {
+                                        type: 'integer'
+                                    },
+                                    minHeight: {
+                                        type: 'integer'
+                                    },
+                                    maxHeight: {
+                                        type: 'integer'
+                                    }
+                                }
+                            },
+                            aspectRatio: {
+                                type: 'string'
+                            },
+                            compatiblePlacementTypes: {
+                                type: 'array',
+                                items: {
+                                    $ref: '#/components/schemas/AppAssetLibraryPlacementType'
+                                }
+                            },
+                            alphaAllowed: {
+                                type: 'boolean'
+                            },
+                            fileExtensions: {
+                                type: 'array',
+                                items: {
+                                    type: 'string'
+                                }
+                            },
+                            maxFileSize: {
+                                type: 'integer',
+                                format: 'int64',
+                                maximum: 9007199254740991,
+                                minimum: 1
+                            },
+                            mimeTypes: {
+                                type: 'array',
+                                items: {
+                                    type: 'string'
+                                }
+                            },
+                            universalAsset: {
+                                type: 'boolean'
+                            }
+                        }
+                    }
+                },
+                videoSpecs: {
+                    type: 'array',
+                    items: {
+                        type: 'object',
+                        properties: {
+                            specId: {
+                                type: 'string'
+                            },
+                            shortName: {
+                                type: 'string'
+                            },
+                            dimensions: {
+                                type: 'object',
+                                properties: {
+                                    minWidth: {
+                                        type: 'integer'
+                                    },
+                                    maxWidth: {
+                                        type: 'integer'
+                                    },
+                                    minHeight: {
+                                        type: 'integer'
+                                    },
+                                    maxHeight: {
+                                        type: 'integer'
+                                    }
+                                }
+                            },
+                            aspectRatio: {
+                                type: 'string'
+                            },
+                            compatiblePlacementTypes: {
+                                type: 'array',
+                                items: {
+                                    $ref: '#/components/schemas/AppAssetLibraryPlacementType'
+                                }
+                            },
+                            frameRates: {
+                                type: 'array',
+                                items: {
+                                    type: 'object',
+                                    properties: {
+                                        minFps: {
+                                            type: 'integer'
+                                        },
+                                        maxFps: {
+                                            type: 'integer'
+                                        }
+                                    }
+                                }
+                            },
+                            duration: {
+                                type: 'object',
+                                properties: {
+                                    min: {
+                                        type: 'string',
+                                        format: 'duration'
+                                    },
+                                    max: {
+                                        type: 'string',
+                                        format: 'duration'
+                                    }
+                                }
+                            },
+                            audioRequired: {
+                                type: 'boolean'
+                            },
+                            fileExtensions: {
+                                type: 'array',
+                                items: {
+                                    type: 'string'
+                                }
+                            },
+                            maxFileSize: {
+                                type: 'integer',
+                                format: 'int64',
+                                maximum: 9007199254740991,
+                                minimum: 1
+                            },
+                            mimeTypes: {
+                                type: 'array',
+                                items: {
+                                    type: 'string'
+                                }
+                            },
+                            universalAsset: {
+                                type: 'boolean'
+                            }
+                        }
+                    }
+                },
+                placementTypes: {
+                    type: 'array',
+                    items: {
+                        type: 'object',
+                        properties: {
+                            placementTypeId: {
+                                $ref: '#/components/schemas/AppAssetLibraryPlacementType'
+                            },
+                            acceptsAssetCategories: {
+                                type: 'array',
+                                items: {
+                                    $ref: '#/components/schemas/AppAssetLibraryAssetCategory'
+                                }
+                            },
+                            specMappings: {
+                                type: 'array',
+                                items: {
+                                    type: 'object',
+                                    properties: {
+                                        placementGroupId: {
+                                            type: 'string'
+                                        },
+                                        specs: {
+                                            type: 'array',
+                                            items: {
+                                                type: 'string'
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                displayClasses: {
+                    type: 'array',
+                    items: {
+                        type: 'object',
+                        properties: {
+                            displayClassId: {
+                                $ref: '#/components/schemas/AppAssetLibraryDisplayClass'
+                            },
+                            deviceFamily: {
+                                $ref: '#/components/schemas/DeviceFamily'
+                            },
+                            screenDimensions: {
+                                type: 'array',
+                                items: {
+                                    type: 'string'
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: [
+        'id',
+        'type'
+    ]
+} as const;
+
+export const AppAssetLibraryRefDataResponseSchema = {
+    type: 'object',
+    title: 'AppAssetLibraryRefDataResponse',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                $ref: '#/components/schemas/AppAssetLibraryRefDatum'
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            $ref: '#/components/schemas/PagingInformation'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
+export const AppAssetLibraryRefDatumResponseSchema = {
+    type: 'object',
+    title: 'AppAssetLibraryRefDatumResponse',
+    properties: {
+        data: {
+            $ref: '#/components/schemas/AppAssetLibraryRefDatum'
+        },
+        links: {
+            $ref: '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
+export const AppAssetLibraryVideoSchema = {
+    type: 'object',
+    title: 'AppAssetLibraryVideo',
+    properties: {
+        type: {
+            type: 'string',
+            enum: [
+                'appAssetLibraryVideos'
+            ]
+        },
+        id: {
+            type: 'string'
+        },
+        attributes: {
+            oneOf: [
+                {
+                    $ref: '#/components/schemas/AppAssetLibraryVideoAwaitingUploadAttributes'
+                },
+                {
+                    $ref: '#/components/schemas/AppAssetLibraryVideoUploadCompleteAttributes'
+                },
+                {
+                    $ref: '#/components/schemas/AppAssetLibraryVideoFailedAttributes'
+                },
+                {
+                    $ref: '#/components/schemas/AppAssetLibraryVideoCommonAttributes'
+                },
+                {
+                    $ref: '#/components/schemas/AppAssetLibraryVideoCommonAttributes'
+                },
+                {
+                    $ref: '#/components/schemas/AppAssetLibraryVideoReadyForReviewAttributes'
+                },
+                {
+                    $ref: '#/components/schemas/AppAssetLibraryVideoWaitingForReviewAttributes'
+                },
+                {
+                    $ref: '#/components/schemas/AppAssetLibraryVideoInReviewAttributes'
+                },
+                {
+                    $ref: '#/components/schemas/AppAssetLibraryVideoAcceptedAttributes'
+                },
+                {
+                    $ref: '#/components/schemas/AppAssetLibraryVideoApprovedAttributes'
+                },
+                {
+                    $ref: '#/components/schemas/AppAssetLibraryVideoRejectedAttributes'
+                },
+                {
+                    $ref: '#/components/schemas/AppAssetLibraryVideoArchivedAttributes'
+                }
+            ],
+            discriminator: {
+                propertyName: 'state',
+                mapping: {
+                    UPLOAD_COMPLETE: '#/components/schemas/AppAssetLibraryVideoUploadCompleteAttributes',
+                    COMPLETE: '#/components/schemas/AppAssetLibraryVideoCommonAttributes',
+                    IN_REVIEW: '#/components/schemas/AppAssetLibraryVideoInReviewAttributes',
+                    ACCEPTED: '#/components/schemas/AppAssetLibraryVideoAcceptedAttributes',
+                    FAILED: '#/components/schemas/AppAssetLibraryVideoFailedAttributes',
+                    AWAITING_UPLOAD: '#/components/schemas/AppAssetLibraryVideoAwaitingUploadAttributes',
+                    PREPARE_FOR_SUBMISSION: '#/components/schemas/AppAssetLibraryVideoCommonAttributes',
+                    READY_FOR_REVIEW: '#/components/schemas/AppAssetLibraryVideoReadyForReviewAttributes',
+                    ARCHIVED: '#/components/schemas/AppAssetLibraryVideoArchivedAttributes',
+                    APPROVED: '#/components/schemas/AppAssetLibraryVideoApprovedAttributes',
+                    WAITING_FOR_REVIEW: '#/components/schemas/AppAssetLibraryVideoWaitingForReviewAttributes',
+                    REJECTED: '#/components/schemas/AppAssetLibraryVideoRejectedAttributes'
+                }
+            }
+        },
+        relationships: {
+            type: 'object',
+            properties: {
+                placements: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            $ref: '#/components/schemas/RelationshipLinks'
+                        },
+                        meta: {
+                            $ref: '#/components/schemas/PagingInformation'
+                        },
+                        data: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    type: {
+                                        type: 'string',
+                                        enum: [
+                                            'appAssetLibraryPlacements'
+                                        ]
+                                    },
+                                    id: {
+                                        type: 'string'
+                                    }
+                                },
+                                required: [
+                                    'id',
+                                    'type'
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: [
+        'id',
+        'type'
+    ]
+} as const;
+
+export const AppAssetLibraryVideoCommonAttributesSchema = {
+    type: 'object',
+    title: 'AppAssetLibraryVideoCommonAttributes',
+    properties: {
+        category: {
+            $ref: '#/components/schemas/AppAssetLibraryAssetCategory'
+        },
+        createdDate: {
+            type: 'string',
+            format: 'date-time'
+        },
+        lastModifiedDate: {
+            type: 'string',
+            format: 'date-time'
+        },
+        fileName: {
+            type: 'string'
+        },
+        fileSize: {
+            type: 'integer',
+            format: 'int64',
+            maximum: 9007199254740991,
+            minimum: 1
+        },
+        previewFrameImage: {
+            $ref: '#/components/schemas/PreviewFrameImage'
+        },
+        previewFrameTimeCode: {
+            type: 'string'
+        },
+        referenceName: {
+            type: 'string'
+        },
+        specId: {
+            type: 'string'
+        },
+        state: {
+            $ref: '#/components/schemas/AppAssetLibraryAssetState'
+        },
+        stateDetails: {
+            type: 'array',
+            items: {
+                $ref: '#/components/schemas/StateDetail'
+            }
+        },
+        videoAsset: {
+            type: 'string',
+            format: 'uri'
+        }
+    },
+    required: [
+        'state'
+    ]
+} as const;
+
+export const AppAssetLibraryVideoAcceptedAttributesSchema = {
+    title: 'AppAssetLibraryVideoAcceptedAttributes',
+    allOf: [
+        {
+            $ref: '#/components/schemas/AppAssetLibraryVideoCommonAttributes'
+        },
+        {
+            type: 'object'
+        }
+    ]
+} as const;
+
+export const AppAssetLibraryVideoApprovedAttributesSchema = {
+    title: 'AppAssetLibraryVideoApprovedAttributes',
+    allOf: [
+        {
+            $ref: '#/components/schemas/AppAssetLibraryVideoCommonAttributes'
+        },
+        {
+            type: 'object'
+        }
+    ]
+} as const;
+
+export const AppAssetLibraryVideoArchivedAttributesSchema = {
+    title: 'AppAssetLibraryVideoArchivedAttributes',
+    allOf: [
+        {
+            $ref: '#/components/schemas/AppAssetLibraryVideoCommonAttributes'
+        },
+        {
+            type: 'object'
+        }
+    ]
+} as const;
+
+export const AppAssetLibraryVideoAwaitingUploadAttributesSchema = {
+    title: 'AppAssetLibraryVideoAwaitingUploadAttributes',
+    allOf: [
+        {
+            $ref: '#/components/schemas/AppAssetLibraryVideoCommonAttributes'
+        },
+        {
+            type: 'object',
+            properties: {
+                uploadOperations: {
+                    type: 'array',
+                    items: {
+                        $ref: '#/components/schemas/UploadOperation'
+                    }
+                }
+            }
+        }
+    ]
+} as const;
+
+export const AppAssetLibraryVideoFailedAttributesSchema = {
+    title: 'AppAssetLibraryVideoFailedAttributes',
+    allOf: [
+        {
+            $ref: '#/components/schemas/AppAssetLibraryVideoCommonAttributes'
+        },
+        {
+            type: 'object',
+            properties: {
+                uploadOperations: {
+                    type: 'array',
+                    items: {
+                        $ref: '#/components/schemas/UploadOperation'
+                    }
+                }
+            }
+        }
+    ]
+} as const;
+
+export const AppAssetLibraryVideoInReviewAttributesSchema = {
+    title: 'AppAssetLibraryVideoInReviewAttributes',
+    allOf: [
+        {
+            $ref: '#/components/schemas/AppAssetLibraryVideoCommonAttributes'
+        },
+        {
+            type: 'object'
+        }
+    ]
+} as const;
+
+export const AppAssetLibraryVideoReadyForReviewAttributesSchema = {
+    title: 'AppAssetLibraryVideoReadyForReviewAttributes',
+    allOf: [
+        {
+            $ref: '#/components/schemas/AppAssetLibraryVideoCommonAttributes'
+        },
+        {
+            type: 'object'
+        }
+    ]
+} as const;
+
+export const AppAssetLibraryVideoRejectedAttributesSchema = {
+    title: 'AppAssetLibraryVideoRejectedAttributes',
+    allOf: [
+        {
+            $ref: '#/components/schemas/AppAssetLibraryVideoCommonAttributes'
+        },
+        {
+            type: 'object'
+        }
+    ]
+} as const;
+
+export const AppAssetLibraryVideoUploadCompleteAttributesSchema = {
+    title: 'AppAssetLibraryVideoUploadCompleteAttributes',
+    allOf: [
+        {
+            $ref: '#/components/schemas/AppAssetLibraryVideoCommonAttributes'
+        },
+        {
+            type: 'object',
+            properties: {
+                uploadOperations: {
+                    type: 'array',
+                    items: {
+                        $ref: '#/components/schemas/UploadOperation'
+                    }
+                }
+            }
+        }
+    ]
+} as const;
+
+export const AppAssetLibraryVideoWaitingForReviewAttributesSchema = {
+    title: 'AppAssetLibraryVideoWaitingForReviewAttributes',
+    allOf: [
+        {
+            $ref: '#/components/schemas/AppAssetLibraryVideoCommonAttributes'
+        },
+        {
+            type: 'object'
+        }
+    ]
+} as const;
+
+export const AppAssetLibraryVideosResponseSchema = {
+    type: 'object',
+    title: 'AppAssetLibraryVideosResponse',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                $ref: '#/components/schemas/AppAssetLibraryVideo'
+            }
+        },
+        included: {
+            type: 'array',
+            items: {
+                $ref: '#/components/schemas/AppAssetLibraryPlacement'
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            $ref: '#/components/schemas/PagingInformation'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
+export const AppAssetLibraryVideoResponseSchema = {
+    type: 'object',
+    title: 'AppAssetLibraryVideoResponse',
+    properties: {
+        data: {
+            $ref: '#/components/schemas/AppAssetLibraryVideo'
+        },
+        included: {
+            type: 'array',
+            items: {
+                $ref: '#/components/schemas/AppAssetLibraryPlacement'
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
+export const AppAssetLibraryVideoCreateRequestSchema = {
+    type: 'object',
+    title: 'AppAssetLibraryVideoCreateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: [
+                        'appAssetLibraryVideos'
+                    ]
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        category: {
+                            $ref: '#/components/schemas/AppAssetLibraryAssetCategory'
+                        },
+                        fileName: {
+                            type: 'string'
+                        },
+                        fileSize: {
+                            type: 'integer',
+                            format: 'int64',
+                            maximum: 9007199254740991,
+                            minimum: 1
+                        },
+                        previewFrameTimeCode: {
+                            type: 'string',
+                            nullable: true
+                        },
+                        referenceName: {
+                            type: 'string',
+                            nullable: true
+                        }
+                    },
+                    required: [
+                        'fileName',
+                        'fileSize',
+                        'category'
+                    ]
+                },
+                relationships: {
+                    type: 'object',
+                    properties: {
+                        assetLibrary: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: [
+                                                'appAssetLibraries'
+                                            ]
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: [
+                                        'id',
+                                        'type'
+                                    ]
+                                }
+                            },
+                            required: [
+                                'data'
+                            ]
+                        },
+                        placements: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'array',
+                                    items: {
+                                        type: 'object',
+                                        properties: {
+                                            type: {
+                                                type: 'string',
+                                                enum: [
+                                                    'appAssetLibraryPlacements'
+                                                ]
+                                            },
+                                            id: {
+                                                type: 'string'
+                                            }
+                                        },
+                                        required: [
+                                            'id',
+                                            'type'
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    required: [
+                        'assetLibrary'
+                    ]
+                }
+            },
+            required: [
+                'relationships',
+                'attributes',
+                'type'
+            ]
+        }
+    },
+    required: [
+        'data'
+    ]
+} as const;
+
+export const AppAssetLibraryVideoUpdateRequestSchema = {
+    type: 'object',
+    title: 'AppAssetLibraryVideoUpdateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: [
+                        'appAssetLibraryVideos'
+                    ]
+                },
+                id: {
+                    type: 'string'
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        archived: {
+                            type: 'boolean',
+                            nullable: true
+                        },
+                        previewFrameTimeCode: {
+                            type: 'string',
+                            nullable: true
+                        },
+                        referenceName: {
+                            type: 'string',
+                            nullable: true
+                        },
+                        uploaded: {
+                            type: 'boolean',
+                            nullable: true
+                        }
+                    }
+                }
+            },
+            required: [
+                'id',
+                'type'
+            ]
+        }
+    },
+    required: [
+        'data'
+    ]
+} as const;
+
 export const AppAvailabilityV2Schema = {
     type: 'object',
     title: 'AppAvailabilityV2',
@@ -5528,6 +8013,38 @@ export const AppCustomProductPageLocalizationSchema = {
                             }
                         }
                     }
+                },
+                placements: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            $ref: '#/components/schemas/RelationshipLinks'
+                        },
+                        meta: {
+                            $ref: '#/components/schemas/PagingInformation'
+                        },
+                        data: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    type: {
+                                        type: 'string',
+                                        enum: [
+                                            'appAssetLibraryPlacements'
+                                        ]
+                                    },
+                                    id: {
+                                        type: 'string'
+                                    }
+                                },
+                                required: [
+                                    'id',
+                                    'type'
+                                ]
+                            }
+                        }
+                    }
                 }
             }
         },
@@ -5593,6 +8110,32 @@ export const AppCustomProductPageLocalizationInlineCreateSchema = {
                             ]
                         }
                     }
+                },
+                placements: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    type: {
+                                        type: 'string',
+                                        enum: [
+                                            'appAssetLibraryPlacements'
+                                        ]
+                                    },
+                                    id: {
+                                        type: 'string'
+                                    }
+                                },
+                                required: [
+                                    'id',
+                                    'type'
+                                ]
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -5618,6 +8161,9 @@ export const AppCustomProductPageLocalizationsResponseSchema = {
             items: {
                 oneOf: [
                     {
+                        $ref: '#/components/schemas/AppAssetLibraryPlacement'
+                    },
+                    {
                         $ref: '#/components/schemas/AppCustomProductPageVersion'
                     },
                     {
@@ -5634,6 +8180,7 @@ export const AppCustomProductPageLocalizationsResponseSchema = {
                     propertyName: 'type',
                     mapping: {
                         appScreenshotSets: '#/components/schemas/AppScreenshotSet',
+                        appAssetLibraryPlacements: '#/components/schemas/AppAssetLibraryPlacement',
                         appKeywords: '#/components/schemas/AppKeyword',
                         appCustomProductPageVersions: '#/components/schemas/AppCustomProductPageVersion',
                         appPreviewSets: '#/components/schemas/AppPreviewSet'
@@ -5666,6 +8213,9 @@ export const AppCustomProductPageLocalizationResponseSchema = {
             items: {
                 oneOf: [
                     {
+                        $ref: '#/components/schemas/AppAssetLibraryPlacement'
+                    },
+                    {
                         $ref: '#/components/schemas/AppCustomProductPageVersion'
                     },
                     {
@@ -5682,6 +8232,7 @@ export const AppCustomProductPageLocalizationResponseSchema = {
                     propertyName: 'type',
                     mapping: {
                         appScreenshotSets: '#/components/schemas/AppScreenshotSet',
+                        appAssetLibraryPlacements: '#/components/schemas/AppAssetLibraryPlacement',
                         appKeywords: '#/components/schemas/AppKeyword',
                         appCustomProductPageVersions: '#/components/schemas/AppCustomProductPageVersion',
                         appPreviewSets: '#/components/schemas/AppPreviewSet'
@@ -5755,6 +8306,32 @@ export const AppCustomProductPageLocalizationCreateRequestSchema = {
                             required: [
                                 'data'
                             ]
+                        },
+                        placements: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'array',
+                                    items: {
+                                        type: 'object',
+                                        properties: {
+                                            type: {
+                                                type: 'string',
+                                                enum: [
+                                                    'appAssetLibraryPlacements'
+                                                ]
+                                            },
+                                            id: {
+                                                type: 'string'
+                                            }
+                                        },
+                                        required: [
+                                            'id',
+                                            'type'
+                                        ]
+                                    }
+                                }
+                            }
                         }
                     },
                     required: [
@@ -7243,6 +9820,38 @@ export const AppEventLocalizationSchema = {
                             }
                         }
                     }
+                },
+                placements: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            $ref: '#/components/schemas/RelationshipLinks'
+                        },
+                        meta: {
+                            $ref: '#/components/schemas/PagingInformation'
+                        },
+                        data: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    type: {
+                                        type: 'string',
+                                        enum: [
+                                            'appAssetLibraryPlacements'
+                                        ]
+                                    },
+                                    id: {
+                                        type: 'string'
+                                    }
+                                },
+                                required: [
+                                    'id',
+                                    'type'
+                                ]
+                            }
+                        }
+                    }
                 }
             }
         },
@@ -7271,6 +9880,9 @@ export const AppEventLocalizationsResponseSchema = {
             items: {
                 oneOf: [
                     {
+                        $ref: '#/components/schemas/AppAssetLibraryPlacement'
+                    },
+                    {
                         $ref: '#/components/schemas/AppEventScreenshot'
                     },
                     {
@@ -7285,6 +9897,7 @@ export const AppEventLocalizationsResponseSchema = {
                     mapping: {
                         appEvents: '#/components/schemas/AppEvent',
                         appEventVideoClips: '#/components/schemas/AppEventVideoClip',
+                        appAssetLibraryPlacements: '#/components/schemas/AppAssetLibraryPlacement',
                         appEventScreenshots: '#/components/schemas/AppEventScreenshot'
                     }
                 }
@@ -7315,6 +9928,9 @@ export const AppEventLocalizationResponseSchema = {
             items: {
                 oneOf: [
                     {
+                        $ref: '#/components/schemas/AppAssetLibraryPlacement'
+                    },
+                    {
                         $ref: '#/components/schemas/AppEventScreenshot'
                     },
                     {
@@ -7329,6 +9945,7 @@ export const AppEventLocalizationResponseSchema = {
                     mapping: {
                         appEvents: '#/components/schemas/AppEvent',
                         appEventVideoClips: '#/components/schemas/AppEventVideoClip',
+                        appAssetLibraryPlacements: '#/components/schemas/AppAssetLibraryPlacement',
                         appEventScreenshots: '#/components/schemas/AppEventScreenshot'
                     }
                 }
@@ -7408,6 +10025,32 @@ export const AppEventLocalizationCreateRequestSchema = {
                             required: [
                                 'data'
                             ]
+                        },
+                        placements: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'array',
+                                    items: {
+                                        type: 'object',
+                                        properties: {
+                                            type: {
+                                                type: 'string',
+                                                enum: [
+                                                    'appAssetLibraryPlacements'
+                                                ]
+                                            },
+                                            id: {
+                                                type: 'string'
+                                            }
+                                        },
+                                        required: [
+                                            'id',
+                                            'type'
+                                        ]
+                                    }
+                                }
+                            }
                         }
                     },
                     required: [
@@ -11945,6 +14588,38 @@ export const AppStoreVersionExperimentTreatmentLocalizationSchema = {
                             }
                         }
                     }
+                },
+                placements: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            $ref: '#/components/schemas/RelationshipLinks'
+                        },
+                        meta: {
+                            $ref: '#/components/schemas/PagingInformation'
+                        },
+                        data: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    type: {
+                                        type: 'string',
+                                        enum: [
+                                            'appAssetLibraryPlacements'
+                                        ]
+                                    },
+                                    id: {
+                                        type: 'string'
+                                    }
+                                },
+                                required: [
+                                    'id',
+                                    'type'
+                                ]
+                            }
+                        }
+                    }
                 }
             }
         },
@@ -11973,6 +14648,9 @@ export const AppStoreVersionExperimentTreatmentLocalizationsResponseSchema = {
             items: {
                 oneOf: [
                     {
+                        $ref: '#/components/schemas/AppAssetLibraryPlacement'
+                    },
+                    {
                         $ref: '#/components/schemas/AppPreviewSet'
                     },
                     {
@@ -11987,6 +14665,7 @@ export const AppStoreVersionExperimentTreatmentLocalizationsResponseSchema = {
                     mapping: {
                         appScreenshotSets: '#/components/schemas/AppScreenshotSet',
                         appStoreVersionExperimentTreatments: '#/components/schemas/AppStoreVersionExperimentTreatment',
+                        appAssetLibraryPlacements: '#/components/schemas/AppAssetLibraryPlacement',
                         appPreviewSets: '#/components/schemas/AppPreviewSet'
                     }
                 }
@@ -12017,6 +14696,9 @@ export const AppStoreVersionExperimentTreatmentLocalizationResponseSchema = {
             items: {
                 oneOf: [
                     {
+                        $ref: '#/components/schemas/AppAssetLibraryPlacement'
+                    },
+                    {
                         $ref: '#/components/schemas/AppPreviewSet'
                     },
                     {
@@ -12031,6 +14713,7 @@ export const AppStoreVersionExperimentTreatmentLocalizationResponseSchema = {
                     mapping: {
                         appScreenshotSets: '#/components/schemas/AppScreenshotSet',
                         appStoreVersionExperimentTreatments: '#/components/schemas/AppStoreVersionExperimentTreatment',
+                        appAssetLibraryPlacements: '#/components/schemas/AppAssetLibraryPlacement',
                         appPreviewSets: '#/components/schemas/AppPreviewSet'
                     }
                 }
@@ -12098,6 +14781,32 @@ export const AppStoreVersionExperimentTreatmentLocalizationCreateRequestSchema =
                             required: [
                                 'data'
                             ]
+                        },
+                        placements: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'array',
+                                    items: {
+                                        type: 'object',
+                                        properties: {
+                                            type: {
+                                                type: 'string',
+                                                enum: [
+                                                    'appAssetLibraryPlacements'
+                                                ]
+                                            },
+                                            id: {
+                                                type: 'string'
+                                            }
+                                        },
+                                        required: [
+                                            'id',
+                                            'type'
+                                        ]
+                                    }
+                                }
+                            }
                         }
                     },
                     required: [
@@ -13325,6 +16034,38 @@ export const AppStoreVersionLocalizationSchema = {
                             }
                         }
                     }
+                },
+                placements: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            $ref: '#/components/schemas/RelationshipLinks'
+                        },
+                        meta: {
+                            $ref: '#/components/schemas/PagingInformation'
+                        },
+                        data: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    type: {
+                                        type: 'string',
+                                        enum: [
+                                            'appAssetLibraryPlacements'
+                                        ]
+                                    },
+                                    id: {
+                                        type: 'string'
+                                    }
+                                },
+                                required: [
+                                    'id',
+                                    'type'
+                                ]
+                            }
+                        }
+                    }
                 }
             }
         },
@@ -13353,6 +16094,9 @@ export const AppStoreVersionLocalizationsResponseSchema = {
             items: {
                 oneOf: [
                     {
+                        $ref: '#/components/schemas/AppAssetLibraryPlacement'
+                    },
+                    {
                         $ref: '#/components/schemas/AppKeyword'
                     },
                     {
@@ -13370,6 +16114,7 @@ export const AppStoreVersionLocalizationsResponseSchema = {
                     mapping: {
                         appScreenshotSets: '#/components/schemas/AppScreenshotSet',
                         appStoreVersions: '#/components/schemas/AppStoreVersion',
+                        appAssetLibraryPlacements: '#/components/schemas/AppAssetLibraryPlacement',
                         appKeywords: '#/components/schemas/AppKeyword',
                         appPreviewSets: '#/components/schemas/AppPreviewSet'
                     }
@@ -13401,6 +16146,9 @@ export const AppStoreVersionLocalizationResponseSchema = {
             items: {
                 oneOf: [
                     {
+                        $ref: '#/components/schemas/AppAssetLibraryPlacement'
+                    },
+                    {
                         $ref: '#/components/schemas/AppKeyword'
                     },
                     {
@@ -13418,6 +16166,7 @@ export const AppStoreVersionLocalizationResponseSchema = {
                     mapping: {
                         appScreenshotSets: '#/components/schemas/AppScreenshotSet',
                         appStoreVersions: '#/components/schemas/AppStoreVersion',
+                        appAssetLibraryPlacements: '#/components/schemas/AppAssetLibraryPlacement',
                         appKeywords: '#/components/schemas/AppKeyword',
                         appPreviewSets: '#/components/schemas/AppPreviewSet'
                     }
@@ -13512,6 +16261,32 @@ export const AppStoreVersionLocalizationCreateRequestSchema = {
                             required: [
                                 'data'
                             ]
+                        },
+                        placements: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'array',
+                                    items: {
+                                        type: 'object',
+                                        properties: {
+                                            type: {
+                                                type: 'string',
+                                                enum: [
+                                                    'appAssetLibraryPlacements'
+                                                ]
+                                            },
+                                            id: {
+                                                type: 'string'
+                                            }
+                                        },
+                                        required: [
+                                            'id',
+                                            'type'
+                                        ]
+                                    }
+                                }
+                            }
                         }
                     },
                     required: [
@@ -15959,6 +18734,14 @@ export const AppSchema = {
                     }
                 },
                 backgroundAssets: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            $ref: '#/components/schemas/RelationshipLinks'
+                        }
+                    }
+                },
+                assetLibrary: {
                     type: 'object',
                     properties: {
                         links: {
@@ -49309,6 +52092,52 @@ export const ReviewSubmissionItemSchema = {
                         }
                     }
                 },
+                appAssetLibraryImage: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: [
+                                        'appAssetLibraryImages'
+                                    ]
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: [
+                                'id',
+                                'type'
+                            ]
+                        }
+                    }
+                },
+                appAssetLibraryVideo: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: [
+                                        'appAssetLibraryVideos'
+                                    ]
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: [
+                                'id',
+                                'type'
+                            ]
+                        }
+                    }
+                },
                 backgroundAssetVersion: {
                     type: 'object',
                     properties: {
@@ -49543,6 +52372,12 @@ export const ReviewSubmissionItemsResponseSchema = {
             items: {
                 oneOf: [
                     {
+                        $ref: '#/components/schemas/AppAssetLibraryImage'
+                    },
+                    {
+                        $ref: '#/components/schemas/AppAssetLibraryVideo'
+                    },
+                    {
                         $ref: '#/components/schemas/AppCustomProductPageVersion'
                     },
                     {
@@ -49585,6 +52420,7 @@ export const ReviewSubmissionItemsResponseSchema = {
                 discriminator: {
                     propertyName: 'type',
                     mapping: {
+                        appAssetLibraryImages: '#/components/schemas/AppAssetLibraryImage',
                         appEvents: '#/components/schemas/AppEvent',
                         gameCenterAchievementVersions: '#/components/schemas/GameCenterAchievementVersionV2',
                         appStoreVersionExperiments: '#/components/schemas/AppStoreVersionExperiment',
@@ -49594,6 +52430,7 @@ export const ReviewSubmissionItemsResponseSchema = {
                         gameCenterChallengeVersions: '#/components/schemas/GameCenterChallengeVersion',
                         subscriptionGroupVersions: '#/components/schemas/SubscriptionGroupVersion',
                         appStoreVersions: '#/components/schemas/AppStoreVersion',
+                        appAssetLibraryVideos: '#/components/schemas/AppAssetLibraryVideo',
                         backgroundAssetVersions: '#/components/schemas/BackgroundAssetVersion',
                         gameCenterLeaderboardSetVersions: '#/components/schemas/GameCenterLeaderboardSetVersionV2',
                         appCustomProductPageVersions: '#/components/schemas/AppCustomProductPageVersion',
@@ -49627,6 +52464,12 @@ export const ReviewSubmissionItemResponseSchema = {
             items: {
                 oneOf: [
                     {
+                        $ref: '#/components/schemas/AppAssetLibraryImage'
+                    },
+                    {
+                        $ref: '#/components/schemas/AppAssetLibraryVideo'
+                    },
+                    {
                         $ref: '#/components/schemas/AppCustomProductPageVersion'
                     },
                     {
@@ -49669,6 +52512,7 @@ export const ReviewSubmissionItemResponseSchema = {
                 discriminator: {
                     propertyName: 'type',
                     mapping: {
+                        appAssetLibraryImages: '#/components/schemas/AppAssetLibraryImage',
                         appEvents: '#/components/schemas/AppEvent',
                         gameCenterAchievementVersions: '#/components/schemas/GameCenterAchievementVersionV2',
                         appStoreVersionExperiments: '#/components/schemas/AppStoreVersionExperiment',
@@ -49678,6 +52522,7 @@ export const ReviewSubmissionItemResponseSchema = {
                         gameCenterChallengeVersions: '#/components/schemas/GameCenterChallengeVersion',
                         subscriptionGroupVersions: '#/components/schemas/SubscriptionGroupVersion',
                         appStoreVersions: '#/components/schemas/AppStoreVersion',
+                        appAssetLibraryVideos: '#/components/schemas/AppAssetLibraryVideo',
                         backgroundAssetVersions: '#/components/schemas/BackgroundAssetVersion',
                         gameCenterLeaderboardSetVersions: '#/components/schemas/GameCenterLeaderboardSetVersionV2',
                         appCustomProductPageVersions: '#/components/schemas/AppCustomProductPageVersion',
@@ -49840,6 +52685,52 @@ export const ReviewSubmissionItemCreateRequestSchema = {
                                             type: 'string',
                                             enum: [
                                                 'appEvents'
+                                            ]
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: [
+                                        'id',
+                                        'type'
+                                    ]
+                                }
+                            }
+                        },
+                        appAssetLibraryImage: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: [
+                                                'appAssetLibraryImages'
+                                            ]
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: [
+                                        'id',
+                                        'type'
+                                    ]
+                                }
+                            }
+                        },
+                        appAssetLibraryVideo: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: [
+                                                'appAssetLibraryVideos'
                                             ]
                                         },
                                         id: {
@@ -61022,6 +63913,154 @@ export const AnalyticsReportInstancesLinkagesResponseSchema = {
     ]
 } as const;
 
+export const AppAssetLibraryImagesLinkagesResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: [
+                            'appAssetLibraryImages'
+                        ]
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: [
+                    'id',
+                    'type'
+                ]
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            $ref: '#/components/schemas/PagingInformation'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
+export const AppAssetLibraryVideosLinkagesResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: [
+                            'appAssetLibraryVideos'
+                        ]
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: [
+                    'id',
+                    'type'
+                ]
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            $ref: '#/components/schemas/PagingInformation'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
+export const AppAssetLibraryImagePlacementsLinkagesResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: [
+                            'appAssetLibraryPlacements'
+                        ]
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: [
+                    'id',
+                    'type'
+                ]
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            $ref: '#/components/schemas/PagingInformation'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
+export const AppAssetLibraryVideoPlacementsLinkagesResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: [
+                            'appAssetLibraryPlacements'
+                        ]
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: [
+                    'id',
+                    'type'
+                ]
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            $ref: '#/components/schemas/PagingInformation'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
 export const AppAvailabilityV2TerritoryAvailabilitiesLinkagesResponseSchema = {
     type: 'object',
     properties: {
@@ -61472,6 +64511,43 @@ export const AppCustomProductPageLocalizationAppScreenshotSetsLinkagesResponseSc
     ]
 } as const;
 
+export const AppCustomProductPageLocalizationPlacementsLinkagesResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: [
+                            'appAssetLibraryPlacements'
+                        ]
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: [
+                    'id',
+                    'type'
+                ]
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            $ref: '#/components/schemas/PagingInformation'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
 export const AppCustomProductPageLocalizationSearchKeywordsLinkagesResponseSchema = {
     type: 'object',
     properties: {
@@ -61773,6 +64849,43 @@ export const AppEventLocalizationAppEventVideoClipsLinkagesResponseSchema = {
                         type: 'string',
                         enum: [
                             'appEventVideoClips'
+                        ]
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: [
+                    'id',
+                    'type'
+                ]
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            $ref: '#/components/schemas/PagingInformation'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
+export const AppEventLocalizationPlacementsLinkagesResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: [
+                            'appAssetLibraryPlacements'
                         ]
                     },
                     id: {
@@ -62513,6 +65626,43 @@ export const AppStoreVersionExperimentTreatmentLocalizationAppScreenshotSetsLink
     ]
 } as const;
 
+export const AppStoreVersionExperimentTreatmentLocalizationPlacementsLinkagesResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: [
+                            'appAssetLibraryPlacements'
+                        ]
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: [
+                    'id',
+                    'type'
+                ]
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            $ref: '#/components/schemas/PagingInformation'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
 export const AppStoreVersionExperimentTreatmentAppStoreVersionExperimentTreatmentLocalizationsLinkagesResponseSchema = {
     type: 'object',
     properties: {
@@ -62674,6 +65824,43 @@ export const AppStoreVersionLocalizationAppScreenshotSetsLinkagesResponseSchema 
                         type: 'string',
                         enum: [
                             'appScreenshotSets'
+                        ]
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: [
+                    'id',
+                    'type'
+                ]
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            $ref: '#/components/schemas/PagingInformation'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
+export const AppStoreVersionLocalizationPlacementsLinkagesResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: [
+                            'appAssetLibraryPlacements'
                         ]
                     },
                     id: {
@@ -63818,6 +67005,37 @@ export const AppAppTagsLinkagesResponseSchema = {
         },
         meta: {
             $ref: '#/components/schemas/PagingInformation'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
+export const AppAssetLibraryLinkageResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: [
+                        'appAssetLibraries'
+                    ]
+                },
+                id: {
+                    type: 'string'
+                }
+            },
+            required: [
+                'id',
+                'type'
+            ]
+        },
+        links: {
+            $ref: '#/components/schemas/DocumentLinks'
         }
     },
     required: [
@@ -74191,6 +77409,125 @@ export const RelationshipLinksSchema = {
             format: 'uri-reference'
         }
     }
+} as const;
+
+export const AppAssetLibraryAssetCategorySchema = {
+    type: 'string',
+    enum: [
+        'CREATIVE_ASSETS',
+        'APP_SCREENSHOTS_AND_PREVIEWS'
+    ]
+} as const;
+
+export const AppAssetLibraryAssetStateSchema = {
+    type: 'string',
+    enum: [
+        'AWAITING_UPLOAD',
+        'UPLOAD_COMPLETE',
+        'FAILED',
+        'COMPLETE',
+        'PREPARE_FOR_SUBMISSION',
+        'READY_FOR_REVIEW',
+        'WAITING_FOR_REVIEW',
+        'IN_REVIEW',
+        'ACCEPTED',
+        'APPROVED',
+        'REJECTED',
+        'ARCHIVED'
+    ]
+} as const;
+
+export const AppAssetLibraryDisplayClassSchema = {
+    type: 'string',
+    enum: [
+        'DEFAULT',
+        'WATCH_ULTRA',
+        'WATCH_SERIES_10',
+        'WATCH_SERIES_7',
+        'WATCH_SERIES_4',
+        'WATCH_SERIES_3',
+        'IPHONE_DUO',
+        'IPHONE_DYNAMIC_ISLAND_LARGE_DISPLAY',
+        'IPHONE_DYNAMIC_ISLAND_MEDIUM_DISPLAY',
+        'IPHONE_FACE_ID_LARGE_DISPLAY',
+        'IPHONE_FACE_ID_MEDIUM_DISPLAY',
+        'IPHONE_HOME_BUTTON_LARGE_DISPLAY',
+        'IPHONE_HOME_BUTTON_MEDIUM_DISPLAY',
+        'IPHONE_HOME_BUTTON_40_DISPLAY',
+        'IPHONE_HOME_BUTTON_35_DISPLAY',
+        'IPAD_13_DISPLAY',
+        'IPAD_11_DISPLAY',
+        'IPAD_129_DISPLAY',
+        'IPAD_105_DISPLAY',
+        'IPAD_97_DISPLAY'
+    ]
+} as const;
+
+export const AppAssetLibraryFeatureSchema = {
+    type: 'string',
+    enum: [
+        'APP_STORE_VERSIONS',
+        'CUSTOM_PRODUCT_PAGES',
+        'PRODUCT_PAGE_OPTIMIZATIONS',
+        'IN_APP_EVENTS',
+        'IN_APP_PURCHASES',
+        'SUBSCRIPTIONS',
+        'RETENTION_MESSAGING',
+        'GAME_CENTER',
+        'APP_CLIPS',
+        'APPLE_ADS'
+    ]
+} as const;
+
+export const AppAssetLibraryMediaTypeSchema = {
+    type: 'string',
+    enum: [
+        'IMAGE',
+        'VIDEO'
+    ]
+} as const;
+
+export const AppAssetLibraryPlacementPlatformSchema = {
+    type: 'string',
+    enum: [
+        'IPHONE_APP_STORE',
+        'IPAD_APP_STORE',
+        'WATCH_APP_STORE',
+        'IMESSAGE_APP_STORE',
+        'VISION_PRO_APP_STORE',
+        'MAC_APP_STORE',
+        'TV_APP_STORE',
+        'ANY'
+    ]
+} as const;
+
+export const AppAssetLibraryPlacementStateSchema = {
+    type: 'string',
+    enum: [
+        'ASSET_PROCESSING',
+        'FAILED',
+        'PARENT_PREPARE_FOR_SUBMISSION',
+        'PARENT_READY_FOR_REVIEW',
+        'PARENT_WAITING_FOR_REVIEW',
+        'PARENT_IN_REVIEW',
+        'PARENT_APPROVED'
+    ]
+} as const;
+
+export const AppAssetLibraryPlacementTypeSchema = {
+    type: 'string',
+    enum: [
+        'APP_SCREENSHOT',
+        'IMESSAGE_APP_SCREENSHOT',
+        'APP_PREVIEW',
+        'PRODUCT_PAGE_HEADER_ASSET',
+        'APP_STORE_SEARCH_RESULTS_ASSET',
+        'SEARCH_RESULTS_ADS_ASSET',
+        'TODAY_TAB_ADS_ASSET',
+        'EVENT_CARD_ASSET',
+        'EVENT_DETAILS_PAGE_ASSET',
+        'RETENTION_MESSAGE_ASSET'
+    ]
 } as const;
 
 export const AppClipActionSchema = {
