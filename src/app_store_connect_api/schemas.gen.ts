@@ -414,6 +414,9 @@ export const AgeRatingDeclarationSchema = {
                         'FREQUENT'
                     ]
                 },
+                datingAndRelationships: {
+                    type: 'boolean'
+                },
                 gambling: {
                     type: 'boolean'
                 },
@@ -494,6 +497,9 @@ export const AgeRatingDeclarationSchema = {
                         'INFREQUENT',
                         'FREQUENT'
                     ]
+                },
+                sharedLocation: {
+                    type: 'boolean'
                 },
                 socialMedia: {
                     type: 'boolean'
@@ -671,6 +677,10 @@ export const AgeRatingDeclarationUpdateRequestSchema = {
                                 'FREQUENT'
                             ]
                         },
+                        datingAndRelationships: {
+                            type: 'boolean',
+                            nullable: true
+                        },
                         gambling: {
                             type: 'boolean',
                             nullable: true
@@ -764,6 +774,10 @@ export const AgeRatingDeclarationUpdateRequestSchema = {
                                 'INFREQUENT',
                                 'FREQUENT'
                             ]
+                        },
+                        sharedLocation: {
+                            type: 'boolean',
+                            nullable: true
                         },
                         socialMedia: {
                             type: 'boolean',
@@ -17967,6 +17981,13 @@ export const AppSchema = {
                 },
                 streamlinedPurchasingEnabled: {
                     type: 'boolean'
+                },
+                groupPurchaseInvitationMode: {
+                    type: 'string',
+                    enum: [
+                        'APPLE_HOSTED',
+                        'DEVELOPER_HOSTED'
+                    ]
                 }
             }
         },
@@ -19258,6 +19279,14 @@ export const AppUpdateRequestSchema = {
                         streamlinedPurchasingEnabled: {
                             type: 'boolean',
                             nullable: true
+                        },
+                        groupPurchaseInvitationMode: {
+                            type: 'string',
+                            nullable: true,
+                            enum: [
+                                'APPLE_HOSTED',
+                                'DEVELOPER_HOSTED'
+                            ]
                         }
                     }
                 }
@@ -60462,6 +60491,160 @@ export const SubscriptionPlanAvailabilityUpdateRequestSchema = {
     ]
 } as const;
 
+export const SubscriptionPriceChangePreviewSchema = {
+    type: 'object',
+    title: 'SubscriptionPriceChangePreview',
+    properties: {
+        type: {
+            type: 'string',
+            enum: [
+                'subscriptionPriceChangePreviews'
+            ]
+        },
+        id: {
+            type: 'string'
+        },
+        attributes: {
+            type: 'object',
+            properties: {
+                changeResults: {
+                    type: 'array',
+                    items: {
+                        type: 'object',
+                        properties: {
+                            territoryId: {
+                                type: 'string'
+                            },
+                            changeType: {
+                                type: 'string',
+                                enum: [
+                                    'INCREASE_PRESERVABLE',
+                                    'DECREASE_NOT_PRESERVABLE',
+                                    'MIXED_NOT_PRESERVABLE',
+                                    'NO_CHANGE'
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: [
+        'id',
+        'type'
+    ]
+} as const;
+
+export const SubscriptionPriceChangePreviewResponseSchema = {
+    type: 'object',
+    title: 'SubscriptionPriceChangePreviewResponse',
+    properties: {
+        data: {
+            $ref: '#/components/schemas/SubscriptionPriceChangePreview'
+        },
+        links: {
+            $ref: '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
+export const SubscriptionPriceChangePreviewCreateRequestSchema = {
+    type: 'object',
+    title: 'SubscriptionPriceChangePreviewCreateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: [
+                        'subscriptionPriceChangePreviews'
+                    ]
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        proposedChanges: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    territoryId: {
+                                        type: 'string'
+                                    },
+                                    startDate: {
+                                        type: 'string',
+                                        format: 'date'
+                                    },
+                                    basePricePointId: {
+                                        type: 'string'
+                                    },
+                                    additionalPriceTiers: {
+                                        type: 'array',
+                                        items: {
+                                            $ref: '#/components/schemas/ProposedSubscriptionPriceTier'
+                                        }
+                                    }
+                                }
+                            },
+                            nullable: true
+                        }
+                    }
+                },
+                relationships: {
+                    type: 'object',
+                    properties: {
+                        subscription: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: [
+                                                'subscriptions'
+                                            ]
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: [
+                                        'id',
+                                        'type'
+                                    ]
+                                }
+                            },
+                            required: [
+                                'data'
+                            ]
+                        }
+                    },
+                    required: [
+                        'subscription'
+                    ]
+                }
+            },
+            required: [
+                'relationships',
+                'type'
+            ]
+        }
+    },
+    required: [
+        'data'
+    ]
+} as const;
+
 export const SubscriptionPricePointSchema = {
     type: 'object',
     title: 'SubscriptionPricePoint',
@@ -60613,6 +60796,338 @@ export const SubscriptionPricePointResponseSchema = {
     ]
 } as const;
 
+export const SubscriptionPriceTierEqualizationSchema = {
+    type: 'object',
+    title: 'SubscriptionPriceTierEqualization',
+    properties: {
+        type: {
+            type: 'string',
+            enum: [
+                'subscriptionPriceTierEqualizations'
+            ]
+        },
+        id: {
+            type: 'string'
+        },
+        attributes: {
+            type: 'object',
+            properties: {
+                equalizedPrices: {
+                    type: 'array',
+                    items: {
+                        $ref: '#/components/schemas/SubscriptionEqualizedPriceTiersForTerritory'
+                    }
+                }
+            }
+        },
+        relationships: {
+            type: 'object',
+            properties: {
+                priceTierPricePoints: {
+                    type: 'object',
+                    properties: {
+                        meta: {
+                            $ref: '#/components/schemas/PagingInformation'
+                        },
+                        data: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    type: {
+                                        type: 'string',
+                                        enum: [
+                                            'subscriptionPricePoints'
+                                        ]
+                                    },
+                                    id: {
+                                        type: 'string'
+                                    }
+                                },
+                                required: [
+                                    'id',
+                                    'type'
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: [
+        'id',
+        'type'
+    ]
+} as const;
+
+export const SubscriptionPriceTierEqualizationResponseSchema = {
+    type: 'object',
+    title: 'SubscriptionPriceTierEqualizationResponse',
+    properties: {
+        data: {
+            $ref: '#/components/schemas/SubscriptionPriceTierEqualization'
+        },
+        included: {
+            type: 'array',
+            items: {
+                $ref: '#/components/schemas/SubscriptionPricePoint'
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/DocumentLinks'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
+export const SubscriptionPriceTierEqualizationCreateRequestSchema = {
+    type: 'object',
+    title: 'SubscriptionPriceTierEqualizationCreateRequest',
+    properties: {
+        data: {
+            type: 'object',
+            properties: {
+                type: {
+                    type: 'string',
+                    enum: [
+                        'subscriptionPriceTierEqualizations'
+                    ]
+                },
+                attributes: {
+                    type: 'object',
+                    properties: {
+                        additionalPriceTiers: {
+                            type: 'array',
+                            items: {
+                                $ref: '#/components/schemas/ProposedSubscriptionPriceTier'
+                            },
+                            nullable: true
+                        }
+                    }
+                },
+                relationships: {
+                    type: 'object',
+                    properties: {
+                        subscription: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: [
+                                                'subscriptions'
+                                            ]
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: [
+                                        'id',
+                                        'type'
+                                    ]
+                                }
+                            },
+                            required: [
+                                'data'
+                            ]
+                        },
+                        basePricePoint: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        type: {
+                                            type: 'string',
+                                            enum: [
+                                                'subscriptionPricePoints'
+                                            ]
+                                        },
+                                        id: {
+                                            type: 'string'
+                                        }
+                                    },
+                                    required: [
+                                        'id',
+                                        'type'
+                                    ]
+                                }
+                            },
+                            required: [
+                                'data'
+                            ]
+                        }
+                    },
+                    required: [
+                        'basePricePoint',
+                        'subscription'
+                    ]
+                }
+            },
+            required: [
+                'relationships',
+                'type'
+            ]
+        }
+    },
+    required: [
+        'data'
+    ]
+} as const;
+
+export const SubscriptionPriceTierSchema = {
+    type: 'object',
+    title: 'SubscriptionPriceTier',
+    properties: {
+        type: {
+            type: 'string',
+            enum: [
+                'subscriptionPriceTiers'
+            ]
+        },
+        id: {
+            type: 'string'
+        },
+        attributes: {
+            type: 'object',
+            properties: {
+                minQuantity: {
+                    type: 'integer'
+                }
+            }
+        },
+        relationships: {
+            type: 'object',
+            properties: {
+                subscriptionPricePoint: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: [
+                                        'subscriptionPricePoints'
+                                    ]
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: [
+                                'id',
+                                'type'
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/ResourceLinks'
+        }
+    },
+    required: [
+        'id',
+        'type'
+    ]
+} as const;
+
+export const SubscriptionPriceTierInlineCreateSchema = {
+    type: 'object',
+    properties: {
+        type: {
+            type: 'string',
+            enum: [
+                'subscriptionPriceTiers'
+            ]
+        },
+        id: {
+            type: 'string'
+        },
+        attributes: {
+            type: 'object',
+            properties: {
+                minQuantity: {
+                    type: 'integer',
+                    nullable: true
+                }
+            }
+        },
+        relationships: {
+            type: 'object',
+            properties: {
+                subscriptionPricePoint: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                type: {
+                                    type: 'string',
+                                    enum: [
+                                        'subscriptionPricePoints'
+                                    ]
+                                },
+                                id: {
+                                    type: 'string'
+                                }
+                            },
+                            required: [
+                                'id',
+                                'type'
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    },
+    required: [
+        'type'
+    ]
+} as const;
+
+export const SubscriptionPriceTiersResponseSchema = {
+    type: 'object',
+    title: 'SubscriptionPriceTiersResponse',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                $ref: '#/components/schemas/SubscriptionPriceTier'
+            }
+        },
+        included: {
+            type: 'array',
+            items: {
+                $ref: '#/components/schemas/SubscriptionPricePoint'
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            $ref: '#/components/schemas/PagingInformation'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
 export const SubscriptionPriceSchema = {
     type: 'object',
     title: 'SubscriptionPrice',
@@ -60687,6 +61202,38 @@ export const SubscriptionPriceSchema = {
                                 'id',
                                 'type'
                             ]
+                        }
+                    }
+                },
+                additionalPriceTiers: {
+                    type: 'object',
+                    properties: {
+                        links: {
+                            $ref: '#/components/schemas/RelationshipLinks'
+                        },
+                        meta: {
+                            $ref: '#/components/schemas/PagingInformation'
+                        },
+                        data: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    type: {
+                                        type: 'string',
+                                        enum: [
+                                            'subscriptionPriceTiers'
+                                        ]
+                                    },
+                                    id: {
+                                        type: 'string'
+                                    }
+                                },
+                                required: [
+                                    'id',
+                                    'type'
+                                ]
+                            }
                         }
                     }
                 }
@@ -60803,6 +61350,32 @@ export const SubscriptionPriceInlineCreateSchema = {
                             ]
                         }
                     }
+                },
+                additionalPriceTiers: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    type: {
+                                        type: 'string',
+                                        enum: [
+                                            'subscriptionPriceTiers'
+                                        ]
+                                    },
+                                    id: {
+                                        type: 'string'
+                                    }
+                                },
+                                required: [
+                                    'id',
+                                    'type'
+                                ]
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -60830,6 +61403,9 @@ export const SubscriptionPricesResponseSchema = {
                         $ref: '#/components/schemas/SubscriptionPricePoint'
                     },
                     {
+                        $ref: '#/components/schemas/SubscriptionPriceTier'
+                    },
+                    {
                         $ref: '#/components/schemas/Territory'
                     }
                 ],
@@ -60837,6 +61413,7 @@ export const SubscriptionPricesResponseSchema = {
                     propertyName: 'type',
                     mapping: {
                         territories: '#/components/schemas/Territory',
+                        subscriptionPriceTiers: '#/components/schemas/SubscriptionPriceTier',
                         subscriptionPricePoints: '#/components/schemas/SubscriptionPricePoint'
                     }
                 }
@@ -60870,6 +61447,9 @@ export const SubscriptionPriceResponseSchema = {
                         $ref: '#/components/schemas/SubscriptionPricePoint'
                     },
                     {
+                        $ref: '#/components/schemas/SubscriptionPriceTier'
+                    },
+                    {
                         $ref: '#/components/schemas/Territory'
                     }
                 ],
@@ -60877,6 +61457,7 @@ export const SubscriptionPriceResponseSchema = {
                     propertyName: 'type',
                     mapping: {
                         territories: '#/components/schemas/Territory',
+                        subscriptionPriceTiers: '#/components/schemas/SubscriptionPriceTier',
                         subscriptionPricePoints: '#/components/schemas/SubscriptionPricePoint'
                     }
                 }
@@ -61000,6 +61581,32 @@ export const SubscriptionPriceCreateRequestSchema = {
                             required: [
                                 'data'
                             ]
+                        },
+                        additionalPriceTiers: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'array',
+                                    items: {
+                                        type: 'object',
+                                        properties: {
+                                            type: {
+                                                type: 'string',
+                                                enum: [
+                                                    'subscriptionPriceTiers'
+                                                ]
+                                            },
+                                            id: {
+                                                type: 'string'
+                                            }
+                                        },
+                                        required: [
+                                            'id',
+                                            'type'
+                                        ]
+                                    }
+                                }
+                            }
                         }
                     },
                     required: [
@@ -61012,6 +61619,12 @@ export const SubscriptionPriceCreateRequestSchema = {
                 'relationships',
                 'type'
             ]
+        },
+        included: {
+            type: 'array',
+            items: {
+                $ref: '#/components/schemas/SubscriptionPriceTierInlineCreate'
+            }
         }
     },
     required: [
@@ -62758,6 +63371,9 @@ export const SubscriptionsResponseSchema = {
                         $ref: '#/components/schemas/SubscriptionPlanAvailability'
                     },
                     {
+                        $ref: '#/components/schemas/SubscriptionPriceTier'
+                    },
+                    {
                         $ref: '#/components/schemas/SubscriptionPrice'
                     },
                     {
@@ -62785,6 +63401,7 @@ export const SubscriptionsResponseSchema = {
                         subscriptionImages: '#/components/schemas/SubscriptionImage',
                         subscriptionPrices: '#/components/schemas/SubscriptionPrice',
                         subscriptionIntroductoryOffers: '#/components/schemas/SubscriptionIntroductoryOffer',
+                        subscriptionPriceTiers: '#/components/schemas/SubscriptionPriceTier',
                         subscriptionPromotionalOffers: '#/components/schemas/SubscriptionPromotionalOffer',
                         subscriptionLocalizations: '#/components/schemas/SubscriptionLocalization',
                         subscriptionAvailabilities: '#/components/schemas/SubscriptionAvailability'
@@ -62850,6 +63467,9 @@ export const SubscriptionResponseSchema = {
                         $ref: '#/components/schemas/SubscriptionPlanAvailability'
                     },
                     {
+                        $ref: '#/components/schemas/SubscriptionPriceTier'
+                    },
+                    {
                         $ref: '#/components/schemas/SubscriptionPrice'
                     },
                     {
@@ -62877,6 +63497,7 @@ export const SubscriptionResponseSchema = {
                         subscriptionImages: '#/components/schemas/SubscriptionImage',
                         subscriptionPrices: '#/components/schemas/SubscriptionPrice',
                         subscriptionIntroductoryOffers: '#/components/schemas/SubscriptionIntroductoryOffer',
+                        subscriptionPriceTiers: '#/components/schemas/SubscriptionPriceTier',
                         subscriptionPromotionalOffers: '#/components/schemas/SubscriptionPromotionalOffer',
                         subscriptionLocalizations: '#/components/schemas/SubscriptionLocalization',
                         subscriptionAvailabilities: '#/components/schemas/SubscriptionAvailability'
@@ -63204,6 +63825,9 @@ export const SubscriptionUpdateRequestSchema = {
             type: 'array',
             items: {
                 oneOf: [
+                    {
+                        $ref: '#/components/schemas/SubscriptionPriceTierInlineCreate'
+                    },
                     {
                         $ref: '#/components/schemas/SubscriptionPromotionalOfferInlineCreate'
                     },
@@ -77300,6 +77924,43 @@ export const SubscriptionPricePointEqualizationsLinkagesResponseSchema = {
     ]
 } as const;
 
+export const SubscriptionPriceAdditionalPriceTiersLinkagesResponseSchema = {
+    type: 'object',
+    properties: {
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    type: {
+                        type: 'string',
+                        enum: [
+                            'subscriptionPriceTiers'
+                        ]
+                    },
+                    id: {
+                        type: 'string'
+                    }
+                },
+                required: [
+                    'id',
+                    'type'
+                ]
+            }
+        },
+        links: {
+            $ref: '#/components/schemas/PagedDocumentLinks'
+        },
+        meta: {
+            $ref: '#/components/schemas/PagingInformation'
+        }
+    },
+    required: [
+        'data',
+        'links'
+    ]
+} as const;
+
 export const SubscriptionPromotionalOfferPricesLinkagesResponseSchema = {
     type: 'object',
     properties: {
@@ -81001,6 +81662,22 @@ export const PropertySchema = {
     }
 } as const;
 
+export const ProposedSubscriptionPriceTierSchema = {
+    type: 'object',
+    properties: {
+        minQuantity: {
+            type: 'integer'
+        },
+        subscriptionPricePointId: {
+            type: 'string'
+        }
+    },
+    required: [
+        'minQuantity',
+        'subscriptionPricePointId'
+    ]
+} as const;
+
 export const ScmProviderTypeSchema = {
     type: 'object',
     properties: {
@@ -81089,6 +81766,24 @@ export const SubscriptionCustomerEligibilitySchema = {
         'EXISTING',
         'EXPIRED'
     ]
+} as const;
+
+export const SubscriptionEqualizedPriceTiersForTerritorySchema = {
+    type: 'object',
+    properties: {
+        territoryId: {
+            type: 'string'
+        },
+        basePricePointId: {
+            type: 'string'
+        },
+        additionalPriceTiers: {
+            type: 'array',
+            items: {
+                $ref: '#/components/schemas/ProposedSubscriptionPriceTier'
+            }
+        }
+    }
 } as const;
 
 export const SubscriptionGracePeriodDurationSchema = {
